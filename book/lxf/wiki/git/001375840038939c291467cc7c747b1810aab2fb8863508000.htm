@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html xmlns:itranswarp="http://www.itranswarp.com/" xmlns:wb="http://open.weibo.com/wb">
+<!--
+
+-->
+<head>
+    <meta charset="utf-8" />
+    <title>åˆ›å»ºä¸åˆå¹¶åˆ†æ”¯ - å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="javascript,node,jquery,git,python,java,sql,linux,ios,android,æ•™ç¨‹,è½¯ä»¶,ç¼–ç¨‹,å¼€å‘,è¿ç»´,äº‘è®¡ç®—,ç½‘ç»œ,äº’è”ç½‘" />
+    <meta name="description" content="ç ”ç©¶äº’è”ç½‘äº§å“å’ŒæŠ€æœ¯ï¼Œæä¾›åŸåˆ›ä¸­æ–‡ç²¾å“æ•™ç¨‹" />
+    <meta property="x-nav" content=" /wiki/git " />
+    <link rel="alternate" href="/feed" title="å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™" type="application/rss+xml" />
+    
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://www.liaoxuefeng.com/wiki/git/001375840038939c291467cc7c747b1810aab2fb8863508000" />
+    <meta property="og:title" content="åˆ›å»ºä¸åˆå¹¶åˆ†æ”¯" />
+    <meta property="og:description" content="å²ä¸Šæœ€æµ…æ˜¾æ˜“æ‡‚çš„Gitæ•™ç¨‹" />
+    <meta property="og:image" content="http://www.liaoxuefeng.com/files/attachments/001385348516246a18bd54b498f4c74b694624d67f02fa9000/l" />
+
+    <!-- BEGIN CSS COMPRESS -->
+    <link rel="stylesheet" href="../../static/themes/default/css/codemirror.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/codemirror.css" />
+    <link rel="stylesheet" href="../../static/themes/default/css/highlight.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/highlight.css" />
+    <link rel="stylesheet" href="../../static/themes/default/css/itranswarp.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/itranswarp.css" />
+    <!-- END CSS COMPRESS -->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../static/themes/default/css/ie.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/ie.css" />
+    <![endif]-->
+    
+    <script src="../../static/themes/default/js/all.js" tppabs="http://www.liaoxuefeng.com/static/themes/default/js/all.js"></script>
+    
+    <script id="tplComment" type="text/plain">
+        <div class="uk-comment">
+            <div class="uk-comment-header" style="margin-bottom:0">
+                <a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }"><img class="uk-comment-avatar uk-border-circle x-avatar" src="{ user.image_url }" width="50" height="50" alt=""></a>
+                <h4 class="uk-comment-title"><a target="_blank" href="http://www.liaoxuefeng.com/discuss/{ board_id }/{ id }">{ name }</a></h4>
+                <div class="uk-comment-meta"><a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }">{ user.name }</a> created at { created_at.toSmartDate() }, Last updated at { updated_at.toSmartDate() }</div>
+            </div>
+            <div class="uk-comment-body x-auto-content">
+                { content|safe }
+            </div>
+        </div>
+    </script>
+
+    <script id="tplCommentReply" type="text/plain">
+        <div class="uk-comment">
+            <div class="uk-comment-header" style="margin-bottom:0">
+                <a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }"><img class="uk-comment-avatar uk-border-circle x-avatar" src="{ user.image_url }" width="50" height="50" alt=""></a>
+                <div class="uk-comment-meta"><a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }">{ user.name }</a></div>
+                <div class="uk-comment-meta">Created at { created_at.toSmartDate() }, Last updated at { updated_at.toSmartDate() }</div>
+            </div>
+            <div class="uk-comment-body x-auto-content">
+                { content|safe }
+            </div>
+        </div>
+    </script>
+
+    <script id="tplCommentInfo" type="text/plain">
+        <li>
+            <div class="x-comment-info">
+                <hr>
+                <a target="_blank" class="uk-button uk-button-small" href="http://www.liaoxuefeng.com/discuss/{ board_id }/{ id }"><i class="uk-icon-list-ul"></i> View Full Discuss</a>
+                &nbsp;
+                <a target="_blank" class="uk-button uk-button-small" href="http://www.liaoxuefeng.com/discuss/{ board_id }/{ id }#reply"><i class="uk-icon-reply"></i> Reply This Topic</a>
+            </div>
+        </li>
+    </script>
+
+    <script id="tplCommentArea" type="text/plain">
+        <div class="x-display-if-signin">
+            <p><button id="comment-make-button" type="button" class="uk-button uk-button-primary"><i class="uk-icon-comment"></i> Make a Comment</button></p>
+            <form id="comment-form" class="uk-form" style="display:none;">
+                <fieldset>
+                    <div class="uk-alert uk-alert-danger" style="display:none"></div>
+                    <div class="uk-form-row">
+                        <label>Title:</label>
+                    </div>
+                    <div class="uk-form-row">
+                        <input type="text" name="name" maxlength="100" style="width:100%">
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Content:</label>
+                    </div>
+                    <div class="uk-form-row x-textarea">
+                    </div>
+                    <div class="uk-form-row">
+                        <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-check"></i> Post</button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="uk-button x-cancel"><i class="uk-icon-close"></i> Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </script>
+
+    <style id="x-doc-style">
+
+        .x-display-if-signin { display: none; }
+
+    </style>
+    <script>
+        var g_time = parseFloat('1440958562505');
+        var g_signins = [{"id":"weibo","icon":"weibo","name":"ä½¿ç”¨æ–°æµªå¾®åšç™»å½•"}];
+//
+        var g_user = null;
+//
+    </script>
+
+
+
+
+
+    
+    
+<style>
+.x-wiki-visible {
+    display: block;
+}
+</style>
+
+<script>
+loadComments('001375840038939c291467cc7c747b1810aab2fb8863508000');
+
+var
+    comment_type = 'wikipage',
+    comment_ref_id = '001375840038939c291467cc7c747b1810aab2fb8863508000',
+    comment_tag = 'git';
+
+function onAuthSuccess() {
+    initCommentArea(comment_type, comment_ref_id, comment_tag);
+}
+
+$(function () {
+    if (g_user !== null) {
+        initCommentArea(comment_type, comment_ref_id, comment_tag);
+    }
+});
+
+$(function () {
+    var
+        current = $('#001375840038939c291467cc7c747b1810aab2fb8863508000'),
+        prev = current.prev().find('a'),
+        next = current.next().find('a'),
+        L = [];
+    current.addClass('uk-active');
+    $('#off-001375840038939c291467cc7c747b1810aab2fb8863508000').addClass('uk-active');
+    L.push('<div class="uk-clearfix uk-margin-left uk-margin-right">');
+    if (prev.length > 0) {
+        L.push('<span class="uk-float-left"><i class="uk-icon-chevron-left"></i> <a href="');
+        L.push(prev.attr('href'));
+        L.push('">');
+        L.push(encodeHtml(prev.text()));
+        L.push('</a></span>');
+    }
+    if (next.length > 0) {
+        L.push('<span class="uk-float-right"><a href="');
+        L.push(next.attr('href'));
+        L.push('">');
+        L.push(encodeHtml(next.text()));
+        L.push('</a> <i class="uk-icon-chevron-right"></i></span>')
+    }
+    L.push('</div>');
+    $('#x-wiki-prev-next').html(L.join(''));
+});
+</script>
+
+
+<style>
+.x-center {
+    margin: 0;
+}
+
+
+.x-center {
+    margin-left: 316px;
+    padding-left: 15px;
+}
+
+
+
+
+</style>
+
+<!-- BEGIN custom_header -->
+<script src="../../../tjs.sjs.sinajs.cn/open/api/js/wb.js" tppabs="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+// git:
+$(function() {
+  if (location.pathname.indexOf('/wiki/git')===0) {
+    $('.x-wiki-info').parent().css('position', 'relative').append('<a href="https://itunes.apple.com/cn/app/git-jiao-cheng/id876420437" target="_blank" style="display:block;width:135px;height:40px;position:absolute;right:10px;top:10px;"><img src="../../static/img/download-on-the-app-store.png"/*tpa=http://www.liaoxuefeng.com/static/img/download-on-the-app-store.png*/ /></a>');
+  }
+});
+</script>
+
+<script>
+// python 3:
+$(function() {
+  if (location.pathname.indexOf('/wiki/python34')===0) {
+    $('.x-wiki-info').parent().css('position', 'relative').append('<a href="../python27.htm"/*tpa=http://www.liaoxuefeng.com/wiki/python27*/ target="_blank" style="display:block;position:absolute;right:10px;top:10px;">2.7æ—§ç‰ˆæ•™ç¨‹</a>');
+  }
+});
+</script>
+
+<script>
+// python 2.7:
+$(function() {
+  if (location.pathname.indexOf('/wiki/python27')===0) {
+    $('#main .x-container').prepend('<div class="uk-alert">æ‚¨ç›®å‰æ­£åœ¨å­¦ä¹ çš„2.7ç‰ˆæœ¬çš„Pythonæ•™ç¨‹å·²è¿‡æœŸï¼Œè¯·ç«‹åˆ»å‰å¾€æœ€æ–°çš„Python 3 æ•™ç¨‹ï¼š<a href="../python34.htm"/*tpa=http://www.liaoxuefeng.com/wiki/python34*/ class="uk-button uk-button-success">æˆ‘è¦å­¦ Python 3</a></div>');
+  }
+});
+</script>
+
+<script>
+// wiki:
+$(function() {
+  if (location.pathname.indexOf('/wiki/')===0) {
+    $('.x-wiki-content').find('a[href^=http]').attr('target', '_blank');
+    $('#x-wiki-prev-next').prev().before('<h3>åˆ†äº«ç»™æœ‹å‹</h3><p><wb:share-button appkey="1391944217" addition="full" type="button" ralateUid="1658384301" picture_search="false" pic="' + $('meta[property="og:image"]').attr('content') + '"></wb:share-button></p><h3>æ‚¨çš„é¼“åŠ±æ˜¯ä½œè€…å†™ä½œæœ€å¤§çš„åŠ¨åŠ›</h3><p>å¦‚æœæ‚¨è®¤ä¸ºæœ¬ç½‘ç«™çš„æ•™ç¨‹è´¨é‡ä¸é”™ï¼Œè¯»åè§‰å¾—æ”¶è·å¾ˆå¤§ï¼Œé¢„æœŸå·¥èµ„æ¶¨å¹…èƒ½è¶…è¿‡30%ï¼Œä¸å¦¨å°é¢èµåŠ©æˆ‘ä¸€ä¸‹ï¼Œè®©æˆ‘æœ‰åŠ¨åŠ›ç»§ç»­å†™å‡ºé«˜è´¨é‡çš„æ•™ç¨‹ï¼š</p><p><a target="_blank" href="http://www.liaoxuefeng.com/webpage/donate" class="uk-button uk-button-primary"><i class="uk-icon-cny"></i> æˆ‘è¦å°é¢èµåŠ©</a></p>');
+  }
+});
+</script>
+
+<script>
+// article:
+$(function() {
+  if (location.pathname.indexOf('/article/')===0) {
+    $('.x-article-content').find('a[href^=http]').attr('target', '_blank');
+    $('.x-article-content').after('<h3>åˆ†äº«ç»™æœ‹å‹</h3><p><wb:share-button appkey="1391944217" addition="full" type="button" ralateUid="1658384301" picture_search="false" pic="' + $('meta[property="og:image"]').attr('content') + '"></wb:share-button></p>');
+  }
+});
+</script>
+
+<script>
+// all:
+$(function() {
+  $('.x-footer-copyright').find('p').append('<br>ç”±<a target="_blank" href="http://s.click.taobao.com/t?e=m%3D2%26s%3DjPaT%2Fmi2tL4cQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAlFz4nQbUpKuV%2FZ67c680w5IW%2FH7aX8LI9nQCCjrrrN3wYAeXhmRFOHMh3DDj7e5Hudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D">é˜¿é‡Œäº‘</a>æ‰˜ç®¡<br><a href="#0" onclick="location.assign(decodeURIComponent(\'moc.36104%fxlksaA3%otliam\'.split(\'\').reverse().join(\'\')))">å¹¿å‘Šåˆä½œ</a>');
+  $('.x-footer').append('<hr><div style="text-align:center"><p>å‹æƒ…é“¾æ¥: <a href="http://www.shi-ci.com/" target="_blank">ä¸­åè¯—è¯</a> - <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DjPaT%2Fmi2tL4cQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAlFz4nQbUpKuV%2FZ67c680w5IW%2FH7aX8LI9nQCCjrrrN3wYAeXhmRFOHMh3DDj7e5Hudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank">é˜¿é‡Œäº‘</a> - <a href="http://mitpress.mit.edu/sicp/full-text/book/book.html" target="_blank">SICP</a> - <a href="http://www.4clojure.com/" target="_blank">4clojure</a></p></div>');
+});
+</script>
+
+
+<script>
+// tongji
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "../../../hm.baidu.com/hm.js-2efddd14a5f2b304677462d06fb4f964"/*tpa=http://hm.baidu.com/hm.js?2efddd14a5f2b304677462d06fb4f964*/;
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- END custom_header -->
+</head>
+
+<body>
+    <div class="x-goto-top">
+        <div class="x-arrow"></div>
+        <div class="x-stick"></div>
+    </div>
+
+    <div id="header" class="uk-navbar uk-navbar-attached">
+        <div class="uk-container x-container">
+            <div class="uk-navbar uk-navbar-attached">
+                
+                <ul class="uk-navbar-nav uk-visible-small">
+                    <li><a href="#0" onclick="UIkit.offcanvas.show('#x-offcanvas-left')"><i class="uk-icon-chevron-right"></i></a></li>
+                </ul>
+                
+                <a href="javascript:if(confirm('http://www.liaoxuefeng.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/'" tppabs="http://www.liaoxuefeng.com/" class="uk-navbar-brand uk-visible-large">å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™</a>
+                <a href="javascript:if(confirm('http://www.liaoxuefeng.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/'" tppabs="http://www.liaoxuefeng.com/" class="uk-navbar-brand uk-hidden-large"><i class="uk-icon-home"></i></a>
+                <ul id="ul-navbar" class="uk-navbar-nav uk-hidden-small">
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000'" tppabs="http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000">ç¼–ç¨‹</a></li>
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000'" tppabs="http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000">è¯»ä¹¦</a></li>
+                    
+                    <li><a href="../javascript.htm" tppabs="http://www.liaoxuefeng.com/wiki/javascript">JavaScriptæ•™ç¨‹</a></li>
+                    
+                    <li><a href="../python34.htm" tppabs="http://www.liaoxuefeng.com/wiki/python34">Pythonæ•™ç¨‹</a></li>
+                    
+                    <li><a href="../git.htm" tppabs="http://www.liaoxuefeng.com/wiki/git">Gitæ•™ç¨‹</a></li>
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/discuss  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/discuss'" tppabs="http://www.liaoxuefeng.com/discuss">é—®ç­”</a></li>
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/webpage/donate  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/webpage/donate'" tppabs="http://www.liaoxuefeng.com/webpage/donate">èµåŠ©</a></li>
+                    
+                </ul>
+                
+                <ul class="uk-navbar-nav uk-visible-small">
+                    <li class="uk-parent" data-uk-dropdown>
+                        <a href="#0"><i class="uk-icon-navicon"></i></a>
+                        <div class="uk-dropdown uk-dropdown-navbar">
+                            <ul class="uk-nav uk-nav-navbar">
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000'" tppabs="http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000">ç¼–ç¨‹</a></li>
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000'" tppabs="http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000">è¯»ä¹¦</a></li>
+                                
+                                <li><a href="../javascript.htm" tppabs="http://www.liaoxuefeng.com/wiki/javascript">JavaScriptæ•™ç¨‹</a></li>
+                                
+                                <li><a href="../python34.htm" tppabs="http://www.liaoxuefeng.com/wiki/python34">Pythonæ•™ç¨‹</a></li>
+                                
+                                <li><a href="../git.htm" tppabs="http://www.liaoxuefeng.com/wiki/git">Gitæ•™ç¨‹</a></li>
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/discuss  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/discuss'" tppabs="http://www.liaoxuefeng.com/discuss">é—®ç­”</a></li>
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/webpage/donate  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/webpage/donate'" tppabs="http://www.liaoxuefeng.com/webpage/donate">èµåŠ©</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                
+
+<!--
+                <div class="uk-navbar-content x-hidden-tiny">
+                    <form id="form-search" class="uk-form uk-margin-remove uk-display-inline-block">
+                        <div class="uk-form-icon">
+                            <i class="uk-icon-search"></i>
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+-->
+
+                <div class="uk-navbar-flip">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-parent x-display-if-signin" data-uk-dropdown>
+                            <a href="#0"><i class="uk-icon-user"></i><span class="x-hidden-tiny">&nbsp;</span><span class="x-user-name x-hidden-tiny"></span></a>
+                            <div class="uk-dropdown uk-dropdown-navbar">
+                                <ul class="uk-nav uk-nav-navbar">
+                                    <li><a target="_blank" href="javascript:if(confirm('http://www.liaoxuefeng.com/me/profile  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/me/profile'" tppabs="http://www.liaoxuefeng.com/me/profile"><i class="uk-icon-cogs"></i> Profile</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/auth/signout  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/auth/signout'" tppabs="http://www.liaoxuefeng.com/auth/signout"><i class="uk-icon-power-off"></i> Sign Out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="x-display-if-not-signin uk-hidden-small"><a href="javascript:showSignin()"><i class="uk-icon-sign-in"></i> Sign In</a></li>
+                        <li class="x-display-if-not-signin uk-visible-small"><a href="javascript:showSignin()"><i class="uk-icon-sign-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- // header -->
+
+    <div id="main">
+        <div class="x-placeholder-50"><!-- placeholder --></div>
+        <div class="x-placeholder"><!-- placeholder --></div>
+        <div class="uk-container x-container">
+            <div class="uk-grid">
+                <div class="x-body-before uk-width-1-1">
+                    
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-1">
+                
+                    <div class="x-sidebar-left">
+                        <div class="x-sidebar-left-top">
+                            
+                        </div>
+                        <div class="x-sidebar-left-content">
+                            
+    <ul class="uk-nav uk-nav-side">
+        <li class="uk-nav-header">Index</li>
+    </ul>
+    <ul class="uk-nav uk-nav-side" style="margin-right:-15px;">
+        <li id="git"><a href="../git.htm" tppabs="http://www.liaoxuefeng.com/wiki/git">Gitæ•™ç¨‹</a></li>
+    
+        <li id="001373962845513aefd77a99f4145f0a2c7a7ca057e7570000" style="margin-left:1em;">
+            <a href="001373962845513aefd77a99f4145f0a2c7a7ca057e7570000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001373962845513aefd77a99f4145f0a2c7a7ca057e7570000">Gitç®€ä»‹</a>
+        </li>
+    
+        <li id="00137402760310626208b4f695940a49e5348b689d095fc000" style="margin-left:2em;">
+            <a href="00137402760310626208b4f695940a49e5348b689d095fc000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137402760310626208b4f695940a49e5348b689d095fc000">Gitçš„è¯ç”Ÿ</a>
+        </li>
+    
+        <li id="001374027586935cf69c53637d8458c9aec27dd546a6cd6000" style="margin-left:2em;">
+            <a href="001374027586935cf69c53637d8458c9aec27dd546a6cd6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374027586935cf69c53637d8458c9aec27dd546a6cd6000">é›†ä¸­å¼vsåˆ†å¸ƒå¼</a>
+        </li>
+    
+        <li id="00137396287703354d8c6c01c904c7d9ff056ae23da865a000" style="margin-left:1em;">
+            <a href="00137396287703354d8c6c01c904c7d9ff056ae23da865a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137396287703354d8c6c01c904c7d9ff056ae23da865a000">å®‰è£…Git</a>
+        </li>
+    
+        <li id="0013743256916071d599b3aed534aaab22a0db6c4e07fd0000" style="margin-left:1em;">
+            <a href="0013743256916071d599b3aed534aaab22a0db6c4e07fd0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">åˆ›å»ºç‰ˆæœ¬åº“</a>
+        </li>
+    
+        <li id="0013743858312764dca7ad6d0754f76aa562e3789478044000" style="margin-left:1em;">
+            <a href="0013743858312764dca7ad6d0754f76aa562e3789478044000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013743858312764dca7ad6d0754f76aa562e3789478044000">æ—¶å…‰æœºç©¿æ¢­</a>
+        </li>
+    
+        <li id="0013744142037508cf42e51debf49668810645e02887691000" style="margin-left:2em;">
+            <a href="0013744142037508cf42e51debf49668810645e02887691000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013744142037508cf42e51debf49668810645e02887691000">ç‰ˆæœ¬å›é€€</a>
+        </li>
+    
+        <li id="0013745374151782eb658c5a5ca454eaa451661275886c6000" style="margin-left:2em;">
+            <a href="0013745374151782eb658c5a5ca454eaa451661275886c6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013745374151782eb658c5a5ca454eaa451661275886c6000">å·¥ä½œåŒºå’Œæš‚å­˜åŒº</a>
+        </li>
+    
+        <li id="001374829472990293f16b45df14f35b94b3e8a026220c5000" style="margin-left:2em;">
+            <a href="001374829472990293f16b45df14f35b94b3e8a026220c5000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374829472990293f16b45df14f35b94b3e8a026220c5000">ç®¡ç†ä¿®æ”¹</a>
+        </li>
+    
+        <li id="001374831943254ee90db11b13d4ba9a73b9047f4fb968d000" style="margin-left:2em;">
+            <a href="001374831943254ee90db11b13d4ba9a73b9047f4fb968d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374831943254ee90db11b13d4ba9a73b9047f4fb968d000">æ’¤é”€ä¿®æ”¹</a>
+        </li>
+    
+        <li id="0013758392816224cafd33c44b4451887cc941e6716805c000" style="margin-left:2em;">
+            <a href="0013758392816224cafd33c44b4451887cc941e6716805c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013758392816224cafd33c44b4451887cc941e6716805c000">åˆ é™¤æ–‡ä»¶</a>
+        </li>
+    
+        <li id="001374385852170d9c7adf13c30429b9660d0eb689dd43a000" style="margin-left:1em;">
+            <a href="001374385852170d9c7adf13c30429b9660d0eb689dd43a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374385852170d9c7adf13c30429b9660d0eb689dd43a000">è¿œç¨‹ä»“åº“</a>
+        </li>
+    
+        <li id="0013752340242354807e192f02a44359908df8a5643103a000" style="margin-left:2em;">
+            <a href="0013752340242354807e192f02a44359908df8a5643103a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013752340242354807e192f02a44359908df8a5643103a000">æ·»åŠ è¿œç¨‹åº“</a>
+        </li>
+    
+        <li id="001375233990231ac8cf32ef1b24887a5209f83e01cb94b000" style="margin-left:2em;">
+            <a href="001375233990231ac8cf32ef1b24887a5209f83e01cb94b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375233990231ac8cf32ef1b24887a5209f83e01cb94b000">ä»è¿œç¨‹åº“å…‹éš†</a>
+        </li>
+    
+        <li id="0013743862006503a1c5bf5a783434581661a3cc2084efa000" style="margin-left:1em;">
+            <a href="0013743862006503a1c5bf5a783434581661a3cc2084efa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013743862006503a1c5bf5a783434581661a3cc2084efa000">åˆ†æ”¯ç®¡ç†</a>
+        </li>
+    
+        <li id="001375840038939c291467cc7c747b1810aab2fb8863508000" style="margin-left:2em;">
+            <a href="001375840038939c291467cc7c747b1810aab2fb8863508000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375840038939c291467cc7c747b1810aab2fb8863508000">åˆ›å»ºä¸åˆå¹¶åˆ†æ”¯</a>
+        </li>
+    
+        <li id="001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000" style="margin-left:2em;">
+            <a href="001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000">è§£å†³å†²çª</a>
+        </li>
+    
+        <li id="0013758410364457b9e3d821f4244beb0fd69c61a185ae0000" style="margin-left:2em;">
+            <a href="0013758410364457b9e3d821f4244beb0fd69c61a185ae0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013758410364457b9e3d821f4244beb0fd69c61a185ae0000">åˆ†æ”¯ç®¡ç†ç­–ç•¥</a>
+        </li>
+    
+        <li id="00137602359178794d966923e5c4134bc8bf98dfb03aea3000" style="margin-left:2em;">
+            <a href="00137602359178794d966923e5c4134bc8bf98dfb03aea3000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137602359178794d966923e5c4134bc8bf98dfb03aea3000">Bugåˆ†æ”¯</a>
+        </li>
+    
+        <li id="001376026233004c47f22a16d1f4fa289ce45f14bbc8f11000" style="margin-left:2em;">
+            <a href="001376026233004c47f22a16d1f4fa289ce45f14bbc8f11000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001376026233004c47f22a16d1f4fa289ce45f14bbc8f11000">Featureåˆ†æ”¯</a>
+        </li>
+    
+        <li id="0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000" style="margin-left:2em;">
+            <a href="0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000">å¤šäººåä½œ</a>
+        </li>
+    
+        <li id="0013762144381812a168659b3dd4610b4229d81de5056cc000" style="margin-left:1em;">
+            <a href="0013762144381812a168659b3dd4610b4229d81de5056cc000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013762144381812a168659b3dd4610b4229d81de5056cc000">æ ‡ç­¾ç®¡ç†</a>
+        </li>
+    
+        <li id="001376951758572072ce1dc172b4178b910d31bc7521ee4000" style="margin-left:2em;">
+            <a href="001376951758572072ce1dc172b4178b910d31bc7521ee4000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001376951758572072ce1dc172b4178b910d31bc7521ee4000">åˆ›å»ºæ ‡ç­¾</a>
+        </li>
+    
+        <li id="001376951885068a0ac7d81c3a64912b35a59b58a1d926b000" style="margin-left:2em;">
+            <a href="001376951885068a0ac7d81c3a64912b35a59b58a1d926b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">æ“ä½œæ ‡ç­¾</a>
+        </li>
+    
+        <li id="00137628548491051ccfaef0ccb470894c858999603fedf000" style="margin-left:1em;">
+            <a href="00137628548491051ccfaef0ccb470894c858999603fedf000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137628548491051ccfaef0ccb470894c858999603fedf000">ä½¿ç”¨GitHub</a>
+        </li>
+    
+        <li id="00137621280731812dec22ecc9b44f4b2ca1c680f181a5b000" style="margin-left:1em;">
+            <a href="00137621280731812dec22ecc9b44f4b2ca1c680f181a5b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137621280731812dec22ecc9b44f4b2ca1c680f181a5b000">è‡ªå®šä¹‰Git</a>
+        </li>
+    
+        <li id="0013758404317281e54b6f5375640abbb11e67be4cd49e0000" style="margin-left:2em;">
+            <a href="0013758404317281e54b6f5375640abbb11e67be4cd49e0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013758404317281e54b6f5375640abbb11e67be4cd49e0000">å¿½ç•¥ç‰¹æ®Šæ–‡ä»¶</a>
+        </li>
+    
+        <li id="001375234012342f90be1fc4d81446c967bbdc19e7c03d3000" style="margin-left:2em;">
+            <a href="001375234012342f90be1fc4d81446c967bbdc19e7c03d3000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000">é…ç½®åˆ«å</a>
+        </li>
+    
+        <li id="00137583770360579bc4b458f044ce7afed3df579123eca000" style="margin-left:2em;">
+            <a href="00137583770360579bc4b458f044ce7afed3df579123eca000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137583770360579bc4b458f044ce7afed3df579123eca000">æ­å»ºGitæœåŠ¡å™¨</a>
+        </li>
+    
+        <li id="00137586810169600f39e17409a4358b1ac0d3621356287000" style="margin-left:1em;">
+            <a href="00137586810169600f39e17409a4358b1ac0d3621356287000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137586810169600f39e17409a4358b1ac0d3621356287000">æœŸæœ«æ€»ç»“</a>
+        </li>
+    
+    </ul>
+    <div class="x-placeholder"></div>
+
+                        </div>
+                        <div class="x-sidebar-left-bottom">
+                            <h3>å…³äºä½œè€…</h3>
+<iframe width="100%" height="310" class="share_self"  frameborder="0" scrolling="no" src="../../../widget.weibo.com/weiboshow/fi000001.php-language=&width=0&height=550&fansrow=2&ptype=1&speed=0&skin=5&istitle=0&noborder=0&isweibo=0&isfans=1&uid=1658384301&verifier=078cedea&colors=0593d3,ffffff,666666,0593d3,0477ab&dpc=1" tppabs="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=0&isFans=1&uid=1658384301&verifier=078cedea&colors=0593d3,ffffff,666666,0593d3,0477ab&dpc=1"></iframe>
+
+<div style="width:100%;overflow-x:hidden;">
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300x600-lxf -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-6727358730461554"
+     data-ad-slot="4769867116"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div style="width:100%;overflow-x:hidden;">
+<script type="text/javascript">
+    /*300x250 @baidu*/
+    var cpro_id = "u2060917";
+</script>
+<script src="../../../cpro.baidustatic.com/cpro/ui/c.js" tppabs="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+
+
+                        </div>
+                    </div>
+                
+                
+
+                    <div class="x-center">
+                        <div>
+                            
+                        </div>
+                        <div class="x-content" style="width:100%">
+                            
+    <h4>åˆ›å»ºä¸åˆå¹¶åˆ†æ”¯</h4>
+    <div class="x-wiki-info"><span>Reads: 42706</span></div>
+    <hr>
+    <div class="x-wiki-content">
+        <p>åœ¨<a href="0013744142037508cf42e51debf49668810645e02887691000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013744142037508cf42e51debf49668810645e02887691000">ç‰ˆæœ¬å›é€€</a>é‡Œï¼Œä½ å·²ç»çŸ¥é“ï¼Œæ¯æ¬¡æäº¤ï¼ŒGitéƒ½æŠŠå®ƒä»¬ä¸²æˆä¸€æ¡æ—¶é—´çº¿ï¼Œè¿™æ¡æ—¶é—´çº¿å°±æ˜¯ä¸€ä¸ªåˆ†æ”¯ã€‚æˆªæ­¢åˆ°ç›®å‰ï¼Œåªæœ‰ä¸€æ¡æ—¶é—´çº¿ï¼Œåœ¨Gité‡Œï¼Œè¿™ä¸ªåˆ†æ”¯å«ä¸»åˆ†æ”¯ï¼Œå³<code>master</code>åˆ†æ”¯ã€‚<code>HEAD</code>ä¸¥æ ¼æ¥è¯´ä¸æ˜¯æŒ‡å‘æäº¤ï¼Œè€Œæ˜¯æŒ‡å‘<code>master</code>ï¼Œ<code>master</code>æ‰æ˜¯æŒ‡å‘æäº¤çš„ï¼Œæ‰€ä»¥ï¼Œ<code>HEAD</code>æŒ‡å‘çš„å°±æ˜¯å½“å‰åˆ†æ”¯ã€‚</p>
+<p>ä¸€å¼€å§‹çš„æ—¶å€™ï¼Œ<code>master</code>åˆ†æ”¯æ˜¯ä¸€æ¡çº¿ï¼ŒGitç”¨<code>master</code>æŒ‡å‘æœ€æ–°çš„æäº¤ï¼Œå†ç”¨<code>HEAD</code>æŒ‡å‘<code>master</code>ï¼Œå°±èƒ½ç¡®å®šå½“å‰åˆ†æ”¯ï¼Œä»¥åŠå½“å‰åˆ†æ”¯çš„æäº¤ç‚¹ï¼š</p>
+<p><img src="../../files/attachments/0013849087937492135fbf4bbd24dfcbc18349a8a59d36d000/0.png" tppabs="http://www.liaoxuefeng.com/files/attachments/0013849087937492135fbf4bbd24dfcbc18349a8a59d36d000/0" alt="git-br-initial"></p>
+<p>æ¯æ¬¡æäº¤ï¼Œ<code>master</code>åˆ†æ”¯éƒ½ä¼šå‘å‰ç§»åŠ¨ä¸€æ­¥ï¼Œè¿™æ ·ï¼Œéšç€ä½ ä¸æ–­æäº¤ï¼Œ<code>master</code>åˆ†æ”¯çš„çº¿ä¹Ÿè¶Šæ¥è¶Šé•¿ï¼š</p>
+<video width="400" height="300" controls>
+<source src="../../../brightcove.vo.llnwd.net/v1/uds/pd/72312210001/201505/3399/72312210001_4229444814001_master-branch-forward.mp4" tppabs="http://brightcove.vo.llnwd.net/v1/uds/pd/72312210001/201505/3399/72312210001_4229444814001_master-branch-forward.mp4">
+<source src="../../../liaoxuefeng-liaoxuefeng.stor.sinaapp.com/learngit/video/master-branch-forward.mp4" tppabs="http://liaoxuefeng-liaoxuefeng.stor.sinaapp.com/learngit/video/master-branch-forward.mp4">
+</video>
+
+<p>å½“æˆ‘ä»¬åˆ›å»ºæ–°çš„åˆ†æ”¯ï¼Œä¾‹å¦‚<code>dev</code>æ—¶ï¼ŒGitæ–°å»ºäº†ä¸€ä¸ªæŒ‡é’ˆå«<code>dev</code>ï¼ŒæŒ‡å‘<code>master</code>ç›¸åŒçš„æäº¤ï¼Œå†æŠŠ<code>HEAD</code>æŒ‡å‘<code>dev</code>ï¼Œå°±è¡¨ç¤ºå½“å‰åˆ†æ”¯åœ¨<code>dev</code>ä¸Šï¼š</p>
+<p><img src="../../files/attachments/001384908811773187a597e2d844eefb11f5cf5d56135ca000/0.png" tppabs="http://www.liaoxuefeng.com/files/attachments/001384908811773187a597e2d844eefb11f5cf5d56135ca000/0" alt="git-br-create"></p>
+<p>ä½ çœ‹ï¼ŒGitåˆ›å»ºä¸€ä¸ªåˆ†æ”¯å¾ˆå¿«ï¼Œå› ä¸ºé™¤äº†å¢åŠ ä¸€ä¸ª<code>dev</code>æŒ‡é’ˆï¼Œæ”¹æ”¹<code>HEAD</code>çš„æŒ‡å‘ï¼Œå·¥ä½œåŒºçš„æ–‡ä»¶éƒ½æ²¡æœ‰ä»»ä½•å˜åŒ–ï¼</p>
+<p>ä¸è¿‡ï¼Œä»ç°åœ¨å¼€å§‹ï¼Œå¯¹å·¥ä½œåŒºçš„ä¿®æ”¹å’Œæäº¤å°±æ˜¯é’ˆå¯¹<code>dev</code>åˆ†æ”¯äº†ï¼Œæ¯”å¦‚æ–°æäº¤ä¸€æ¬¡åï¼Œ<code>dev</code>æŒ‡é’ˆå¾€å‰ç§»åŠ¨ä¸€æ­¥ï¼Œè€Œ<code>master</code>æŒ‡é’ˆä¸å˜ï¼š</p>
+<p><img src="../../files/attachments/0013849088235627813efe7649b4f008900e5365bb72323000/0.png" tppabs="http://www.liaoxuefeng.com/files/attachments/0013849088235627813efe7649b4f008900e5365bb72323000/0" alt="git-br-dev-fd"></p>
+<p>å‡å¦‚æˆ‘ä»¬åœ¨<code>dev</code>ä¸Šçš„å·¥ä½œå®Œæˆäº†ï¼Œå°±å¯ä»¥æŠŠ<code>dev</code>åˆå¹¶åˆ°<code>master</code>ä¸Šã€‚Gitæ€ä¹ˆåˆå¹¶å‘¢ï¼Ÿæœ€ç®€å•çš„æ–¹æ³•ï¼Œå°±æ˜¯ç›´æ¥æŠŠ<code>master</code>æŒ‡å‘<code>dev</code>çš„å½“å‰æäº¤ï¼Œå°±å®Œæˆäº†åˆå¹¶ï¼š</p>
+<p><img src="../../files/attachments/00138490883510324231a837e5d4aee844d3e4692ba50f5000/0.png" tppabs="http://www.liaoxuefeng.com/files/attachments/00138490883510324231a837e5d4aee844d3e4692ba50f5000/0" alt="git-br-ff-merge"></p>
+<p>æ‰€ä»¥Gitåˆå¹¶åˆ†æ”¯ä¹Ÿå¾ˆå¿«ï¼å°±æ”¹æ”¹æŒ‡é’ˆï¼Œå·¥ä½œåŒºå†…å®¹ä¹Ÿä¸å˜ï¼</p>
+<p>åˆå¹¶å®Œåˆ†æ”¯åï¼Œç”šè‡³å¯ä»¥åˆ é™¤<code>dev</code>åˆ†æ”¯ã€‚åˆ é™¤<code>dev</code>åˆ†æ”¯å°±æ˜¯æŠŠ<code>dev</code>æŒ‡é’ˆç»™åˆ æ‰ï¼Œåˆ æ‰åï¼Œæˆ‘ä»¬å°±å‰©ä¸‹äº†ä¸€æ¡<code>master</code>åˆ†æ”¯ï¼š</p>
+<p><img src="../../files/attachments/001384908867187c83ca970bf0f46efa19badad99c40235000/0.png" tppabs="http://www.liaoxuefeng.com/files/attachments/001384908867187c83ca970bf0f46efa19badad99c40235000/0" alt="git-br-rm"></p>
+<p>çœŸæ˜¯å¤ªç¥å¥‡äº†ï¼Œä½ çœ‹å¾—å‡ºæ¥æœ‰äº›æäº¤æ˜¯é€šè¿‡åˆ†æ”¯å®Œæˆçš„å—ï¼Ÿ</p>
+<video width="400" height="300" controls>
+<source src="../../../brightcove.vo.llnwd.net/v1/uds/pd/72312210001/201505/3441/72312210001_4229449489001_master-and-dev-ff.mp4" tppabs="http://brightcove.vo.llnwd.net/v1/uds/pd/72312210001/201505/3441/72312210001_4229449489001_master-and-dev-ff.mp4">
+<source src="../../../liaoxuefeng-liaoxuefeng.stor.sinaapp.com/learngit/video/master-and-dev-ff.mp4" tppabs="http://liaoxuefeng-liaoxuefeng.stor.sinaapp.com/learngit/video/master-and-dev-ff.mp4">
+</video>
+
+<p>ä¸‹é¢å¼€å§‹å®æˆ˜ã€‚</p>
+<p>é¦–å…ˆï¼Œæˆ‘ä»¬åˆ›å»º<code>dev</code>åˆ†æ”¯ï¼Œç„¶ååˆ‡æ¢åˆ°<code>dev</code>åˆ†æ”¯ï¼š</p>
+<pre><code>$ git checkout -b dev
+Switched to a new branch &#39;dev&#39;
+</code></pre><p><code>git checkout</code>å‘½ä»¤åŠ ä¸Š<code>-b</code>å‚æ•°è¡¨ç¤ºåˆ›å»ºå¹¶åˆ‡æ¢ï¼Œç›¸å½“äºä»¥ä¸‹ä¸¤æ¡å‘½ä»¤ï¼š</p>
+<pre><code>$ git branch dev
+$ git checkout dev
+Switched to branch &#39;dev&#39;
+</code></pre><p>ç„¶åï¼Œç”¨<code>git branch</code>å‘½ä»¤æŸ¥çœ‹å½“å‰åˆ†æ”¯ï¼š</p>
+<pre><code>$ git branch
+* dev
+  master
+</code></pre><p><code>git branch</code>å‘½ä»¤ä¼šåˆ—å‡ºæ‰€æœ‰åˆ†æ”¯ï¼Œå½“å‰åˆ†æ”¯å‰é¢ä¼šæ ‡ä¸€ä¸ª<code>*</code>å·ã€‚</p>
+<p>ç„¶åï¼Œæˆ‘ä»¬å°±å¯ä»¥åœ¨<code>dev</code>åˆ†æ”¯ä¸Šæ­£å¸¸æäº¤ï¼Œæ¯”å¦‚å¯¹readme.txtåšä¸ªä¿®æ”¹ï¼ŒåŠ ä¸Šä¸€è¡Œï¼š</p>
+<pre><code>Creating a new branch is quick.
+</code></pre><p>ç„¶åæäº¤ï¼š</p>
+<pre><code>$ git add readme.txt 
+$ git commit -m &quot;branch test&quot;
+[dev fec145a] branch test
+ 1 file changed, 1 insertion(+)
+</code></pre><p>ç°åœ¨ï¼Œ<code>dev</code>åˆ†æ”¯çš„å·¥ä½œå®Œæˆï¼Œæˆ‘ä»¬å°±å¯ä»¥åˆ‡æ¢å›<code>master</code>åˆ†æ”¯ï¼š</p>
+<pre><code>$ git checkout master
+Switched to branch &#39;master&#39;
+</code></pre><p>åˆ‡æ¢å›<code>master</code>åˆ†æ”¯åï¼Œå†æŸ¥çœ‹ä¸€ä¸ªreadme.txtæ–‡ä»¶ï¼Œåˆšæ‰æ·»åŠ çš„å†…å®¹ä¸è§äº†ï¼å› ä¸ºé‚£ä¸ªæäº¤æ˜¯åœ¨<code>dev</code>åˆ†æ”¯ä¸Šï¼Œè€Œ<code>master</code>åˆ†æ”¯æ­¤åˆ»çš„æäº¤ç‚¹å¹¶æ²¡æœ‰å˜ï¼š</p>
+<p><img src="../../files/attachments/001384908892295909f96758654469cad60dc50edfa9abd000/0.png" tppabs="http://www.liaoxuefeng.com/files/attachments/001384908892295909f96758654469cad60dc50edfa9abd000/0" alt="git-br-on-master"></p>
+<p>ç°åœ¨ï¼Œæˆ‘ä»¬æŠŠ<code>dev</code>åˆ†æ”¯çš„å·¥ä½œæˆæœåˆå¹¶åˆ°<code>master</code>åˆ†æ”¯ä¸Šï¼š</p>
+<pre><code>$ git merge dev
+Updating d17efd8..fec145a
+Fast-forward
+ readme.txt |    1 +
+ 1 file changed, 1 insertion(+)
+</code></pre><p><code>git merge</code>å‘½ä»¤ç”¨äºåˆå¹¶æŒ‡å®šåˆ†æ”¯åˆ°å½“å‰åˆ†æ”¯ã€‚åˆå¹¶åï¼Œå†æŸ¥çœ‹readme.txtçš„å†…å®¹ï¼Œå°±å¯ä»¥çœ‹åˆ°ï¼Œå’Œ<code>dev</code>åˆ†æ”¯çš„æœ€æ–°æäº¤æ˜¯å®Œå…¨ä¸€æ ·çš„ã€‚</p>
+<p>æ³¨æ„åˆ°ä¸Šé¢çš„<code>Fast-forward</code>ä¿¡æ¯ï¼ŒGitå‘Šè¯‰æˆ‘ä»¬ï¼Œè¿™æ¬¡åˆå¹¶æ˜¯â€œå¿«è¿›æ¨¡å¼â€ï¼Œä¹Ÿå°±æ˜¯ç›´æ¥æŠŠ<code>master</code>æŒ‡å‘<code>dev</code>çš„å½“å‰æäº¤ï¼Œæ‰€ä»¥åˆå¹¶é€Ÿåº¦éå¸¸å¿«ã€‚</p>
+<p>å½“ç„¶ï¼Œä¹Ÿä¸æ˜¯æ¯æ¬¡åˆå¹¶éƒ½èƒ½<code>Fast-forward</code>ï¼Œæˆ‘ä»¬åé¢ä¼šå°†å…¶ä»–æ–¹å¼çš„åˆå¹¶ã€‚</p>
+<p>åˆå¹¶å®Œæˆåï¼Œå°±å¯ä»¥æ”¾å¿ƒåœ°åˆ é™¤<code>dev</code>åˆ†æ”¯äº†ï¼š</p>
+<pre><code>$ git branch -d dev
+Deleted branch dev (was fec145a).
+</code></pre><p>åˆ é™¤åï¼ŒæŸ¥çœ‹<code>branch</code>ï¼Œå°±åªå‰©ä¸‹<code>master</code>åˆ†æ”¯äº†ï¼š</p>
+<pre><code>$ git branch
+* master
+</code></pre><p>å› ä¸ºåˆ›å»ºã€åˆå¹¶å’Œåˆ é™¤åˆ†æ”¯éå¸¸å¿«ï¼Œæ‰€ä»¥Gité¼“åŠ±ä½ ä½¿ç”¨åˆ†æ”¯å®ŒæˆæŸä¸ªä»»åŠ¡ï¼Œåˆå¹¶åå†åˆ æ‰åˆ†æ”¯ï¼Œè¿™å’Œç›´æ¥åœ¨<code>master</code>åˆ†æ”¯ä¸Šå·¥ä½œæ•ˆæœæ˜¯ä¸€æ ·çš„ï¼Œä½†è¿‡ç¨‹æ›´å®‰å…¨ã€‚</p>
+<video width="648" height="434" controls>
+<source src="../../../brightcove.vo.llnwd.net/v1/uds/pd/72312210001/201505/3937/72312210001_4229443855001_create-dev-merge-delete.mp4" tppabs="http://brightcove.vo.llnwd.net/v1/uds/pd/72312210001/201505/3937/72312210001_4229443855001_create-dev-merge-delete.mp4">
+<source src="../../../liaoxuefeng-liaoxuefeng.stor.sinaapp.com/learngit/video/create-dev-merge-delete.mp4" tppabs="http://liaoxuefeng-liaoxuefeng.stor.sinaapp.com/learngit/video/create-dev-merge-delete.mp4">
+</video>
+
+<h3 id="-">å°ç»“</h3>
+<p>Gité¼“åŠ±å¤§é‡ä½¿ç”¨åˆ†æ”¯ï¼š</p>
+<p>æŸ¥çœ‹åˆ†æ”¯ï¼š<code>git branch</code></p>
+<p>åˆ›å»ºåˆ†æ”¯ï¼š<code>git branch &lt;name&gt;</code></p>
+<p>åˆ‡æ¢åˆ†æ”¯ï¼š<code>git checkout &lt;name&gt;</code></p>
+<p>åˆ›å»º+åˆ‡æ¢åˆ†æ”¯ï¼š<code>git checkout -b &lt;name&gt;</code></p>
+<p>åˆå¹¶æŸåˆ†æ”¯åˆ°å½“å‰åˆ†æ”¯ï¼š<code>git merge &lt;name&gt;</code></p>
+<p>åˆ é™¤åˆ†æ”¯ï¼š<code>git branch -d &lt;name&gt;</code></p>
+
+    </div>
+    <hr>
+    <div id="x-wiki-prev-next" class="uk-clearfix uk-margin-left uk-margin-right">
+    </div>
+    <hr>
+
+    <div class="x-anchor"><a name="comments"></a></div>
+
+    <h3>Comments</h3>
+
+    <ul id="x-comment-list" class="uk-comment-list">
+    </ul>
+
+    <h3>Make a Comment</h3>
+
+    <div class="x-display-if-not-signin">
+        <p><button type="button" class="uk-button" onclick="showSignin()"><i class="uk-icon-signin"></i> Sign In to Make a Comment</button></p>
+    </div>
+
+    <div id="x-comment-area"></div>
+
+
+                        </div>
+                        <div>
+                            <div class="uk-clearfix" style="margin:15px 0">
+
+
+<div style="width:336px;height:280px;float:left;">
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- lxf-336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-6727358730461554"
+     data-ad-slot="8492060710"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div style="width:336px;height:280px;float:left;">
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- lxf-336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-6727358730461554"
+     data-ad-slot="8492060710"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div style="width:336px;height:280px;float:left;">
+<script type="text/javascript">
+    /*336x280 @baidu*/
+    var cpro_id = "u2068816";
+</script>
+<script src="../../../cpro.baidustatic.com/cpro/ui/c.js" tppabs="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+
+<div style="width:336px;height:280px;float:left;">
+<script type="text/javascript">
+    /*336x280 @baidu*/
+    var cpro_id = "u2068816";
+</script>
+<script src="../../../cpro.baidustatic.com/cpro/ui/c.js" tppabs="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+
+
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-grid">
+                <div class="x-body-after uk-width-1-1">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="x-offcanvas-left" class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">
+            <div class="uk-panel">
+                
+    <ul class="uk-nav uk-nav-side">
+        <li class="uk-nav-header">Index</li>
+    </ul>
+    <ul class="uk-nav uk-nav-side">
+        <li id="off-git"><a href="../git.htm" tppabs="http://www.liaoxuefeng.com/wiki/git">Gitæ•™ç¨‹</a></li>
+    
+        <li id="off-001373962845513aefd77a99f4145f0a2c7a7ca057e7570000" style="margin-left:1em;">
+            <a href="001373962845513aefd77a99f4145f0a2c7a7ca057e7570000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001373962845513aefd77a99f4145f0a2c7a7ca057e7570000">Gitç®€ä»‹</a>
+        </li>
+    
+        <li id="off-00137402760310626208b4f695940a49e5348b689d095fc000" style="margin-left:2em;">
+            <a href="00137402760310626208b4f695940a49e5348b689d095fc000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137402760310626208b4f695940a49e5348b689d095fc000">Gitçš„è¯ç”Ÿ</a>
+        </li>
+    
+        <li id="off-001374027586935cf69c53637d8458c9aec27dd546a6cd6000" style="margin-left:2em;">
+            <a href="001374027586935cf69c53637d8458c9aec27dd546a6cd6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374027586935cf69c53637d8458c9aec27dd546a6cd6000">é›†ä¸­å¼vsåˆ†å¸ƒå¼</a>
+        </li>
+    
+        <li id="off-00137396287703354d8c6c01c904c7d9ff056ae23da865a000" style="margin-left:1em;">
+            <a href="00137396287703354d8c6c01c904c7d9ff056ae23da865a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137396287703354d8c6c01c904c7d9ff056ae23da865a000">å®‰è£…Git</a>
+        </li>
+    
+        <li id="off-0013743256916071d599b3aed534aaab22a0db6c4e07fd0000" style="margin-left:1em;">
+            <a href="0013743256916071d599b3aed534aaab22a0db6c4e07fd0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">åˆ›å»ºç‰ˆæœ¬åº“</a>
+        </li>
+    
+        <li id="off-0013743858312764dca7ad6d0754f76aa562e3789478044000" style="margin-left:1em;">
+            <a href="0013743858312764dca7ad6d0754f76aa562e3789478044000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013743858312764dca7ad6d0754f76aa562e3789478044000">æ—¶å…‰æœºç©¿æ¢­</a>
+        </li>
+    
+        <li id="off-0013744142037508cf42e51debf49668810645e02887691000" style="margin-left:2em;">
+            <a href="0013744142037508cf42e51debf49668810645e02887691000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013744142037508cf42e51debf49668810645e02887691000">ç‰ˆæœ¬å›é€€</a>
+        </li>
+    
+        <li id="off-0013745374151782eb658c5a5ca454eaa451661275886c6000" style="margin-left:2em;">
+            <a href="0013745374151782eb658c5a5ca454eaa451661275886c6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013745374151782eb658c5a5ca454eaa451661275886c6000">å·¥ä½œåŒºå’Œæš‚å­˜åŒº</a>
+        </li>
+    
+        <li id="off-001374829472990293f16b45df14f35b94b3e8a026220c5000" style="margin-left:2em;">
+            <a href="001374829472990293f16b45df14f35b94b3e8a026220c5000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374829472990293f16b45df14f35b94b3e8a026220c5000">ç®¡ç†ä¿®æ”¹</a>
+        </li>
+    
+        <li id="off-001374831943254ee90db11b13d4ba9a73b9047f4fb968d000" style="margin-left:2em;">
+            <a href="001374831943254ee90db11b13d4ba9a73b9047f4fb968d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374831943254ee90db11b13d4ba9a73b9047f4fb968d000">æ’¤é”€ä¿®æ”¹</a>
+        </li>
+    
+        <li id="off-0013758392816224cafd33c44b4451887cc941e6716805c000" style="margin-left:2em;">
+            <a href="0013758392816224cafd33c44b4451887cc941e6716805c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013758392816224cafd33c44b4451887cc941e6716805c000">åˆ é™¤æ–‡ä»¶</a>
+        </li>
+    
+        <li id="off-001374385852170d9c7adf13c30429b9660d0eb689dd43a000" style="margin-left:1em;">
+            <a href="001374385852170d9c7adf13c30429b9660d0eb689dd43a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001374385852170d9c7adf13c30429b9660d0eb689dd43a000">è¿œç¨‹ä»“åº“</a>
+        </li>
+    
+        <li id="off-0013752340242354807e192f02a44359908df8a5643103a000" style="margin-left:2em;">
+            <a href="0013752340242354807e192f02a44359908df8a5643103a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013752340242354807e192f02a44359908df8a5643103a000">æ·»åŠ è¿œç¨‹åº“</a>
+        </li>
+    
+        <li id="off-001375233990231ac8cf32ef1b24887a5209f83e01cb94b000" style="margin-left:2em;">
+            <a href="001375233990231ac8cf32ef1b24887a5209f83e01cb94b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375233990231ac8cf32ef1b24887a5209f83e01cb94b000">ä»è¿œç¨‹åº“å…‹éš†</a>
+        </li>
+    
+        <li id="off-0013743862006503a1c5bf5a783434581661a3cc2084efa000" style="margin-left:1em;">
+            <a href="0013743862006503a1c5bf5a783434581661a3cc2084efa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013743862006503a1c5bf5a783434581661a3cc2084efa000">åˆ†æ”¯ç®¡ç†</a>
+        </li>
+    
+        <li id="off-001375840038939c291467cc7c747b1810aab2fb8863508000" style="margin-left:2em;">
+            <a href="001375840038939c291467cc7c747b1810aab2fb8863508000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375840038939c291467cc7c747b1810aab2fb8863508000">åˆ›å»ºä¸åˆå¹¶åˆ†æ”¯</a>
+        </li>
+    
+        <li id="off-001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000" style="margin-left:2em;">
+            <a href="001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000">è§£å†³å†²çª</a>
+        </li>
+    
+        <li id="off-0013758410364457b9e3d821f4244beb0fd69c61a185ae0000" style="margin-left:2em;">
+            <a href="0013758410364457b9e3d821f4244beb0fd69c61a185ae0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013758410364457b9e3d821f4244beb0fd69c61a185ae0000">åˆ†æ”¯ç®¡ç†ç­–ç•¥</a>
+        </li>
+    
+        <li id="off-00137602359178794d966923e5c4134bc8bf98dfb03aea3000" style="margin-left:2em;">
+            <a href="00137602359178794d966923e5c4134bc8bf98dfb03aea3000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137602359178794d966923e5c4134bc8bf98dfb03aea3000">Bugåˆ†æ”¯</a>
+        </li>
+    
+        <li id="off-001376026233004c47f22a16d1f4fa289ce45f14bbc8f11000" style="margin-left:2em;">
+            <a href="001376026233004c47f22a16d1f4fa289ce45f14bbc8f11000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001376026233004c47f22a16d1f4fa289ce45f14bbc8f11000">Featureåˆ†æ”¯</a>
+        </li>
+    
+        <li id="off-0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000" style="margin-left:2em;">
+            <a href="0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000">å¤šäººåä½œ</a>
+        </li>
+    
+        <li id="off-0013762144381812a168659b3dd4610b4229d81de5056cc000" style="margin-left:1em;">
+            <a href="0013762144381812a168659b3dd4610b4229d81de5056cc000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013762144381812a168659b3dd4610b4229d81de5056cc000">æ ‡ç­¾ç®¡ç†</a>
+        </li>
+    
+        <li id="off-001376951758572072ce1dc172b4178b910d31bc7521ee4000" style="margin-left:2em;">
+            <a href="001376951758572072ce1dc172b4178b910d31bc7521ee4000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001376951758572072ce1dc172b4178b910d31bc7521ee4000">åˆ›å»ºæ ‡ç­¾</a>
+        </li>
+    
+        <li id="off-001376951885068a0ac7d81c3a64912b35a59b58a1d926b000" style="margin-left:2em;">
+            <a href="001376951885068a0ac7d81c3a64912b35a59b58a1d926b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001376951885068a0ac7d81c3a64912b35a59b58a1d926b000">æ“ä½œæ ‡ç­¾</a>
+        </li>
+    
+        <li id="off-00137628548491051ccfaef0ccb470894c858999603fedf000" style="margin-left:1em;">
+            <a href="00137628548491051ccfaef0ccb470894c858999603fedf000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137628548491051ccfaef0ccb470894c858999603fedf000">ä½¿ç”¨GitHub</a>
+        </li>
+    
+        <li id="off-00137621280731812dec22ecc9b44f4b2ca1c680f181a5b000" style="margin-left:1em;">
+            <a href="00137621280731812dec22ecc9b44f4b2ca1c680f181a5b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137621280731812dec22ecc9b44f4b2ca1c680f181a5b000">è‡ªå®šä¹‰Git</a>
+        </li>
+    
+        <li id="off-0013758404317281e54b6f5375640abbb11e67be4cd49e0000" style="margin-left:2em;">
+            <a href="0013758404317281e54b6f5375640abbb11e67be4cd49e0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/0013758404317281e54b6f5375640abbb11e67be4cd49e0000">å¿½ç•¥ç‰¹æ®Šæ–‡ä»¶</a>
+        </li>
+    
+        <li id="off-001375234012342f90be1fc4d81446c967bbdc19e7c03d3000" style="margin-left:2em;">
+            <a href="001375234012342f90be1fc4d81446c967bbdc19e7c03d3000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000">é…ç½®åˆ«å</a>
+        </li>
+    
+        <li id="off-00137583770360579bc4b458f044ce7afed3df579123eca000" style="margin-left:2em;">
+            <a href="00137583770360579bc4b458f044ce7afed3df579123eca000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137583770360579bc4b458f044ce7afed3df579123eca000">æ­å»ºGitæœåŠ¡å™¨</a>
+        </li>
+    
+        <li id="off-00137586810169600f39e17409a4358b1ac0d3621356287000" style="margin-left:1em;">
+            <a href="00137586810169600f39e17409a4358b1ac0d3621356287000.htm" tppabs="http://www.liaoxuefeng.com/wiki/git/00137586810169600f39e17409a4358b1ac0d3621356287000">æœŸæœ«æ€»ç»“</a>
+        </li>
+    
+    </ul>
+    <div class="x-placeholder"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="footer">
+        <div class="x-footer uk-container x-container">
+            <hr>
+            <div class="uk-grid">
+                <div class="x-footer-copyright uk-width-small-1-2 uk-width-medium-1-3">
+                    <p>
+                        <a href="javascript:if(confirm('http://www.liaoxuefeng.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/'" tppabs="http://www.liaoxuefeng.com/">å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™</a>&copy;2015
+                        <br>
+                        Powered by <a href="javascript:if(confirm('http://js.itranswarp.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://js.itranswarp.com/'" tppabs="http://js.itranswarp.com/" target="_blank">iTranswarp.js</a>
+                    </p>
+                </div>
+                <div class="uk-width-small-1-2 uk-width-medium-1-3 x-hidden-tiny">
+                    <a href="javascript:if(confirm('http://www.liaoxuefeng.com/feed  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/feed'" tppabs="http://www.liaoxuefeng.com/feed" target="_blank" class="uk-icon-button uk-icon-rss" data-uk-tooltip title="Subscribe the RSS"></a>
+                    <a href="javascript:if(confirm('https://github.com/michaelliao/itranswarp.js  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/michaelliao/itranswarp.js'" tppabs="https://github.com/michaelliao/itranswarp.js" target="_blank" class="uk-icon-button uk-icon-github" data-uk-tooltip title="View source code on GitHub"></a>
+                    <a href="javascript:if(confirm('https://twitter.com/liaoxuefeng  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://twitter.com/liaoxuefeng'" tppabs="https://twitter.com/liaoxuefeng" target="_blank" class="uk-icon-button uk-icon-twitter" data-uk-tooltip title="Follow author on Twitter"></a>
+                    <a href="javascript:if(confirm('http://www.weibo.com/liaoxuefeng  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.weibo.com/liaoxuefeng'" tppabs="http://www.weibo.com/liaoxuefeng" target="_blank" class="uk-icon-button uk-icon-weibo uk-visible-large uk-hidden-medium" data-uk-tooltip title="Follow author on Weibo"></a>
+                </div>
+                <div class="uk-width-medium-1-3 uk-hidden-small">
+                    <p>
+                        <a href="javascript:if(confirm('https://github.com/michaelliao/itranswarp.js/issues  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/michaelliao/itranswarp.js/issues'" tppabs="https://github.com/michaelliao/itranswarp.js/issues" target="_blank">Feedback</a>
+                        <br>
+                        <a href="javascript:if(confirm('https://github.com/michaelliao/itranswarp.js/blob/master/LICENSE  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/michaelliao/itranswarp.js/blob/master/LICENSE'" tppabs="https://github.com/michaelliao/itranswarp.js/blob/master/LICENSE" target="_blank">License</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-signin" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <a class="uk-modal-close uk-close"></a>
+            <div class="uk-modal-header">
+                <h2>Please Sign In</h2>
+            </div>
+            <p>You can sign in directly without register:</p>
+            
+            <h3><a href="javascript:if(confirm('http://www.liaoxuefeng.com/auth/from/weibo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/auth/from/weibo'" tppabs="http://www.liaoxuefeng.com/auth/from/weibo"><i class="uk-icon-weibo"></i> ä½¿ç”¨æ–°æµªå¾®åšç™»å½•</a></h3>
+            
+            <p>You need authorize to allow connect to your social passport for the first time.</p>
+        </div>
+    </div>
+
+    <div id="oldBrowser">
+        <div class="uk-alert uk-alert-danger" data-uk-alert>
+            <a href="#0" class="uk-alert-close uk-close"></a>
+            <p>
+                WARNING: You are using an old browser that does not support HTML5.
+                Please choose a modern browser (<a href="javascript:if(confirm('http://www.google.com/chrome  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.google.com/chrome'" tppabs="http://www.google.com/chrome" target="_blank">Chrome</a> / <a href="javascript:if(confirm('http://www.mozilla.org/firefox/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.mozilla.org/firefox/'" tppabs="http://www.mozilla.org/firefox/" target="_blank">Firefox</a> / <a href="javascript:if(confirm('http://www.apple.com/safari/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.apple.com/safari/'" tppabs="http://www.apple.com/safari/" target="_blank">Sarafi</a>) to get a good experience.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

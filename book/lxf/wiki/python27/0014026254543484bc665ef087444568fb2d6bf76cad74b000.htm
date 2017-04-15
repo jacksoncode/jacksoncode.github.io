@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html xmlns:itranswarp="http://www.itranswarp.com/" xmlns:wb="http://open.weibo.com/wb">
+<!--
+
+-->
+<head>
+    <meta charset="utf-8" />
+    <title>Day 14 - å®ŒæˆWeb App - å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="javascript,node,jquery,git,python,java,sql,linux,ios,android,æ•™ç¨‹,è½¯ä»¶,ç¼–ç¨‹,å¼€å‘,è¿ç»´,äº‘è®¡ç®—,ç½‘ç»œ,äº’è”ç½‘" />
+    <meta name="description" content="ç ”ç©¶äº’è”ç½‘äº§å“å’ŒæŠ€æœ¯ï¼Œæä¾›åŸåˆ›ä¸­æ–‡ç²¾å“æ•™ç¨‹" />
+    <meta property="x-nav" content=" /wiki/python27 " />
+    <link rel="alternate" href="/feed" title="å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™" type="application/rss+xml" />
+    
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://www.liaoxuefeng.com/wiki/python27/0014026254543484bc665ef087444568fb2d6bf76cad74b000" />
+    <meta property="og:title" content="Day 14 - å®ŒæˆWeb App" />
+    <meta property="og:description" content="å°ç™½çš„Pythonæ–°æ‰‹æ•™ç¨‹" />
+    <meta property="og:image" content="http://www.liaoxuefeng.com/files/attachments/00138594927688160cc8acacc69449b924764f6faa39e8f000/l" />
+
+    <!-- BEGIN CSS COMPRESS -->
+    <link rel="stylesheet" href="../../static/themes/default/css/codemirror.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/codemirror.css" />
+    <link rel="stylesheet" href="../../static/themes/default/css/highlight.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/highlight.css" />
+    <link rel="stylesheet" href="../../static/themes/default/css/itranswarp.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/itranswarp.css" />
+    <!-- END CSS COMPRESS -->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../static/themes/default/css/ie.css" tppabs="http://www.liaoxuefeng.com/static/themes/default/css/ie.css" />
+    <![endif]-->
+    
+    <script src="../../static/themes/default/js/all.js" tppabs="http://www.liaoxuefeng.com/static/themes/default/js/all.js"></script>
+    
+    <script id="tplComment" type="text/plain">
+        <div class="uk-comment">
+            <div class="uk-comment-header" style="margin-bottom:0">
+                <a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }"><img class="uk-comment-avatar uk-border-circle x-avatar" src="{ user.image_url }" width="50" height="50" alt=""></a>
+                <h4 class="uk-comment-title"><a target="_blank" href="http://www.liaoxuefeng.com/discuss/{ board_id }/{ id }">{ name }</a></h4>
+                <div class="uk-comment-meta"><a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }">{ user.name }</a> created at { created_at.toSmartDate() }, Last updated at { updated_at.toSmartDate() }</div>
+            </div>
+            <div class="uk-comment-body x-auto-content">
+                { content|safe }
+            </div>
+        </div>
+    </script>
+
+    <script id="tplCommentReply" type="text/plain">
+        <div class="uk-comment">
+            <div class="uk-comment-header" style="margin-bottom:0">
+                <a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }"><img class="uk-comment-avatar uk-border-circle x-avatar" src="{ user.image_url }" width="50" height="50" alt=""></a>
+                <div class="uk-comment-meta"><a target="_blank" href="http://www.liaoxuefeng.com/user/{ user.id }">{ user.name }</a></div>
+                <div class="uk-comment-meta">Created at { created_at.toSmartDate() }, Last updated at { updated_at.toSmartDate() }</div>
+            </div>
+            <div class="uk-comment-body x-auto-content">
+                { content|safe }
+            </div>
+        </div>
+    </script>
+
+    <script id="tplCommentInfo" type="text/plain">
+        <li>
+            <div class="x-comment-info">
+                <hr>
+                <a target="_blank" class="uk-button uk-button-small" href="http://www.liaoxuefeng.com/discuss/{ board_id }/{ id }"><i class="uk-icon-list-ul"></i> View Full Discuss</a>
+                &nbsp;
+                <a target="_blank" class="uk-button uk-button-small" href="http://www.liaoxuefeng.com/discuss/{ board_id }/{ id }#reply"><i class="uk-icon-reply"></i> Reply This Topic</a>
+            </div>
+        </li>
+    </script>
+
+    <script id="tplCommentArea" type="text/plain">
+        <div class="x-display-if-signin">
+            <p><button id="comment-make-button" type="button" class="uk-button uk-button-primary"><i class="uk-icon-comment"></i> Make a Comment</button></p>
+            <form id="comment-form" class="uk-form" style="display:none;">
+                <fieldset>
+                    <div class="uk-alert uk-alert-danger" style="display:none"></div>
+                    <div class="uk-form-row">
+                        <label>Title:</label>
+                    </div>
+                    <div class="uk-form-row">
+                        <input type="text" name="name" maxlength="100" style="width:100%">
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Content:</label>
+                    </div>
+                    <div class="uk-form-row x-textarea">
+                    </div>
+                    <div class="uk-form-row">
+                        <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-check"></i> Post</button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="uk-button x-cancel"><i class="uk-icon-close"></i> Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </script>
+
+    <style id="x-doc-style">
+
+        .x-display-if-signin { display: none; }
+
+    </style>
+    <script>
+        var g_time = parseFloat('1440958647183');
+        var g_signins = [{"id":"weibo","icon":"weibo","name":"ä½¿ç”¨æ–°æµªå¾®åšç™»å½•"}];
+//
+        var g_user = null;
+//
+    </script>
+
+
+
+
+
+    
+    
+<style>
+.x-wiki-visible {
+    display: block;
+}
+</style>
+
+<script>
+loadComments('0014026254543484bc665ef087444568fb2d6bf76cad74b000');
+
+var
+    comment_type = 'wikipage',
+    comment_ref_id = '0014026254543484bc665ef087444568fb2d6bf76cad74b000',
+    comment_tag = 'python';
+
+function onAuthSuccess() {
+    initCommentArea(comment_type, comment_ref_id, comment_tag);
+}
+
+$(function () {
+    if (g_user !== null) {
+        initCommentArea(comment_type, comment_ref_id, comment_tag);
+    }
+});
+
+$(function () {
+    var
+        current = $('#0014026254543484bc665ef087444568fb2d6bf76cad74b000'),
+        prev = current.prev().find('a'),
+        next = current.next().find('a'),
+        L = [];
+    current.addClass('uk-active');
+    $('#off-0014026254543484bc665ef087444568fb2d6bf76cad74b000').addClass('uk-active');
+    L.push('<div class="uk-clearfix uk-margin-left uk-margin-right">');
+    if (prev.length > 0) {
+        L.push('<span class="uk-float-left"><i class="uk-icon-chevron-left"></i> <a href="');
+        L.push(prev.attr('href'));
+        L.push('">');
+        L.push(encodeHtml(prev.text()));
+        L.push('</a></span>');
+    }
+    if (next.length > 0) {
+        L.push('<span class="uk-float-right"><a href="');
+        L.push(next.attr('href'));
+        L.push('">');
+        L.push(encodeHtml(next.text()));
+        L.push('</a> <i class="uk-icon-chevron-right"></i></span>')
+    }
+    L.push('</div>');
+    $('#x-wiki-prev-next').html(L.join(''));
+});
+</script>
+
+
+<style>
+.x-center {
+    margin: 0;
+}
+
+
+.x-center {
+    margin-left: 316px;
+    padding-left: 15px;
+}
+
+
+
+
+</style>
+
+<!-- BEGIN custom_header -->
+<script src="../../../tjs.sjs.sinajs.cn/open/api/js/wb.js" tppabs="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+// git:
+$(function() {
+  if (location.pathname.indexOf('/wiki/git')===0) {
+    $('.x-wiki-info').parent().css('position', 'relative').append('<a href="https://itunes.apple.com/cn/app/git-jiao-cheng/id876420437" target="_blank" style="display:block;width:135px;height:40px;position:absolute;right:10px;top:10px;"><img src="../../static/img/download-on-the-app-store.png"/*tpa=http://www.liaoxuefeng.com/static/img/download-on-the-app-store.png*/ /></a>');
+  }
+});
+</script>
+
+<script>
+// python 3:
+$(function() {
+  if (location.pathname.indexOf('/wiki/python34')===0) {
+    $('.x-wiki-info').parent().css('position', 'relative').append('<a href="../python27.htm"/*tpa=http://www.liaoxuefeng.com/wiki/python27*/ target="_blank" style="display:block;position:absolute;right:10px;top:10px;">2.7æ—§ç‰ˆæ•™ç¨‹</a>');
+  }
+});
+</script>
+
+<script>
+// python 2.7:
+$(function() {
+  if (location.pathname.indexOf('/wiki/python27')===0) {
+    $('#main .x-container').prepend('<div class="uk-alert">æ‚¨ç›®å‰æ­£åœ¨å­¦ä¹ çš„2.7ç‰ˆæœ¬çš„Pythonæ•™ç¨‹å·²è¿‡æœŸï¼Œè¯·ç«‹åˆ»å‰å¾€æœ€æ–°çš„Python 3 æ•™ç¨‹ï¼š<a href="../python34.htm"/*tpa=http://www.liaoxuefeng.com/wiki/python34*/ class="uk-button uk-button-success">æˆ‘è¦å­¦ Python 3</a></div>');
+  }
+});
+</script>
+
+<script>
+// wiki:
+$(function() {
+  if (location.pathname.indexOf('/wiki/')===0) {
+    $('.x-wiki-content').find('a[href^=http]').attr('target', '_blank');
+    $('#x-wiki-prev-next').prev().before('<h3>åˆ†äº«ç»™æœ‹å‹</h3><p><wb:share-button appkey="1391944217" addition="full" type="button" ralateUid="1658384301" picture_search="false" pic="' + $('meta[property="og:image"]').attr('content') + '"></wb:share-button></p><h3>æ‚¨çš„é¼“åŠ±æ˜¯ä½œè€…å†™ä½œæœ€å¤§çš„åŠ¨åŠ›</h3><p>å¦‚æœæ‚¨è®¤ä¸ºæœ¬ç½‘ç«™çš„æ•™ç¨‹è´¨é‡ä¸é”™ï¼Œè¯»åè§‰å¾—æ”¶è·å¾ˆå¤§ï¼Œé¢„æœŸå·¥èµ„æ¶¨å¹…èƒ½è¶…è¿‡30%ï¼Œä¸å¦¨å°é¢èµåŠ©æˆ‘ä¸€ä¸‹ï¼Œè®©æˆ‘æœ‰åŠ¨åŠ›ç»§ç»­å†™å‡ºé«˜è´¨é‡çš„æ•™ç¨‹ï¼š</p><p><a target="_blank" href="http://www.liaoxuefeng.com/webpage/donate" class="uk-button uk-button-primary"><i class="uk-icon-cny"></i> æˆ‘è¦å°é¢èµåŠ©</a></p>');
+  }
+});
+</script>
+
+<script>
+// article:
+$(function() {
+  if (location.pathname.indexOf('/article/')===0) {
+    $('.x-article-content').find('a[href^=http]').attr('target', '_blank');
+    $('.x-article-content').after('<h3>åˆ†äº«ç»™æœ‹å‹</h3><p><wb:share-button appkey="1391944217" addition="full" type="button" ralateUid="1658384301" picture_search="false" pic="' + $('meta[property="og:image"]').attr('content') + '"></wb:share-button></p>');
+  }
+});
+</script>
+
+<script>
+// all:
+$(function() {
+  $('.x-footer-copyright').find('p').append('<br>ç”±<a target="_blank" href="http://s.click.taobao.com/t?e=m%3D2%26s%3DjPaT%2Fmi2tL4cQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAlFz4nQbUpKuV%2FZ67c680w5IW%2FH7aX8LI9nQCCjrrrN3wYAeXhmRFOHMh3DDj7e5Hudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D">é˜¿é‡Œäº‘</a>æ‰˜ç®¡<br><a href="#0" onclick="location.assign(decodeURIComponent(\'moc.36104%fxlksaA3%otliam\'.split(\'\').reverse().join(\'\')))">å¹¿å‘Šåˆä½œ</a>');
+  $('.x-footer').append('<hr><div style="text-align:center"><p>å‹æƒ…é“¾æ¥: <a href="http://www.shi-ci.com/" target="_blank">ä¸­åè¯—è¯</a> - <a href="http://s.click.taobao.com/t?e=m%3D2%26s%3DjPaT%2Fmi2tL4cQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAlFz4nQbUpKuV%2FZ67c680w5IW%2FH7aX8LI9nQCCjrrrN3wYAeXhmRFOHMh3DDj7e5Hudn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D" target="_blank">é˜¿é‡Œäº‘</a> - <a href="http://mitpress.mit.edu/sicp/full-text/book/book.html" target="_blank">SICP</a> - <a href="http://www.4clojure.com/" target="_blank">4clojure</a></p></div>');
+});
+</script>
+
+
+<script>
+// tongji
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "../../../hm.baidu.com/hm.js-2efddd14a5f2b304677462d06fb4f964"/*tpa=http://hm.baidu.com/hm.js?2efddd14a5f2b304677462d06fb4f964*/;
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- END custom_header -->
+</head>
+
+<body>
+    <div class="x-goto-top">
+        <div class="x-arrow"></div>
+        <div class="x-stick"></div>
+    </div>
+
+    <div id="header" class="uk-navbar uk-navbar-attached">
+        <div class="uk-container x-container">
+            <div class="uk-navbar uk-navbar-attached">
+                
+                <ul class="uk-navbar-nav uk-visible-small">
+                    <li><a href="#0" onclick="UIkit.offcanvas.show('#x-offcanvas-left')"><i class="uk-icon-chevron-right"></i></a></li>
+                </ul>
+                
+                <a href="javascript:if(confirm('http://www.liaoxuefeng.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/'" tppabs="http://www.liaoxuefeng.com/" class="uk-navbar-brand uk-visible-large">å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™</a>
+                <a href="javascript:if(confirm('http://www.liaoxuefeng.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/'" tppabs="http://www.liaoxuefeng.com/" class="uk-navbar-brand uk-hidden-large"><i class="uk-icon-home"></i></a>
+                <ul id="ul-navbar" class="uk-navbar-nav uk-hidden-small">
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000'" tppabs="http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000">ç¼–ç¨‹</a></li>
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000'" tppabs="http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000">è¯»ä¹¦</a></li>
+                    
+                    <li><a href="../javascript.htm" tppabs="http://www.liaoxuefeng.com/wiki/javascript">JavaScriptæ•™ç¨‹</a></li>
+                    
+                    <li><a href="../python34.htm" tppabs="http://www.liaoxuefeng.com/wiki/python34">Pythonæ•™ç¨‹</a></li>
+                    
+                    <li><a href="../git.htm" tppabs="http://www.liaoxuefeng.com/wiki/git">Gitæ•™ç¨‹</a></li>
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/discuss  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/discuss'" tppabs="http://www.liaoxuefeng.com/discuss">é—®ç­”</a></li>
+                    
+                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/webpage/donate  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/webpage/donate'" tppabs="http://www.liaoxuefeng.com/webpage/donate">èµåŠ©</a></li>
+                    
+                </ul>
+                
+                <ul class="uk-navbar-nav uk-visible-small">
+                    <li class="uk-parent" data-uk-dropdown>
+                        <a href="#0"><i class="uk-icon-navicon"></i></a>
+                        <div class="uk-dropdown uk-dropdown-navbar">
+                            <ul class="uk-nav uk-nav-navbar">
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000'" tppabs="http://www.liaoxuefeng.com/category/0013738748415562fee26e070fa4664ad926c8e30146c67000">ç¼–ç¨‹</a></li>
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000'" tppabs="http://www.liaoxuefeng.com/category/0013738748248885ddf38d8cd1b4803aa74bcda32f853fd000">è¯»ä¹¦</a></li>
+                                
+                                <li><a href="../javascript.htm" tppabs="http://www.liaoxuefeng.com/wiki/javascript">JavaScriptæ•™ç¨‹</a></li>
+                                
+                                <li><a href="../python34.htm" tppabs="http://www.liaoxuefeng.com/wiki/python34">Pythonæ•™ç¨‹</a></li>
+                                
+                                <li><a href="../git.htm" tppabs="http://www.liaoxuefeng.com/wiki/git">Gitæ•™ç¨‹</a></li>
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/discuss  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/discuss'" tppabs="http://www.liaoxuefeng.com/discuss">é—®ç­”</a></li>
+                                
+                                <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/webpage/donate  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/webpage/donate'" tppabs="http://www.liaoxuefeng.com/webpage/donate">èµåŠ©</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                
+
+<!--
+                <div class="uk-navbar-content x-hidden-tiny">
+                    <form id="form-search" class="uk-form uk-margin-remove uk-display-inline-block">
+                        <div class="uk-form-icon">
+                            <i class="uk-icon-search"></i>
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+-->
+
+                <div class="uk-navbar-flip">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-parent x-display-if-signin" data-uk-dropdown>
+                            <a href="#0"><i class="uk-icon-user"></i><span class="x-hidden-tiny">&nbsp;</span><span class="x-user-name x-hidden-tiny"></span></a>
+                            <div class="uk-dropdown uk-dropdown-navbar">
+                                <ul class="uk-nav uk-nav-navbar">
+                                    <li><a target="_blank" href="javascript:if(confirm('http://www.liaoxuefeng.com/me/profile  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/me/profile'" tppabs="http://www.liaoxuefeng.com/me/profile"><i class="uk-icon-cogs"></i> Profile</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="javascript:if(confirm('http://www.liaoxuefeng.com/auth/signout  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/auth/signout'" tppabs="http://www.liaoxuefeng.com/auth/signout"><i class="uk-icon-power-off"></i> Sign Out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="x-display-if-not-signin uk-hidden-small"><a href="javascript:showSignin()"><i class="uk-icon-sign-in"></i> Sign In</a></li>
+                        <li class="x-display-if-not-signin uk-visible-small"><a href="javascript:showSignin()"><i class="uk-icon-sign-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- // header -->
+
+    <div id="main">
+        <div class="x-placeholder-50"><!-- placeholder --></div>
+        <div class="x-placeholder"><!-- placeholder --></div>
+        <div class="uk-container x-container">
+            <div class="uk-grid">
+                <div class="x-body-before uk-width-1-1">
+                    
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-1">
+                
+                    <div class="x-sidebar-left">
+                        <div class="x-sidebar-left-top">
+                            
+                        </div>
+                        <div class="x-sidebar-left-content">
+                            
+    <ul class="uk-nav uk-nav-side">
+        <li class="uk-nav-header">Index</li>
+    </ul>
+    <ul class="uk-nav uk-nav-side" style="margin-right:-15px;">
+        <li id="python27"><a href="../python27.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27">Python 2.7æ•™ç¨‹</a></li>
+    
+        <li id="0013747381369301852037f35874be2b85aa318aad57bda000" style="margin-left:1em;">
+            <a href="0013747381369301852037f35874be2b85aa318aad57bda000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013747381369301852037f35874be2b85aa318aad57bda000">Pythonç®€ä»‹</a>
+        </li>
+    
+        <li id="001374738150500472fd5785c194ebea336061163a8a974000" style="margin-left:1em;">
+            <a href="001374738150500472fd5785c194ebea336061163a8a974000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738150500472fd5785c194ebea336061163a8a974000">å®‰è£…Python</a>
+        </li>
+    
+        <li id="001407375700558864523211a5049c4983176de304549c8000" style="margin-left:2em;">
+            <a href="001407375700558864523211a5049c4983176de304549c8000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407375700558864523211a5049c4983176de304549c8000">Pythonè§£é‡Šå™¨</a>
+        </li>
+    
+        <li id="001374738165063fb542617cc6f4ccd943363211148ba9a000" style="margin-left:1em;">
+            <a href="001374738165063fb542617cc6f4ccd943363211148ba9a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738165063fb542617cc6f4ccd943363211148ba9a000">ç¬¬ä¸€ä¸ªPythonç¨‹åº</a>
+        </li>
+    
+        <li id="001375502200090e998439175cc4268b0ea703b3b4ed55e000" style="margin-left:2em;">
+            <a href="001375502200090e998439175cc4268b0ea703b3b4ed55e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001375502200090e998439175cc4268b0ea703b3b4ed55e000">ä½¿ç”¨æ–‡æœ¬ç¼–è¾‘å™¨</a>
+        </li>
+    
+        <li id="001386818214042e9c46552422e42d8a00f019e088506ce000" style="margin-left:2em;">
+            <a href="001386818214042e9c46552422e42d8a00f019e088506ce000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386818214042e9c46552422e42d8a00f019e088506ce000">è¾“å…¥å’Œè¾“å‡º</a>
+        </li>
+    
+        <li id="001374738250465218a4f3a99994457a8db2fef7ce773c4000" style="margin-left:1em;">
+            <a href="001374738250465218a4f3a99994457a8db2fef7ce773c4000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738250465218a4f3a99994457a8db2fef7ce773c4000">PythonåŸºç¡€</a>
+        </li>
+    
+        <li id="001374738264643de15c5c4abad47dd9510e3b86286acb8000" style="margin-left:2em;">
+            <a href="001374738264643de15c5c4abad47dd9510e3b86286acb8000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738264643de15c5c4abad47dd9510e3b86286acb8000">æ•°æ®ç±»å‹å’Œå˜é‡</a>
+        </li>
+    
+        <li id="001386819196283586a37629844456ca7e5a7faa9b94ee8000" style="margin-left:2em;">
+            <a href="001386819196283586a37629844456ca7e5a7faa9b94ee8000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819196283586a37629844456ca7e5a7faa9b94ee8000">å­—ç¬¦ä¸²å’Œç¼–ç </a>
+        </li>
+    
+        <li id="001386819318453af120e8751ea4d2696d8a1ffa5ffdfd7000" style="margin-left:2em;">
+            <a href="001386819318453af120e8751ea4d2696d8a1ffa5ffdfd7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819318453af120e8751ea4d2696d8a1ffa5ffdfd7000">ä½¿ç”¨listå’Œtuple</a>
+        </li>
+    
+        <li id="001374738281887b88350bd21544e6095d55eaf54cac23f000" style="margin-left:2em;">
+            <a href="001374738281887b88350bd21544e6095d55eaf54cac23f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738281887b88350bd21544e6095d55eaf54cac23f000">æ¡ä»¶åˆ¤æ–­å’Œå¾ªç¯</a>
+        </li>
+    
+        <li id="0013868193482529754158abf734c00bba97c87f89a263b000" style="margin-left:2em;">
+            <a href="0013868193482529754158abf734c00bba97c87f89a263b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868193482529754158abf734c00bba97c87f89a263b000">ä½¿ç”¨dictå’Œset</a>
+        </li>
+    
+        <li id="0013747383144265f6402ab37cc40c5aecc816c08d8b771000" style="margin-left:1em;">
+            <a href="0013747383144265f6402ab37cc40c5aecc816c08d8b771000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013747383144265f6402ab37cc40c5aecc816c08d8b771000">å‡½æ•°</a>
+        </li>
+    
+        <li id="001374738355709946f704395994738a02e64a890af576f000" style="margin-left:2em;">
+            <a href="001374738355709946f704395994738a02e64a890af576f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738355709946f704395994738a02e64a890af576f000">è°ƒç”¨å‡½æ•°</a>
+        </li>
+    
+        <li id="00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000" style="margin-left:2em;">
+            <a href="00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000">å®šä¹‰å‡½æ•°</a>
+        </li>
+    
+        <li id="001374738449338c8a122a7f2e047899fc162f4a7205ea3000" style="margin-left:2em;">
+            <a href="001374738449338c8a122a7f2e047899fc162f4a7205ea3000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738449338c8a122a7f2e047899fc162f4a7205ea3000">å‡½æ•°çš„å‚æ•°</a>
+        </li>
+    
+        <li id="00137473836826348026db722d9435483fa38c137b7e685000" style="margin-left:2em;">
+            <a href="00137473836826348026db722d9435483fa38c137b7e685000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00137473836826348026db722d9435483fa38c137b7e685000">é€’å½’å‡½æ•°</a>
+        </li>
+    
+        <li id="0013868196169906eb9ca5864384546bf3405ae6a172b3e000" style="margin-left:1em;">
+            <a href="0013868196169906eb9ca5864384546bf3405ae6a172b3e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868196169906eb9ca5864384546bf3405ae6a172b3e000">é«˜çº§ç‰¹æ€§</a>
+        </li>
+    
+        <li id="0013868196352269f28f1f00aee485ea27e3c4e47f12bc7000" style="margin-left:2em;">
+            <a href="0013868196352269f28f1f00aee485ea27e3c4e47f12bc7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868196352269f28f1f00aee485ea27e3c4e47f12bc7000">åˆ‡ç‰‡</a>
+        </li>
+    
+        <li id="0013868196435255fcca20a1630446ea2dd434a7176e152000" style="margin-left:2em;">
+            <a href="0013868196435255fcca20a1630446ea2dd434a7176e152000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868196435255fcca20a1630446ea2dd434a7176e152000">è¿­ä»£</a>
+        </li>
+    
+        <li id="00138681963899940a998c0ace64bb5ad45d1b56b103c48000" style="margin-left:2em;">
+            <a href="00138681963899940a998c0ace64bb5ad45d1b56b103c48000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138681963899940a998c0ace64bb5ad45d1b56b103c48000">åˆ—è¡¨ç”Ÿæˆå¼</a>
+        </li>
+    
+        <li id="00138681965108490cb4c13182e472f8d87830f13be6e88000" style="margin-left:2em;">
+            <a href="00138681965108490cb4c13182e472f8d87830f13be6e88000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138681965108490cb4c13182e472f8d87830f13be6e88000">ç”Ÿæˆå™¨</a>
+        </li>
+    
+        <li id="001386819866394c3f9efcd1a454b2a8c57933e976445c0000" style="margin-left:1em;">
+            <a href="001386819866394c3f9efcd1a454b2a8c57933e976445c0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819866394c3f9efcd1a454b2a8c57933e976445c0000">å‡½æ•°å¼ç¼–ç¨‹</a>
+        </li>
+    
+        <li id="001386819873910807d8c322ca74d269c9f80f747330a52000" style="margin-left:2em;">
+            <a href="001386819873910807d8c322ca74d269c9f80f747330a52000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819873910807d8c322ca74d269c9f80f747330a52000">é«˜é˜¶å‡½æ•°</a>
+        </li>
+    
+        <li id="00141861202544241651579c69d4399a9aa135afef28c44000" style="margin-left:3em;">
+            <a href="00141861202544241651579c69d4399a9aa135afef28c44000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00141861202544241651579c69d4399a9aa135afef28c44000">map/reduce</a>
+        </li>
+    
+        <li id="001418612030427b1f1cf4ea04c41368e8a6753dca43070000" style="margin-left:3em;">
+            <a href="001418612030427b1f1cf4ea04c41368e8a6753dca43070000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001418612030427b1f1cf4ea04c41368e8a6753dca43070000">filter</a>
+        </li>
+    
+        <li id="001418612033918f1f341b1e0f14762a118891fa52949aa000" style="margin-left:3em;">
+            <a href="001418612033918f1f341b1e0f14762a118891fa52949aa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001418612033918f1f341b1e0f14762a118891fa52949aa000">sorted</a>
+        </li>
+    
+        <li id="0014186131194415d50558b7a1c424f9fb52b84dc9c965c000" style="margin-left:2em;">
+            <a href="0014186131194415d50558b7a1c424f9fb52b84dc9c965c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014186131194415d50558b7a1c424f9fb52b84dc9c965c000">è¿”å›å‡½æ•°</a>
+        </li>
+    
+        <li id="0013868198760391f49337a8bd847978adea85f0a535591000" style="margin-left:2em;">
+            <a href="0013868198760391f49337a8bd847978adea85f0a535591000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868198760391f49337a8bd847978adea85f0a535591000">åŒ¿åå‡½æ•°</a>
+        </li>
+    
+        <li id="001386819879946007bbf6ad052463ab18034f0254bf355000" style="margin-left:2em;">
+            <a href="001386819879946007bbf6ad052463ab18034f0254bf355000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819879946007bbf6ad052463ab18034f0254bf355000">è£…é¥°å™¨</a>
+        </li>
+    
+        <li id="001386819893624a7edc0e3e3df4d5d852a352b037c93ec000" style="margin-left:2em;">
+            <a href="001386819893624a7edc0e3e3df4d5d852a352b037c93ec000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819893624a7edc0e3e3df4d5d852a352b037c93ec000">åå‡½æ•°</a>
+        </li>
+    
+        <li id="0013868200171577d6385bb5b4f4875bee9cbf0f0fa29c5000" style="margin-left:1em;">
+            <a href="0013868200171577d6385bb5b4f4875bee9cbf0f0fa29c5000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200171577d6385bb5b4f4875bee9cbf0f0fa29c5000">æ¨¡å—</a>
+        </li>
+    
+        <li id="0013868200196665403ac40fac14536939dd5af20810782000" style="margin-left:2em;">
+            <a href="0013868200196665403ac40fac14536939dd5af20810782000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200196665403ac40fac14536939dd5af20810782000">ä½¿ç”¨æ¨¡å—</a>
+        </li>
+    
+        <li id="0013868200214529634268c5b3b45b3a3ba1cd81a251a3b000" style="margin-left:2em;">
+            <a href="0013868200214529634268c5b3b45b3a3ba1cd81a251a3b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200214529634268c5b3b45b3a3ba1cd81a251a3b000">å®‰è£…ç¬¬ä¸‰æ–¹æ¨¡å—</a>
+        </li>
+    
+        <li id="001386820023084e5263fe54fde4e4e8616597058cc4ba1000" style="margin-left:2em;">
+            <a href="001386820023084e5263fe54fde4e4e8616597058cc4ba1000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820023084e5263fe54fde4e4e8616597058cc4ba1000">ä½¿ç”¨__future__</a>
+        </li>
+    
+        <li id="0013868200385680e8cf932dba9433ea367de9aba2b4784000" style="margin-left:1em;">
+            <a href="0013868200385680e8cf932dba9433ea367de9aba2b4784000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200385680e8cf932dba9433ea367de9aba2b4784000">é¢å‘å¯¹è±¡ç¼–ç¨‹</a>
+        </li>
+    
+        <li id="00138682004077376d2d7f8cc8a4e2c9982f92788588322000" style="margin-left:2em;">
+            <a href="00138682004077376d2d7f8cc8a4e2c9982f92788588322000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138682004077376d2d7f8cc8a4e2c9982f92788588322000">ç±»å’Œå®ä¾‹</a>
+        </li>
+    
+        <li id="001386820042500060e2921830a4adf94fb31bcea8d6f5c000" style="margin-left:2em;">
+            <a href="001386820042500060e2921830a4adf94fb31bcea8d6f5c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820042500060e2921830a4adf94fb31bcea8d6f5c000">è®¿é—®é™åˆ¶</a>
+        </li>
+    
+        <li id="001386820044406b227b3e751cc4d5190420d17a2dc6353000" style="margin-left:2em;">
+            <a href="001386820044406b227b3e751cc4d5190420d17a2dc6353000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820044406b227b3e751cc4d5190420d17a2dc6353000">ç»§æ‰¿å’Œå¤šæ€</a>
+        </li>
+    
+        <li id="0013868200480395edcd8f8987a4871b01b5e340bbb8223000" style="margin-left:2em;">
+            <a href="0013868200480395edcd8f8987a4871b01b5e340bbb8223000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200480395edcd8f8987a4871b01b5e340bbb8223000">è·å–å¯¹è±¡ä¿¡æ¯</a>
+        </li>
+    
+        <li id="001386820058291028118ddeefc4de7860a8e48b9942e9b000" style="margin-left:1em;">
+            <a href="001386820058291028118ddeefc4de7860a8e48b9942e9b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820058291028118ddeefc4de7860a8e48b9942e9b000">é¢å‘å¯¹è±¡é«˜çº§ç¼–ç¨‹</a>
+        </li>
+    
+        <li id="0013868200605560b1bd3c660bf494282ede59fee17e781000" style="margin-left:2em;">
+            <a href="0013868200605560b1bd3c660bf494282ede59fee17e781000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200605560b1bd3c660bf494282ede59fee17e781000">ä½¿ç”¨__slots__</a>
+        </li>
+    
+        <li id="001386820062641f3bcc60a4b164f8d91df476445697b9e000" style="margin-left:2em;">
+            <a href="001386820062641f3bcc60a4b164f8d91df476445697b9e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820062641f3bcc60a4b164f8d91df476445697b9e000">ä½¿ç”¨@property</a>
+        </li>
+    
+        <li id="0013868200511568dd94e77b21d4b8597ede8bf65c36bcd000" style="margin-left:2em;">
+            <a href="0013868200511568dd94e77b21d4b8597ede8bf65c36bcd000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200511568dd94e77b21d4b8597ede8bf65c36bcd000">å¤šé‡ç»§æ‰¿</a>
+        </li>
+    
+        <li id="0013946328809098c1be08a2c7e4319bd60269f62be04fa000" style="margin-left:2em;">
+            <a href="0013946328809098c1be08a2c7e4319bd60269f62be04fa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013946328809098c1be08a2c7e4319bd60269f62be04fa000">å®šåˆ¶ç±»</a>
+        </li>
+    
+        <li id="001386820064557c69858840b4c48d2b8411bc2ea9099ba000" style="margin-left:2em;">
+            <a href="001386820064557c69858840b4c48d2b8411bc2ea9099ba000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820064557c69858840b4c48d2b8411bc2ea9099ba000">ä½¿ç”¨å…ƒç±»</a>
+        </li>
+    
+        <li id="001386832254674584228cd773d4db5a02ab85d2db4f83e000" style="margin-left:1em;">
+            <a href="001386832254674584228cd773d4db5a02ab85d2db4f83e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832254674584228cd773d4db5a02ab85d2db4f83e000">é”™è¯¯ã€è°ƒè¯•å’Œæµ‹è¯•</a>
+        </li>
+    
+        <li id="001386832284796780f5db7b5744bf9989f8d845ef77712000" style="margin-left:2em;">
+            <a href="001386832284796780f5db7b5744bf9989f8d845ef77712000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832284796780f5db7b5744bf9989f8d845ef77712000">é”™è¯¯å¤„ç†</a>
+        </li>
+    
+        <li id="00138683229901532c40b749184441dbd428d2e0f8aa50e000" style="margin-left:2em;">
+            <a href="00138683229901532c40b749184441dbd428d2e0f8aa50e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138683229901532c40b749184441dbd428d2e0f8aa50e000">è°ƒè¯•</a>
+        </li>
+    
+        <li id="00140137128705556022982cfd844b38d050add8565dcb9000" style="margin-left:2em;">
+            <a href="00140137128705556022982cfd844b38d050add8565dcb9000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140137128705556022982cfd844b38d050add8565dcb9000">å•å…ƒæµ‹è¯•</a>
+        </li>
+    
+        <li id="00140137398003434356a2635da4a98b4d00670e8aadb2f000" style="margin-left:2em;">
+            <a href="00140137398003434356a2635da4a98b4d00670e8aadb2f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140137398003434356a2635da4a98b4d00670e8aadb2f000">æ–‡æ¡£æµ‹è¯•</a>
+        </li>
+    
+        <li id="001386832151866c052395d62814708a14c4fa1c933d85e000" style="margin-left:1em;">
+            <a href="001386832151866c052395d62814708a14c4fa1c933d85e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832151866c052395d62814708a14c4fa1c933d85e000">IOç¼–ç¨‹</a>
+        </li>
+    
+        <li id="001386820066616a77f826d876b46b9ac34cb5f34374f7a000" style="margin-left:2em;">
+            <a href="001386820066616a77f826d876b46b9ac34cb5f34374f7a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820066616a77f826d876b46b9ac34cb5f34374f7a000">æ–‡ä»¶è¯»å†™</a>
+        </li>
+    
+        <li id="0013868321590543ff305fb9f9949f08d760883cc243812000" style="margin-left:2em;">
+            <a href="0013868321590543ff305fb9f9949f08d760883cc243812000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868321590543ff305fb9f9949f08d760883cc243812000">æ“ä½œæ–‡ä»¶å’Œç›®å½•</a>
+        </li>
+    
+        <li id="00138683221577998e407bb309542d9b6a68d9276bc3dbe000" style="margin-left:2em;">
+            <a href="00138683221577998e407bb309542d9b6a68d9276bc3dbe000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138683221577998e407bb309542d9b6a68d9276bc3dbe000">åºåˆ—åŒ–</a>
+        </li>
+    
+        <li id="0013868322563729e03f6905ea94f0195528e3647887415000" style="margin-left:1em;">
+            <a href="0013868322563729e03f6905ea94f0195528e3647887415000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868322563729e03f6905ea94f0195528e3647887415000">è¿›ç¨‹å’Œçº¿ç¨‹</a>
+        </li>
+    
+        <li id="0013868323401155ceb3db1e2044f80b974b469eb06cb43000" style="margin-left:2em;">
+            <a href="0013868323401155ceb3db1e2044f80b974b469eb06cb43000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868323401155ceb3db1e2044f80b974b469eb06cb43000">å¤šè¿›ç¨‹</a>
+        </li>
+    
+        <li id="001386832360548a6491f20c62d427287739fcfa5d5be1f000" style="margin-left:2em;">
+            <a href="001386832360548a6491f20c62d427287739fcfa5d5be1f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832360548a6491f20c62d427287739fcfa5d5be1f000">å¤šçº¿ç¨‹</a>
+        </li>
+    
+        <li id="001386832845200f6513494f0c64bd882f25818a0281e80000" style="margin-left:2em;">
+            <a href="001386832845200f6513494f0c64bd882f25818a0281e80000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832845200f6513494f0c64bd882f25818a0281e80000">ThreadLocal</a>
+        </li>
+    
+        <li id="001397567993007df355a3394da48f0bf14960f0c78753f000" style="margin-left:2em;">
+            <a href="001397567993007df355a3394da48f0bf14960f0c78753f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001397567993007df355a3394da48f0bf14960f0c78753f000">è¿›ç¨‹ vs. çº¿ç¨‹</a>
+        </li>
+    
+        <li id="001386832973658c780d8bfa4c6406f83b2b3097aed5df6000" style="margin-left:2em;">
+            <a href="001386832973658c780d8bfa4c6406f83b2b3097aed5df6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832973658c780d8bfa4c6406f83b2b3097aed5df6000">åˆ†å¸ƒå¼è¿›ç¨‹</a>
+        </li>
+    
+        <li id="001386832260566c26442c671fa489ebc6fe85badda25cd000" style="margin-left:1em;">
+            <a href="001386832260566c26442c671fa489ebc6fe85badda25cd000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832260566c26442c671fa489ebc6fe85badda25cd000">æ­£åˆ™è¡¨è¾¾å¼</a>
+        </li>
+    
+        <li id="001386832257831f46c9ba77b3e468a82e015f5ba415612000" style="margin-left:1em;">
+            <a href="001386832257831f46c9ba77b3e468a82e015f5ba415612000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832257831f46c9ba77b3e468a82e015f5ba415612000">å¸¸ç”¨å†…å»ºæ¨¡å—</a>
+        </li>
+    
+        <li id="001411031239400f7181f65f33a4623bc42276a605debf6000" style="margin-left:2em;">
+            <a href="001411031239400f7181f65f33a4623bc42276a605debf6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001411031239400f7181f65f33a4623bc42276a605debf6000">collections</a>
+        </li>
+    
+        <li id="001399413803339f4bbda5c01fc479cbea98b1387390748000" style="margin-left:2em;">
+            <a href="001399413803339f4bbda5c01fc479cbea98b1387390748000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001399413803339f4bbda5c01fc479cbea98b1387390748000">base64</a>
+        </li>
+    
+        <li id="0013994173393204e80af1f8fa94c8e9d094d229395ea43000" style="margin-left:2em;">
+            <a href="0013994173393204e80af1f8fa94c8e9d094d229395ea43000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013994173393204e80af1f8fa94c8e9d094d229395ea43000">struct</a>
+        </li>
+    
+        <li id="0013868328251266d86585fc9514536a638f06b41908d44000" style="margin-left:2em;">
+            <a href="0013868328251266d86585fc9514536a638f06b41908d44000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868328251266d86585fc9514536a638f06b41908d44000">hashlib</a>
+        </li>
+    
+        <li id="001415616001996f6b32d80b6454caca3d33c965a07611f000" style="margin-left:2em;">
+            <a href="001415616001996f6b32d80b6454caca3d33c965a07611f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001415616001996f6b32d80b6454caca3d33c965a07611f000">itertools</a>
+        </li>
+    
+        <li id="001407499098340324a6232bfee42348849d53c90576747000" style="margin-left:2em;">
+            <a href="001407499098340324a6232bfee42348849d53c90576747000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407499098340324a6232bfee42348849d53c90576747000">XML</a>
+        </li>
+    
+        <li id="001407500818913cef22f247dbd4699921fe9d309727a20000" style="margin-left:2em;">
+            <a href="001407500818913cef22f247dbd4699921fe9d309727a20000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407500818913cef22f247dbd4699921fe9d309727a20000">HTMLParser</a>
+        </li>
+    
+        <li id="001386832259025782d9e10e92f4cad885c80a9076913aa000" style="margin-left:1em;">
+            <a href="001386832259025782d9e10e92f4cad885c80a9076913aa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832259025782d9e10e92f4cad885c80a9076913aa000">å¸¸ç”¨ç¬¬ä¸‰æ–¹æ¨¡å—</a>
+        </li>
+    
+        <li id="00140767171357714f87a053a824ffd811d98a83b58ec13000" style="margin-left:2em;">
+            <a href="00140767171357714f87a053a824ffd811d98a83b58ec13000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140767171357714f87a053a824ffd811d98a83b58ec13000">PIL</a>
+        </li>
+    
+        <li id="0013868326118089581a091a04e4c30b2b7896392bdde5c000" style="margin-left:1em;">
+            <a href="0013868326118089581a091a04e4c30b2b7896392bdde5c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868326118089581a091a04e4c30b2b7896392bdde5c000">å›¾å½¢ç•Œé¢</a>
+        </li>
+    
+        <li id="00138683226192949cd41410a6d4f1ebfa9ba40bbd1399d000" style="margin-left:1em;">
+            <a href="00138683226192949cd41410a6d4f1ebfa9ba40bbd1399d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138683226192949cd41410a6d4f1ebfa9ba40bbd1399d000">ç½‘ç»œç¼–ç¨‹</a>
+        </li>
+    
+        <li id="0013868324942775d98d4de625e481db5d6bba6853acaaa000" style="margin-left:2em;">
+            <a href="0013868324942775d98d4de625e481db5d6bba6853acaaa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868324942775d98d4de625e481db5d6bba6853acaaa000">TCP/IPç®€ä»‹</a>
+        </li>
+    
+        <li id="001386832511628f1fe2c65534a46aa86b8e654b6d3567c000" style="margin-left:2em;">
+            <a href="001386832511628f1fe2c65534a46aa86b8e654b6d3567c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832511628f1fe2c65534a46aa86b8e654b6d3567c000">TCPç¼–ç¨‹</a>
+        </li>
+    
+        <li id="0013868325264457324691c860044c5916ce11b305cb814000" style="margin-left:2em;">
+            <a href="0013868325264457324691c860044c5916ce11b305cb814000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868325264457324691c860044c5916ce11b305cb814000">UDPç¼–ç¨‹</a>
+        </li>
+    
+        <li id="0013868325601402299d1e941914a21990ac7861ef4bc2d000" style="margin-left:1em;">
+            <a href="0013868325601402299d1e941914a21990ac7861ef4bc2d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868325601402299d1e941914a21990ac7861ef4bc2d000">ç”µå­é‚®ä»¶</a>
+        </li>
+    
+        <li id="001386832745198026a685614e7462fb57dbf733cc9f3ad000" style="margin-left:2em;">
+            <a href="001386832745198026a685614e7462fb57dbf733cc9f3ad000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832745198026a685614e7462fb57dbf733cc9f3ad000">SMTPå‘é€é‚®ä»¶</a>
+        </li>
+    
+        <li id="001408244819215430d726128bf4fa78afe2890bec57736000" style="margin-left:2em;">
+            <a href="001408244819215430d726128bf4fa78afe2890bec57736000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001408244819215430d726128bf4fa78afe2890bec57736000">POP3æ”¶å–é‚®ä»¶</a>
+        </li>
+    
+        <li id="0013868327777137a11bc6c28214243abad14b191dbc12e000" style="margin-left:1em;">
+            <a href="0013868327777137a11bc6c28214243abad14b191dbc12e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868327777137a11bc6c28214243abad14b191dbc12e000">è®¿é—®æ•°æ®åº“</a>
+        </li>
+    
+        <li id="001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000" style="margin-left:2em;">
+            <a href="001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000">ä½¿ç”¨SQLite</a>
+        </li>
+    
+        <li id="001391435131816c6a377e100ec4d43b3fc9145f3bb8056000" style="margin-left:2em;">
+            <a href="001391435131816c6a377e100ec4d43b3fc9145f3bb8056000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001391435131816c6a377e100ec4d43b3fc9145f3bb8056000">ä½¿ç”¨MySQL</a>
+        </li>
+    
+        <li id="0014021031294178f993c85204e4d1b81ab032070641ce5000" style="margin-left:2em;">
+            <a href="0014021031294178f993c85204e4d1b81ab032070641ce5000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014021031294178f993c85204e4d1b81ab032070641ce5000">ä½¿ç”¨SQLAlchemy</a>
+        </li>
+    
+        <li id="001386832648091917b035146084c43b05754ec9408dfaf000" style="margin-left:1em;">
+            <a href="001386832648091917b035146084c43b05754ec9408dfaf000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832648091917b035146084c43b05754ec9408dfaf000">Webå¼€å‘</a>
+        </li>
+    
+        <li id="001386832653051fd44e44e4f9e4ed08f3e5a5ab550358d000" style="margin-left:2em;">
+            <a href="001386832653051fd44e44e4f9e4ed08f3e5a5ab550358d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832653051fd44e44e4f9e4ed08f3e5a5ab550358d000">HTTPåè®®ç®€ä»‹</a>
+        </li>
+    
+        <li id="001386833123019425a41845ca540a19c9080e8f930d7e1000" style="margin-left:2em;">
+            <a href="001386833123019425a41845ca540a19c9080e8f930d7e1000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386833123019425a41845ca540a19c9080e8f930d7e1000">HTMLç®€ä»‹</a>
+        </li>
+    
+        <li id="001386832689740b04430a98f614b6da89da2157ea3efe2000" style="margin-left:2em;">
+            <a href="001386832689740b04430a98f614b6da89da2157ea3efe2000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832689740b04430a98f614b6da89da2157ea3efe2000">WSGIæ¥å£</a>
+        </li>
+    
+        <li id="001386832704232d6fb5df42dd34a7890fa6254351faac7000" style="margin-left:2em;">
+            <a href="001386832704232d6fb5df42dd34a7890fa6254351faac7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832704232d6fb5df42dd34a7890fa6254351faac7000">ä½¿ç”¨Webæ¡†æ¶</a>
+        </li>
+    
+        <li id="001386832805619b3e68a9cf16c4d0398d8af8f6d50e740000" style="margin-left:2em;">
+            <a href="001386832805619b3e68a9cf16c4d0398d8af8f6d50e740000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832805619b3e68a9cf16c4d0398d8af8f6d50e740000">ä½¿ç”¨æ¨¡æ¿</a>
+        </li>
+    
+        <li id="0013868328689835ecd883d910145dfa8227b539725e5ed000" style="margin-left:1em;">
+            <a href="0013868328689835ecd883d910145dfa8227b539725e5ed000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868328689835ecd883d910145dfa8227b539725e5ed000">åç¨‹</a>
+        </li>
+    
+        <li id="001407503089986d175822da68d4d6685fbe849a0e0ca35000" style="margin-left:2em;">
+            <a href="001407503089986d175822da68d4d6685fbe849a0e0ca35000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407503089986d175822da68d4d6685fbe849a0e0ca35000">gevent</a>
+        </li>
+    
+        <li id="001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000" style="margin-left:1em;">
+            <a href="001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000">å®æˆ˜</a>
+        </li>
+    
+        <li id="0013976177048818eb4187c05a84f9280169d58e22afa09000" style="margin-left:2em;">
+            <a href="0013976177048818eb4187c05a84f9280169d58e22afa09000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013976177048818eb4187c05a84f9280169d58e22afa09000">Day 1 - æ­å»ºå¼€å‘ç¯å¢ƒ</a>
+        </li>
+    
+        <li id="0013976160374750f95bd09087744569be5aae6160c8351000" style="margin-left:2em;">
+            <a href="0013976160374750f95bd09087744569be5aae6160c8351000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013976160374750f95bd09087744569be5aae6160c8351000">Day 2 - ç¼–å†™æ•°æ®åº“æ¨¡å—</a>
+        </li>
+    
+        <li id="001402228705570c9506d546a3349c6b7d64135127672fe000" style="margin-left:2em;">
+            <a href="001402228705570c9506d546a3349c6b7d64135127672fe000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402228705570c9506d546a3349c6b7d64135127672fe000">Day 3 - ç¼–å†™ORM</a>
+        </li>
+    
+        <li id="001402307049906212b8a97f1df4587962539baa31d1fcd000" style="margin-left:2em;">
+            <a href="001402307049906212b8a97f1df4587962539baa31d1fcd000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402307049906212b8a97f1df4587962539baa31d1fcd000">Day 4 - ç¼–å†™Model</a>
+        </li>
+    
+        <li id="0014023080708565bc89d6ab886481fb25a16cdc3b773f0000" style="margin-left:2em;">
+            <a href="0014023080708565bc89d6ab886481fb25a16cdc3b773f0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014023080708565bc89d6ab886481fb25a16cdc3b773f0000">Day 5 - ç¼–å†™Webæ¡†æ¶</a>
+        </li>
+    
+        <li id="001402319155292f806e5a1ba5342d2a497c63314b1c77f000" style="margin-left:2em;">
+            <a href="001402319155292f806e5a1ba5342d2a497c63314b1c77f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402319155292f806e5a1ba5342d2a497c63314b1c77f000">Day 6 - æ·»åŠ é…ç½®æ–‡ä»¶</a>
+        </li>
+    
+        <li id="0014023534049359c3ce60cb680419ba423b5b704baac0c000" style="margin-left:2em;">
+            <a href="0014023534049359c3ce60cb680419ba423b5b704baac0c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014023534049359c3ce60cb680419ba423b5b704baac0c000">Day 7 - ç¼–å†™MVC</a>
+        </li>
+    
+        <li id="001402355742678fd802bd75d51464c8482a3503c463182000" style="margin-left:2em;">
+            <a href="001402355742678fd802bd75d51464c8482a3503c463182000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402355742678fd802bd75d51464c8482a3503c463182000">Day 8 - æ„å»ºå‰ç«¯</a>
+        </li>
+    
+        <li id="001402402473485d8c205b735ee4e698f90769960fcec4b000" style="margin-left:2em;">
+            <a href="001402402473485d8c205b735ee4e698f90769960fcec4b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402402473485d8c205b735ee4e698f90769960fcec4b000">Day 9 - ç¼–å†™API</a>
+        </li>
+    
+        <li id="00140240726395479019cb0be724e7db42936babd5f9717000" style="margin-left:2em;">
+            <a href="00140240726395479019cb0be724e7db42936babd5f9717000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140240726395479019cb0be724e7db42936babd5f9717000">Day 10 - ç”¨æˆ·æ³¨å†Œå’Œç™»å½•</a>
+        </li>
+    
+        <li id="0014025559313061080444477fc4b89a283944ecd922a74000" style="margin-left:2em;">
+            <a href="0014025559313061080444477fc4b89a283944ecd922a74000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014025559313061080444477fc4b89a283944ecd922a74000">Day 11 - ç¼–å†™æ—¥å¿—åˆ›å»ºé¡µ</a>
+        </li>
+    
+        <li id="001402577310047b481599dca0d4a47bf09a566b09fac2d000" style="margin-left:2em;">
+            <a href="001402577310047b481599dca0d4a47bf09a566b09fac2d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402577310047b481599dca0d4a47bf09a566b09fac2d000">Day 12 - ç¼–å†™æ—¥å¿—åˆ—è¡¨é¡µ</a>
+        </li>
+    
+        <li id="001402581661446aa221b0e45934f7888b20c8a02a0d1c7000" style="margin-left:2em;">
+            <a href="001402581661446aa221b0e45934f7888b20c8a02a0d1c7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402581661446aa221b0e45934f7888b20c8a02a0d1c7000">Day 13 - æå‡å¼€å‘æ•ˆç‡</a>
+        </li>
+    
+        <li id="0014026254543484bc665ef087444568fb2d6bf76cad74b000" style="margin-left:2em;">
+            <a href="0014026254543484bc665ef087444568fb2d6bf76cad74b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014026254543484bc665ef087444568fb2d6bf76cad74b000">Day 14 - å®ŒæˆWeb App</a>
+        </li>
+    
+        <li id="00140262673295076f525af00734a8e924c5fc6ff5b6091000" style="margin-left:2em;">
+            <a href="00140262673295076f525af00734a8e924c5fc6ff5b6091000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140262673295076f525af00734a8e924c5fc6ff5b6091000">Day 15 - éƒ¨ç½²Web App</a>
+        </li>
+    
+        <li id="001402635178014df9b8db22892435d8ba20f9f0acc5d01000" style="margin-left:2em;">
+            <a href="001402635178014df9b8db22892435d8ba20f9f0acc5d01000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402635178014df9b8db22892435d8ba20f9f0acc5d01000">Day 16 - ç¼–å†™ç§»åŠ¨App</a>
+        </li>
+    
+        <li id="001414673847034cbe36eb363bd4a2eb91fee53912a7de7000" style="margin-left:1em;">
+            <a href="001414673847034cbe36eb363bd4a2eb91fee53912a7de7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001414673847034cbe36eb363bd4a2eb91fee53912a7de7000">æœŸæœ«æ€»ç»“</a>
+        </li>
+    
+    </ul>
+    <div class="x-placeholder"></div>
+
+                        </div>
+                        <div class="x-sidebar-left-bottom">
+                            <h3>å…³äºä½œè€…</h3>
+<iframe width="100%" height="310" class="share_self"  frameborder="0" scrolling="no" src="../../../widget.weibo.com/weiboshow/fi000001.php-language=&width=0&height=550&fansrow=2&ptype=1&speed=0&skin=5&istitle=0&noborder=0&isweibo=0&isfans=1&uid=1658384301&verifier=078cedea&colors=0593d3,ffffff,666666,0593d3,0477ab&dpc=1" tppabs="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=0&isFans=1&uid=1658384301&verifier=078cedea&colors=0593d3,ffffff,666666,0593d3,0477ab&dpc=1"></iframe>
+
+<div style="width:100%;overflow-x:hidden;">
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300x600-lxf -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-6727358730461554"
+     data-ad-slot="4769867116"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div style="width:100%;overflow-x:hidden;">
+<script type="text/javascript">
+    /*300x250 @baidu*/
+    var cpro_id = "u2060917";
+</script>
+<script src="../../../cpro.baidustatic.com/cpro/ui/c.js" tppabs="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+
+
+                        </div>
+                    </div>
+                
+                
+
+                    <div class="x-center">
+                        <div>
+                            
+                        </div>
+                        <div class="x-content" style="width:100%">
+                            
+    <h4>Day 14 - å®ŒæˆWeb App</h4>
+    <div class="x-wiki-info"><span>Reads: 244</span></div>
+    <hr>
+    <div class="x-wiki-content">
+        <p>åœ¨Web Appæ¡†æ¶å’ŒåŸºæœ¬æµç¨‹è·‘é€šåï¼Œå‰©ä¸‹çš„å·¥ä½œå…¨éƒ¨æ˜¯ä½“åŠ›æ´»äº†ï¼šåœ¨Debugå¼€å‘æ¨¡å¼ä¸‹å®Œæˆåç«¯æ‰€æœ‰APIã€å‰ç«¯æ‰€æœ‰é¡µé¢ã€‚æˆ‘ä»¬éœ€è¦åšçš„äº‹æƒ…åŒ…æ‹¬ï¼š</p>
+<p>å¯¹URL<code>/manage/</code>è¿›è¡Œæ‹¦æˆªï¼Œæ£€æŸ¥å½“å‰ç”¨æˆ·æ˜¯å¦æ˜¯ç®¡ç†å‘˜èº«ä»½ï¼š</p>
+<pre><code>@interceptor(&#39;/manage/&#39;)
+def manage_interceptor(next):
+    user = ctx.request.user
+    if user and user.admin:
+        return next()
+    raise seeother(&#39;/signin&#39;)
+</code></pre><p>åç«¯APIåŒ…æ‹¬ï¼š</p>
+<ul>
+<li><p>è·å–æ—¥å¿—ï¼šGET /api/blogs</p>
+</li>
+<li><p>åˆ›å»ºæ—¥å¿—ï¼šPOST /api/blogs</p>
+</li>
+<li><p>ä¿®æ”¹æ—¥å¿—ï¼šPOST /api/blogs/:blog_id</p>
+</li>
+<li><p>åˆ é™¤æ—¥å¿—ï¼šPOST /api/blogs/:blog_id/delete</p>
+</li>
+<li><p>è·å–è¯„è®ºï¼šGET /api/comments</p>
+</li>
+<li><p>åˆ›å»ºè¯„è®ºï¼šPOST /api/blogs/:blog_id/comments</p>
+</li>
+<li><p>åˆ é™¤è¯„è®ºï¼šPOST /api/comments/:comment_id/delete</p>
+</li>
+<li><p>åˆ›å»ºæ–°ç”¨æˆ·ï¼šPOST /api/users</p>
+</li>
+<li><p>è·å–ç”¨æˆ·ï¼šGET /api/users</p>
+</li>
+</ul>
+<p>ç®¡ç†é¡µé¢åŒ…æ‹¬ï¼š</p>
+<ul>
+<li><p>è¯„è®ºåˆ—è¡¨é¡µï¼šGET /manage/comments</p>
+</li>
+<li><p>æ—¥å¿—åˆ—è¡¨é¡µï¼šGET /manage/blogs</p>
+</li>
+<li><p>åˆ›å»ºæ—¥å¿—é¡µï¼šGET /manage/blogs/create</p>
+</li>
+<li><p>ä¿®æ”¹æ—¥å¿—é¡µï¼šGET /manage/blogs/</p>
+</li>
+<li><p>ç”¨æˆ·åˆ—è¡¨é¡µï¼šGET /manage/users</p>
+</li>
+</ul>
+<p>ç”¨æˆ·æµè§ˆé¡µé¢åŒ…æ‹¬ï¼š</p>
+<ul>
+<li><p>æ³¨å†Œé¡µï¼šGET /register</p>
+</li>
+<li><p>ç™»å½•é¡µï¼šGET /signin</p>
+</li>
+<li><p>æ³¨é”€é¡µï¼šGET /signout</p>
+</li>
+<li><p>é¦–é¡µï¼šGET /</p>
+</li>
+<li><p>æ—¥å¿—è¯¦æƒ…é¡µï¼šGET /blog/:blog_id</p>
+</li>
+</ul>
+<p>æŠŠæ‰€æœ‰çš„åŠŸèƒ½å®ç°ï¼Œæˆ‘ä»¬ç¬¬ä¸€ä¸ªWeb Appå°±å®£å‘Šå®Œæˆï¼</p>
+
+    </div>
+    <hr>
+    <div id="x-wiki-prev-next" class="uk-clearfix uk-margin-left uk-margin-right">
+    </div>
+    <hr>
+
+    <div class="x-anchor"><a name="comments"></a></div>
+
+    <h3>Comments</h3>
+
+    <ul id="x-comment-list" class="uk-comment-list">
+    </ul>
+
+    <h3>Make a Comment</h3>
+
+    <div class="x-display-if-not-signin">
+        <p><button type="button" class="uk-button" onclick="showSignin()"><i class="uk-icon-signin"></i> Sign In to Make a Comment</button></p>
+    </div>
+
+    <div id="x-comment-area"></div>
+
+
+                        </div>
+                        <div>
+                            <div class="uk-clearfix" style="margin:15px 0">
+
+
+<div style="width:336px;height:280px;float:left;">
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- lxf-336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-6727358730461554"
+     data-ad-slot="8492060710"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div style="width:336px;height:280px;float:left;">
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- lxf-336x280 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-6727358730461554"
+     data-ad-slot="8492060710"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div style="width:336px;height:280px;float:left;">
+<script type="text/javascript">
+    /*336x280 @baidu*/
+    var cpro_id = "u2068816";
+</script>
+<script src="../../../cpro.baidustatic.com/cpro/ui/c.js" tppabs="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+
+<div style="width:336px;height:280px;float:left;">
+<script type="text/javascript">
+    /*336x280 @baidu*/
+    var cpro_id = "u2068816";
+</script>
+<script src="../../../cpro.baidustatic.com/cpro/ui/c.js" tppabs="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+
+
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-grid">
+                <div class="x-body-after uk-width-1-1">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="x-offcanvas-left" class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">
+            <div class="uk-panel">
+                
+    <ul class="uk-nav uk-nav-side">
+        <li class="uk-nav-header">Index</li>
+    </ul>
+    <ul class="uk-nav uk-nav-side">
+        <li id="off-python27"><a href="../python27.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27">Python 2.7æ•™ç¨‹</a></li>
+    
+        <li id="off-0013747381369301852037f35874be2b85aa318aad57bda000" style="margin-left:1em;">
+            <a href="0013747381369301852037f35874be2b85aa318aad57bda000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013747381369301852037f35874be2b85aa318aad57bda000">Pythonç®€ä»‹</a>
+        </li>
+    
+        <li id="off-001374738150500472fd5785c194ebea336061163a8a974000" style="margin-left:1em;">
+            <a href="001374738150500472fd5785c194ebea336061163a8a974000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738150500472fd5785c194ebea336061163a8a974000">å®‰è£…Python</a>
+        </li>
+    
+        <li id="off-001407375700558864523211a5049c4983176de304549c8000" style="margin-left:2em;">
+            <a href="001407375700558864523211a5049c4983176de304549c8000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407375700558864523211a5049c4983176de304549c8000">Pythonè§£é‡Šå™¨</a>
+        </li>
+    
+        <li id="off-001374738165063fb542617cc6f4ccd943363211148ba9a000" style="margin-left:1em;">
+            <a href="001374738165063fb542617cc6f4ccd943363211148ba9a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738165063fb542617cc6f4ccd943363211148ba9a000">ç¬¬ä¸€ä¸ªPythonç¨‹åº</a>
+        </li>
+    
+        <li id="off-001375502200090e998439175cc4268b0ea703b3b4ed55e000" style="margin-left:2em;">
+            <a href="001375502200090e998439175cc4268b0ea703b3b4ed55e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001375502200090e998439175cc4268b0ea703b3b4ed55e000">ä½¿ç”¨æ–‡æœ¬ç¼–è¾‘å™¨</a>
+        </li>
+    
+        <li id="off-001386818214042e9c46552422e42d8a00f019e088506ce000" style="margin-left:2em;">
+            <a href="001386818214042e9c46552422e42d8a00f019e088506ce000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386818214042e9c46552422e42d8a00f019e088506ce000">è¾“å…¥å’Œè¾“å‡º</a>
+        </li>
+    
+        <li id="off-001374738250465218a4f3a99994457a8db2fef7ce773c4000" style="margin-left:1em;">
+            <a href="001374738250465218a4f3a99994457a8db2fef7ce773c4000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738250465218a4f3a99994457a8db2fef7ce773c4000">PythonåŸºç¡€</a>
+        </li>
+    
+        <li id="off-001374738264643de15c5c4abad47dd9510e3b86286acb8000" style="margin-left:2em;">
+            <a href="001374738264643de15c5c4abad47dd9510e3b86286acb8000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738264643de15c5c4abad47dd9510e3b86286acb8000">æ•°æ®ç±»å‹å’Œå˜é‡</a>
+        </li>
+    
+        <li id="off-001386819196283586a37629844456ca7e5a7faa9b94ee8000" style="margin-left:2em;">
+            <a href="001386819196283586a37629844456ca7e5a7faa9b94ee8000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819196283586a37629844456ca7e5a7faa9b94ee8000">å­—ç¬¦ä¸²å’Œç¼–ç </a>
+        </li>
+    
+        <li id="off-001386819318453af120e8751ea4d2696d8a1ffa5ffdfd7000" style="margin-left:2em;">
+            <a href="001386819318453af120e8751ea4d2696d8a1ffa5ffdfd7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819318453af120e8751ea4d2696d8a1ffa5ffdfd7000">ä½¿ç”¨listå’Œtuple</a>
+        </li>
+    
+        <li id="off-001374738281887b88350bd21544e6095d55eaf54cac23f000" style="margin-left:2em;">
+            <a href="001374738281887b88350bd21544e6095d55eaf54cac23f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738281887b88350bd21544e6095d55eaf54cac23f000">æ¡ä»¶åˆ¤æ–­å’Œå¾ªç¯</a>
+        </li>
+    
+        <li id="off-0013868193482529754158abf734c00bba97c87f89a263b000" style="margin-left:2em;">
+            <a href="0013868193482529754158abf734c00bba97c87f89a263b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868193482529754158abf734c00bba97c87f89a263b000">ä½¿ç”¨dictå’Œset</a>
+        </li>
+    
+        <li id="off-0013747383144265f6402ab37cc40c5aecc816c08d8b771000" style="margin-left:1em;">
+            <a href="0013747383144265f6402ab37cc40c5aecc816c08d8b771000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013747383144265f6402ab37cc40c5aecc816c08d8b771000">å‡½æ•°</a>
+        </li>
+    
+        <li id="off-001374738355709946f704395994738a02e64a890af576f000" style="margin-left:2em;">
+            <a href="001374738355709946f704395994738a02e64a890af576f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738355709946f704395994738a02e64a890af576f000">è°ƒç”¨å‡½æ•°</a>
+        </li>
+    
+        <li id="off-00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000" style="margin-left:2em;">
+            <a href="00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000">å®šä¹‰å‡½æ•°</a>
+        </li>
+    
+        <li id="off-001374738449338c8a122a7f2e047899fc162f4a7205ea3000" style="margin-left:2em;">
+            <a href="001374738449338c8a122a7f2e047899fc162f4a7205ea3000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001374738449338c8a122a7f2e047899fc162f4a7205ea3000">å‡½æ•°çš„å‚æ•°</a>
+        </li>
+    
+        <li id="off-00137473836826348026db722d9435483fa38c137b7e685000" style="margin-left:2em;">
+            <a href="00137473836826348026db722d9435483fa38c137b7e685000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00137473836826348026db722d9435483fa38c137b7e685000">é€’å½’å‡½æ•°</a>
+        </li>
+    
+        <li id="off-0013868196169906eb9ca5864384546bf3405ae6a172b3e000" style="margin-left:1em;">
+            <a href="0013868196169906eb9ca5864384546bf3405ae6a172b3e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868196169906eb9ca5864384546bf3405ae6a172b3e000">é«˜çº§ç‰¹æ€§</a>
+        </li>
+    
+        <li id="off-0013868196352269f28f1f00aee485ea27e3c4e47f12bc7000" style="margin-left:2em;">
+            <a href="0013868196352269f28f1f00aee485ea27e3c4e47f12bc7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868196352269f28f1f00aee485ea27e3c4e47f12bc7000">åˆ‡ç‰‡</a>
+        </li>
+    
+        <li id="off-0013868196435255fcca20a1630446ea2dd434a7176e152000" style="margin-left:2em;">
+            <a href="0013868196435255fcca20a1630446ea2dd434a7176e152000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868196435255fcca20a1630446ea2dd434a7176e152000">è¿­ä»£</a>
+        </li>
+    
+        <li id="off-00138681963899940a998c0ace64bb5ad45d1b56b103c48000" style="margin-left:2em;">
+            <a href="00138681963899940a998c0ace64bb5ad45d1b56b103c48000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138681963899940a998c0ace64bb5ad45d1b56b103c48000">åˆ—è¡¨ç”Ÿæˆå¼</a>
+        </li>
+    
+        <li id="off-00138681965108490cb4c13182e472f8d87830f13be6e88000" style="margin-left:2em;">
+            <a href="00138681965108490cb4c13182e472f8d87830f13be6e88000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138681965108490cb4c13182e472f8d87830f13be6e88000">ç”Ÿæˆå™¨</a>
+        </li>
+    
+        <li id="off-001386819866394c3f9efcd1a454b2a8c57933e976445c0000" style="margin-left:1em;">
+            <a href="001386819866394c3f9efcd1a454b2a8c57933e976445c0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819866394c3f9efcd1a454b2a8c57933e976445c0000">å‡½æ•°å¼ç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-001386819873910807d8c322ca74d269c9f80f747330a52000" style="margin-left:2em;">
+            <a href="001386819873910807d8c322ca74d269c9f80f747330a52000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819873910807d8c322ca74d269c9f80f747330a52000">é«˜é˜¶å‡½æ•°</a>
+        </li>
+    
+        <li id="off-00141861202544241651579c69d4399a9aa135afef28c44000" style="margin-left:3em;">
+            <a href="00141861202544241651579c69d4399a9aa135afef28c44000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00141861202544241651579c69d4399a9aa135afef28c44000">map/reduce</a>
+        </li>
+    
+        <li id="off-001418612030427b1f1cf4ea04c41368e8a6753dca43070000" style="margin-left:3em;">
+            <a href="001418612030427b1f1cf4ea04c41368e8a6753dca43070000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001418612030427b1f1cf4ea04c41368e8a6753dca43070000">filter</a>
+        </li>
+    
+        <li id="off-001418612033918f1f341b1e0f14762a118891fa52949aa000" style="margin-left:3em;">
+            <a href="001418612033918f1f341b1e0f14762a118891fa52949aa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001418612033918f1f341b1e0f14762a118891fa52949aa000">sorted</a>
+        </li>
+    
+        <li id="off-0014186131194415d50558b7a1c424f9fb52b84dc9c965c000" style="margin-left:2em;">
+            <a href="0014186131194415d50558b7a1c424f9fb52b84dc9c965c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014186131194415d50558b7a1c424f9fb52b84dc9c965c000">è¿”å›å‡½æ•°</a>
+        </li>
+    
+        <li id="off-0013868198760391f49337a8bd847978adea85f0a535591000" style="margin-left:2em;">
+            <a href="0013868198760391f49337a8bd847978adea85f0a535591000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868198760391f49337a8bd847978adea85f0a535591000">åŒ¿åå‡½æ•°</a>
+        </li>
+    
+        <li id="off-001386819879946007bbf6ad052463ab18034f0254bf355000" style="margin-left:2em;">
+            <a href="001386819879946007bbf6ad052463ab18034f0254bf355000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819879946007bbf6ad052463ab18034f0254bf355000">è£…é¥°å™¨</a>
+        </li>
+    
+        <li id="off-001386819893624a7edc0e3e3df4d5d852a352b037c93ec000" style="margin-left:2em;">
+            <a href="001386819893624a7edc0e3e3df4d5d852a352b037c93ec000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386819893624a7edc0e3e3df4d5d852a352b037c93ec000">åå‡½æ•°</a>
+        </li>
+    
+        <li id="off-0013868200171577d6385bb5b4f4875bee9cbf0f0fa29c5000" style="margin-left:1em;">
+            <a href="0013868200171577d6385bb5b4f4875bee9cbf0f0fa29c5000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200171577d6385bb5b4f4875bee9cbf0f0fa29c5000">æ¨¡å—</a>
+        </li>
+    
+        <li id="off-0013868200196665403ac40fac14536939dd5af20810782000" style="margin-left:2em;">
+            <a href="0013868200196665403ac40fac14536939dd5af20810782000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200196665403ac40fac14536939dd5af20810782000">ä½¿ç”¨æ¨¡å—</a>
+        </li>
+    
+        <li id="off-0013868200214529634268c5b3b45b3a3ba1cd81a251a3b000" style="margin-left:2em;">
+            <a href="0013868200214529634268c5b3b45b3a3ba1cd81a251a3b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200214529634268c5b3b45b3a3ba1cd81a251a3b000">å®‰è£…ç¬¬ä¸‰æ–¹æ¨¡å—</a>
+        </li>
+    
+        <li id="off-001386820023084e5263fe54fde4e4e8616597058cc4ba1000" style="margin-left:2em;">
+            <a href="001386820023084e5263fe54fde4e4e8616597058cc4ba1000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820023084e5263fe54fde4e4e8616597058cc4ba1000">ä½¿ç”¨__future__</a>
+        </li>
+    
+        <li id="off-0013868200385680e8cf932dba9433ea367de9aba2b4784000" style="margin-left:1em;">
+            <a href="0013868200385680e8cf932dba9433ea367de9aba2b4784000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200385680e8cf932dba9433ea367de9aba2b4784000">é¢å‘å¯¹è±¡ç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-00138682004077376d2d7f8cc8a4e2c9982f92788588322000" style="margin-left:2em;">
+            <a href="00138682004077376d2d7f8cc8a4e2c9982f92788588322000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138682004077376d2d7f8cc8a4e2c9982f92788588322000">ç±»å’Œå®ä¾‹</a>
+        </li>
+    
+        <li id="off-001386820042500060e2921830a4adf94fb31bcea8d6f5c000" style="margin-left:2em;">
+            <a href="001386820042500060e2921830a4adf94fb31bcea8d6f5c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820042500060e2921830a4adf94fb31bcea8d6f5c000">è®¿é—®é™åˆ¶</a>
+        </li>
+    
+        <li id="off-001386820044406b227b3e751cc4d5190420d17a2dc6353000" style="margin-left:2em;">
+            <a href="001386820044406b227b3e751cc4d5190420d17a2dc6353000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820044406b227b3e751cc4d5190420d17a2dc6353000">ç»§æ‰¿å’Œå¤šæ€</a>
+        </li>
+    
+        <li id="off-0013868200480395edcd8f8987a4871b01b5e340bbb8223000" style="margin-left:2em;">
+            <a href="0013868200480395edcd8f8987a4871b01b5e340bbb8223000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200480395edcd8f8987a4871b01b5e340bbb8223000">è·å–å¯¹è±¡ä¿¡æ¯</a>
+        </li>
+    
+        <li id="off-001386820058291028118ddeefc4de7860a8e48b9942e9b000" style="margin-left:1em;">
+            <a href="001386820058291028118ddeefc4de7860a8e48b9942e9b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820058291028118ddeefc4de7860a8e48b9942e9b000">é¢å‘å¯¹è±¡é«˜çº§ç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-0013868200605560b1bd3c660bf494282ede59fee17e781000" style="margin-left:2em;">
+            <a href="0013868200605560b1bd3c660bf494282ede59fee17e781000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200605560b1bd3c660bf494282ede59fee17e781000">ä½¿ç”¨__slots__</a>
+        </li>
+    
+        <li id="off-001386820062641f3bcc60a4b164f8d91df476445697b9e000" style="margin-left:2em;">
+            <a href="001386820062641f3bcc60a4b164f8d91df476445697b9e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820062641f3bcc60a4b164f8d91df476445697b9e000">ä½¿ç”¨@property</a>
+        </li>
+    
+        <li id="off-0013868200511568dd94e77b21d4b8597ede8bf65c36bcd000" style="margin-left:2em;">
+            <a href="0013868200511568dd94e77b21d4b8597ede8bf65c36bcd000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868200511568dd94e77b21d4b8597ede8bf65c36bcd000">å¤šé‡ç»§æ‰¿</a>
+        </li>
+    
+        <li id="off-0013946328809098c1be08a2c7e4319bd60269f62be04fa000" style="margin-left:2em;">
+            <a href="0013946328809098c1be08a2c7e4319bd60269f62be04fa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013946328809098c1be08a2c7e4319bd60269f62be04fa000">å®šåˆ¶ç±»</a>
+        </li>
+    
+        <li id="off-001386820064557c69858840b4c48d2b8411bc2ea9099ba000" style="margin-left:2em;">
+            <a href="001386820064557c69858840b4c48d2b8411bc2ea9099ba000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820064557c69858840b4c48d2b8411bc2ea9099ba000">ä½¿ç”¨å…ƒç±»</a>
+        </li>
+    
+        <li id="off-001386832254674584228cd773d4db5a02ab85d2db4f83e000" style="margin-left:1em;">
+            <a href="001386832254674584228cd773d4db5a02ab85d2db4f83e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832254674584228cd773d4db5a02ab85d2db4f83e000">é”™è¯¯ã€è°ƒè¯•å’Œæµ‹è¯•</a>
+        </li>
+    
+        <li id="off-001386832284796780f5db7b5744bf9989f8d845ef77712000" style="margin-left:2em;">
+            <a href="001386832284796780f5db7b5744bf9989f8d845ef77712000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832284796780f5db7b5744bf9989f8d845ef77712000">é”™è¯¯å¤„ç†</a>
+        </li>
+    
+        <li id="off-00138683229901532c40b749184441dbd428d2e0f8aa50e000" style="margin-left:2em;">
+            <a href="00138683229901532c40b749184441dbd428d2e0f8aa50e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138683229901532c40b749184441dbd428d2e0f8aa50e000">è°ƒè¯•</a>
+        </li>
+    
+        <li id="off-00140137128705556022982cfd844b38d050add8565dcb9000" style="margin-left:2em;">
+            <a href="00140137128705556022982cfd844b38d050add8565dcb9000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140137128705556022982cfd844b38d050add8565dcb9000">å•å…ƒæµ‹è¯•</a>
+        </li>
+    
+        <li id="off-00140137398003434356a2635da4a98b4d00670e8aadb2f000" style="margin-left:2em;">
+            <a href="00140137398003434356a2635da4a98b4d00670e8aadb2f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140137398003434356a2635da4a98b4d00670e8aadb2f000">æ–‡æ¡£æµ‹è¯•</a>
+        </li>
+    
+        <li id="off-001386832151866c052395d62814708a14c4fa1c933d85e000" style="margin-left:1em;">
+            <a href="001386832151866c052395d62814708a14c4fa1c933d85e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832151866c052395d62814708a14c4fa1c933d85e000">IOç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-001386820066616a77f826d876b46b9ac34cb5f34374f7a000" style="margin-left:2em;">
+            <a href="001386820066616a77f826d876b46b9ac34cb5f34374f7a000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386820066616a77f826d876b46b9ac34cb5f34374f7a000">æ–‡ä»¶è¯»å†™</a>
+        </li>
+    
+        <li id="off-0013868321590543ff305fb9f9949f08d760883cc243812000" style="margin-left:2em;">
+            <a href="0013868321590543ff305fb9f9949f08d760883cc243812000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868321590543ff305fb9f9949f08d760883cc243812000">æ“ä½œæ–‡ä»¶å’Œç›®å½•</a>
+        </li>
+    
+        <li id="off-00138683221577998e407bb309542d9b6a68d9276bc3dbe000" style="margin-left:2em;">
+            <a href="00138683221577998e407bb309542d9b6a68d9276bc3dbe000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138683221577998e407bb309542d9b6a68d9276bc3dbe000">åºåˆ—åŒ–</a>
+        </li>
+    
+        <li id="off-0013868322563729e03f6905ea94f0195528e3647887415000" style="margin-left:1em;">
+            <a href="0013868322563729e03f6905ea94f0195528e3647887415000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868322563729e03f6905ea94f0195528e3647887415000">è¿›ç¨‹å’Œçº¿ç¨‹</a>
+        </li>
+    
+        <li id="off-0013868323401155ceb3db1e2044f80b974b469eb06cb43000" style="margin-left:2em;">
+            <a href="0013868323401155ceb3db1e2044f80b974b469eb06cb43000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868323401155ceb3db1e2044f80b974b469eb06cb43000">å¤šè¿›ç¨‹</a>
+        </li>
+    
+        <li id="off-001386832360548a6491f20c62d427287739fcfa5d5be1f000" style="margin-left:2em;">
+            <a href="001386832360548a6491f20c62d427287739fcfa5d5be1f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832360548a6491f20c62d427287739fcfa5d5be1f000">å¤šçº¿ç¨‹</a>
+        </li>
+    
+        <li id="off-001386832845200f6513494f0c64bd882f25818a0281e80000" style="margin-left:2em;">
+            <a href="001386832845200f6513494f0c64bd882f25818a0281e80000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832845200f6513494f0c64bd882f25818a0281e80000">ThreadLocal</a>
+        </li>
+    
+        <li id="off-001397567993007df355a3394da48f0bf14960f0c78753f000" style="margin-left:2em;">
+            <a href="001397567993007df355a3394da48f0bf14960f0c78753f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001397567993007df355a3394da48f0bf14960f0c78753f000">è¿›ç¨‹ vs. çº¿ç¨‹</a>
+        </li>
+    
+        <li id="off-001386832973658c780d8bfa4c6406f83b2b3097aed5df6000" style="margin-left:2em;">
+            <a href="001386832973658c780d8bfa4c6406f83b2b3097aed5df6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832973658c780d8bfa4c6406f83b2b3097aed5df6000">åˆ†å¸ƒå¼è¿›ç¨‹</a>
+        </li>
+    
+        <li id="off-001386832260566c26442c671fa489ebc6fe85badda25cd000" style="margin-left:1em;">
+            <a href="001386832260566c26442c671fa489ebc6fe85badda25cd000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832260566c26442c671fa489ebc6fe85badda25cd000">æ­£åˆ™è¡¨è¾¾å¼</a>
+        </li>
+    
+        <li id="off-001386832257831f46c9ba77b3e468a82e015f5ba415612000" style="margin-left:1em;">
+            <a href="001386832257831f46c9ba77b3e468a82e015f5ba415612000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832257831f46c9ba77b3e468a82e015f5ba415612000">å¸¸ç”¨å†…å»ºæ¨¡å—</a>
+        </li>
+    
+        <li id="off-001411031239400f7181f65f33a4623bc42276a605debf6000" style="margin-left:2em;">
+            <a href="001411031239400f7181f65f33a4623bc42276a605debf6000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001411031239400f7181f65f33a4623bc42276a605debf6000">collections</a>
+        </li>
+    
+        <li id="off-001399413803339f4bbda5c01fc479cbea98b1387390748000" style="margin-left:2em;">
+            <a href="001399413803339f4bbda5c01fc479cbea98b1387390748000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001399413803339f4bbda5c01fc479cbea98b1387390748000">base64</a>
+        </li>
+    
+        <li id="off-0013994173393204e80af1f8fa94c8e9d094d229395ea43000" style="margin-left:2em;">
+            <a href="0013994173393204e80af1f8fa94c8e9d094d229395ea43000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013994173393204e80af1f8fa94c8e9d094d229395ea43000">struct</a>
+        </li>
+    
+        <li id="off-0013868328251266d86585fc9514536a638f06b41908d44000" style="margin-left:2em;">
+            <a href="0013868328251266d86585fc9514536a638f06b41908d44000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868328251266d86585fc9514536a638f06b41908d44000">hashlib</a>
+        </li>
+    
+        <li id="off-001415616001996f6b32d80b6454caca3d33c965a07611f000" style="margin-left:2em;">
+            <a href="001415616001996f6b32d80b6454caca3d33c965a07611f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001415616001996f6b32d80b6454caca3d33c965a07611f000">itertools</a>
+        </li>
+    
+        <li id="off-001407499098340324a6232bfee42348849d53c90576747000" style="margin-left:2em;">
+            <a href="001407499098340324a6232bfee42348849d53c90576747000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407499098340324a6232bfee42348849d53c90576747000">XML</a>
+        </li>
+    
+        <li id="off-001407500818913cef22f247dbd4699921fe9d309727a20000" style="margin-left:2em;">
+            <a href="001407500818913cef22f247dbd4699921fe9d309727a20000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407500818913cef22f247dbd4699921fe9d309727a20000">HTMLParser</a>
+        </li>
+    
+        <li id="off-001386832259025782d9e10e92f4cad885c80a9076913aa000" style="margin-left:1em;">
+            <a href="001386832259025782d9e10e92f4cad885c80a9076913aa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832259025782d9e10e92f4cad885c80a9076913aa000">å¸¸ç”¨ç¬¬ä¸‰æ–¹æ¨¡å—</a>
+        </li>
+    
+        <li id="off-00140767171357714f87a053a824ffd811d98a83b58ec13000" style="margin-left:2em;">
+            <a href="00140767171357714f87a053a824ffd811d98a83b58ec13000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140767171357714f87a053a824ffd811d98a83b58ec13000">PIL</a>
+        </li>
+    
+        <li id="off-0013868326118089581a091a04e4c30b2b7896392bdde5c000" style="margin-left:1em;">
+            <a href="0013868326118089581a091a04e4c30b2b7896392bdde5c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868326118089581a091a04e4c30b2b7896392bdde5c000">å›¾å½¢ç•Œé¢</a>
+        </li>
+    
+        <li id="off-00138683226192949cd41410a6d4f1ebfa9ba40bbd1399d000" style="margin-left:1em;">
+            <a href="00138683226192949cd41410a6d4f1ebfa9ba40bbd1399d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00138683226192949cd41410a6d4f1ebfa9ba40bbd1399d000">ç½‘ç»œç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-0013868324942775d98d4de625e481db5d6bba6853acaaa000" style="margin-left:2em;">
+            <a href="0013868324942775d98d4de625e481db5d6bba6853acaaa000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868324942775d98d4de625e481db5d6bba6853acaaa000">TCP/IPç®€ä»‹</a>
+        </li>
+    
+        <li id="off-001386832511628f1fe2c65534a46aa86b8e654b6d3567c000" style="margin-left:2em;">
+            <a href="001386832511628f1fe2c65534a46aa86b8e654b6d3567c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832511628f1fe2c65534a46aa86b8e654b6d3567c000">TCPç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-0013868325264457324691c860044c5916ce11b305cb814000" style="margin-left:2em;">
+            <a href="0013868325264457324691c860044c5916ce11b305cb814000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868325264457324691c860044c5916ce11b305cb814000">UDPç¼–ç¨‹</a>
+        </li>
+    
+        <li id="off-0013868325601402299d1e941914a21990ac7861ef4bc2d000" style="margin-left:1em;">
+            <a href="0013868325601402299d1e941914a21990ac7861ef4bc2d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868325601402299d1e941914a21990ac7861ef4bc2d000">ç”µå­é‚®ä»¶</a>
+        </li>
+    
+        <li id="off-001386832745198026a685614e7462fb57dbf733cc9f3ad000" style="margin-left:2em;">
+            <a href="001386832745198026a685614e7462fb57dbf733cc9f3ad000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832745198026a685614e7462fb57dbf733cc9f3ad000">SMTPå‘é€é‚®ä»¶</a>
+        </li>
+    
+        <li id="off-001408244819215430d726128bf4fa78afe2890bec57736000" style="margin-left:2em;">
+            <a href="001408244819215430d726128bf4fa78afe2890bec57736000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001408244819215430d726128bf4fa78afe2890bec57736000">POP3æ”¶å–é‚®ä»¶</a>
+        </li>
+    
+        <li id="off-0013868327777137a11bc6c28214243abad14b191dbc12e000" style="margin-left:1em;">
+            <a href="0013868327777137a11bc6c28214243abad14b191dbc12e000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868327777137a11bc6c28214243abad14b191dbc12e000">è®¿é—®æ•°æ®åº“</a>
+        </li>
+    
+        <li id="off-001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000" style="margin-left:2em;">
+            <a href="001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001388320596292f925f46d56ef4c80a1c9d8e47e2d5711000">ä½¿ç”¨SQLite</a>
+        </li>
+    
+        <li id="off-001391435131816c6a377e100ec4d43b3fc9145f3bb8056000" style="margin-left:2em;">
+            <a href="001391435131816c6a377e100ec4d43b3fc9145f3bb8056000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001391435131816c6a377e100ec4d43b3fc9145f3bb8056000">ä½¿ç”¨MySQL</a>
+        </li>
+    
+        <li id="off-0014021031294178f993c85204e4d1b81ab032070641ce5000" style="margin-left:2em;">
+            <a href="0014021031294178f993c85204e4d1b81ab032070641ce5000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014021031294178f993c85204e4d1b81ab032070641ce5000">ä½¿ç”¨SQLAlchemy</a>
+        </li>
+    
+        <li id="off-001386832648091917b035146084c43b05754ec9408dfaf000" style="margin-left:1em;">
+            <a href="001386832648091917b035146084c43b05754ec9408dfaf000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832648091917b035146084c43b05754ec9408dfaf000">Webå¼€å‘</a>
+        </li>
+    
+        <li id="off-001386832653051fd44e44e4f9e4ed08f3e5a5ab550358d000" style="margin-left:2em;">
+            <a href="001386832653051fd44e44e4f9e4ed08f3e5a5ab550358d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832653051fd44e44e4f9e4ed08f3e5a5ab550358d000">HTTPåè®®ç®€ä»‹</a>
+        </li>
+    
+        <li id="off-001386833123019425a41845ca540a19c9080e8f930d7e1000" style="margin-left:2em;">
+            <a href="001386833123019425a41845ca540a19c9080e8f930d7e1000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386833123019425a41845ca540a19c9080e8f930d7e1000">HTMLç®€ä»‹</a>
+        </li>
+    
+        <li id="off-001386832689740b04430a98f614b6da89da2157ea3efe2000" style="margin-left:2em;">
+            <a href="001386832689740b04430a98f614b6da89da2157ea3efe2000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832689740b04430a98f614b6da89da2157ea3efe2000">WSGIæ¥å£</a>
+        </li>
+    
+        <li id="off-001386832704232d6fb5df42dd34a7890fa6254351faac7000" style="margin-left:2em;">
+            <a href="001386832704232d6fb5df42dd34a7890fa6254351faac7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832704232d6fb5df42dd34a7890fa6254351faac7000">ä½¿ç”¨Webæ¡†æ¶</a>
+        </li>
+    
+        <li id="off-001386832805619b3e68a9cf16c4d0398d8af8f6d50e740000" style="margin-left:2em;">
+            <a href="001386832805619b3e68a9cf16c4d0398d8af8f6d50e740000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001386832805619b3e68a9cf16c4d0398d8af8f6d50e740000">ä½¿ç”¨æ¨¡æ¿</a>
+        </li>
+    
+        <li id="off-0013868328689835ecd883d910145dfa8227b539725e5ed000" style="margin-left:1em;">
+            <a href="0013868328689835ecd883d910145dfa8227b539725e5ed000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013868328689835ecd883d910145dfa8227b539725e5ed000">åç¨‹</a>
+        </li>
+    
+        <li id="off-001407503089986d175822da68d4d6685fbe849a0e0ca35000" style="margin-left:2em;">
+            <a href="001407503089986d175822da68d4d6685fbe849a0e0ca35000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001407503089986d175822da68d4d6685fbe849a0e0ca35000">gevent</a>
+        </li>
+    
+        <li id="off-001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000" style="margin-left:1em;">
+            <a href="001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000">å®æˆ˜</a>
+        </li>
+    
+        <li id="off-0013976177048818eb4187c05a84f9280169d58e22afa09000" style="margin-left:2em;">
+            <a href="0013976177048818eb4187c05a84f9280169d58e22afa09000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013976177048818eb4187c05a84f9280169d58e22afa09000">Day 1 - æ­å»ºå¼€å‘ç¯å¢ƒ</a>
+        </li>
+    
+        <li id="off-0013976160374750f95bd09087744569be5aae6160c8351000" style="margin-left:2em;">
+            <a href="0013976160374750f95bd09087744569be5aae6160c8351000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0013976160374750f95bd09087744569be5aae6160c8351000">Day 2 - ç¼–å†™æ•°æ®åº“æ¨¡å—</a>
+        </li>
+    
+        <li id="off-001402228705570c9506d546a3349c6b7d64135127672fe000" style="margin-left:2em;">
+            <a href="001402228705570c9506d546a3349c6b7d64135127672fe000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402228705570c9506d546a3349c6b7d64135127672fe000">Day 3 - ç¼–å†™ORM</a>
+        </li>
+    
+        <li id="off-001402307049906212b8a97f1df4587962539baa31d1fcd000" style="margin-left:2em;">
+            <a href="001402307049906212b8a97f1df4587962539baa31d1fcd000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402307049906212b8a97f1df4587962539baa31d1fcd000">Day 4 - ç¼–å†™Model</a>
+        </li>
+    
+        <li id="off-0014023080708565bc89d6ab886481fb25a16cdc3b773f0000" style="margin-left:2em;">
+            <a href="0014023080708565bc89d6ab886481fb25a16cdc3b773f0000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014023080708565bc89d6ab886481fb25a16cdc3b773f0000">Day 5 - ç¼–å†™Webæ¡†æ¶</a>
+        </li>
+    
+        <li id="off-001402319155292f806e5a1ba5342d2a497c63314b1c77f000" style="margin-left:2em;">
+            <a href="001402319155292f806e5a1ba5342d2a497c63314b1c77f000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402319155292f806e5a1ba5342d2a497c63314b1c77f000">Day 6 - æ·»åŠ é…ç½®æ–‡ä»¶</a>
+        </li>
+    
+        <li id="off-0014023534049359c3ce60cb680419ba423b5b704baac0c000" style="margin-left:2em;">
+            <a href="0014023534049359c3ce60cb680419ba423b5b704baac0c000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014023534049359c3ce60cb680419ba423b5b704baac0c000">Day 7 - ç¼–å†™MVC</a>
+        </li>
+    
+        <li id="off-001402355742678fd802bd75d51464c8482a3503c463182000" style="margin-left:2em;">
+            <a href="001402355742678fd802bd75d51464c8482a3503c463182000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402355742678fd802bd75d51464c8482a3503c463182000">Day 8 - æ„å»ºå‰ç«¯</a>
+        </li>
+    
+        <li id="off-001402402473485d8c205b735ee4e698f90769960fcec4b000" style="margin-left:2em;">
+            <a href="001402402473485d8c205b735ee4e698f90769960fcec4b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402402473485d8c205b735ee4e698f90769960fcec4b000">Day 9 - ç¼–å†™API</a>
+        </li>
+    
+        <li id="off-00140240726395479019cb0be724e7db42936babd5f9717000" style="margin-left:2em;">
+            <a href="00140240726395479019cb0be724e7db42936babd5f9717000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140240726395479019cb0be724e7db42936babd5f9717000">Day 10 - ç”¨æˆ·æ³¨å†Œå’Œç™»å½•</a>
+        </li>
+    
+        <li id="off-0014025559313061080444477fc4b89a283944ecd922a74000" style="margin-left:2em;">
+            <a href="0014025559313061080444477fc4b89a283944ecd922a74000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014025559313061080444477fc4b89a283944ecd922a74000">Day 11 - ç¼–å†™æ—¥å¿—åˆ›å»ºé¡µ</a>
+        </li>
+    
+        <li id="off-001402577310047b481599dca0d4a47bf09a566b09fac2d000" style="margin-left:2em;">
+            <a href="001402577310047b481599dca0d4a47bf09a566b09fac2d000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402577310047b481599dca0d4a47bf09a566b09fac2d000">Day 12 - ç¼–å†™æ—¥å¿—åˆ—è¡¨é¡µ</a>
+        </li>
+    
+        <li id="off-001402581661446aa221b0e45934f7888b20c8a02a0d1c7000" style="margin-left:2em;">
+            <a href="001402581661446aa221b0e45934f7888b20c8a02a0d1c7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402581661446aa221b0e45934f7888b20c8a02a0d1c7000">Day 13 - æå‡å¼€å‘æ•ˆç‡</a>
+        </li>
+    
+        <li id="off-0014026254543484bc665ef087444568fb2d6bf76cad74b000" style="margin-left:2em;">
+            <a href="0014026254543484bc665ef087444568fb2d6bf76cad74b000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/0014026254543484bc665ef087444568fb2d6bf76cad74b000">Day 14 - å®ŒæˆWeb App</a>
+        </li>
+    
+        <li id="off-00140262673295076f525af00734a8e924c5fc6ff5b6091000" style="margin-left:2em;">
+            <a href="00140262673295076f525af00734a8e924c5fc6ff5b6091000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/00140262673295076f525af00734a8e924c5fc6ff5b6091000">Day 15 - éƒ¨ç½²Web App</a>
+        </li>
+    
+        <li id="off-001402635178014df9b8db22892435d8ba20f9f0acc5d01000" style="margin-left:2em;">
+            <a href="001402635178014df9b8db22892435d8ba20f9f0acc5d01000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001402635178014df9b8db22892435d8ba20f9f0acc5d01000">Day 16 - ç¼–å†™ç§»åŠ¨App</a>
+        </li>
+    
+        <li id="off-001414673847034cbe36eb363bd4a2eb91fee53912a7de7000" style="margin-left:1em;">
+            <a href="001414673847034cbe36eb363bd4a2eb91fee53912a7de7000.htm" tppabs="http://www.liaoxuefeng.com/wiki/python27/001414673847034cbe36eb363bd4a2eb91fee53912a7de7000">æœŸæœ«æ€»ç»“</a>
+        </li>
+    
+    </ul>
+    <div class="x-placeholder"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="footer">
+        <div class="x-footer uk-container x-container">
+            <hr>
+            <div class="uk-grid">
+                <div class="x-footer-copyright uk-width-small-1-2 uk-width-medium-1-3">
+                    <p>
+                        <a href="javascript:if(confirm('http://www.liaoxuefeng.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/'" tppabs="http://www.liaoxuefeng.com/">å»–é›ªå³°çš„å®˜æ–¹ç½‘ç«™</a>&copy;2015
+                        <br>
+                        Powered by <a href="javascript:if(confirm('http://js.itranswarp.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://js.itranswarp.com/'" tppabs="http://js.itranswarp.com/" target="_blank">iTranswarp.js</a>
+                    </p>
+                </div>
+                <div class="uk-width-small-1-2 uk-width-medium-1-3 x-hidden-tiny">
+                    <a href="javascript:if(confirm('http://www.liaoxuefeng.com/feed  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/feed'" tppabs="http://www.liaoxuefeng.com/feed" target="_blank" class="uk-icon-button uk-icon-rss" data-uk-tooltip title="Subscribe the RSS"></a>
+                    <a href="javascript:if(confirm('https://github.com/michaelliao/itranswarp.js  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/michaelliao/itranswarp.js'" tppabs="https://github.com/michaelliao/itranswarp.js" target="_blank" class="uk-icon-button uk-icon-github" data-uk-tooltip title="View source code on GitHub"></a>
+                    <a href="javascript:if(confirm('https://twitter.com/liaoxuefeng  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://twitter.com/liaoxuefeng'" tppabs="https://twitter.com/liaoxuefeng" target="_blank" class="uk-icon-button uk-icon-twitter" data-uk-tooltip title="Follow author on Twitter"></a>
+                    <a href="javascript:if(confirm('http://www.weibo.com/liaoxuefeng  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.weibo.com/liaoxuefeng'" tppabs="http://www.weibo.com/liaoxuefeng" target="_blank" class="uk-icon-button uk-icon-weibo uk-visible-large uk-hidden-medium" data-uk-tooltip title="Follow author on Weibo"></a>
+                </div>
+                <div class="uk-width-medium-1-3 uk-hidden-small">
+                    <p>
+                        <a href="javascript:if(confirm('https://github.com/michaelliao/itranswarp.js/issues  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/michaelliao/itranswarp.js/issues'" tppabs="https://github.com/michaelliao/itranswarp.js/issues" target="_blank">Feedback</a>
+                        <br>
+                        <a href="javascript:if(confirm('https://github.com/michaelliao/itranswarp.js/blob/master/LICENSE  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/michaelliao/itranswarp.js/blob/master/LICENSE'" tppabs="https://github.com/michaelliao/itranswarp.js/blob/master/LICENSE" target="_blank">License</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-signin" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <a class="uk-modal-close uk-close"></a>
+            <div class="uk-modal-header">
+                <h2>Please Sign In</h2>
+            </div>
+            <p>You can sign in directly without register:</p>
+            
+            <h3><a href="javascript:if(confirm('http://www.liaoxuefeng.com/auth/from/weibo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.liaoxuefeng.com/auth/from/weibo'" tppabs="http://www.liaoxuefeng.com/auth/from/weibo"><i class="uk-icon-weibo"></i> ä½¿ç”¨æ–°æµªå¾®åšç™»å½•</a></h3>
+            
+            <p>You need authorize to allow connect to your social passport for the first time.</p>
+        </div>
+    </div>
+
+    <div id="oldBrowser">
+        <div class="uk-alert uk-alert-danger" data-uk-alert>
+            <a href="#0" class="uk-alert-close uk-close"></a>
+            <p>
+                WARNING: You are using an old browser that does not support HTML5.
+                Please choose a modern browser (<a href="javascript:if(confirm('http://www.google.com/chrome  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.google.com/chrome'" tppabs="http://www.google.com/chrome" target="_blank">Chrome</a> / <a href="javascript:if(confirm('http://www.mozilla.org/firefox/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.mozilla.org/firefox/'" tppabs="http://www.mozilla.org/firefox/" target="_blank">Firefox</a> / <a href="javascript:if(confirm('http://www.apple.com/safari/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.apple.com/safari/'" tppabs="http://www.apple.com/safari/" target="_blank">Sarafi</a>) to get a good experience.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
