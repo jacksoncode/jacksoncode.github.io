@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta name="baidu-site-verification" content="HvuxptDcq6" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Git操作手册|命令速查表 - Lippi-浮生志 - Lippi.OuYang(ouyanglip@gmail.com)">
+    <title>
+      Git操作手册|命令速查表 - Lippi-浮生志
+    </title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS 
+    <link href="/css/blog.css" rel="stylesheet">-->
+    <!-- index css -->
+    <link href="/css/index.css" rel="stylesheet">
+	<!-- pagments CSS-->
+	<link href="/css/pygments.css" rel="stylesheet">
+        <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"> </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+   <!-- 回到顶部js-->
+    <script src="/js/index.js"></script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?085fc257cb1e774f7764a2cf527c393d";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+	<script>
+    (function(){
+     var bp = document.createElement('script');
+	 bp.src = '//push.zhanzhang.baidu.com/push.js';
+	 var s = document.getElementsByTagName("script")[0];
+	 s.parentNode.insertBefore(bp, s);
+	 })();
+	</script>
+
+  </head>
+  
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="/index.html">
+            Lippi-浮生志
+          </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+            <li>
+              <a href="/categories.html">
+                分 类
+              </a>
+            </li>
+            <li>
+              <a href="/tags.html">
+                标 签
+              </a>
+            </li>
+            <li>
+              <a href="/archives.html">
+                归 档
+              </a>
+            </li>
+            <li>
+              <a href="/faqs.html">
+                备 忘
+              </a>
+            </li>
+            <li>
+              <a href="/about.html">
+                关 于
+              </a>
+            </li>
+          </ul> 
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <!-- Blog Post -->
+<!-- Title -->
+<div class="row">
+  <div class="post-area post">
+
+ 	<div class="post-list-body">
+        	<div class="all-posts" post-cate="All">
+ 		<header>
+		<h1>
+		  Git操作手册|命令速查表
+		  <div class="post-date"><a href="https://github.com/LippiOuYang/LippiOuYang.github.io/edit/master/_posts/2016-02-20-git-guide.md" target="_blank">纠错</a>&nbsp;&nbsp;
+			<span class="glyphicon glyphicon-time"></span>
+			20 Feb 2016
+		  </div>
+		</h1>
+ 		</header>
+		<!-- Author -->
+		<hr>
+		 <article>
+		<p>这篇文章主要介绍Git分布式版本管理与集中式管理的一些差异，总结下Git常用命令作为日后的速查表，最后介绍Git进阶的一些案例。
+本文分为以下几个部分：</p>
+<ol>
+  <li>Git与SVN差异</li>
+  <li>Git常用命令</li>
+  <li>Git进阶指南</li>
+</ol>
+
+<p>##Git与SVN差异</p>
+
+<p>Git的第一个版本是Linux之父Linus Torvalds亲手操刀设计和实现的,Git 基于 DAG 结构 (Directed Acyclic Graph)，其运行起来相当的快,它已经是现在的主流。</p>
+
+<p>Git 和 SVN 思想最大的差别有四个：</p>
+
+<ul>
+  <li>去中心化</li>
+  <li>直接记录快照，而非差异</li>
+  <li>不一样的分支概念</li>
+  <li>三个文件状态</li>
+</ul>
+
+<p><strong>去中心化</strong></p>
+
+<p>Git是一个DVCS（分布式版本管理系统），在技术层面上并不存在一个像中心仓库这样的东西 ， 所有的数据都在本地，不存在谁是中心</p>
+
+<p><img src="/images/images/git.gif" alt="" /></p>
+
+<p>图中每个开发者拉取(pull)并推送(push)到origin。但除了这种集中式的推送拉取关系，每个开发者也可能会从其他的开发者处拉取代码的变更，从技术上讲，这意味着Alice定义了一个名为bob的Git的remote，它指向了Bob的软件仓库。反之亦然。</p>
+
+<p><strong>直接记录快照，而非差异</strong></p>
+
+<p>Git每一个版本都是直接记录快照，而非文件的差异。 下面两个对比图在网上是广为流传大家应该熟悉：</p>
+
+<p>SVN：</p>
+
+<p><img src="/images/images/svn.png" alt="" /></p>
+
+<p>Git:</p>
+
+<p><img src="/images/images/gitgit.png" alt="" /></p>
+
+<p>Git使用SHA-1算法计算数据的校验和，通过文件的内容或目录计算出SHA-1哈希值，作为指纹字符串，每个Version 都是一个快照。</p>
+
+<p><strong>不一样的分支概念</strong></p>
+
+<p>Git的分支本质是一个指向提交快照的指针，是从某个提交快照往回看的历史。当创建/切换分支的时候，只是变换了指针指向而已.而SVN创建一个分支， 是的的确确的复制了一份文件。</p>
+
+<p><strong>三个文件状态</strong></p>
+
+<p>在Git中文件有三种状态：</p>
+
+<ul>
+  <li>已提交（committed）：该文件被安全地保存在了本地数据库</li>
+  <li>已修改（modified）：修改了某个文件，但还没有保存</li>
+  <li>已暂存（staged）：把已修改的文件放下下次保存的清单中</li>
+</ul>
+
+<p>##Git常用命令</p>
+
+<p>###创建</p>
+
+<p>复制一个已创建的仓库:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone ssh://user@domain.com/repo.git
+</code></pre>
+</div>
+
+<p>创建一个新的本地仓库:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git init
+</code></pre>
+</div>
+
+<p>###本地修改</p>
+
+<p>显示工作路径下已修改的文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git status
+</code></pre>
+</div>
+
+<p>显示与上次提交版本文件的不同：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git diff
+</code></pre>
+</div>
+
+<p>把当前所有修改添加到下次提交中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git add
+</code></pre>
+</div>
+
+<p>把对某个文件的修改添加到下次提交中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git add -p &lt;file&gt;
+</code></pre>
+</div>
+
+<p>提交本地的所有修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit -a
+</code></pre>
+</div>
+
+<p>提交之前已标记的变化：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit
+</code></pre>
+</div>
+
+<p>附加消息提交：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit -m 'message here'
+</code></pre>
+</div>
+
+<p>提交，并将提交时间设置为之前的某个日期:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git commit --date="`date --date='n day ago'`" -am "Commit Message"
+</code></pre>
+</div>
+
+<p>###修改上次提交</p>
+
+<p>请勿修改已发布的提交记录!</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit --amend
+</code></pre>
+</div>
+
+<p>把当前分支中未提交的修改移动到其他分支</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git stash
+git checkout branch2
+git stash pop
+</code></pre>
+</div>
+
+<p>###搜索</p>
+
+<p>从当前目录的所有文件中查找文本内容：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git grep "Hello"
+</code></pre>
+</div>
+
+<p>在某一版本中搜索文本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git grep "Hello" v2.5
+</code></pre>
+</div>
+
+<p>###提交历史</p>
+
+<p>从最新提交开始，显示所有的提交记录（显示hash， 作者信息，提交的标题和时间）：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log
+</code></pre>
+</div>
+
+<p>显示所有提交（仅显示提交的hash和message）：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log --oneline
+</code></pre>
+</div>
+
+<p>显示某个用户的所有提交：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log --author="username"
+</code></pre>
+</div>
+
+<p>显示某个文件的所有修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log -p &lt;file&gt;
+</code></pre>
+</div>
+
+<p>谁，在什么时间，修改了文件的什么内容：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git blame &lt;file&gt;
+</code></pre>
+</div>
+
+<p>###分支与标签</p>
+
+<p>列出所有的分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch
+</code></pre>
+</div>
+
+<p>切换分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout &lt;branch&gt;
+</code></pre>
+</div>
+
+<p>创建并切换到新分支:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -b &lt;branch&gt;
+</code></pre>
+</div>
+
+<p>基于当前分支创建新分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch &lt;new-branch&gt;
+</code></pre>
+</div>
+
+<p>基于远程分支创建新的可追溯的分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;
+</code></pre>
+</div>
+
+<p>删除本地分支:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch -d &lt;branch&gt;
+</code></pre>
+</div>
+
+<p>给当前版本打标签：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag &lt;tag-name&gt;
+</code></pre>
+</div>
+
+<p>###更新与发布</p>
+
+<p>列出当前配置的远程端：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote -v
+</code></pre>
+</div>
+
+<p>显示远程端的信息：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote show &lt;remote&gt;
+</code></pre>
+</div>
+
+<p>添加新的远程端：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote add &lt;remote&gt; &lt;url&gt;
+</code></pre>
+</div>
+
+<p>下载远程端版本，但不合并到HEAD中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch &lt;remote&gt;
+</code></pre>
+</div>
+
+<p>下载远程端版本，并自动与HEAD版本合并：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote pull &lt;remote&gt; &lt;url&gt;
+</code></pre>
+</div>
+
+<p>将远程端版本合并到本地版本中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git pull origin master
+</code></pre>
+</div>
+
+<p>将本地版本发布到远程端：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push remote &lt;remote&gt; &lt;branch&gt;
+</code></pre>
+</div>
+
+<p>删除远程端分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push &lt;remote&gt; :&lt;branch&gt; (since Git v1.5.0)
+或
+git push &lt;remote&gt; --delete &lt;branch&gt; (since Git v1.7.0)
+</code></pre>
+</div>
+
+<p>发布标签:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push --tags
+</code></pre>
+</div>
+
+<p>###合并与重置</p>
+
+<p>将分支合并到当前HEAD中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git merge &lt;branch&gt;
+</code></pre>
+</div>
+
+<p>将当前HEAD版本重置到分支中:
+请勿重置已发布的提交!</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git rebase &lt;branch&gt;
+</code></pre>
+</div>
+
+<p>退出重置:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git rebase --abort
+</code></pre>
+</div>
+
+<p>解决冲突后继续重置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git rebase --continue
+</code></pre>
+</div>
+
+<p>使用配置好的merge tool 解决冲突：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git mergetool
+</code></pre>
+</div>
+
+<p>在编辑器中手动解决冲突后，标记文件为已解决冲突</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git add &lt;resolved-file&gt;
+$ git rm &lt;resolved-file&gt;
+</code></pre>
+</div>
+
+<p>###撤销</p>
+
+<p>放弃工作目录下的所有修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git reset --hard HEAD
+</code></pre>
+</div>
+
+<p>移除缓存区的所有文件（i.e. 撤销上次git add）:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git reset HEAD
+</code></pre>
+</div>
+
+<p>放弃某个文件的所有本地修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout HEAD &lt;file&gt;
+</code></pre>
+</div>
+
+<p>重置一个提交（通过创建一个截然不同的新提交）</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git revert &lt;commit&gt;
+</code></pre>
+</div>
+
+<p>将HEAD重置到指定的版本，并抛弃该版本之后的所有修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git reset --hard &lt;commit&gt;
+</code></pre>
+</div>
+
+<p>将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git reset &lt;commit&gt;
+</code></pre>
+</div>
+
+<p>将HEAD重置到上一次提交的版本，并保留未提交的本地修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git reset --keep &lt;commit&gt;
+</code></pre>
+</div>
+
+<p>##Git进阶指南</p>
+
+<p>###问：如何修改 origin 仓库信息？</p>
+
+<p>####1、添加 origin 仓库信息</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git remote add origin &lt;git仓库地址&gt;
+</code></pre>
+</div>
+
+<p>####2、查看 origin 仓库信息</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 以下三种方式均可
+git config get --remote.origin.url
+git remote -v
+git remote show origin
+</code></pre>
+</div>
+
+<p>####3、删除 origin 仓库信息</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> git remote rm origin
+</code></pre>
+</div>
+
+<p>###问：如何配置 git ssh keys ？</p>
+
+<p>在本地生成 ssh 私钥 / 公钥 文件
+将「公钥」添加到 git 服务（github、gitlab、coding.net 等）网站后台
+测试 git ssh 连接是否成功
+接下来以添加 github ssh keys 为例，请注意替换 github 文件名。</p>
+
+<p>注：如果对密钥机制不熟悉，建议不要指定 -f 参数，直接使用默认的 id_rsa 文件名。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 运行以下命令，一直回车，文件名可随意指定
+ssh-keygen -t rsa -b 4096 -C "kaiye@macbook" -f ~/.ssh/github
+
+# 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
+ssh-add -K ~/.ssh/github
+
+# 将 pub 公钥的内容粘贴到线上网站的后台
+cat ~/.ssh/github.pub
+
+# 测试 git ssh 是否连接成功
+ssh -T git@github.com
+</code></pre>
+</div>
+
+<p>###问：如何撤销修改？</p>
+
+<p>修改包含四种情况，需单独区分。</p>
+
+<p>####1、新建的文件和目录，且从未提交至版本库</p>
+
+<p>此类文件的状态为 Untracked files ，撤销方法如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clean -fd .
+</code></pre>
+</div>
+
+<p>其中，. 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径，以下其他情况类似。</p>
+
+<p>####2、提交过版本库，但未提交至暂存区的文件（未执行 git add）</p>
+
+<p>此类文件的状态为<code class="highlighter-rouge"> Changes not staged for commit</code>，撤销方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> git checkout .
+</code></pre>
+</div>
+
+<p>####3、已提交至暂存区的文件</p>
+
+<p>此类文件的状态为 Changes to be committed，撤销方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git reset .
+</code></pre>
+</div>
+
+<p>执行之后文件将会回到以上的 1 或者 2 状态，可继续按以上步骤执行撤销，若 git reset 同时加上 –hard 参数，将会把修改过的文件也还原成版本库中的版本。</p>
+
+<p>####4、已提交至版本库（执行了 git commit）</p>
+
+<p>每次提交都会生成一个 hash 版本号，通过以下命令可查阅版本号并将其回滚：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git log
+git reset &lt;版本号&gt;
+</code></pre>
+</div>
+
+<p>如果需要「回滚至上一次提交」，可直接使用以下命令：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git reset head~1
+</code></pre>
+</div>
+
+<p>执行之后，再按照 1 或者 2 状态进行处理即可，如果回滚之后的代码同时需要提交至 origin 仓库（即回滚 origin 线上仓库的代码），需要使用 -f 强制提交参数，且当前用户需要具备「强制提交的权限」。</p>
+
+<p>####5、如果回滚了之后又不想回滚了怎么办？</p>
+
+<p>如果是以上的情况 1 或者 2，只能歇屁了，因为修改没入过版本库，无法回滚。</p>
+
+<p>如果是情况 4，回滚之后通过 git log 将看不到回滚之前的版本号，但可通过 git reflog 命令（所有使用过的版本号）找到回滚之前的版本号，然后 git reset <版本号> 。</版本号></p>
+
+<p>###问：遇到冲突了怎么解决？</p>
+
+<p>两个分支进行合并时（通常是 git pull 时），可能会遇到冲突，同时被修改的文件会进入 Unmerged 状态，需要解决冲突。</p>
+
+<p>####1、最快的办法</p>
+
+<p>大部分时候，「最快解决冲突」的办法是：使用当前 HEAD 的版本（ours），或使用合并进来的分支版本（theirs）。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 使用当前分支 HEAD 版本，通常是冲突源文件的 &lt;&lt;&lt;&lt;&lt;&lt;&lt; 标记部分，======= 的上方
+git checkout --ours &lt;文件名&gt;
+
+ # 使用合并分支版本，通常是源冲突文件的 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记部分
+ git checkout --theirs &lt;文件名&gt;
+
+# 标记为解决状态加入暂存区
+git add &lt;文件名&gt;
+</code></pre>
+</div>
+
+<p>####2、最通用的办法</p>
+
+<p>用编辑器打开冲突的源文件进行修改，可能会发生遗留，且体验不好，通常需要借助 git mergetool 命令。</p>
+
+<p>在 Mac 系统下，运行 git mergetool <文件名> 可以开启配置的第三方工具进行 merge，默认的是 FileMerge 应用程序，还可以配置成 Meld 或 kdiff3，体验更佳。</文件名></p>
+
+<p>####3、最好的习惯</p>
+
+<p>有三个好的习惯，可以减少代码的冲突：
+ 在开始修改代码前先 git pull 一下；
+  将业务代码进行划分，尽量不要多个人在同一时间段修改同一文件；
+  通过Gitflow 工作流也可以提升 git流程效率，减少发生冲突的可能性。</p>
+
+<p>####4、最复杂的情况</p>
+
+<p>如果你的项目周期比较长，还应该养成「定期 rebase 的习惯」，git pull –rebase 可以让分支的代码和 origin 仓库的代码保持兼容，同时还不会破坏线上代码的可靠性。</p>
+
+<p>它的大概原理是，先将 origin 仓库的代码按 origin 的时间流在本地分支中提交，再将本地分支的修改记录追加到 origin 分支上。如果发生冲突，则可以即时的发现问题并解决，否则到项目上线时再解决冲突，可能会发生额外的风险。</p>
+
+<p>rebase 大概的操作步骤如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 将当前分支的版本追加到从远程 pull 回来的节点之后
+git pull --rebase
+
+# 若发生冲突，则按以上其他方法进行解决，解决后继续
+git rebase --continue
+
+# 直到所有冲突得以解决，待项目最后上线前再执行
+git push origin
+
+# 若多次提交修改了同一文件，可能需要直接跳过后续提交，按提示操作即可
+git rebase --skip
+</code></pre>
+</div>
+
+<p>###问：如何在不提交修改的前提下，执行 pull / merge 等操作？</p>
+
+<p>有些修改没有完全完成之前，可能不需要提交到版本库，圡方法是将修改的文件 copy 到 git 仓库之外的目录临时存放，pull / merge 操作完成之后，再 copy 回来。</p>
+
+<p>这样的做法一个是效率不高，另外一个可能会遗漏潜在的冲突。此类需求最好是通过 git stash 命令来完成，它可以将当前工作状态（WIP，work in progress）临时存放在 stash 队列中，待操作完成后再从 stash 队列中重新应用这些修改。</p>
+
+<p>以下是 git stash 常用命令：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 查看 stash 队列中已暂存了多少 WIP
+git stash list
+
+# 恢复上一次的 WIP 状态，并从队列中移除
+git stash pop
+
+# 添加当前 WIP，注意：未提交到版本库的文件会自动忽略，只要不运行 git clean -fd . 就不会丢失
+git stash
+
+# 恢复指定编号的 WIP，同时从队列中移除
+git stash pop stash@{num}
+
+# 恢复指定编号的 WIP，但不从队列中移除
+git stash apply stash@{num}
+</code></pre>
+</div>
+
+<p>###问：如何在 git log 中查看修改的文件列表？</p>
+
+<p>默认的 git log 会显示较全的信息，且不包含文件列表。使用 –name-status 可以看到修改的文件列表，使用 –oneline 可以将参数简化成一行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git log --name-status --oneline
+</code></pre>
+</div>
+
+<p>每次手动加上参数很麻烦，可以通过自定义快捷命令的方式来简化操作：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git config --global alias.ls 'log --name-status --oneline --graph'
+</code></pre>
+</div>
+
+<p>运行以上配置后，可通过 git ls 命令来实现「自定义 git log」效果，通过该方法也可以创建 git st 、 git ci 等一系列命令，以便沿用 svn 命令行习惯。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git config --global alias.st 'status --porcelain'
+</code></pre>
+</div>
+
+<p>更多 git log 参数，可通过 git help log 查看手册。</p>
+
+<p>如果是看上一次提交的版本日志，直接运行 git show 即可。</p>
+
+<p>此外，如果你的 Mac 安装了zsh（参考《全新Mac安装指南（编程篇），那么可以直接使用 gst、glog 等一系列快捷命令，详情见此列表：Plugin:git 。</p>
+
+<p>###问：git submodule update 时出错怎么解决？</p>
+
+<p>例如，在执行 git submodule update 时有以下错误信息：</p>
+
+<blockquote>
+  <p>fatal: reference is not a tree: f869da471c5d8a185cd110bbe4842d6757b002f5
+Unable to checkout ‘f869da471c5d8a185cd110bbe4842d6757b002f5’ in submodule path ‘source/i18n-php-server’</p>
+</blockquote>
+
+<p>在此例中，发生以上错误是因为 i18n-php-server 子仓库在某电脑 A 的「本地」commit 了新的版本 「f869da471c5d8a185cd110bbe4842d6757b002f5」，且该次 commit 未 push origin。但其父级仓库 i18n-www 中引用了该子仓库的版本号，且将引用记录 push origin，导致其他客户机无法 update 。</p>
+
+<p>解决方法，在电脑 A 上将 i18n-php-server 版本库 push origin 后，在其他客户机上执行 git submodule update 。或者用以上提到的 git reset 方法，将子仓库的引用版本号还原成 origin 上存在的最新版本号。</p>
+
+<p>###其他问题</p>
+
+<p>设置本地分支与远程分支保持同步，在第一次 git push 的时候带上 -u 参数即可</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git push origin master -u 
+</code></pre>
+</div>
+
+<p>支持中文目录与文件名的显示（git 默认将非 ASCII 编码的目录与文件名以八进制编码展示）</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git config core.quotepath off
+</code></pre>
+</div>
+
+<p>常用的打 tag 操作，更多请查看《Git 基础 - 打标签》</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 列出所有本地 tag
+git tag   
+
+# 本地新增一个 tag，推送至 origin 服务器
+git tag -a v1.0.0 -m 'tag description'
+git push origin v1.0.0
+
+# 删除本地与 origin tag
+git tag -d v1.0.0
+git push origin --delete v1.0.0
+</code></pre>
+</div>
+
+<p>使用 git GUI 客户端（如，SoureTree、Github Desktop）能极大的提升分支管理效率。分支合并操作通常只有两种情况：从 origin merge 到本地，使用 git pull 即可；从另外一个本地分支 merge 到当前分支，使用 git merge <分支名>，以下是常用命令：</分支名></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 新建分支 branch1，并切换过去
+git checkout -b branch1
+
+# 查看所有本地与远程分支
+git branch -a
+
+# 修改完成后，切换回 master 分支，将 branch1 分支合并进来
+git checkout master
+git merge branch1
+
+# 删除已完成合并的分支 branch1
+git branch -d branch1
+</code></pre>
+</div>
+
+<p>###参考资料</p>
+
+<ol>
+  <li>Pro Git 简体中文版</li>
+  <li>Git权威指南</li>
+  <li>命令行man手册</li>
+</ol>
+
+		  </article>
+		<hr>
+	<br/>
+        <p>
+          本作品由 <a href="mailto:ouyanglip@gmail.com">Lippi.OuYang</a> 创作，采用
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="查看协议详细信息" target="_blank">CC BY-NC-SA 3.0 许可协议</a>
+          进行许可。
+        </p>
+	<div style="margin-top:10px;margin-bottom:10px">
+	  
+	  <span class="next">
+	    上篇：
+	    <a href="/blog/2016/02/baidu-spider-forbidden.html">
+	      解决百度爬虫无法抓取github pages
+	    </a>
+	  </span>
+	   
+	  
+	  <span class="prev">
+	    下篇：
+	    <a href="/blog/2016/02/hi.html">
+	      hi
+	    </a>
+	  </span>
+	  
+	</div>
+	</div>
+	
+        
+	<div post-cate="Unix/Linux">
+          <ul class="posts">
+            
+              
+                
+              
+            
+              
+                
+		<li>
+                  <a href="/blog/2016/02/baidu-spider-forbidden.html" class="post-list-item">
+                    <h2>解决百度爬虫无法抓取github pages</h2>
+                    <span class="date">Feb 18, 2016</span>
+                  </a>
+		</li>
+                
+              
+                
+		<li>
+                  <a href="/blog/2016/01/apache-configuration-in-ubuntu.html" class="post-list-item">
+                    <h2>Ubuntu下Apache服务器的配置</h2>
+                    <span class="date">Jan 20, 2016</span>
+                  </a>
+		</li>
+                
+              
+                
+		<li>
+                  <a href="/blog/2016/01/tmux-guide.html" class="post-list-item">
+                    <h2>终端复用软件之tmux简介</h2>
+                    <span class="date">Jan 19, 2016</span>
+                  </a>
+		</li>
+                
+              
+            
+          </ul>
+	</div>
+        
+	<div post-cate="Git">
+          <ul class="posts">
+            
+              
+                
+              
+            
+              
+                
+		<li>
+                  <a href="/blog/2016/02/git-guide.html" class="post-list-item">
+                    <h2>Git操作手册|命令速查表</h2>
+                    <span class="date">Feb 20, 2016</span>
+                  </a>
+		</li>
+                
+              
+            
+          </ul>
+	</div>
+        
+	<div post-cate="hi">
+          <ul class="posts">
+            
+              
+                
+              
+            
+              
+                
+		<li>
+                  <a href="/blog/2016/02/hi.html" class="post-list-item">
+                    <h2>hi</h2>
+                    <span class="date">Feb 22, 2016</span>
+                  </a>
+		</li>
+                
+              
+            
+          </ul>
+	</div>
+        
+	 </div>
+
+</div>
+
+
+<!-- Blog Comments -->
+<div class="media">
+  <!-- UY BEGIN 
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2023801"></script>
+UY END -->
+
+<!-- 多说评论框 start -->
+  <div class="post-comment">
+            <span>Comments</span>
+	<div class="ds-thread" data-thread-key="/blog/2016/02/git-guide" data-title="Git操作手册|命令速查表" data-url="LippiOuYang.github.io/blog/2016/02/git-guide.html">
+	</div>
+ </div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"lippiouyang"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+ 
+</div> 
+</div>
+
+        </div>
+
+	 <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+	      <a href="javascript:;">
+		<div class="arrow"></div>
+		<div class="stick"></div>
+	      </a>
+	    </div>
+
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Blog Search Well -->  
+	
+                    <div class="shadow-corner-curl hidden-xs">
+	  <div class="categories-list-header">站内搜索</div>
+<!-- 使用该代码即表示您同意接受 Google 自定义搜索服务条款。 -->
+<!-- 有关服务条款，请访问 http://www.google.com/cse/docs/tos.html?hl=zh-CN -->
+<form name="cse" id="searchbox_demo" action="/search.html">
+  <input type="hidden" name="cref" value="" />
+  <input type="hidden" name="ie" value="utf-8" />
+  <input type="hidden" name="hl" value="zh-CN" />
+  <input name="q" type="text" size="30" />
+  <input type="submit" name="sa" value="搜索" /> 
+</form>
+<script type="text/javascript" src="http://www.google.com/cse/tools/onthefly?form=searchbox_demo&lang=zh-CN"></script>			      
+     
+            
+</div>
+
+
+
+
+
+
+
+
+          <!-- Blog Categories Well -->
+              
+
+    <div class="shadow-corner-curl hidden-xs">
+      <div class="categories-list-header">
+        Categories
+      </div>
+      
+      <a href="/index.html" class="categories-list-item" cate="All">
+        All<span class="my-badge"> 5</span>
+      </a>
+      
+        <a href="javascript:;" class="categories-list-item" cate="Unix/Linux">
+          Unix/Linux <span class="my-badge">3</span>
+        </a>
+      
+        <a href="javascript:;" class="categories-list-item" cate="Git">
+          Git <span class="my-badge">1</span>
+        </a>
+      
+        <a href="javascript:;" class="categories-list-item" cate="hi">
+          hi <span class="my-badge">1</span>
+        </a>
+      
+    </div>
+
+
+
+ 
+         
+              <div class="shadow-corner-curl hidden-xs">
+      <div class="categories-list-header">
+        热门文章
+      </div>
+
+ <ul class="list-unstyled">
+      	<li><a href="/blog/2015/03/github-pages-blog.html" class="categories-list-item">利用Github-pages建立个人博客</a></li>	
+<li><a href="/blog/2014/07/qualified-programmer-should-read-what-books.html" class="categories-list-item">一个合格的程序员应该读过哪些书</a></li>
+<li><a href="/blog/2014/12/c-open-project.html" class="categories-list-item">值得推荐的C/C++框架和库</a></li>
+<li><a href="/blog/2014/12/c-code-opt.html" class="categories-list-item">C代码优化小贴士</a></li>	
+<li><a href="/blog/2014/06/26-methods-to-improve-java-performance.html" class="categories-list-item">Java编程Tips</a></li>
+<li><a href="/blog/2015/04/gradle-task-management.html" class="categories-list-item">Gradle系列教程之任务管理</a></li>	
+<li><a href="/blog/2015/05/android-links.html" class="categories-list-item">安卓开发者必备的42个链接</a></li>
+<li><a href="/blog/2015/05/gradle-dependency-management.html" class="categories-list-item">Gradle系列教程之依赖管理</a></li>
+<li><a href="/blog/2014/10/android-opensource.html" class="categories-list-item">值得推荐的android开源框架</a></li>	 
+<li><a href="/blog/2015/07/hibernate-cache-guide.html" class="categories-list-item">Hibernate缓存配置笔记</a></li>	
+	 
+     </ul>
+</div>
+ 
+       
+                   <div class="shadow-corner-curl hidden-xs">
+      <div class="categories-list-header">
+        相关链接
+      </div>    
+ <ul class="list-unstyled">
+              <li>
+                <a href="https://github.com/" class="categories-list-item">
+                   GitHub 
+                </a>
+              </li>
+<li>
+                <a href="http://www.stackoverflow.com/" class="categories-list-item">
+                   Stack Overflow 
+                </a>
+              </li>
+<li>
+                <a href="http://jekyllrb.com/docs/posts/" class="categories-list-item">
+                  Jekyll文档 
+                </a>
+              </li>
+               
+               <li>
+                <a href="https://news.ycombinator.com/" class="categories-list-item">
+                   Hacker News 
+                </a>
+              </li>        
+              
+              <li>
+                <a href="http://developer.android.com/" class="categories-list-item">
+                   Android Developer 
+                </a>
+              </li>
+              
+              <li>
+                <a href="http://www.ruanyifeng.com/blog/" class="categories-list-item">
+                   Ruanyifeng's Blog 
+                </a>
+              </li>
+
+
+  <li>
+                <a href="http://www.importnew.com/" class="categories-list-item">
+                   ImportNew 
+                </a>
+              </li>
+<li>
+                <a href="http://guides.codepath.com/android" class="categories-list-item">
+                   CodePath Android Cliffnotes 
+                </a>
+              </li>
+<li>
+                <a href="http://androidweekly.net/" class="categories-list-item">
+                   Androidweekly 	
+                </a>
+              </li>
+<li>
+			<a href="http://mvnrepository.com/" class="categories-list-item">
+                   Mvnrepository 
+                </a>
+              </li>
+<li>
+			<a href="http://www.iteye.com/" class="categories-list-item">
+                  Iteye 
+                </a>
+              </li>
+              		
+            </ul>
+
+</div>
+ 
+
+          <!-- Side Widget Well -->
+           
+        </div>
+      </div>
+
+
+
+      <!-- /.row -->
+      <hr>
+      <!-- Footer -->
+      <footer>
+           <p><small>Designed by <a href="https://github.com/EZLippi">Lippi</a> | Free hosted at <a href="https://github.com/EZLippi/EZLippi.github.io">Github</a> | Copyright 2014 - 2017  
+										</p>
+
+	<!--
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:ouyanglip@gmail.com"><span class="glyphicon glyphicon-envelope"></span> ouyanglip@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/LippiOuYang">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="/feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>Draw my life with code</span>
+          <span class="point"> · </span>
+          <span>&copy; 2014 LippiOuYang</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/LippiOuYang">Lippi</a></span>
+
+      </div>
+    </div>
+    </div>
+	-->
+ 
+              <div style="display:none;"><script src="http://s95.cnzz.com/z_stat.php?id=1254799848&web_id=1254799848" language="JavaScript"></script></div>
+ 
+
+      </footer>
+    </div>
+    <!-- /.container -->
+  </body>
+
+</html>
