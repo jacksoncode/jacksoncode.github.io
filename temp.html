@@ -1,33 +1,55 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
+<html lang="en">
+
+<head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>程序猿网址导航</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Bootstrap -->
+    <title>CodeClub</title>
+    <link rel="icon" type="image/x-ico" href="./img/logo.png" />
+
+    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    	
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jquery.goup.min.js"></script>
+    
+    <!--h-ui-->
+    <link rel="stylesheet" type="text/css" href="css/h-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/h-ui.admin.css" />
+	<link rel="stylesheet" type="text/css" href="css/h-ui.doc.css" />
+	<link rel="stylesheet" type="text/css" href="css/iconfont.min.css" />
 
-		<!--自定义样式表-->
-    <link rel="stylesheet" href="css/index.css" />
-		
-		<!--百度站长验证代码-->
-		<meta name="baidu-site-verification" content="IhojXiz1uV" />
-		
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.goup.min.js"></script>
+
+	<!--百度站长验证代码-->
+	<meta name="baidu-site-verification" content="IhojXiz1uV" />
+	
+	<link rel="stylesheet" href="css/index.css" />
+	
+    <!-- Additional fonts for this theme -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this theme -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Temporary navbar container fix until Bootstrap 4 is patched -->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-  	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -37,17 +59,20 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
       	</button>
-		      <a class="navbar-brand" href="index.html#bs-example-navbar-collapse-1"><img height="30px" src="img/logo.png"/></a>
+		      <a class="navbar-brand" href="index.html#bs-example-navbar-collapse-1">CodeClub</a>
 		    </div>
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li class="active"><a href="index.html">首页 <span class="sr-only">(current)</span></a></li>
-		        <li><a href="#">网址导航</a></li>
-		        <li><a href="#">博客</a></li>
-		        <li><a href="#">图书</a></li>
-		        <li class="dropdown">
+		        <li><a href="nav.html">网址导航</a></li>
+		        <li><a href="blog.html">博客</a></li>
+		        <li><a href="book.html">图书</a></li>
+		        <li><a href="contact.html">联系我</a></li>
+		        <li><a href="about.html">关于我</a></li>
+		        <!--更多的菜单，目前用不到-->
+		        <!--<li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">思考 <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
 		            <li><a href="#">Python</a></li>
@@ -58,37 +83,11 @@
 		            <li role="separator" class="divider"></li>
 		            <li><a href="#">建设中</a></li>
 		          </ul>
-		        </li>
-		      </ul>
-		      
-		      <!--百度搜索框开始-->
-		      <form class="navbar-form navbar-left" onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
-				    <div class="form-group">
-				    	<input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
-				    	<input type="text"  class="form-control" onfocus="checkHttps" name="word"  size="30">
-				    </div>				    
-				    <button type="submit" class="btn btn-default">Search</button>
-					</form>
-					<script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
-					<script>
-					    function checkHttps () {
-					        BaiduHttps.useHttps();    
-					    };
-					    function baiduWithHttps (formname) {
-					        var data = BaiduHttps.useHttps();
-					        if (data.s === 0) {
-					            return true;
-					        }
-					        else {
-					            formname.action = 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
-					            return true;
-					        }
-					    };
-					</script>     
-		      <!--百度搜索框结束-->
-		      
-		      <ul class="nav navbar-nav navbar-right">
-		        <!--<li><a href="#">关于我</a></li>-->
+		        </li>-->
+		      </ul>     
+		      		      
+		      <!--<ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">关于我</a></li>
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">关于 <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
@@ -98,65 +97,76 @@
 		            <li><a href="#">Separated link</a></li>
 		          </ul>
 		        </li>
-		      </ul>
+		      </ul>-->
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav> <!--end of nav-->
 
-		<section class="container-fluid custom-section-left">
-  		<h1>程序猿网址导航</h1>
-  		
-  	</section>
-  	
-  	<!--友言-->
-  	<section class="youyan">
+    <!-- Page Header 顶部大图 -->
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="site-heading">
+                        <h1>Temp Title</h1>
+                        <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--网页正文内容放在这里-->
+  	<hr/>
+  	<!--友言，评论框，不需要的页面可以删除-->
+  	<section class="youyan container-fluid">
   		<!-- UY BEGIN -->
 			<div id="uyan_frame"></div>
 			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132333"></script>
 			<!-- UY END -->
   	</section>
-  	
-  	<footer>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row">
-                <div class="col-sm-2">
-                    <h6>Copyright &copy;CodeClub</h6>
-                </div>
-                
-                <div class="col-sm-4">
-                    <h6>关于我们</h6>
-                    <p>爱折腾，爱捣鼓，爱安静，闲不下来！
-                    </p>
-                </div>
-                
-                <div class="col-sm-2">
-                    <h6>导航</h6>
-                    <ul class="unstyled">
-                        <li><a href="index.html">主页</a></li>
-                        <li><a href="">服务</a></li>
-                        <li><a href="">链接</a></li>
+                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://github.com/jacksoncode">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                     </ul>
-                </div>
-                
-                <div class="col-sm-2">
-                    <h6>Contact me</h6>
-                    <ul class="unstyled">
-                        <li><a href="">微博</a></li>
-                        <li><a href="">微信</a></li>
-                        <li><a href="">QQ</a></li>
-                    </ul>                    
-                </div>
-                
-                <div class="col-sm-2">
-                    <h6>本网站由<span class="glyphicon glyphicon-heart"></span>Jackson制作</h6>
+                    <p class="copyright text-muted">Copyright &copy; Jackson 2017. Free Hosted at <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank" title="Github">Github</a></p>
                 </div>
             </div>
         </div>
-    </footer><!--页脚结束-->
-    
+    </footer>
     <!--返回顶部代码-->
     <div>
-    	<p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
+    	<p id="back-to-top"><a href="#top"><span></span>TOP</a></p>
     	<script> 
 					$(function(){ 
 					//当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失 
@@ -181,22 +191,19 @@
 					}); 
 			</script>
     </div>
-    
-   <!--友言分享侧边栏-->
-    <!-- JiaThis Button BEGIN -->
-		<script type="text/javascript">
-		var jiathis_config = {data_track_clickback:'true'};
-		</script>
-		<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jiathis_r.js?move=0&amp;uid=2132333" charset="utf-8"></script>
-		<!-- JiaThis Button END -->
-    
-    <!--百度分享代码开始-->
-		<!--<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["qzone","tsina","bdysc","weixin","douban","sqq","huaban","youdao","sdo","qingbiji","people","mail","wealink","ty","fbook","twi","linkedin","h163","evernotecn","copy","print"],"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"100"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>-->
-    <!--百度分享代码结束-->
-   
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="./js/jquery-3.2.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>    
-  </body>
+
+    <!-- jQuery Version 3.1.1 -->
+    <script src="lib/jquery/jquery.js"></script>
+
+    <!-- Tether -->
+    <script src="lib/tether/tether.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
 </html>
