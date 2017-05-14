@@ -127,7 +127,7 @@ featured-condition-size: 1     # A tag will be featured if the size of it is mor
 
 ````
 {% if tag[1].size > {{site.featured-condition-size}} %}
-
+{% endif %}
 ````
 
 是用来做筛选过滤的.
