@@ -3,6 +3,7 @@
 
 ##### 学习amWiki
 - [amWiki轻文库简介](?file=001-学习amWiki/01-amWiki轻文库简介 "amWiki轻文库简介")
+- [amWiKi小问题](?file=001-学习amWiki/010-amWiKi小问题 "amWiKi小问题")
 - [amWiki功能导图](?file=001-学习amWiki/02-amWiki功能导图 "amWiki功能导图")
 - [如何开始一个新amWiki轻文库](?file=001-学习amWiki/03-如何开始一个新amWiki轻文库 "如何开始一个新amWiki轻文库")
 - [如何编辑amWiki轻文库](?file=001-学习amWiki/04-如何编辑amWiki轻文库 "如何编辑amWiki轻文库")
@@ -19,3 +20,7 @@
 - [amWiki与流程图](?file=003-学习markdown/03-amWiki与流程图 "amWiki与流程图")
 - [Markdown中增加徽章](?file=003-学习markdown/04-Markdown中增加徽章 "Markdown中增加徽章")
 - [Atom对Markdown的原生支持](?file=003-学习markdown/05-Atom对Markdown的原生支持 "Atom对Markdown的原生支持")
+
+##### Jekyll使用
+- [Github+Jekyll添加评论支持](?file=005-Jekyll使用/005-Github+Jekyll添加评论支持 "Github+Jekyll添加评论支持")
+- [来必力评论系统](?file=005-Jekyll使用/006-来必力评论系统 "来必力评论系统")
