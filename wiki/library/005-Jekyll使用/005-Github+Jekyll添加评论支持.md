@@ -39,5 +39,6 @@
 ````
     {% if site.intensedebate_comments %}
       {% include intensedebate-comments.html %}
-    {% endif %
+    {% endif %}
+
 ````
