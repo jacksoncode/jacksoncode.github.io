@@ -32,7 +32,7 @@
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
 
 ##### JavaScript
-- [待添加](?file=012-JavaScript/000-待添加 "待添加")
+- [基本语法](?file=012-JavaScript/000-基本语法 "基本语法")
 
 ##### Java
 - [待添加](?file=013-Java/000-待添加 "待添加")
