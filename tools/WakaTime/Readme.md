@@ -1,5 +1,8 @@
 # Waka Time安装方法
 
+官网：https://wakatime.com/dashboard
+
+
 ## eclipse
 
 #### **Install**
@@ -114,6 +117,12 @@
 http://update.dcloud.net.cn/test/plugin_for_test
 
 但貌似里面也没哟waka time？如何破？继续寻找方法。
+
+貌似是h自带的eclipse版本不是最新的，到这里下载匹配的版本试试
+
+https://github.com/wakatime/eclipse-wakatime/tree/master/update-site/plugins
+
+http://marketplace.eclipse.org/content/wakatime
 
 ## 安装记录
 
