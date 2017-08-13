@@ -106,6 +106,14 @@
 1. (If you already have a WakaTime plugin installed, you won't be prompted for your api key.)
 1. Use VS Code like you normally do and your coding activity will be displayed on your WakaTime Dashboard.
 
+## Hbuilder
+
+理论上应该和eclipse一样，但实际安装失败。
+
+选择手动安装，输入下面地址。
+http://update.dcloud.net.cn/test/plugin_for_test
+
+但貌似里面也没哟waka time？如何破？继续寻找方法。
 
 ## 安装记录
 
