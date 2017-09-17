@@ -34,6 +34,7 @@
 
 ##### JavaScript
 - [基本语法](?file=012-JavaScript/000-基本语法 "基本语法")
+- [阻止缓存](?file=012-JavaScript/090-阻止缓存 "阻止缓存")
 - [驼峰命名法](?file=012-JavaScript/099-驼峰命名法 "驼峰命名法")
 
 ##### Java
