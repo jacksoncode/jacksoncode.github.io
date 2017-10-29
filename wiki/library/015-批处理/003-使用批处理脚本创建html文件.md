@@ -10,3 +10,26 @@ echo ^<html^> >>test.html
 ````
 
 echo加两个>就是把这段内容换行并写入test.html文件中，如果是一个>则表示清空文本中的内容，重新写入一行。
+
+**例子，创建一个空的html：**
+
+````batch
+echo off
+set filepath=e:\test
+
+echo ^<!DOCTYPE html^> >>%filepath%\index.html
+echo ^<html lang="en"^> >>%filepath%\index.html
+echo ^<head^> >>%filepath%\index.html
+rem 如果html中有中文，下面的编码可以改成国标或者ANSI
+echo ^<meta charset="UTF-8"^> >>%filepath%\index.html
+echo ^<link rel="stylesheet" href="css/index.css"^> >>%filepath%\index.html
+echo ^<script type="text/javascript" src="js/index.js"^>^</script^> >>%filepath%\index.html
+echo ^<title^>Document^</title^> >>%filepath%\index.html
+echo ^</head^> >>%filepath%\index.html
+echo ^<body^> >>%filepath%\index.html
+    
+    rem 这里可以放需要展示的html内容。
+
+echo ^</body^> >>%filepath%\index.html
+echo ^</html^> >>%filepath%\index.html
+````
