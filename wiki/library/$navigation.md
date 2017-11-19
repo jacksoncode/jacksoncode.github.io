@@ -27,6 +27,7 @@
 
 ##### Python
 - [GitHub上适合新手的Python项目](?file=010-Python/001-GitHub上适合新手的Python项目 "GitHub上适合新手的Python项目")
+- [笔记](?file=010-Python/002-笔记 "笔记")
 
 ##### HTML&CSS
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
