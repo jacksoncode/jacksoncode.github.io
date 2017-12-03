@@ -29,7 +29,11 @@
 - [GitHub上适合新手的Python项目](?file=010-Python/001-GitHub上适合新手的Python项目 "GitHub上适合新手的Python项目")
 - [笔记](?file=010-Python/002-笔记 "笔记")
 - [常用方法](?file=010-Python/010-常用方法 "常用方法")
-- [新手练习项目](?file=010-Python/099-新手练习项目 "新手练习项目")
+- [新手练习项目](?file=010-Python/090-新手练习项目 "新手练习项目")
+- [70个Python练手项目&#40;有教程&#41;](?file=010-Python/091-70个Python练手项目&#40;有教程&#41; "70个Python练手项目&#40;有教程&#41;")
+- [从零开始学会写爬虫的5个教程](?file=010-Python/092-从零开始学会写爬虫的5个教程 "从零开始学会写爬虫的5个教程")
+- [值得看的Python开源代码](?file=010-Python/093-值得看的Python开源代码 "值得看的Python开源代码")
+- [10个Python练手项目](?file=010-Python/094-10个Python练手项目 "10个Python练手项目")
 
 ##### HTML&CSS
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
