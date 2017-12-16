@@ -1,5 +1,5 @@
 /**
- * amWiki Web端 - 滚动条模块
+ * @desc amWiki Web端 - 滚动条模块
  * @author Tevin
  */
 
@@ -16,11 +16,6 @@
         }
     }, 500);
 
-    /**
-     * 页面滚动
-     * @param {Element} _this
-     * @constructor
-     */
     var Scroller = function (_this) {
         this.$e = {
             container: $(_this),    //主容器
@@ -49,10 +44,6 @@
         this._init();
     };
 
-    /**
-     * 初始化
-     * @private
-     */
     Scroller.prototype._init = function () {
         var that = this;
         var barHtml = '<div class="scrollbar scrollbar-y" onselectstart="return false"><div><i></i></div></div>';
@@ -71,7 +62,7 @@
         this.$e.inner = this.$e.container.children('.scroller-inner');
         //绑定事件
         this._onWinResize();
-        $(win).on('resize', function () {
+        $(window).on('resize', function () {
             that._onWinResize();
             that.checkHeightWidth();
         });
@@ -90,10 +81,7 @@
         this._bindAction();
     };
 
-    /**
-     * 滑块操作
-     * @private
-     */
+    //滑块操作
     Scroller.prototype._bindAction = function () {
         var that = this;
         var onDrag = false;
@@ -125,7 +113,7 @@
                 }
             });
         }
-        $(win.document).on({
+        $(document).on({
             'mousemove': function (e) {
                 if (onDrag == 'y') {
                     that.scrollYTo(top + e.pageY - _y);
@@ -146,10 +134,7 @@
         });
     };
 
-    /**
-     * 尺寸缩放
-     * @private
-     */
+    //尺寸缩放
     Scroller.prototype._onWinResize = function () {
         if (isMobi()) {
             this.$e.inner.removeAttr('style').removeClass('on');
@@ -162,10 +147,7 @@
         }
     };
 
-    /**
-     * 重设滑块大小
-     * @private
-     */
+    //重设滑块大小
     Scroller.prototype._resize = function () {
         var that = this;
         this._data.containerH = this.$e.inner.height();
@@ -199,10 +181,7 @@
         }
     };
 
-    /**
-     * 重设滑块顶部距离
-     * @private
-     */
+    //重设滑块顶部距离
     Scroller.prototype._reScroll = function () {
         var that = this;
         var top1 = this.$e.inner.scrollTop();
@@ -223,11 +202,7 @@
         }
     };
 
-    /**
-     * 垂直滚动到某位置
-     * @param {Number} num
-     * @public
-     */
+    //垂直滚动到某位置
     Scroller.prototype.scrollYTo = function (num) {
         var barTop = num;
         barTop = barTop < 0 ? 0 : barTop;
@@ -236,11 +211,7 @@
         this.$e.inner.scrollTop(barTop / this._data.barH * this._data.contentH);
     };
 
-    /**
-     * 水平滚动到某位置
-     * @param {Number} num
-     * @public
-     */
+    //水平滚动到某位置
     Scroller.prototype.scrollXTo = function (num) {
         var barLeft = num;
         barLeft = barLeft < 0 ? 0 : barLeft;
@@ -249,10 +220,7 @@
         this.$e.inner.scrollLeft(barLeft / this._data.barW * this._data.contentW);
     };
 
-    /**
-     * 检查高度宽度
-     * @public
-     */
+    //检查高度
     Scroller.prototype.checkHeightWidth = function () {
         var that = this;
         this._data.contentH = 0;
@@ -276,7 +244,7 @@
         this._reScroll();
     };
 
-    //注册到 jQuery
+    //方法绑定
     $.extend($.fn, {
         scrollbar: function () {
             return this.each(function () {

@@ -1,5 +1,5 @@
 /**
- * amWiki Web端 - 文档加载与渲染模块
+ * @desc amWiki Web端 - 文档加载与渲染模块
  * @author Tevin
  */
 
@@ -13,8 +13,7 @@
     var URL_ENCODE_NAME = 'AMWikiUrlEncode';  //记录url编码的键名
 
     /**
-     * 文档管理
-     * @constructor
+     * @class 创建一个文档管理对象
      */
     var Docs = function () {
         this.$e = {
@@ -30,15 +29,12 @@
             //记录页面宽度
             pageWidth: 0
         };
-        this._initUrlEncode();
-        this._initHashEvent();
+        this.initUrlEncode();
+        this.initHashEvent();
     };
 
-    /**
-     * 初始化url编码类型标记
-     * @private
-     */
-    Docs.prototype._initUrlEncode = function () {
+    //初始化url编码类型标记
+    Docs.prototype.initUrlEncode = function () {
         /*
          * 由于win与linux采用不同编码保存中文文件名
          * 记录浏览器打开当前域名的wiki时服务器中文文件名的编码类型
@@ -52,11 +48,8 @@
         delete localStorage.urlEcode
     };
 
-    /**
-     * 修正移动端hash变化时滚动位置
-     * @private
-     */
-    Docs.prototype._initHashEvent = function () {
+    //修正移动端hash变化时滚动位置
+    Docs.prototype.initHashEvent = function () {
         var that = this;
         this.data.pageWidth = this.$e.win.width();
         this.$e.win.on('resize', function () {
@@ -76,12 +69,7 @@
         });
     };
 
-    /**
-     * 转换链接文本
-     * @param {String} str
-     * @returns {String}
-     * @private
-     */
+    //转换链接文本
     Docs.prototype._tramsformLinkText = function (str) {
         return str
             .replace(/^\s+|\s+$/g, '')  //去除首尾空格
@@ -93,11 +81,7 @@
             .replace(/\]/g, '&#93;');  //转义右中括号
     };
 
-    /**
-     * 设置文档h1、h2、h3描记
-     * @returns {string}
-     * @private
-     */
+    //设置文档h1、h2、h3描记
     Docs.prototype._setTitlesAnchor = function () {
         var that = this;
         var $titles = null;
@@ -136,18 +120,12 @@
         return contentsMd;
     };
 
-    /**
-     * 创建脚注
-     * @param {String} text
-     * @returns {String}
-     * @private
-     */
-    Docs.prototype._setFootnote = function (text) {
+    //创建脚注
+    Docs.prototype.createFootnote = function (text) {
         var footnotes = [];
         var noteReg = /\[\^([ a-zA-Z\d]+)]/g;
         var footReg = /\[\^([ a-zA-Z\d]+)]: ?([\S\s]+?)(?=\[\^(?:[ a-zA-Z\d]+)]|\n\n|$)/g;
         var templates = $.trim($('#template\\:footnote').text()).split(/[\r\n]+\s*/g);
-        templates[4] += templates[5] + templates[6] + templates[7] + templates[8];
         var html = '';
         //提取脚注内容
         text = text.replace(footReg, function (match, s1, s2, index) {
@@ -197,15 +175,11 @@
             }
             html = templates[1].replace('{{list}}', html);
         }
-        return text + '\n<br>' + html;
+        return text + html;
     };
 
-    /**
-     * 设置js代码块注释显示隐藏
-     * @param {Object} $elm
-     * @private
-     */
-    Docs.prototype._setJSCommentDisable = function ($elm) {
+    //设置js注释隐藏
+    Docs.prototype.setJSCommentDisable = function ($elm) {
         var $disBtn = $('<div class="lang-off-js-comment">注<i>/</i></div>');
         $disBtn.on('click', function () {
             var $this = $(this);
@@ -220,12 +194,8 @@
         $elm.prepend($disBtn);
     };
 
-    /**
-     * 解析流程图
-     * @param {Object} $elm
-     * @private
-     */
-    Docs.prototype._createFlowChart = function ($elm) {
+    //解析流程图
+    Docs.prototype.createFlowChart = function ($elm) {
         var code = $elm.text();
         $elm.text('');
         var id = 'flowChart' + parseInt(Math.random() * 500);
@@ -233,7 +203,7 @@
         var chart = flowchart.parse(code);
         chart.drawSVG(id, {
             'line-width': 1.3,
-            'line-length': 56,
+            'line-length': 55,
             'line-color': '#666',
             'text-margin': 10,
             'font-size': 12,
@@ -251,159 +221,30 @@
         });
     };
 
-    /**
-     * 解析 Markdown 目录
-     * @param {String} html
-     * @returns {String}
-     * @private
-     */
-    Docs.prototype._setTOC = function (html) {
-        return html.replace(/\[(TOC|MENU)]/g, '<blockquote class="markdown-contents"></blockquote>');
-    };
-
-    /**
-     * 解析 Markdown 自定义图片大小与对齐方式
-     * @param {String} html
-     * @returns {String}
-     * @private
-     */
-    Docs.prototype._setImgResize = function (html) {
-        return html.replace(/<img(.*?)src="(.*?)=(\d*[-x×]\d*)(-[lrc])?"/g, function (m, s1, s2, s3, s4) {
-            var imgHtml = '<img' + s1 + 'src="' + s2 + '"';
-            var imgSize = s3.split(/[-x×]/);
-            var align = ({'-l': 'left', '-r': 'right', '-c': 'center'})[s4];
-            if (imgSize[0]) {
-                imgHtml += ' width="' + imgSize[0] + '"';
-            }
-            if (imgSize[1]) {
-                imgHtml += ' height="' + imgSize[1] + '"';
-            }
-            if (align) {
-                imgHtml += ' align="' + align + '"';
-            }
-            return imgHtml;
-        });
-    };
-
-    /**
-     * 解析 markdown 复选框
-     * @param {String} html
-     * @returns {String}
-     * @private
-     */
-    Docs.prototype._setCheckbox = function (html) {
-        return html.replace(/\[([√×Xx\s\-_])\]\s(.*?)([<\n\r])/g, function (m, s1, s2, s3, index) {
-            var checkboxHtml = '<input type="checkbox" id="checkbox' + index + '"';
-            checkboxHtml += /\s/.test(s1) ? '>' : 'checked="true">';
-            checkboxHtml += '<label for="checkbox' + index + '">' + s2 + '</label>';
-            return checkboxHtml + s3;
-        });
-    };
-
-    /**
-     * 解析 markdown 文字飘红
-     * @param {String} html
-     * @returns {String}
-     * @private
-     */
-    Docs.prototype._setRedText = function (html) {
-        return html.replace(/==(.*?)==/g, function (m, s1) {
-            return '<mark>' + s1 + '</mark>';
-        });
-    };
-
-    /**
-     * 创建目录
-     * @param {String} contents - markdown 目录
-     * @private
-     */
-    Docs.prototype._createContents = function (contents) {
-        var $contents = $('.markdown-contents').html(marked(contents));
-        $('blockquote').each(function () {
-            var $this = $(this);
-            var $links = $this.find('ol>li>a');
-            //至少2条链接才视为目录
-            if ($links.length > 1) {
-                $this.addClass('markdown-contents');
-                $contents = $contents.add($this);
-            }
-        });
-        //自带序号的目录，不再额外显示一层序号
-        $contents.find('ol').each(function () {
-            var $this = $(this);
-            var $links = $this.children('li').children('a');
-            var text1 = $links.eq(0).text(),
-                text2 = $links.eq(1).text();
-            var conditions = [
-                //普通数字类型
-                /^[\(（]?(\d+\.?)+[^\d]{2,}/,
-                //汉字序号类型
-                /^[\(（【第]?[一二三四五六七八九十百千万壹贰叁肆伍陆柒捌玖拾佰仟]+/,
-                //英文序号类型
-                /^(chapter)|(section)|(part)|(step)/i,
-                //罗马序号类型
-                /^[ⅠⅡⅢⅣIⅤⅥⅦⅧⅨⅩⅪⅫLCDM]+\.?/
-            ];
-            for (var i = 0, cond; cond = conditions[i]; i++) {
-                if (cond.test(text1) && cond.test(text2)) {
-                    $this.addClass('unindex');
-                    break;
-                }
-            }
-        });
-        //没写序号的目录，创建序号
-        var setIndex = function ($elm, index1) {
-            if ($elm.length == 0) {
-                return;
-            }
-            $elm.children('li').each(function (index2) {
-                var $this = $(this);
-                if (!$elm.hasClass('unindex')) {
-                    var index = typeof index1 == 'number' ? (index1 + 1) + '.' + (index2 + 1): (index2 + 1) + '.';
-                    $this.prepend('<i>' + index + '</i>');
-                }
-                setIndex($this.children('ol'), index2);
-            });
-        };
-        $contents.children('ol').each(function () {
-            setIndex($(this));
-        });
-    };
-
-    /**
-     * 编码 url
-     *   由于服务器可能存在 GBK 或 UTF-8 两种编码，中文路径编码不对需要切换才能访问
-     * @param {String} path
-     * @param {String} type - 是否需要编码类型反转， GBK、UTF-8切换
-     * @returns {String}
-     * @private
-     */
-    Docs.prototype._encodeUrl = function (path, type) {
-        var url = 'library/';
-        if (typeof AWConfig.libraryPrefix == 'string' && AWConfig.libraryPrefix.length > 0) {
-            url = AWConfig.libraryPrefix.replace(/\\/g, '/').replace(/\/?&/, '/');
-        }
+    //编码url
+    Docs.prototype.encodeUrl = function (path, type) {
+        var url = '';
         var paths = [];
         //正常编码
         if (type == 'normal') {
             if (localStorage[URL_ENCODE_NAME] == 'utf8') {
-                url += encodeURI(path);
+                url = 'library/' + encodeURI(path);
             } else if (localStorage[URL_ENCODE_NAME] == 'gbk') {
-                paths = path.split('/').map(function (path) {
-                    return GBK.encode(path);
-                });
-                url += paths.join('/');
+                paths = path.split('/');
+                url = 'library/' + GBK.encode(paths[0]);
+                url += paths[1] ? '/' + GBK.encode(paths[1]) : '';
+                url += paths[2] ? '/' + GBK.encode(paths[2]) : '';
             }
         }
         //反转编码
         else if (type == 'reverse') {
             if (localStorage[URL_ENCODE_NAME] == 'utf8') {
-                paths = path.split('/').map(function (path) {
-                    return GBK.encode(path);
-                });
-                url += paths.join('/');
+                paths = path.split('/');
+                url = 'library/' + GBK.encode(paths[0]);
+                url += paths[1] ? '/' + GBK.encode(paths[1]) : '';
+                url += paths[2] ? '/' + GBK.encode(paths[2]) : '';
             } else if (localStorage[URL_ENCODE_NAME] == 'gbk') {
-                url += encodeURI(path);
+                url = 'library/' + encodeURI(path);
             }
         }
         url += '.md?t=' + (new Date()).getTime();
@@ -411,35 +252,28 @@
     };
 
     /**
-     * 渲染文档
-     * @param {String} content - 需要渲染的文档内容
-     * @public
+     * @desc 渲染文档
+     * @param content {string} - 需要渲染的文档内容
      */
     Docs.prototype.renderDoc = function (content) {
         var that = this;
         var html = '';
         this.cleanView();
         //创建脚注
-        content = this._setFootnote(content);
+        content = this.createFootnote(content);
         //编译 markdown
-        html = marked(content);
+        html = marked(content)
         //创建目录标记，和悬浮窗格式统一
-        html = this._setTOC(html);
-        //自定义图片大小与对齐方式
-        html = this._setImgResize(html);
-        //复选框
-        html = this._setCheckbox(html);
-        //文字飘红
-        html = this._setRedText(html);
-        //填充到页面
-        this.$e.view.html(html);
+            .replace(/\[(TOC|MENU)]/g, '<blockquote class="markdown-contents"></blockquote>');
         //功能化代码块
-        this.$e.view.find('pre code').each(function (i, element) {
+        this.$e.view
+            .html(html)
+            .find('pre code').each(function (i, element) {
             var $elm = $(element);
             var className = $elm.attr('class') || '';
             //创建流程图
             if (className.indexOf('lang-flow') >= 0) {
-                that._createFlowChart($elm);
+                that.createFlowChart($elm);
             }
             //创建语法高亮
             else if (className.indexOf('lang') >= 0) {
@@ -448,7 +282,7 @@
             //创建js注释开关
             className = $elm.attr('class') || '';
             if (className.indexOf('javascript') >= 0) {
-                that._setJSCommentDisable($elm);
+                that.setJSCommentDisable($elm);
             }
         });
         //设置网页title
@@ -458,15 +292,10 @@
         //创建描点
         var contents = this._setTitlesAnchor();
         //创建目录
-        this._createContents(contents);
+        $('.markdown-contents').html(marked(contents));
     };
 
-    /**
-     * 读取文档
-     * @param {String} url
-     * @param {Function} callback
-     * @public
-     */
+    //读取文档
     Docs.prototype.getDoc = function (url, callback) {
         var that = this;
         var ajaxData = {
@@ -490,21 +319,23 @@
     };
 
     /**
-     * 加载指定页面
-     * @param {String} path - 页面资源地址
-     * @param {Function} callback - 加载完成后的回调，包含参数：
-     *    type - 加载页面最终状态，success、error 两种
-     *    content - 加载页面成功时，传递加载的内容
-     * @public
+     * @callback loadPageCallback
+     * @param type {string} - 加载页面最终状态，success、error 两种
+     * @param content {string} - 加载页面成功时，传递加载的内容
+     */
+    /**
+     * @desc 加载指定页面
+     * @param path {string} - 页面资源地址
+     * @param callback {loadPageCallback} - 加载完成后的回调
      */
     Docs.prototype.loadPage = function (path, callback) {
         //console.log(path);
         var that = this;
-        var url = this._encodeUrl(path, 'normal');
+        var url = this.encodeUrl(path, 'normal');
         this.getDoc(url, function (type, data) {
             if (type == 'fail') {
                 //如果第一失败，转换url编码类型后发送第二次请求
-                var url = that._encodeUrl(path, 'reverse');
+                var url = that.encodeUrl(path, 'reverse');
                 that.getDoc(url, function (type) {
                     //第二次仍然失败，视为打开文档失败
                     if (type == 'fail') {
@@ -523,8 +354,7 @@
     };
 
     /**
-     * 清理页面
-     * @public
+     * @desc 清理页面
      */
     Docs.prototype.cleanView = function () {
         this.$e.view.find('.lang-off-js-comment').off('click');

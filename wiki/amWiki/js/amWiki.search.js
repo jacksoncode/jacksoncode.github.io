@@ -1,5 +1,5 @@
 /**
- * amWiki Web端 - 全库搜索模块
+ * @desc amWiki Web端 - 全库搜索模块
  * @author Tevin
  */
 
@@ -9,29 +9,27 @@
     'use strict';
 
     /**
-     * 全局搜索
-     * @param {Storage} _storage
-     * @constructor
+     * @class 创建全局搜索
      */
     var Search = function (_storage) {
         this._storage = _storage;
-        this.$e = {
+        this.elm = {
             //显示搜索面板按钮
-            searchShow: $('#searchShow'),
+            $searchShow: $('#searchShow'),
             //更新全部缓存按钮
-            searchUpdate: this._storage.$e.searchUpdate,
+            $searchUpdate: this._storage.elm.$searchUpdate,
             //搜索面板
-            searchBox: $('#searchBox'),
+            $searchBox: $('#searchBox'),
             //搜索结果列表
-            results: $('#results'),
+            $results: $('#results'),
             //搜索结果信息提示
-            resultMsg: $('#resultMsg'),
+            $resultMsg: $('#resultMsg'),
             //搜素结果显示更多
-            resultMore: $('#resultMore'),
+            $resultMore: $('#resultMore'),
             //搜索按钮
-            search: $('#search'),
+            $search: $('#search'),
             //搜索文本
-            searchText: $('#searchText')
+            $searchText: $('#searchText')
         };
         this._data = {
             //搜素结果
@@ -48,52 +46,45 @@
         this.onNeedRebuildStorage = null;
     };
 
-    /**
-     * 绑定用户操作
-     * @private
-     */
+    //初始化
     Search.prototype._bindCtrl = function () {
         var that = this;
         //展开折叠搜索面板
-        this.$e.searchShow.on('click', function () {
-            if (that.$e.searchBox.hasClass('on')) {
+        this.elm.$searchShow.on('click', function () {
+            if (that.elm.$searchBox.hasClass('on')) {
                 that.displayBox('off');
-                that.$e.searchShow.trigger('searchoff');
+                that.elm.$searchShow.trigger('searchoff');
             } else {
                 that.displayBox('on', function () {
                     resetResHeight();
                 });
-                that.$e.searchShow.trigger('searchon');
+                that.elm.$searchShow.trigger('searchon');
             }
         });
         //设置结果区域高度
         var resetResHeight = function () {
-            var hOut = that.$e.searchBox.height();
-            var dt = that.$e.results.offset().top - that.$e.searchUpdate.offset().top;
-            that.$e.results.height(hOut - dt);
+            var hOut = that.elm.$searchBox.height();
+            var dt = that.elm.$results.offset().top - that.elm.$searchUpdate.offset().top;
+            that.elm.$results.height(hOut - dt);
         };
         $(win).on('resize', function () {
-            if (that.$e.searchBox.hasClass('on')) {
+            if (that.elm.$searchBox.hasClass('on')) {
                 resetResHeight();
             }
         });
-        //当本地浏览且存在页面挂载数据时，隐藏重建缓存按钮
-        if (location.protocol == 'file:' && typeof AWPageMounts != 'undefined') {
-            this.$e.searchUpdate.parent().addClass('off');
-        }
         //重建缓存
-        this.$e.searchUpdate.on('click', function () {
+        this.elm.$searchUpdate.on('click', function () {
             //开启重建缓存时，如果存在搜索子进程，则干掉子进程
             if (that._worker) {
                 that._worker.terminate();
                 that._worker = null;
-                that.$e.resultMsg.hide();
+                that.elm.$resultMsg.hide();
             }
-            that.$e.search.prop('disabled', true);
-            that.$e.searchUpdate.prop('disabled', true);
+            that.elm.$search.prop('disabled', true);
+            that.elm.$searchUpdate.prop('disabled', true);
             that.onNeedRebuildStorage(function () {
-                that.$e.search.prop('disabled', false);
-                that.$e.searchUpdate.val('请勿频繁使用');
+                that.elm.$search.prop('disabled', false);
+                that.elm.$searchUpdate.val('请勿频繁使用');
             });
         });
         //更新全部缓存按钮使用的时间限制：一小时内不允许重复使用
@@ -101,33 +92,28 @@
         if (lastBuild) {
             var lave = Date.now() - lastBuild;
             if (lave < 60 * 60 * 1000) {
-                this.$e.searchUpdate.prop('disabled', true).val('请勿频繁使用');
+                this.elm.$searchUpdate.prop('disabled', true).val('请勿频繁使用');
             }
         }
         //点击搜索
-        this.$e.search.on('click', function () {
+        this.elm.$search.on('click', function () {
             that._search();
         });
-        this.$e.searchText.on('keyup', function (e) {
+        this.elm.$searchText.on('keyup', function (e) {
             if (e.keyCode == 13) {
                 that._search();
             }
         });
         //结果翻页
-        this.$e.resultMore.on('click', function () {
+        this.elm.$resultMore.on('click', function () {
             that._nextResultPage();
         });
     };
 
-    /**
-     * 显示隐藏搜索面板
-     * @param {String} type - on 显示 ／ off 隐藏
-     * @param {Function} callback
-     * @public
-     */
+    //显示隐藏搜索面板
     Search.prototype.displayBox = function (type, callback) {
         var that = this;
-        var $box = this.$e.searchBox;
+        var $box = this.elm.$searchBox;
         if (type == 'on' && !$box.hasClass('on')) {
             $box
                 .addClass('on')
@@ -155,104 +141,66 @@
         }
     };
 
-    /**
-     * 启动搜素
-     * @private
-     */
+    //启动搜素
     Search.prototype._search = function () {
         var that = this;
-        if (this.$e.searchText.val() == '') {
-            this.$e.searchText.focus();
+        if (this.elm.$searchText.val() == '') {
+            this.elm.$searchText.focus();
             return;
         }
-        var words = this.$e.searchText.val();
-        this.$e.resultMsg.show().text('创建搜索中...');
+        var words = this.elm.$searchText.val();
         if (typeof win.Worker !== "undefined") {
             //开启一次新搜索时，如果存在搜索子进程，则干掉子进程
             if (this._worker) {
                 this._worker.terminate();
                 this._worker = null;
-                this.$e.resultMsg.hide();
+                this.elm.$resultMsg.hide();
             }
-            try {
-                //创建搜素子进程搜素
-                this._worker = new win.Worker('amWiki/js/amWiki.search.worker.js');
-                this._searchByWorker(words);
-            } catch (e) {
-                //在当前环境搜索
-                this._searchByPresent(words);
-            }
-        } else {
-            //在当前环境搜索
-            this._searchByPresent(words);
-        }
-    };
-
-    /**
-     * 搜索子进程通讯
-     * @param {String} words
-     * @private
-     */
-    Search.prototype._searchByWorker = function (words) {
-        var that = this;
-        //收到子进程搜素消息
-        this._worker.onmessage = function (event) {
-            var data = event.data;
-            //加载成功后发送文档数据
-            if (data.type == 'searcher:loaded') {
-                that._worker.postMessage({type: 'searcher:docs', docs: that._storage.getAllDocs()});
-            }
-            //文档预处理完成后开始搜索
-            else if (data.type == 'searcher:ready') {
-                that.$e.resultMsg.show().html('正在搜索，请稍后...');
-                that._worker.postMessage({type: 'searcher:search', words: words});
-            }
-            //搜索结果排行
-            else if (data.type == 'searcher:result') {
-                that._data.result = data.result;
-                that._showResultList();
+            this.elm.$resultMsg.show().text('创建搜索中...');
+            //创建子进程
+            this._worker = new win.Worker('amWiki/js/amWiki.search.worker.js');
+            //收到子进程搜素消息
+            this._worker.onmessage = function (event) {
+                var data = event.data;
+                //加载成功后发送文档数据
+                if (data.type == 'loaded') {
+                    that._worker.postMessage({type: 'docs', docs: that._storage.getAllDocs()});
+                }
+                //文档预处理完成后开始搜索
+                else if (data.type == 'ready') {
+                    that.elm.$resultMsg.show().html('正在搜索，请稍后...');
+                    that._worker.postMessage({type: 'search', words: words});
+                }
+                //搜索结果排行
+                else if (data.type == 'result') {
+                    that._data.result = data.result;
+                    that._showResultList();
+                    that._worker.terminate();
+                    that._worker = null;
+                }
+            };
+            //子进程出错
+            this._worker.onerror = function (e) {
+                console.error(e);
                 that._worker.terminate();
                 that._worker = null;
-            }
-        };
-        //子进程出错
-        this._worker.onerror = function (e) {
-            console.error(e);
-            this.$e.resultMsg.show().text('Sorry，出错了！<br/>' + e.msg);
-            that._worker.terminate();
-            that._worker = null;
-        };
+            };
+        } else {
+            this.elm.$resultMsg.show().text('Sorry，您的浏览器不支持搜索！');
+            this.elm.$search.prop('disabled', true);
+        }
+
     };
 
-    /**
-     * 在当前环境搜索
-     * @param {String} words
-     * @private
-     */
-    Search.prototype._searchByPresent = function (words) {
-        var searcher = new AWSearcher();
-        searcher.initDocs(this._storage.getAllDocs());
-        this.$e.resultMsg.show().html('正在搜索，请稍后...');
-        searcher.matchWords(words);
-        this._data.result = searcher.getResult();
-        this._showResultList();
-    };
-
-    /**
-     * 显示结果列表
-     * @private
-     */
+    //显示结果列表
     Search.prototype._showResultList = function () {
-        this.$e.results.children('ul').children().remove();
-        this.$e.resultMsg.hide();
+        this.elm.$results.children('ul').children().remove();
+        this.elm.$resultMsg.hide();
         this._data.pagination = 0;
         this._nextResultPage();
     };
 
-    /**
-     * 显示结果列表下一页
-     * @private
-     */
+    //显示结果列表下一页
     Search.prototype._nextResultPage = function () {
         var html = '';
         var count = 0;
@@ -263,23 +211,17 @@
                 break;
             }
         }
-        this.$e.results.children('ul').append(html);
+        this.elm.$results.children('ul').append(html);
         this._data.pagination++;
         //如果还有结果没显示完，显示显示更多按钮
         if (this._data.pagination * this._data.pageSize >= this._data.result.length) {
-            this.$e.resultMore.hide();
+            this.elm.$resultMore.hide();
         } else {
-            this.$e.resultMore.show();
+            this.elm.$resultMore.show();
         }
     };
 
-    /**
-     * 渲染单条模板
-     * @param {String} template
-     * @param {Object} data
-     * @returns {String}
-     * @private
-     */
+    //渲染单条模板
     Search.prototype._renderRankItem = function (template, data) {
         var tmpl = template;
         data.time = win.tools.formatTime(data.timestamp);
