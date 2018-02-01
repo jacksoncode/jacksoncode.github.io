@@ -37,6 +37,7 @@
 - [值得看的Python开源代码](?file=010-Python/093-值得看的Python开源代码 "值得看的Python开源代码")
 - [10个Python练手项目](?file=010-Python/094-10个Python练手项目 "10个Python练手项目")
 - [GitHub上适合新手的Python项目](?file=010-Python/095-GitHub上适合新手的Python项目 "GitHub上适合新手的Python项目")
+- [更改pip源至国内镜像](?file=010-Python/100-更改pip源至国内镜像 "更改pip源至国内镜像")
 
 ##### HTML&CSS
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
