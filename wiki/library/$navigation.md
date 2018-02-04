@@ -38,6 +38,8 @@
 - [10个Python练手项目](?file=010-Python/094-10个Python练手项目 "10个Python练手项目")
 - [GitHub上适合新手的Python项目](?file=010-Python/095-GitHub上适合新手的Python项目 "GitHub上适合新手的Python项目")
 - [更改pip源至国内镜像](?file=010-Python/100-更改pip源至国内镜像 "更改pip源至国内镜像")
+- [PythonWeb课程大纲](?file=010-Python/901-PythonWeb课程大纲 "PythonWeb课程大纲")
+- [数据分析师课程大纲](?file=010-Python/902-数据分析师课程大纲 "数据分析师课程大纲")
 
 ##### HTML&CSS
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
@@ -58,6 +60,10 @@
 
 ##### Bash Shell
 - [Start](?file=016-Bash Shell/001-Start "Start")
+
+##### 测试专业
+- [Web安全工程师](?file=030-测试专业/010-Web安全工程师 "Web安全工程师")
+- [测试微专业](?file=030-测试专业/011-测试微专业 "测试微专业")
 
 ##### Git
 - [待添加](?file=050-Git/000-待添加 "待添加")
