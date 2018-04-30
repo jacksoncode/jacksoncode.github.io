@@ -103,3 +103,35 @@ conda env create -f environment.yml
   conda install -n env_name package_name
   ````
 > 如果不能通过``conda install``来安装，文档中提到可以从Anaconda.org安装，但我觉得会更习惯用pip直接安装。pip在Anaconda中已安装好，不需要单独为每个环境安装pip。如需要用pip管理包，activate环境后直接使用即可。
+
+#### 5.Conda 更新
+* 更新package
+  ````
+  conda update -n python34 numpy
+  ````
+* 删除package
+  ````
+  conda remove -n python34 numpy
+  ````
+* 更新conda，保持conda最新
+  ````
+  conda update conda
+  ````
+* 更新anaconda
+  ````
+  conda update anaconda
+  ````
+* 更新python
+  ````
+  conda update python
+  ````
+
+#### Conda 源
+````bash
+  # 添加Anaconda的TUNA镜像
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  # TUNA的help中镜像地址加有引号，需要去掉
+
+  # 设置搜索时显示通道地址
+  conda config --set show_channel_urls yes
+  ````
