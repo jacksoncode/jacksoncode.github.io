@@ -37,6 +37,7 @@
 - [值得看的Python开源代码](?file=010-Python/093-值得看的Python开源代码 "值得看的Python开源代码")
 - [10个Python练手项目](?file=010-Python/094-10个Python练手项目 "10个Python练手项目")
 - [GitHub上适合新手的Python项目](?file=010-Python/095-GitHub上适合新手的Python项目 "GitHub上适合新手的Python项目")
+- [Python解析html](?file=010-Python/600-Python解析html "Python解析html")
 - [更改pip源至国内镜像](?file=010-Python/800-更改pip源至国内镜像 "更改pip源至国内镜像")
 - [Conda常用命令](?file=010-Python/801-Conda常用命令 "Conda常用命令")
 - [PythonWeb课程大纲](?file=010-Python/901-PythonWeb课程大纲 "PythonWeb课程大纲")
