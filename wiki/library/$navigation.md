@@ -44,6 +44,10 @@
 - [PythonWeb课程大纲](?file=010-Python/901-PythonWeb课程大纲 "PythonWeb课程大纲")
 - [数据分析师课程大纲](?file=010-Python/902-数据分析师课程大纲 "数据分析师课程大纲")
 - [Python学习资源](?file=010-Python/951-Python学习资源 "Python学习资源")
+- **Python学习资源**
+    - [最全Python学习资源：从入门、进阶到大神](?file=010-Python/999-Python学习资源/100-最全Python学习资源：从入门、进阶到大神 "最全Python学习资源：从入门、进阶到大神")
+    - [Python学习资源](?file=010-Python/999-Python学习资源/101-Python学习资源 "Python学习资源")
+    - [Github大学资源](?file=010-Python/999-Python学习资源/102-Github大学资源 "Github大学资源")
 
 ##### HTML&CSS
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
@@ -64,6 +68,9 @@
 
 ##### Bash Shell
 - [Start](?file=016-Bash Shell/001-Start "Start")
+- [Linux 下各文件夹的结构说明及用途介绍](?file=016-Bash Shell/101-Linux 下各文件夹的结构说明及用途介绍 "Linux 下各文件夹的结构说明及用途介绍")
+- [九条命令在一分钟内检查Linux服务器性能](?file=016-Bash Shell/102-九条命令在一分钟内检查Linux服务器性能 "九条命令在一分钟内检查Linux服务器性能")
+- [55 个 Linux 教程和练手项目合集](?file=016-Bash Shell/800-55 个 Linux 教程和练手项目合集 "55 个 Linux 教程和练手项目合集")
 
 ##### 测试专业
 - [Web安全工程师](?file=030-测试专业/010-Web安全工程师 "Web安全工程师")

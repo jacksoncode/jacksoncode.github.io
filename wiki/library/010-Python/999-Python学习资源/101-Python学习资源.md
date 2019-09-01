@@ -1,5 +1,9 @@
 # Python学习资源
 
+### 100天进阶
+
+https://github.com/jackfrued/Python-100-Days
+
 ### 7天入门Python
 
 * 7天速成Python课：
@@ -113,4 +117,4 @@ https://www.kaggle.com/learn/overview
 79. [Python3 实现简单的 Web 服务器](https://link.zhihu.com/?target=https%3A//www.shiyanlou.com/courses/552)
 80. [仿 StackOverflow 开发在线问答系统](https://link.zhihu.com/?target=https%3A//www.shiyanlou.com/courses/1068)
 
-### 
+###
