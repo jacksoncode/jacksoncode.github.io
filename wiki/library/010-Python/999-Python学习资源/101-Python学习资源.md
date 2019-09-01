@@ -4,6 +4,10 @@
 
 https://github.com/jackfrued/Python-100-Days
 
+### 撸代码形式学Python
+
+https://github.com/xianhu/LearnPython
+
 ### 7天入门Python
 
 * 7天速成Python课：
