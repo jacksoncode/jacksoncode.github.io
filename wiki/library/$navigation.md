@@ -43,6 +43,7 @@
 - [Conda常用命令](?file=010-Python/801-Conda常用命令 "Conda常用命令")
 - [PythonWeb课程大纲](?file=010-Python/901-PythonWeb课程大纲 "PythonWeb课程大纲")
 - [数据分析师课程大纲](?file=010-Python/902-数据分析师课程大纲 "数据分析师课程大纲")
+- [Python学习资源](?file=010-Python/951-Python学习资源 "Python学习资源")
 
 ##### HTML&CSS
 - [待添加](?file=011-HTML&CSS/000-待添加 "待添加")
