@@ -73,6 +73,7 @@
 - [Linux 下各文件夹的结构说明及用途介绍](?file=016-Bash Shell/101-Linux 下各文件夹的结构说明及用途介绍 "Linux 下各文件夹的结构说明及用途介绍")
 - [九条命令在一分钟内检查Linux服务器性能](?file=016-Bash Shell/102-九条命令在一分钟内检查Linux服务器性能 "九条命令在一分钟内检查Linux服务器性能")
 - [55 个 Linux 教程和练手项目合集](?file=016-Bash Shell/800-55 个 Linux 教程和练手项目合集 "55 个 Linux 教程和练手项目合集")
+- [Linux中高效编写Bash脚本的10个技巧](?file=016-Bash Shell/801-Linux中高效编写Bash脚本的10个技巧 "Linux中高效编写Bash脚本的10个技巧")
 
 ##### 测试专业
 - [Web安全工程师](?file=030-测试专业/010-Web安全工程师 "Web安全工程师")
