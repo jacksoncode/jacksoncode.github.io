@@ -1,0 +1,517 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+#watermark {
+
+  position: relative;
+  overflow: hidden;
+}
+
+#watermark .x {
+  position: absolute;
+  top: 800;
+  left: 400;
+  color: #3300ff;
+  font-size: 50px;
+  pointer-events: none;
+  opacity:0.3;
+  filter:Alpha(opacity=50);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+    </style>
+
+
+    <style type="text/css">
+ html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+
+
+
+
+    </style>
+    <style type="text/css">
+        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
+
+
+
+
+
+    </style>
+
+    <style type="text/css">
+        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div data-v-87ffcada="" class="article" id="watermark">
+        <p class="x">更多课程请加QQ群170701297</p>
+        <div data-v-87ffcada="" class="main main-app">
+            <h1 data-v-87ffcada="" class="article-title pd">
+                08讲案例篇：系统中出现大量不可中断进程和僵尸进程怎么办（下）
+            </h1>
+            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
+                                                                                        src="https://static001.geekbang.org/resource/image/c3/a4/c3fc6fc5daceb549e55f419514ad43a4.jpg">
+
+
+                <div data-v-87ffcada="" id="article-content" class="">
+                    <div class="text">
+                        <p>你好，我是倪朋飞。</p><p>上一节，我给你讲了Linux进程状态的含义，以及不可中断进程和僵尸进程产生的原因，我们先来简单复习下。</p><p>使用 ps 或者 top 可以查看进程的状态，这些状态包括运行、空闲、不可中断睡眠、可中断睡眠、僵尸以及暂停等。其中，我们重点学习了不可中断状态和僵尸进程：</p><ul>
+<li>
+<p>不可中断状态，一般表示进程正在跟硬件交互，为了保护进程数据与硬件一致，系统不允许其他进程或中断打断该进程。</p>
+</li>
+<li>
+<p>僵尸进程表示进程已经退出，但它的父进程没有回收该进程所占用的资源。</p>
+</li>
+</ul><p>上一节的最后，我用一个案例展示了处于这两种状态的进程。通过分析 top 命令的输出，我们发现了两个问题：</p><ul>
+<li>
+<p>第一，iowait 太高了，导致系统平均负载升高，并且已经达到了系统 CPU 的个数。</p>
+</li>
+<li>
+<p>第二，僵尸进程在不断增多，看起来是应用程序没有正确清理子进程的资源。</p>
+</li>
+</ul><p>相信你一定认真思考过这两个问题，那么，真相到底是什么呢？接下来，我们一起顺着这两个问题继续分析，找出根源。</p><p>首先，请你打开一个终端，登录到上次的机器中。然后执行下面的命令，重新运行这个案例：</p><pre><code># 先删除上次启动的案例
+$ docker rm -f app
+# 重新运行案例
+$ docker run --privileged --name=app -itd feisky/app:iowait
+</code></pre><h2>iowait 分析</h2><p>我们先来看一下 iowait 升高的问题。</p><p>我相信，一提到 iowait 升高，你首先会想要查询系统的 I/O 情况。我一般也是这种思路，那么什么工具可以查询系统的 I/O 情况呢？</p><!-- [[[read_end]]] --><p>这里，我推荐的正是上节课要求安装的 dstat ，它的好处是，可以同时查看 CPU 和 I/O 这两种资源的使用情况，便于对比分析。</p><p>那么，我们在终端中运行 dstat 命令，观察 CPU 和 I/O 的使用情况：</p><pre><code># 间隔1秒输出10组数据
+$ dstat 1 10
+You did not select any stats, using -cdngy by default.
+--total-cpu-usage-- -dsk/total- -net/total- ---paging-- ---system--
+usr sys idl wai stl| read  writ| recv  send|  in   out | int   csw
+  0   0  96   4   0|1219k  408k|   0     0 |   0     0 |  42   885
+  0   0   2  98   0|  34M    0 | 198B  790B|   0     0 |  42   138
+  0   0   0 100   0|  34M    0 |  66B  342B|   0     0 |  42   135
+  0   0  84  16   0|5633k    0 |  66B  342B|   0     0 |  52   177
+  0   3  39  58   0|  22M    0 |  66B  342B|   0     0 |  43   144
+  0   0   0 100   0|  34M    0 | 200B  450B|   0     0 |  46   147
+  0   0   2  98   0|  34M    0 |  66B  342B|   0     0 |  45   134
+  0   0   0 100   0|  34M    0 |  66B  342B|   0     0 |  39   131
+  0   0  83  17   0|5633k    0 |  66B  342B|   0     0 |  46   168
+  0   3  39  59   0|  22M    0 |  66B  342B|   0     0 |  37   134
+</code></pre><p>从 dstat 的输出，我们可以看到，每当 iowait 升高（wai）时，磁盘的读请求（read）都会很大。这说明 iowait 的升高跟磁盘的读请求有关，很可能就是磁盘读导致的。</p><p>那到底是哪个进程在读磁盘呢？不知道你还记不记得，上节在  top  里看到的不可中断状态进程，我觉得它就很可疑，我们试着来分析下。</p><p>我们继续在刚才的终端中，运行 top 命令，观察 D 状态的进程：</p><pre><code># 观察一会儿按 Ctrl+C 结束
+$ top
+...
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 4340 root      20   0   44676   4048   3432 R   0.3  0.0   0:00.05 top
+ 4345 root      20   0   37280  33624    860 D   0.3  0.0   0:00.01 app
+ 4344 root      20   0   37280  33624    860 D   0.3  0.4   0:00.01 app
+...
+
+</code></pre><p>我们从 top 的输出找到 D 状态进程的 PID，你可以发现，这个界面里有两个 D 状态的进程，PID分别是 4344 和 4345。</p><p>接着，我们查看这些进程的磁盘读写情况。对了，别忘了工具是什么。一般要查看某一个进程的资源使用情况，都可以用我们的老朋友 pidstat，不过这次记得加上 -d 参数，以便输出 I/O 使用情况。</p><p>比如，以 4344 为例，我们在终端里运行下面的 pidstat 命令，并用 -p 4344 参数指定进程号：</p><pre><code># -d 展示 I/O 统计数据，-p 指定进程号，间隔 1 秒输出 3 组数据
+$ pidstat -d -p 4344 1 3
+06:38:50      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:38:51        0      4344      0.00      0.00      0.00       0  app
+06:38:52        0      4344      0.00      0.00      0.00       0  app
+06:38:53        0      4344      0.00      0.00      0.00       0  app
+</code></pre><p>在这个输出中，  kB_rd 表示每秒读的 KB 数， kB_wr 表示每秒写的 KB 数，iodelay 表示 I/O 的延迟（单位是时钟周期）。它们都是 0，那就表示此时没有任何的读写，说明问题不是 4344 进程导致的。</p><p>可是，用同样的方法分析进程 4345，你会发现，它也没有任何磁盘读写。</p><p>那要怎么知道，到底是哪个进程在进行磁盘读写呢？我们继续使用 pidstat，但这次去掉进程号，干脆就来观察所有进程的 I/O 使用情况。</p><p>在终端中运行下面的  pidstat 命令：</p><pre><code># 间隔 1 秒输出多组数据 (这里是 20 组)
+$ pidstat -d 1 20
+...
+06:48:46      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:48:47        0      4615      0.00      0.00      0.00       1  kworker/u4:1
+06:48:47        0      6080  32768.00      0.00      0.00     170  app
+06:48:47        0      6081  32768.00      0.00      0.00     184  app
+
+06:48:47      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:48:48        0      6080      0.00      0.00      0.00     110  app
+
+06:48:48      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:48:49        0      6081      0.00      0.00      0.00     191  app
+
+06:48:49      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:48:50      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:48:51        0      6082  32768.00      0.00      0.00       0  app
+06:48:51        0      6083  32768.00      0.00      0.00       0  app
+
+06:48:51      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:48:52        0      6082  32768.00      0.00      0.00     184  app
+06:48:52        0      6083  32768.00      0.00      0.00     175  app
+
+06:48:52      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:48:53        0      6083      0.00      0.00      0.00     105  app
+...
+</code></pre><p>观察一会儿可以发现，的确是 app 进程在进行磁盘读，并且每秒读的数据有 32 MB，看来就是 app 的问题。不过，app 进程到底在执行啥 I/O 操作呢？</p><p>这里，我们需要回顾一下进程用户态和内核态的区别。进程想要访问磁盘，就必须使用系统调用，所以接下来，重点就是找出  app 进程的系统调用了。</p><p>strace  正是最常用的跟踪进程系统调用的工具。所以，我们从 pidstat 的输出中拿到进程的 PID 号，比如 6082，然后在终端中运行 strace 命令，并用 -p 参数指定 PID 号：</p><pre><code>$ strace -p 6082
+strace: attach: ptrace(PTRACE_SEIZE, 6082): Operation not permitted
+</code></pre><p>这儿出现了一个奇怪的错误，strace 命令居然失败了，并且命令报出的错误是没有权限。按理来说，我们所有操作都已经是以 root 用户运行了，为什么还会没有权限呢？你也可以先想一下，碰到这种情况，你会怎么处理呢？</p><p><strong>一般遇到这种问题时，我会先检查一下进程的状态是否正常</strong>。比如，继续在终端中运行 ps 命令，并使用 grep 找出刚才的 6082 号进程：</p><pre><code>$ ps aux | grep 6082
+root      6082  0.0  0.0      0     0 pts/0    Z+   13:43   0:00 [app] &lt;defunct&gt;
+</code></pre><p>果然，进程 6082 已经变成了 Z 状态，也就是僵尸进程。僵尸进程都是已经退出的进程，所以就没法儿继续分析它的系统调用。关于僵尸进程的处理方法，我们一会儿再说，现在还是继续分析 iowait 的问题。</p><p>到这一步，你应该注意到了，系统 iowait 的问题还在继续，但是  top、pidstat  这类工具已经不能给出更多的信息了。这时，我们就应该求助那些基于事件记录的动态追踪工具了。</p><p>你可以用  perf top 看看有没有新发现。再或者，可以像我一样，在终端中运行 perf record，持续一会儿（例如 15 秒），然后按 Ctrl+C 退出，再运行 perf report 查看报告：</p><pre><code>$ perf record -g
+$ perf report
+</code></pre><p>接着，找到我们关注的 app 进程，按回车键展开调用栈，你就会得到下面这张调用关系图：</p><p><img src="https://static001.geekbang.org/resource/image/21/a1/21e79416e946ed049317a4b4c5a576a1.png" alt=""></p><p>这个图里的swapper 是内核中的调度进程，你可以先忽略掉。</p><p>我们来看其他信息，你可以发现， app 的确在通过系统调用 sys_read() 读取数据。并且从 new_sync_read 和 blkdev_direct_IO  能看出，进程正在对磁盘进行<strong>直接读</strong>，也就是绕过了系统缓存，每个读请求都会从磁盘直接读，这就可以解释我们观察到的 iowait 升高了。</p><p>看来，罪魁祸首是 app 内部进行了磁盘的直接 I/O啊！</p><p>下面的问题就容易解决了。我们接下来应该从代码层面分析，究竟是哪里出现了直接读请求。查看源码文件 <a href="https://github.com/feiskyer/linux-perf-examples/blob/master/high-iowait-process/app.c">app.c</a>，你会发现它果然使用了 O_DIRECT 选项打开磁盘，于是绕过了系统缓存，直接对磁盘进行读写。</p><pre><code>open(disk, O_RDONLY|O_DIRECT|O_LARGEFILE, 0755)
+</code></pre><p>直接读写磁盘，对 I/O 敏感型应用（比如数据库系统）是很友好的，因为你可以在应用中，直接控制磁盘的读写。但在大部分情况下，我们最好还是通过系统缓存来优化磁盘 I/O，换句话说，删除 O_DIRECT 这个选项就是了。</p><p><a href="https://github.com/feiskyer/linux-perf-examples/blob/master/high-iowait-process/app-fix1.c">app-fix1.c</a> 就是修改后的文件，我也打包成了一个镜像文件，运行下面的命令，你就可以启动它了：</p><pre><code># 首先删除原来的应用
+$ docker rm -f app
+# 运行新的应用
+$ docker run --privileged --name=app -itd feisky/app:iowait-fix1
+</code></pre><p>最后，再用 top 检查一下：</p><pre><code>$ top
+top - 14:59:32 up 19 min,  1 user,  load average: 0.15, 0.07, 0.05
+Tasks: 137 total,   1 running,  72 sleeping,   0 stopped,  12 zombie
+%Cpu0  :  0.0 us,  1.7 sy,  0.0 ni, 98.0 id,  0.3 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  :  0.0 us,  1.3 sy,  0.0 ni, 98.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+...
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 3084 root      20   0       0      0      0 Z   1.3  0.0   0:00.04 app
+ 3085 root      20   0       0      0      0 Z   1.3  0.0   0:00.04 app
+    1 root      20   0  159848   9120   6724 S   0.0  0.1   0:09.03 systemd
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd
+    3 root      20   0       0      0      0 I   0.0  0.0   0:00.40 kworker/0:0
+...
+</code></pre><p>你会发现， iowait 已经非常低了，只有 0.3%，说明刚才的改动已经成功修复了 iowait 高的问题，大功告成！不过，别忘了，僵尸进程还在等着你。仔细观察僵尸进程的数量，你会郁闷地发现，僵尸进程还在不断的增长中。</p><h2>僵尸进程</h2><p>接下来，我们就来处理僵尸进程的问题。既然僵尸进程是因为父进程没有回收子进程的资源而出现的，那么，要解决掉它们，就要找到它们的根儿，<strong>也就是找出父进程，然后在父进程里解决。</strong></p><p>父进程的找法我们前面讲过，最简单的就是运行  pstree 命令：</p><pre><code># -a 表示输出命令行选项
+# p表PID
+# s表示指定进程的父进程
+$ pstree -aps 3084
+systemd,1
+  └─dockerd,15006 -H fd://
+      └─docker-containe,15024 --config /var/run/docker/containerd/containerd.toml
+          └─docker-containe,3991 -namespace moby -workdir...
+              └─app,4009
+                  └─(app,3084)
+</code></pre><p>运行完，你会发现 3084 号进程的父进程是 4009，也就是 app 应用。</p><p>所以，我们接着查看 app 应用程序的代码，看看子进程结束的处理是否正确，比如有没有调用 wait() 或 waitpid() ，抑或是，有没有注册 SIGCHLD 信号的处理函数。</p><p>现在我们查看修复 iowait 后的源码文件 <a href="https://github.com/feiskyer/linux-perf-examples/blob/master/high-iowait-process/app-fix1.c">app-fix1.c</a> ，找到子进程的创建和清理的地方：</p><pre><code>int status = 0;
+  for (;;) {
+    for (int i = 0; i &lt; 2; i++) {
+      if(fork()== 0) {
+        sub_process();
+      }
+    }
+    sleep(5);
+  }
+
+  while(wait(&amp;status)&gt;0);
+</code></pre><p>循环语句本来就容易出错，你能找到这里的问题吗？这段代码虽然看起来调用了 wait() 函数等待子进程结束，但却错误地把 wait() 放到了 for 死循环的外面，也就是说，wait() 函数实际上并没被调用到，我们把它挪到 for 循环的里面就可以了。</p><p>修改后的文件我放到了 <a href="https://github.com/feiskyer/linux-perf-examples/blob/master/high-iowait-process/app-fix2.c">app-fix2.c</a> 中，也打包成了一个 Docker 镜像，运行下面的命令，你就可以启动它：</p><pre><code># 先停止产生僵尸进程的 app
+$ docker rm -f app
+# 然后启动新的 app
+$ docker run --privileged --name=app -itd feisky/app:iowait-fix2
+</code></pre><p>启动后，再用 top 最后来检查一遍：</p><pre><code>$ top
+top - 15:00:44 up 20 min,  1 user,  load average: 0.05, 0.05, 0.04
+Tasks: 125 total,   1 running,  72 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  1.7 sy,  0.0 ni, 98.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  :  0.0 us,  1.3 sy,  0.0 ni, 98.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+...
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 3198 root      20   0    4376    840    780 S   0.3  0.0   0:00.01 app
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd
+    3 root      20   0       0      0      0 I   0.0  0.0   0:00.41 kworker/0:0
+...
+</code></pre><p>好了，僵尸进程（Z状态）没有了， iowait  也是 0，问题终于全部解决了。</p><h2>小结</h2><p>今天我用一个多进程的案例，带你分析系统等待 I/O 的 CPU 使用率（也就是 iowait%）升高的情况。</p><p>虽然这个案例是磁盘 I/O 导致了 iowait 升高，不过， <strong>iowait 高不一定代表I/O 有性能瓶颈。当系统中只有 I/O 类型的进程在运行时，iowait 也会很高，但实际上，磁盘的读写远没有达到性能瓶颈的程度</strong>。</p><p>因此，碰到 iowait 升高时，需要先用 dstat、pidstat 等工具，确认是不是磁盘 I/O 的问题，然后再找是哪些进程导致了 I/O。</p><p>等待 I/O 的进程一般是不可中断状态，所以用 ps 命令找到的 D 状态（即不可中断状态）的进程，多为可疑进程。但这个案例中，在 I/O 操作后，进程又变成了僵尸进程，所以不能用 strace 直接分析这个进程的系统调用。</p><p>这种情况下，我们用了 perf 工具，来分析系统的 CPU 时钟事件，最终发现是直接 I/O 导致的问题。这时，再检查源码中对应位置的问题，就很轻松了。</p><p>而僵尸进程的问题相对容易排查，使用 pstree 找出父进程后，去查看父进程的代码，检查 wait() / waitpid() 的调用，或是 SIGCHLD 信号处理函数的注册就行了。</p><h2>思考</h2><p>最后，我想邀请你一起来聊聊，你碰到过的不可中断状态进程和僵尸进程问题。你是怎么分析它们的根源？又是怎么解决的？在今天的案例操作中，你又有什么新的发现吗？你可以结合我的讲述，总结自己的思路。</p><p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
+                    data-v-87ffcada="">精选留言</span></h2>
+                <ul data-v-87ffcada="">
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/ea/72/94a0d7fc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">zecho</span>
+                            </div>
+                            <div class="bd">提一个建议，案例的讲解过于简单，与预期有些差距，很多时候我们实际遇到的要比这个复杂，这会带来不是简单的几个命令就可以，特别需要更深入的工具，比如brendan中火焰图，perf-tools，或者systemtab等等；希望能找些实际的案例，谢谢。 <br></div>
+                            <span class="time">2018-12-07 08:49</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">嗯嗯，实际上这里的案例是我故意设计的比较简单，这样初学者可以把重点放到理解当前讲的原理和指标上，而不是看着一堆的新工具和内核函数而感到害怕。当然了，火焰图、perf-tools、systemtap这些工具以后也会讲到，只是还是让我们先把基础的东西铺垫好。<br><br>如果你已经对这些比较熟悉了，推荐去把这些思路应用到实际的系统中去分析，然后在这里跟大家分享你的所得。我相信，你有可能会发现不同的理解，甚至是更好的分析思路。</p>
+                                <p class="reply-time">2018-12-08 22:06</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/11/fe/de00d8d8.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">王涛</span>
+                            </div>
+                            <div class="bd">d8打卡。看完这部分，作为一名运维人员就尴尬了，当开发跟你说机器性能有问题时，这个问题就变成了甩锅问题。开发说代码没问题，你又看不懂开发的代码。。。 <br></div>
+                            <span class="time">2018-12-07 08:59</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">找出进程就可以甩锅了😊<br><br>从磁盘IO的角度来说，其实很容易找出那些进程在消耗IO资源。因为这里侧重的是CPU使用的分析，所以IO讲的不是特别深入。后续的IO部分还会有更细致的拆解。</p>
+                                <p class="reply-time">2018-12-08 22:09</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/34/bb/0b971fca.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">walker</span>
+                            </div>
+                            <div class="bd">有时候直接杀死僵尸进程的时候会导致服务不可用，或是崩溃。在线上运行的服务出现僵尸进程时，怎样处理比较好呢？ <br></div>
+                            <span class="time">2018-12-07 10:11</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/20/80/d61ad0cc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">柯锦玲(侠客行)</span>
+                            </div>
+                            <div class="bd">dock镜像等资料在哪里下载？ <br></div>
+                            <span class="time">2018-12-07 07:43</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">每天晒白牙</span>
+                            </div>
+                            <div class="bd">【D8打卡】<br>今天主要学习的是系统中出现了大量不可中断进程和僵尸进程的处理方法<br>现象：<br>①iowait太高，导致平均负载升高，并且达到了系统CPU的个数<br>②僵尸进程不断增多<br>分析过程：<br>1.先分析iowait升高的原因<br>一般iowait升高，可能的原因是i&#47;o问题<br>①用dstat 命令同时查看cpu和i&#47;o对比情况（如 dstat 1 10 间隔1秒输出10组数据），通过结果可以发现iowait升高时，磁盘读请求（read）升高<br>所以推断iowait升高是磁盘读导致<br>②定位磁盘读的进程，使用top命令查看处于不可中断状态（D）的进程PID<br>③查看对应进程的磁盘读写情况，使用pidstat命令，加上-d参数，可以看到i&#47;o使用情况（如 pidstat -d -p &lt;pid&gt; 1 3）,发现处于不可中断状态的进程都没有进行磁盘读写<br>④继续使用pidstat命令，但是去掉进程号，查看所有进程的i&#47;o情况（pidstat -d 1 20），可以定位到进行磁盘读写的进程。我们知道进程访问磁盘，需要使用系统调用，<br>下面的重点就是找到该进程的系统调用<br>⑤使用strace查看进程的系统调用 strace -p &lt;pid&gt;<br>发现报了 strace:attach :ptrace(PTRACE_SIZE，6028)：Operation not peritted,说没有权限，我是使用的root权限，所以这个时候就要查看进程的状态是否正常<br>⑥ps aux | grep &lt;pid&gt; 发现进程处于Z状态，已经变成了僵尸进程，所以不能进行系统调用分析了<br>⑦既然top和pidstat都不能找出问题，使用基于事件记录的动态追踪工具<br>如果是centos系统，可以使用下面的方法<br>在容器外面把分析记录保存，到容器里面查看结果<br>操作：<br>（1）在centos系统上运行 perf record -g ，执行一会儿按ctrl+c停止<br>（2）把生成的perf.data（通常文件生成在命令执行的当前目录下，当然可以通过find | grep perf.data或 find &#47; -name perf.data查看路径）文件拷贝到容器里面分析：<br>docker cp perf.data app:&#47;tpm<br>docker exec -i -t app bash<br>cd &#47;tmp&#47;<br>apt-get update &amp;&amp; apt-get install -y linux-perf linux-tools procps<br>perf_4.9 report<br>然后观察调用栈信息，检查是否有磁盘读操作，这个案例是定位到了进行磁盘的直接读，当然也可以查看源码进行验证。因为我的centos系统用老师的 iowait镜像iowait升高不明显，所以使用的是iowait-new2镜像，可以得到想要的结果，但是这个镜像把我的系统能搞崩溃，所以我只能执行到cd &#47;tmp&#47;这步，下面那部就执行不下去了。但是整个分析过程还是理解了。<br><br>2.僵尸进程<br>僵尸进程出现的原因是父进程没有回收子进程的资源出现的。解决办法是找到父进程，在父进程中处理，使用pstree查父进程，然后查看父进程的源码检查wait()&#47;waitpid()的调用或SIGCHLD信号处理函数的注册 <br></div>
+                            <span class="time">2018-12-07 07:49</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">白华</span>
+                            </div>
+                            <div class="bd">今天进行实验看来还是不会成功的，上次在你的docker hub仓库中看到了iowait镜像，试了最新的几个，在centos7虚拟机中还是不行 <br></div>
+                            <span class="time">2018-12-07 07:14</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/1b/82/69581d8a.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">姜小鱼</span>
+                            </div>
+                            <div class="bd">老师：iowait%生高并不能得出存在io性能的结论，还要继续看io量(dstat)和io并发等情况.那么这个io量到底达到多少才能说明存在性能瓶颈？有一个量化指标吗？期待回复，谢谢 <br></div>
+                            <span class="time">2018-12-07 14:06</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">IO部分会讲的</p>
+                                <p class="reply-time">2018-12-08 16:19</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">我来也</span>
+                            </div>
+                            <div class="bd">[D8打卡]<br>今天又学了两个乖, dstat可以同时看cpu和io. (上篇文章安装后只看了下效果,没想到这一层).strace可以追踪系统调用.<br>虽然我之前也写过linux c程序,但是看到sys_read&#47;new_sync_read&#47;blkdev_direct_IO确实不知道是正在对磁盘进行直接读, 即使看了代码 也不知道 O_DIRECT 这个参数就是直接读.<br>还是功力太浅,线索摆在前面也抓不住,哈哈😁.<br>----<br>有些同学问&quot;服务出现僵尸进程时，怎样处理&quot;.<br>其实我也不知道怎么处理,但是我把那个父进程杀掉, 僵尸进程就几乎没有了. <br>上一篇文章中,老师也提到过[通常，僵尸进程持续的时间都比较短，在父进程回收它的资源后就会消亡；或者在父进程退出后，由 init 进程回收后也会消亡]<br> <br></div>
+                            <span class="time">2018-12-07 12:05</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">嗯嗯 可以再思考一点，比如假如父进程已经是init了又该怎么办？注意init进程是不会退出的</p>
+                                <p class="reply-time">2018-12-09 08:13</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/11/c9/c3eae895.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">运维小司机</span>
+                            </div>
+                            <div class="bd">后面那两个镜像，我不知道是不是我系统的问题，我运行iowait直接飚满了，系统直接卡死。 <br></div>
+                            <span class="time">2018-12-07 10:25</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">ninuxer</span>
+                            </div>
+                            <div class="bd">打卡day9<br>在用perf展开的分析详情中，有个children和self都90%多的swapper进程，如果我看到这个，我肯定会先去围绕这个进程展开，而会忽略占用才0.6%得app进程，关于这个情况，是我理解上有什么偏差么？ <br></div>
+                            <span class="time">2018-12-07 08:24</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/36/d2/c7357723.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">发条橙子 。</span>
+                            </div>
+                            <div class="bd">老师 ， 我这边使用 stress 来模拟 io 的请求 ， 发现 stress 的进程时而 D 时而 R 。 但是用 pidstat 、 iostat  以及 dstat 都没有看到对 磁盘有  读数据请求 和 写数据请求 。 所以这个是 stress 工具本身的问题么 ？？ <br></div>
+                            <span class="time">2018-12-16 16:30</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">可能跟stress的选项有关，你的命令是什么？</p>
+                                <p class="reply-time">2018-12-17 07:39</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/61/bc/88a905a5.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">赵强强</span>
+                            </div>
+                            <div class="bd">倪老师.公司一个服务调用量很大，top命令输出显示php-fpm worker进程cpu使用率很高，但是pidstat输出确找不到该进程，进程确实一直存在的，是什么原因呢 <br></div>
+                            <span class="time">2018-12-08 20:19</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">试试分析下线程</p>
+                                <p class="reply-time">2018-12-09 07:33</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/16/31/ae8adf82.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">路过</span>
+                            </div>
+                            <div class="bd">听课程，还会需要有点编程的功底，否则这个问题排查起来只能粗暴简单处理了。把锅丢给开发了。:) <br></div>
+                            <span class="time">2018-12-07 14:53</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">嗯嗯 了解一些编程的基本功很有帮助，特别是复杂问题的最后很可能要去分析函数调用栈等，更需要一定的编程功底。</p>
+                                <p class="reply-time">2018-12-07 22:41</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/e8/45/c58cb283.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">帆帆帆帆帆帆帆帆</span>
+                            </div>
+                            <div class="bd">@jeff，数据库一般都有自己的数据缓冲池bufferpool，在合适的时间，数据库会从磁盘读入数据到bufferpool，或者从bufferpool写出数据到磁盘。在这种情况下，再使用文件系统缓存，反而不会有性能的提升，而且数据库写出数据到磁盘的时候，必须写到了磁盘才算真的完成了数据的持久化。 <br></div>
+                            <span class="time">2018-12-07 13:59</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">嗯嗯，谢谢分享</p>
+                                <p class="reply-time">2018-12-09 07:50</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLRCxev73gpRIKKwjvuU2WgFKcZ1rKrGhDSZpUMzRsEgvAEZN00XscsTXp0ib1OrNkn9LgH2hYxX1w/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">hsggj</span>
+                            </div>
+                            <div class="bd">老师，请问一下，perf除了可以检测C++之外，其他的代码如java,php的问题可以检测吗？ <br></div>
+                            <span class="time">2018-12-07 11:30</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">可以的，我们案例里面已经有一个PHP的示例，我还会在答疑中介绍Java的使用方法。</p>
+                                <p class="reply-time">2018-12-09 07:59</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/16/31/ae8adf82.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">路过</span>
+                            </div>
+                            <div class="bd">用ubuntu 做实验很顺利。请问老师，曾经发生僵尸进程的父进程是1，服务器又不方便重启，如何清理这样的僵尸进程？谢谢老师！ <br></div>
+                            <span class="time">2018-12-07 08:28</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKibu8C3CeYGF6JCBribiaEPia5gibaQnj9icryPVwoF6ibosmdicXJIhBEUdn0aDwZQ32oTyJL86DgDswhAg/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">花开蝶自来</span>
+                            </div>
+                            <div class="bd">找到了僵死进程之后，如果父进程是系统的话，怎么办？重启？重装系统？ <br></div>
+                            <span class="time">2018-12-29 14:16</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">父进程是哪个进程？</p>
+                                <p class="reply-time">2018-12-29 17:27</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKibu8C3CeYGF6JCBribiaEPia5gibaQnj9icryPVwoF6ibosmdicXJIhBEUdn0aDwZQ32oTyJL86DgDswhAg/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">花开蝶自来</span>
+                            </div>
+                            <div class="bd">我发现我写的程序一直是 S状态进程。这个是不是因为我的主线程 一直在循环等待 子线程完成的原因？<br>实际上我们看到的进程状态就是主线程的状态？子线程的状态应该要用 top -Hp &lt;pid&gt; 来显示吧 <br></div>
+                            <span class="time">2018-12-29 14:01</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">嗯嗯，是的。只要不是CPU密集型应用，很大概率看到的都是S状态</p>
+                                <p class="reply-time">2018-12-29 17:28</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/4a/fb/70f14340.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">maoxiajun</span>
+                            </div>
+                            <div class="bd">lesson8打卡 <br></div>
+                            <span class="time">2018-12-26 13:28</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍</p>
+                                <p class="reply-time">2018-12-26 22:38</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/d8/ee/6e7c2264.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Only now</span>
+                            </div>
+                            <div class="bd">Mark <br></div>
+                            <span class="time">2018-12-24 20:02</span>
+                            
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

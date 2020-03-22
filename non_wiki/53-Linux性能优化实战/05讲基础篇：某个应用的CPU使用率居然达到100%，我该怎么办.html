@@ -1,0 +1,563 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+#watermark {
+
+  position: relative;
+  overflow: hidden;
+}
+
+#watermark .x {
+  position: absolute;
+  top: 800;
+  left: 400;
+  color: #3300ff;
+  font-size: 50px;
+  pointer-events: none;
+  opacity:0.3;
+  filter:Alpha(opacity=50);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+    </style>
+
+
+    <style type="text/css">
+ html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+
+
+
+
+    </style>
+    <style type="text/css">
+        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
+
+
+
+
+
+    </style>
+
+    <style type="text/css">
+        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div data-v-87ffcada="" class="article" id="watermark">
+        <p class="x">更多课程请加QQ群170701297</p>
+        <div data-v-87ffcada="" class="main main-app">
+            <h1 data-v-87ffcada="" class="article-title pd">
+                05讲基础篇：某个应用的CPU使用率居然达到100%，我该怎么办
+            </h1>
+            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
+                                                                                        src="https://static001.geekbang.org/resource/image/69/b5/69ad9216d18b2c937a210a4fa604f4b5.jpg">
+
+
+                <div data-v-87ffcada="" id="article-content" class="">
+                    <div class="text">
+                        <p>你好，我是倪朋飞。</p><p>通过前两节对平均负载和 CPU 上下文切换的学习，我相信你对 CPU 的性能已经有了初步了解。不过我还是想问一下，在学这个专栏前，你最常用什么指标来描述系统的 CPU 性能呢？我想你的答案，可能不是平均负载，也不是 CPU 上下文切换，而是另一个更直观的指标—— CPU 使用率。</p><p>我们前面说过，CPU 使用率是单位时间内 CPU 使用情况的统计，以百分比的方式展示。那么，作为最常用也是最熟悉的 CPU 指标，你能说出 CPU 使用率到底是怎么算出来的吗？再有，诸如 top、ps 之类的性能工具展示的 %user、%nice、 %system、%iowait 、%steal 等等，你又能弄清楚它们之间的不同吗？</p><p>今天我就带你了解 CPU 使用率的内容，同时，我也会以我们最常用的反向代理服务器 Nginx 为例，带你在一步步操作和分析中深入理解。</p><h2>CPU 使用率</h2><p>在上一期我曾提到，Linux 作为一个多任务操作系统，将每个 CPU 的时间划分为很短的时间片，再通过调度器轮流分配给各个任务使用，因此造成多任务同时运行的错觉。</p><p>为了维护 CPU 时间，Linux 通过事先定义的节拍率（内核中表示为 HZ），触发时间中断，并使用全局变量 Jiffies 记录了开机以来的节拍数。每发生一次时间中断，Jiffies 的值就加 1。</p><!-- [[[read_end]]] --><p>节拍率 HZ 是内核的可配选项，可以设置为 100、250、1000 等。不同的系统可能设置不同数值，你可以通过查询 /boot/config 内核选项来查看它的配置值。比如在我的系统中，节拍率设置成了 250，也就是每秒钟触发 250 次时间中断。</p><pre><code>$ grep 'CONFIG_HZ=' /boot/config-$(uname -r)
+CONFIG_HZ=250
+</code></pre><p>同时，正因为节拍率 HZ 是内核选项，所以用户空间程序并不能直接访问。为了方便用户空间程序，内核还提供了一个用户空间节拍率 USER_HZ，它总是固定为 100，也就是1/100秒。这样，用户空间程序并不需要关心内核中 HZ 被设置成了多少，因为它看到的总是固定值 USER_HZ。</p><p>Linux 通过 /proc 虚拟文件系统，向用户空间提供了系统内部状态的信息，而 /proc/stat 提供的就是系统的 CPU 和任务统计信息。比方说，如果你只关注 CPU 的话，可以执行下面的命令：</p><pre><code># 只保留各个CPU的数据
+$ cat /proc/stat | grep ^cpu
+cpu  280580 7407 286084 172900810 83602 0 583 0 0 0
+cpu0 144745 4181 176701 86423902 52076 0 301 0 0 0
+cpu1 135834 3226 109383 86476907 31525 0 282 0 0 0
+</code></pre><p>这里的输出结果是一个表格。其中，第一列表示的是 CPU 编号，如cpu0、cpu1 ，而第一行没有编号的 cpu  ，表示的是所有 CPU 的累加。其他列则表示不同场景下 CPU 的累加节拍数，它的单位是 USER_HZ，也就是 10 ms（1/100秒），所以这其实就是不同场景下的 CPU 时间。</p><p>当然，这里每一列的顺序并不需要你背下来。你只要记住，有需要的时候，查询  man proc  就可以。不过，你要清楚man proc文档里每一列的涵义，它们都是CPU使用率相关的重要指标，你还会在很多其他的性能工具中看到它们。下面，我来依次解读一下。</p><ul>
+<li>
+<p>user（通常缩写为 us），代表用户态 CPU 时间。注意，它不包括下面的 nice 时间，但包括了 guest 时间。</p>
+</li>
+<li>
+<p>nice（通常缩写为 ni），代表低优先级用户态 CPU 时间，也就是进程的 nice 值被调整为 1-19 之间时的 CPU 时间。这里注意，nice 可取值范围是 -20 到 19，数值越大，优先级反而越低。</p>
+</li>
+<li>
+<p>system（通常缩写为sys），代表内核态 CPU 时间。</p>
+</li>
+<li>
+<p>idle（通常缩写为id），代表空闲时间。注意，它不包括等待 I/O 的时间（iowait）。</p>
+</li>
+<li>
+<p>iowait（通常缩写为 wa），代表等待 I/O 的 CPU 时间。</p>
+</li>
+<li>
+<p>irq（通常缩写为 hi），代表处理硬中断的 CPU 时间。</p>
+</li>
+<li>
+<p>softirq（通常缩写为 si），代表处理软中断的 CPU 时间。</p>
+</li>
+<li>
+<p>steal（通常缩写为 st），代表当系统运行在虚拟机中的时候，被其他虚拟机占用的 CPU 时间。</p>
+</li>
+<li>
+<p>guest（通常缩写为 guest），代表通过虚拟化运行其他操作系统的时间，也就是运行虚拟机的 CPU 时间。</p>
+</li>
+<li>
+<p>guest_nice（通常缩写为 gnice），代表以低优先级运行虚拟机的时间。</p>
+</li>
+</ul><p>而我们通常所说的 <strong>CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的百分比</strong>，用公式来表示就是：</p><p><img src="https://static001.geekbang.org/resource/image/3e/09/3edcc7f908c7c1ddba4bbcccc0277c09.png" alt=""><br>
+根据这个公式，我们就可以从 /proc/stat 中的数据，很容易地计算出 CPU 使用率。当然，也可以用每一个场景的CPU时间，除以总的CPU时间，计算出每个场景的CPU使用率。</p><p>不过先不要着急计算，你能说出，直接用 /proc/stat 的数据，算的是什么时间段的 CPU 使用率吗？</p><p>看到这里，你应该想起来了，这是开机以来的节拍数累加值，所以直接算出来的，是开机以来的平均 CPU 使用率，一般没啥参考价值。</p><p>事实上，为了计算 CPU 使用率，性能工具一般都会取间隔一段时间（比如3秒）的两次值，作差后，再计算出这段时间内的平均 CPU 使用率，即</p><p><img src="https://static001.geekbang.org/resource/image/84/5a/8408bb45922afb2db09629a9a7eb1d5a.png" alt=""></p><p>这个公式，就是我们用各种性能工具所看到的CPU 使用率的实际计算方法。</p><p>现在，我们知道了系统 CPU 使用率的计算方法，那进程的呢？跟系统的指标类似，Linux 也给每个进程提供了运行情况的统计信息，也就是 /proc/[pid]/stat。不过，这个文件包含的数据就比较丰富了，总共有 52 列的数据。</p><p>当然，不用担心，因为你并不需要掌握每一列的含义。还是那句话，需要的时候，查  man proc  就行。</p><p>回过头来看，是不是说要查看 CPU 使用率，就必须先读取 /proc/stat 和 /proc/[pid]/stat 这两个文件，然后再按照上面的公式计算出来呢？</p><p>当然不是，各种各样的性能分析工具已经帮我们计算好了。不过要注意的是，<strong>性能分析工具给出的都是间隔一段时间的平均 CPU 使用率，所以要注意间隔时间的设置</strong>，特别是用多个工具对比分析时，你一定要保证它们用的是相同的间隔时间。</p><p>比如，对比一下 top 和 ps 这两个工具报告的 CPU 使用率，默认的结果很可能不一样，因为 top 默认使用 3 秒时间间隔，而 ps 使用的却是进程的整个生命周期。</p><h2>怎么查看 CPU 使用率</h2><p>知道了 CPU 使用率的含义后，我们再来看看要怎么查看 CPU 使用率。说到查看 CPU 使用率的工具，我猜你第一反应肯定是  top 和 ps。的确，top 和 ps 是最常用的性能分析工具：</p><ul>
+<li>
+<p>top 显示了系统总体的 CPU 和内存使用情况，以及各个进程的资源使用情况。</p>
+</li>
+<li>
+<p>ps 则只显示了每个进程的资源使用情况。</p>
+</li>
+</ul><p>比如，top 的输出格式为：</p><pre><code># 默认每3秒刷新一次
+$ top
+top - 11:58:59 up 9 days, 22:47,  1 user,  load average: 0.03, 0.02, 0.00
+Tasks: 123 total,   1 running,  72 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  8169348 total,  5606884 free,   334640 used,  2227824 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  7497908 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    1 root      20   0   78088   9288   6696 S   0.0  0.1   0:16.83 systemd
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.05 kthreadd
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H
+...
+</code></pre><p>这个输出结果中，第三行 %Cpu 就是系统的 CPU 使用率，具体每一列的含义上一节都讲过，只是把CPU时间变换成了CPU使用率，我就不再重复讲了。不过需要注意，top 默认显示的是所有 CPU 的平均值，这个时候你只需要按下数字 1 ，就可以切换到每个 CPU 的使用率了。</p><p>继续往下看，空白行之后是进程的实时信息，每个进程都有一个 %CPU 列，表示进程的 CPU 使用率。它是用户态和内核态 CPU 使用率的总和，包括进程用户空间使用的 CPU、通过系统调用执行的内核空间 CPU 、以及在就绪队列等待运行的 CPU。在虚拟化环境中，它还包括了运行虚拟机占用的 CPU。</p><p>所以，到这里我们可以发现， top 并没有细分进程的用户态CPU和内核态 CPU。那要怎么查看每个进程的详细情况呢？你应该还记得上一节用到的  pidstat  吧，它正是一个专门分析每个进程 CPU 使用情况的工具。</p><p>比如，下面的pidstat命令，就间隔1秒展示了进程的5组CPU使用率，包括：</p><ul>
+<li>
+<p>用户态CPU使用率 （%usr）；</p>
+</li>
+<li>
+<p>内核态CPU使用率（%system）；</p>
+</li>
+<li>
+<p>运行虚拟机CPU使用率（%guest）；</p>
+</li>
+<li>
+<p>等待 CPU使用率（%wait）；</p>
+</li>
+<li>
+<p>以及总的CPU使用率（%CPU）。</p>
+</li>
+</ul><p>最后的 Average 部分，还计算了 5 组数据的平均值。</p><pre><code># 每隔1秒输出一组数据，共输出5组
+$ pidstat 1 5
+15:56:02      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+15:56:03        0     15006    0.00    0.99    0.00    0.00    0.99     1  dockerd
+
+...
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0     15006    0.00    0.99    0.00    0.00    0.99     -  dockerd
+</code></pre><h2>CPU 使用率过高怎么办？</h2><p>通过 top、ps、pidstat 等工具，你能够轻松找到 CPU 使用率较高（比如 100% ）的进程。接下来，你可能又想知道，占用 CPU 的到底是代码里的哪个函数呢？找到它，你才能更高效、更针对性地进行优化。</p><p>我猜你第一个想到的，应该是 GDB（The GNU Project Debugger）， 这个功能强大的程序调试利器。的确，GDB 在调试程序错误方面很强大。但是，我又要来“挑刺”了。请你记住，GDB 并不适合在性能分析的早期应用。</p><p>为什么呢？因为 GDB 调试程序的过程会中断程序运行，这在线上环境往往是不允许的。所以，GDB 只适合用在性能分析的后期，当你找到了出问题的大致函数后，线下再借助它来进一步调试函数内部的问题。</p><p>那么哪种工具适合在第一时间分析进程的 CPU 问题呢？我的推荐是 perf。perf 是 Linux 2.6.31 以后内置的性能分析工具。它以性能事件采样为基础，不仅可以分析系统的各种事件和内核性能，还可以用来分析指定应用程序的性能问题。</p><p>使用 perf 分析 CPU 性能问题，我来说两种最常见、也是我最喜欢的用法。</p><p>第一种常见用法是 perf top，类似于 top，它能够实时显示占用 CPU 时钟最多的函数或者指令，因此可以用来查找热点函数，使用界面如下所示：</p><pre><code>$ perf top
+Samples: 833  of event 'cpu-clock', Event count (approx.): 97742399
+Overhead  Shared Object       Symbol
+   7.28%  perf                [.] 0x00000000001f78a4
+   4.72%  [kernel]            [k] vsnprintf
+   4.32%  [kernel]            [k] module_get_kallsym
+   3.65%  [kernel]            [k] _raw_spin_unlock_irqrestore
+...
+</code></pre><p>输出结果中，第一行包含三个数据，分别是采样数（Samples）、事件类型（event）和事件总数量（Event count）。比如这个例子中，perf 总共采集了 833 个 CPU 时钟事件，而总事件数则为 97742399。</p><p>另外，<strong>采样数需要我们特别注意</strong>。如果采样数过少（比如只有十几个），那下面的排序和百分比就没什么实际参考价值了。</p><p>再往下看是一个表格式样的数据，每一行包含四列，分别是：</p><ul>
+<li>
+<p>第一列 Overhead ，是该符号的性能事件在所有采样中的比例，用百分比来表示。</p>
+</li>
+<li>
+<p>第二列 Shared ，是该函数或指令所在的动态共享对象（Dynamic Shared Object），如内核、进程名、动态链接库名、内核模块名等。</p>
+</li>
+<li>
+<p>第三列 Object ，是动态共享对象的类型。比如 [.] 表示用户空间的可执行程序、或者动态链接库，而 [k] 则表示内核空间。</p>
+</li>
+<li>
+<p>最后一列 Symbol 是符号名，也就是函数名。当函数名未知时，用十六进制的地址来表示。</p>
+</li>
+</ul><p>还是以上面的输出为例，我们可以看到，占用 CPU 时钟最多的是 perf 工具自身，不过它的比例也只有 7.28%，说明系统并没有 CPU 性能问题。 perf top的使用你应该很清楚了吧。</p><p>接着再来看第二种常见用法，也就是 perf record 和 perf report。 perf top 虽然实时展示了系统的性能信息，但它的缺点是并不保存数据，也就无法用于离线或者后续的分析。而 perf record 则提供了保存数据的功能，保存后的数据，需要你用 perf report 解析展示。</p><pre><code>$ perf record # 按Ctrl+C终止采样
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.452 MB perf.data (6093 samples) ]
+
+$ perf report # 展示类似于perf top的报告
+</code></pre><p>在实际使用中，我们还经常为 perf top 和 perf record 加上 -g 参数，开启调用关系的采样，方便我们根据调用链来分析性能问题。</p><h2>案例</h2><p>下面我们就以 Nginx + PHP 的 Web 服务为例，来看看当你发现 CPU 使用率过高的问题后，要怎么使用 top 等工具找出异常的进程，又要怎么利用 perf 找出引发性能问题的函数。</p><h3>你的准备</h3><p>以下案例基于 Ubuntu 18.04，同样适用于其他的 Linux 系统。我使用的案例环境如下所示：</p><ul>
+<li>
+<p>机器配置：2 CPU，8GB 内存</p>
+</li>
+<li>
+<p>预先安装 docker、sysstat、perf、ab 等工具，如 apt install <a href="http://docker.io">docker.io</a> sysstat linux-tools-common apache2-utils</p>
+</li>
+</ul><p>我先简单介绍一下这次新使用的工具 ab。ab（apache bench）是一个常用的 HTTP 服务性能测试工具，这里用来模拟 Ngnix 的客户端。由于 Nginx 和 PHP 的配置比较麻烦，我把它们打包成了两个 <a href="https://github.com/feiskyer/linux-perf-examples/tree/master/nginx-high-cpu">Docker 镜像</a>，这样只需要运行两个容器，就可以得到模拟环境。</p><p>注意，这个案例要用到两台虚拟机，如下图所示：</p><p><img src="https://static001.geekbang.org/resource/image/90/3d/90c30b4f555218f77241bfe2ac27723d.png" alt=""></p><p>你可以看到，其中一台用作 Web 服务器，来模拟性能问题；另一台用作 Web 服务器的客户端，来给 Web 服务增加压力请求。使用两台虚拟机是为了相互隔离，避免“交叉感染”。</p><p>接下来，我们打开两个终端，分别 SSH 登录到两台机器上，并安装上面提到的工具。</p><p>还是同样的“配方”。下面的所有命令，都默认假设以 root 用户运行，如果你是普通用户身份登陆系统，一定要先运行 sudo su root 命令切换到 root 用户。到这里，准备工作就完成了。</p><p>不过，操作之前，我还想再说一点。这次案例中 PHP 应用的核心逻辑比较简单，大部分人一眼就可以看出问题，但你要知道，实际生产环境中的源码就复杂多了。</p><p>所以，我希望你在按照步骤操作之前，先不要查看源码（避免先入为主），而是<strong>把它当成一个黑盒来分析。</strong>这样，你可以更好地理解整个解决思路，怎么从系统的资源使用问题出发，分析出瓶颈所在的应用、以及瓶颈在应用中的大概位置。</p><h3>操作和分析</h3><p>接下来，我们正式进入操作环节。</p><p>首先，在第一个终端执行下面的命令来运行 Nginx 和 PHP 应用：</p><pre><code>$ docker run --name nginx -p 10000:80 -itd feisky/nginx
+$ docker run --name phpfpm -itd --network container:nginx feisky/php-fpm
+</code></pre><p>然后，在第二个终端使用 curl 访问 http://[VM1的IP]:10000，确认 Nginx 已正常启动。你应该可以看到 It works! 的响应。</p><pre><code># 192.168.0.10是第一台虚拟机的IP地址
+$ curl http://192.168.0.10:10000/
+It works!
+</code></pre><p>接着，我们来测试一下这个 Nginx 服务的性能。在第二个终端运行下面的 ab 命令：</p><pre><code># 并发10个请求测试Nginx性能，总共测试100个请求
+$ ab -c 10 -n 100 http://192.168.0.10:10000/
+This is ApacheBench, Version 2.3 &lt;$Revision: 1706008 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, 
+...
+Requests per second:    11.63 [#/sec] (mean)
+Time per request:       859.942 [ms] (mean)
+...
+</code></pre><p>从ab的输出结果我们可以看到，Nginx能承受的每秒平均请求数只有 11.63。你一定在吐槽，这也太差了吧。那到底是哪里出了问题呢？我们用 top 和 pidstat 再来观察下。</p><p>这次，我们在第二个终端，将测试的请求总数增加到 10000。这样当你在第一个终端使用性能分析工具时， Nginx 的压力还是继续。</p><p>继续在第二个终端，运行 ab 命令：</p><pre><code>$ ab -c 10 -n 10000 http://10.240.0.5:10000/
+</code></pre><p>接着，回到第一个终端运行 top 命令，并按下数字 1 ，切换到每个 CPU 的使用率：</p><pre><code>$ top
+...
+%Cpu0  : 98.7 us,  1.3 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  : 99.3 us,  0.7 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+...
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+21514 daemon    20   0  336696  16384   8712 R  41.9  0.2   0:06.00 php-fpm
+21513 daemon    20   0  336696  13244   5572 R  40.2  0.2   0:06.08 php-fpm
+21515 daemon    20   0  336696  16384   8712 R  40.2  0.2   0:05.67 php-fpm
+21512 daemon    20   0  336696  13244   5572 R  39.9  0.2   0:05.87 php-fpm
+21516 daemon    20   0  336696  16384   8712 R  35.9  0.2   0:05.61 php-fpm
+</code></pre><p>这里可以看到，系统中有几个 php-fpm 进程的 CPU 使用率加起来接近 200%；而每个 CPU 的用户使用率（us）也已经超过了 98%，接近饱和。这样，我们就可以确认，正是用户空间的 php-fpm 进程，导致CPU 使用率骤升。</p><p>那再往下走，怎么知道是 php-fpm 的哪个函数导致了 CPU 使用率升高呢？我们来用 perf 分析一下。在第一个终端运行下面的perf命令：</p><pre><code># -g开启调用关系分析，-p指定php-fpm的进程号21515
+$ perf top -g -p 21515
+</code></pre><p>按方向键切换到 php-fpm，再按下回车键展开 php-fpm 的调用关系，你会发现，调用关系最终到了 sqrt 和 add_function。看来，我们需要从这两个函数入手了。</p><p><img src="https://static001.geekbang.org/resource/image/6e/10/6e58d2f7b1ace94501b1833bab16f210.png" alt=""></p><p>我们拷贝出 <a href="https://github.com/feiskyer/linux-perf-examples/blob/master/nginx-high-cpu/app/index.php">Nginx 应用的源码</a>，看看是不是调用了这两个函数：</p><pre><code># 从容器phpfpm中将PHP源码拷贝出来
+$ docker cp phpfpm:/app .
+
+# 使用grep查找函数调用
+$ grep sqrt -r app/ #找到了sqrt调用
+app/index.php:  $x += sqrt($x);
+$ grep add_function -r app/ #没找到add_function调用，这其实是PHP内置函数
+</code></pre><p>OK，原来只有 sqrt 函数在 app/index.php 文件中调用了。那最后一步，我们就该看看这个文件的源码了：</p><pre><code>$ cat app/index.php
+&lt;?php
+// test only.
+$x = 0.0001;
+for ($i = 0; $i &lt;= 1000000; $i++) {
+  $x += sqrt($x);
+}
+
+echo &quot;It works!&quot;
+</code></pre><p>呀，有没有发现问题在哪里呢？我想你要笑话我了，居然犯了一个这么傻的错误，测试代码没删就直接发布应用了。为了方便你验证优化后的效果，我把修复后的应用也打包成了一个Docker镜像，你可以在第一个终端中执行下面的命令来运行它：</p><pre><code># 停止原来的应用
+$ docker rm -f nginx phpfpm
+# 运行优化后的应用
+$ docker run --name nginx -p 10000:80 -itd feisky/nginx:cpu-fix
+$ docker run --name phpfpm -itd --network container:nginx feisky/php-fpm:cpu-fix
+</code></pre><p>接着，到第二个终端来验证一下修复后的效果。首先Ctrl+C停止之前的ab命令后，再运行下面的命令：</p><pre><code>$ ab -c 10 -n 10000 http://10.240.0.5:10000/
+...
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      1720000 bytes
+HTML transferred:       90000 bytes
+Requests per second:    2237.04 [#/sec] (mean)
+Time per request:       4.470 [ms] (mean)
+Time per request:       0.447 [ms] (mean, across all concurrent requests)
+Transfer rate:          375.75 [Kbytes/sec] received
+...
+</code></pre><p>从这里你可以发现，现在每秒的平均请求数，已经从原来的11变成了2237。</p><p>你看，就是这么很傻的一个小问题，却会极大的影响性能，并且查找起来也并不容易吧。当然，找到问题后，解决方法就简单多了，删除测试代码就可以了。</p><h2>小结</h2><p>CPU 使用率是最直观和最常用的系统性能指标，更是我们在排查性能问题时，通常会关注的第一个指标。所以我们更要熟悉它的含义，尤其要弄清楚用户（%user）、Nice（%nice）、系统（%system） 、等待 I/O（%iowait） 、中断（%irq）以及软中断（%softirq）这几种不同 CPU 的使用率。比如说：</p><ul>
+<li>
+<p>用户 CPU 和 Nice CPU 高，说明用户态进程占用了较多的 CPU，所以应该着重排查进程的性能问题。</p>
+</li>
+<li>
+<p>系统 CPU 高，说明内核态占用了较多的 CPU，所以应该着重排查内核线程或者系统调用的性能问题。</p>
+</li>
+<li>
+<p>I/O 等待 CPU 高，说明等待 I/O 的时间比较长，所以应该着重排查系统存储是不是出现了 I/O 问题。</p>
+</li>
+<li>
+<p>软中断和硬中断高，说明软中断或硬中断的处理程序占用了较多的 CPU，所以应该着重排查内核中的中断服务程序。</p>
+</li>
+</ul><p>碰到 CPU 使用率升高的问题，你可以借助 top、pidstat 等工具，确认引发 CPU 性能问题的来源；再使用 perf 等工具，排查出引起性能问题的具体函数。</p><h2>思考</h2><p>最后，我想邀请你一起来聊聊，你所理解的 CPU 使用率，以及在发现 CPU 使用率升高时，你又是怎么分析的呢？你可以结合今天的内容，和你自己的操作记录，来总结思路。</p><p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
+                    data-v-87ffcada="">精选留言</span></h2>
+                <ul data-v-87ffcada="">
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/e7/47/d0715205.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">D白菜</span>
+                            </div>
+                            <div class="bd">Day 5，干活满满啊，谢谢老师啊。<br>今天总结如下：<br>1、Linux并发(任务并行)的实质：Linux 作为一个多任务操作系统，将每个 CPU 的时间划分为很短的时间片，再通过调度器轮流分配给各个任务使用<br>2、cpu的维护，通过实先定义的节拍率(内核用赫兹HZ标示)触发时间判断(全局变量jiffies记录)。<br>3、节拍率是内核态运行，属于内核空间节拍率；用户空间节拍率( USER_HZ)是一个固定设置<br>[root@dbayang ~]# grep &#39;CONFIG_HZ=&#39; &#47;boot&#47;config-$(uname -r)<br>CONFIG_HZ=1000<br>4、&#47;proc&#47;stat 提供的就是系统的 CPU 和任务统计信息； &#47;proc&#47;[pid]&#47;stat展示进程的CPU和任务统计信息<br>5、cpu的使用率={1-(idle_time&#47;total_cpu_time)}&#47;sample_time<br>6、性能分析工具给出的都是间隔一段时间的平均 CPU 使用率，所以要注意间隔时间的设置。top默认为3s，ps使用的是进程运行时间。<br>7、top、vmstat、mpstat等命令种关于cpu性能相关指标的含义<br>8、pidstat命令含义<br>9、perf<br>       以前用到的一堆[n]trace分析工具，perf的直观易用，这是今天最大的收获，作为dba对数据库的分析也很有的，么么哒。<br>perf top、perf record、perf report<br>对进程进行跟踪分析其调用perf top -g -p &lt;mysqlpid&gt;<br>10、今天用到测试工具：ab <br></div>
+                            <span class="time">2018-11-30 08:37</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍 课代表的总结很全面</p>
+                                <p class="reply-time">2018-11-30 22:43</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">每天晒白牙</span>
+                            </div>
+                            <div class="bd">【D5补卡】<br>我的系统是centos7，上次实战用 perf top -g -p pid没有看到函数名称，只能看到一堆十六进制的东西，然后老师给了解决方法，我转述下：<br>分析：当没有看到函数名称，只看到了十六进制符号，下面有Failed to open &#47;usr&#47;lib&#47;x86_64-linux-gnu&#47;libxml2.so.2.9.4, continuing without symbols  这说明perf无法找到待分析进程所依赖的库。这里只显示了一个，但其实依赖的库还有很多。这个问题其实是在分析Docker容器应用时经常会碰到的一个问题，因为容器应用所依赖的库都在镜像里面。<br><br>老师给了两个解决思路：<br>（1）在容器外面构建相同路径的依赖库。这种方法不推荐，一是因为找出这些依赖比较麻烦，更重要的是构建这些路径会污染虚拟机的环境。<br>（2）在容器外面把分析纪录保存下来，到容器里面再去查看结果，这样库和符号的路径就都是对的了。<br><br>操作：<br>（1）在Centos系统上运行 perf record -g -p &lt;pid&gt;，执行一会儿（比如15秒）按ctrl+c停止<br>（2）把生成的 perf.data（这个文件生成在执行命令的当前目录下，当然也可以通过查找它的路径 find | grep perf.data或 find &#47; -name perf.data）文件拷贝到容器里面分析:<br>docker cp perf.data phpfpm:&#47;tmp<br>docker exec -i -t phpfpm bash<br>$ cd &#47;tmp&#47;<br>$ apt-get update &amp;&amp; apt-get install -y linux-perf linux-tools procps<br>$ perf_4.9 report<br><br>注意：最后运行的工具名字是容器内部安装的版本 perf_4.9，而不是 perf 命令，这是因为 perf 会去跟内核的版本进行匹配，但镜像里面安装的perf版本有可能跟虚拟机的内核版本不一致。<br>注意：上面的问题只是在centos系统中有问题，ubuntu上没有这个问题 <br></div>
+                            <span class="time">2018-12-04 08:25</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/52/fe/df362d52.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">不纯有机物</span>
+                            </div>
+                            <div class="bd">老师，我的也是无法定位到具体的函数，都是16进制显示的 <br></div>
+                            <span class="time">2018-11-30 11:44</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/24/d2/40353046.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">zeroxus</span>
+                            </div>
+                            <div class="bd">【D5】打卡<br>干货满满<br>使用Markdown整理成了笔记， 配合目录查回顾，会方便很多<br>https:&#47;&#47;www.zybuluo.com&#47;Gugoole&#47;note&#47;1354842 <br></div>
+                            <span class="time">2018-11-30 15:07</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">每天晒白牙</span>
+                            </div>
+                            <div class="bd">【day5】打卡<br>早晨六点半起来跟着专栏在虚拟机上搞，这个案例能完整跟下来也是不容易，还需要docker，个人认为，这种实战的课，一定要上手，光看是不行的。愿自己能坚持下去。 <br></div>
+                            <span class="time">2018-11-30 07:20</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/a7/6d/19bff1f9.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">ichen</span>
+                            </div>
+                            <div class="bd">内核如果没有perf package的话，可以从git下载源码安装<br>https:&#47;&#47;askubuntu.com&#47;questions&#47;50145&#47;how-to-install-perf-monitoring-tool&#47;306683<br><br>git clone https:&#47;&#47;git.kernel.org&#47;pub&#47;scm&#47;linux&#47;kernel&#47;git&#47;torvalds&#47;linux.git （大约2.5G 左右）<br>cd linux&#47;tools&#47;perf<br>make （可能缺flex，bison等，需自行安装）<br>cp perf &#47;usr&#47;bin<br>perf --version  <br></div>
+                            <span class="time">2018-12-01 05:21</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">感谢分享</p>
+                                <p class="reply-time">2018-12-03 09:04</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/b0/38/076fa6c1.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">风清扬笑</span>
+                            </div>
+                            <div class="bd">cpu使用率，就是cpu被使用的比例，也就是空闲之外的使用比例。<br><br>对我来说，发现cpu使用率高后，先跟老师一样用perf来抓取cpu消耗栈，很容易发现瓶颈。<br><br>另外，我一般用mpstat -P ALL 来看各个cpu核心的使用率情况，因为top之类的看的是系统总使用率，不一定能发现问题，特别是多进程或者多线程应用 <br></div>
+                            <span class="time">2018-11-30 01:19</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍</p>
+                                <p class="reply-time">2018-11-30 08:22</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/50/89/a6259c76.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">北斗狼</span>
+                            </div>
+                            <div class="bd">老师，问个问题，我按您的文档，我使用perf top -g -p 进程ID 怎么无法查看php-fpm的调用关系，出不来哪个函数较用较高的CPU？ 以下是我的显示结果，您帮我看看为什么显示的是0x7fd...<br>1、开始压力测试<br>ab -c 10 -n 10000 http:&#47;&#47;bjdsj-test-11-58:10001<br><br>2、查看调用关系 perf top -g -p 39826<br>Samples: 80K of event &#39;cycles&#39;, Event count (approx.): 29700884257                                                       <br>+   93.02%     0.69%  php-fpm             [.] 0x00000000008c296e<br>   0x7fd84a21c96e                                                                                                          <br>   0x7fd84a21d323                                                                                                          <br>   0x7fd84a185f94                                                                                                          <br>   0x7fd84a0d66fc                                                                                                          <br>   0x7fd84a325642                                                                                                          <br>   0x7fd842a702e1                                                                                                          <br>   0x6cb6258d4c544155 <br>+   23.35%     0.38%  php-fpm             [.] 0x00000000008c4a7c<br>+    5.60%     5.60%  libm-2.24.so        [.] 0x000000000002127e<br>+    4.22%     0.00%  php-fpm             [.] 0x000000000098dd97<br>+    2.54%     2.54%  php-fpm             [.] 0x000000000094ede0<br>+    1.96%     1.96%  php-fpm             [.] 0x0000000000681b9d<br>+    1.58%     1.58%  php-fpm             [.] 0x0000000000815e70<br>+    1.52%     1.51%  php-fpm             [.] 0x000000000094eddc<br>+    1.48%     1.48%  php-fpm             [.] 0x00000000008cd729<br>+    1.32%     1.32%  php-fpm             [.] 0x00000000008c4ae5<br>+    1.21%     1.21%  php-fpm             [.] 0x000000000098dc03<br>+    1.04%     1.04%  php-fpm             [.] 0x0000000000681b99<br>Failed to open &#47;opt&#47;bitnami&#47;php&#47;lib&#47;php&#47;extensions&#47;opcache.so, continuing without symbols<br> <br></div>
+                            <span class="time">2018-11-30 14:28</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/b3/46/ec914238.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">espzest</span>
+                            </div>
+                            <div class="bd">iowait所耗费的时间，应该不算到cpu使用率里面吧？  如果是这样的话，上面计算cpu使用率 除去idle以外的时间都算，是不是有问题？ <br></div>
+                            <span class="time">2018-11-30 08:56</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">C家族的铁粉儿</span>
+                            </div>
+                            <div class="bd">『D6打卡』<br>还没有操作实验，看了内容，先占个位置。 <br></div>
+                            <span class="time">2018-11-30 08:44</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">我来也</span>
+                            </div>
+                            <div class="bd">[D5打卡]<br>以前只会用top看CPU使用率，发现占用高的进程了再针对性的分析，比如c程序就用prof，局限性很高，<br>今天了解到可以用perf，直接看进程内函数调用栈和各函数的cpu使用率。<br>以前看到%sys过高，系统中断数过高的判断方法更搞笑，挨个杀可疑进程。<br>现在直接用pidstat就是了。<br>——————<br>最近在某云服务器上就遇到了诡异的事情，cpu空闲75%，%iowait不到1，系统中断数一直比较稳定，vmstat中的r正在运行和等待队列也还正常，但是系统每隔1小时23分，负载load1：就会从平常的0.2升高到8甚至是12的情况。好在每次持续时间较短，约2分钟，load5的值还可以接受。<br>争取最近能把原因查出来，早点把学费赚回来，哈哈😄<br>—————<br>虽然之前学k8s专栏时ubuntu 18.04 和docker都配好了，但是最近手上事情有点多，还是先解决手上的事情吧。老师见谅哈。 <br></div>
+                            <span class="time">2018-11-30 13:27</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">很多线上问题其实跟这个类似，等到你登陆服务器的时候性能问题已经结束了，这样在线分析就看不出哪里导致的问题，只有从平均负载这种反应历史的指标看出一些问题。<br><br>这种情景下，就需要监控系统的配合，记录下历史的系统和进程的性能指标。并且，这个case只有load1高，所以监控的间隔时间也需要比较精细。</p>
+                                <p class="reply-time">2018-11-30 17:46</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/9c/17/6ffd80f6.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">李嘉鹏</span>
+                            </div>
+                            <div class="bd">我安装的ubuntu 18.04 live server版本，使用如下指令安装的perf：<br>apt install linux-tools-generic <br></div>
+                            <span class="time">2018-12-15 12:29</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍 谢谢分享安装方法</p>
+                                <p class="reply-time">2018-12-17 07:51</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/30/f1/bf7fd8d2.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">樊海涛</span>
+                            </div>
+                            <div class="bd">执行perf top -g -p  （php-fpm进程号），发现不了sqrt函数<br> <br></div>
+                            <span class="time">2018-12-02 16:18</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">只看到地址而不是函数名是由于应用程序运行在容器中，它的依赖也都在容器内部，故而perf无法找到PHP符号表。一个简单的解决方法是使用perf record生成perf.data拷贝到容器内部 perf report。</p>
+                                <p class="reply-time">2018-12-03 08:33</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/30/f1/bf7fd8d2.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">樊海涛</span>
+                            </div>
+                            <div class="bd">[Day6打卡]<br>文章前面（查询 man proc 就可以），木有这么个命令吧？<br> <br></div>
+                            <span class="time">2018-12-02 12:55</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">man是Linux最基本的命令</p>
+                                <p class="reply-time">2018-12-03 08:36</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/0c/ca/6173350b.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">郭江伟</span>
+                            </div>
+                            <div class="bd">用sysbench测试cpu性能，然后利用perf 找到具体哪个进程的哪个函数在消耗CPU<br>gjw@gjw:&#47;etc&#47;apt$ sysbench --threads=1 --time=600 cpu run<br>sysbench 1.1.0 (using bundled LuaJIT 2.1.0-beta3)<br>Running the test with following options:<br>Number of threads: 1<br>Initializing random number generator from current time<br>Prime numbers limit: 10000<br>Initializing worker threads...<br>Threads started!<br>查看sysbench进程<br>ps -egjw@gjw:~$ ps -ef | grep sysbench<br>gjw      31921  1294 77 11:20 pts&#47;0    00:04:39 sysbench --threads=1 --time=600 cpu run<br>perf top获取进程信息：<br>sudo perf top -g -p 31921<br>Samples: 824  of event &#39;cycles:ppp&#39;, Event count (approx.): 618842235                                                                                                         <br>  Children      Self  Shared Object  Symbol                                                                                                                                   <br>+  100.00%   100.00%  sysbench       [.] cpu_execute_event<br>然后在sysbench源码中查看cpu_execute_event 函数：<br>gjw@gjw:~&#47;soft&#47;sysbench-master$ grep -r cpu_execute_event<br>Binary file src&#47;tests&#47;cpu&#47;libsbcpu.a matches<br>Binary file src&#47;tests&#47;cpu&#47;libsbcpu_a-sb_cpu.o matches<br>src&#47;tests&#47;cpu&#47;sb_cpu.c:static int cpu_execute_event(sb_event_t *, int);<br>src&#47;tests&#47;cpu&#47;sb_cpu.c:    .execute_event = cpu_execute_event,<br>src&#47;tests&#47;cpu&#47;sb_cpu.c:int cpu_execute_event(sb_event_t *r, int thread_id)<br>Binary file src&#47;sysbench matches<br>gjw@gjw:~&#47;soft&#47;sysbench-master$ vi src&#47;tests&#47;cpu&#47;sb_cpu.c <br> int cpu_execute_event(sb_event_t *r, int thread_id)<br>{<br>  unsigned long long c;<br>  unsigned long long l;<br>  double t;<br>  unsigned long long n=0;<br>  (void)thread_id; &#47;* unused *&#47;<br>  (void)r; &#47;* unused *&#47;<br>  &#47;* So far we&#39;re using very simple test prime number tests in 64bit *&#47;<br>  for(c=3; c &lt; max_prime; c++)<br>  {<br>    t = sqrt((double)c);<br>    for(l = 2; l &lt;= t; l++)<br>      if (c % l == 0)<br>        break;<br>    if (l &gt; t )<br>      n++;<br>  }<br>  return 0;<br>可以看到该函数在计算素数，由此完成了一个cpu使用率很高的案例分析 <br></div>
+                            <span class="time">2018-12-02 11:34</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">很详细的分析步骤，感谢分享👍</p>
+                                <p class="reply-time">2018-12-03 08:39</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">dexter</span>
+                            </div>
+                            <div class="bd">每天上班地铁听一遍，下班地铁听一遍，晚上做实验 <br></div>
+                            <span class="time">2018-12-01 14:08</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍</p>
+                                <p class="reply-time">2018-12-03 18:22</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLkhgYnYZBdhdwKnXQibey04cy9N9ria3DadH7iagoKukaWK1FJwjfCoh0He4p7b2icSYVzHH71l8ZXiaQ/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">猪哥哥</span>
+                            </div>
+                            <div class="bd">老师你好 我写了一个python死循环 代码如下 <br>def wangfang():<br>  while True:<br>    i =1<br>wangfang()<br>使用perf top命令 无法抓取到该循环的函数, 老师能解释一下吗 <br></div>
+                            <span class="time">2019-01-07 17:05</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/15/a4/3744053e.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Ivan</span>
+                            </div>
+                            <div class="bd">请问iowait time算在idle time里面吗？cpu的利用率计算公式中空闲时间指的是idle time，还是idle+iowait time。 <br></div>
+                            <span class="time">2018-12-03 15:49</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">iowait不算在idle里面</p>
+                                <p class="reply-time">2018-12-03 17:38</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83ernR4NKI5tejJAV3HMTF3gszBBUAjkjLO2QYic2gx5dMGelFv4LWibib7CUGexmMcMp5HiaaibmOH3dyHg/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">渡渡鸟_linux</span>
+                            </div>
+                            <div class="bd">使用perf 只能分析到16进制的地址，无法显示函数名称 <br></div>
+                            <span class="time">2018-12-02 16:37</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">只看到地址而不是函数名是由于应用程序运行在容器中，它的依赖也都在容器内部，故而perf无法找到PHP符号表。</p>
+                                <p class="reply-time">2018-12-03 08:28</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/b1/4d/10c75b34.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Johnson</span>
+                            </div>
+                            <div class="bd">碰到一个cpu利用率很低但是load非常高的问题，分析是D状态的进程很多，大多是ps命令，有没有杀掉这些命令的办法？不能重启的 <br></div>
+                            <span class="time">2018-11-30 19:02</span>
+                            
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

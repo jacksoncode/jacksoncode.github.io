@@ -1,0 +1,415 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+#watermark {
+
+  position: relative;
+  overflow: hidden;
+}
+
+#watermark .x {
+  position: absolute;
+  top: 800;
+  left: 400;
+  color: #3300ff;
+  font-size: 50px;
+  pointer-events: none;
+  opacity:0.5;
+  filter:Alpha(opacity=50);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+    </style>
+
+
+    <style type="text/css">
+ html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+
+
+
+
+    </style>
+    <style type="text/css">
+        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
+
+
+
+
+
+    </style>
+
+    <style type="text/css">
+        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div data-v-87ffcada="" class="article" id="watermark">
+        <p class="x">所有最新极客时间课程请加QQ1046877154</p>
+        <div data-v-87ffcada="" class="main main-app">
+            <h1 data-v-87ffcada="" class="article-title pd">
+                11讲三阶段进化：调试，编写与运行代码
+            </h1>
+            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
+                                                                                        src="https://static001.geekbang.org/resource/image/0a/c6/0af6b43239d86d9ba1bb7dadc4a534c6.jpg">
+
+
+                <div data-v-87ffcada="" id="article-content" class="">
+                    <div class="text">
+                        <p>刚开始学编程写代码，总会碰到一些困惑。比如，曾经就有刚入行的同学问我：“写程序是想到哪写到哪，边写边改边验证好，还是先整体梳理出思路，有步骤、有计划地分析后，再写更好？”</p>
+<p>老实说，我刚入行时走的是前一条路，因为没有什么人或方法论来指导我，都是自己瞎摸索。一路走来十多年后，再回溯编程之路的经历，总结编程的进化过程，大概会经历下面三个阶段。</p>
+<h2>阶段一：调试代码 Debugging</h2>
+<p>编程，是把用自然语言描述的现实问题，转变为用程序语言来描述并解决问题的过程；翻译，也是把一种语言的文字转变为另一种语言的文字，所以我想编程和翻译应该是有相通之处的。</p>
+<p>好些年前，我曾偶然读到一篇关于性能的英文文章，读完不禁拍案叫绝，就忍不住想翻译过来。那是我第一次尝试翻译长篇英文，老实说翻得很痛苦，断断续续花了好几周的业余时间。那时的我，之于翻译，就是一个刚入门的初学者。</p>
+<p>初次翻译，免不了遇到不少不熟悉的单词或词组，一路磕磕碰碰地查词典或 Google。一些似乎能理解含义的句子，却感觉无法很好地用中文来表达，如果直白地译出来感觉又不像正常的中文句子表达方式。</p>
+<p>如是种种的磕碰之处，难道不像你刚学编程时候的情形吗？刚开始写代码，对语法掌握得不熟，对各种库和 API 不知道，不了解，也不熟悉。一路写代码，翻翻书，查查 Google，搜搜 API 文档，好不容易写完一段代码，却又不知道能否执行，执行能否正确等等。</p><!-- [[[read_end]]] -->
+<p>小心翼翼地点击 Debug 按钮开始了单步调试之旅，一步步验证所有的变量或执行结果是否符合预期。如果出错了，是在哪一步开始或哪个变量出错的？一段不到一屏的代码，足足单步走了半小时，反复改了好几次，终于顺利执行完毕，按预期输出了执行结果。</p>
+<p>如果不是自己写全新的代码，而是一来就接手了别人的代码，没有文档，前辈稍微给你介绍两句，你就很快又开始了 Debug 的单步调试之旅，一步步搞清代码运行的所有步骤和内部逻辑。根据你接手代码的规模，这个阶段可能持续数天到数周不等。</p>
+<p>这就是我感觉可以划为编程第一阶段的 “调试代码 Debugging” 时期。这个时期或长或短，也许你曾经为各种编程工具或 IDE 提供的高级 Debug 功能激动不已，但如果你不逐渐降低使用Debug 功能的频率，那么你可能很难走入第二阶段。</p>
+<h2>阶段二：编写代码 Coding</h2>
+<p>翻译讲究 “信、达、雅”，编码亦如此。</p>
+<p>那么何谓 “信、达、雅” ？它是由我国清末新兴启蒙思想家严复提出的，他在《天演论》中的 “译例言” 讲到：</p>
+<blockquote>
+<p>译事三难：信、达、雅。求其信已大难矣，顾信矣，不达，虽译犹不译也，则达尚焉。</p>
+</blockquote>
+<p><strong>信，指不违背原文，不偏离原文，不篡改，不增不减，要求准确可信地表达原文描述的事实</strong>。</p>
+<p>这条应用在编程上就是：程序员需要深刻地理解用户的原始需求。虽然需求很多时候来自于需求（产品）文档，但需求（产品）文档上写的并不一定真正体现了用户的原始需求。关于用户需求的“提炼”，早已有流传甚广的“福特之问”。</p>
+<blockquote>
+<p>福特：您需要一个什么样的更好的交通工具？  <br />
+用户：我要一匹更快的马。</p>
+</blockquote>
+<p>用户说需要一匹更快的马，你就跑去 “养” 只更壮、更快的马；后来用户需求又变了，说要让马能在天上飞，你可能就傻眼了，只能拒绝用户说：“这需求不合理，技术上实现不了。”可见，用户所说的也不可 “信” 矣。只有真正挖掘并理解了用户的原始需求，最后通过编程实现的程序系统才是符合 “信” 的标准的。</p>
+<p>但在这一条的修行上几乎没有止境，因为要做到 “信” 的标准，编写行业软件程序的程序员需要在一个行业长期沉淀，才能慢慢搞明白用户的真实需求。</p>
+<p><strong>达，指不拘泥于原文的形式，表达通顺明白，让读者对所述内容明达</strong>。</p>
+<p>这条应用在编程上就是在说程序的可读性、可理解性和可维护性。</p>
+<p>按严复的标准，只满足 “信” 一条的翻译，还不如不译，至少还需要满足 “达” 这条才算尚可。</p>
+<p>同样，只满足 “信” 这一条的程序虽然能准确地满足用户的需要，但没有 “达” 则很难维护下去。因为程序固然是写给机器去执行的，但其实也是给人看的。</p>
+<p>所有关于代码规范和风格的编程约束都是在约定 “达” 的标准。个人可以通过编程实践用时间来积累经验，逐渐达到 “达” 的标准。但一个团队中程序员们的代码风格差异如何解决？这就像如果一本书由一群人来翻译，你会发现每章的文字风格都有差异，所以我是不太喜欢读由一群人一起翻译的书。</p>
+<p>一些流行建议的解决方案是：多沟通，深入理解别人的代码思路和风格，不要轻易盲目地修改。但这些年实践下来，这个方法在现实中走得并不顺畅。</p>
+<p>随着微服务架构的流行，倒是提供了另一种解决方案：每个服务对应一个唯一的负责人（Owner）。长期由一个人来维护的代码，就不会那么容易腐烂，因为一个人不存在沟通问题。而一个人所能 “达” 到的层次，完全由个人的经验水平和追求来决定。</p>
+<p><strong>雅，指选用的词语要得体，追求文章本身的古雅，简明优雅</strong>。</p>
+<p>雅的标准，应用在编程上已经从技艺上升到了艺术的追求，这当然是很高的要求与自我追求了，难以强求。而只有先满足于 “信” 和 “达” 的要求，你才有余力来追求 “雅” 。</p>
+<p>举个例子来说明下从 “达” 到 “雅” 的追求与差异。</p>
+<p>下面是一段程序片段，同一个方法，实现完全一样的功能，都符合 “信” 的要求；而方法很短小，命名也完全符合规范，可理解性和维护性都没问题，符合 “达” 的要求；差别就在对 “雅” 的追求上。</p>
+<pre><code class="language-Java">private String generateKey(String service, String method) {  
+  String head = &quot;DBO$&quot;;  
+  String key = &quot;&quot;;  
+
+  int len = head.length() + service.length() + method.length();  
+  if (len &lt;= 50) {  
+    key = head + service + method;  
+  } else {  
+    service = service.substring(service.lastIndexOf(&quot;.&quot;) + 1);  
+    len = head.length() + service.length() + method.length();  
+    key = head + service + method;  
+    if (len &gt; 50) {  
+      key = head + method;  
+      if (key.length() &gt; 50) {  
+        key = key.substring(0, 48) + &quot;.~&quot;;  
+      }  
+    }  
+  }  
+  
+  return key;  
+}
+</code></pre>
+<p>该方法的目标是生成一个字符串 key 值，传入两个参数：服务名和方法名，然后返回 key 值，key 的长度受外部条件约束不能超过 50 个字符。方法实现不复杂，很短，看起来也还不错，分析下其中的逻辑：</p>
+<ol>
+<li>先 key 由固定的头（head）+ service（全类名）+ method（方法）组成，若小于 50 字符，直接返回。</li>
+<li>若超过 50 字符限制，则去掉包名，保留类名，再判断一次，若此时小于 50 字符则返回。</li>
+<li>若还是超过 50 字符限制，则连类名一起去掉，保留头和方法再判断一次，若小于 50 字符则返回。</li>
+<li>最后如果有个变态长的方法名（46+ 个字符），没办法，只好暴力截断到 50 字符返回。</li>
+</ol>
+<p>这个实现最大限度地在生成的 key 中保留全部有用的信息，对超过限制的情况依次按信息重要程度的不同进行丢弃。这里只有一个问题，这个业务规则只有 4 个判断，实现进行了三次 if 语句嵌套，还好这个方法比较短，可读性还不成问题。</p>
+<p>而现实中很多业务规则比这复杂得多，以前看过一些实现的 if 嵌套多达 10 层的，方法也长得要命。当然一开始没有嵌套那么多层，只是后来随着时间的演变，业务规则发生了变化，慢慢增加了。之后接手的程序员就按照这种方式继续嵌套下去，慢慢演变至此，到我看到的时候就有 10 层了。</p>
+<p>程序员有一种编程的惯性，特别是进行维护性编程时。一开始接手一个别人做的系统，不可能一下能了解和掌控全局。当要增加新功能时，在原有代码上添加逻辑，很容易保持原来程序的写法惯性，因为这样写也更安全。</p>
+<p>所以一个 10 层嵌套 if 的业务逻辑方法实现，第一个程序员也许只写了 3 次嵌套，感觉还不错，也不失简洁。后来写 4、5、6 层的程序员则是懒惰不愿再改，到了写第 8、9、10 层的程序员时，基本很可能就是不敢再乱动了。</p>
+<p>那么如何让这个小程序在未来的生命周期内，更优雅地演变下去？下面是另一个版本的实现：</p>
+<pre><code class="language-java">private String generateKey(String service, String method) {  
+  String head = &quot;DBO$&quot;;  
+  String key = head + service + method;  
+
+  // head + service(with package) + method  
+  if (key.length() &lt;= 50) {  
+    return key;  
+  }  
+
+  // head + service(without package) + method  
+  service = service.substring(service.lastIndexOf(&quot;.&quot;) + 1);  
+  key = head + service + method;  
+  if (key.length() &lt;= 50) {  
+    return key;  
+  }  
+
+  // head + method  
+  key = head + method;  
+  if (key.length() &lt;= 50) {  
+    return key;  
+  }  
+
+  // last, we cut the string to 50 characters limit.  
+  key = key.substring(0, 48) + &quot;.~&quot;;  
+  return key;  
+}
+</code></pre>
+<p>从嵌套变成了顺序逻辑，这样可以为未来的程序员留下更优雅地编程惯性方向。</p>
+<h2>阶段三：运行代码 Running</h2>
+<p>编程相对翻译，其超越 “信、达、雅” 的部分在于：翻译出来的文字能让人读懂，读爽就够了；但代码写出来还需要运行，才能产生最终的价值。</p>
+<p>写程序我们追求 “又快又好”，并且写出来的代码要符合 “信、达、雅” 的标准，但清晰定义 “多快多好” 则是指运行时的效率和效果。为准确评估代码的运行效率和效果，每个程序员可能都需要深刻记住并理解下面这张关于程序延迟数字的图：</p>
+<p><img src="https://static001.geekbang.org/resource/image/52/00/5262e4b7f60a60273be6b79a2fd26f00.png" alt="" /></p>
+<center><span class="reference">每个程序员都应该知道的延迟数字</span></center>
+<p>只有深刻记住并理解了程序运行各环节的效率数据，你才有可能接近准确地评估程序运行的最终效果。当然，上面这张图只是最基础的程序运行效率数据，实际的生产运行环节会需要更多的基准效率数据才可能做出更准确的预估。</p>
+<p>说一个例子，曾经我所在团队的一个高级程序员和我讨论要在所有的微服务中引入一个限流开源工具。这对于他和我们团队都是一个新东西，如何进行引入后线上运行效果的评估呢？</p>
+<p>第一步，他去阅读资料和代码搞懂该工具的实现原理与机制并能清晰地描述出来。第二步，去对该工具进行效果测试，又称功能可用性验证。第三步，进行基准性能测试，或者又叫基准效率测试（Benchmark），以确定符合预期的标准。</p>
+<p>做完上述三步，他拿出一个该工具的原理性描述说明文档，一份样例使用代码和一份基准效率测试结果，如下：</p>
+<p><img src="https://static001.geekbang.org/resource/image/17/41/172a61261b64a6847a625afd17131c41.png" alt="" /></p>
+<p>上图中有个红色字体部分，当阀值设置为 100 万而请求数超过 100 万时，发生了很大偏差。这是一个很奇怪的测试结果，但如果心里对各种基准效率数据有谱的话，会知道这实际绝不会影响线上服务的运行。</p>
+<p>因为我们的服务主要由两部分组成：RPC 和业务逻辑。而 RPC 又由网络通信加上编解码序列化组成。服务都是 Java 实现的，而目前 Java 中最高效且吞吐最大的网络通信方式是基于 NIO 的方式，而我们服务使用的 RPC 框架正是基于 Netty（一个基于 Java NIO 的开源网络通信框架）的。</p>
+<p>我曾经单独在一组 4 核的物理主机上测试过 Java 原生 NIO 与 Netty v3 和 v4 两个版本的基准性能对比，经过 Netty 封装后，大约有 10% 的性能损耗。在 1K 大小报文时，原生的 Java NIO 在当时的测试环境所能达到 TPS（每秒事务数） 的极限大约 5 万出头（极限，就是继续加压，但 TPS 不再上升，CPU 也消耗不上去，延时却在增加），而 Netty 在 4.5 万附近。增加了 RPC 的编解码后，TPS 极限下降至 1.3 万左右。</p>
+<p>所以，实际一个服务在类似基准测试的环境下单实例所能承载的 TPS 极限不可能超过 RPC 的上限，因为 RPC 是没有包含业务逻辑的部分。加上不算简单的业务逻辑，我能预期的单实例真实 TPS 也许只有 1千 ～2 千。</p>
+<p>因此，上面 100 万的阀值偏差是绝对影响不到单实例的服务的。当然最后我们也搞明白了，100 万的阀值偏差来自于时间精度的大小，那个限流工具采用了微秒作为最小时间精度，所以只能在百万级的范围内保证准确。</p>
+<p>讲完上述例子，就是想说明一个程序员要想精确评估程序的运行效率和效果，就得自己动手做大量的基准测试。</p>
+<p>基准测试和测试人员做的性能测试不同。测试人员做的性能测试都是针对真实业务综合场景的模拟，测试的是整体系统的运行；而基准测试是开发人员自己做来帮助准确理解程序运行效率和效果的方式，当测试人员在性能测试发现了系统的性能问题时，开发人员才可能一步步拆解根据基准测试的标尺效果找到真正的瓶颈点，否则大部分的性能优化都是在靠猜测。</p>
+<p>到了这个阶段，一段代码写出来，基本就该在你头脑中跑过一遍了。等上线进入真实生产环境跑起来，你就可以拿真实的运行数据和头脑中的预期做出对比，如果差距较大，那可能就掩藏着问题，值得你去分析和思考。</p>
+<p>最后，文章开头那个问题有答案了吗？在第一阶段，你是想到哪就写到哪；而到了第三阶段，写到哪，一段鲜活的代码就成为了你想的那样。</p>
+<p>你现在处在编程的哪个阶段？有怎样的感悟？欢迎你留言分享。</p>
+<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
+
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
+                    data-v-87ffcada="">精选留言</span></h2>
+                <ul data-v-87ffcada="">
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">third</span>
+                            </div>
+                            <div class="bd">心得如下：<br>1.我对三个阶段的理解是，调试代码-独立，编写代码-合作，运行代码-事业<br><br>2.独立，你需要掌握编程的知识，并熟练掌握（一个人）<br><br>2.合作，你要需求与他人的合作，并降低合作成本。（一群人）<br><br>3.主要方法是，信达雅<br><br>4.信：理解真实的用户需求<br><br>5.达：方便维护和使用<br><br>6.雅：有一种美的感受和体验<br><br>7.事业，所有的道理和方法，都需要在现实中得到验证，同时保持进步（一群人和事物）<br><br>8.老实说，我觉得我在第一段的前边，属于刚入门的新手，要努力学习。<br><br>顺便请问一下老师，一个相对比较模糊问题。<br>以一个普通人的资质，编程2500小时左右，成为一个基本合格的新手程序员，是否是一件大概率事件呢？ <br></div>
+                            <span class="time">2018-08-27 15:36</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">2500小时应该很熟练了，应该跨过新手阶段了</p>
+                                <p class="reply-time">2018-08-27 18:36</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">godtrue</span>
+                            </div>
+                            <div class="bd">恩，现在处在一个什么阶段还真定位不好，我们现在的开发模式，基本是先弄清楚整体流程再动手，每天必开早会，代码开发完了自测、测试、review、完善这么个流程。<br>就个人而言，也比较喜欢将所有代码都搞定再验证，有问题再调整和优化。<br><br>编程之于翻译，确有异曲同工之妙。<br>业务-将现实问题翻译成需求<br>产品-将业务的需求翻译成PRD<br>研发-将产品的PRD翻译成代码<br>测试-验证研发的翻译工作信否<br>压测-验证研发的翻译工作性能好不<br>架构-检查研发的翻译工作达否<br>编译器-将Java源码翻译成Java字节码<br>JVM-将Java字节码翻译成机器码<br>cpu-将机器码指令执行起来，真正去解决现实的问题<br> <br></div>
+                            <span class="time">2018-08-28 09:09</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">你们有个不错的流程^_^</p>
+                                <p class="reply-time">2018-08-28 18:38</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/06/ad/fe79da1d.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">维维</span>
+                            </div>
+                            <div class="bd">理清思路，行云流水的敲完代码，一气呵成。然后第一个闪念就是我的代码根本不会出问题。😄😄😄 <br></div>
+                            <span class="time">2018-08-29 22:10</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">哈哈😄</p>
+                                <p class="reply-time">2018-08-30 16:30</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/59/43/66e5643a.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Franklin.du</span>
+                            </div>
+                            <div class="bd">在第二阶段，到第三阶段还有好远的距离！！ <br></div>
+                            <span class="time">2018-08-27 14:46</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">2，3阶段不是完全串行的，只是为了方便写作表达，可以是穿插迭代进化的</p>
+                                <p class="reply-time">2018-08-27 18:37</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/d7/5d2bfaa7.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Aliliin</span>
+                            </div>
+                            <div class="bd">目前处于第一阶段，正在努力学习中。。 <br></div>
+                            <span class="time">2018-08-27 13:43</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">加油💪😄</p>
+                                <p class="reply-time">2018-08-27 18:38</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/97/46/fe1f21d8.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">北风一叶</span>
+                            </div>
+                            <div class="bd">我能说我还在第一阶段吗 <br></div>
+                            <span class="time">2018-11-13 08:31</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">那继续加油^_^</p>
+                                <p class="reply-time">2018-11-13 18:35</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">helloworld</span>
+                            </div>
+                            <div class="bd">关于基准测试部分的经验不错，不过工作中真有真多时间为了使用一个来源工具，先研究其源码的时间吗？直接压测看效果不就行了？ <br></div>
+                            <span class="time">2018-10-25 08:15</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">一个新东西引入到核心服务中，不理解实现原理，是用不好的，还可能埋坑，这是必要的成本</p>
+                                <p class="reply-time">2018-10-25 18:18</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/87/6b/0b6cd39a.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">朱月俊</span>
+                            </div>
+                            <div class="bd">&quot;实际一个服务在类似基准测试的环境下单实例所能承载的 TPS 极限不可能超过 RPC 的上限，因为 RPC 是没有包含业务逻辑的部分。加上不算简单的业务逻辑，我能预期的单实例真实 TPS 也许只有 1 千 ～2 千。&quot;<br>意思是JAVA rpc 单实例上限tps只能达到1000-2000? 这个能详细说下嘛？ <br></div>
+                            <span class="time">2018-10-18 23:28</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">不是，例子中说的是Java业务服务的TPS，包含了业务逻辑的</p>
+                                <p class="reply-time">2018-10-19 20:20</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/3d/9d/fd5b50ba.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">天师</span>
+                            </div>
+                            <div class="bd">想讲个有点炫技的关于雅的经历，做OpenGL渲染的时候，有个同事提出个练习题，使用OpenGL实时渲染一个转动着的魔方，在各个轴各个层上都能够自由旋转，当时存在一个问题，需要确定旋转以后的小方块移动到了哪个位置，同事他们的处理方式是人工穷举，比如2x2x2的魔方里面，顶层旋转了90度，那么顶层1号的小方块就变成了旁边的2号小方块。<br>我觉得这种穷举不太舒服，而且不通用与3x3x3,4x4x4甚至更高阶的魔方，后来想出了个招数，用三维向量替代小方块的数字编号，这样每次旋转，实际上也是对小方块三维向量编号进行旋转，旋转后的向量就是小方块新的编号，这样的算法只需要用数学库构造一个旋转矩阵就可以完成，并且无论对于几阶的魔方，算法上都是通用的，并且也不需要人工穷举。这个招数，无论什么时候想起来，都觉得是挺舒服的一个思路。<br>相应的，见过的让我觉得舒服，欣赏的架构与代码，还有Akka的Reactive Stream，Scala的trait特性等等 <br></div>
+                            <span class="time">2018-10-11 12:56</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">感觉这不是炫技，而是用了更通用的方法解决问题😊</p>
+                                <p class="reply-time">2018-10-11 18:47</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/2d/f6/15abf014.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">小白</span>
+                            </div>
+                            <div class="bd">峰哥，那个是阀值还是阈值啊😂  <br></div>
+                            <span class="time">2018-09-09 22:08</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">我理解意思差不多一样</p>
+                                <p class="reply-time">2018-09-10 19:26</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/13/3f/817f380e.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">June Yuan</span>
+                            </div>
+                            <div class="bd">正在阶段二努力，有时会滑落到一。 <br></div>
+                            <span class="time">2018-09-03 15:13</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">艾尔欧唯伊</span>
+                            </div>
+                            <div class="bd">努力向三阶段进军。。。 <br></div>
+                            <span class="time">2018-08-27 22:07</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/ee/4d/b04cd2fd.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">funky的两斤K仔</span>
+                            </div>
+                            <div class="bd"><br>现在在工作了，还是戒不掉写两行代码就想debug的习惯。怎么把代码模型整个放进脑子里好像也是个挑战。 <br></div>
+                            <span class="time">2018-08-27 21:55</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">那还需要多想，多写代码</p>
+                                <p class="reply-time">2018-08-28 18:38</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

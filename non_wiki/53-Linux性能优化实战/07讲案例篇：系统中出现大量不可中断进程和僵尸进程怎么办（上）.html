@@ -1,0 +1,462 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+#watermark {
+
+  position: relative;
+  overflow: hidden;
+}
+
+#watermark .x {
+  position: absolute;
+  top: 800;
+  left: 400;
+  color: #3300ff;
+  font-size: 50px;
+  pointer-events: none;
+  opacity:0.3;
+  filter:Alpha(opacity=50);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+    </style>
+
+
+    <style type="text/css">
+ html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+
+
+
+
+    </style>
+    <style type="text/css">
+        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
+
+
+
+
+
+    </style>
+
+    <style type="text/css">
+        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div data-v-87ffcada="" class="article" id="watermark">
+        <p class="x">更多课程请加QQ群170701297</p>
+        <div data-v-87ffcada="" class="main main-app">
+            <h1 data-v-87ffcada="" class="article-title pd">
+                07讲案例篇：系统中出现大量不可中断进程和僵尸进程怎么办（上）
+            </h1>
+            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
+                                                                                        src="https://static001.geekbang.org/resource/image/7d/11/7d2c019b6c0e78a51b872dcd227aa611.jpg">
+
+
+                <div data-v-87ffcada="" id="article-content" class="">
+                    <div class="text">
+                        <p>你好，我是倪朋飞。</p><p>上一节，我用一个 Nginx+PHP 的案例，给你讲了服务器 CPU 使用率高的分析和应对方法。这里你一定要记得，当碰到无法解释的 CPU 使用率问题时，先要检查一下是不是短时应用在捣鬼。</p><p>短时应用的运行时间比较短，很难在 top 或者 ps 这类展示系统概要和进程快照的工具中发现，你需要使用记录事件的工具来配合诊断，比如 execsnoop 或者 perf top。</p><p>这些思路你不用刻意去背，多练习几次，多在操作中思考，你便能灵活运用。</p><p>另外，我们还讲到 CPU 使用率的类型。除了上一节提到的用户 CPU 之外，它还包括系统 CPU（比如上下文切换）、等待 I/O 的 CPU（比如等待磁盘的响应）以及中断 CPU（包括软中断和硬中断）等。</p><p>我们已经在上下文切换的文章中，一起分析了系统 CPU 使用率高的问题，剩下的等待 I/O 的 CPU 使用率（以下简称为 iowait）升高，也是最常见的一个服务器性能问题。今天我们就来看一个多进程I/O的案例，并分析这种情况。</p><h2>进程状态</h2><p>当 iowait 升高时，进程很可能因为得不到硬件的响应，而长时间处于不可中断状态。从 ps 或者 top 命令的输出中，你可以发现它们都处于 D 状态，也就是不可中断状态（Uninterruptible Sleep）。既然说到了进程的状态，进程有哪些状态你还记得吗？我们先来回顾一下。</p><!-- [[[read_end]]] --><p>top 和 ps 是最常用的查看进程状态的工具，我们就从 top 的输出开始。下面是一个 top 命令输出的示例，S列（也就是 Status  列）表示进程的状态。从这个示例里，你可以看到 R、D、Z、S、I 等几个状态，它们分别是什么意思呢？</p><pre><code>$ top
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+28961 root      20   0   43816   3148   4040 R   3.2  0.0   0:00.01 top
+  620 root      20   0   37280  33676    908 D   0.3  0.4   0:00.01 app
+    1 root      20   0  160072   9416   6752 S   0.0  0.1   0:37.64 systemd
+ 1896 root      20   0       0      0      0 Z   0.0  0.0   0:00.00 devapp
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.10 kthreadd
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq
+    7 root      20   0       0      0      0 S   0.0  0.0   0:06.37 ksoftirqd/0
+</code></pre><p>我们挨个来看一下：</p><ul>
+<li>
+<p><strong>R</strong> 是 Running 或 Runnable 的缩写，表示进程在 CPU 的就绪队列中，正在运行或者正在等待运行。</p>
+</li>
+<li>
+<p><strong>D</strong> 是 Disk Sleep 的缩写，也就是不可中断状态睡眠（Uninterruptible Sleep），一般表示进程正在跟硬件交互，并且交互过程不允许被其他进程或中断打断。</p>
+</li>
+<li>
+<p><strong>Z</strong> 是 Zombie 的缩写，如果你玩过“植物大战僵尸”这款游戏，应该知道它的意思。它表示僵尸进程，也就是进程实际上已经结束了，但是父进程还没有回收它的资源（比如进程的描述符、PID 等）。</p>
+</li>
+<li>
+<p><strong>S</strong> 是 Interruptible Sleep 的缩写，也就是可中断状态睡眠，表示进程因为等待某个事件而被系统挂起。当进程等待的事件发生时，它会被唤醒并进入 R 状态。</p>
+</li>
+<li>
+<p><strong>I</strong> 是 Idle 的缩写，也就是空闲状态，用在不可中断睡眠的内核线程上。前面说了，硬件交互导致的不可中断进程用 D 表示，但对某些内核线程来说，它们有可能实际上并没有任何负载，用 Idle 正是为了区分这种情况。要注意，D 状态的进程会导致平均负载升高， I 状态的进程却不会。</p>
+</li>
+</ul><p>当然了，上面的示例并没有包括进程的所有状态。除了以上 5 个状态，进程还包括下面这2个状态。</p><p>第一个是 <strong>T 或者 t</strong>，也就是 Stopped 或 Traced 的缩写，表示进程处于暂停或者跟踪状态。</p><p>向一个进程发送 SIGSTOP 信号，它就会因响应这个信号变成暂停状态（Stopped）；再向它发送 SIGCONT 信号，进程又会恢复运行（如果进程是终端里直接启动的，则需要你用 fg 命令，恢复到前台运行）。</p><p>而当你用调试器（如 gdb）调试一个进程时，在使用断点中断进程后，进程就会变成跟踪状态，这其实也是一种特殊的暂停状态，只不过你可以用调试器来跟踪并按需要控制进程的运行。</p><p>另一个是 <strong>X</strong>，也就是 Dead 的缩写，表示进程已经消亡，所以你不会在 top 或者 ps 命令中看到它。</p><p>了解了这些，我们再回到今天的主题。先看不可中断状态，这其实是为了保证进程数据与硬件状态一致，并且正常情况下，不可中断状态在很短时间内就会结束。所以，短时的不可中断状态进程，我们一般可以忽略。</p><p>但如果系统或硬件发生了故障，进程可能会在不可中断状态保持很久，甚至导致系统中出现大量不可中断进程。这时，你就得注意下，系统是不是出现了 I/O 等性能问题。</p><p>再看僵尸进程，这是多进程应用很容易碰到的问题。正常情况下，当一个进程创建了子进程后，它应该通过系统调用 wait() 或者 waitpid() 等待子进程结束，回收子进程的资源；而子进程在结束时，会向它的父进程发送 SIGCHLD 信号，所以，父进程还可以注册 SIGCHLD 信号的处理函数，异步回收资源。</p><p>如果父进程没这么做，或是子进程执行太快，父进程还没来得及处理子进程状态，子进程就已经提前退出，那这时的子进程就会变成僵尸进程。换句话说，父亲应该一直对儿子负责，善始善终，如果不作为或者跟不上，都会导致“问题少年”的出现。</p><p>通常，僵尸进程持续的时间都比较短，在父进程回收它的资源后就会消亡；或者在父进程退出后，由 init 进程回收后也会消亡。</p><p>一旦父进程没有处理子进程的终止，还一直保持运行状态，那么子进程就会一直处于僵尸状态。大量的僵尸进程会用尽 PID 进程号，导致新进程不能创建，所以这种情况一定要避免。</p><h2>案例分析</h2><p>接下来，我将用一个多进程应用的案例，带你分析大量不可中断状态和僵尸状态进程的问题。这个应用基于 C 开发，由于它的编译和运行步骤比较麻烦，我把它打包成了一个 <a href="https://github.com/feiskyer/linux-perf-examples/tree/master/high-iowait-process">Docker 镜像</a>。这样，你只需要运行一个 Docker 容器就可以得到模拟环境。</p><h3>你的准备</h3><p>下面的案例仍然基于 Ubuntu 18.04，同样适用于其他的 Linux 系统。我使用的案例环境如下所示：</p><ul>
+<li>
+<p>机器配置：2 CPU，8GB 内存</p>
+</li>
+<li>
+<p>预先安装 docker、sysstat、dstat 等工具，如 apt install <a href="http://docker.io">docker.io</a> dstat sysstat</p>
+</li>
+</ul><p>这里，dstat 是一个新的性能工具，它吸收了 vmstat、iostat、ifstat 等几种工具的优点，可以同时观察系统的 CPU、磁盘 I/O、网络以及内存使用情况。</p><p>接下来，我们打开一个终端，SSH 登录到机器上，并安装上述工具。</p><p>注意，以下所有命令都默认以 root 用户运行，如果你用普通用户身份登陆系统，请运行 sudo su root 命令切换到 root 用户。</p><p>如果安装过程有问题，你可以先上网搜索解决，实在解决不了的，记得在留言区向我提问。</p><blockquote>
+<p>温馨提示：案例应用的核心代码逻辑比较简单，你可能一眼就能看出问题，但实际生产环境中的源码就复杂多了。所以，我依旧建议，操作之前别看源码，避免先入为主，而要把它当成一个黑盒来分析，这样你可以更好地根据现象分析问题。你姑且当成你工作中的一次演练，这样效果更佳。</p>
+</blockquote><h3>操作和分析</h3><p>安装完成后，我们首先执行下面的命令运行案例应用：</p><pre><code>$ docker run --privileged --name=app -itd feisky/app:iowait
+</code></pre><p>然后，输入 ps 命令，确认案例应用已正常启动。如果一切正常，你应该可以看到如下所示的输出：</p><pre><code>$ ps aux | grep /app
+root      4009  0.0  0.0   4376  1008 pts/0    Ss+  05:51   0:00 /app
+root      4287  0.6  0.4  37280 33660 pts/0    D+   05:54   0:00 /app
+root      4288  0.6  0.4  37280 33668 pts/0    D+   05:54   0:00 /app
+</code></pre><p>从这个界面，我们可以发现多个 app 进程已经启动，并且它们的状态分别是 Ss+ 和 D+。其中，S 表示可中断睡眠状态，D 表示不可中断睡眠状态，我们在前面刚学过，那后面的 s 和 + 是什么意思呢？不知道也没关系，查一下man ps 就可以。现在记住，s 表示这个进程是一个会话的领导进程，而 + 表示前台进程组。</p><p>这里又出现了两个新概念，<strong>进程组</strong>和<strong>会话</strong>。它们用来管理一组相互关联的进程，意思其实很好理解。</p><ul>
+<li>
+<p>进程组表示一组相互关联的进程，比如每个子进程都是父进程所在组的成员；</p>
+</li>
+<li>
+<p>而会话是指共享同一个控制终端的一个或多个进程组。</p>
+</li>
+</ul><p>比如，我们通过 SSH 登录服务器，就会打开一个控制终端（TTY），这个控制终端就对应一个会话。而我们在终端中运行的命令以及它们的子进程，就构成了一个个的进程组，其中，在后台运行的命令，构成后台进程组；在前台运行的命令，构成前台进程组。</p><p>明白了这些，我们再用 top  看一下系统的资源使用情况：</p><pre><code># 按下数字 1 切换到所有 CPU 的使用情况，观察一会儿按 Ctrl+C 结束
+$ top
+top - 05:56:23 up 17 days, 16:45,  2 users,  load average: 2.00, 1.68, 1.39
+Tasks: 247 total,   1 running,  79 sleeping,   0 stopped, 115 zombie
+%Cpu0  :  0.0 us,  0.7 sy,  0.0 ni, 38.9 id, 60.5 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  :  0.0 us,  0.7 sy,  0.0 ni,  4.7 id, 94.6 wa,  0.0 hi,  0.0 si,  0.0 st
+...
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 4340 root      20   0   44676   4048   3432 R   0.3  0.0   0:00.05 top
+ 4345 root      20   0   37280  33624    860 D   0.3  0.0   0:00.01 app
+ 4344 root      20   0   37280  33624    860 D   0.3  0.4   0:00.01 app
+    1 root      20   0  160072   9416   6752 S   0.0  0.1   0:38.59 systemd
+...
+</code></pre><p>从这里你能看出什么问题吗？细心一点，逐行观察，别放过任何一个地方。忘了哪行参数意思的话，也要及时返回去复习。</p><p>好的，如果你已经有了答案，那就继续往下走，看看跟我找的问题是否一样。这里，我发现了四个可疑的地方。</p><ul>
+<li>
+<p>先看第一行的平均负载（ Load Average），过去1 分钟、5 分钟和 15 分钟内的平均负载在依次减小，说明平均负载正在升高；而 1 分钟内的平均负载已经达到系统的 CPU 个数，说明系统很可能已经有了性能瓶颈。</p>
+</li>
+<li>
+<p>再看第二行的 Tasks，有 1 个正在运行的进程，但僵尸进程比较多，而且还在不停增加，说明有子进程在退出时没被清理。</p>
+</li>
+<li>
+<p>接下来看两个 CPU 的使用率情况，用户 CPU 和系统 CPU 都不高，但 iowait 分别是 60.5% 和 94.6%，好像有点儿不正常。</p>
+</li>
+<li>
+<p>最后再看每个进程的情况， CPU 使用率最高的进程只有 0.3%，看起来并不高；但有两个进程处于 D 状态，它们可能在等待 I/O，但光凭这里并不能确定是它们导致了 iowait 升高。</p>
+</li>
+</ul><p>我们把这四个问题再汇总一下，就可以得到很明确的两点：</p><ul>
+<li>
+<p>第一点，iowait 太高了，导致系统的平均负载升高，甚至达到了系统 CPU 的个数。</p>
+</li>
+<li>
+<p>第二点，僵尸进程在不断增多，说明有程序没能正确清理子进程的资源。</p>
+</li>
+</ul><p>那么，碰到这两个问题该怎么办呢？结合我们前面分析问题的思路，你先自己想想，动手试试，下节课我来继续“分解”。</p><h2>小结</h2><p>今天我们主要通过简单的操作，熟悉了几个必备的进程状态。用我们最熟悉的 ps 或者 top ，可以查看进程的状态，这些状态包括运行（R）、空闲（I）、不可中断睡眠（D）、可中断睡眠（S）、僵尸（Z）以及暂停（T）等。</p><p>其中，不可中断状态和僵尸状态，是我们今天学习的重点。</p><ul>
+<li>
+<p>不可中断状态，表示进程正在跟硬件交互，为了保护进程数据和硬件的一致性，系统不允许其他进程或中断打断这个进程。进程长时间处于不可中断状态，通常表示系统有 I/O 性能问题。</p>
+</li>
+<li>
+<p>僵尸进程表示进程已经退出，但它的父进程还没有回收子进程占用的资源。短暂的僵尸状态我们通常不必理会，但进程长时间处于僵尸状态，就应该注意了，可能有应用程序没有正常处理子进程的退出。</p>
+</li>
+</ul><h2>思考</h2><p>最后，我想请你思考一下今天的课后题，案例中发现的这两个问题，你会怎么分析呢？又应该怎么解决呢？你可以结合前面我们做过的案例分析，总结自己的思路，提出自己的问题。</p><p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
+                    data-v-87ffcada="">精选留言</span></h2>
+                <ul data-v-87ffcada="">
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">白华</span>
+                            </div>
+                            <div class="bd">老师以后的案例能不能使用centos7系统进行操作？做的很多实验和你的都会有部分偏差，这次偏差更大，相信学习你课程的大部分都是用虚拟机跑的项目，用centos系统使用率会很高，而且实际生产中用centos系统肯定大于Ubuntu，造成的实验偏差会不会也是系统的原因。我也遇到了没有出现D状态的进程，出现了大量Z进程。平均负载并没有提升，反而是下降了。iowait并没有变化。所以恳请您使用centos系统来教学吧 <br></div>
+                            <span class="time">2018-12-05 10:47</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">iowait不高是因为案例IO操作不够大导致的。我重新推了一个docker镜像，麻烦再试下看看</p>
+                                <p class="reply-time">2018-12-05 21:47</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/b1/4d/10c75b34.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Johnson</span>
+                            </div>
+                            <div class="bd">遇到有大量的D状态的进程，导致负载到7000多，但是cpu和iowait都不高，除了重启设备还有什么办法解决？ <br></div>
+                            <span class="time">2018-12-05 09:26</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/3f/57/a014199a.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">书林</span>
+                            </div>
+                            <div class="bd">每个人的机器配置不一样，所以会出现有的机器iowait不明显，有的机器被打爆。解决办法是用docker cgroup选项对 block io做限制。假设硬盘设备为 &#47;dev&#47;nvme0n1，测试如下：<br>1. 限制块设备的读写 iops 为 3: `docker run --privileged --name=app9 --device &#47;dev&#47;nvme0n1:&#47;dev&#47;nvme0n1 --device-write-iops &#47;dev&#47;nvme0n1:3 --device-read-iops &#47;dev&#47;nvme0n1:3  -itd feisky&#47;app:iowait-new2`<br>2. 可以查看host机器 cgroup 已为对应 docker container 添加了相关限制：<br>```<br>cat &#47;sys&#47;fs&#47;cgroup&#47;blkio&#47;docker&#47;&quot;docker-container-id&quot;&#47;blkio.throttle.write_iops_device<br>259:0 3<br>cat &#47;sys&#47;fs&#47;cgroup&#47;blkio&#47;docker&#47;&quot;docker-container-id&quot;&#47;blkio.throttle.read_iops_device<br>259:0 3<br>```<br>3.  <br>```<br>docker exec -it  &quot;docker-container-id&quot; &#47;bin&#47;bash<br>root@4cc5e6c74cc0:&#47;# dd iflag=direct if=&#47;dev&#47;nvme0n1 of=&#47;dev&#47;null bs=1k count=1000<br>1000+0 records in<br>1000+0 records out<br>1024000 bytes (1.0 MB, 1000 KiB) copied, 340.004 s, 3.0 kB&#47;s<br>```<br>`dd` 每次从 &#47;dev&#47;nvme0n1 设备读取数据写到 &#47;dev&#47;null 设备，每次读取 1kB，一共1000次，必须为 direct 选项。可以观测到拷贝速度为 3 kB&#47;s，即 1kB * 3，说明cgroup 限制 `blkio.throttle.read_iops_device` 生效。<br><br>4. 观察host机器 iowait 已经上去。<br>```<br>top - 12:10:22 up  1:25,  1 user,  load average: 0.88, 0.81, 0.83<br>任务: 780 total,   1 running, 227 sleeping,   0 stopped, 552 zombie<br>%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 s<br>%Cpu1  :  2.7 us,  0.0 sy,  0.0 ni, 97.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 s<br>%Cpu2  :  0.0 us,  0.0 sy,  0.0 ni,  0.0 id,100.0 wa,  0.0 hi,  0.0 si,  0.0 s<br>%Cpu3  :  5.3 us,  7.9 sy,  0.0 ni, 84.2 id,  0.0 wa,  0.0 hi,  2.6 si,  0.0 s<br>MiB Mem :   7863.3 total,    230.4 free,   3847.2 used,   3785.8 buff&#47;cache<br>MiB Swap:   8192.0 total,   8191.5 free,      0.5 used.   3191.1 avail Mem <br>```<br>zombie数那么高是因为这个 docker container 已经运行20多分钟了。<br><br>供大家参考:) <br></div>
+                            <span class="time">2018-12-09 12:17</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">谢谢分享，见到Docker高手了😊。 这样的确可以达到IO限制的目的，不过使用系统级工具分析的时候，会有很大不同，比如iostat看看磁盘使用率可能还是很空闲；或者看看内核调用栈也有些不同。<br><br>不过这倒是不错的性能隔离方案👍</p>
+                                <p class="reply-time">2018-12-14 08:20</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">每天晒白牙</span>
+                            </div>
+                            <div class="bd">【D7打卡】<br>今天主要学习进程的状态，可以通过ps或top查看进程的状态<br>R:运行 Running或Runnable的缩写 表示进程在CPU的就绪队列中，正在运行或正在等待运行<br>I:空闲  Idle的缩写，用在不可中断睡眠的内核线程上。空闲线程不会导致平均负载升高，D状态的会导致平均负载升高<br>D:不可中断睡眠 Dist Sleep的缩写 表示进程正在跟硬件交互，并且交互过程中不允许被其他进程或中断打断<br>S:可中断睡眠 Interruptible Sleep的缩写 表示进程因为等待某个事件而被系统挂起。当进程等待的事件发生时，它会被唤醒并进入R状态<br>Z:僵尸 Zombie缩写 进程已经结束，但父进程还没有回收它的资源（如进程的描述符、PID等）<br>T:暂停 Stopped或Traced的缩写，表示进程处于暂停或者跟踪状态<br>今天实战的结果和老师的出入很大，我的系统是centos的<br>ps aux | grep &#47;app结果最开始是<br>[root@localhost ~]# ps aux | grep &#47;app<br>root       3468  0.0  0.0   4364   380 pts&#47;0    Ss+  07:38   0:00 &#47;app<br>root       3568 12.0  3.3  37268 33036 pts&#47;0    D+   07:39   0:00 &#47;app<br>root       3569  7.0  3.3  37268 33036 pts&#47;0    D+   07:39   0:00 &#47;app<br>root       3571  0.0  0.0 112728   988 pts&#47;4    S+   07:39   0:00 grep --color=auto &#47;app<br>[root@localhost ~]# ps aux | grep &#47;app<br>root       3468  0.0  0.0   4364   424 pts&#47;0    Ss+  07:38   0:00 &#47;app<br>root       3590 15.0  3.3  37268 33016 pts&#47;0    R+   07:39   0:00 &#47;app<br>root       3591 15.0  3.3  37268 33016 pts&#47;0    R+   07:39   0:00 &#47;app<br>root       3593  0.0  0.0 112724   988 pts&#47;4    R+   07:39   0:00 grep --color=auto &#47;app<br>[root@localhost ~]# ps aux | grep &#47;app<br>root       3468  0.0  0.0   4364   424 pts&#47;0    Ss+  07:38   0:00 &#47;app<br>root       3597  0.0  0.0 112728   988 pts&#47;4    S+   07:39   0:00 grep --color=auto &#47;app<br>同样用top命令观察，平均负载也不高，然后wa也很低，也没看到处于D状态的进程。符合的只有 处于僵尸状态的进程比较多<br>[root@localhost ~]# top<br>top - 07:41:45 up  2:35,  8 users,  load average: 0.00, 0.03, 0.31<br>Tasks: 224 total,   1 running, 135 sleeping,   0 stopped,  88 zombie<br>%Cpu0  :  0.7 us,  5.8 sy,  0.0 ni, 88.1 id,  4.1 wa,  0.0 hi,  1.4 si,  0.0 st<br>%Cpu1  :  1.0 us,  7.1 sy,  0.0 ni, 86.7 id,  2.7 wa,  0.0 hi,  2.4 si,  0.0 st<br>KiB Mem :   999720 total,   165196 free,   389676 used,   444848 buff&#47;cache<br>KiB Swap:  2097148 total,  1788172 free,   308976 used.   335844 avail Mem                                                                                                                 <br>和老师反映了情况，老师说可能是案例里I&#47;O线程还不够多，效果不明显，等着老师修改案例重新发镜像，再实验。 <br></div>
+                            <span class="time">2018-12-05 08:08</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">白华</span>
+                            </div>
+                            <div class="bd">今天重新进行了测试，用了你docker hub上的fix2，fix1，new，new2都进行测试了，发现还是不行，iowait没有升高，平均负载没有上升，没有发现D状态。希望你以后使用centos7系统进行操作，性能会好很多 <br></div>
+                            <span class="time">2018-12-06 12:41</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/ib8rSTG2Kln7m4M10qpb6ehPaWsA3dsib5OBsMDyol1QuwS6JiaBFJ6a2omytoS4QvLCHIw291IzBYrmj3W1gdNmA/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">丁兆鹏</span>
+                            </div>
+                            <div class="bd">centos7 中模拟一下一起docker中无法启动app<br> docker ps -a<br>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES<br>54a43bfd9ddb        feisky&#47;app:iowait   &quot;&#47;app&quot;              7 seconds ago       Exited (1) 6 seconds ago                       app<br><br>docker logs app也为空。<br><br>既然是c程序，使用gdb调试，发现在select_disk()<br><br>	const char *sd_prefix = &quot;sd&quot;;<br>	const char *xvd_prefix = &quot;xvd&quot;;<br>...<br>		if (strncmp(sd_prefix, entry-&gt;d_name, 2) == 0 || strncmp(xvd_prefix, entry-&gt;d_name, 3) == 0)<br><br>看看机器上磁盘格式如下：<br>df -h<br>Filesystem      Size  Used Avail Use% Mounted on<br>&#47;dev&#47;vda1        99G   16G   79G  17% &#47;<br>&#47;dev&#47;vdb1        99G  5.5G   88G   6% &#47;data1<br><br>找到原因了,磁盘前缀不同，无法找到的盘，修改app.c代码<br>        const char *sd_prefix = &quot;vd&quot;;<br>        const char *xvd_prefix = &quot;vdb&quot;;<br><br>然后就可以正常启动了。<br>docker ps<br>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES<br>ceb6eec8129a        feisky&#47;app:iowait   &quot;&#47;app&quot;              2 seconds ago       Up 1 second                             app <br></div>
+                            <span class="time">2018-12-17 12:14</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍 高手，这是案例考虑不周了，已经在github上增加了参数</p>
+                                <p class="reply-time">2018-12-18 22:59</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/b4/52/75c44c71.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">songgoogle</span>
+                            </div>
+                            <div class="bd">麻烦换centos吧，更接近实际工作需求 <br></div>
+                            <span class="time">2018-12-07 09:39</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">每天晒白牙</span>
+                            </div>
+                            <div class="bd">【D7补卡】<br>在和老师多次交流下，终于逼得老师发布一个把自己机器跑死的镜像，就可以了，结果和老师的温和了。看到老师之前的例子io压力还是不够啊<br>docker run --privileged --name=app -itd feisky&#47;app:iowait-new2<br>执行这个镜像，iowait打满，直接把我的微信给挤掉了，浏览器都打不开了，不过结果是好的。<br>继续坚持下去！ <br></div>
+                            <span class="time">2018-12-05 20:46</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/12/04/5837b21c.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Brown羊羊</span>
+                            </div>
+                            <div class="bd">没有模拟出来系统I&#47;O瓶颈，可以帮忙看下吗：<br>容器运行起来后只发现一个app进程<br>[root@liyang2 ~]# ps aux|grep &#47;app<br>root     23619  0.0  0.0   4368   380 pts&#47;0    Ss+  17:12   0:00 &#47;app<br>root     23777  0.0  0.0 112648   952 pts&#47;0    S+   17:12   0:00 grep --color=auto &#47;app<br><br>CPU情况  wa也没有很高<br>%Cpu(s):  1.0 us,  1.5 sy,  0.0 ni, 94.0 id,  3.3 wa,  0.0 hi,  0.2 si,  0.0 st<br><br>系统：redhat7  3.10.0-327.el7.x86_64 x86_64 GNU&#47;Linux   <br></div>
+                            <span class="time">2018-12-05 17:16</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">我的机器配置太弱了，IO已经跑满还是好多人都没有观察到iowait的现象。重新推了一个镜像，加大了IO操作，再试试看现在怎么样</p>
+                                <p class="reply-time">2018-12-05 21:38</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/1b/82/69581d8a.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">姜小鱼</span>
+                            </div>
+                            <div class="bd">这个案例的iowait比较高，但是并不影响cpu使用率。因为准确来说，iowait也是属于cpu idle状态的一部分，他和僵尸进程影响的只是平均负载和系统资源 <br></div>
+                            <span class="time">2018-12-05 10:23</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">确切的说是CPU繁忙程度，因为iowait也是CPU使用率的一种类型</p>
+                                <p class="reply-time">2018-12-05 22:00</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/fc/fc/1e235814.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">耿长学</span>
+                            </div>
+                            <div class="bd">学习了，每天上班路上听听音频看一看，晚上回家整理学习 <br></div>
+                            <span class="time">2018-12-05 08:57</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/9a/f5/71eee10b.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">深蓝</span>
+                            </div>
+                            <div class="bd">同问，关于Uninterruptible sleep(D)状态<br>的进程如何有效的处理，以前运维的时候遇到过，貌似只能重启机器，不知道还有什么更好的办法 <br></div>
+                            <span class="time">2018-12-07 08:37</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">一个基本的思路是要找出进程处于 D 状态的原因，是在等待什么样的I&#47;O资源。比如分析系统调用、进程堆栈等等。<br><br>找出根源之后，再去分析这些根源里面到底发生了什么，才导致的没有响应。<br><br>当然，也有其他比较hack的方法，但生产环境中不推荐，以免给系统带来未知的损坏。</p>
+                                <p class="reply-time">2018-12-08 22:18</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/57/ed/d96acbd7.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">mj4ever</span>
+                            </div>
+                            <div class="bd">通过实际操作和资料查阅，本次课程学到了以下知识：<br>1、进程的多种状态，D (Disk Sleep) 状态的进程，会导致平均负载升高<br>2、僵尸进程：<br>（1）父子进程的运行是异步的过程，父进程需要知道子进程是何时关闭的<br>（2）子进程需要父进程来收尸，但父进程没有安装SIGCHLD信号处理函数调用wait或waitpid（）等待子进程结束，或是子进程执行太快，父进程还没来得及处理子进程状态<br>（3）父进程退出后，init进程会自动接手子进程，进行清理<br>（4）僵尸进程已经放弃了几乎所有内存空间，没有任何可执行代码，也不能被调度，仅仅在进程列表中保留一个位置，记载该进程的退出状态等信息供其他进程收集<br>（5）大量的僵尸进程会用尽 PID 进程号，导致新进程不能创建<br>3、会话和进程组<br>4、实操<br>（1）查看了僵尸进程 查看僵尸进程的命令 ps -e -o stat,ppid,pid,cmd | egrep &#39;^[Zz]&#39;  或  ps -ef | grep &quot;defunct&quot;，停止父进程后，僵尸进程会被回收<br>（2）没有观察到io的问题，可能是和机器配置有关系，不知道是否可以暴露个参数让我们启动docker的时候传参来施加压力。 <br></div>
+                            <span class="time">2018-12-06 10:45</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">ninuxer</span>
+                            </div>
+                            <div class="bd">打卡day8<br>根据上几天的内容，出现iowait，能想到的分析过程：先用pidstat -u查看进城级别cpu的信息，pidstat -w查看进程级别的自愿中断信息，如果因为io问题，自愿中断应该会飙升，再就是用perf top查看出问题的进程的信息了 <br></div>
+                            <span class="time">2018-12-05 08:41</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/22/c1/d402bfbf.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">一生一世</span>
+                            </div>
+                            <div class="bd">我的思路是用1、pidstat看看上下文交换情况；2、vmstat看看wa;把僵尸进程的父进程停掉 <br></div>
+                            <span class="time">2018-12-05 01:55</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/48/d7/8b69bf21.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">请叫我小强</span>
+                            </div>
+                            <div class="bd">不知道有没有同学碰到这个问题：在使用 make build 的时候出现无法认证的错误。<br>gcc -o app app.c<br>docker build -t feisky&#47;app:iowait -f Dockerfile .<br>Sending build context to Docker daemon 30.72 kB<br>Step 1&#47;4 : FROM ubuntu<br>Get https:&#47;&#47;registry-1.docker.io&#47;v2&#47;: x509: certificate signed by unknown authority<br>make: *** [build] Error 1<br><br>这个问题可以尝试在 Dockerfile 文件中把 FROM ubuntu 修改成 FROM daocloud.io&#47;ubuntu 来解决。<br><br> <br></div>
+                            <span class="time">2019-01-09 17:34</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">这应该是网络错误导致的，docker.io在国内访问不太稳定，一般过一段时间就会好。当然，换成国内的镜像会更稳定</p>
+                                <p class="reply-time">2019-01-10 20:55</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/13/56/6a062937.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">gentleman♥️</span>
+                            </div>
+                            <div class="bd">[root@VM_2_23_centos high-iowait-process]# docker run --privileged --name=app -itd feisky&#47;app:iowait<br>7eb239587e564ffa1d0dd9fd91e1fe36b6c2dcdf73043cf2db8b6fde1e9e74e5<br>[root@VM_2_23_centos high-iowait-process]# top<br>top - 19:22:39 up 108 days,  8:59,  3 users,  load average: 0.71, 0.36, 0.23<br>Tasks: 187 total,   1 running, 186 sleeping,   0 stopped,   0 zombie<br>top - 19:25:15 up 108 days,  9:02,  3 users,  load average: 0.09, 0.25, 0.21<br>Tasks: 186 total,   2 running, 184 sleeping,   0 stopped,   0 zombie<br>%Cpu(s):  2.3 us,  5.3 sy,  0.0 ni, 92.5 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st<br>KiB Mem : 16267940 total,   406336 free, 11878328 used,  3983276 buff&#47;cache<br>KiB Swap:        0 total,        0 free,        0 used.  3937244 avail Mem <br><br>僵尸线程和负载都不高啊，docker app应该已经启动了？<br> <br></div>
+                            <span class="time">2019-01-08 19:27</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">docker logs app 看看是不是正常运行了？<br></p>
+                                <p class="reply-time">2019-01-09 17:56</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/4c/c8/bed1e08a.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">辣椒</span>
+                            </div>
+                            <div class="bd">评论里是高手辈出啊，两个问题都是看评论区的评论都解决了 <br></div>
+                            <span class="time">2019-01-08 14:24</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">😊 高手如云</p>
+                                <p class="reply-time">2019-01-09 18:07</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Xg huang</span>
+                            </div>
+                            <div class="bd">请教一下老师，一般在写代码访问io的时候，是不可中断还是可中断？ <br></div>
+                            <span class="time">2019-01-08 08:51</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">代码里访问的时候可能会使用缓存，也可能访问到磁盘，访问磁盘的时候是不可中断的</p>
+                                <p class="reply-time">2019-01-09 18:13</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/42/f6/6532d23d.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">悬铃木（赵岩）</span>
+                            </div>
+                            <div class="bd">请教老师一个问题，进程可以自己进入T状态吗？除了kill -Stop 和debug去调试。 这个T状态是异常的一种吗？ <br></div>
+                            <span class="time">2018-12-27 22:50</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">收到信号或者被ptrace系统调用跟踪时也会的</p>
+                                <p class="reply-time">2018-12-28 21:58</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

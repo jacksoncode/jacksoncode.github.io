@@ -1,0 +1,492 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+#watermark {
+
+  position: relative;
+  overflow: hidden;
+}
+
+#watermark .x {
+  position: absolute;
+  top: 800;
+  left: 400;
+  color: #3300ff;
+  font-size: 50px;
+  pointer-events: none;
+  opacity:0.3;
+  filter:Alpha(opacity=50);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+    </style>
+
+
+    <style type="text/css">
+ html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+
+
+
+
+    </style>
+    <style type="text/css">
+        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
+
+
+
+
+
+    </style>
+
+    <style type="text/css">
+        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div data-v-87ffcada="" class="article" id="watermark">
+        <p class="x">更多课程请加QQ群170701297</p>
+        <div data-v-87ffcada="" class="main main-app">
+            <h1 data-v-87ffcada="" class="article-title pd">
+                20讲案例篇：为什么系统的Swap变高了（下）
+            </h1>
+            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
+                                                                                        src="https://static001.geekbang.org/resource/image/d6/a5/d659372fca91ad6b4213c892c303a2a5.jpg">
+
+
+                <div data-v-87ffcada="" id="article-content" class="">
+                    <div class="text">
+                        <p>你好，我是倪朋飞。</p><p>上一节我们详细学习了 Linux 内存回收，特别是 Swap 的原理，先简单回顾一下。</p><p>在内存资源紧张时，Linux通过直接内存回收和定期扫描的方式，来释放文件页和匿名页，以便把内存分配给更需要的进程使用。</p><ul>
+<li>
+<p>文件页的回收比较容易理解，直接清空缓存，或者把脏数据写回磁盘后，再释放缓存就可以了。</p>
+</li>
+<li>
+<p>而对不常访问的匿名页，则需要通过Swap换出到磁盘中，这样在下次访问的时候，再次从磁盘换入到内存中就可以了。</p>
+</li>
+</ul><p>开启 Swap 后，你可以设置 /proc/sys/vm/min_free_kbytes ，来调整系统定期回收内存的阈值，也可以设置 /proc/sys/vm/swappiness ，来调整文件页和匿名页的回收倾向。</p><p>那么，当 Swap 使用升高时，要如何定位和分析呢？下面，我们就来看一个磁盘I/O的案例，实战分析和演练。</p><h2>案例</h2><p>下面案例基于 Ubuntu 18.04，同样适用于其他的 Linux 系统。</p><ul>
+<li>
+<p>机器配置：2 CPU，8GB 内存</p>
+</li>
+<li>
+<p>你需要预先安装 sysstat 等工具，如 apt install sysstat</p>
+</li>
+</ul><p>首先，我们打开两个终端，分别 SSH 登录到两台机器上，并安装上面提到的这些工具。</p><p>同以前的案例一样，接下来的所有命令都默认以 root 用户运行，如果你是用普通用户身份登陆系统，请运行 sudo su root 命令切换到 root 用户。</p><!-- [[[read_end]]] --><p>如果安装过程中有什么问题，同样鼓励你先自己搜索解决，解决不了的，可以在留言区向我提问。</p><p>然后，在终端中运行free命令，查看Swap的使用情况。比如，在我的机器中，输出如下：</p><pre><code>$ free
+             total        used        free      shared  buff/cache   available
+Mem:        8169348      331668     6715972         696     1121708     7522896
+Swap:             0           0           0
+</code></pre><p>从这个free输出你可以看到，Swap的大小是0，这说明我的机器没有配置Swap。</p><p>为了继续Swap的案例， 就需要先配置、开启Swap。如果你的环境中已经开启了Swap，那你可以略过下面的开启步骤，继续往后走。</p><p>要开启Swap，我们首先要清楚，Linux本身支持两种类型的Swap，即Swap分区和Swap文件。以Swap文件为例，在第一个终端中运行下面的命令开启Swap，我这里配置Swap文件的大小为8GB：</p><pre><code># 创建Swap文件
+$ fallocate -l 8G /mnt/swapfile
+# 修改权限只有根用户可以访问
+$ chmod 600 /mnt/swapfile
+# 配置Swap文件
+$ mkswap /mnt/swapfile
+# 开启Swap
+$ swapon /mnt/swapfile
+</code></pre><p>然后，再执行free命令，确认Swap配置成功：</p><pre><code>$ free
+             total        used        free      shared  buff/cache   available
+Mem:        8169348      331668     6715972         696     1121708     7522896
+Swap:       8388604           0     8388604
+</code></pre><p>现在，free  输出中，Swap 空间以及剩余空间都从 0 变成了8GB，说明Swap已经<strong>正常开启</strong>。</p><p>接下来，我们在第一个终端中，运行下面的 dd 命令，模拟大文件的读取：</p><pre><code># 写入空设备，实际上只有磁盘的读请求
+$ dd if=/dev/sda1 of=/dev/null bs=1G count=2048
+</code></pre><p>接着，在第二个终端中运行 sar 命令，查看内存各个指标的变化情况。你可以多观察一会儿，查看这些指标的变化情况。</p><pre><code># 间隔1秒输出一组数据
+# -r表示显示内存使用情况，-S表示显示Swap使用情况
+$ sar -r -S 1
+04:39:56    kbmemfree   kbavail kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
+04:39:57      6249676   6839824   1919632     23.50    740512     67316   1691736     10.22    815156    841868         4
+
+04:39:56    kbswpfree kbswpused  %swpused  kbswpcad   %swpcad
+04:39:57      8388604         0      0.00         0      0.00
+
+04:39:57    kbmemfree   kbavail kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
+04:39:58      6184472   6807064   1984836     24.30    772768     67380   1691736     10.22    847932    874224        20
+
+04:39:57    kbswpfree kbswpused  %swpused  kbswpcad   %swpcad
+04:39:58      8388604         0      0.00         0      0.00
+
+…
+
+
+04:44:06    kbmemfree   kbavail kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
+04:44:07       152780   6525716   8016528     98.13   6530440     51316   1691736     10.22    867124   6869332         0
+
+04:44:06    kbswpfree kbswpused  %swpused  kbswpcad   %swpcad
+04:44:07      8384508      4096      0.05        52      1.27
+</code></pre><p>我们可以看到，sar的输出结果是两个表格，第一个表格表示内存的使用情况，第二个表格表示Swap的使用情况。其中，各个指标名称前面的kb前缀，表示这些指标的单位是KB。</p><p>去掉前缀后，你会发现，大部分指标我们都已经见过了，剩下的几个新出现的指标，我来简单介绍一下。</p><ul>
+<li>
+<p>kbcommit，表示当前系统负载需要的内存。它实际上是为了保证系统内存不溢出，对需要内存的估计值。%commit，就是这个值相对总内存的百分比。</p>
+</li>
+<li>
+<p>kbactive，表示活跃内存，也就是最近使用过的内存，一般不会被系统回收。</p>
+</li>
+<li>
+<p>kbinact，表示非活跃内存，也就是不常访问的内存，有可能会被系统回收。</p>
+</li>
+</ul><p>清楚了界面指标的含义后，我们再结合具体数值，来分析相关的现象。你可以清楚地看到，总的内存使用率（%memused）在不断增长，从开始的23%一直长到了 98%，并且主要内存都被缓冲区（kbbuffers）占用。具体来说：</p><ul>
+<li>
+<p>刚开始，剩余内存（kbmemfree）不断减少，而缓冲区（kbbuffers）则不断增大，由此可知，剩余内存不断分配给了缓冲区。</p>
+</li>
+<li>
+<p>一段时间后，剩余内存已经很小，而缓冲区占用了大部分内存。这时候，Swap的使用开始逐渐增大，缓冲区和剩余内存则只在小范围内波动。</p>
+</li>
+</ul><p>你可能困惑了，为什么缓冲区在不停增大？这又是哪些进程导致的呢？</p><p>显然，我们还得看看进程缓存的情况。在前面缓存的案例中我们学过， cachetop 正好能满足这一点。那我们就来 cachetop 一下。</p><p>在第二个终端中，按下Ctrl+C停止sar命令，然后运行下面的cachetop命令，观察缓存的使用情况：</p><pre><code>$ cachetop 5
+12:28:28 Buffers MB: 6349 / Cached MB: 87 / Sort: HITS / Order: ascending
+PID      UID      CMD              HITS     MISSES   DIRTIES  READ_HIT%  WRITE_HIT%
+   18280 root     python                 22        0        0     100.0%       0.0%
+   18279 root     dd                  41088    41022        0      50.0%      50.0%
+</code></pre><p>通过cachetop的输出，我们看到，dd进程的读写请求只有50%的命中率，并且未命中的缓存页数（MISSES）为41022（单位是页）。这说明，正是案例开始时运行的dd，导致了缓冲区使用升高。</p><p>你可能接着会问，为什么Swap也跟着升高了呢？直观来说，缓冲区占了系统绝大部分内存，还属于可回收内存，内存不够用时，不应该先回收缓冲区吗？</p><p>这种情况，我们还得进一步通过 /proc/zoneinfo  ，观察剩余内存、内存阈值以及匿名页和文件页的活跃情况。</p><p>你可以在第二个终端中，按下Ctrl+C，停止cachetop命令。然后运行下面的命令，观察 /proc/zoneinfo 中这几个指标的变化情况：</p><pre><code># -d 表示高亮变化的字段
+# -A 表示仅显示Normal行以及之后的15行输出
+$ watch -d grep -A 15 'Normal' /proc/zoneinfo
+Node 0, zone   Normal
+  pages free     21328
+        min      14896
+        low      18620
+        high     22344
+        spanned  1835008
+        present  1835008
+        managed  1796710
+        protection: (0, 0, 0, 0, 0)
+      nr_free_pages 21328
+      nr_zone_inactive_anon 79776
+      nr_zone_active_anon 206854
+      nr_zone_inactive_file 918561
+      nr_zone_active_file 496695
+      nr_zone_unevictable 2251
+      nr_zone_write_pending 0
+</code></pre><p>你可以发现，剩余内存（pages_free）在一个小范围内不停地波动。当它小于页低阈值（pages_low) 时，又会突然增大到一个大于页高阈值（pages_high）的值。</p><p>再结合刚刚用 sar 看到的剩余内存和缓冲区的变化情况，我们可以推导出，剩余内存和缓冲区的波动变化，正是由于内存回收和缓存再次分配的循环往复。</p><ul>
+<li>
+<p>当剩余内存小于页低阈值时，系统会回收一些缓存和匿名内存，使剩余内存增大。其中，缓存的回收导致sar中的缓冲区减小，而匿名内存的回收导致了Swap的使用增大。</p>
+</li>
+<li>
+<p>紧接着，由于dd还在继续，剩余内存又会重新分配给缓存，导致剩余内存减少，缓冲区增大。</p>
+</li>
+</ul><p>其实还有一个有趣的现象，如果多次运行dd和sar，你可能会发现，在多次的循环重复中，有时候是Swap用得比较多，有时候Swap很少，反而缓冲区的波动更大。</p><p>换句话说，系统回收内存时，有时候会回收更多的文件页，有时候又回收了更多的匿名页。</p><p>显然，系统回收不同类型内存的倾向，似乎不那么明显。你应该想到了上节课提到的swappiness，正是调整不同类型内存回收的配置选项。</p><p>还是在第二个终端中，按下Ctrl+C停止watch命令，然后运行下面的命令，查看swappiness的配置：</p><pre><code>$ cat /proc/sys/vm/swappiness
+60
+</code></pre><p>swappiness显示的是默认值60，这是一个相对中和的配置，所以系统会根据实际运行情况，选择合适的回收类型，比如回收不活跃的匿名页，或者不活跃的文件页。</p><p>到这里，我们已经找出了Swap发生的根源。另一个问题就是，刚才的Swap到底影响了哪些应用程序呢？换句话说，Swap换出的是哪些进程的内存？</p><p>这里我还是推荐 proc文件系统，用来查看进程Swap换出的虚拟内存大小，它保存在 /proc/pid/status中的VmSwap中（推荐你执行man proc来查询其他字段的含义）。</p><p>在第二个终端中运行下面的命令，就可以查看使用Swap最多的进程。注意for、awk、sort都是最常用的Linux命令，如果你还不熟悉，可以用man来查询它们的手册，或上网搜索教程来学习。</p><pre><code># 按VmSwap使用量对进程排序，输出进程名称、进程ID以及SWAP用量
+$ for file in /proc/*/status ; do awk '/VmSwap|Name|^Pid/{printf $2 &quot; &quot; $3}END{ print &quot;&quot;}' $file; done | sort -k 3 -n -r | head
+dockerd 2226 10728 kB
+docker-containe 2251 8516 kB
+snapd 936 4020 kB
+networkd-dispat 911 836 kB
+polkitd 1004 44 kB
+</code></pre><p>从这里你可以看到，使用Swap比较多的是dockerd 和 docker-containe 进程，所以，当dockerd再次访问这些换出到磁盘的内存时，也会比较慢。</p><p>这也说明了一点，虽然缓存属于可回收内存，但在类似大文件拷贝这类场景下，系统还是会用Swap机制来回收匿名内存，而不仅仅是回收占用绝大部分内存的文件页。</p><p>最后，如果你在一开始配置了 Swap，不要忘记在案例结束后关闭。你可以运行下面的命令，关闭Swap：</p><pre><code>$ swapoff -a
+</code></pre><p>实际上，关闭Swap后再重新打开，也是一种常用的Swap空间清理方法，比如：</p><pre><code>$ swapoff -a &amp;&amp; swapon -a 
+</code></pre><h2>小结</h2><p>在内存资源紧张时，Linux 会通过 Swap ，把不常访问的匿名页换出到磁盘中，下次访问的时候再从磁盘换入到内存中来。你可以设置/proc/sys/vm/min_free_kbytes，来调整系统定期回收内存的阈值；也可以设置/proc/sys/vm/swappiness，来调整文件页和匿名页的回收倾向。</p><p>当Swap变高时，你可以用 sar、/proc/zoneinfo、/proc/pid/status等方法，查看系统和进程的内存使用情况，进而找出Swap升高的根源和受影响的进程。</p><p>反过来说，通常，降低Swap的使用，可以提高系统的整体性能。要怎么做呢？这里，我也总结了几种常见的降低方法。</p><ul>
+<li>
+<p>禁止Swap，现在服务器的内存足够大，所以除非有必要，禁用Swap就可以了。随着云计算的普及，大部分云平台中的虚拟机都默认禁止Swap。</p>
+</li>
+<li>
+<p>如果实在需要用到Swap，可以尝试降低swappiness的值，减少内存回收时Swap的使用倾向。</p>
+</li>
+<li>
+<p>响应延迟敏感的应用，如果它们可能在开启Swap的服务器中运行，你还可以用库函数 mlock() 或者 mlockall()锁定内存，阻止它们的内存换出。</p>
+</li>
+</ul><h2>思考</h2><p>最后，给你留一个思考题。</p><p>今天的案例中，swappiness使用的是默认配置的60。如果把它配置成0的话，还会发生Swap吗？这又是为什么呢？</p><p>希望你可以实际操作一下，重点观察sar的输出，并结合今天的内容来记录、总结。</p><p>欢迎留言和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg" alt=""></p>
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
+                    data-v-87ffcada="">精选留言</span></h2>
+                <ul data-v-87ffcada="">
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Free_fish</span>
+                            </div>
+                            <div class="bd">用smem --sort swap命令可以直接将进程按照swap使用量排序显示 <br></div>
+                            <span class="time">2019-01-04 20:29</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍 谢谢分享</p>
+                                <p class="reply-time">2019-01-04 22:33</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/07/1e/bdbe93f4.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">尘封</span>
+                            </div>
+                            <div class="bd">$ swapoff -a &amp;&amp; swapon -a，线上使用这个命令释放swap有什么风险吗？ <br></div>
+                            <span class="time">2019-01-04 07:55</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">有的，使用了swap说明内存可能有压力了，这么强制换入有可能导致内存问题</p>
+                                <p class="reply-time">2019-01-10 20:58</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Geek_2b6807</span>
+                            </div>
+                            <div class="bd">希望老师在用工具的时候能够使用对内核版本要求不高的，毕竟生产环境用较新内核的还是比较少 <br></div>
+                            <span class="time">2019-01-04 00:27</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/7c/10/165cb374.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Scott</span>
+                            </div>
+                            <div class="bd">答案不是上一讲有提到吗，就算设置为0，如果空闲内存+文件页 &lt; page_low，还是会发生swap，这个值是设置swap的积极程度，就算最不积极，被逼无奈还是得swap的。 <br></div>
+                            <span class="time">2019-01-04 13:48</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">👍 是的</p>
+                                <p class="reply-time">2019-01-12 10:13</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">ninuxer</span>
+                            </div>
+                            <div class="bd">打卡day21<br>按我的理解，swapness只是几率，并不意味着一定，所以还是会发生匿名页交换，只是几率小点 <br></div>
+                            <span class="time">2019-01-04 08:47</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/99/ba/f8db012f.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">流转千回</span>
+                            </div>
+                            <div class="bd">打卡，老师这么晚还在更新专栏，致敬！ <br></div>
+                            <span class="time">2019-01-04 00:36</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLz5feictl6uxOFeth2zrO7LPOZKk0mvzIBYD9ic5EyGB39dicBbkYsIYoqqBsibJFo0fDicxN0CUt2dAQ/132" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">berryfl</span>
+                            </div>
+                            <div class="bd">&#47;proc&#47;*&#47;status会匹配到self之类的特殊目录，把匹配的部分写复杂点可以限制到仅数字，例如+([0-9]) <br></div>
+                            <span class="time">2019-01-10 13:32</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">嗯，是的</p>
+                                <p class="reply-time">2019-01-10 20:42</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/0f/84/d8e63885.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">仲鬼</span>
+                            </div>
+                            <div class="bd">老师好，我研究man sar后还是没理解kbcommit，这个估计值具体指什么呢？<br>就算单纯以不导致OOM的最小内存理解，为什么会小于kbmemused（已用物理内存）呢？我认为应该是kbcommit &gt;= kbmemused。 <br></div>
+                            <span class="time">2019-01-09 20:45</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">kbcommit就是进程申请的内存之和，kbmemused还包括了buffer和cache</p>
+                                <p class="reply-time">2019-01-10 20:54</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">白华</span>
+                            </div>
+                            <div class="bd">我写的dd参数就是大文件系统的数据，一共就20g存储的虚拟机，传的是&#47;dev&#47;root文件系统 有10g 需要写好久，实验现象和您描述的差不多，但是swap就是没变化 <br></div>
+                            <span class="time">2019-01-07 18:00</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">swap开了吗？swapiness配置的什么</p>
+                                <p class="reply-time">2019-01-09 18:20</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/86/9a/4231fb93.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">AA</span>
+                            </div>
+                            <div class="bd">请问min_free_kbytes一般设置多少？ <br></div>
+                            <span class="time">2019-01-07 08:45</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">用系统默认值就可以，除非发现问题才建议调整</p>
+                                <p class="reply-time">2019-01-07 17:44</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/86/9a/4231fb93.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">AA</span>
+                            </div>
+                            <div class="bd">请教下min_free_kbytes一般设置多少？ <br></div>
+                            <span class="time">2019-01-07 08:10</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">系统默认值就可以</p>
+                                <p class="reply-time">2019-01-07 17:44</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">dexter</span>
+                            </div>
+                            <div class="bd">当前全部进程VmSwap的使用量的总和是不是就是free里面swap中的used的使用量？ <br></div>
+                            <span class="time">2019-01-06 21:50</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">腾达</span>
+                            </div>
+                            <div class="bd">第一次启动虚拟机按照步骤操作，swpused发现高起来好多，后来几次不知道为什么swpused高不起来了，始终维持2%上下。第一次和后面几次的差异就是第一次运行后，去安装了smem，然后重启了机器几次，系统的默认参数都没改过 <br></div>
+                            <span class="time">2019-01-06 17:16</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">试试调整 dd 参数，可能是你的内存大得多，可以多读一些数据</p>
+                                <p class="reply-time">2019-01-07 17:50</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">白华</span>
+                            </div>
+                            <div class="bd">在centos系统操作还是会有区别，我的swap分的2G，但是一点都没有用到，kbswpfree总是不变，即使memused达到了98%以上，就看到了kbswpfree的波动。 <br></div>
+                            <span class="time">2019-01-06 13:58</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">详细的现象是什么？试试调大dd的参数读更多的数据？</p>
+                                <p class="reply-time">2019-01-07 17:52</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">风飘，吾独思</span>
+                            </div>
+                            <div class="bd">打卡 <br></div>
+                            <span class="time">2019-01-06 00:53</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/da/ec/779c1a78.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">往事随风，顺其自然</span>
+                            </div>
+                            <div class="bd">现在变化不大，按照比例操作 <br></div>
+                            <span class="time">2019-01-05 21:04</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/da/ec/779c1a78.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">往事随风，顺其自然</span>
+                            </div>
+                            <div class="bd">centos 没有kbactive 和kbinact 活跃内部的和非活跃内存的情况 <br></div>
+                            <span class="time">2019-01-05 20:43</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">无名老卒</span>
+                            </div>
+                            <div class="bd">请问老师这个是表示什么意思？我这台机器上面的Normal、Movable、Device下面的数值都是零。<br><br># grep Node &#47;proc&#47;zoneinfo<br>Node 0, zone      DMA<br>Node 0, zone    DMA32<br>Node 0, zone   Normal<br>Node 0, zone  Movable<br>Node 0, zone   Device <br></div>
+                            <span class="time">2019-01-05 00:01</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/14/5a/3d/1a1754f2.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Geek_37593b</span>
+                            </div>
+                            <div class="bd">打卡 <br></div>
+                            <span class="time">2019-01-04 23:16</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/13/57/6e/dd0eee5f.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">夜空中最亮的星（华仔）</span>
+                            </div>
+                            <div class="bd">swappiness 使用的是默认配置的 60。如果把它配置为0 还会使用 swap 吗？ <br>会使用的 ，为0 是最大限度不用，不是一定不用。 <br></div>
+                            <span class="time">2019-01-04 17:34</span>
+                            
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

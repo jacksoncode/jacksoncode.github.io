@@ -1,0 +1,553 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+#watermark {
+
+  position: relative;
+  overflow: hidden;
+}
+
+#watermark .x {
+  position: absolute;
+  top: 800;
+  left: 400;
+  color: #3300ff;
+  font-size: 50px;
+  pointer-events: none;
+  opacity:0.5;
+  filter:Alpha(opacity=50);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+    </style>
+
+
+    <style type="text/css">
+ html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+
+
+
+
+    </style>
+    <style type="text/css">
+        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
+
+
+
+
+
+    </style>
+
+    <style type="text/css">
+        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div data-v-87ffcada="" class="article" id="watermark">
+        <p class="x">所有最新极客时间课程请加QQ1046877154</p>
+        <div data-v-87ffcada="" class="main main-app">
+            <h1 data-v-87ffcada="" class="article-title pd">
+                04讲如何发布和引用服务？
+            </h1>
+            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
+                                                                                        src="https://static001.geekbang.org/resource/image/4c/f6/4c1e8ef28bd26d5cf16f5c1bce4f0cf6.jpg">
+
+
+                <div data-v-87ffcada="" id="article-content" class="">
+                    <div class="text">
+                        <p>从这期开始，我将陆续给你讲解微服务各个基本组件的原理和实现方式。</p>
+<p>今天我要与你分享的第一个组件是<span class="orange">服务发布和引用</span>。我在前面说过，想要构建微服务，首先要解决的问题是，<strong>服务提供者如何发布一个服务，服务消费者如何引用这个服务</strong>。具体来说，就是这个服务的接口名是什么？调用这个服务需要传递哪些参数？接口的返回值是什么类型？以及一些其他接口描述信息。</p>
+<p>我前面说过，最常见的服务发布和引用的方式有三种：</p>
+<ul>
+<li>
+<p>RESTful API</p>
+</li>
+<li>
+<p>XML配置</p>
+</li>
+<li>
+<p>IDL文件</p>
+</li>
+</ul>
+<p>下面我就结合具体的实例，逐个讲解每一种方式的具体使用方法以及各自的应用场景，以便你在选型时作参考。</p>
+<h2>RESTful API</h2>
+<p>首先来说说RESTful API的方式，主要被<strong>用作HTTP或者HTTPS协议的接口定义</strong>，即使在非微服务架构体系下，也被广泛采用。</p>
+<p>下面是开源服务化框架<a href="http://github.com/weibocom/motan">Motan</a>发布RESTful API的例子，它发布了三个RESTful格式的API，接口声明如下：</p>
+<pre><code>@Path(&quot;/rest&quot;)
+ public interface RestfulService {
+     @GET
+     @Produces(MediaType.APPLICATION_JSON)
+     List&lt;User&gt; getUsers(@QueryParam(&quot;uid&quot;) int uid);
+ 
+     @GET
+     @Path(&quot;/primitive&quot;)
+     @Produces(MediaType.TEXT_PLAIN)
+     String testPrimitiveType();
+ 
+     @POST
+     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+     @Produces(MediaType.APPLICATION_JSON)
+     Response add(@FormParam(&quot;id&quot;) int id, @FormParam(&quot;name&quot;) String name);
+</code></pre><!-- [[[read_end]]] -->
+<p>具体的服务实现如下：</p>
+<pre><code>public class RestfulServerDemo implements RestfulService {
+        
+     @Override
+     public List&lt;User&gt; getUsers(@CookieParam(&quot;uid&quot;) int uid) {
+         return Arrays.asList(new User(uid, &quot;name&quot; + uid));
+     }
+ 
+     @Override
+     public String testPrimitiveType() {
+         return &quot;helloworld!&quot;;
+     }
+ 
+     @Override
+     public Response add(@FormParam(&quot;id&quot;) int id, @FormParam(&quot;name&quot;) String name) {
+         return Response.ok().cookie(new NewCookie(&quot;ck&quot;, String.valueOf(id))).entity(new User(id, name)).build();
+     }
+</code></pre>
+<p>服务提供者这一端通过部署代码到Tomcat中，并配置Tomcat中如下的web.xml，就可以通过servlet的方式对外提供RESTful API。</p>
+<pre><code>&lt;listener&gt;
+     &lt;listener-class&gt;com.weibo.api.motan.protocol.restful.support.servlet.RestfulServletContainerListener&lt;/listener-class&gt;
+ &lt;/listener&gt;
+
+ &lt;servlet&gt;
+     &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+     &lt;servlet-class&gt;org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher&lt;/servlet-class&gt;
+     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+     &lt;init-param&gt;
+         &lt;param-name&gt;resteasy.servlet.mapping.prefix&lt;/param-name&gt;
+         &lt;param-value&gt;/servlet&lt;/param-value&gt;  &lt;!-- 此处实际为servlet-mapping的url-pattern，具体配置见resteasy文档--&gt;
+     &lt;/init-param&gt;
+ &lt;/servlet&gt;
+
+ &lt;servlet-mapping&gt;
+     &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+     &lt;url-pattern&gt;/servlet/*&lt;/url-pattern&gt;
+ &lt;/servlet-mapping&gt;
+</code></pre>
+<p>这样服务消费者就可以通过HTTP协议调用服务了，因为HTTP协议本身是一个公开的协议，对于服务消费者来说几乎没有学习成本，所以比较适合用作跨业务平台之间的服务协议。比如你有一个服务，不仅需要在业务部门内部提供服务，还需要向其他业务部门提供服务，甚至开放给外网提供服务，这时候采用HTTP协议就比较合适，也省去了沟通服务协议的成本。</p>
+<h2>XML配置</h2>
+<p>接下来再来给你讲下XML配置方式，这种方式的服务发布和引用主要分三个步骤：</p>
+<ul>
+<li>
+<p>服务提供者定义接口，并实现接口。</p>
+</li>
+<li>
+<p>服务提供者进程启动时，通过加载server.xml配置文件将接口暴露出去。</p>
+</li>
+<li>
+<p>服务消费者进程启动时，通过加载client.xml配置文件来引入要调用的接口。</p>
+</li>
+</ul>
+<p>我继续以服务化框架Motan为例，它还支持以XML配置的方式来发布和引用服务。</p>
+<p>首先，服务提供者定义接口。</p>
+<pre><code>public interface FooService {
+    public String hello(String name);
+}
+</code></pre>
+<p>然后服务提供者实现接口。</p>
+<pre><code>public class FooServiceImpl implements FooService {
+
+    public String hello(String name) {
+        System.out.println(name + &quot; invoked rpc service&quot;);
+        return &quot;hello &quot; + name;
+    }
+}
+</code></pre>
+<p>最后服务提供者进程启动时，加载server.xml配置文件，开启8002端口监听。</p>
+<p>server.xml配置如下：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+ xmlns:motan=&quot;http://api.weibo.com/schema/motan&quot;
+ xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd&quot;&gt;
+
+    &lt;!-- service implemention bean --&gt;
+    &lt;bean id=&quot;serviceImpl&quot; class=&quot;quickstart.FooServiceImpl&quot; /&gt;
+    &lt;!-- exporting service by Motan --&gt;
+    &lt;motan:service interface=&quot;quickstart.FooService&quot; ref=&quot;serviceImpl&quot; export=&quot;8002&quot; /&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>服务提供者加载server.xml的代码如下：</p>
+<pre><code>import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Server {
+
+    public static void main(String[] args) throws InterruptedException {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;classpath:motan_server.xml&quot;);
+        System.out.println(&quot;server start...&quot;);
+    }
+}
+</code></pre>
+<p>服务消费者要想调用服务，就必须在进程启动时，加载配置client.xml，引用接口定义，然后发起调用。</p>
+<p>client.xml配置如下：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:motan=&quot;http://api.weibo.com/schema/motan&quot;
+xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd&quot;&gt;
+
+    &lt;!-- reference to the remote service --&gt;
+    &lt;motan:referer id=&quot;remoteService&quot; interface=&quot;quickstart.FooService&quot; directUrl=&quot;localhost:8002&quot;/&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>服务消费者启动时，加载client.xml的代码如下。</p>
+<pre><code>import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+
+public class Client {
+
+    public static void main(String[] args) throws InterruptedException {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;classpath:motan_client.xml&quot;);
+        FooService service = (FooService) ctx.getBean(&quot;remoteService&quot;);
+        System.out.println(service.hello(&quot;motan&quot;));
+    }
+}
+</code></pre>
+<p>就这样，通过在服务提供者和服务消费者之间维持一份对等的XML配置文件，来保证服务消费者按照服务提供者的约定来进行服务调用。在这种方式下，如果服务提供者变更了接口定义，不仅需要更新服务提供者加载的接口描述文件server.xml，还需要同时更新服务消费者加载的接口描述文件client.xml。</p>
+<p>一般是私有RPC框架会选择XML配置这种方式来描述接口，因为私有RPC协议的性能要比HTTP协议高，所以在对性能要求比较高的场景下，采用XML配置的方式比较合适。但这种方式对业务代码侵入性比较高，XML配置有变更的时候，服务消费者和服务提供者都要更新，所以适合公司内部联系比较紧密的业务之间采用。如果要应用到跨部门之间的业务调用，一旦有XML配置变更，需要花费大量精力去协调不同部门做升级工作。在我经历的实际项目里，就遇到过一次底层服务的接口升级，需要所有相关的调用方都升级，为此花费了大量时间去协调沟通不同部门之间的升级工作，最后经历了大半年才最终完成。所以对于XML配置方式的服务描述，一旦应用到多个部门之间的接口格式约定，如果有变更，最好是新增接口，不到万不得已不要对原有的接口格式做变更。</p>
+<h2>IDL文件</h2>
+<p>IDL就是接口描述语言（interface description language）的缩写，通过一种中立的方式来描述接口，使得在不同的平台上运行的对象和不同语言编写的程序可以相互通信交流。比如你用Java语言实现提供的一个服务，也能被PHP语言调用。</p>
+<p>也就是说IDL主要是<strong>用作跨语言平台的服务之间的调用</strong>，有两种最常用的IDL：一个是Facebook开源的<strong>Thrift协议</strong>，另一个是Google开源的<strong>gRPC协议</strong>。无论是Thrift协议还是gRPC协议，它们的工作原理都是类似的。</p>
+<p>接下来，我以gRPC协议为例，给你讲讲如何使用IDL文件方式来描述接口。</p>
+<p>gRPC协议使用Protobuf简称proto文件来定义接口名、调用参数以及返回值类型。</p>
+<p>比如文件helloword.proto定义了一个接口SayHello方法，它的请求参数是HelloRequest，它的返回值是HelloReply。</p>
+<pre><code>// The greeter service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}  
+</code></pre>
+<p>假如服务提供者使用的是Java语言，那么利用protoc插件即可自动生成Server端的Java代码。</p>
+<pre><code>private class GreeterImpl extends GreeterGrpc.GreeterImplBase {
+
+  @Override
+  public void sayHello(HelloRequest req, StreamObserver&lt;HelloReply&gt; responseObserver) {
+    HelloReply reply = HelloReply.newBuilder().setMessage(&quot;Hello &quot; + req.getName()).build();
+    responseObserver.onNext(reply);
+    responseObserver.onCompleted();
+  }
+
+  @Override
+  public void sayHelloAgain(HelloRequest req, StreamObserver&lt;HelloReply&gt; responseObserver) {
+    HelloReply reply = HelloReply.newBuilder().setMessage(&quot;Hello again &quot; + req.getName()).build();
+    responseObserver.onNext(reply);
+    responseObserver.onCompleted();
+  }
+}
+</code></pre>
+<p>假如服务消费者使用的也是Java语言，那么利用protoc插件即可自动生成Client端的Java代码。</p>
+<pre><code>public void greet(String name) {
+  logger.info(&quot;Will try to greet &quot; + name + &quot; ...&quot;);
+  HelloRequest request = HelloRequest.newBuilder().setName(name).build();
+  HelloReply response;
+  try {
+    response = blockingStub.sayHello(request);
+  } catch (StatusRuntimeException e) {
+    logger.log(Level.WARNING, &quot;RPC failed: {0}&quot;, e.getStatus());
+    return;
+  }
+  logger.info(&quot;Greeting: &quot; + response.getMessage());
+  try {
+    response = blockingStub.sayHelloAgain(request);
+  } catch (StatusRuntimeException e) {
+    logger.log(Level.WARNING, &quot;RPC failed: {0}&quot;, e.getStatus());
+    return;
+  }
+  logger.info(&quot;Greeting: &quot; + response.getMessage());
+}  
+</code></pre>
+<p>假如服务消费者使用的是PHP语言，那么利用protoc插件即可自动生成Client端的PHP代码。</p>
+<pre><code>    $request = new Helloworld\HelloRequest();
+    $request-&gt;setName($name);
+    list($reply, $status) = $client-&gt;SayHello($request)-&gt;wait();
+    $message = $reply-&gt;getMessage();
+    list($reply, $status) = $client-&gt;SayHelloAgain($request)-&gt;wait();
+    $message = $reply-&gt;getMessage(); 
+</code></pre>
+<p>由此可见，gRPC协议的服务描述是通过proto文件来定义接口的，然后再使用protoc来生成不同语言平台的客户端和服务端代码，从而具备跨语言服务调用能力。</p>
+<p>有一点特别需要注意的是，在描述接口定义时，IDL文件需要对接口返回值进行详细定义。如果接口返回值的字段比较多，并且经常变化时，采用IDL文件方式的接口定义就不太合适了。一方面可能会造成IDL文件过大难以维护，另一方面只要IDL文件中定义的接口返回值有变更，都需要同步所有的服务消费者都更新，管理成本就太高了。</p>
+<p>我在项目实践过程中，曾经考虑过采用Protobuf文件来描述微博内容接口，但微博内容返回的字段有几百个，并且有些字段不固定，返回什么字段是业务方自定义的，这种情况采用Protobuf文件来描述的话会十分麻烦，所以最终不得不放弃这种方式。</p>
+<h2>总结</h2>
+<p>今天我给你介绍了服务描述最常见的三种方式：RESTful API、XML配置以及IDL文件。</p>
+<p>具体采用哪种服务描述方式是根据实际情况决定的，通常情况下，如果只是企业内部之间的服务调用，并且都是Java语言的话，选择XML配置方式是最简单的。如果企业内部存在多个服务，并且服务采用的是不同语言平台，建议使用IDL文件方式进行描述服务。如果还存在对外开放服务调用的情形的话，使用RESTful API方式则更加通用。</p>
+<p><img src="https://static001.geekbang.org/resource/image/6f/99/6fb77c7f56052f945d09f1e8f20d0099.png" alt="" /></p>
+<h2>思考题</h2>
+<p>针对你的业务场景思考一下，假如要进行服务化，你觉得使用哪种服务描述最合适？为什么？</p>
+<p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
+<p><img src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg" alt="" /></p>
+
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
+                    data-v-87ffcada="">精选留言</span></h2>
+                <ul data-v-87ffcada="">
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/d4/f3/b73d8abf.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">三木子</span>
+                            </div>
+                            <div class="bd">老师可否提供一个微博的restfull api设计规范文档呢？想要学习下。 <br></div>
+                            <span class="time">2018-08-30 09:35</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/01/f4/3dc9bcce.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">钟悠</span>
+                            </div>
+                            <div class="bd">边看文章，边想dubbo <br></div>
+                            <span class="time">2018-08-30 09:01</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/e5/df/0c8e3fdc.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">小胖狗</span>
+                            </div>
+                            <div class="bd">我们这边是这样的。同一个服务，对内提供的话就使用RPC，对外提供的话，就走Restful API <br></div>
+                            <span class="time">2018-08-30 09:02</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/b3/c5/7fc124e2.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Liam</span>
+                            </div>
+                            <div class="bd">三种方式都用过：<br><br>A项目使用Consul，对应restful<br>B项目使用dubbo, 对应XML<br>C项目涉及java和python服务之间调用，使用thrift，对应IDL <br></div>
+                            <span class="time">2018-08-30 19:27</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/2a/4c/393ebc45.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">岳阳楼</span>
+                            </div>
+                            <div class="bd">没理解说IDL兼容的问题，查了一下，Protobuf是支持版本兼容的，新增字段或者删除字段都可以兼容。能细致的讲一下您对这个的见解么，谢谢！ <br></div>
+                            <span class="time">2018-08-30 11:30</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/a0/bb/a7dc0dd3.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">王江华</span>
+                            </div>
+                            <div class="bd">目前我们用的php+thirft，还没有做服务注册，服务化刚刚开始，后续还有好多坑要趟 <br></div>
+                            <span class="time">2018-08-30 10:46</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/04/18/07ee18ad.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">明天更美好</span>
+                            </div>
+                            <div class="bd">我觉得我们如果做的话，xml方式适合，我们对性能要求交高，对在提供能力要求1.5wtps，响应60ms以内，所以xml比较合适，但是我还想请教胡老师一个问题，就是我们目前还是单体应用，有23接口，就认证接口并发交高，有必要做微服务吗？目前光tomcat部署了30多个，感觉好烦，每次升级换包老半天。而且是没网部署。 <br></div>
+                            <span class="time">2018-08-30 08:40</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/09/42/b7a406c9.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">Hurt</span>
+                            </div>
+                            <div class="bd">目前 微服务 还是以java为主吗 老师 <br></div>
+                            <span class="time">2018-08-30 07:16</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/6b/f8/abb7bfe3.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">A:春哥大魔王</span>
+                            </div>
+                            <div class="bd">请问在rpc调用和mq调用之间怎样做取舍，因为很多场景下两者之间的选择貌似都可以呢 <br></div>
+                            <span class="time">2018-08-30 10:46</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/d4/f3/b73d8abf.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">三木子</span>
+                            </div>
+                            <div class="bd">现在的服务是通过dubbo xml配置服务访问。将以前的一个应用拆分成两个独立服务，一个基础服务，一个业务服务，业务依赖基础服务。基础服务只服务于业务，所以用xml配置引用比较高效。业务对外提供服务restfull api，共别的系统调用！ <br></div>
+                            <span class="time">2018-08-30 09:52</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/d4/c2/910d231e.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">oddrock</span>
+                            </div>
+                            <div class="bd">老师好，提一个问题。<br>您说：“在这种方式下，如果服务提供者变更了接口定义，不仅需要更新服务提供者加载的接口描述文件 server.xml，还需要同时更新服务消费者加载的接口描述文件 client.xml。”<br><br>Xml文件里其实只有一行bean的配置和一行服务描述的配置，改起来并不麻烦啊，不知道老师你说的xml配置修改会带来较大麻烦指的是什么。<br>另外，这种情况，是需要服务端和客户端共享接口定义java类的，一旦出现变动，接口定义java类也要都改动吧。<br>但我还是对这种方式变更起来麻烦没有直观认识。 <br></div>
+                            <span class="time">2018-08-30 09:42</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/a7/e6/4ce4016f.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">不够</span>
+                            </div>
+                            <div class="bd">我司的微服务大多数都是内部调用，比较在意性能，采用的xml，依赖相同的api接口，有接口变更时，一般就升级接口 <br></div>
+                            <span class="time">2018-08-30 09:20</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/11/15/69/fc60d1f4.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">陈华应</span>
+                            </div>
+                            <div class="bd">一般是两种结合，各个服务之间的调用通过xml的形式，对外暴露restful接口，如给前端调用等。dubbo，pigeon， springboot实现两种不同形式的服务接口定义与调用。目前都是JAVA，还没有涉及到多语言。 <br></div>
+                            <span class="time">2018-08-30 09:12</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/ba/80/2b427c9c.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">libocz</span>
+                            </div>
+                            <div class="bd">三种方式不都是跨语言的吗？RESTful API采用http协议，XML采用RPC，这两者之间因为不同的协议存在效率问题可以理解。但是IDL文件这种方式好像相比前两种，没有特别的优势，还需要使用工具来生成不同语言的版本，相比前两种似乎更为麻烦，而又没有明显的优点。求老师点明<br><br>  <br></div>
+                            <span class="time">2018-09-15 18:13</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/67/af/b2df8ca6.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">耳东陈</span>
+                            </div>
+                            <div class="bd">服务规范、服务描述之前通过文档规范，稍有改动跨部门沟通简直就是噩梦，现在使用Swagger 轻松解决问题 <br></div>
+                            <span class="time">2018-09-04 08:22</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/85/4c/400f817c.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">heigh</span>
+                            </div>
+                            <div class="bd">请教，idl走的七层还是四层协议？ <br></div>
+                            <span class="time">2018-09-01 09:54</span>
+                            
+                            <div class="reply">
+                                <div class="reply-hd"><span>作者回复</span></div>
+                                <p class="reply-content">idl跟通信协议无关，grpc用的是http2，可以理解是七层，thrift用的是tcp，四层</p>
+                                <p class="reply-time">2018-09-04 10:12</p>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/10/5a/a8/f25ec64c.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">long.mr</span>
+                            </div>
+                            <div class="bd">老师，刚刚说的消息字段太多的时候proto文件中添加字段的修改成本很大，实际上指的的是编译 发布成本吗? 就是依赖该服务端模块需要重新编译是吧?那字段多的时候应该考虑哪种方式呢，xml配置起来好麻烦，restful的话 同样也需要告知业务方让他们修改对应的客户端。 感觉好难选择，个人认为内部的话统一使用proto，对外提供服务时候，用rpc搭建一个http的server也是挺方便的吧。 <br></div>
+                            <span class="time">2018-09-01 00:01</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/12/0c/42/fbd028c2.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">feimeng0532</span>
+                            </div>
+                            <div class="bd">微博内容不用protobuf，用的什么？ <br></div>
+                            <span class="time">2018-08-30 21:36</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="https://static001.geekbang.org/account/avatar/00/0f/fc/34/c733b116.jpg" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">何磊</span>
+                            </div>
+                            <div class="bd">一个微服务应该能够同时支持rpc与http协议的调用。 <br></div>
+                            <span class="time">2018-08-30 21:10</span>
+                            
+                        </div>
+                    </li>
+                    
+                    <li data-v-87ffcada="" class="comment-item"><img
+                            src="" class="avatar">
+                        <div class="info">
+                            <div class="hd"><span class="username">郁</span>
+                            </div>
+                            <div class="bd">对内grpc，对外http+json <br></div>
+                            <span class="time">2018-08-30 08:31</span>
+                            
+                        </div>
+                    </li>
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
