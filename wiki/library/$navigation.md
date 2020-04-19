@@ -30,6 +30,8 @@
 - [基础-访问文件和网络](?file=010-Python/002-基础-访问文件和网络 "基础-访问文件和网络")
 - [常用方法](?file=010-Python/010-常用方法 "常用方法")
 - [有意思的第三方库](?file=010-Python/012-有意思的第三方库 "有意思的第三方库")
+- [第三方库](?file=010-Python/013-第三方库 "第三方库")
+- [常用代码模块](?file=010-Python/020-常用代码模块 "常用代码模块")
 - [保留两位小数的方法](?file=010-Python/021-保留两位小数的方法 "保留两位小数的方法")
 - [截取一部分字符串](?file=010-Python/022-截取一部分字符串 "截取一部分字符串")
 - [新手练习项目](?file=010-Python/090-新手练习项目 "新手练习项目")
@@ -59,6 +61,7 @@
 - [基本语法](?file=012-JavaScript/000-基本语法 "基本语法")
 - [阻止缓存](?file=012-JavaScript/090-阻止缓存 "阻止缓存")
 - [驼峰命名法](?file=012-JavaScript/099-驼峰命名法 "驼峰命名法")
+- [一行JS能做的事](?file=012-JavaScript/800-一行JS能做的事 "一行JS能做的事")
 
 ##### Java
 - [待添加](?file=013-Java/000-待添加 "待添加")
@@ -68,12 +71,22 @@
 - [批处理下载文件](?file=015-批处理/002-批处理下载文件 "批处理下载文件")
 - [使用批处理脚本创建html文件](?file=015-批处理/003-使用批处理脚本创建html文件 "使用批处理脚本创建html文件")
 
-##### Bash Shell
-- [Start](?file=016-Bash Shell/001-Start "Start")
-- [Linux 下各文件夹的结构说明及用途介绍](?file=016-Bash Shell/101-Linux 下各文件夹的结构说明及用途介绍 "Linux 下各文件夹的结构说明及用途介绍")
-- [九条命令在一分钟内检查Linux服务器性能](?file=016-Bash Shell/102-九条命令在一分钟内检查Linux服务器性能 "九条命令在一分钟内检查Linux服务器性能")
-- [55 个 Linux 教程和练手项目合集](?file=016-Bash Shell/800-55 个 Linux 教程和练手项目合集 "55 个 Linux 教程和练手项目合集")
-- [Linux中高效编写Bash脚本的10个技巧](?file=016-Bash Shell/801-Linux中高效编写Bash脚本的10个技巧 "Linux中高效编写Bash脚本的10个技巧")
+##### Linux
+- [Start](?file=016-Linux/001-Start "Start")
+- [Ubuntu升级操作](?file=016-Linux/010-Ubuntu升级操作 "Ubuntu升级操作")
+- [Linux 下各文件夹的结构说明及用途介绍](?file=016-Linux/101-Linux 下各文件夹的结构说明及用途介绍 "Linux 下各文件夹的结构说明及用途介绍")
+- [九条命令在一分钟内检查Linux服务器性能](?file=016-Linux/102-九条命令在一分钟内检查Linux服务器性能 "九条命令在一分钟内检查Linux服务器性能")
+- [zsh主题](?file=016-Linux/201-zsh主题 "zsh主题")
+- [55 个 Linux 教程和练手项目合集](?file=016-Linux/800-55 个 Linux 教程和练手项目合集 "55 个 Linux 教程和练手项目合集")
+- [Linux中高效编写Bash脚本的10个技巧](?file=016-Linux/801-Linux中高效编写Bash脚本的10个技巧 "Linux中高效编写Bash脚本的10个技巧")
+- [升级Ubuntu内核的几种方法](?file=016-Linux/802-升级Ubuntu内核的几种方法 "升级Ubuntu内核的几种方法")
+- [Shell健壮性的一些建议](?file=016-Linux/803-Shell健壮性的一些建议 "Shell健壮性的一些建议")
+- [Shell编程必备知识](?file=016-Linux/804-Shell编程必备知识 "Shell编程必备知识")
+- [netstat的替代者-ss命令详解](?file=016-Linux/805-netstat的替代者-ss命令详解 "netstat的替代者-ss命令详解")
+- [网络命令中的“瑞士军刀”--nc](?file=016-Linux/806-网络命令中的“瑞士军刀”--nc "网络命令中的“瑞士军刀”--nc")
+- [网络命令之-netstat](?file=016-Linux/807-网络命令之-netstat "网络命令之-netstat")
+- [如何快速修正Linux命令](?file=016-Linux/808-如何快速修正Linux命令 "如何快速修正Linux命令")
+- [shell检查神器](?file=016-Linux/809-shell检查神器 "shell检查神器")
 
 ##### 测试专业
 - [Web安全工程师](?file=030-测试专业/010-Web安全工程师 "Web安全工程师")
@@ -86,6 +99,7 @@
 ##### 小技巧
 - [使用CE无限使用百度云试用下载时间](?file=100-小技巧/000-使用CE无限使用百度云试用下载时间 "使用CE无限使用百度云试用下载时间")
 - [Windows系统图标混乱](?file=100-小技巧/001-Windows系统图标混乱 "Windows系统图标混乱")
+- [Chrome离线安装插件](?file=100-小技巧/002-Chrome离线安装插件 "Chrome离线安装插件")
 
 ##### 职场与职业规划
 - [阿里面试](?file=200-职场与职业规划/101-阿里面试 "阿里面试")
