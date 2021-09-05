@@ -126,6 +126,14 @@ conda env create -f environment.yml
   conda update python
   ````
 
+#### 删除无用的包
+
+````
+conda clean -p      //删除没有用的包
+conda clean -t      //tar打包
+conda clean -y -all //删除所有的安装包及cache
+````
+
 #### Conda 源
 ````bash
   # 添加Anaconda的TUNA镜像
