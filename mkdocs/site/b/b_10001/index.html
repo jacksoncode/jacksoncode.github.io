@@ -1,0 +1,1533 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
+    
+    
+      
+        <title>基础语法 - Jackson Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bb3983ee.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Jackson Docs" class="md-header__button md-logo" aria-label="Jackson Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Jackson Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基础语法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Jackson Docs" class="md-nav__button md-logo" aria-label="Jackson Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Jackson Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          学习Markdown
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="学习Markdown" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          学习Markdown
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a/a_10001/" class="md-nav__link">
+        Markdown快速开始
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a/a_10002/" class="md-nav__link">
+        Markdown徽章
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a/a_10003/" class="md-nav__link">
+        Markdown进阶
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          基础语法
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        基础语法
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    数值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    保留关键字
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    重新赋值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    多重赋值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    字符串
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    内置函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-if" class="md-nav__link">
+    条件分支-if
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    逻辑运算
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    逐步创建函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    For循环
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    While循环
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    集合
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    字典
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    字典词典
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    推导式
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b_10002/" class="md-nav__link">
+        进阶语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b_10003/" class="md-nav__link">
+        常用方法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c/c_10000.md" class="md-nav__link">
+        Go
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../d/d_10000.md" class="md-nav__link">
+        Linux
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          测试专业
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="测试专业" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          测试专业
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e/e_10001/" class="md-nav__link">
+        测试基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e/e_10002/" class="md-nav__link">
+        自动化测试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e/e_10003/" class="md-nav__link">
+        性能测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../f/f_10000/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          读书笔记
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="读书笔记" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          读书笔记
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g/g_10001/" class="md-nav__link">
+        我的书单
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g/g_10002/" class="md-nav__link">
+        单核工作法图解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g/g_10003/" class="md-nav__link">
+        高效读书的习惯
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../h/h_10000/" class="md-nav__link">
+        金融理财
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    数值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    保留关键字
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    重新赋值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    多重赋值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    字符串
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    内置函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-if" class="md-nav__link">
+    条件分支-if
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    逻辑运算
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    逐步创建函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    For循环
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    While循环
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    集合
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    字典
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    字典词典
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    推导式
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="-">基础-基本语法</h1>
+<div class="toc">
+<ul>
+<li><a href="#-">基础-基本语法</a><ul>
+<li><a href="#_1">数值</a></li>
+<li><a href="#_2">保留关键字</a></li>
+<li><a href="#_3">重新赋值</a></li>
+<li><a href="#_4">多重赋值</a></li>
+<li><a href="#_5">字符串</a></li>
+<li><a href="#_6">内置函数</a></li>
+<li><a href="#_7">方法</a></li>
+<li><a href="#_8">函数</a></li>
+<li><a href="#-if">条件分支-if</a></li>
+<li><a href="#_9">逻辑运算</a></li>
+<li><a href="#_10">逐步创建函数</a></li>
+<li><a href="#_11">列表</a></li>
+<li><a href="#for">For循环</a></li>
+<li><a href="#while">While循环</a></li>
+<li><a href="#_12">集合</a></li>
+<li><a href="#_13">字典</a></li>
+<li><a href="#_14">字典词典</a></li>
+<li><a href="#_15">推导式</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="_1">数值</h3>
+<ul>
+<li>即使一个整数可以整除另一个整数，其结果也将是一个浮点数</li>
+<li>一个整数和一个浮点数的运算将生成一个浮点数</li>
+<li>如需要生成一个浮点数，包括一个小数点即可！如果数字本身是一个整数，也没关系，甚至不必在小数点之后添加任何内容
+  ````python<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>33.
+  33.0
+  ````</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>手动将一个数值类型转换为另一个数值类型，这可通过 int() 和 float() 构造这些类型的新对象来实现。</li>
+<li>将一个浮点数转换成整数时，小数点后的部分会被去除，而不是数学中的四舍五入。</li>
+<li>变量名中只能使用普通字母、数字和下划线，且以字母或下划线开头。</li>
+<li>命名规则还是遵循驼峰命名法，变量用下划线间隔，函数用驼峰。</li>
+<li>行尾不需要以分号结束。</li>
+<li>以4个空格为缩进，标识代码块，不需要花括号{}。</li>
+<li>定义变量可以直接写，并赋值，而不需要前面加关键字，比如<code>var</code>、<code>define</code>之类的。</li>
+</ul>
+<pre><code class="language-py">name = Jackson
+age = 23
+</code></pre>
+<p><strong>运算符：</strong></p>
+<ul>
+<li>除了基本的<code>+-*/</code>运算符, <code>**</code>表示n次方，比如 <code>3**2</code>表示3的2次方。</li>
+<li>python中没有其他语言的<code>i++</code>，但是可以用 <code>i+=1</code>来表示，同样的 <code>-=</code>、<code>*=</code>、<code>/=</code>同样的有效。</li>
+<li><code>//</code>取整，<code>%</code>取余。</li>
+</ul>
+<h3 id="_2">保留关键字</h3>
+<pre><code>False      class      finally    is         return
+None       continue   for        lambda     try
+True       def        from       nonlocal   while
+and        del        global     not        with
+as         elif       if         or         yield
+assert     else       import     pass
+break      except     in         raise
+</code></pre>
+<h3 id="_3">重新赋值</h3>
+<pre><code class="language-python">  &gt;&gt;&gt; manila_pop += 1675 # manila_pop = manila_pop + 1675
+  &gt;&gt;&gt; manila_pop -= 250 # manila_pop = manila_pop - 1675
+  &gt;&gt;&gt; manila_pop *= 0.9 # manila_pop = manila_pop * 0.9
+  &gt;&gt;&gt; manila_area /=  2 # manila_area = manila_area / 2
+</code></pre>
+<h3 id="_4">多重赋值</h3>
+<p>也可以在一行代码中为两个变量赋值：</p>
+<pre><code class="language-python">savings = 514.86
+salary = 320.51
+
+savings, salary = 514.86, 320.51
+</code></pre>
+<h3 id="_5">字符串</h3>
+<ul>
+<li><code>+</code>可用于字符串的拼接。</li>
+<li>字符串中包含引号的时候，最外层用单引号，内层字符串用双引号，区分开来。</li>
+<li>使用反斜杠（\）来转义</li>
+</ul>
+<h3 id="_6">内置函数</h3>
+<ul>
+<li>字符串长度：<code>len()</code>，如果括号内的内容不是字符类型，则会报错</li>
+<li>变量类型：<code>type()</code></li>
+<li>数据类型转换：<code>int()</code>、<code>str()</code>、<code>float()</code>、<code>bool()</code></li>
+</ul>
+<h3 id="_7">方法</h3>
+<p>语法：<code>name_string.islower()</code></p>
+<p>和javascript类似。</p>
+<ul>
+<li>判断字符串是否全部小写：<code>islower()</code></li>
+<li>返回字符串中子字符串出现的次数：<code>count()</code>
+  ````py<blockquote>
+<blockquote>
+<blockquote>
+<p>"One fish, two fish, red fish, blue fish.".count('fish')
+  4
+  ````</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>字符串转换成小写：<code>lower()</code></li>
+<li>字符串转换成大写：<code>upper()</code></li>
+<li>字符串每个单词的首字母大写：<code>title()</code></li>
+<li>去除字符串左侧空格：<code>lstrip()</code></li>
+<li>去除字符串右侧空格：<code>rstrip()</code></li>
+<li>去除字符串两侧空格：<code>strip()</code></li>
+</ul>
+<h3 id="_8">函数</h3>
+<p><strong>语法：</strong></p>
+<pre><code class="language-py">def cylinder_volume(height, radius):
+    pi = 3.14159
+    return height * pi * radius ** 2
+</code></pre>
+<p><img alt="" src="assets/010/20171122-11f0263b.png" /></p>
+<p><strong>函数头</strong>
+1. def 关键字表示以下代码即函数定义。
+2. def 后跟的是函数的名称，在这个例子中是<code>cylinder_volume</code>。函数名称应该是一个单词，中间没有空格，这是为什么在这个名称中有一个下划线。
+3. 函数定义第一行的最后一个元素是函数所需的参数（函数名的规则与变量名的规则相同）。函数的参数是调用函数时传入的值；在函数体中将使用这些参数。用逗号隔开参数，并将它们放在一对括号中。如果编写一个不带参数的函数，应使用一对空括号 ()。函数定义的第一行以冒号 : 结尾。</p>
+<p>这是一个不带参数的函数示例：</p>
+<pre><code class="language-py">def print_greeting():
+    print('Hello World!')
+</code></pre>
+<p><strong>函数体</strong>
+4. <strong>使用四个空格缩进函数体</strong>。函数体是函数发挥作用的载体。我们可以在函数体内引用参数变量，以及定义新的变量。在此定义的<code>pi</code> 变量是一个局部变量，这意味着它只能在<code>cylinder_volume</code>函数的函数体中使用。在其他地方尝试访问该变量会导致错误。
+5. 使用 <code>return</code>关键字可获取函数结果。<code>return</code>之后的表达式值是函数的输出值。
+6. 在这个示例中，我们返回一个表达式（即圆柱体积的公式）的值。请注意，在表达式的其他部分之前先计算<code>radius ** 2</code>，原因是在数学运算顺序中，先运算乘方，再运算乘法。（也就是说，增加一对额外括号不会有什么坏处，特别是在涉及大量数学运算的表达式中，首先计算哪个运算可能会出现混淆。返回<code>height * pi * (radius ** 2)</code>即可。）如果不用表达式返回值，替代方法是提前在函数体中计算体积，然后将其存储在名为 <code>volume</code> 的变量中，这将使我们可以 <code>return volume</code>。</p>
+<p><strong>记录函数</strong></p>
+<p>文档字符串（也称为 "docstrings"）。Docstrings 是一种用于解释函数目的以及如何使用的注释。</p>
+<p>用三个引号（"""）包围起来:</p>
+<pre><code class="language-py">def population_density(population, land_area):
+    &quot;&quot;&quot;Calculate the population density of an area.
+
+    population: int. The population of the area
+    land_area: int or float. This function is unit-agnostic, if you pass
+               in values in terms of square km or square miles the
+               function will return a density in those units.
+    &quot;&quot;&quot;
+    return population / land_area
+</code></pre>
+<h3 id="-if">条件分支-if</h3>
+<p><strong>条件分支表达式：</strong></p>
+<p><img alt="" src="assets/010/20171126-2d6e9fe2.png" /></p>
+<ol>
+<li><code>if</code> 关键字表示此行是条件表达式。</li>
+<li><code>if</code> 之后是 <code>phone_balance &lt; 10</code>，即要检查的条件。这部分是布尔表达式 —— 一个计算结果为 <code>True</code> 或 <code>False</code> 的表达式。</li>
+<li>条件表达式（或 "<code>if</code> 语句"）以冒号结尾。</li>
+<li>该行后面是一个缩进的代码块，在此种情况中：</li>
+</ol>
+<pre><code class="language-py">  phone_balance += 10
+  bank_balance -= 10
+</code></pre>
+<p>如果布尔表达式的计算结果为 <code>True</code>，那么将执行该缩进的代码块。如果布尔表达式的计算结果为 <code>False</code>，则不会执行缩进的代码块。</p>
+<p><strong>扩展：<code>if</code>、<code>elif</code> 和 <code>else</code></strong></p>
+<p>else语法：</p>
+<pre><code class="language-py">  if number % 2 == 0:
+      print(&quot;The number &quot; + str(number) + &quot; is even.&quot;)
+  else:
+      print(&quot;The number &quot; + str(number) + &quot; is odd.&quot;)
+</code></pre>
+<p><code>else</code> 关键字后面总是跟一个冒号，不需要布尔表达式 —— <code>if</code> 语句后的布尔表达式计算结果为 <code>False</code> 时，即可运行。</p>
+<p><code>elif</code>语法：</p>
+<pre><code class="language-py">  def garden_calendar(season):
+    if season == &quot;spring&quot;:
+        print(&quot;time to plant the garden!&quot;)
+    elif season == &quot;summer&quot;:
+        print(&quot;time to water the garden!&quot;)
+    elif season == &quot;autumn&quot; or season == &quot;fall&quot;:
+        print(&quot;time to harvest the garden!&quot;)
+    elif season == &quot;winter&quot;:
+        print(&quot;time to stay indoors and drink tea!&quot;)
+    else:
+        print(&quot;I don't recognize that season&quot;)
+</code></pre>
+<h3 id="_9">逻辑运算</h3>
+<p>与或非在Python中的表达用：<code>and</code>、<code>or</code>、<code>not</code></p>
+<p>例子：</p>
+<pre><code class="language-py">if is_raining and is_sunny:
+    print(&quot;Is there a rainbow?&quot;)
+</code></pre>
+<pre><code class="language-py">if (not do_not_email) and (location == &quot;USA&quot; or location == &quot;CAN&quot;):
+    send_email()
+</code></pre>
+<ul>
+<li>判断一个值是否为真可以用：<code>if ran_away:</code></li>
+<li>判断一个值是否为假：<code>if not ran_away:</code></li>
+<li>不要使用：<code>if ran_away == true</code> 或者<code>if ran_away == false</code></li>
+</ul>
+<h3 id="_10">逐步创建函数</h3>
+<p>一个完整的功能或者函数，逐步的将其拆解成小的功能模块或者函数，然后组装起来。</p>
+<p>创建函数时的步骤：</p>
+<ol>
+<li>收集函数的要求，包括输入和输出</li>
+<li>首先将该过程分成简单的语言，而不是代码。</li>
+<li>创建执行每个步骤的函数框架，包括尚未定义的帮助函数。
+  在这个阶段，调整步骤使编码更容易</li>
+<li>创建帮助函数框架。</li>
+<li>填写帮助函数的代码，测试其功能。</li>
+<li>完成主函数的代码，调用每个帮助函数，并测试其功能。</li>
+</ol>
+<h3 id="_11">列表</h3>
+<p><strong>列表：</strong>相当于C或者JS里面的数组，类型为：<code>list</code>。</p>
+<p><strong>列表切片：</strong>从列表中切出来一部分，生成新的列表。</p>
+<p><img alt="" src="assets/010/20171201-7f7ae20c.png" /></p>
+<p>例子：</p>
+<pre><code class="language-py">  #从months的第6位开始切，到第9位结束。
+  q3 = months[6:9]
+  print(q3)
+  ['July', 'August', 'September']
+  print(months)
+  ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+</code></pre>
+<p><strong>切片简化方式：</strong></p>
+<p>有几种切片快捷方式可以简化常见情况。如果想获得一个从原始列表开头开始的分片，或者一个在在原始列表的末尾结束的分片，可以省略如下所示的开始或结束索引：</p>
+<pre><code class="language-py">&gt;&gt;&gt; first_half = months[:6]
+&gt;&gt;&gt; print(first_half)
+['January', 'February', 'March', 'April', 'May', 'June']
+&gt;&gt;&gt; second_half = months[6:]
+&gt;&gt;&gt; print(second_half)
+['July', 'August', 'September', 'October', 'November', 'December']
+</code></pre>
+<p>如果列表数量不确定，只想获取最后的几个，可以用负数：</p>
+<pre><code class="language-py">&gt;&gt;&gt; months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+&gt;&gt;&gt; last_three_months = months[-3:]
+&gt;&gt;&gt; print(last_three_months)
+['October', 'November', 'December']
+</code></pre>
+<p><code>list</code>和<code>string</code>、<code>float</code>、<code>int</code>都是一种数据类型，和字符串类似，<code>list</code>和<code>string</code>都支持索引、切片、<code>len</code>函数和<code>in</code>运算。</p>
+<pre><code class="language-py">&gt;&gt;&gt; sample_string = &quot;And Now For Something Completely Different&quot;
+&gt;&gt;&gt; sample_list = ['Graham', 'John', 'Terry', 'Eric', 'Terry', 'Michael']
+&gt;&gt;&gt; sample_string[4]
+'N'
+&gt;&gt;&gt; sample_list[4]
+'Terry'
+&gt;&gt;&gt; sample_string[12:21]
+'Something'
+&gt;&gt;&gt; sample_list[2:4]
+['Terry', 'Eric']
+&gt;&gt;&gt; len(sample_string)
+42
+&gt;&gt;&gt; len(sample_list)
+6
+&gt;&gt;&gt; 'thing' in sample_string
+True
+&gt;&gt;&gt; 'Rowan' in sample_list
+False
+</code></pre>
+<p><strong>可变性（Mutability）:</strong>表示对象是否可被修改。列表是可变的，字符串式不可变。</p>
+<blockquote>
+<ol>
+<li>这里字符串的不可变指的不是字符串的变量不能再被赋值，而是字符串的内容不能被修改。</li>
+<li>另一点，将列表a赋值给列表b以后，修改列表a的某个值后，列表b的对应的值也被修改了。</li>
+</ol>
+</blockquote>
+<p><strong>修改列表：</strong></p>
+<pre><code class="language-py">sentence2 = [&quot;I&quot;, &quot;wish&quot;, &quot;to&quot;, &quot;register&quot;, &quot;a&quot;, &quot;complaint&quot;, &quot;.&quot;]
+sentence2[6]=&quot;!&quot;    #[&quot;I&quot;, &quot;wish&quot;, &quot;to&quot;, &quot;register&quot;, &quot;a&quot;, &quot;complaint&quot;, &quot;!&quot;]
+sentence2[0:2] = [&quot;We&quot;, &quot;want&quot;]   #表示从第0位开始，替换2个，结果是：[&quot;We&quot;, &quot;want&quot;, &quot;to&quot;, &quot;register&quot;, &quot;a&quot;, &quot;complaint&quot;, &quot;.&quot;]
+</code></pre>
+<pre><code class="language-py">sample_list = ['Graham', 'John', 'Terry', 'Eric', 'Terry', 'Michael']
+new_list = sample_list
+print(sample_list)
+print(new_list)
+
+sample_list[1] = 'Jackson'
+sample_list[2] = 250
+print(sample_list)
+print(new_list)
+
+#输出结果：
+['Graham', 'John', 'Terry', 'Eric', 'Terry', 'Michael']
+['Graham', 'John', 'Terry', 'Eric', 'Terry', 'Michael']
+
+['Graham', 'Jackson', 250, 'Eric', 'Terry', 'Michael']
+['Graham', 'Jackson', 250, 'Eric', 'Terry', 'Michael']
+</code></pre>
+<p><strong>使用列表：</strong></p>
+<ul>
+<li><code>len(some_list)</code>返回列表元素个数。</li>
+<li><code>max(some_list)</code>返回列表中最大的元素。
+  如果内容都是数字，则返回最大的数字，如果内容都是字符串，则返回按字母排序的最后一个元素。如果列表包含了不同类型的元素，则报错。</li>
+<li><code>min(some_list)</code>返回列表中最小的元素。</li>
+<li><code>sorted(some_list)</code>按从小到大的顺序返回<code>some_list</code>的副本，同时<code>some_list</code>的内容不变。元素为字符串时，按字母排序。
+  如果要按从大到小来排序，则加个参数：<code>sorted(some_list,reverse=True)</code></li>
+<li><code>some_list.sort()</code>是从小到大排序，把结果再赋给<code>some_list</code>，也就是原列表的内容被改变了。
+  当然，如果给<code>sort()</code>加个参数：<code>some_list.sort(reverse=True)</code>则将其按从大到小排序。</li>
+</ul>
+<p><strong>连接列表<code>join</code>：</strong></p>
+<p>join 将一个列表作为参数，返回一个由分隔符字符串连接列表元素组成的字符串。在这个示例中，我们使用字符串 \n 作为分隔符，以便使每个元素之间有一个换行符。</p>
+<blockquote>
+<p>被链接列表的元素只能是字符串。
+元素之间必须用逗号(<code>,</code>)间隔开，不能用空格，否则会引入问题。</p>
+</blockquote>
+<p><img alt="" src="assets/010/20171201-0d1d2b89.png" /></p>
+<pre><code class="language-py">&gt;&gt;&gt; nautical_directions = &quot;\n&quot;.join([&quot;fore&quot;, &quot;aft&quot;, &quot;starboard&quot;, &quot;port&quot;])
+&gt;&gt;&gt; print(nautical_directions)
+fore
+aft
+starboard
+port
+</code></pre>
+<p>分隔符换成其他字符串，不用<code>\n</code>:</p>
+<pre><code class="language-py">&gt;&gt;&gt; names = [&quot;García&quot;, &quot;O'Kelly&quot;, &quot;Davis&quot;]
+&gt;&gt;&gt; &quot;-&quot;.join(names)
+&quot;García-O'Kelly-Davis&quot;
+</code></pre>
+<p><strong>追加到列表<code>append</code>:</strong></p>
+<pre><code class="language-py">#追加字符
+&gt;&gt;&gt; some=['s','d','f','h']
+&gt; &gt;&gt;&gt; some.append('x')
+&gt;&gt;&gt; some
+['s', 'd', 'f', 'h', 'x']
+#*************************************
+#追加数字
+&gt;&gt;&gt; some=[1,5,3]
+&gt;&gt;&gt; some.append(6)
+&gt;&gt;&gt; some
+[1, 5, 3, 6]
+#*************************************
+#混合
+&gt;&gt;&gt; some.append('a')
+&gt;&gt;&gt; some
+[1, 5, 3, 6, 'a']
+</code></pre>
+<h3 id="for">For循环</h3>
+<p><img alt="" src="assets/010/20171202-87892ee9.png" /></p>
+<ol>
+<li>for 关键字表示这是一个 for 循环。</li>
+<li>该行的其余部分指定了正在迭代的内容。names 是这个 for 循环迭代的列表。name 是该循环的迭代变量。针对 names 中的每个元素， for 循环的主体都会被执行一次，迭代变量 name 可用于循环体，从而指代循环当前处理的元素。</li>
+<li>一个 for 循环的主体缩进了四个空格，并针对列表中的每个元素运行一次。</li>
+</ol>
+<p><strong>关于命名的注释。</strong>你可以采用自己喜欢的任何方式命名迭代变量。但是这个例子展现了一个常见模式，即列表 names 的名称是以 "s" 结尾的复数，而迭代变量是没有 "s" 的单数。以此模式命名列表和迭代变量，可以使其他程序员更轻松地了解不同的变量。</p>
+<blockquote>
+<p>这里的迭代变量名是自定义的，不需要和列表名有关系，但通常要考虑是其他的程序员能够一眼看出来。</p>
+</blockquote>
+<p>实现C语言中的<code>for</code>循环的功能，需要用到<code>range()</code>:</p>
+<pre><code class="language-py">for number in range(x):
+    pass
+</code></pre>
+<blockquote>
+<p>range 函数需要一个参数，一个整数 n，并返回一个从零到 n-1 的数字序列。
+<code>for number in range(2)</code>即表示x=0/1，循环两次；x初始值为0，循环x次</p>
+</blockquote>
+<p><strong>把列表的内容输出成<code>html</code>的<code>ul</code>列表：</strong></p>
+<pre><code class="language-py">def html_list(input_list):
+    output_list = []
+    output_list.append('&lt;ul&gt;')
+    for index in range(len(input_list)):
+        output_list.append('&lt;li&gt;' + str(input_list[index]) + '&lt;/li&gt;')
+    output_list.append('&lt;/ul&gt;')
+    output_lists = &quot;\n&quot;.join(output_list)
+    return output_lists
+</code></pre>
+<pre><code class="language-py">def html_list(list_items):
+    HTML_string = &quot;&lt;ul&gt;\n&quot;
+    for item in list_items:
+        HTML_string += &quot;&lt;li&gt;{}&lt;/li&gt;\n&quot;.format(item)
+    HTML_string += &quot;&lt;/ul&gt;&quot;
+    return HTML_string
+</code></pre>
+<p>两种方法的区别：
+  1. 前者返回的内容还是个列表，经过格式化，形式上是一段ul。
+  2. 后者输出的直接是一段html格式的代码。
+  3. 前者需要转换原始列表为字符串格式，后者不需要。</p>
+<blockquote>
+<p>如果<code>for</code>后面的变量不需要在循环体中使用，可以写为 <code>for _ in range(10):</code> 这里的 <code>_</code> 是一个虚拟变量，在循环体中不会被使用到。</p>
+</blockquote>
+<h3 id="while">While循环</h3>
+<p><img alt="" src="assets/010/20171203-45d0d0f5.png" /></p>
+<ol>
+<li>While 关键字表明这是一个 while 循环</li>
+<li>接下来是一个测试表达式，在该示例中为 sum(hand) &lt;= 21。如果此表达式为真，将执行循环体。运行循环体后再次判断测试表达式。该过程重复判断测试表达式并运行循环，直到表达式变为 false。</li>
+<li>循环体缩进了四个空格。循环体应该以某种方式修改测试表达式中的变量。如果测试表达式的值从不改变，结果将是一个无限循环！在该示例中，循环体将数字追加到 hand 列表中，因此增加了 sum(hand) 的值。</li>
+</ol>
+<blockquote>
+<p>示例代码说明，hand中的数量（<code>sum(hand)</code>）少于等于17的时候，从<code>card_deck</code>中减掉(<code>card_deck.pop()</code>)一个，加到<code>hand</code> (<code>hand.append()</code>)中。</p>
+</blockquote>
+<p><strong><code>break</code>停止:</strong></p>
+<p>使程序跳出循环。</p>
+<p><strong>切片、break、for的应用：</strong></p>
+<p>需求是从headlines中内容拼出一个字符串刚好140个字符，元素之间用空格间隔开。</p>
+<pre><code class="language-py">headlines = [&quot;Local Bear Eaten by Man&quot;,
+             &quot;Legislature Announces New Laws&quot;,
+             &quot;Peasant Discovers Violence Inherent in System&quot;,
+             &quot;Cat Rescues Fireman Stuck in Tree&quot;,
+             &quot;Brave Knight Runs Away&quot;,
+             &quot;Papperbok Review: Totally Triffic&quot;]
+
+news_ticker = &quot;&quot;
+
+#我的方案：
+index = 0
+for index in range(len(headlines)):
+    if len(news_ticker + &quot; &quot; + headlines[index]) &gt; 140:
+        break
+    else:
+        news_ticker = news_ticker + headlines[index]+ &quot; &quot;
+        print(&quot;debug:news_ticker is:{}&quot;.format(news_ticker))
+        print(&quot;debug:news_ticker's length is:{}&quot;.format(len(news_ticker)))
+print('debug:index is: {}'.format(index))
+print(&quot;debug:Add backspace length is:{}&quot;.format(len(news_ticker)))
+i = 0
+while len(news_ticker) + 1 &lt;= 140:
+    news_ticker = news_ticker + headlines[index][i]
+    i += 1
+print(&quot;debug:final length is:{}&quot;.format(len(news_ticker)))
+print(&quot;debug:final news is:{}&quot;.format(news_ticker))
+
+#更简洁的方案：
+for headline in headlines:
+    news_ticker += headline + &quot; &quot;
+    if len(news_ticker) &gt;= 140:
+        news_ticker = news_ticker[:140]
+        break
+
+#我的方案：是在加，判断离终点还有多远，先到达最近的，然后再一个字符一个字符的增加。
+#系统方案：先加满（刚好超出一个元素），然后从新的字符串上截取（切片）0-140的内容。
+#后者代码更简洁，我忽略了一个字符串的切片方案。
+</code></pre>
+<h3 id="_12">集合</h3>
+<p>集合和列表类似，也是存储元素的数据结构，但集合是唯一元素的集合，且元素没有任何特定排序。</p>
+<blockquote>
+<p>集合中的元素都是唯一的、不重复的；集合中元素的排序都是随机的，每次print，顺序都会改变，新添加进来的元素位置也是随机的。</p>
+</blockquote>
+<p><strong>创建集合：</strong></p>
+<pre><code class="language-py">#创建空集合：
+my_set = set()
+
+#根据已有列表创建集合：
+country = ['JJJ', 'FFF', 'MMM', 'AAA', 'MMM', 'JJJ', 'JJJ', 'AAA', 'SSS', 'OOO', 'NNN', 'DDD']
+country_set = set(country)
+
+print(country)
+#结果是：['JJJ', 'FFF', 'MMM', 'AAA', 'MMM', 'JJJ', 'JJJ', 'AAA', 'SSS', 'OOO', 'NNN', 'DDD']
+print(country_set)
+#结果是：['JJJ', 'FFF', 'MMM', 'AAA', 'SSS', 'OOO', 'NNN', 'DDD']
+</code></pre>
+<p>集合同样支持<code>in</code>运算符：</p>
+<pre><code class="language-py">&gt;&gt;&gt; 'JJJ' in country
+True
+&gt;&gt;&gt; 'JJJ' in country_set
+True
+&gt;&gt;&gt;
+</code></pre>
+<p>集合支持添加元素，但和列表不同，使用的不是<code>append</code>，而是<code>add</code>方法：</p>
+<pre><code class="language-py">&gt;&gt;&gt; country_set.add('BBBBB')
+&gt;&gt;&gt; country_set
+{'MMM', 'AAA', 'OOO', 'NNN', 'JJJ', 'BBBBB', 'DDD', 'SSS', 'FFF'}
+</code></pre>
+<p>集合也有一个与列表一样的 pop 方法。从集合 pop 一个元素时，一个随机元素被删除，但集合不同于列表，是无序的，所以没有 "最后一个元素"。</p>
+<p>可以使用与迭代列表一样的方法通过 for 循环迭代集合</p>
+<pre><code class="language-py">&gt;&gt;&gt; country_set.pop()
+'MMM'
+&gt;&gt;&gt; country_set
+{'AAA', 'OOO', 'NNN', 'JJJ', 'BBBBB', 'DDD', 'SSS', 'FFF'}
+</code></pre>
+<p><strong>集合的使用：</strong></p>
+<pre><code class="language-py"># 方法一：
+squares = set()
+squares_2 = set()
+def nearest_square(limit):
+    answer = 0
+    while (answer+1)**2 &lt; limit:
+        answer += 1
+    return answer**2
+for x in range(2,2000):
+    squares.add(nearest_square(x))
+print(squares)
+
+# 方法二：
+n = 1
+while n**2 &lt;= 2000:
+    squares_2.add(n**2)
+    n += 1
+print(squares_2)
+</code></pre>
+<blockquote>
+<p>两种方法比较：①后一种代码更简洁；②计算机运行的次数更少，前一种需要运算1+2+...+2000次，后者只需1999次，后者更加节省资源；</p>
+</blockquote>
+<h3 id="_13">字典</h3>
+<p>字典是复合型（我定义的）的数据结构，存储的是元素对：<strong>键（Key）</strong> 和 <strong>值（Value）</strong>。</p>
+<blockquote>
+<p>类似<code>json</code>也支持对象嵌套。</p>
+</blockquote>
+<pre><code class="language-py"># 创建字典：
+&gt;&gt;&gt; elements = {'hydrogen': 1, 'helium': 2, 'carbon': 6}
+# 查找字典中的值：
+&gt;&gt;&gt; print(element['carbon'])
+6
+# 插入字典：
+&gt;&gt;&gt; elements['lithium'] = 3
+&gt;&gt;&gt; print(elements['lithium'])
+3
+</code></pre>
+<p>检查字典中是否包含某个键：</p>
+<pre><code class="language-py">if 'mithril' in elements:
+    print(&quot;That's a real element!&quot;)
+else:
+    print(&quot;There's no such element!&quot;)
+</code></pre>
+<p>另一种方法 <code>get</code>。<code>get</code> 用于在字典中查找值，但不同于方括号，如果不存在这个键，<code>get</code> 返回<code>None</code> (或选择的默认值)，而不像方括号那样会报<code>key error</code>。</p>
+<pre><code class="language-py">&gt;&gt;&gt; elements.get('dilithium')
+None
+# 查找不到值的时候报指定的字符串提示。
+&gt;&gt;&gt; elements.get('kryptonite', 'There\'s no such element!')
+&quot;There's no such element!&quot;
+</code></pre>
+<blockquote>
+<p>列表、集合、字典三者表达上分别用[]、()、{};
+迭代：就是通过for循环遍历列表、集合或者字典，表达方式：<code>for name in names:</code></p>
+</blockquote>
+<h3 id="_14">字典词典</h3>
+<p>说白了，就是<code>json</code>，字典嵌套字典。</p>
+<pre><code class="language-py">#创建
+elements = {'hydrogen': {'number': 1, 'weight': 1.00794, 'symbol': 'H'},
+            'helium': {'number': 2, 'weight': 4.002602, 'symbol': 'He'}}
+#通过方括号查看
+&gt;&gt;&gt; print(elements['helium'])
+{'number': 2, 'symbol': 'He', 'weight': 4.002602}
+#通过``get``查找：获取**氦字典**
+&gt;&gt;&gt; elements.get('helium')
+{'number': 2, 'weight': 4.002602, 'symbol': 'He'}
+#get嵌套查找子对象（键值的子键）：**原子量**
+&gt;&gt;&gt; elements.get('helium').get('number')
+2
+#查找不存在的键
+&gt;&gt;&gt; print(elements.get('unobtainium', 'There\'s no such element!'))
+There's no such element!
+</code></pre>
+<h3 id="_15">推导式</h3>
+<ul>
+<li>格式</li>
+</ul>
+<pre><code class="language-python"># 列表推导式
+# 中括号包裹，条件可为空
+[元素内容 for i in range(x,y) 条件]
+
+# 字典推导式
+# 花括号包裹，条件可为空
+{key:value for i in range(x,y) 条件}
+</code></pre>
+<ul>
+<li>样例</li>
+</ul>
+<pre><code class="language-python"># 生成数字1-10的列表
+print([i for i in range(1, 11)])
+# 运行结果
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# 以1-10的平方为列表
+print([i*i for i in range(1, 11)])
+# 运行结果
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+#生成1-10中偶数的平方的列表
+print([i*i for i in range(1, 11) if(i % 2) == 0])
+# 运行结果
+[4, 16, 36, 64, 100]
+</code></pre>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../a/a_10003/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Markdown进阶" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Markdown进阶
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../b_10002/" class="md-footer__link md-footer__link--next" aria-label="Next: 进阶语法" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              进阶语法
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.361d90f1.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.289a2a4b.min.js"></script>
+      
+    
+  </body>
+</html>
