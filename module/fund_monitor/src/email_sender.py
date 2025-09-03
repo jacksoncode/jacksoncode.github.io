@@ -61,7 +61,9 @@ class EmailSender:
         self.charset = self.config.get('EMAIL_SETTINGS', 'charset', fallback='utf-8')
         
         # 邮件模板路径
-        self.template_path = "templates/email_template.html"
+        import os
+        current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.template_path = os.path.join(current_dir, "templates", "email_template.html")
         
         self.logger.info("邮件发送器初始化完成")
     
@@ -90,6 +92,11 @@ class EmailSender:
                 'host': self.config.get('SMTP_SERVERS', '163_host', fallback='smtp.163.com'),
                 'port': self.config.getint('SMTP_SERVERS', '163_port', fallback=25),
                 'ssl_port': self.config.getint('SMTP_SERVERS', '163_ssl_port', fallback=465)
+            },
+            '126': {
+                'host': self.config.get('SMTP_SERVERS', '126_host', fallback='smtp.126.com'),
+                'port': self.config.getint('SMTP_SERVERS', '126_port', fallback=25),
+                'ssl_port': self.config.getint('SMTP_SERVERS', '126_ssl_port', fallback=465)
             },
             'gmail': {
                 'host': self.config.get('SMTP_SERVERS', 'gmail_host', fallback='smtp.gmail.com'),
@@ -211,16 +218,26 @@ class EmailSender:
             status = '⚠️预警' if is_alert else '正常'
             status_class = 'status-alert' if is_alert else 'status-normal'
             
-            row = f'''
+            row = '''
             <tr class="{row_class}">
-                <td>{fund.get('fund_name', 'N/A')}</td>
-                <td>{fund.get('net_value', 0):.4f}</td>
+                <td>{fund_name}</td>
+                <td>{net_value:.4f}</td>
                 <td class="{change_rate_class}">{change_rate_str}</td>
                 <td class="{change_rate_class}">{change_amount_str}</td>
-                <td>{fund.get('update_time', 'N/A')}</td>
+                <td>{update_time}</td>
                 <td class="{status_class}">{status}</td>
             </tr>
-            '''
+            '''.format(
+                row_class=row_class,
+                fund_name=fund.get('fund_name', 'N/A'),
+                net_value=fund.get('net_value', 0),
+                change_rate_class=change_rate_class,
+                change_rate_str=change_rate_str,
+                change_amount_str=change_amount_str,
+                update_time=fund.get('update_time', 'N/A'),
+                status_class=status_class,
+                status=status
+            )
             rows.append(row)
         
         return ''.join(rows)
