@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="联系 Jackson - 有问题或建议？欢迎通过表单与我联系">
+    <meta name="keywords" content="联系方式,留言,反馈,技术交流">
+    <meta name="author" content="Jackson">
 
     <title>CodeClub</title>
     <link rel="icon" type="image/x-ico" href="./img/logo.png" />
@@ -77,25 +78,32 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
                 <p>Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
-                <form name="sentMessage" id="contactForm">
+                <form name="sentMessage" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" required>
+                        <label for="name" class="form-label">姓名</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="请输入您的姓名">
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <label for="email" class="form-label">邮箱地址</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="请输入您的邮箱">
                     </div>
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phone" required>
+                        <label for="phone" class="form-label">电话号码</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="请输入您的电话（选填）">
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                        <label for="message" class="form-label">留言内容</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required placeholder="请输入您想说的话..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Send</button>
+                    <input type="text" name="_gotcha" style="display:none">
+                    <input type="hidden" name="_subject" value="CodeClub 网站新留言">
+                    <button type="submit" class="btn btn-secondary">发送消息</button>
                 </form>
+                <p class="mt-3 text-muted small">
+                    <strong>提示：</strong>表单功能需要配置 Formspree。请前往 
+                    <a href="https://formspree.io" target="_blank">formspree.io</a> 
+                    注册账号并替换表单 action 中的 YOUR_FORM_ID。
+                </p>
             </div>
         </div>
     </div>
