@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Wiki - CodeClub</title>
     <link rel="icon" type="image/x-icon" href="../img/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="../lib/font-awesome/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
     <style>
         :root {
             --primary-color: #3b82f6;
@@ -371,29 +381,114 @@
             margin-bottom: 8px;
         }
 
+        /* Inline code */
         .markdown-body code {
-            background: var(--code-bg);
+            background: #f1f5f9;
             padding: 2px 6px;
             border-radius: 4px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.875em;
-            color: #e83e8c;
+            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.85em;
+            color: #ec4899;
+            border: 1px solid #e2e8f0;
         }
 
+        /* Code blocks */
         .markdown-body pre {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 20px;
+            background: #0d1117;
+            color: #e6edf3;
+            padding: 0;
             border-radius: var(--radius-md);
             overflow-x: auto;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #30363d;
+            position: relative;
         }
 
         .markdown-body pre code {
             background: transparent;
             color: inherit;
-            padding: 0;
+            padding: 20px;
+            display: block;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            border: none;
         }
+
+        /* Code block header with language label */
+        .code-block-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+
+        .code-block-header {
+            background: #161b22;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .code-language {
+            font-size: 0.75rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-code-btn {
+            background: transparent;
+            border: 1px solid #30363d;
+            color: #8b949e;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-code-btn:hover {
+            background: #30363d;
+            color: #e6edf3;
+        }
+
+        .copy-code-btn.copied {
+            background: #238636;
+            border-color: #238636;
+            color: white;
+        }
+
+        .code-block-wrapper pre {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+        }
+
+        /* Syntax highlighting overrides */
+        .hljs {
+            background: #0d1117 !important;
+            color: #e6edf3 !important;
+        }
+
+        .hljs-keyword { color: #ff7b72; }
+        .hljs-string { color: #a5d6ff; }
+        .hljs-number { color: #79c0ff; }
+        .hljs-function { color: #d2a8ff; }
+        .hljs-comment { color: #8b949e; font-style: italic; }
+        .hljs-operator { color: #ff7b72; }
+        .hljs-punctuation { color: #c9d1d9; }
+        .hljs-variable { color: #ffa657; }
+        .hljs-class { color: #d2a8ff; }
+        .hljs-built_in { color: #79c0ff; }
 
         .markdown-body blockquote {
             border-left: 4px solid var(--primary-color);
@@ -630,6 +725,17 @@
     </div>
 
     <script>
+        // Configure marked.js for better code highlighting
+        marked.setOptions({
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            },
+            langPrefix: 'hljs language-'
+        });
+
         // Wiki configuration
         const WIKI_CONFIG = {
             basePath: './library',
@@ -759,6 +865,10 @@
                 .then(markdown => {
                     const html = marked.parse(markdown);
                     articleContent.innerHTML = `<div class="markdown-body">${html}</div>`;
+                    
+                    // Enhance code blocks with syntax highlighting and copy buttons
+                    enhanceCodeBlocks();
+                    
                     window.location.hash = docPath;
                 })
                 .catch(error => {
@@ -796,6 +906,64 @@
             html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(fileName)}</span>`;
             
             breadcrumb.innerHTML = html;
+        }
+
+        function enhanceCodeBlocks() {
+            // Find all pre elements containing code
+            const preElements = document.querySelectorAll('.markdown-body pre');
+            
+            preElements.forEach(pre => {
+                const code = pre.querySelector('code');
+                if (!code) return;
+                
+                // Detect language from class
+                let language = '';
+                code.classList.forEach(cls => {
+                    if (cls.startsWith('language-')) {
+                        language = cls.replace('language-', '');
+                    }
+                });
+                
+                // Create wrapper
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrapper';
+                
+                // Create header
+                const header = document.createElement('div');
+                header.className = 'code-block-header';
+                header.innerHTML = `
+                    <span class="code-language">${language || 'code'}</span>
+                    <button class="copy-code-btn" title="复制代码">
+                        <i class="fas fa-copy"></i>
+                        <span>复制</span>
+                    </button>
+                `;
+                
+                // Move pre into wrapper
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(header);
+                wrapper.appendChild(pre);
+                
+                // Add copy functionality
+                const copyBtn = header.querySelector('.copy-code-btn');
+                copyBtn.addEventListener('click', () => {
+                    const codeText = code.textContent;
+                    navigator.clipboard.writeText(codeText).then(() => {
+                        copyBtn.classList.add('copied');
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>已复制</span>';
+                        
+                        setTimeout(() => {
+                            copyBtn.classList.remove('copied');
+                            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>复制</span>';
+                        }, 2000);
+                    });
+                });
+                
+                // Apply syntax highlighting
+                if (window.hljs) {
+                    hljs.highlightElement(code);
+                }
+            });
         }
 
         function setupEventListeners() {
