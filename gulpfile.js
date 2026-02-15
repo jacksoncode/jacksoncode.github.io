@@ -40,15 +40,23 @@ function minifyJs() {
         .pipe(browserSync.reload({ stream: true }));
 }
 
-function copy() {
+function copyBootstrap() {
     return gulp.src(['node_modules/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
-        .pipe(gulp.dest('lib/bootstrap'))
+        .pipe(gulp.dest('lib/bootstrap'));
+}
 
-    gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
+function copyJquery() {
+    return gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
         .pipe(gulp.dest('lib/jquery'));
+}
 
+function copyFontAwesome() {
     return gulp.src(['node_modules/@fortawesome/fontawesome-free/**', '!node_modules/@fortawesome/fontawesome-free/**/*.map', '!node_modules/@fortawesome/fontawesome-free/.npmignore', '!node_modules/@fortawesome/fontawesome-free/*.txt', '!node_modules/@fortawesome/fontawesome-free/*.md', '!node_modules/@fortawesome/fontawesome-free/*.json'])
         .pipe(gulp.dest('lib/font-awesome'));
+}
+
+function copy() {
+    return gulp.parallel(copyBootstrap, copyJquery, copyFontAwesome)();
 }
 
 function browserSyncInit(done) {
