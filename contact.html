@@ -1,155 +1,682 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="联系 Jackson - 有问题或建议？欢迎通过表单与我联系">
     <meta name="keywords" content="联系方式,留言,反馈,技术交流">
     <meta name="author" content="Jackson">
+    <title>CodeClub - 联系我</title>
+    <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    <title>CodeClub</title>
-    <link rel="icon" type="image/x-ico" href="./img/logo.png" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css" />
-    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" type="text/css">
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .info-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .info-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .info-text {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Form */
+        .form-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-header {
+            margin-bottom: 32px;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-label .required {
+            color: #ef4444;
+            margin-left: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-hint {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .form-hint strong {
+            color: var(--text-primary);
+        }
+
+        .form-hint a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .form-hint a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 48px 24px 24px;
+            margin-top: 64px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .footer-link {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .footer-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .form-card {
+                padding: 24px;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+        }
+
+        /* Success Message */
+        .alert {
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+            font-size: 0.9375rem;
+            display: none;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-fixed-top" role="navigation">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">CodeClub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nav.html">网址导航</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/blog/">博客</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="book.html">图书</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="contact.html">联系我</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">关于我</a>
-                    </li>
-                </ul>
-            </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">
+                <img src="./img/logo.png" alt="CodeClub">
+                <span>CodeClub</span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="index.html">首页</a></li>
+                <li><a class="nav-link" href="nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="./blog/">博客</a></li>
+                <li><a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a></li>
+                <li><a class="nav-link" href="book.html">图书</a></li>
+                <li><a class="nav-link active" href="contact.html">联系我</a></li>
+                <li><a class="nav-link" href="about.html">关于我</a></li>
+            </ul>
         </div>
     </nav>
 
-    <header class="intro-header" style="background-image: url('img/contact-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="page-heading">
-                        <h1>Contact Me</h1>
-                        <hr class="small">
-                        <span class="subheading">Have questions? I have answers (maybe).</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>联系我</h1>
+            <p>有问题或建议？欢迎随时与我联系</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-grid">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="info-title">发送邮件</h3>
+                    <p class="info-text">
+                        有任何问题或建议，欢迎发送邮件给我。我会尽快回复您的消息。
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3 class="info-title">社交媒体</h3>
+                    <p class="info-text">
+                        关注我的社交媒体，获取最新动态和技术分享。
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="微信">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="social-link" title="微博">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="https://github.com/jacksoncode" target="_blank" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                <p>Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
-                <form name="sentMessage" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">姓名</label>
-                        <input type="text" class="form-control" id="name" name="name" required placeholder="请输入您的姓名">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">邮箱地址</label>
-                        <input type="email" class="form-control" id="email" name="email" required placeholder="请输入您的邮箱">
+                    <h3 class="info-title">回复时间</h3>
+                    <p class="info-text">
+                        通常情况下，我会在 24 小时内回复您的消息。如果是技术问题，我会尽力提供帮助。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="form-card">
+                <div class="form-header">
+                    <h2 class="form-title">发送消息</h2>
+                    <p class="form-subtitle">填写以下表单，我会尽快与您联系</p>
+                </div>
+
+                <div class="alert alert-success" id="successAlert">
+                    <i class="fas fa-check-circle"></i> 消息已发送成功！我会尽快回复您。
+                </div>
+
+                <div class="alert alert-error" id="errorAlert">
+                    <i class="fas fa-exclamation-circle"></i> 发送失败，请稍后重试。
+                </div>
+
+                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">
+                            您的姓名 <span class="required">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" required 
+                               placeholder="请输入您的姓名">
                     </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">电话号码</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="请输入您的电话（选填）">
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            邮箱地址 <span class="required">*</span>
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" required 
+                               placeholder="请输入您的邮箱">
                     </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">留言内容</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" required placeholder="请输入您想说的话..."></textarea>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">
+                            电话号码
+                        </label>
+                        <input type="tel" class="form-control" id="phone" name="phone" 
+                               placeholder="请输入您的电话（选填）">
                     </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">
+                            留言内容 <span class="required">*</span>
+                        </label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required 
+                                  placeholder="请输入您想说的话..."></textarea>
+                    </div>
+
                     <input type="text" name="_gotcha" style="display:none">
                     <input type="hidden" name="_subject" value="CodeClub 网站新留言">
-                    <button type="submit" class="btn btn-secondary">发送消息</button>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        发送消息
+                    </button>
+
+                    <div class="form-hint">
+                        <strong>提示：</strong>表单功能需要配置 Formspree。请前往 
+                        <a href="https://formspree.io" target="_blank">formspree.io</a> 
+                        注册账号并替换表单 action 中的 YOUR_FORM_ID。
+                    </div>
                 </form>
-                <p class="mt-3 text-muted small">
-                    <strong>提示：</strong>表单功能需要配置 Formspree。请前往 
-                    <a href="https://formspree.io" target="_blank">formspree.io</a> 
-                    注册账号并替换表单 action 中的 YOUR_FORM_ID。
-                </p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <hr>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://github.com/jacksoncode">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Jackson 2026. Free Hosted at <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank" title="Github">Github</a></p>
-                </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="#" class="footer-link" title="微信">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="#" class="footer-link" title="微博">
+                    <i class="fab fa-weibo"></i>
+                </a>
+                <a href="https://github.com/jacksoncode" target="_blank" class="footer-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
             </div>
+            <p class="footer-text">
+                Copyright &copy; Jackson 2026. Free Hosted at 
+                <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank">GitHub</a>
+            </p>
         </div>
     </footer>
 
-    <script src="lib/jquery/jquery.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/clean-blog.min.js"></script>
-
+    <script>
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const submitBtn = form.querySelector('.btn-submit');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // Hide previous alerts
+            successAlert.classList.remove('show');
+            errorAlert.classList.remove('show');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 发送中...';
+            
+            // Submit form
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    successAlert.classList.add('show');
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                // For demo purposes, show success even if form is not configured
+                if (form.action.includes('YOUR_FORM_ID')) {
+                    successAlert.innerHTML = '<i class="fas fa-info-circle"></i> 表单演示模式：请配置 Formspree 后使用真实发送功能。';
+                    successAlert.classList.add('show');
+                    setTimeout(() => {
+                        successAlert.classList.remove('show');
+                    }, 5000);
+                } else {
+                    errorAlert.classList.add('show');
+                }
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            });
+        });
+    </script>
 </body>
-
 </html>
