@@ -150,6 +150,11 @@
             user-select: none;
         }
 
+        /* Indentation levels for tree toggles */
+        .tree-toggle.level-0 { padding-left: 20px; }
+        .tree-toggle.level-1 { padding-left: 36px; }
+        .tree-toggle.level-2 { padding-left: 52px; }
+
         .tree-toggle:hover {
             color: var(--primary-color);
             background: rgba(59, 130, 246, 0.05);
@@ -173,7 +178,7 @@
 
         .tree-children {
             display: none;
-            padding-left: 16px;
+            padding-left: 0;
         }
 
         .tree-children.expanded {
@@ -182,13 +187,18 @@
 
         .tree-link {
             display: block;
-            padding: 6px 20px 6px 44px;
+            padding: 6px 20px;
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.8125rem;
             transition: var(--transition);
             border-left: 2px solid transparent;
         }
+
+        /* Indentation levels for tree links */
+        .tree-link.level-0 { padding-left: 44px; }
+        .tree-link.level-1 { padding-left: 60px; }
+        .tree-link.level-2 { padding-left: 76px; }
 
         .tree-link:hover {
             color: var(--primary-color);
@@ -655,7 +665,7 @@
 
                 if (item.type === 'folder') {
                     const toggle = document.createElement('div');
-                    toggle.className = 'tree-toggle' + (expandedFolders.has(item.id) ? ' expanded' : '');
+                    toggle.className = 'tree-toggle level-' + level + (expandedFolders.has(item.id) ? ' expanded' : '');
                     toggle.innerHTML = `
                         <i class="fas fa-chevron-right"></i>
                         <i class="fas fa-folder folder-icon"></i>
@@ -672,7 +682,7 @@
                     li.appendChild(children);
                 } else {
                     const link = document.createElement('a');
-                    link.className = 'tree-link' + (currentPath === item.id ? ' active' : '');
+                    link.className = 'tree-link level-' + level + (currentPath === item.id ? ' active' : '');
                     link.href = '#' + item.id;
                     link.innerHTML = `<i class="fas fa-file-alt file-icon"></i>${escapeHtml(item.name)}`;
                     link.onclick = (e) => {
