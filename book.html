@@ -1,241 +1,710 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="程序员推荐书单 - 精选Python、Java、JavaScript、Go、算法等优质编程图书">
     <meta name="keywords" content="编程书籍,技术图书,Python书籍,Java书籍,算法书籍,程序员书单">
     <meta name="author" content="Jackson">
+    <title>CodeClub - 图书推荐</title>
+    <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    <title>CodeClub</title>
-    <link rel="icon" type="image/x-ico" href="./img/logo.png" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="css/book.css" />
-    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" type="text/css">
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px;
+            position: sticky;
+            top: 64px;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .filter-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filter-tag {
+            padding: 8px 16px;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .filter-tag.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .filter-tag i {
+            font-size: 0.75rem;
+        }
+
+        /* Books Grid */
+        .books-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 32px;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .book-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+
+        .book-cover {
+            position: relative;
+            padding-top: 140%;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            overflow: hidden;
+        }
+
+        .book-cover img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .book-category-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .book-info {
+            padding: 20px;
+        }
+
+        .book-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #f59e0b;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 48px 24px 24px;
+            margin-top: 64px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            color: var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 20px;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-fixed-top" role="navigation">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">CodeClub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nav.html">网址导航</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/blog/">博客</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="book.html">图书</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">联系我</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">关于我</a>
-                    </li>
-                </ul>
-            </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">
+                <img src="./img/logo.png" alt="CodeClub">
+                <span>CodeClub</span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="index.html">首页</a></li>
+                <li><a class="nav-link" href="nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="./blog/">博客</a></li>
+                <li><a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a></li>
+                <li><a class="nav-link active" href="book.html">图书</a></li>
+                <li><a class="nav-link" href="contact.html">联系我</a></li>
+                <li><a class="nav-link" href="about.html">关于我</a></li>
+            </ul>
         </div>
     </nav>
 
-    <header class="intro-header" style="background-image: url('img/book-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="site-heading">
-                        <h1>Book For Code</h1>
-                        <span class="subheading">The Top-quality Books For Coder</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>程序员书单推荐</h1>
+            <p>精选 Python、Java、JavaScript、Go、算法等优质编程图书</p>
         </div>
-    </header>
-
-    <section class="container-fluid">
-        <div class="book-form" id="book-form">
-            <h3>可以勾选你需要的图书分类：</h3>
-            <form class="container-fluid">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="all" id="all">
-                    <label class="form-check-label" for="all">全选</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="java" id="java">
-                    <label class="form-check-label" for="java">Java</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="javascript" id="javascript">
-                    <label class="form-check-label" for="javascript">JavaScript</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="html" id="html">
-                    <label class="form-check-label" for="html">Html</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="python" id="python">
-                    <label class="form-check-label" for="python">Python</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="go" id="go">
-                    <label class="form-check-label" for="go">Go</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="algorithm" id="algorithm">
-                    <label class="form-check-label" for="algorithm">算法</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="thinking" id="thinking">
-                    <label class="form-check-label" for="thinking">编程思想</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="book" value="reading" id="reading">
-                    <label class="form-check-label" for="reading">读书</label>
-                </div>
-            </form>
-        </div>
-        <hr />
-        <ul class="book-list">
-            <li data-category="python">
-                <a href="#"><img src="images/book/python-biancheng.png" alt="Python编程：从入门到实践"/></a>
-                <p>Python编程：从入门到实践</p>
-            </li>
-            <li data-category="python">
-                <a href="#"><img src="images/book/python-bianchengkuaisushangshou.png" alt="Python编程快速上手"/></a>
-                <p>Python编程快速上手——让繁琐的工作自动化</p>
-            </li>
-            <li data-category="python">
-                <a href="#"><img src="images/book/python-core-3rd.png" alt="Python核心编程第三版"/></a>
-                <p>Python核心编程，第三版</p>
-            </li>
-            <li data-category="python">
-                <a href="#"><img src="images/book/liuchangde-python.png" alt="流畅的Python"/></a>
-                <p>流畅的Python</p>
-            </li>
-            <li data-category="html">
-                <a href="#"><img src="images/book/html5-quanweizhinan.png" alt="HTML5权威指南"/></a>
-                <p>HTML5权威指南</p>
-            </li>
-            <li data-category="html">
-                <a href="#"><img src="images/book/HTML5andCSS3-jichu-8th.png" alt="HTML5与CSS3基础教程"/></a>
-                <p>Html5与CSS3基础教程，第八版</p>
-            </li>
-            <li data-category="html">
-                <a href="#"><img src="images/book/xiangyingshiweb-2th.png" alt="响应式Web设计"/></a>
-                <p>响应式Web设计——Html5和CSS3实战，第二版</p>
-            </li>
-            <li data-category="java thinking">
-                <a href="#"><img src="images/book/java-bianchengsixiang-4th.png" alt="Java编程思想第四版"/></a>
-                <p>JAVA编程思想，第四版</p>
-            </li>
-            <li data-category="java">
-                <a href="#"><img src="images/book/java-core-1-9th.png" alt="Java核心技术卷1"/></a>
-                <p>JAVA核心技术，卷1，第九版</p>
-            </li>
-            <li data-category="java">
-                <a href="#"><img src="images/book/java-core-2-9th.png" alt="Java核心技术卷2"/></a>
-                <p>JAVA核心技术，卷2，第九版</p>
-            </li>
-            <li data-category="javascript">
-                <a href="#"><img src="images/book/javascript-quanweizhinan-6th.png" alt="JavaScript权威指南"/></a>
-                <p>JavaScript权威指南，第六版</p>
-            </li>
-            <li data-category="javascript">
-                <a href="#"><img src="images/book/nibuzhidaode-js-up.png" alt="你不知道的JavaScript上卷"/></a>
-                <p>你不知道的JS，上卷</p>
-            </li>
-            <li data-category="javascript">
-                <a href="#"><img src="images/book/nibuzhidaode-js-mid.png" alt="你不知道的JavaScript中卷"/></a>
-                <p>你不知道的JS，中卷</p>
-            </li>
-            <li data-category="go">
-                <a href="#"><img src="images/book/goyuyan-biancheng.png" alt="Go语言编程"/></a>
-                <p>GO语言编程</p>
-            </li>
-            <li data-category="algorithm">
-                <a href="#"><img src="images/book/suanfa-4th.png" alt="算法第四版"/></a>
-                <p>算法，第四版</p>
-            </li>
-            <li data-category="algorithm">
-                <a href="#"><img src="images/book/ahasuanfa.png" alt="啊哈算法"/></a>
-                <p>啊哈，算法</p>
-            </li>
-            <li data-category="thinking">
-                <a href="#"><img src="images/book/chonggou.png" alt="重构：改善既有代码的设计"/></a>
-                <p>重构，改善既有代码的设计</p>
-            </li>
-            <li data-category="reading">
-                <a href="#"><img src="images/book/tesila.png" alt="特斯拉：电气时代的开创者"/></a>
-                <p>特斯拉，电气时代的开创者</p>
-            </li>
-        </ul>
     </section>
 
-    <hr>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://github.com/jacksoncode">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Jackson 2026. Free Hosted at <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank" title="Github">Github</a></p>
-                </div>
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-title">图书分类</div>
+            <div class="filter-tags">
+                <button class="filter-tag active" data-category="all">
+                    <i class="fas fa-th-large"></i> 全部
+                </button>
+                <button class="filter-tag" data-category="python">
+                    <i class="fab fa-python"></i> Python
+                </button>
+                <button class="filter-tag" data-category="java">
+                    <i class="fab fa-java"></i> Java
+                </button>
+                <button class="filter-tag" data-category="javascript">
+                    <i class="fab fa-js"></i> JavaScript
+                </button>
+                <button class="filter-tag" data-category="html">
+                    <i class="fab fa-html5"></i> HTML/CSS
+                </button>
+                <button class="filter-tag" data-category="go">
+                    <i class="fas fa-code"></i> Go
+                </button>
+                <button class="filter-tag" data-category="algorithm">
+                    <i class="fas fa-calculator"></i> 算法
+                </button>
+                <button class="filter-tag" data-category="thinking">
+                    <i class="fas fa-brain"></i> 编程思想
+                </button>
+                <button class="filter-tag" data-category="reading">
+                    <i class="fas fa-book-reader"></i> 其他
+                </button>
             </div>
+        </div>
+    </section>
+
+    <!-- Books Grid -->
+    <section class="books-section">
+        <div class="books-grid" id="booksGrid">
+            <!-- Books will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link" title="微信">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="#" class="social-link" title="微博">
+                    <i class="fab fa-weibo"></i>
+                </a>
+                <a href="https://github.com/jacksoncode" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p class="footer-text">
+                Copyright &copy; Jackson 2026. Free Hosted at 
+                <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank">GitHub</a>
+            </p>
         </div>
     </footer>
 
-    <script src="lib/jquery/jquery.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/clean-blog.min.js"></script>
-    <script src="js/book.js"></script>
+    <script>
+        // Book data
+        const booksData = [
+            {
+                id: 1,
+                title: 'Python编程：从入门到实践',
+                category: 'python',
+                categoryLabel: 'Python',
+                image: 'images/book/python-biancheng.png',
+                rating: 4.9
+            },
+            {
+                id: 2,
+                title: 'Python编程快速上手——让繁琐的工作自动化',
+                category: 'python',
+                categoryLabel: 'Python',
+                image: 'images/book/python-bianchengkuaisushangshou.png',
+                rating: 4.8
+            },
+            {
+                id: 3,
+                title: 'Python核心编程，第三版',
+                category: 'python',
+                categoryLabel: 'Python',
+                image: 'images/book/python-core-3rd.png',
+                rating: 4.7
+            },
+            {
+                id: 4,
+                title: '流畅的Python',
+                category: 'python',
+                categoryLabel: 'Python',
+                image: 'images/book/liuchangde-python.png',
+                rating: 4.9
+            },
+            {
+                id: 5,
+                title: 'HTML5权威指南',
+                category: 'html',
+                categoryLabel: 'HTML/CSS',
+                image: 'images/book/html5-quanweizhinan.png',
+                rating: 4.6
+            },
+            {
+                id: 6,
+                title: 'Html5与CSS3基础教程，第八版',
+                category: 'html',
+                categoryLabel: 'HTML/CSS',
+                image: 'images/book/HTML5andCSS3-jichu-8th.png',
+                rating: 4.5
+            },
+            {
+                id: 7,
+                title: '响应式Web设计——Html5和CSS3实战，第二版',
+                category: 'html',
+                categoryLabel: 'HTML/CSS',
+                image: 'images/book/xiangyingshiweb-2th.png',
+                rating: 4.7
+            },
+            {
+                id: 8,
+                title: 'JAVA编程思想，第四版',
+                category: 'java',
+                categoryLabel: 'Java',
+                image: 'images/book/java-bianchengsixiang-4th.png',
+                rating: 4.9
+            },
+            {
+                id: 9,
+                title: 'JAVA核心技术，卷1，第九版',
+                category: 'java',
+                categoryLabel: 'Java',
+                image: 'images/book/java-core-1-9th.png',
+                rating: 4.7
+            },
+            {
+                id: 10,
+                title: 'JAVA核心技术，卷2，第九版',
+                category: 'java',
+                categoryLabel: 'Java',
+                image: 'images/book/java-core-2-9th.png',
+                rating: 4.7
+            },
+            {
+                id: 11,
+                title: 'JavaScript权威指南，第六版',
+                category: 'javascript',
+                categoryLabel: 'JavaScript',
+                image: 'images/book/javascript-quanweizhinan-6th.png',
+                rating: 4.8
+            },
+            {
+                id: 12,
+                title: '你不知道的JS，上卷',
+                category: 'javascript',
+                categoryLabel: 'JavaScript',
+                image: 'images/book/nibuzhidaode-js-up.png',
+                rating: 4.9
+            },
+            {
+                id: 13,
+                title: '你不知道的JS，中卷',
+                category: 'javascript',
+                categoryLabel: 'JavaScript',
+                image: 'images/book/nibuzhidaode-js-mid.png',
+                rating: 4.8
+            },
+            {
+                id: 14,
+                title: 'GO语言编程',
+                category: 'go',
+                categoryLabel: 'Go',
+                image: 'images/book/goyuyan-biancheng.png',
+                rating: 4.6
+            },
+            {
+                id: 15,
+                title: '算法，第四版',
+                category: 'algorithm',
+                categoryLabel: '算法',
+                image: 'images/book/suanfa-4th.png',
+                rating: 4.9
+            },
+            {
+                id: 16,
+                title: '啊哈，算法',
+                category: 'algorithm',
+                categoryLabel: '算法',
+                image: 'images/book/ahasuanfa.png',
+                rating: 4.7
+            },
+            {
+                id: 17,
+                title: '重构，改善既有代码的设计',
+                category: 'thinking',
+                categoryLabel: '编程思想',
+                image: 'images/book/chonggou.png',
+                rating: 4.8
+            },
+            {
+                id: 18,
+                title: '特斯拉，电气时代的开创者',
+                category: 'reading',
+                categoryLabel: '其他',
+                image: 'images/book/tesila.png',
+                rating: 4.5
+            }
+        ];
 
+        // Category colors
+        const categoryColors = {
+            python: '#3b82f6',
+            java: '#ef4444',
+            javascript: '#f59e0b',
+            html: '#10b981',
+            go: '#06b6d4',
+            algorithm: '#8b5cf6',
+            thinking: '#ec4899',
+            reading: '#6b7280'
+        };
+
+        let currentCategory = 'all';
+
+        function renderBooks(category = 'all') {
+            const grid = document.getElementById('booksGrid');
+            const filteredBooks = category === 'all' 
+                ? booksData 
+                : booksData.filter(book => book.category === category);
+
+            if (filteredBooks.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>暂无该分类的图书</h3>
+                        <p>请选择其他分类查看</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredBooks.map(book => `
+                <div class="book-card" data-category="${book.category}">
+                    <div class="book-cover">
+                        <img src="${book.image}" alt="${book.title}" loading="lazy">
+                        <span class="book-category-badge" style="background: ${categoryColors[book.category] || '#6b7280'}">
+                            ${book.categoryLabel}
+                        </span>
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <div class="book-meta">
+                            <span class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${book.rating}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupFilters() {
+            const filterTags = document.querySelectorAll('.filter-tag');
+            
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    // Remove active class from all tags
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tag
+                    tag.classList.add('active');
+                    
+                    // Get category and render
+                    const category = tag.dataset.category;
+                    currentCategory = category;
+                    renderBooks(category);
+                });
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBooks();
+            setupFilters();
+        });
+    </script>
 </body>
-
 </html>
