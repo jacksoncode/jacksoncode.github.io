@@ -1,250 +1,1023 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Wiki - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --content-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.2s ease;
+        }
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="renderer" content="webkit">
-        <title>Jackson WiKi</title>
-        <link rel="stylesheet" type="text/css" href="amWiki/css/markdownbody.github.css" />
-        <link rel="stylesheet" type="text/css" href="amWiki/css/lhjs.github-gist.css" />
-        <link rel="stylesheet" type="text/css" href="amWiki/css/amWiki.css" />
-    </head>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <body>
-        <!-- 头部 -->
-        <header class="header">
-            <div class="header-inner">
-                <a class="logo" href="?file=首页">
-                    <img src="logo.png" /><i></i>
-                    <b>Jackson WiKi</b>
-                    <span>V1.1</span>
-                </a>
-                <div class="menu-icon" id="menuIcon">
-                    <svg>
-                        <use xlink:href="#icon:navStart"></use>
-                    </svg>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .wiki-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-header img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .sidebar-header a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-search {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 12px 10px 36px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            background: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 0;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        /* Tree Menu */
+        .tree-item {
+            list-style: none;
+        }
+
+        .tree-toggle {
+            display: flex;
+            align-items: center;
+            padding: 8px 20px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .tree-toggle:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .tree-toggle i {
+            margin-right: 8px;
+            font-size: 0.75rem;
+            transition: transform 0.2s;
+            width: 16px;
+        }
+
+        .tree-toggle.expanded i {
+            transform: rotate(90deg);
+        }
+
+        .tree-toggle .folder-icon {
+            margin-left: 4px;
+            color: #f59e0b;
+        }
+
+        .tree-children {
+            display: none;
+            padding-left: 16px;
+        }
+
+        .tree-children.expanded {
+            display: block;
+        }
+
+        .tree-link {
+            display: block;
+            padding: 6px 20px 6px 44px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            transition: var(--transition);
+            border-left: 2px solid transparent;
+        }
+
+        .tree-link:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .tree-link.active {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+            border-left-color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .tree-link .file-icon {
+            margin-right: 6px;
+            color: var(--text-muted);
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 200;
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 300px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content-header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+
+        .content-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Article Content */
+        .article-container {
+            flex: 1;
+            padding: 40px 48px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .article-content {
+            background: var(--content-bg);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Markdown Styles */
+        .markdown-body h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .markdown-body h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .markdown-body h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        .markdown-body p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .markdown-body ul, .markdown-body ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .markdown-body li {
+            margin-bottom: 8px;
+        }
+
+        .markdown-body code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875em;
+            color: #e83e8c;
+        }
+
+        .markdown-body pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .markdown-body pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .markdown-body blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .markdown-body a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .markdown-body a:hover {
+            text-decoration: underline;
+        }
+
+        .markdown-body img {
+            max-width: 100%;
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+        }
+
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .markdown-body th, .markdown-body td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .markdown-body th {
+            background: var(--bg-color);
+            font-weight: 600;
+        }
+
+        /* Loading & Error States */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .error-state i {
+            font-size: 48px;
+            color: #ef4444;
+            margin-bottom: 16px;
+        }
+
+        /* Welcome State */
+        .welcome-state {
+            text-align: center;
+            padding: 100px 40px;
+        }
+
+        .welcome-state i {
+            font-size: 64px;
+            color: var(--primary-color);
+            margin-bottom: 24px;
+        }
+
+        .welcome-state h2 {
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .welcome-state p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .content-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 24px 48px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .article-container {
+                padding: 24px;
+            }
+
+            .article-content {
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .article-content {
+                padding: 24px;
+            }
+
+            .content-header {
+                padding: 12px 20px;
+            }
+
+            .markdown-body h1 {
+                font-size: 1.75rem;
+            }
+
+            .markdown-body h2 {
+                font-size: 1.375rem;
+            }
+        }
+
+        /* Overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="wiki-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="../img/logo.png" alt="Logo">
+                <a href="../index.html">CodeClub Wiki</a>
+            </div>
+            
+            <div class="sidebar-search">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="sidebarSearch" placeholder="搜索文档...">
                 </div>
             </div>
-        </header>
-        <!-- 页面 -->
-        <div class="container" id="container">
-            <div class="nav" id="nav">
-                <div class="menu-filter">
-                    <svg>
-                        <use xlink:href="#icon:navFilter"></use>
-                    </svg>
-                    <input type="text" id="menuFilter" value="" placeholder="请输入筛选条件" title="请输入筛选条件" />
-                    <i class="off" title="清空筛选">&times;</i>
+
+            <nav class="sidebar-nav" id="sidebarNav">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <span>加载目录...</span>
                 </div>
-                <div class="menu-search" id="searchShow" title="全库搜索">
-                    <svg>
-                        <use xlink:href="#icon:search"></use>
-                    </svg>
-                </div>
-                <nav class="menubar scroller" id="menuBar" data-x-rolling="true">
-                    <div class="scroller-inner">
-                        <div class="scroller-content"></div>
-                    </div>
-                </nav>
-            </div>
-            <div class="main scroller" id="main">
-                <div class="main-inner scroller-inner">
-                    <!-- 正文 -->
-                    <article class="markdown-body scroller-content" id="view"></article>
-                    <script id="template:footnote" type="text/html">
-                        <sup><a href="#fn:foot{{index}}" name="fn:note{{index}}" title="{{title}}">[{{index}}]</a></sup>
-                        <ol class="footnote"><i>[参考资料]：</i>{{list}}</ol>
-                        <li id="fn:foot{{index}}">{{content}} {{back}}</li>
-                        <li class="footnote-none" data-msg="匹配缺失">{{content}}</li>
-                        <a href="#fn:note{{index}}">
-                            <svg>
-                                <use xlink:href="#icon:footnoteBack"></use>
-                            </svg>
-                        </a>
-                    </script>
-                    <!-- 上下翻页 -->
-                    <div class="main-sibling scroller-content" id="mainSibling">
-                        <p><span>上一篇：</span>
-                            <a href="#"></a>
-                        </p>
-                        <p><span>下一篇：</span>
-                            <a href="#"></a>
-                        </p>
-                    </div>
-                    <!-- 全库搜索 -->
-                    <div class="search-box" id="searchBox">
-                        <div class="search-update">
-                            <input type="button" id="searchUpdate" value="更新所有缓存" />
-                            <div class="text">
-                                <p>上次完全更新：<time id="cacheLasttime">0000-00-00 00:00:00</time></p>
-                                <p>文档总数：<b id="cacheDocTotal">0</b> / <span>已缓存：<i id="cacheState">0%</i></span></p>
-                            </div>
-                        </div>
-                        <h2>全库搜索</h2>
-                        <div class="search-input">
-                            <input type="text" id="searchText" placeholder="请输入搜索内容" />
-                            <input type="button" id="search" value="搜 索" />
-                        </div>
-                        <div class="search-results" id="results">
-                            <div class="search-result-message" id="resultMsg"></div>
-                            <ul class="search-list"></ul>
-                            <div class="search-result-more" id="resultMore">显示更多</div>
-                            <script id="template:searchResult" type="text/html">
-                                <li class="search-item">
-                                    <a href="?file={{path}}">
-                                        <div class="content">
-                                            <strong>{{title}}</strong> {{api}} {{content}}
-                                        </div>
-                                        <div class="bottom">
-                                            <p>位置：<span>{{path}}</span></p>
-                                            <div class="time">最后缓存于
-                                                <time>{{time}}</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </script>
-                        </div>
-                    </div>
-                    <!-- 接口测试 -->
-                    <!-- 接口测试面板 -->
-<div class="testing-box" id="testingBox">
-    <h2>请求内容</h2>
-    <div class="testing-send">
-        <input class="testing-send-url" id="testingSendUrl" type="text" title="请求地址" />
-        <select class="testing-send-type" id="testingSendType" title="请求类型">
-            <option value="GET">GET</option>
-            <option value="POST">POST</option>
-            <option value="PUT">PUT</option>
-            <option value="DELETE">DELETE</option>
-        </select>
-        <h3>参数列表：</h3>
-        <ul class="testing-params" id="testingParam"></ul>
-        <script id="template:formList" type="text/html">
-            <li>
-                <span>{{describe}}</span>
-                <input class="testing-param-key" type="text" value="{{keyName}}" placeholder="参数名" title="参数名" />&nbsp;&nbsp;
-                <input class="testing-param-val" type="text" value="{{default}}" placeholder="请输入参数值 ({{valueType}})" {{required}}/>
-                <big>*</big>
-            </li>
-        </script>
-        <div class="testing-btn">
-            <button class="testing-btn-send" id="testingBtnSend">发送Ajax</button> &nbsp;|&nbsp;
-            <button id="testingBtnAdd">增加参数</button>
-            <button id="testingBtnReset">重置参数值</button>
-        </div>
-        <div class="testing-btn2">
-            <hr>
-            <div class="testing-btn-param" id="testingBtnGParam" title="全局参数将影响所有接口">[<span>全局参数设置</span>]</div>
-            <!-- 全局参数弹窗 -->
-            <div class="testing-global" id="testingGlobal">
-                <div class="testing-global-param"><i class="close">&times;</i>
-                    <h4>全局参数列表<small>(全局参数影响所有接口)</small></h4>
-                    <ul id="testingGlobalParam"></ul>
-                    <script id="template:globalParam" type="text/html">
-                        <li><i>&times;</i> 描述：
-                            <input type="text" placeholder="describe" value="{{describe}}"><br> 参数名：
-                            <input type="text" placeholder="key-name" value="{{keyName}}"><br> 参数值：
-                            <input type="text" placeholder="value" value="{{value}}">
-                        </li>
-                    </script>
-                    <div class="btn">
-                        <div class="testing-global-working" id="testingGlobalWorking" title="禁用/启用全局变量"><i></i><span>启用中</span><span>已禁用</span></div>
-                        <button class="add">增加</button> &#12288;|&#12288;
-                        <button class="save">保 存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <h2>响应内容<small id="testingDuration"></small>
-        <svg id="testingLoading">
-            <use xlink:href="#icon:loading"></use>
-        </svg>
-    </h2>
-    <div class="testing-response">
-        <iframe id="testingResponse" width="100%" frameborder="0" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" framespacing="0"></iframe>
-    </div>
-</div>
-                </div>
-            </div>
-        </div>
-        <aside>
-            <!-- 侧边目录 -->
-            <div class="contents" id="contents">
-                <div class="btn">
-                    <svg>
-                        <use xlink:href="#icon:contents"></use>
-                    </svg>
-                    <span>目录</span>
-                </div>
-                <div class="contents-list">
-                    <p>
-                        <a id="contentsTitle" href="#客户日志流水接口示例">客户日志流水接口示例</a>
-                    </p>
-                    <div class="markdown-contents"></div>
-                </div>
-            </div>
-            <!-- 返回顶部 -->
-            <div class="back-top" id="backTop">
-                <a class="back-icon" href="#">
-                    <svg>
-                        <use xlink:href="#icon:backTop"></use>
-                    </svg>
-                </a>
-                <a class="back-text" href="#">返回顶部</a>
-            </div>
+            </nav>
         </aside>
-        <footer>
-            <!-- 签名 -->
-            <div class="signature">Powered by
-                <a href="https://jacksoncode.github.io" target="_blank">Jackson</a>
-            </div>
-        </footer>
-        <!-- js -->
-        <div class="hidden">
-            <script type="text/javascript" src="amWiki/js/gbk.js"></script>
-            <script type="text/javascript" src="amWiki/js/jquery-compat-3.1.0.min.js"></script>
-            <script type="text/javascript" src="amWiki/js/marked.min.js"></script>
-            <script type="text/javascript" src="amWiki/js/highlight.min.js"></script>
-            <script type="text/javascript" src="amWiki/js/raphael-min.js"></script>
-            <script type="text/javascript" src="amWiki/js/flowchart.min.js"></script>
-            <script type="text/javascript" src="amWiki/js/amWiki.tools.js"></script>
-            <script type="text/javascript" src="amWiki/js/amWiki.storage.js"></script>
-            <script type="text/javascript" src="amWiki/js/amWiki.search.js"></script>
-            <script type="text/javascript" src="amWiki/js/amWiki.docs.js"></script>
-            <script src="amWiki/js/amWiki.testing.js"></script>
-            <script type="text/javascript" src="amWiki/js/amWiki.scrollbar.js"></script>
-            <script type="text/javascript" src="amWiki/js/amWiki.js"></script>
-        </div>
-        <!-- svg -->
-        <div class="hidden" id="svgSymbols"></div>
-        <!-- 低版本浏览器警告 -->
-        <div id="lowBrowser">
-            <div></div>
-            <p><span>您的浏览器版本过低，不支持浏览本Wiki，请升级或更换您的浏览器再试！</span></p>
-            <script>
-                (function(win) {
-                    var notice = document.getElementById('lowBrowser');
-                    //jQuery 3.x 需要 addEventListener 方法支持
-                    if(typeof win.addEventListener == 'undefined') {
-                        notice.style.display = 'block';
-                    } else {
-                        var comments = notice.previousSibling;
-                        if(comments.nodeType == 8) {
-                            comments.parentNode.removeChild(comments);
-                        } else if(comments.previousSibling.nodeType == 8) {
-                            comments = comments.previousSibling;
-                            comments.parentNode.removeChild(comments);
-                        }
-                        notice.parentNode.removeChild(notice);
-                    }
-                    notice = comments = null;
-                })(window);
-            </script>
-        </div>
-    </body>
 
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="breadcrumb" id="breadcrumb">
+                    <a href="./">Wiki</a>
+                    <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+                    <span>首页</span>
+                </div>
+                <div class="content-actions">
+                    <button class="btn-icon" id="refreshBtn" title="刷新">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="btn-icon" id="githubBtn" title="在 GitHub 中查看">
+                        <i class="fab fa-github"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="article-container">
+                <article class="article-content markdown-body" id="articleContent">
+                    <div class="welcome-state">
+                        <i class="fas fa-book-open"></i>
+                        <h2>欢迎使用 CodeClub Wiki</h2>
+                        <p>点击左侧目录浏览文档，或使用搜索功能快速查找内容。所有文档均存储在 GitHub 上，实时动态加载。</p>
+                    </div>
+                </article>
+            </div>
+
+            <footer class="content-footer">
+                <p>Content hosted on <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank" style="color: var(--primary-color);">GitHub</a> • Built with ❤️</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Wiki configuration
+        const WIKI_CONFIG = {
+            basePath: './library',
+            githubUrl: 'https://github.com/jacksoncode/jacksoncode.github.io/tree/master/wiki/library'
+        };
+
+        // File system structure
+        const wikiStructure = [
+            {
+                id: '001-学习amWiki',
+                name: '学习amWiki',
+                type: 'folder',
+                children: [
+                    { id: '001-学习amWiki/001-如何开始', name: '如何开始', type: 'file' },
+                    { id: '001-学习amWiki/002-详细使用', name: '详细使用', type: 'file' },
+                    { id: '001-学习amWiki/003-网站的发布', name: '网站的发布', type: 'file' },
+                    { id: '001-学习amWiki/004-用atom写作', name: '用atom写作', type: 'file' }
+                ]
+            },
+            {
+                id: '002-文档示范',
+                name: '文档示范',
+                type: 'folder',
+                children: [
+                    { id: '002-文档示范/001-通用规范', name: '通用规范', type: 'file' },
+                    { id: '002-文档示范/002-图文排版', name: '图文排版', type: 'file' }
+                ]
+            },
+            {
+                id: '003-学习markdown',
+                name: '学习markdown',
+                type: 'folder',
+                children: [
+                    { id: '003-学习markdown/01-markdown入门', name: 'markdown入门', type: 'file' },
+                    { id: '003-学习markdown/02-markdown详细', name: 'markdown详细', type: 'file' },
+                    { id: '003-学习markdown/03-amWiki与流程图', name: 'amWiki与流程图', type: 'file' }
+                ]
+            },
+            {
+                id: '005-Jekyll使用',
+                name: 'Jekyll使用',
+                type: 'folder',
+                children: [
+                    { id: '005-Jekyll使用/001-Jekyll本地环境', name: 'Jekyll本地环境', type: 'file' },
+                    { id: '005-Jekyll使用/002-Jekyll的使用', name: 'Jekyll的使用', type: 'file' },
+                    { id: '005-Jekyll使用/003-迁移到GitHub', name: '迁移到GitHub', type: 'file' },
+                    { id: '005-Jekyll使用/004-绑定域名', name: '绑定域名', type: 'file' },
+                    { id: '005-Jekyll使用/005-Github+Jekyll添加评论支持', name: 'Github+Jekyll添加评论支持', type: 'file' },
+                    { id: '005-Jekyll使用/006-来必力评论系统', name: '来必力评论系统', type: 'file' }
+                ]
+            },
+            {
+                id: '010-Python',
+                name: 'Python',
+                type: 'folder',
+                children: [
+                    { id: '010-Python/001-Python基础', name: 'Python基础', type: 'file' },
+                    { id: '010-Python/002-Python函数', name: 'Python函数', type: 'file' },
+                    { id: '010-Python/003-Python模块', name: 'Python模块', type: 'file' },
+                    { id: '010-Python/004-Python面向对象', name: 'Python面向对象', type: 'file' },
+                    { id: '010-Python/005-Python文件操作', name: 'Python文件操作', type: 'file' },
+                    { id: '010-Python/006-Python异常处理', name: 'Python异常处理', type: 'file' },
+                    { id: '010-Python/999-Python学习资源', name: 'Python学习资源', type: 'folder', children: [
+                        { id: '010-Python/999-Python学习资源/000-廖雪峰教程', name: '廖雪峰教程', type: 'file' }
+                    ]}
+                ]
+            },
+            {
+                id: '011-HTML&CSS',
+                name: 'HTML & CSS',
+                type: 'folder',
+                children: [
+                    { id: '011-HTML&CSS/000-待添加', name: '待添加', type: 'file' },
+                    { id: '011-HTML&CSS/001-HTML基础', name: 'HTML基础', type: 'file' },
+                    { id: '011-HTML&CSS/002-CSS基础', name: 'CSS基础', type: 'file' }
+                ]
+            },
+            {
+                id: '012-JavaScript',
+                name: 'JavaScript',
+                type: 'folder',
+                children: [
+                    { id: '012-JavaScript/000-待添加', name: '待添加', type: 'file' }
+                ]
+            },
+            {
+                id: '013-Java',
+                name: 'Java',
+                type: 'folder',
+                children: [
+                    { id: '013-Java/000-待添加', name: '待添加', type: 'file' }
+                ]
+            },
+            {
+                id: '015-批处理',
+                name: '批处理',
+                type: 'folder',
+                children: [
+                    { id: '015-批处理/001-批处理基础', name: '批处理基础', type: 'file' }
+                ]
+            },
+            {
+                id: '016-Linux',
+                name: 'Linux',
+                type: 'folder',
+                children: [
+                    { id: '016-Linux/001-Linux命令', name: 'Linux命令', type: 'file' },
+                    { id: '016-Linux/002-Vim编辑器', name: 'Vim编辑器', type: 'file' }
+                ]
+            },
+            {
+                id: '030-测试专业',
+                name: '测试专业',
+                type: 'folder',
+                children: [
+                    { id: '030-测试专业/001-软件测试基础', name: '软件测试基础', type: 'file' },
+                    { id: '030-测试专业/002-测试用例设计', name: '测试用例设计', type: 'file' }
+                ]
+            },
+            {
+                id: '050-Git',
+                name: 'Git',
+                type: 'folder',
+                children: [
+                    { id: '050-Git/001-Git基础', name: 'Git基础', type: 'file' },
+                    { id: '050-Git/002-Git分支管理', name: 'Git分支管理', type: 'file' },
+                    { id: '050-Git/003-GitHub使用', name: 'GitHub使用', type: 'file' }
+                ]
+            },
+            {
+                id: '100-小技巧',
+                name: '小技巧',
+                type: 'folder',
+                children: [
+                    { id: '100-小技巧/000-使用CE无限使用百度云试用下载时间', name: '使用CE无限使用百度云试用下载时间', type: 'file' },
+                    { id: '100-小技巧/001-Windows系统图标混乱', name: 'Windows系统图标混乱', type: 'file' },
+                    { id: '100-小技巧/002-Chrome离线安装插件', name: 'Chrome离线安装插件', type: 'file' },
+                    { id: '100-小技巧/100-Gitbook常见问题', name: 'Gitbook常见问题', type: 'file' },
+                    { id: '100-小技巧/200-Npm常用命令', name: 'Npm常用命令', type: 'file' }
+                ]
+            },
+            {
+                id: '200-职场与职业规划',
+                name: '职场与职业规划',
+                type: 'folder',
+                children: [
+                    { id: '200-职场与职业规划/001-如何学习', name: '如何学习', type: 'file' }
+                ]
+            },
+            {
+                id: '201-PPT制作',
+                name: 'PPT制作',
+                type: 'folder',
+                children: [
+                    { id: '201-PPT制作/001-PPT基础', name: 'PPT基础', type: 'file' }
+                ]
+            },
+            {
+                id: '300-金融理财',
+                name: '金融理财',
+                type: 'folder',
+                children: [
+                    { id: '300-金融理财/001-理财基础', name: '理财基础', type: 'file' }
+                ]
+            },
+            {
+                id: '500-读书笔记',
+                name: '读书笔记',
+                type: 'folder',
+                children: [
+                    { id: '500-读书笔记/001-我的书单', name: '我的书单', type: 'file' },
+                    { id: '500-读书笔记/100-逻辑思维笔记', name: '逻辑思维笔记', type: 'file' },
+                    { id: '500-读书笔记/101-目标与战略', name: '目标与战略', type: 'file' },
+                    { id: '500-读书笔记/201-单核工作法图解', name: '单核工作法图解', type: 'file' },
+                    { id: '500-读书笔记/202-高效读书的习惯', name: '高效读书的习惯', type: 'file' }
+                ]
+            },
+            {
+                id: '505-得到听课',
+                name: '得到听课',
+                type: 'folder',
+                children: [
+                    { id: '505-得到听课/001-如何成为有效学习的高手', name: '如何成为有效学习的高手', type: 'file' }
+                ]
+            },
+            {
+                id: '510-知乎Live',
+                name: '知乎Live',
+                type: 'folder',
+                children: [
+                    { id: '510-知乎Live/001-前端开发', name: '前端开发', type: 'file' }
+                ]
+            },
+            {
+                id: '900-若有所思',
+                name: '若有所思',
+                type: 'folder',
+                children: [
+                    { id: '900-若有所思/100-发现bugs', name: '发现bugs', type: 'file' },
+                    { id: '900-若有所思/200-发现你的美', name: '发现你的美', type: 'file' },
+                    { id: '900-若有所思/500-重要和紧急', name: '重要和紧急', type: 'file' }
+                ]
+            }
+        ];
+
+        // State management
+        let currentPath = '';
+        let expandedFolders = new Set();
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSidebar(wikiStructure);
+            setupEventListeners();
+            
+            // Check URL for direct link
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                loadDocument(hash);
+            }
+        });
+
+        function renderSidebar(structure, parentElement = null, level = 0) {
+            const container = parentElement || document.getElementById('sidebarNav');
+            if (!parentElement) {
+                container.innerHTML = '';
+            }
+
+            const ul = document.createElement('ul');
+            ul.style.listStyle = 'none';
+
+            structure.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'tree-item';
+
+                if (item.type === 'folder') {
+                    const toggle = document.createElement('div');
+                    toggle.className = 'tree-toggle' + (expandedFolders.has(item.id) ? ' expanded' : '');
+                    toggle.innerHTML = `
+                        <i class="fas fa-chevron-right"></i>
+                        <i class="fas fa-folder folder-icon"></i>
+                        <span>${escapeHtml(item.name)}</span>
+                    `;
+                    toggle.onclick = () => toggleFolder(item.id, toggle, children);
+                    li.appendChild(toggle);
+
+                    const children = document.createElement('ul');
+                    children.className = 'tree-children' + (expandedFolders.has(item.id) ? ' expanded' : '');
+                    if (item.children) {
+                        renderSidebar(item.children, children, level + 1);
+                    }
+                    li.appendChild(children);
+                } else {
+                    const link = document.createElement('a');
+                    link.className = 'tree-link' + (currentPath === item.id ? ' active' : '');
+                    link.href = '#' + item.id;
+                    link.innerHTML = `<i class="fas fa-file-alt file-icon"></i>${escapeHtml(item.name)}`;
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        loadDocument(item.id);
+                    };
+                    li.appendChild(link);
+                }
+
+                ul.appendChild(li);
+            });
+
+            container.appendChild(ul);
+        }
+
+        function toggleFolder(folderId, toggle, children) {
+            if (expandedFolders.has(folderId)) {
+                expandedFolders.delete(folderId);
+                toggle.classList.remove('expanded');
+                children.classList.remove('expanded');
+            } else {
+                expandedFolders.add(folderId);
+                toggle.classList.add('expanded');
+                children.classList.add('expanded');
+            }
+        }
+
+        function loadDocument(docPath) {
+            currentPath = docPath;
+            updateActiveLink(docPath);
+            updateBreadcrumb(docPath);
+            
+            const articleContent = document.getElementById('articleContent');
+            articleContent.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <span>加载文档...</span>
+                </div>
+            `;
+
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+
+            // Try to load the markdown file
+            const mdPath = `${WIKI_CONFIG.basePath}/${docPath}.md`;
+            
+            fetch(mdPath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('文档不存在');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    const html = marked.parse(markdown);
+                    articleContent.innerHTML = `<div class="markdown-body">${html}</div>`;
+                    window.location.hash = docPath;
+                })
+                .catch(error => {
+                    articleContent.innerHTML = `
+                        <div class="error-state">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h3>无法加载文档</h3>
+                            <p>${error.message}</p>
+                            <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">
+                                文件路径: ${escapeHtml(mdPath)}
+                            </p>
+                        </div>
+                    `;
+                });
+        }
+
+        function updateActiveLink(docPath) {
+            document.querySelectorAll('.tree-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + docPath) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function updateBreadcrumb(docPath) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const parts = docPath.split('/');
+            const fileName = parts[parts.length - 1];
+            
+            let html = '<a href="./">Wiki</a>';
+            if (parts.length > 1) {
+                html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(parts[0].split('-').slice(1).join('-'))}</span>`;
+            }
+            html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(fileName)}</span>`;
+            
+            breadcrumb.innerHTML = html;
+        }
+
+        function setupEventListeners() {
+            // Mobile toggle
+            document.getElementById('mobileToggle').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('open');
+                document.getElementById('sidebarOverlay').classList.toggle('show');
+            });
+
+            document.getElementById('sidebarOverlay').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('sidebarOverlay').classList.remove('show');
+            });
+
+            // Search
+            document.getElementById('sidebarSearch').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                filterSidebar(searchTerm);
+            });
+
+            // Refresh button
+            document.getElementById('refreshBtn').addEventListener('click', () => {
+                if (currentPath) {
+                    loadDocument(currentPath);
+                }
+            });
+
+            // GitHub button
+            document.getElementById('githubBtn').addEventListener('click', () => {
+                let githubPath = WIKI_CONFIG.githubUrl;
+                if (currentPath) {
+                    githubPath += '/' + currentPath.split('/')[0];
+                }
+                window.open(githubPath, '_blank');
+            });
+
+            // Handle hash change
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash.slice(1);
+                if (hash && hash !== currentPath) {
+                    loadDocument(hash);
+                }
+            });
+        }
+
+        function filterSidebar(searchTerm) {
+            const links = document.querySelectorAll('.tree-link');
+            const folders = document.querySelectorAll('.tree-toggle');
+            
+            if (!searchTerm) {
+                links.forEach(link => link.style.display = 'block');
+                folders.forEach(folder => folder.style.display = 'flex');
+                return;
+            }
+
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                link.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+
+            // Show all folders when searching
+            folders.forEach(folder => folder.style.display = 'flex');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
 </html>
