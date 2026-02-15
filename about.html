@@ -1,130 +1,731 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="关于 Jackson - 一名热爱编程的开发者，分享技术心得与学习经验">
     <meta name="keywords" content="关于我,程序员,开发者,Jackson,个人介绍">
     <meta name="author" content="Jackson">
+    <title>CodeClub - 关于我</title>
+    <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    <title>CodeClub</title>
-    <link rel="icon" type="image/x-ico" href="./img/logo.png" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css" />
-    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" type="text/css">
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .about-content h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background: white;
+            padding: 64px 24px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+        }
+
+        .skill-category-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-category-title i {
+            color: var(--primary-color);
+        }
+
+        .skill-item {
+            margin-bottom: 16px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .skill-level {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--border-color);
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 48px 24px 24px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-fixed-top" role="navigation">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">CodeClub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="nav.html">网址导航</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/blog/">博客</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="book.html">图书</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">联系我</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about.html">关于我</a>
-                    </li>
-                </ul>
-            </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">
+                <img src="./img/logo.png" alt="CodeClub">
+                <span>CodeClub</span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="index.html">首页</a></li>
+                <li><a class="nav-link" href="nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="./blog/">博客</a></li>
+                <li><a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a></li>
+                <li><a class="nav-link" href="book.html">图书</a></li>
+                <li><a class="nav-link" href="contact.html">联系我</a></li>
+                <li><a class="nav-link active" href="about.html">关于我</a></li>
+            </ul>
         </div>
     </nav>
 
-    <header class="intro-header" style="background-image: url('img/about-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="page-heading">
-                        <h1>About Me</h1>
-                        <span class="subheading">This is what I do.</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="./img/logo.png" alt="Jackson" class="hero-avatar">
+            <h1>Jackson</h1>
+            <p class="hero-subtitle">热爱编程的全栈开发者</p>
+            <div class="hero-tags">
+                <span class="hero-tag">Python</span>
+                <span class="hero-tag">JavaScript</span>
+                <span class="hero-tag">Web开发</span>
+                <span class="hero-tag">开源爱好者</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-grid">
+            <div class="about-content">
+                <h2>关于我</h2>
+                <p>
+                    你好！我是 Jackson，一名热爱技术的全栈开发者。我热衷于探索新技术，
+                    并将所学知识分享给别人。这个网站是我记录学习笔记、分享技术心得的地方。
+                </p>
+                <p>
+                    我相信持续学习是程序员的必修课。在工作之余，我喜欢阅读技术书籍、
+                    参与开源项目，并通过博客和 Wiki 记录自己的成长历程。
+                </p>
+                <p>
+                    如果你也对编程感兴趣，欢迎与我交流。无论是技术问题还是职业建议，
+                    我都乐意分享自己的经验和看法。
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">年编程经验</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">技术文章</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">开源项目</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">网站访客</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="skills-container">
+            <div class="section-header">
+                <h2 class="section-title">技术技能</h2>
+                <p class="section-subtitle">熟练掌握多种编程语言和开发工具</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-code"></i>
+                        编程语言
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-level">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-level">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Java</span>
+                            <span class="skill-level">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-globe"></i>
+                        Web 技术
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HTML/CSS</span>
+                            <span class="skill-level">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React/Vue</span>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Node.js</span>
+                            <span class="skill-level">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <i class="fas fa-tools"></i>
+                        开发工具
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Git/GitHub</span>
+                            <span class="skill-level">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Docker</span>
+                            <span class="skill-level">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Linux</span>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum molestiae debitis nobis, quod sapiente qui voluptatum, placeat magni repudiandae accusantium fugit quas labore non rerum possimus, corrupti enim modi! Et.</p>
-            </div>
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="section-header">
+            <h2 class="section-title">经历时间线</h2>
+            <p class="section-subtitle">我的编程学习之旅</p>
         </div>
-    </div>
-
-    <hr>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://github.com/jacksoncode">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Jackson 2026. Free Hosted at <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank" title="Github">Github</a></p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2024 - 至今</div>
+                <div class="timeline-title">持续学习与分享</div>
+                <div class="timeline-desc">
+                    创建 CodeClub 网站，记录学习笔记，分享技术文章，参与开源项目贡献。
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2022 - 2024</div>
+                <div class="timeline-title">全栈开发进阶</div>
+                <div class="timeline-desc">
+                    深入学习前后端技术栈，掌握 React、Vue、Node.js 等现代 Web 开发技术。
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2020 - 2022</div>
+                <div class="timeline-title">编程入门阶段</div>
+                <div class="timeline-desc">
+                    学习 Python 和 Java，完成编程基础课程，开始写个人项目。
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2019</div>
+                <div class="timeline-title">初次接触编程</div>
+                <div class="timeline-desc">
+                    在大学期间第一次接触编程，对计算机科学产生浓厚兴趣。
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link" title="微信">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="#" class="social-link" title="微博">
+                    <i class="fab fa-weibo"></i>
+                </a>
+                <a href="https://github.com/jacksoncode" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p class="footer-text">
+                Copyright &copy; Jackson 2026. Free Hosted at 
+                <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank">GitHub</a>
+            </p>
+        </div>
     </footer>
 
-    <script src="lib/jquery/jquery.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/clean-blog.min.js"></script>
-
+    <script>
+        // Animate skill bars on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.style.width;
+                        entry.target.style.width = '0';
+                        setTimeout(() => {
+                            entry.target.style.width = width;
+                        }, 100);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => observer.observe(bar));
+        });
+    </script>
 </body>
-
 </html>
