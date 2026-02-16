@@ -390,6 +390,36 @@
                 <li>重启 IDE 完成安装</li>
             </ol>
 
+            <p><strong>方式三：命令行安装（CLI）</strong></p>
+            <p>
+                对于喜欢命令行的开发者，可以使用 npm 或 pip 直接安装 opencode CLI：
+            </p>
+            <p><strong>使用 npm 安装（适用于 Node.js 环境）：</strong></p>
+            <pre><code># 全局安装 opencode CLI
+npm install -g @opencode/cli
+
+# 验证安装
+opencode --version
+
+# 初始化配置
+opencode init</code></pre>
+            <p><strong>使用 pip 安装（适用于 Python 环境）：</strong></p>
+            <pre><code># 安装 opencode CLI
+pip install opencode-cli
+
+# 验证安装
+opencode --version
+
+# 查看帮助信息
+opencode --help</code></pre>
+            <p><strong>CLI 常用命令：</strong></p>
+            <ul>
+                <li><code>opencode login</code> - 登录账户</li>
+                <li><code>opencode config</code> - 配置设置</li>
+                <li><code>opencode status</code> - 查看服务状态</li>
+                <li><code>opencode update</code> - 更新到最新版本</li>
+            </ul>
+
             <h3>3. 初始配置</h3>
             <p>
                 安装完成后，需要进行简单的配置：
@@ -550,6 +580,111 @@ result = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, numbers)))</code>
                 <li><strong>识别问题</strong>：重复代码、过长函数、魔法数字等</li>
             </ul>
 
+            <p><strong>6. Explain Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：深度解释代码逻辑、算法原理和设计思路</li>
+                <li><strong>使用场景</strong>：理解复杂代码、学习新技术、Code Review</li>
+                <li><strong>启用方法</strong>：选中代码后输入 <code>/explain</code> 或右键选择 Explain</li>
+                <li><strong>特点</strong>：提供多层级解释，从高层设计到具体实现细节</li>
+            </ul>
+
+            <p><strong>7. Fix Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：自动检测并修复代码中的错误</li>
+                <li><strong>使用场景</strong>：快速修复编译错误、运行时异常、逻辑错误</li>
+                <li><strong>启用方法</strong>：输入 <code>/fix</code> 或将光标放在错误行使用快捷键</li>
+                <li><strong>支持</strong>：语法错误、类型错误、空指针异常等常见问题</li>
+            </ul>
+
+            <p><strong>8. Optimize Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：性能优化建议，提升代码执行效率</li>
+                <li><strong>使用场景</strong>：性能瓶颈分析、算法优化、资源管理</li>
+                <li><strong>启用方法</strong>：输入 <code>/optimize</code> 或选择 Optimize Skill</li>
+                <li><strong>优化范围</strong>：时间复杂度、空间复杂度、数据库查询、缓存策略</li>
+            </ul>
+
+            <h3>Skills 使用详解</h3>
+
+            <p><strong>如何调用 Skills</strong></p>
+            <p>
+                opencode 提供多种方式调用 Skills：
+            </p>
+            <ol>
+                <li><strong>斜杠命令</strong>：在编辑器中输入 <code>/</code> 后跟随 Skill 名称，如 <code>/review</code></li>
+                <li><strong>快捷键</strong>：
+                    <ul>
+                        <li><code>Ctrl/Cmd + Shift + P</code> 打开命令面板，搜索 opencode Skills</li>
+                        <li><code>Ctrl/Cmd + K Ctrl/Cmd + S</code> 查看所有可用的 Skills 快捷键</li>
+                    </ul>
+                </li>
+                <li><strong>右键菜单</strong>：选中代码后右键，在 opencode 菜单中选择对应的 Skill</li>
+                <li><strong>聊天窗口</strong>：在 opencode 侧边栏聊天窗口中输入 Skill 命令</li>
+            </ol>
+
+            <p><strong>Skill 使用示例</strong></p>
+            <p>以下是 Code Review Skill 的实际使用示例：</p>
+            <pre><code># 原始代码
+@agent
+class UserService:
+    def get_user(self, id):
+        user = db.query("SELECT * FROM users WHERE id = " + id)
+        return user
+
+# 使用 /review 后，opencode 会输出：
+## Code Review 报告
+
+### 🔴 严重问题
+1. **SQL 注入风险** (第4行)
+   - 问题：直接拼接 SQL 字符串，存在 SQL 注入漏洞
+   - 建议：使用参数化查询
+   - 修复：
+     ```python
+     user = db.query("SELECT * FROM users WHERE id = ?", (id,))
+     ```
+
+### 🟡 警告
+2. **缺少类型注解** (第3行)
+   - 建议添加参数和返回类型：
+     ```python
+     def get_user(self, id: int) -> Optional[User]:
+     ```
+
+### 🟢 建议
+3. **添加错误处理**
+   - 建议添加 try-except 块处理数据库异常</code></pre>
+
+            <p><strong>Skills 组合使用</strong></p>
+            <p>
+                多个 Skills 可以组合使用，形成完整的工作流：
+            </p>
+            <pre><code># 示例：完整的代码优化流程
+
+# 1. 使用 /explain 理解代码
+/explain
+"请解释这段排序算法的实现原理"
+
+# 2. 使用 /optimize 优化性能
+/optimize
+"这段代码在处理大数据量时较慢，请提供优化方案"
+
+# 3. 使用 /refactor 重构代码
+/refactor
+"将这段代码重构为更简洁的实现"
+
+# 4. 使用 /test 生成测试用例
+/test
+"为这个优化后的函数生成边界测试用例"
+
+# 5. 使用 /doc 添加文档
+/doc
+"为这个函数添加详细的 Google Style 文档字符串"</code></pre>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> Skill 使用技巧</div>
+                <p>在使用 Skills 时，提供越详细的上下文信息，得到的结果就越准确。可以在 Skill 命令后添加具体的要求或约束条件。</p>
+            </div>
+
             <h3>什么是 Agent？</h3>
             <p>
                 <strong>Agent</strong> 是 opencode 的智能代理功能，它能够理解复杂的多步骤任务，并自主规划执行路径。与简单的代码补全不同，Agent 可以：
@@ -593,6 +728,272 @@ result = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, numbers)))</code>
             </p>
             <pre><code># 示例指令
 @agent 将项目中的所有回调函数改为 async/await 形式</code></pre>
+
+            <h3>Agent 实际使用案例</h3>
+
+            <p><strong>案例一：搭建完整的 RESTful API</strong></p>
+            <p><strong>背景</strong>：需要为一个博客系统快速搭建后端 API。</p>
+            <p><strong>Agent 指令</strong>：</p>
+            <pre><code>@agent 
+请帮我创建一个完整的博客系统 RESTful API，使用 Python + FastAPI + SQLAlchemy。
+
+需求：
+1. 用户模块：注册、登录、JWT 认证
+2. 文章模块：CRUD 操作、分页查询、标签管理
+3. 评论模块：嵌套评论、评论审核
+4. 数据库使用 PostgreSQL
+5. 包含完整的错误处理和日志记录
+6. 生成 API 文档和单元测试
+
+项目结构参考：
+- app/
+  - api/        # 路由层
+  - core/       # 核心配置
+  - models/     # 数据模型
+  - schemas/    # Pydantic 模型
+  - services/   # 业务逻辑
+  - tests/      # 测试文件
+- requirements.txt
+- alembic/      # 数据库迁移</code></pre>
+            <p><strong>Agent 执行过程</strong>：</p>
+            <ol>
+                <li><strong>需求分析</strong>：分析项目需求，确认技术栈选择</li>
+                <li><strong>创建项目结构</strong>：创建完整的目录结构和基础文件</li>
+                <li><strong>配置环境</strong>：生成 requirements.txt、Dockerfile、docker-compose.yml</li>
+                <li><strong>实现核心模块</strong>：
+                    <ul>
+                        <li>数据库模型（User、Post、Comment、Tag）</li>
+                        <li>Pydantic schemas（请求/响应模型）</li>
+                        <li>JWT 认证中间件</li>
+                        <li>API 路由（包含完整的 CRUD）</li>
+                        <li>业务逻辑层（Services）</li>
+                    </ul>
+                </li>
+                <li><strong>添加测试</strong>：为每个 API 端点生成 pytest 测试用例</li>
+                <li><strong>生成文档</strong>：配置 Swagger/OpenAPI 自动文档</li>
+            </ol>
+            <p><strong>执行时间</strong>：约 3-5 分钟完成整个项目骨架。</p>
+
+            <p><strong>案例二：排查生产环境 Bug</strong></p>
+            <p><strong>背景</strong>：线上服务出现内存泄漏，需要快速定位和修复。</p>
+            <p><strong>Agent 指令</strong>：</p>
+            <pre><code>@agent
+生产环境出现内存泄漏问题，请帮我分析和修复。
+
+现象：
+- 服务运行 2-3 小时后内存占用持续增长
+- 最终触发 OOM 被系统杀掉
+- 重启后恢复正常，但问题会重复出现
+- 主要发生在处理大量图片上传时
+
+项目信息：
+- Node.js + Express 服务
+- 使用 Sharp 库处理图片
+- MongoDB 存储文件元数据
+- Redis 做缓存
+
+请帮我：
+1. 分析可能的内存泄漏原因
+2. 检查代码中未关闭的资源
+3. 提供修复方案
+4. 添加内存监控和告警</code></pre>
+            <p><strong>Agent 诊断过程</strong>：</p>
+            <ol>
+                <li><strong>代码扫描</strong>：分析图片处理相关的代码路径</li>
+                <li><strong>问题定位</strong>：发现 Sharp 实例未正确销毁，流对象未关闭</li>
+                <li><strong>根因分析</strong>：
+                    <ul>
+                        <li>每个请求创建新的 Sharp 实例但没有调用 destroy()</li>
+                        <li>文件流未监听 'end' 事件及时清理</li>
+                        <li>临时文件未删除</li>
+                        <li>EventEmitter 监听器未移除</li>
+                    </ul>
+                </li>
+                <li><strong>生成修复代码</strong>：
+                    <pre><code>// 修复后的代码示例
+async function processImage(file) {
+    const sharpInstance = sharp(file.path);
+    try {
+        const buffer = await sharpInstance
+            .resize(800, 600)
+            .jpeg({ quality: 80 })
+            .toBuffer();
+        return buffer;
+    } finally {
+        // 确保资源释放
+        sharpInstance.destroy();
+        fs.unlinkSync(file.path);
+    }
+}</code></pre>
+                </li>
+                <li><strong>添加监控</strong>：集成 node-memwatch 和 Prometheus 监控</li>
+            </ol>
+
+            <p><strong>案例三：遗留系统现代化改造</strong></p>
+            <p><strong>背景</strong>：将旧的 Python 2 + Django 1.8 项目升级到现代技术栈。</p>
+            <p><strong>Agent 指令</strong>：</p>
+            <pre><code>@agent
+请帮我将遗留的 Django 项目升级到现代技术栈。
+
+当前状况：
+- Python 2.7 + Django 1.8
+- 使用老旧的函数视图
+- 没有类型注解
+- 同步阻塞 IO
+- 测试覆盖率不足 20%
+
+目标：
+- 升级到 Python 3.11 + Django 4.2
+- 迁移到类视图 + DRF
+- 添加完整的类型注解
+- 关键路径改为异步
+- 测试覆盖率提升到 80%+
+
+请制定详细的迁移计划，并执行：
+1. 逐步升级依赖包
+2. 修复 Python 2/3 兼容性问题
+3. 重构视图层
+4. 添加类型注解
+5. 补充测试用例</code></pre>
+
+            <h3>Agent Teams - 团队协作模式</h3>
+
+            <p><strong>什么是 Agent Teams？</strong></p>
+            <p>
+                Agent Teams 是 opencode 的多 Agent 协作功能，允许同时启用多个 Specialized Agent，每个负责特定领域，通过协作完成复杂任务。就像真实的开发团队一样，有前端专家、后端专家、测试专家等角色。
+            </p>
+
+            <p><strong>内置的 Team 角色</strong></p>
+            <ul>
+                <li><strong>@architect</strong> - 架构师 Agent
+                    <ul>
+                        <li>职责：系统架构设计、技术选型、方案评估</li>
+                        <li>适用：项目初始规划、重大技术决策</li>
+                    </ul>
+                </li>
+                <li><strong>@backend</strong> - 后端开发 Agent
+                    <ul>
+                        <li>职责：API 设计、数据库建模、业务逻辑实现</li>
+                        <li>适用：后端功能开发、性能优化</li>
+                    </ul>
+                </li>
+                <li><strong>@frontend</strong> - 前端开发 Agent
+                    <ul>
+                        <li>职责：UI 组件开发、状态管理、交互逻辑</li>
+                        <li>适用：页面开发、组件库建设</li>
+                    </ul>
+                </li>
+                <li><strong>@qa</strong> - 测试工程师 Agent
+                    <ul>
+                        <li>职责：测试用例设计、自动化测试、Bug 报告</li>
+                        <li>适用：测试策略制定、覆盖率提升</li>
+                    </ul>
+                </li>
+                <li><strong>@devops</strong> - DevOps 工程师 Agent
+                    <ul>
+                        <li>职责：CI/CD 配置、容器化、部署脚本</li>
+                        <li>适用：流水线搭建、环境配置</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Agent Teams 使用示例</strong></p>
+            <p>以下是如何使用 Team 完成一个完整功能的开发：</p>
+            <pre><code># 启动一个新的功能开发任务
+# 首先让架构师进行设计
+
+@architect
+请设计一个用户权限管理系统，支持 RBAC 模型。
+需要包含：
+- 用户、角色、权限三表关系
+- 权限粒度到按钮级别
+- 支持数据权限（只能查看自己部门的数据）
+- 高性能的权限校验方案
+
+输出：
+- ER 图设计
+- API 接口设计
+- 技术方案文档
+
+---
+
+# 架构师完成设计后，分配给后端和前端开发
+
+@backend
+根据架构师的设计，实现用户权限管理后端：
+1. 创建数据库模型（SQLAlchemy）
+2. 实现权限校验装饰器
+3. 开发管理 API（用户、角色、权限的 CRUD）
+4. 实现登录和 JWT 认证
+5. 添加单元测试
+
+@frontend
+同时开发前端管理界面：
+1. 用户管理页面（列表、新增、编辑、分配角色）
+2. 角色管理页面（权限树选择）
+3. 权限管理页面（动态权限配置）
+4. 与后端 API 对接
+5. 添加前端权限控制（隐藏无权限的按钮）
+
+---
+
+# 开发完成后，QA 进行测试
+
+@qa
+为权限管理系统设计测试用例：
+1. 正常场景测试（分配权限、验证权限）
+2. 异常场景测试（越权访问、未登录访问）
+3. 性能测试（1000 并发权限校验）
+4. 安全测试（SQL 注入、越权漏洞）
+5. 生成测试报告
+
+---
+
+# 最后 DevOps 部署上线
+
+@devops
+配置权限管理服务的部署：
+1. 编写 Dockerfile
+2. 配置 docker-compose（包含 PostgreSQL、Redis）
+3. 设置 GitHub Actions CI/CD 流水线
+4. 配置 Nginx 反向代理
+5. 添加监控和日志收集</code></pre>
+
+            <p><strong>Agent Teams 工作流程</strong></p>
+            <ol>
+                <li><strong>任务分解</strong>：Team Leader（通常是 Architect）将大任务分解为子任务</li>
+                <li><strong>角色分配</strong>：根据专业领域，分配给不同的 Agent 角色</li>
+                <li><strong>并行开发</strong>：多个 Agent 同时工作，提高开发效率</li>
+                <li><strong>协作沟通</strong>：Agent 之间自动协调接口定义、数据格式等</li>
+                <li><strong>集成测试</strong>：各 Agent 完成后，自动进行集成测试</li>
+                <li><strong>代码审查</strong>：相互审查代码，确保质量</li>
+            </ol>
+
+            <p><strong>创建自定义 Agent</strong></p>
+            <p>
+                除了内置角色，你还可以创建自定义 Agent：
+            </p>
+            <pre><code># 创建专门的 React 专家 Agent
+@create-agent ReactExpert
+
+描述：React 开发专家，精通 Hooks、状态管理、性能优化
+专长：
+- React 18 新特性（Concurrent Features、Suspense）
+- 状态管理（Redux Toolkit、Zustand、Jotai）
+- 性能优化（memo、useMemo、代码分割）
+- TypeScript 集成
+- 测试（React Testing Library）
+
+工作流：
+1. 分析需求，设计组件结构
+2. 编写类型安全的代码
+3. 实现自定义 Hooks
+4. 编写单元测试
+5. 提供性能优化建议
+
+# 使用自定义 Agent
+@ReactExpert
+帮我优化这个 React 组件的性能，目前渲染很慢...</code></pre>
 
             <h3>如何启用 Agent</h3>
             <ol>
