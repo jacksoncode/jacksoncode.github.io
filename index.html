@@ -1,195 +1,663 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CodeClub - 程序员技术博客与学习资源导航，分享编程知识、技术文章和优质图书推荐">
+    <meta name="keywords" content="编程,代码,技术博客,程序员,学习资源,Python,Java,JavaScript">
+    <meta name="author" content="Jackson">
+    <title>CodeClub - 程序员的技术分享空间</title>
+    <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-	<head>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="CodeClub - 程序员技术博客与学习资源导航，分享编程知识、技术文章和优质图书推荐">
-		<meta name="keywords" content="编程,代码,技术博客,程序员,学习资源,Python,Java,JavaScript">
-		<meta name="author" content="Jackson">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-		<title>CodeClub</title>
-		<link rel="icon" type="image/x-ico" href="./img/logo.png" />
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
 
-		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
 
-		<!-- Custom CSS -->
-		<link rel="stylesheet" href="css/index.css" />
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
 
-		<!-- Custom fonts -->
-		<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" type="text/css">
+        .navbar-brand img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
 
-		<!-- Custom styles for this theme -->
-		<link href="css/clean-blog.min.css" rel="stylesheet">
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
 
-	</head>
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
 
-	<body>
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-expand-lg navbar-fixed-top" role="navigation">
-			<div class="container">
-				<a class="navbar-brand" href="index.html">CodeClub</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-						<li class="nav-item active">
-							<a class="nav-link" href="index.html">首页</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="nav.html">网址导航</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/blog/">博客</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="book.html">图书</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="contact.html">联系我</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="about.html">关于我</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+        }
 
-		<!-- Page Header -->
-		<header class="intro-header" style="background-image: url('img/home-bg.jpg')">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-						<div class="site-heading">
-							<h1>CodeClub</h1>
-							<span class="subheading">I Love Code, I Love This.</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-		<!-- Main Content -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-					<div class="post-preview">
-						<a href="blog.html">
-							<h2 class="post-title">
-								Man must explore, and this is exploration at its greatest
-							</h2>
-							<h3 class="post-subtitle">
-								Problems look mighty small from 150 miles up
-							</h3>
-						</a>
-						<p class="post-meta">Posted by <a href="about.html">Jackson</a> on September 24, 2017</p>
-					</div>
-					<hr>
-					<div class="post-preview">
-						<a href="blog.html">
-							<h2 class="post-title">
-								I believe every human has a finite number of heartbeats. I don't intend to waste any of
-								mine.
-							</h2>
-						</a>
-						<p class="post-meta">Posted by <a href="about.html">Jackson</a> on September 18, 2017</p>
-					</div>
-					<hr>
-					<div class="post-preview">
-						<a href="blog.html">
-							<h2 class="post-title">
-								Science has not yet mastered prophecy
-							</h2>
-							<h3 class="post-subtitle">
-								We predict too much for the next year and yet far too little for the next ten.
-							</h3>
-						</a>
-						<p class="post-meta">Posted by <a href="about.html">Jackson</a> on August 24, 2017</p>
-					</div>
-					<hr>
-					<div class="post-preview">
-						<a href="blog.html">
-							<h2 class="post-title">
-								Failure is not an option
-							</h2>
-							<h3 class="post-subtitle">
-								Many say exploration is part of our destiny, but it's actually our duty to future
-								generations.
-							</h3>
-						</a>
-						<p class="post-meta">Posted by <a href="about.html">Jackson</a> on July 8, 2017</p>
-					</div>
-					<hr>
-					<div class="clearfix">
-						<a class="btn btn-secondary float-right" href="blog.html">More Posts &rarr;</a>
-					</div>
-				</div>
-			</div>
-		</div>
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
 
-		<hr>
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-		<!-- Footer -->
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-10 offset-lg-2 col-md-10 offset-md-1">
-						<ul class="list-inline text-center">
-							<li class="list-inline-item">
-								<a href="#">
-									<span class="fa-stack fa-lg">
-										<i class="fa fa-circle fa-stack-2x"></i>
-										<i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="#">
-									<span class="fa-stack fa-lg">
-										<i class="fa fa-circle fa-stack-2x"></i>
-										<i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="https://github.com/jacksoncode">
-									<span class="fa-stack fa-lg">
-										<i class="fa fa-circle fa-stack-2x"></i>
-										<i class="fa fa-github fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-							</li>
-						</ul>
-						<p class="copyright text-muted">Copyright &copy; Jackson 2026. Free Hosted at <a
-								href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank"
-								title="Github">Github</a></p>
-					</div>
-				</div>
-			</div>
-		</footer>
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
 
-		<!-- jQuery -->
-		<script src="lib/jquery/jquery.js"></script>
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
 
-		<!-- Bootstrap Core JavaScript -->
-		<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        .hero-desc {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-		<!-- Custom JavaScript -->
-		<script src="js/clean-blog.min.js"></script>
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
 
-	</body>
+        .btn {
+            padding: 14px 32px;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-icon.nav { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .feature-icon.wiki { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .feature-icon.books { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .feature-icon.blog { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            padding: 64px 24px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Recent Posts Section */
+        .posts-section {
+            padding: 80px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .posts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .posts-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .btn-view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-view-all:hover {
+            gap: 12px;
+        }
+
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .post-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .post-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(8px);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .post-category {
+            padding: 4px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .post-title {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .post-excerpt {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 48px 24px 24px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 24px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+
+            .posts-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">
+                <img src="./img/logo.png" alt="CodeClub">
+                <span>CodeClub</span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a class="nav-link active" href="index.html">首页</a></li>
+                <li><a class="nav-link" href="nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="./blog/">博客</a></li>
+                <li><a class="nav-link" href="./wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link" href="./mkdocs/site/index.html" target="_blank">NewWiKi</a></li>
+                <li><a class="nav-link" href="book.html">图书</a></li>
+                <li><a class="nav-link" href="contact.html">联系我</a></li>
+                <li><a class="nav-link" href="about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>CodeClub</h1>
+            <p class="hero-subtitle">程序员的技术分享空间</p>
+            <p class="hero-desc">
+                这里是我的个人技术博客，记录学习笔记、分享编程心得、推荐优质资源。
+                无论你是初学者还是资深开发者，都能在这里找到有价值的内容。
+            </p>
+            <div class="hero-buttons">
+                <a href="nav.html" class="btn btn-primary">
+                    <i class="fas fa-compass"></i> 开始探索
+                </a>
+                <a href="about.html" class="btn btn-secondary">
+                    <i class="fas fa-user"></i> 关于我
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 class="section-title">探索资源</h2>
+            <p class="section-subtitle">
+                精心整理的编程学习资源，帮助你提升技术能力
+            </p>
+        </div>
+        <div class="features-grid">
+            <a href="nav.html" class="feature-card">
+                <div class="feature-icon nav">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <h3 class="feature-title">网址导航</h3>
+                <p class="feature-desc">
+                    精选优质编程网站、AI工具、学习资源，一站式解决你的技术查找需求。
+                </p>
+            </a>
+            <a href="./wiki/index.html" class="feature-card">
+                <div class="feature-icon wiki">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3 class="feature-title">技术文档</h3>
+                <p class="feature-desc">
+                    系统化的技术笔记和教程，涵盖 Python、JavaScript、算法等多个领域。
+                </p>
+            </a>
+            <a href="book.html" class="feature-card">
+                <div class="feature-icon books">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 class="feature-title">图书推荐</h3>
+                <p class="feature-desc">
+                    精选编程经典书籍，从入门到进阶，帮助你建立系统的知识体系。
+                </p>
+            </a>
+            <a href="./blog/" class="feature-card">
+                <div class="feature-icon blog">
+                    <i class="fas fa-pen-nib"></i>
+                </div>
+                <h3 class="feature-title">技术博客</h3>
+                <p class="feature-desc">
+                    分享编程经验、项目实战、技术心得，记录我的成长历程。
+                </p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">技术文章</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">优质资源</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">推荐图书</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">年编程经验</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="posts-section">
+        <div class="posts-header">
+            <h2 class="posts-title">最新文章</h2>
+            <a href="./blog/" class="btn-view-all">
+                查看全部 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="post-list">
+            <a href="./blog/" class="post-card">
+                <div class="post-meta">
+                    <span class="post-category">Python</span>
+                    <span>2024年3月15日</span>
+                </div>
+                <h3 class="post-title">Python 异步编程实战：从入门到精通</h3>
+                <p class="post-excerpt">
+                    深入理解 Python 的异步编程模型，掌握 async/await 的使用方法，提升程序性能。
+                </p>
+            </a>
+            <a href="./blog/" class="post-card">
+                <div class="post-meta">
+                    <span class="post-category">前端</span>
+                    <span>2024年3月10日</span>
+                </div>
+                <h3 class="post-title">现代 CSS 布局技巧：Grid 与 Flexbox 最佳实践</h3>
+                <p class="post-excerpt">
+                    探索 CSS Grid 和 Flexbox 的强大功能，学习如何构建响应式、现代化的网页布局。
+                </p>
+            </a>
+            <a href="./blog/" class="post-card">
+                <div class="post-meta">
+                    <span class="post-category">工具</span>
+                    <span>2024年3月5日</span>
+                </div>
+                <h3 class="post-title">我的开发工具箱：提升效率的必备神器</h3>
+                <p class="post-excerpt">
+                    分享我日常开发中使用的工具，包括编辑器、插件、命令行工具等，助你提升开发效率。
+                </p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link" title="微信">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="#" class="social-link" title="微博">
+                    <i class="fab fa-weibo"></i>
+                </a>
+                <a href="https://github.com/jacksoncode" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p class="footer-text">
+                Copyright &copy; Jackson 2026. Free Hosted at 
+                <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank">GitHub</a>
+            </p>
+        </div>
+    </footer>
+</body>
 </html>
