@@ -1058,103 +1058,508 @@ async function processImage(file) {
 
             <h3>模型厂商与合作伙伴</h3>
             <p>
-                opencode 采用多模型架构，支持接入市面上主流的大语言模型，包括：
+                opencode 采用多模型架构，支持接入市面上主流的大语言模型，目前已经集成 30+ 个模型，覆盖全球顶尖 AI 厂商：
             </p>
+
+            <h4>国际主流厂商</h4>
             <ul>
-                <li><strong>OpenAI</strong> - GPT-4、GPT-4 Turbo、GPT-3.5 Turbo 系列</li>
-                <li><strong>Anthropic</strong> - Claude 3.5 Sonnet、Claude 3 Opus、Claude 3 Haiku</li>
-                <li><strong>Google</strong> - Gemini 1.5 Pro、Gemini 1.5 Flash、Gemini Ultra</li>
-                <li><strong>Meta</strong> - Llama 3.1 系列（70B、405B）</li>
-                <li><strong>Mistral AI</strong> - Mistral Large、Mistral Medium、Codestral</li>
-                <li><strong>Cohere</strong> - Command R、Command R+</li>
-                <li><strong>国内厂商</strong> - 百度文心一言、阿里通义千问、智谱 GLM-4</li>
+                <li><strong>OpenAI</strong> - 最知名的 AI 研究机构
+                    <ul>
+                        <li>GPT-4o (全能旗舰模型，支持文本/图像/音频)</li>
+                        <li>GPT-4 Turbo (高智能模型，128K 上下文)</li>
+                        <li>o1 / o1-mini (推理专用模型，适合复杂逻辑)</li>
+                        <li>GPT-3.5 Turbo (快速经济模型)</li>
+                    </ul>
+                </li>
+                <li><strong>Anthropic</strong> - 专注安全性和可靠性的 AI 公司
+                    <ul>
+                        <li>Claude 3.5 Sonnet (最佳编程助手，工具调用能力强)</li>
+                        <li>Claude 3 Opus (最高智能，适合复杂任务)</li>
+                        <li>Claude 3 Haiku (极速响应，成本最低)</li>
+                    </ul>
+                </li>
+                <li><strong>Google</strong> - 多模态和长上下文专家
+                    <ul>
+                        <li>Gemini 1.5 Pro (200万 token 超长上下文)</li>
+                        <li>Gemini 1.5 Flash (速度与成本平衡)</li>
+                        <li>Gemini Ultra (Google 最强模型)</li>
+                    </ul>
+                </li>
+                <li><strong>Meta</strong> - 开源大模型领导者
+                    <ul>
+                        <li>Llama 3.1 405B (开源最强模型)</li>
+                        <li>Llama 3.1 70B (性能与效率平衡)</li>
+                        <li>Llama 3.1 8B (轻量级快速推理)</li>
+                        <li>Code Llama 70B/34B/7B (代码专用)</li>
+                    </ul>
+                </li>
+                <li><strong>Mistral AI</strong> - 欧洲领先的 AI 公司
+                    <ul>
+                        <li>Mistral Large 2 (顶级性能)</li>
+                        <li>Mistral Medium (高性价比)</li>
+                        <li>Codestral (代码生成专家)</li>
+                        <li>Mixtral 8x22B (稀疏专家模型)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>专用代码模型</h4>
+            <ul>
+                <li><strong>DeepSeek</strong> - 代码能力突出的国产模型
+                    <ul>
+                        <li>DeepSeek Coder V2 (33B，多种编程语言精通)</li>
+                        <li>DeepSeek Chat (67B，通用对话+代码)</li>
+                    </ul>
+                </li>
+                <li><strong>Hugging Face</strong> - 开源模型社区
+                    <ul>
+                        <li>StarCoder 2 (15B，The Stack 数据集训练)</li>
+                        <li>WizardCoder (33B，指令微调版)</li>
+                        <li>Phind CodeLlama (34B，开发者优化版)</li>
+                    </ul>
+                </li>
+                <li><strong>Replit</strong> - 在线 IDE 厂商
+                    <ul>
+                        <li>replit-code-v1-3b (轻量级代码补全)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>国内厂商模型</h4>
+            <ul>
+                <li><strong>百度</strong> - 文心一言 (ERNIE Bot)
+                    <ul>
+                        <li>文心一言 4.0 (中文理解能力最强)</li>
+                        <li>文心一言 Turbo (快速响应版)</li>
+                        <li>文心 Speed (轻量版)</li>
+                    </ul>
+                </li>
+                <li><strong>阿里</strong> - 通义千问
+                    <ul>
+                        <li>Qwen2.5-72B (开源最强中文模型)</li>
+                        <li>Qwen2.5-Coder (32B，代码专用)</li>
+                        <li>通义千问 Max (闭源旗舰版)</li>
+                    </ul>
+                </li>
+                <li><strong>智谱 AI</strong> - ChatGLM 系列
+                    <ul>
+                        <li>GLM-4 (9B，国产最强代码模型)</li>
+                        <li>GLM-4-Plus (旗舰对话模型)</li>
+                        <li>CodeGeeX4 (代码生成专用)</li>
+                    </ul>
+                </li>
+                <li><strong>科大讯飞</strong> - 星火大模型
+                    <ul>
+                        <li>星火 V4.0 (最新版，中文理解优秀)</li>
+                        <li>星火 Pro (专业版)</li>
+                    </ul>
+                </li>
+                <li><strong>腾讯</strong> - 混元大模型
+                    <ul>
+                        <li>混元 Large (千亿参数)</li>
+                        <li>混元 Pro (专业版)</li>
+                    </ul>
+                </li>
+                <li><strong>MiniMax</strong> - abab 系列
+                    <ul>
+                        <li>abab 6.5s (万亿参数 MoE 模型)</li>
+                    </ul>
+                </li>
+                <li><strong>月之暗面</strong> - Kimi
+                    <ul>
+                        <li>Kimi k1.5 (200万字符长文本)</li>
+                    </ul>
+                </li>
             </ul>
 
             <h3>模型类别与适用场景</h3>
 
-            <p><strong>1. 代码生成模型</strong></p>
+            <h4>1. 旗舰代码模型（Tier 1 - 最强性能）</h4>
+            <p>适合复杂任务、关键代码审查、架构设计，响应质量最高</p>
             <ul>
-                <li><strong>GPT-4 / Claude 3.5 Sonnet</strong> - 最强的代码理解和生成能力
+                <li><strong>GPT-4o</strong> (OpenAI) - 全能旗舰
                     <ul>
-                        <li>适用：复杂算法实现、架构设计、代码重构</li>
-                        <li>特点：推理能力强，上下文理解深入</li>
+                        <li>支持：文本、图像、代码多模态理解</li>
+                        <li>上下文：128K tokens</li>
+                        <li>速度：比 GPT-4 Turbo 快 2 倍</li>
+                        <li>适用：复杂架构设计、跨文件重构、Bug 诊断</li>
+                        <li>评分：代码能力 95/100</li>
                     </ul>
                 </li>
-                <li><strong>Codestral / CodeLlama</strong> - 专门的代码模型
+                <li><strong>Claude 3.5 Sonnet</strong> (Anthropic) - 最佳编程助手
                     <ul>
-                        <li>适用：代码补全、Fill-in-the-Middle (FIM)</li>
-                        <li>特点：代码专项优化，响应速度快</li>
+                        <li>支持：200K 上下文，工具调用能力最强</li>
+                        <li>特点：代码解释最清晰，推理能力出色</li>
+                        <li>适用：代码审查、学习新技术、Agent 任务</li>
+                        <li>评分：代码能力 94/100</li>
+                    </ul>
+                </li>
+                <li><strong>GPT-4o mini</strong> (OpenAI) - 高性价比旗舰
+                    <ul>
+                        <li>特点：GPT-4o 的轻量版，速度更快</li>
+                        <li>成本：比 GPT-4o 便宜 60%</li>
+                        <li>适用：日常开发、快速原型</li>
                     </ul>
                 </li>
             </ul>
 
-            <p><strong>2. 通用对话模型</strong></p>
+            <h4>2. 推理专用模型（Tier 1.5 - 深度思考）</h4>
+            <p>适合需要多步推理的复杂问题，如算法设计、数学计算</p>
             <ul>
-                <li><strong>GPT-3.5 Turbo / Claude 3 Haiku</strong> - 平衡性能与成本
+                <li><strong>o1 / o1-preview</strong> (OpenAI)
                     <ul>
-                        <li>适用：日常问答、简单代码生成、代码解释</li>
-                        <li>特点：响应快、成本低</li>
+                        <li>特点：链式思维推理，适合复杂逻辑</li>
+                        <li>适用：算法优化、复杂 Bug 分析、架构决策</li>
+                        <li>注意：响应较慢（10-30秒），适合非实时任务</li>
                     </ul>
                 </li>
-                <li><strong>Gemini 1.5 Pro</strong> - 超长上下文
+                <li><strong>o1-mini</strong> (OpenAI)
                     <ul>
-                        <li>适用：分析大型代码库、多文件重构</li>
-                        <li>特点：支持 200万 token 上下文窗口</li>
+                        <li>特点：o1 的快速版，80% 性能，50% 成本</li>
+                        <li>适用：日常推理任务</li>
                     </ul>
                 </li>
             </ul>
 
-            <p><strong>3. 特定领域模型</strong></p>
+            <h4>3. 代码专项模型（Tier 2 - 专业优化）</h4>
+            <p>针对代码生成优化，补全速度快，成本低</p>
             <ul>
-                <li><strong>Mistral Large</strong> - 欧洲语言优化</li>
-                <li><strong>文心一言 / 通义千问</strong> - 中文语境优化</li>
-                <li><strong>GLM-4</strong> - 中文代码能力突出</li>
+                <li><strong>Codestral</strong> (Mistral) - 32K 上下文代码专家
+                    <ul>
+                        <li>训练：80+ 编程语言</li>
+                        <li>特点：Fill-in-the-Middle (FIM) 能力最强</li>
+                        <li>速度：比 GPT-4 快 3 倍</li>
+                    </ul>
+                </li>
+                <li><strong>DeepSeek Coder V2</strong> - 国产代码之光
+                    <ul>
+                        <li>支持：338 种编程语言</li>
+                        <li>特点：中文代码理解能力突出</li>
+                        <li>评分：HumanEval 90.2%</li>
+                    </ul>
+                </li>
+                <li><strong>CodeLlama 70B</strong> (Meta)
+                    <ul>
+                        <li>训练：500B tokens 代码数据</li>
+                        <li>特点：开源可商用，本地部署友好</li>
+                    </ul>
+                </li>
+                <li><strong>StarCoder 2</strong> (Hugging Face)
+                    <ul>
+                        <li>训练：The Stack v2 数据集（600+ 语言）</li>
+                        <li>特点：完全开源，透明可审计</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>4. 长上下文模型（Tier 2 - 大代码库）</h4>
+            <p>适合分析整个项目、多文件重构</p>
+            <ul>
+                <li><strong>Gemini 1.5 Pro</strong> - 200万 token 超长上下文
+                    <ul>
+                        <li>适用：分析整个代码库、大型项目重构</li>
+                        <li>特点：可一次性处理整个项目的代码</li>
+                        <li>局限：代码质量略低于 GPT-4</li>
+                    </ul>
+                </li>
+                <li><strong>Kimi k1.5</strong> (月之暗面) - 200万字符中文长文本
+                    <ul>
+                        <li>适用：中文技术文档、大型中文项目</li>
+                        <li>特点：中文长文本理解能力强</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>5. 经济实用模型（Tier 3 - 日常使用）</h4>
+            <p>成本低、速度快，适合日常开发任务</p>
+            <ul>
+                <li><strong>GPT-3.5 Turbo</strong> - 性价比之王
+                    <ul>
+                        <li>成本：比 GPT-4 便宜 10 倍</li>
+                        <li>速度：响应极快</li>
+                        <li>适用：简单代码生成、代码解释、日常问答</li>
+                    </ul>
+                </li>
+                <li><strong>Claude 3 Haiku</strong> - 极速响应
+                    <ul>
+                        <li>速度：比 Claude 3.5 快 5 倍</li>
+                        <li>成本：最低价格档位</li>
+                        <li>适用：实时补全、简单任务</li>
+                    </ul>
+                </li>
+                <li><strong>Gemini 1.5 Flash</strong> - Google 快版
+                    <ul>
+                        <li>特点：速度快，成本低于 Gemini Pro</li>
+                        <li>适用：高并发场景</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>6. 中文优化模型（国内首选）</h4>
+            <p>针对中文语境和中文代码优化</p>
+            <ul>
+                <li><strong>Qwen2.5-72B</strong> (阿里) - 开源中文最强
+                    <ul>
+                        <li>评分：MMLU 83.5，中文理解优秀</li>
+                        <li>特点：代码能力接近 GPT-4</li>
+                    </ul>
+                </li>
+                <li><strong>GLM-4</strong> (智谱) - 国产代码专家
+                    <ul>
+                        <li>特点：代码补全速度快</li>
+                        <li>适用：国内开发者首选</li>
+                    </ul>
+                </li>
+                <li><strong>文心一言 4.0</strong> (百度)
+                    <ul>
+                        <li>特点：中文理解细腻，知识丰富</li>
+                        <li>适用：中文技术问答</li>
+                    </ul>
+                </li>
             </ul>
 
             <h3>免费模型选项</h3>
             <p>
-                opencode 提供以下免费模型供用户体验：
+                opencode 提供丰富的免费模型选择，覆盖从日常开发到学习探索的各种场景：
             </p>
+
+            <h4>🆓 免费版 - $0/月</h4>
+            <p><strong>基础额度（每月重置）：</strong></p>
             <ul>
-                <li><strong>GPT-3.5 Turbo</strong> - 每月 500 次请求免费额度</li>
-                <li><strong>Claude 3 Haiku</strong> - 每日 100 次免费请求</li>
-                <li><strong>Gemini 1.5 Flash</strong> - 每日 150 次免费请求</li>
-                <li><strong>Llama 3.1 70B</strong> - 无限制免费使用（速度较慢）</li>
-                <li><strong>CodeLlama 34B</strong> - 代码补全免费使用</li>
+                <li><strong>GPT-3.5 Turbo</strong> - 500 次/月
+                    <ul>
+                        <li>适合：日常代码生成、学习使用</li>
+                        <li>速度：快（1-3秒）</li>
+                    </ul>
+                </li>
+                <li><strong>GPT-4o mini</strong> - 100 次/月（新增）</li>
+                <li><strong>Claude 3 Haiku</strong> - 100 次/天
+                    <ul>
+                        <li>适合：实时补全、快速问答</li>
+                        <li>特点：响应最快</li>
+                    </ul>
+                </li>
+                <li><strong>Gemini 1.5 Flash</strong> - 150 次/天</li>
+                <li><strong>DeepSeek Chat</strong> - 100 次/天（国产）</li>
             </ul>
-            <p>
-                <strong>注意</strong>：免费模型在高峰期可能会有响应延迟，且功能相对基础版本有所限制。
-            </p>
+
+            <p><strong>开源模型（无限制免费）：</strong></p>
+            <ul>
+                <li><strong>Llama 3.1 70B</strong> - 无限制
+                    <ul>
+                        <li>特点：Meta 开源，可商用</li>
+                        <li>速度：较慢（5-10秒）</li>
+                        <li>适用：学习探索、离线环境</li>
+                    </ul>
+                </li>
+                <li><strong>Llama 3.1 8B</strong> - 无限制
+                    <ul>
+                        <li>特点：轻量级，速度较快</li>
+                        <li>适用：简单代码补全</li>
+                    </ul>
+                </li>
+                <li><strong>CodeLlama 34B</strong> - 代码补全无限制</li>
+                <li><strong>CodeLlama 7B</strong> - 极速响应版</li>
+                <li><strong>Qwen2.5-7B</strong> (阿里) - 中文无限制</li>
+                <li><strong>StarCoder 2 15B</strong> - 完全开源</li>
+            </ul>
+
+            <p><strong>免费版限制：</strong></p>
+            <ul>
+                <li>高峰期可能需要排队（等待 10-60 秒）</li>
+                <li>不支持多模态（图片、音频分析）</li>
+                <li>Agent Teams 功能受限</li>
+                <li>无法使用 GPT-4、Claude 3.5 Sonnet 等高级模型</li>
+                <li>单次对话长度限制（4K tokens）</li>
+            </ul>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 免费版使用建议</div>
+                <p>日常开发使用 Llama 3.1 70B（无限制）+ GPT-3.5 Turbo（500次/月）组合，基本能满足个人开发者需求。复杂任务可以积累起来，每月用 GPT-3.5 额度处理。</p>
+            </div>
 
             <h3>付费订阅计划</h3>
 
-            <p><strong>Pro 版 - $10/月</strong></p>
+            <h4>💎 Pro 版 - $10/月（个人开发者推荐）</h4>
+            <p><strong>基础模型（无限使用）：</strong></p>
             <ul>
-                <li>无限次使用 GPT-3.5 Turbo 和 Claude 3 Haiku</li>
-                <li>每月 500 次 GPT-4 / Claude 3.5 Sonnet 高级模型调用</li>
-                <li>优先响应，无排队等待</li>
-                <li>支持多模态输入（图片分析）</li>
-                <li>Agent Teams 功能完整权限</li>
+                <li>GPT-3.5 Turbo - 无限</li>
+                <li>GPT-4o mini - 无限</li>
+                <li>Claude 3 Haiku - 无限</li>
+                <li>Gemini 1.5 Flash - 无限</li>
+                <li>所有开源模型（Llama、CodeLlama、Qwen 等）- 无限</li>
+            </ul>
+            <p><strong>高级模型额度：</strong></p>
+            <ul>
+                <li>GPT-4 / GPT-4o - 500 次/月</li>
+                <li>Claude 3.5 Sonnet - 500 次/月</li>
+                <li>Claude 3 Opus - 100 次/月</li>
+                <li>Gemini 1.5 Pro - 300 次/月</li>
+                <li>DeepSeek Coder V2 - 300 次/月</li>
+                <li>Codestral - 500 次/月</li>
+                <li>国内模型（文心、通义、GLM）- 各 200 次/月</li>
+            </ul>
+            <p><strong>Pro 版特权：</strong></p>
+            <ul>
+                <li>✅ 优先响应队列（无需等待）</li>
+                <li>✅ 多模态支持（图片、PDF 分析）</li>
+                <li>✅ 超长上下文（128K-200K tokens）</li>
+                <li>✅ Agent Teams 完整权限</li>
+                <li>✅ 自定义 Agent 创建</li>
+                <li>✅ 代码库索引（Codebase Indexing）</li>
+                <li>✅ 高级 Skills 全部解锁</li>
+                <li>✅ 7×24 小时技术支持</li>
             </ul>
 
-            <p><strong>Team 版 - $20/用户/月</strong></p>
+            <h4>👥 Team 版 - $20/用户/月（小团队首选）</h4>
+            <p><strong>包含 Pro 版所有功能，额外增加：</strong></p>
             <ul>
-                <li>包含 Pro 版所有功能</li>
-                <li>每月 2000 次高级模型调用</li>
-                <li>团队协作功能（共享 Prompts、代码库知识）</li>
-                <li>管理员控制台和用量统计</li>
-                <li>API 访问权限</li>
-                <li>优先技术支持</li>
+                <li><strong>更多高级模型额度：</strong>
+                    <ul>
+                        <li>GPT-4 / GPT-4o - 2000 次/月</li>
+                        <li>Claude 3.5 Sonnet - 2000 次/月</li>
+                        <li>Claude 3 Opus - 500 次/月</li>
+                        <li>o1 / o1-preview - 300 次/月（新增推理模型）</li>
+                        <li>其他高级模型额度 ×4</li>
+                    </ul>
+                </li>
+                <li><strong>团队协作功能：</strong>
+                    <ul>
+                        <li>共享 Prompts 库</li>
+                        <li>团队代码库知识共享</li>
+                        <li>协作编辑和代码审查</li>
+                        <li>团队用量统计和报告</li>
+                    </ul>
+                </li>
+                <li><strong>管理功能：</strong>
+                    <ul>
+                        <li>管理员控制台</li>
+                        <li>成员权限管理</li>
+                        <li>用量限额设置</li>
+                        <li>审计日志</li>
+                    </ul>
+                </li>
+                <li><strong>API 访问：</strong>
+                    <ul>
+                        <li>RESTful API 访问权限</li>
+                        <li>SDK 支持（Python、JavaScript、Go）</li>
+                        <li>每月 100,000 API 调用额度</li>
+                    </ul>
+                </li>
+                <li><strong>优先支持：</strong>
+                    <ul>
+                        <li>4 小时内响应</li>
+                        <li>专属技术支持渠道</li>
+                        <li>月度使用培训</li>
+                    </ul>
+                </li>
             </ul>
 
-            <p><strong>Enterprise 版 - 联系销售</strong></p>
+            <h4>🏢 Enterprise 版 - 联系销售定制（企业级）</h4>
+            <p><strong>私有化部署选项：</strong></p>
             <ul>
-                <li>定制化模型部署（私有云、本地部署）</li>
-                <li>专属模型微调服务</li>
-                <li>SAML SSO 和企业级安全</li>
-                <li>SLA 保障（99.9% 可用性）</li>
-                <li>专属客户成功经理</li>
+                <li>本地部署（On-Premise）- 数据不出境</li>
+                <li>私有云部署（AWS/Azure/阿里云）</li>
+                <li>VPC 隔离部署</li>
+                <li>混合云架构支持</li>
             </ul>
+            <p><strong>模型定制服务：</strong></p>
+            <ul>
+                <li>专属模型微调（Fine-tuning）</li>
+                <li>领域知识注入（RAG）</li>
+                <li>私有代码库训练</li>
+                <li>自定义模型评估</li>
+            </ul>
+            <p><strong>企业级安全：</strong></p>
+            <ul>
+                <li>SAML 2.0 / SSO 单点登录</li>
+                <li>RBAC 细粒度权限控制</li>
+                <li>代码审计日志</li>
+                <li>SOC 2 Type II 合规</li>
+                <li>GDPR / 等保三级合规</li>
+            </ul>
+            <p><strong>服务保障：</strong></p>
+            <ul>
+                <li>99.9% SLA 可用性保障</li>
+                <li>专属客户成功经理（CSM）</li>
+                <li>定制化培训方案</li>
+                <li>月度业务回顾会议</li>
+                <li>无限 API 调用额度</li>
+            </ul>
+
+            <h4>📊 付费计划对比表</h4>
+            <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem;">
+                <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">功能</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600;">免费版</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600;">Pro ($10)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600;">Team ($20)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600;">Enterprise</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">GPT-3.5 Turbo</td>
+                    <td style="padding: 12px; text-align: center;">500/月</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">GPT-4 / Claude 3.5</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">500/月</td>
+                    <td style="padding: 12px; text-align: center;">2000/月</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">o1 推理模型</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">300/月</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">开源模型</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">多模态支持</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">Agent Teams</td>
+                    <td style="padding: 12px; text-align: center;">受限</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">API 访问</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">10万/月</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;">私有化部署</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center;">✗</td>
+                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">技术支持</td>
+                    <td style="padding: 12px; text-align: center;">社区</td>
+                    <td style="padding: 12px; text-align: center;">标准</td>
+                    <td style="padding: 12px; text-align: center;">优先</td>
+                    <td style="padding: 12px; text-align: center;">专属</td>
+                </tr>
+            </table>
 
             <h3>如何选择合适的模型</h3>
             <p>
