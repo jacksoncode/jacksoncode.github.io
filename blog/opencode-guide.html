@@ -358,6 +358,54 @@
                 还能理解开发者的意图，提供更智能的编程辅助。
             </p>
 
+            <h2>安装与配置</h2>
+
+            <h3>1. 系统要求</h3>
+            <p>
+                在安装 opencode 之前，请确保你的系统满足以下要求：
+            </p>
+            <ul>
+                <li><strong>操作系统</strong>：Windows 10/11、macOS 10.15+、Linux (Ubuntu 18.04+)</li>
+                <li><strong>内存</strong>：至少 8GB RAM（推荐 16GB）</li>
+                <li><strong>网络</strong>：需要稳定的互联网连接</li>
+                <li><strong>编辑器</strong>：VS Code 1.70+ 或 JetBrains IDE 2022.1+</li>
+            </ul>
+
+            <h3>2. 下载安装</h3>
+            <p><strong>方式一：通过 VS Code 安装（推荐）</strong></p>
+            <ol>
+                <li>打开 VS Code</li>
+                <li>点击左侧活动栏的 Extensions（扩展）图标</li>
+                <li>在搜索框输入 "opencode"</li>
+                <li>找到 opencode 官方扩展，点击 Install</li>
+                <li>安装完成后重启 VS Code</li>
+            </ol>
+
+            <p><strong>方式二：JetBrains IDE 安装</strong></p>
+            <ol>
+                <li>打开 JetBrains IDE（IntelliJ IDEA、PyCharm 等）</li>
+                <li>进入 Settings/Preferences → Plugins</li>
+                <li>切换到 Marketplace 标签</li>
+                <li>搜索 "opencode" 并安装</li>
+                <li>重启 IDE 完成安装</li>
+            </ol>
+
+            <h3>3. 初始配置</h3>
+            <p>
+                安装完成后，需要进行简单的配置：
+            </p>
+            <ol>
+                <li><strong>登录账户</strong>：点击编辑器右侧的 opencode 图标，使用邮箱或 GitHub 账号登录</li>
+                <li><strong>选择计划</strong>：选择适合的计划（免费版或 Pro 版）</li>
+                <li><strong>配置快捷键</strong>：在设置中自定义快捷键，如接受建议、打开聊天等</li>
+                <li><strong>隐私设置</strong>：根据需求配置代码分享和隐私选项</li>
+            </ol>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 配置建议</div>
+                <p>首次使用时建议开启"自动补全"和"代码解释"功能，这是 opencode 最核心的能力。</p>
+            </div>
+
             <h2>核心功能特性</h2>
 
             <h3>1. 智能代码补全</h3>
@@ -452,6 +500,124 @@ result = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, numbers)))</code>
             <p>
                 opencode 会解释这段代码使用了函数式编程，先过滤出偶数，然后计算平方。
             </p>
+
+            <h2>Skills 和 Agent 使用说明</h2>
+
+            <h3>什么是 Skills？</h3>
+            <p>
+                <strong>Skills</strong> 是 opencode 的专项能力模块，每个 Skill 都针对特定场景进行了优化。通过启用不同的 Skills，你可以让 opencode 在特定领域表现更出色。
+            </p>
+
+            <h3>常用 Skills 介绍</h3>
+            
+            <p><strong>1. Code Review Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：自动审查代码，发现潜在问题</li>
+                <li><strong>使用场景</strong>：提交代码前进行自查、Code Review 辅助</li>
+                <li><strong>启用方法</strong>：输入 <code>/review</code> 或选择 Code Review Skill</li>
+                <li><strong>输出</strong>：详细的代码审查报告，包括问题描述、严重程度和修复建议</li>
+            </ul>
+
+            <p><strong>2. Docstring Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：自动生成函数和类的文档字符串</li>
+                <li><strong>使用场景</strong>：为项目添加文档、理解他人代码</li>
+                <li><strong>启用方法</strong>：输入 <code>/doc</code> 或选择 Docstring Skill</li>
+                <li><strong>支持格式</strong>：Google Style、NumPy Style、reStructuredText 等</li>
+            </ul>
+
+            <p><strong>3. Test Case Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：自动生成单元测试用例</li>
+                <li><strong>使用场景</strong>：提高代码覆盖率、TDD 开发</li>
+                <li><strong>启用方法</strong>：输入 <code>/test</code> 或选择 Test Case Skill</li>
+                <li><strong>支持框架</strong>：pytest、unittest、Jest 等主流测试框架</li>
+            </ul>
+
+            <p><strong>4. Git Commit Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：根据代码变更自动生成规范的提交信息</li>
+                <li><strong>使用场景</strong>：保持提交历史清晰、遵循 Conventional Commits 规范</li>
+                <li><strong>启用方法</strong>：输入 <code>/commit</code> 或选择 Git Commit Skill</li>
+                <li><strong>输出示例</strong>：<code>feat: add user authentication module with JWT support</code></li>
+            </ul>
+
+            <p><strong>5. Refactor Skill</strong></p>
+            <ul>
+                <li><strong>功能</strong>：识别代码坏味道并提供重构建议</li>
+                <li><strong>使用场景</strong>：技术债务清理、代码优化</li>
+                <li><strong>启用方法</strong>：输入 <code>/refactor</code> 或选择 Refactor Skill</li>
+                <li><strong>识别问题</strong>：重复代码、过长函数、魔法数字等</li>
+            </ul>
+
+            <h3>什么是 Agent？</h3>
+            <p>
+                <strong>Agent</strong> 是 opencode 的智能代理功能，它能够理解复杂的多步骤任务，并自主规划执行路径。与简单的代码补全不同，Agent 可以：
+            </p>
+            <ul>
+                <li>理解自然语言描述的任务目标</li>
+                <li>自主规划执行步骤</li>
+                <li>在多个文件间进行操作</li>
+                <li>执行命令行操作</li>
+            </ul>
+
+            <h3>Agent 使用场景</h3>
+
+            <p><strong>场景一：功能开发</strong></p>
+            <p>
+                告诉 Agent 你要实现的功能，它会：
+            </p>
+            <ol>
+                <li>分析项目结构和现有代码</li>
+                <li>创建或修改必要的文件</li>
+                <li>编写代码实现功能</li>
+                <li>生成测试用例</li>
+            </ol>
+            <pre><code># 示例指令
+@agent 帮我添加一个用户注册功能，需要包含邮箱验证和密码加密</code></pre>
+
+            <p><strong>场景二：Bug 修复</strong></p>
+            <p>
+                描述 Bug 现象，Agent 会：
+            </p>
+            <ol>
+                <li>定位问题所在</li>
+                <li>分析根因</li>
+                <li>提供修复方案</li>
+                <li>验证修复结果</li>
+            </ol>
+
+            <p><strong>场景三：项目重构</strong></p>
+            <p>
+                让 Agent 帮你进行大规模重构：
+            </p>
+            <pre><code># 示例指令
+@agent 将项目中的所有回调函数改为 async/await 形式</code></pre>
+
+            <h3>如何启用 Agent</h3>
+            <ol>
+                <li><strong>触发方式</strong>：在聊天框输入 <code>@agent</code> 或点击 Agent 模式按钮</li>
+                <li><strong>描述任务</strong>：用自然语言清晰描述你想要完成的任务</li>
+                <li><strong>确认步骤</strong>：Agent 会展示执行计划，你可以确认或修改</li>
+                <li><strong>执行操作</strong>：Agent 会逐步执行，每个关键步骤都会征求你的确认</li>
+            </ol>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> Agent 使用建议</div>
+                <p>Agent 功能强大但消耗较多资源，建议用于复杂任务。简单任务使用普通的 Skills 或代码补全更高效。</p>
+            </div>
+
+            <h3>Skills 和 Agent 的组合使用</h3>
+            <p>
+                在实际开发中，你可以组合使用 Skills 和 Agent：
+            </p>
+            <ol>
+                <li>先用 <strong>Agent</strong> 开发新功能或重构代码</li>
+                <li>使用 <strong>Code Review Skill</strong> 审查生成的代码</li>
+                <li>用 <strong>Docstring Skill</strong> 为新函数添加文档</li>
+                <li>使用 <strong>Test Case Skill</strong> 生成单元测试</li>
+                <li>最后用 <strong>Git Commit Skill</strong> 生成规范的提交信息</li>
+            </ol>
 
             <h2>最佳实践建议</h2>
 
