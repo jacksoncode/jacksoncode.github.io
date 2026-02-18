@@ -131,3 +131,61 @@
 - [发现bugs](?file=900-若有所思/100-发现bugs "发现bugs")
 - [发现你的美](?file=900-若有所思/200-发现你的美 "发现你的美")
 - [重要和紧急](?file=900-若有所思/500-重要和紧急 "重要和紧急")
+
+##### AI编程工具
+- [Claude Code](?file=017-AI编程工具/01_Claude_Code "Claude Code")
+- [Gemini CLI](?file=017-AI编程工具/02_Gemini_CLI "Gemini CLI")
+- [Qwen Code](?file=017-AI编程工具/03_Qwen_Code "Qwen Code")
+- [OpenAI CodeX](?file=017-AI编程工具/04_OpenAI_CodeX "OpenAI CodeX")
+- [iFlow CLI](?file=017-AI编程工具/05_iFlow_CLI "iFlow CLI")
+
+##### Shell脚本
+- [Shell基础入门](?file=018-Shell脚本/01_Shell基础入门/Shell简介与核心概念 "Shell基础入门")
+- [Shell语法基础](?file=018-Shell脚本/02_Shell语法基础/变量的定义与使用 "Shell语法基础")
+- [Shell高级特性](?file=018-Shell脚本/03_Shell高级特性/函数的定义与调用 "Shell高级特性")
+- [Shell实用命令](?file=018-Shell脚本/04_Shell实用命令/文本处理命令 "Shell实用命令")
+- [Shell脚本实例](?file=018-Shell脚本/05_Shell脚本实例/系统维护脚本 "Shell脚本实例")
+
+##### Git操作
+- [Git基础概念](?file=052-Git操作/01_Git基础概念/01_Git简介.md "Git基础概念")
+- [Git基础命令](?file=052-Git操作/02_Git基础命令/git_commit.md "Git基础命令")
+- [Git分支管理](?file=052-Git操作/03_Git分支管理/01_创建和切换分支.md "Git分支管理")
+- [Git远程操作](?file=052-Git操作/04_Git远程操作/01_查看远程仓库.md "Git远程操作")
+- [Git协作流程](?file=052-Git操作/05_Git协作流程/01_Gitflow工作流.md "Git协作流程")
+- [Git高级技巧](?file=052-Git操作/06_Git高级技巧/01_子模块管理.md "Git高级技巧")
+
+##### Linux系统
+- [Linux基础](?file=053-Linux系统/01_Linux基础/01_Linux简介与历史.md "Linux基础")
+- [文件与目录操作](?file=053-Linux系统/02_文件与目录操作/01_ls命令详解.md "文件与目录操作")
+- [文本处理](?file=053-Linux系统/03_文本处理/01_grep命令详解.md "文本处理")
+- [系统管理](?file=053-Linux系统/04_系统管理/01_系统服务管理.md "系统管理")
+- [用户与权限](?file=053-Linux系统/05_用户与权限/01_用户管理.md "用户与权限")
+- [网络命令](?file=053-Linux系统/06_网络命令/01_ip命令详解.md "网络命令")
+- [Shell脚本基础](?file=053-Linux系统/12_Shell脚本基础/01_Shell脚本编写规范.md "Shell脚本基础")
+
+##### UsingAI
+- [UsingAI基础](?file=060-UsingAI/basics/01_基础概念.md "UsingAI基础")
+- [Coding](?file=060-UsingAI/coding/01_CodeGeex.md "Coding")
+- [Text](?file=060-UsingAI/text/01_文本生成.md "Text")
+- [Image](?file=060-UsingAI/images/01_AI绘画.md "Image")
+- [Audio](?file=060-UsingAI/audio/01_语音合成.md "Audio")
+- [Video](?file=060-UsingAI/video/01_视频生成.md "Video")
+
+##### UsingAI_Qwen
+- [Qwen基础](?file=061-UsingAI_Qwen/basics/01_基础概念.md "Qwen基础")
+- [Qwen_Coding](?file=061-UsingAI_Qwen/coding/01_CodeGeex.md "Qwen_Coding")
+- [Qwen_Text](?file=061-UsingAI_Qwen/text/01_文本生成.md "Qwen_Text")
+
+##### UsingAI_TraeAuto
+- [TraeAuto基础](?file=062-UsingAI_TraeAuto/basics/01_基础概念.md "TraeAuto基础")
+- [TraeAuto_Coding](?file=062-UsingAI_TraeAuto/coding/01_代码生成.md "TraeAuto_Coding")
+- [TraeAuto_Advanced](?file=062-UsingAI_TraeAuto/advanced/01_高级特性.md "TraeAuto_Advanced")
+
+##### UsingAI_TraeGLM
+- [TraeGLM基础](?file=063-UsingAI_TraeGLM/basics/01_快速开始.md "TraeGLM基础")
+
+##### 基金理财
+- [基金理财基础](?file=302-基金理财/01_basics/01_基金入门指南.md "基金理财基础")
+- [股票投资](?file=302-基金理财/02_stocks/01_股票基础知识.md "股票投资")
+- [基金投资](?file=302-基金理财/03_funds/01_基金分类与选择.md "基金投资")
+
