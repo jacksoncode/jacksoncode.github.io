@@ -23,11 +23,21 @@
     
     <title>CodeClub - 程序员的技术分享空间</title>
     <link rel="icon" type="image/x-icon" href="./img/logo.png">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="CodeClub">
     <link rel="canonical" href="https://jacksoncode.github.io/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="./img/logo.png" type="image/png">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -108,6 +118,40 @@
             align-items: center;
             gap: 8px;
             list-style: none;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .nav-link {
@@ -497,8 +541,36 @@
                 grid-template-columns: 1fr;
             }
 
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
             .navbar-nav {
-                display: none;
+                position: fixed;
+                top: 64px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 64px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 0;
+                transition: left 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar-nav.active {
+                left: 0;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                font-size: 1.1rem;
+                border-bottom: 1px solid var(--border-color);
             }
 
             .posts-header {
@@ -517,6 +589,11 @@
                 <img src="./img/logo.png" alt="CodeClub" width="32" height="32" loading="eager">
                 <span>CodeClub</span>
             </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="navbar-nav">
                 <li><a class="nav-link active" href="index.html">首页</a></li>
                 <li><a class="nav-link" href="nav.html">网址导航</a></li>
@@ -682,5 +759,44 @@
             </p>
         </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        // 移动端菜单切换
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navbarNav = document.querySelector('.navbar-nav');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navbarNav.classList.toggle('active');
+                    this.setAttribute('aria-expanded', 
+                        this.classList.contains('active') ? 'true' : 'false');
+                });
+                
+                // 点击导航链接后关闭菜单
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        menuToggle.classList.remove('active');
+                        navbarNav.classList.remove('active');
+                    });
+                });
+            }
+            
+            // 注册 Service Worker (PWA)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(registration => {
+                            console.log('ServiceWorker registration successful:', registration.scope);
+                        })
+                        .catch(err => {
+                            console.error('ServiceWorker registration failed:', err);
+                        });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
