@@ -36,6 +36,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Dark Mode CSS -->
+    <link rel="stylesheet" href="./css/dark-mode.css">
     <!-- Preload critical images -->
     <link rel="preload" as="image" href="./img/logo.png" type="image/png">
     
@@ -797,6 +799,62 @@
                 });
             }
         });
+        
+        // Dark Mode Script
+        (function() {
+            const THEME_KEY = 'codeclub-theme';
+            const DARK_THEME = 'dark';
+            const LIGHT_THEME = 'light';
+            
+            function getPreferredTheme() {
+                const saved = localStorage.getItem(THEME_KEY);
+                if (saved) return saved;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK_THEME : LIGHT_THEME;
+            }
+            
+            function applyTheme(theme) {
+                if (theme === DARK_THEME) {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
+                updateIcon(theme);
+            }
+            
+            function updateIcon(theme) {
+                const btn = document.querySelector('.theme-toggle');
+                if (!btn) return;
+                const icon = btn.querySelector('i');
+                if (!icon) return;
+                icon.className = theme === DARK_THEME ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            
+            function toggleTheme() {
+                const current = document.documentElement.classList.contains('dark-mode') ? DARK_THEME : LIGHT_THEME;
+                const next = current === DARK_THEME ? LIGHT_THEME : DARK_THEME;
+                applyTheme(next);
+                localStorage.setItem(THEME_KEY, next);
+            }
+            
+            function createToggle() {
+                if (document.querySelector('.theme-toggle')) return;
+                const btn = document.createElement('button');
+                btn.className = 'theme-toggle';
+                btn.innerHTML = '<i class="fas fa-moon"></i>';
+                btn.onclick = toggleTheme;
+                document.body.appendChild(btn);
+            }
+            
+            applyTheme(getPreferredTheme());
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', createToggle);
+            } else {
+                createToggle();
+            }
+        })();
     </script>
+    
+    <!-- Dark Mode External Script -->
+    <script src="./js/dark-mode.js"></script>
 </body>
 </html>

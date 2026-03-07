@@ -1,0 +1,172 @@
+/**
+ * 暗色模式样式
+ * 用法：在 <html> 标签添加 class="dark-mode" 即可启用
+ */
+
+/* 暗色模式变量 */
+:root {
+    /* 亮色模式（默认） */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* 暗色模式变量 */
+.dark-mode {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-bg: #1e293b;
+    --navbar-bg: rgba(15, 23, 42, 0.95);
+}
+
+/* 应用暗色模式 */
+.dark-mode body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.dark-mode .navbar {
+    background: var(--navbar-bg);
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .navbar-brand {
+    color: var(--text-primary);
+}
+
+.dark-mode .nav-link {
+    color: var(--text-secondary);
+}
+
+.dark-mode .nav-link:hover,
+.dark-mode .nav-link.active {
+    color: var(--primary-color);
+    background: rgba(59, 130, 246, 0.15);
+}
+
+.dark-mode .hero {
+    background: linear-gradient(135deg, #4c1d95 0%, #312e81 100%);
+}
+
+.dark-mode .feature-card,
+.dark-mode .post-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.dark-mode .feature-card:hover,
+.dark-mode .post-card:hover {
+    box-shadow: 0 10px 25px -5px var(--shadow-color);
+}
+
+.dark-mode .stats-section {
+    background: var(--bg-secondary);
+    border-top-color: var(--border-color);
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .footer {
+    background: var(--bg-secondary);
+    border-top-color: var(--border-color);
+}
+
+.dark-mode .social-link {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+.dark-mode .social-link:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.dark-mode .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .mobile-menu-toggle span {
+    background: var(--text-primary);
+}
+
+.dark-mode .navbar-nav.active {
+    background: var(--bg-secondary);
+}
+
+.dark-mode .nav-link {
+    border-bottom-color: var(--border-color);
+}
+
+/* 主题切换按钮样式 */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle i {
+    font-size: 24px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.dark-mode .theme-toggle i {
+    transform: rotate(180deg);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .theme-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .theme-toggle i {
+        font-size: 20px;
+    }
+}
+
+/* 平滑过渡 */
+* {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
