@@ -1,15 +1,41 @@
-# robots.txt for jacksoncode.github.io
+# CodeClub 网站 Robots 配置
+# 最后更新：2026-03-05
+# 网站：https://jacksoncode.github.io
+
+# 默认规则 - 允许所有搜索引擎访问
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://jacksoncode.github.io/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
-
-# Disallow sensitive directories
 Disallow: /node_modules/
 Disallow: /.git/
-Disallow: /module/
-Disallow: /non_wiki/
+Disallow: /__pycache__/
+Disallow: /module/llm/venv/
+Disallow: /module/fund_monitor/myenv/
+Disallow: /Coder/Kiro/ModelScope/venv/
+Disallow: /*.py$
+Disallow: /*.backup.*
+Disallow: /*.backup.$
+Disallow: /includes/
+
+# Sitemap 位置
+Sitemap: https://jacksoncode.github.io/sitemap.xml
+
+# Google 爬虫优化
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing 爬虫
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# 百度爬虫
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# 禁止索引临时和备份文件
+User-agent: *
+Disallow: /*?*
+Disallow: /*.tmp$
+Disallow: /*.temp$
