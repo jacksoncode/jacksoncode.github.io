@@ -1,23 +1,13 @@
-<!-- 
-Google Analytics 集成指南
-用法：将 GA_MEASUREMENT_ID 替换为你的实际 ID，然后添加到所有页面的 </head> 前
--->
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'GA_MEASUREMENT_ID');
+  gtag('config', 'G-XXXXXXXXXX', {
+    'anonymize_ip': true,
+    'cookie_flags': 'SameSite=None;Secure'
+  });
 </script>
-
-<!--
-使用步骤:
-1. 访问 https://analytics.google.com/
-2. 创建新账号/媒体资源
-3. 获取 Measurement ID (格式：G-XXXXXXXXXX)
-4. 替换上面的 GA_MEASUREMENT_ID
-5. 将此代码块添加到所有页面的 <head> 标签内
--->
+<!-- End Google Analytics -->
