@@ -1,0 +1,497 @@
+/**
+ * 移动端优化样式
+ * 优化移动设备上的用户体验
+ */
+
+/* 触摸优化 */
+@media (max-width: 768px) {
+    /* 增大触摸目标 */
+    button, .btn, a, input[type="submit"], input[type="button"] {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 16px;
+    }
+    
+    /* 导航链接优化 */
+    .nav-link, .navbar-nav a {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+    }
+    
+    /* 表单元素优化 */
+    input, textarea, select {
+        min-height: 44px;
+        font-size: 16px; /* 防止 iOS 缩放 */
+        padding: 12px;
+    }
+    
+    /* 搜索框优化 */
+    .search-box {
+        font-size: 16px;
+        padding: 16px;
+        min-height: 52px;
+    }
+    
+    /* 搜索结果优化 */
+    .search-item {
+        min-height: 60px;
+        padding: 16px;
+    }
+    
+    /* 卡片优化 */
+    .feature-card, .post-card {
+        padding: 24px 20px;
+        min-height: auto;
+    }
+    
+    /* 按钮优化 */
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px;
+    }
+    
+    /* 搜索覆盖层优化 */
+    .search-container {
+        width: 95%;
+        margin-top: 5vh;
+    }
+    
+    .search-results {
+        max-height: 50vh;
+    }
+    
+    /* 移动端菜单优化 */
+    .navbar-nav {
+        padding-top: 20px;
+    }
+    
+    .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 16px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    /* 统计数据优化 */
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .stat-item {
+        padding: 16px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    /* 功能卡片优化 */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* 分类卡片优化 */
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .category-links {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 文章列表优化 */
+    .posts-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    /* 页脚优化 */
+    .footer {
+        padding: 32px 16px;
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    /* 主题切换按钮优化 */
+    .theme-toggle {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .theme-toggle i {
+        font-size: 20px;
+    }
+}
+
+/* 超小屏幕优化 */
+@media (max-width: 480px) {
+    /* 英雄区域优化 */
+    .hero {
+        padding: 60px 16px;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-desc {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    /* 章节标题优化 */
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* 统计数据进一步优化 */
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    /* 功能图标优化 */
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    /* 文章卡片优化 */
+    .post-card {
+        padding: 20px 16px;
+    }
+    
+    .post-title {
+        font-size: 1.1rem;
+    }
+    
+    .post-excerpt {
+        font-size: 0.9rem;
+    }
+    
+    /* 搜索优化 */
+    .search-header {
+        padding: 16px;
+    }
+    
+    .search-input {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .search-close {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+}
+
+/* 触摸反馈优化 */
+@media (hover: none) and (pointer: coarse) {
+    /* 移除悬停效果，使用触摸反馈 */
+    .nav-link:hover,
+    .feature-card:hover,
+    .post-card:hover,
+    .btn:hover {
+        transform: none;
+    }
+    
+    /* 添加触摸反馈 */
+    .nav-link:active,
+    .feature-card:active,
+    .post-card:active,
+    .btn:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+    
+    /* 按钮触摸反馈 */
+    button:active,
+    .btn:active {
+        background-color: var(--primary-hover);
+    }
+}
+
+/* 横屏模式优化 */
+@media (max-height: 600px) and (orientation: landscape) {
+    /* 英雄区域压缩 */
+    .hero {
+        padding: 40px 16px;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero-buttons {
+        margin-bottom: 20px;
+    }
+    
+    /* 搜索覆盖层优化 */
+    .search-container {
+        margin-top: 2vh;
+    }
+    
+    .search-results {
+        max-height: 40vh;
+    }
+}
+
+/* iOS Safari 特定优化 */
+@supports (-webkit-touch-callout: none) {
+    /* 修复 iOS Safari 的点击高亮 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* 修复 iOS Safari 的滚动弹性 */
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* 修复 iOS Safari 的输入框缩放 */
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+}
+
+/* 高 DPI 屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* 确保文本清晰 */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* 优化边框显示 */
+    .feature-card, .post-card {
+        border-width: 0.5px;
+    }
+}
+
+/* 减少动画效果（省电模式） */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .hero::before {
+        animation: none;
+    }
+}
+
+/* 暗色模式下的移动端优化 */
+.dark-mode @media (max-width: 768px) {
+    /* 搜索框优化 */
+    .search-input {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    /* 搜索结果优化 */
+    .search-item {
+        border-bottom-color: #374151;
+    }
+    
+    /* 搜索分类优化 */
+    .search-category {
+        background: #374151;
+        color: #9ca3af;
+    }
+}
+
+/* 性能优化：减少重排 */
+@media (max-width: 768px) {
+    /* 使用 transform 代替位置属性 */
+    .navbar-nav.active {
+        transform: translateX(0);
+    }
+    
+    .navbar-nav {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    /* 使用 opacity 代替 display */
+    .search-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .search-overlay {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+}
+
+/* 移动端特定功能 */
+@media (max-width: 768px) {
+    /* 添加返回顶部按钮 */
+    #back-to-top {
+        bottom: 80px;
+        right: 20px;
+    }
+    
+    #back-to-top a {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* 优化图片加载 */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* 优化表格显示 */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    /* 优化代码块显示 */
+    pre, code {
+        font-size: 14px;
+        overflow-x: auto;
+        max-width: 100%;
+    }
+    
+    /* 优化长文本显示 */
+    .post-excerpt, .feature-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+/* 移动端导航优化 */
+@media (max-width: 768px) {
+    /* 汉堡菜单优化 */
+    .mobile-menu-toggle {
+        width: 36px;
+        height: 30px;
+    }
+    
+    .mobile-menu-toggle span {
+        height: 3px;
+        border-radius: 2px;
+    }
+    
+    /* 导航栏高度优化 */
+    .navbar {
+        height: 56px;
+    }
+    
+    .navbar-container {
+        height: 56px;
+        padding: 0 16px;
+    }
+    
+    .navbar-brand img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+}
+
+/* 移动端搜索优化 */
+@media (max-width: 768px) {
+    /* 搜索快捷键提示 */
+    .search-shortcut {
+        display: none;
+    }
+    
+    /* 搜索结果滚动优化 */
+    .search-results {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* 搜索输入优化 */
+    .search-input::placeholder {
+        font-size: 16px;
+    }
+}
+
+/* 移动端性能优化 */
+@media (max-width: 768px) {
+    /* 减少阴影效果 */
+    .feature-card, .post-card {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 简化渐变效果 */
+    .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    /* 优化字体加载 */
+    body {
+        font-display: swap;
+    }
+}
+
+/* 移动端无障碍优化 */
+@media (max-width: 768px) {
+    /* 确保足够的点击区域 */
+    .social-link {
+        width: 48px;
+        height: 48px;
+    }
+    
+    /* 优化表单标签 */
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+    
+    /* 优化错误提示 */
+    .error-message {
+        padding: 12px;
+        margin: 12px 0;
+        border-left: 4px solid #ef4444;
+        background: #fef2f2;
+    }
+}

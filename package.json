@@ -1,6 +1,6 @@
 {
   "name": "jacksoncode-github-io",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "CodeClub - 程序员技术博客与学习资源导航",
   "author": "Jackson",
   "license": "MIT",
@@ -13,13 +13,21 @@
     "start": "npx live-server --port=3000 --open=/index.html",
     "serve": "npx http-server -p 3000 -c-1",
     "optimize:images": "echo '请安装: npm install -g imagemin-cli optipng jpegoptim'",
-    "optimize:css": "npx csso css/*.css -o dist/css/',
+    "optimize:css": "npx csso css/*.css -o dist/css/",
     "audit": "npm audit && npm audit fix",
     "clean": "rm -rf node_modules/.cache .sass-cache dist/",
     "build": "echo '静态网站，无需构建'",
     "deploy": "git add . && git commit -m 'deploy' && git push",
     "lighthouse": "npx lighthouse https://jacksoncode.github.io --view --preset=desktop",
-    "sitemap": "npx sitemap-generator https://jacksoncode.github.io --output-path=./sitemap-auto.xml"
+    "sitemap": "npx sitemap-generator https://jacksoncode.github.io --output-path=./sitemap-auto.xml",
+    "test": "node tests/security.test.js",
+    "test:coverage": "echo '测试覆盖率功能待实现'",
+    "lint": "npx eslint js/ --ext .js",
+    "lint:fix": "npx eslint js/ --ext .js --fix",
+    "format": "npx prettier --write \"**/*.{js,css,html,json,md}\"",
+    "format:check": "npx prettier --check \"**/*.{js,css,html,json,md}\"",
+    "webp:convert": "./optimize-images-webp.sh",
+    "validate": "npm run lint && npm run format:check && npm run test"
   },
   "devDependencies": {
     "bootstrap": "^5.3.3",
@@ -27,7 +35,9 @@
     "csso-cli": "^4.0.2",
     "http-server": "^14.1.1",
     "lighthouse": "^11.0.0",
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0"
   },
   "engines": {
     "node": ">=16.0.0",

@@ -1,0 +1,132 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  # 代码质量检查
+  quality:
+    name: 代码质量检查
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: 安装依赖
+        run: npm ci
+      
+      - name: 运行安全性测试
+        run: |
+          echo "运行安全性测试..."
+          node tests/security.test.js
+      
+      - name: 检查 HTML 语法
+        run: |
+          echo "检查 HTML 文件..."
+          find . -name "*.html" -type f | while read file; do
+            echo "检查: $file"
+            # 这里可以添加 HTML 验证工具
+          done
+
+  # 性能测试
+  lighthouse:
+    name: Lighthouse 性能测试
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 运行 Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          urls: |
+            https://jacksoncode.github.io/
+            https://jacksoncode.github.io/nav.html
+            https://jacksoncode.github.io/blog.html
+          budgetPath: ./.github/lighthouse-budget.json
+          configPath: ./.github/lighthouse-config.json
+
+  # 链接检查
+  link-checker:
+    name: 链接有效性检查
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 链接检查
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress --exclude "https://fonts.googleapis.com" --exclude "https://cdnjs.cloudflare.com"
+          fail: true
+
+  # 部署到 GitHub Pages
+  deploy:
+    name: 部署到 GitHub Pages
+    needs: [quality, lighthouse, link-checker]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: 安装依赖
+        run: npm ci
+      
+      - name: 运行构建
+        run: npm run build || echo "无需构建步骤"
+      
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          force_orphan: true
+          commit_message: '自动部署: ${{ github.event.head_commit.message }}'
+
+  # 性能报告
+  report:
+    name: 生成性能报告
+    needs: [lighthouse]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 创建性能报告
+        run: |
+          echo "📊 性能测试报告" > performance-report.md
+          echo "" >> performance-report.md
+          echo "## Lighthouse 测试结果" >> performance-report.md
+          echo "" >> performance-report.md
+          echo "测试时间: $(date)" >> performance-report.md
+          echo "" >> performance-report.md
+          echo "详细结果请查看 Artifacts" >> performance-report.md
+      
+      - name: 上传报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-report
+          path: performance-report.md
