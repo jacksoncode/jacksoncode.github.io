@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - 技术教程">
+    <meta name="author" content="Jackson">
+    <title>技术教程 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../css/tutorial.css">
+    <style>
+    .tutorial-container { max-width: 960px; margin: 80px auto 40px; padding: 0 20px; }
+    .tutorial-sidebar { position: fixed; top: 80px; left: 20px; width: 260px; max-height: calc(100vh - 100px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 16px; margin-bottom: 12px; color: var(--text-primary, #1a1a2e); }
+    .tutorial-sidebar a { display: block; padding: 6px 10px; color: var(--text-secondary, #666); text-decoration: none; font-size: 14px; border-radius: 4px; }
+    .tutorial-sidebar a:hover, .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar .sub-link { padding-left: 24px; font-size: 13px; }
+    .tutorial-content { margin-left: 300px; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-content h1 { font-size: 28px; margin-bottom: 20px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .tutorial-content h2 { font-size: 22px; margin: 24px 0 16px; color: var(--text-primary, #1a1a2e); }
+    .tutorial-content h3 { font-size: 18px; margin: 20px 0 12px; }
+    .tutorial-content p { line-height: 1.8; margin: 12px 0; color: var(--text-secondary, #333); }
+    .tutorial-content pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+    .tutorial-content code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .tutorial-content p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .tutorial-content blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .tutorial-content ul, .tutorial-content ol { padding-left: 24px; margin: 12px 0; }
+    .tutorial-content li { margin: 6px 0; line-height: 1.7; }
+    .tutorial-content img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
+    .tutorial-nav { display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb); }
+    .tutorial-nav a { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; }
+    .tutorial-nav a:hover { text-decoration: underline; }
+    .tutorial-index { max-width: 960px; margin: 80px auto 40px; padding: 0 20px; }
+    .tutorial-card { background: var(--bg-secondary, #fff); border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s; }
+    .tutorial-card:hover { transform: translateY(-2px); }
+    .tutorial-card h3 { margin: 0 0 8px; color: var(--text-primary, #1a1a2e); }
+    .tutorial-card p { color: var(--text-secondary, #666); margin: 0 0 12px; }
+    .tutorial-card .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-right: 8px; }
+    .badge-python { background: #3b82f6; color: #fff; }
+    .badge-git { background: #f97316; color: #fff; }
+    .badge-ai { background: #8b5cf6; color: #fff; }
+    @media (max-width: 768px) {
+        .tutorial-sidebar { display: none; }
+        .tutorial-content { margin-left: 0; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../index.html">首页</a></li>
+                <li><a class="nav-link" href="../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../blog/">博客</a></li>
+                <li><a class="nav-link" href="../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="index.html">教程</a></li>
+                <li><a class="nav-link" href="../book.html">图书</a></li>
+                <li><a class="nav-link" href="../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="tutorial-index">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="font-size: 32px; margin-bottom: 12px; color: var(--text-primary, #1a1a2e);">📖 技术教程</h1>
+            <p style="color: var(--text-secondary, #666); font-size: 16px;">精选编程教程，从入门到进阶</p>
+        </div>
+        
+        <div class="tutorial-card">
+            <span class="badge badge-python">Python</span>
+            <h3><a href="python/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">Python 教程</a></h3>
+            <p>廖雪峰的 Python 新手教程，中文、免费、零起点，基于最新的 Python 3 版本。包含数据类型、函数、面向对象、网络编程等完整内容。</p>
+            <a href="python/index.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">开始学习 →</a>
+        </div>
+        
+        <div class="tutorial-card">
+            <span class="badge badge-git">Git</span>
+            <h3><a href="git/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">Git 教程</a></h3>
+            <p>史上最浅显易懂的 Git 教程！面向初学者，实用性超强，边学边练。包含版本库、分支管理、远程仓库等完整内容。</p>
+            <a href="git/index.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">开始学习 →</a>
+        </div>
+        
+        <div class="tutorial-card">
+            <span class="badge badge-ai">AI / LLM</span>
+            <h3><a href="anthropic/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">Anthropic 官方教程</a></h3>
+            <p>Anthropic 官方的 Claude 101 系列教程，包含 AI 基础、Claude 使用指南、API 开发等。另有 Anthropic Academy 系统课程可获取证书。</p>
+            <a href="anthropic/index.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">开始学习 →</a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 CodeClub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+</body>
+</html>

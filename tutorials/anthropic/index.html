@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Anthropic 官方教程">
+    <meta name="author" content="Jackson">
+    <title>Anthropic 官方教程 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../css/tutorial.css">
+    <style>
+    .tutorial-container { max-width: 960px; margin: 80px auto 40px; padding: 0 20px; }
+    .tutorial-sidebar { position: fixed; top: 80px; left: 20px; width: 260px; max-height: calc(100vh - 100px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 16px; margin-bottom: 12px; color: var(--text-primary, #1a1a2e); }
+    .tutorial-sidebar a { display: block; padding: 6px 10px; color: var(--text-secondary, #666); text-decoration: none; font-size: 14px; border-radius: 4px; }
+    .tutorial-sidebar a:hover, .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar .sub-link { padding-left: 24px; font-size: 13px; }
+    .tutorial-content { margin-left: 300px; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-content h1 { font-size: 28px; margin-bottom: 20px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .tutorial-content h2 { font-size: 22px; margin: 24px 0 16px; color: var(--text-primary, #1a1a2e); }
+    .tutorial-content h3 { font-size: 18px; margin: 20px 0 12px; }
+    .tutorial-content p { line-height: 1.8; margin: 12px 0; color: var(--text-secondary, #333); }
+    .tutorial-content pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+    .tutorial-content code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .tutorial-content p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .tutorial-content blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .tutorial-content ul, .tutorial-content ol { padding-left: 24px; margin: 12px 0; }
+    .tutorial-content li { margin: 6px 0; line-height: 1.7; }
+    .tutorial-content img { max-width: 100%; border-radius: 8px; margin: 16px 0; }
+    .tutorial-nav { display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb); }
+    .tutorial-nav a { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; }
+    .tutorial-nav a:hover { text-decoration: underline; }
+    .tutorial-index { max-width: 960px; margin: 80px auto 40px; padding: 0 20px; }
+    .tutorial-card { background: var(--bg-secondary, #fff); border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s; }
+    .tutorial-card:hover { transform: translateY(-2px); }
+    .tutorial-card h3 { margin: 0 0 8px; color: var(--text-primary, #1a1a2e); }
+    .tutorial-card p { color: var(--text-secondary, #666); margin: 0 0 12px; }
+    .tutorial-card .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-right: 8px; }
+    .badge-python { background: #3b82f6; color: #fff; }
+    .badge-git { background: #f97316; color: #fff; }
+    .badge-ai { background: #8b5cf6; color: #fff; }
+    @media (max-width: 768px) {
+        .tutorial-sidebar { display: none; }
+        .tutorial-content { margin-left: 0; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../index.html">首页</a></li>
+                <li><a class="nav-link" href="../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../blog/">博客</a></li>
+                <li><a class="nav-link" href="../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="index.html">教程</a></li>
+                <li><a class="nav-link" href="../book.html">图书</a></li>
+                <li><a class="nav-link" href="../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-content"><h1>🤖 Anthropic 官方教程</h1><p style="margin-bottom: 24px; color: var(--text-secondary, #666); line-height: 1.8;">以下教程来源于 Anthropic 官方资源，帮助你系统学习 AI 和 Claude 的使用方法。</p>
+        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
+            <h3 style="margin: 0 0 8px;"><a href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">🎓 Claude 101</a></h3>
+            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Anthropic 官方入门教程，学习 Claude 的基础用法和最佳实践</p>
+            <a href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+        </div>
+        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
+            <h3 style="margin: 0 0 8px;"><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">💻 Claude Code in Action</a></h3>
+            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Anthropic 官方实战教程，学习如何在实际项目中使用 Claude Code</p>
+            <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+        </div>
+        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
+            <h3 style="margin: 0 0 8px;"><a href="https://anthropic.skilljar.com/" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">🏫 Anthropic Academy</a></h3>
+            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Anthropic 官方学习平台，提供 API 开发、MCP 协议、企业部署等系统课程，完成可获得证书</p>
+            <a href="https://anthropic.skilljar.com/" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+        </div>
+        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
+            <h3 style="margin: 0 0 8px;"><a href="https://platform.claude.com/docs" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">📡 Claude API 文档</a></h3>
+            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Claude API 的完整开发文档，包含消息、工具调用、流式输出等接口说明</p>
+            <a href="https://platform.claude.com/docs" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+        </div>
+        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
+            <h3 style="margin: 0 0 8px;"><a href="https://www.promptingguide.ai/" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">✍️ Prompt Engineering Guide</a></h3>
+            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">系统化的 Prompt 工程指南，学习如何编写高效的 Prompt 来引导 Claude 输出</p>
+            <a href="https://www.promptingguide.ai/" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+        </div>
+        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
+            <h3 style="margin: 0 0 8px;"><a href="https://cookbook.openai.com/" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">📖 OpenAI Cookbook</a></h3>
+            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">OpenAI 官方的代码示例集，包含各种 LLM 应用的最佳实践</p>
+            <a href="https://cookbook.openai.com/" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+        </div></div></div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 CodeClub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+</body>
+</html>
