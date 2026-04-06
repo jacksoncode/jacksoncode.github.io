@@ -360,8 +360,8 @@ def generate_index_page():
         
         <div class="tutorial-card">
             <span class="badge badge-ai">AI / LLM</span>
-            <h3><a href="anthropic/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">Anthropic 官方教程</a></h3>
-            <p>Anthropic 官方的 Claude 101 系列教程，包含 AI 基础、Claude 使用指南、API 开发等。另有 Anthropic Academy 系统课程可获取证书。</p>
+            <h3><a href="anthropic/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">AI / LLM 教程</a></h3>
+            <p>本地化 Prompt Engineering Guide（20+ 种技术），外加 Anthropic Academy 视频课程、Claude API 文档等外部资源。</p>
             <a href="anthropic/index.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">开始学习 →</a>
         </div>
     </div>
@@ -480,71 +480,58 @@ def scrape_tutorial(course, tutorial_name, output_dir):
 
 
 def generate_anthropic_pages():
-    """Generate Anthropic Academy tutorial pages."""
+    """Generate Anthropic/AI tutorial index with local + external resources."""
     out_path = TUTORIALS_DIR / "anthropic"
     out_path.mkdir(parents=True, exist_ok=True)
 
-    courses = [
-        {
-            "name": "Claude 101",
-            "desc": "Anthropic 官方入门教程，学习 Claude 的基础用法和最佳实践",
-            "url": "https://anthropic.skilljar.com/introduction-to-claude-cowork",
-            "icon": "🎓",
-        },
-        {
-            "name": "Claude Code in Action",
-            "desc": "Anthropic 官方实战教程，学习如何在实际项目中使用 Claude Code",
-            "url": "https://anthropic.skilljar.com/claude-code-in-action",
-            "icon": "💻",
-        },
-        {
-            "name": "Anthropic Academy",
-            "desc": "Anthropic 官方学习平台，提供 API 开发、MCP 协议、企业部署等系统课程，完成可获得证书",
-            "url": "https://anthropic.skilljar.com/",
-            "icon": "🏫",
-        },
-        {
-            "name": "Claude API 文档",
-            "desc": "Claude API 的完整开发文档，包含消息、工具调用、流式输出等接口说明",
-            "url": "https://platform.claude.com/docs",
-            "icon": "📡",
-        },
-        {
-            "name": "Prompt Engineering Guide",
-            "desc": "系统化的 Prompt 工程指南，学习如何编写高效的 Prompt 来引导 Claude 输出",
-            "url": "https://www.promptingguide.ai/",
-            "icon": "✍️",
-        },
-        {
-            "name": "OpenAI Cookbook",
-            "desc": "OpenAI 官方的代码示例集，包含各种 LLM 应用的最佳实践",
-            "url": "https://cookbook.openai.com/",
-            "icon": "📖",
-        },
-    ]
-
-    # Index page
-    html = make_header("Anthropic 官方教程")
-    html += '<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;">'
-    html += '<div class="tutorial-content">'
-    html += "<h1>🤖 Anthropic 官方教程</h1>"
-    html += '<p style="margin-bottom: 24px; color: var(--text-secondary, #666); line-height: 1.8;">以下教程来源于 Anthropic 官方资源，帮助你系统学习 AI 和 Claude 的使用方法。</p>'
-
-    for course in courses:
-        html += f'''
-        <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #8b5cf6;">
-            <h3 style="margin: 0 0 8px;"><a href="{course["url"]}" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">{course["icon"]} {course["name"]}</a></h3>
-            <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">{course["desc"]}</p>
-            <a href="{course["url"]}" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
-        </div>'''
-
-    html += "</div></div>"
+    html = make_header("AI / LLM 教程", depth=2)
+    html += f'''
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 AI / LLM 教程</h3>
+            <a href="prompt-engineering/index.html">Prompt Engineering Guide</a>
+            <a href="https://anthropic.skilljar.com/" target="_blank">Claude 101 (外部)</a>
+            <a href="https://docs.anthropic.com/" target="_blank">Claude API 文档 (外部)</a>
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <h1>🤖 AI / LLM 教程</h1>
+                <div class="tutorial-body">
+                    <p style="margin-bottom: 24px; color: var(--text-secondary, #666); line-height: 1.8;">AI 和大语言模型相关教程，包含本地化的 Prompt Engineering 指南和外部视频课程链接。</p>
+                    <h2>📚 本地教程</h2>
+                    <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #10b981;">
+                        <h3 style="margin: 0 0 8px;"><a href="prompt-engineering/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">✍️ Prompt Engineering Guide</a> <span style="display:inline-block;padding:2px 8px;background:#10b981;color:#fff;border-radius:12px;font-size:11px;font-weight:600;">本地</span></h3>
+                        <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">系统化的 Prompt 工程指南，包含 Zero-shot、Few-shot、Chain-of-Thought、Tree of Thoughts 等 20+ 种 Prompt 技术。</p>
+                        <a href="prompt-engineering/index.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px;">开始学习 →</a>
+                    </div>
+                    <h2>🎥 外部视频课程</h2>
+                    <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #f59e0b;">
+                        <h3 style="margin: 0 0 8px;"><a href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">🎓 Claude 101</a> <span style="display:inline-block;padding:2px 8px;background:#f59e0b;color:#fff;border-radius:12px;font-size:11px;font-weight:600;">外部</span></h3>
+                        <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Anthropic 官方入门教程，学习 Claude 的基础用法和最佳实践。</p>
+                        <a href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+                    </div>
+                    <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #f59e0b;">
+                        <h3 style="margin: 0 0 8px;"><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">💻 Claude Code in Action</a> <span style="display:inline-block;padding:2px 8px;background:#f59e0b;color:#fff;border-radius:12px;font-size:11px;font-weight:600;">外部</span></h3>
+                        <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Anthropic 官方实战教程，学习如何在实际项目中使用 Claude Code。</p>
+                        <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">前往学习 →</a>
+                    </div>
+                    <h2>📡 外部文档资源</h2>
+                    <div style="padding: 20px; margin: 16px 0; background: var(--bg-primary, #f8fafc); border-radius: 8px; border-left: 4px solid #f59e0b;">
+                        <h3 style="margin: 0 0 8px;"><a href="https://docs.anthropic.com/" target="_blank" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">📡 Claude API 文档</a> <span style="display:inline-block;padding:2px 8px;background:#f59e0b;color:#fff;border-radius:12px;font-size:11px;font-weight:600;">外部</span></h3>
+                        <p style="margin: 0 0 12px; color: var(--text-secondary, #666);">Claude API 的完整开发文档。</p>
+                        <a href="https://docs.anthropic.com/" target="_blank" style="color: #8b5cf6; text-decoration: none; font-weight: 500; font-size: 14px;">查看文档 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    '''
     html += make_footer(depth=2)
 
     with open(out_path / "index.html", "w") as f:
         f.write(html)
 
-    print(f"  ✅ Generated Anthropic tutorials index")
+    print(f"  ✅ Generated Anthropic/AI tutorials index")
 
 
 def main():
