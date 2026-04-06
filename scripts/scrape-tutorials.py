@@ -18,7 +18,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 # Common header template matching site style
-def make_header(title, active=""):
+def make_header(title, depth=1):
+    pfx = "../" * depth
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -27,18 +28,18 @@ def make_header(title, active=""):
     <meta name="description" content="CodeClub - {title}">
     <meta name="author" content="Jackson">
     <title>{title} - CodeClub</title>
-    <link rel="icon" type="image/x-icon" href="../img/logo.png">
+    <link rel="icon" type="image/x-icon" href="{pfx}img/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/dark-mode.css">
-    <link rel="stylesheet" href="../css/mobile-optimizations.css">
-    <link rel="stylesheet" href="../css/tutorial.css">
+    <link rel="stylesheet" href="{pfx}css/main.css">
+    <link rel="stylesheet" href="{pfx}css/dark-mode.css">
+    <link rel="stylesheet" href="{pfx}css/mobile-optimizations.css">
+    <link rel="stylesheet" href="{pfx}css/tutorial.css">
     <style>
-    .tutorial-container {{ max-width: 960px; margin: 80px auto 40px; padding: 0 20px; }}
-    .tutorial-sidebar {{ position: fixed; top: 80px; left: 20px; width: 260px; max-height: calc(100vh - 100px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }}
+    .tutorial-container {{ max-width: 960px; margin: 70px auto 40px; padding: 0 20px; }}
+    .tutorial-sidebar {{ position: fixed; top: 70px; left: 20px; width: 260px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }}
     .tutorial-sidebar h3 {{ font-size: 16px; margin-bottom: 12px; color: var(--text-primary, #1a1a2e); }}
     .tutorial-sidebar a {{ display: block; padding: 6px 10px; color: var(--text-secondary, #666); text-decoration: none; font-size: 14px; border-radius: 4px; }}
     .tutorial-sidebar a:hover, .tutorial-sidebar a.active {{ background: var(--primary, #3b82f6); color: #fff; }}
@@ -58,7 +59,7 @@ def make_header(title, active=""):
     .tutorial-nav {{ display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb); }}
     .tutorial-nav a {{ color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; }}
     .tutorial-nav a:hover {{ text-decoration: underline; }}
-    .tutorial-index {{ max-width: 960px; margin: 80px auto 40px; padding: 0 20px; }}
+    .tutorial-index {{ max-width: 960px; margin: 70px auto 40px; padding: 0 20px; }}
     .tutorial-card {{ background: var(--bg-secondary, #fff); border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s; }}
     .tutorial-card:hover {{ transform: translateY(-2px); }}
     .tutorial-card h3 {{ margin: 0 0 8px; color: var(--text-primary, #1a1a2e); }}
@@ -76,39 +77,41 @@ def make_header(title, active=""):
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <a class="navbar-brand" href="../index.html">
-                <img src="../img/logo.png" alt="CodeClub" width="32" height="32">
+            <a class="navbar-brand" href="{pfx}index.html">
+                <img src="{pfx}img/logo.png" alt="CodeClub" width="32" height="32">
                 <span>CodeClub</span>
             </a>
             <button class="mobile-menu-toggle" aria-label="切换导航菜单">
                 <span></span><span></span><span></span>
             </button>
             <ul class="navbar-nav">
-                <li><a class="nav-link" href="../index.html">首页</a></li>
-                <li><a class="nav-link" href="../nav.html">网址导航</a></li>
-                <li><a class="nav-link" href="../blog/">博客</a></li>
-                <li><a class="nav-link" href="../wiki/index.html" target="_blank">WiKi</a></li>
-                <li><a class="nav-link active" href="index.html">教程</a></li>
-                <li><a class="nav-link" href="../book.html">图书</a></li>
-                <li><a class="nav-link" href="../contact.html">联系我</a></li>
-                <li><a class="nav-link" href="../about.html">关于我</a></li>
+                <li><a class="nav-link" href="{pfx}index.html">首页</a></li>
+                <li><a class="nav-link" href="{pfx}nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="{pfx}blog/">博客</a></li>
+                <li><a class="nav-link" href="{pfx}wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="{pfx}tutorials/index.html">教程</a></li>
+                <li><a class="nav-link" href="{pfx}book.html">图书</a></li>
+                <li><a class="nav-link" href="{pfx}contact.html">联系我</a></li>
+                <li><a class="nav-link" href="{pfx}about.html">关于我</a></li>
             </ul>
         </div>
     </nav>
 """
 
 
-def make_footer():
-    return """
+def make_footer(depth=1):
+    pfx = "../" * depth
+    return f"""
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>
         </div>
     </footer>
-    <script src="../js/dark-mode.js"></script>
-    <script src="../js/mobile-menu.js"></script>
+    <script src="{pfx}js/dark-mode.js"></script>
+    <script src="{pfx}js/mobile-menu.js"></script>
 </body>
 </html>"""
+
 
 
 class LiaoxuefengParser(HTMLParser):
@@ -301,7 +304,7 @@ def generate_tutorial_page(
     rel_path="",
 ):
     """Generate a complete HTML tutorial page."""
-    html = make_header(title)
+    html = make_header(title, depth=2)
     html += f"""
     <div style="max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px;">
         <div style="flex: 1; min-width: 0;">
@@ -327,13 +330,13 @@ def generate_tutorial_page(
         </div>
     </div>
     """
-    html += make_footer()
+    html += make_footer(depth=2)
     return html
 
 
 def generate_index_page():
     """Generate tutorials index page."""
-    html = make_header("技术教程")
+    html = make_header("技术教程", depth=1)
     html += """
     <div class="tutorial-index">
         <div style="text-align: center; margin-bottom: 40px;">
@@ -363,7 +366,7 @@ def generate_index_page():
         </div>
     </div>
     """
-    html += make_footer()
+    html += make_footer(depth=2)
     return html
 
 
@@ -430,13 +433,13 @@ def scrape_tutorial(course, tutorial_name, output_dir):
 
     # Index page
     with open(out_path / "index.html", "w") as f:
-        html = make_header(f"{tutorial_name}")
+        html = make_header(f"{tutorial_name}", depth=2)
         html += f'<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;">'
         html += toc_sidebar
         html += f'<div class="tutorial-content"><h1>{tutorial_name}</h1>{index_content}'
         html += f'<p style="margin-top: 20px; color: var(--text-secondary, #666);">原文来源：<a href="{BASE_URL}/books/{course}/" style="color: var(--primary, #3b82f6);">廖雪峰的官方网站</a></p>'
         html += "</div></div>"
-        html += make_footer()
+        html += make_footer(depth=2)
         f.write(html)
 
     # Chapter pages
@@ -446,7 +449,7 @@ def scrape_tutorial(course, tutorial_name, output_dir):
         next_url = f"{i + 1}.html" if i < len(pages) - 1 else None
         next_title = pages[i + 1]["title"] if i < len(pages) - 1 else None
 
-        page_html = make_header(page["title"])
+        page_html = make_header(page["title"], depth=2)
         page_html += f'<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;">'
         page_html += toc_sidebar
         page_html += f'<div class="tutorial-content">'
@@ -467,7 +470,7 @@ def scrape_tutorial(course, tutorial_name, output_dir):
 
         page_html += f'<p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="{page["url"]}" style="color: var(--primary, #3b82f6);">廖雪峰 - {page["title"]}</a></p>'
         page_html += "</div></div>"
-        page_html += make_footer()
+        page_html += make_footer(depth=2)
 
         with open(out_path / f"{i}.html", "w") as f:
             f.write(page_html)
@@ -536,7 +539,7 @@ def generate_anthropic_pages():
         </div>'''
 
     html += "</div></div>"
-    html += make_footer()
+    html += make_footer(depth=2)
 
     with open(out_path / "index.html", "w") as f:
         f.write(html)
