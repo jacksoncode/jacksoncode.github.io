@@ -120,31 +120,18 @@ class RunoobContentParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.in_content = False
-        self.in_sidebar = False
-        self.skip = 0
+        self.depth = 0
         self.parts = []
 
     def handle_starttag(self, tag, attrs):
-        if self.skip > 0:
-            self.skip += 1
-            return
         d = dict(attrs)
         cls = d.get("class", "") or ""
-        if "article-intro" in cls or "tutintro" in cls:
+        if "article-body" in cls:
             self.in_content = True
-            return
-        if (
-            "left-column" in cls
-            or "sidebar-tree" in cls
-            or "right-column" in cls
-            or "article-heading-ad" in cls
-            or "archive-list" in cls
-            or "previous-next-links" in cls
-            or "sidebar-box" in cls
-        ):
-            self.skip = 1
+            self.depth = 1
             return
         if self.in_content:
+            self.depth += 1
             self.parts.append(f"<{tag}")
             for k, v in attrs:
                 if k in ("class", "id", "href", "src", "alt", "width", "height"):
@@ -154,15 +141,14 @@ class RunoobContentParser(HTMLParser):
             self.parts[-1] += ">"
 
     def handle_endtag(self, tag):
-        if self.skip > 0:
-            self.skip -= 1
-            return
         if self.in_content:
+            self.depth -= 1
+            if self.depth <= 0:
+                self.in_content = False
+                return
             self.parts.append(f"</{tag}>")
 
     def handle_data(self, data):
-        if self.skip > 0:
-            return
         if self.in_content:
             self.parts.append(data)
 
@@ -414,9 +400,24 @@ def main():
         ("Linux", f"{BASE}/linux/linux-tutorial.html", "linux", ["/linux/"]),
         ("Shell", f"{BASE}/linux/linux-shell.html", "shell", ["/linux/"]),
         ("Docker", f"{BASE}/docker/docker-tutorial.html", "docker", ["/docker/"]),
-        ("AI Agent", f"{BASE}/ai-agent/ai-agent-tutorial.html", "ai-agent", ["/ai-agent/"]),
-        ("Claude Code", f"{BASE}/claude-code/claude-code-tutorial.html", "claude-code", ["/claude-code/"]),
-        ("OpenCode", f"{BASE}/opencode/opencode-tutorial.html", "opencode", ["/opencode/"]),
+        (
+            "AI Agent",
+            f"{BASE}/ai-agent/ai-agent-tutorial.html",
+            "ai-agent",
+            ["/ai-agent/"],
+        ),
+        (
+            "Claude Code",
+            f"{BASE}/claude-code/claude-code-tutorial.html",
+            "claude-code",
+            ["/claude-code/"],
+        ),
+        (
+            "OpenCode",
+            f"{BASE}/opencode/opencode-tutorial.html",
+            "opencode",
+            ["/opencode/"],
+        ),
     ]
 
     for name, url, d, prefixes in tutorials:
