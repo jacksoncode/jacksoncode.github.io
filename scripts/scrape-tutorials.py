@@ -251,6 +251,36 @@ def extract_content(html):
     return parser.get_content(), parser.title
 
 
+def extract_content_html(html):
+    """Extract content from content.html endpoint (gsi-chapter-content)."""
+    m = re.search(
+        r'<div id="gsi-chapter-content">(.*?)</div>\s*</div>\s*</div>', html, re.DOTALL
+    )
+    if m:
+        content = m.group(1)
+    else:
+        m = re.search(r'<div id="gsi-chapter-content">', html, re.DOTALL)
+        if m:
+            content = html[m.end() :]
+        else:
+            return ""
+
+    for marker in ["x-discuss", "gsi-chapter-discuss", "评论"]:
+        idx = content.find(marker)
+        if idx > 0:
+            content = content[:idx]
+            break
+
+    for m2 in re.finditer(r"<p[^>]*>(.*?)</p>", content, re.DOTALL):
+        if "svg" not in m2.group(1).lower() and len(m2.group(1).strip()) > 10:
+            content = content[m2.start() :]
+            break
+
+    content = content.strip()
+    content = re.sub(r"\s*<div>\s*</div>\s*$", "", content)
+    return content
+
+
 def clean_content(html_content):
     """Clean up extracted HTML content."""
     html_content = re.sub(
@@ -258,13 +288,6 @@ def clean_content(html_content):
     )
     html_content = re.sub(r"<style[^>]*>.*?</style>", "", html_content, flags=re.DOTALL)
     html_content = re.sub(r"<!--.*?-->", "", html_content, flags=re.DOTALL)
-    html_content = re.sub(
-        r"<h3[^>]*>Comments?</h3>.*", "", html_content, flags=re.DOTALL
-    )
-    html_content = re.sub(r"Loading comments.*", "", html_content, flags=re.DOTALL)
-    html_content = re.sub(
-        r'<a\s+href="/books/[^"]*"[^>]*>.*?</a>\s*$', "", html_content, flags=re.DOTALL
-    )
     return html_content.strip()
 
 
@@ -280,13 +303,14 @@ def generate_tutorial_page(
     """Generate a complete HTML tutorial page."""
     html = make_header(title)
     html += f"""
-    <div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;">
-        <div class="tutorial-content" style="background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-            <h1 style="font-size: 28px; margin-bottom: 20px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px;">{title}</h1>
-            <div class="tutorial-body" style="line-height: 1.8; color: var(--text-secondary, #333);">
-                {content}
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);">
+    <div style="max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px;">
+        <div style="flex: 1; min-width: 0;">
+            <div style="background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                <h1 style="font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px;">{title}</h1>
+                <div style="font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333);">
+                    {content}
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb);">
     """
     if prev_url:
         html += f'<a href="{prev_url}" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; {prev_title}</a>'
@@ -360,16 +384,17 @@ def scrape_tutorial(course, tutorial_name, output_dir):
 
     print(f"  Found {len(toc)} chapters")
 
-    # Fetch each chapter
+    # Fetch each chapter via content.html endpoint
     pages = []
     for i, item in enumerate(toc):
         print(f"  [{i + 1}/{len(toc)}] {item['title']}")
-        content_html = fetch_page(item["url"])
+        # Use content.html endpoint instead of index.html
+        content_url = item["url"].replace("/index.html", "/content.html")
+        content_html = fetch_page(content_url)
         if content_html:
-            content, title = extract_content(content_html)
+            content = extract_content_html(content_html)
             content = clean_content(content)
-            if not title:
-                title = item["title"]
+            title = item["title"]
             pages.append(
                 {
                     "title": title,

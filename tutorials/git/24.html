@@ -74,7 +74,129 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>8.1. 创建标签</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="23.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 8. 标签管理</a><a href="25.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">8.2. 操作标签 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/tag/create/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 8.1. 创建标签</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>8.1. 创建标签</h1><div class="tutorial-body"><pre class="hljs"><code class="language-plain">$ git branch
+* dev
+  master
+$ git checkout master
+Switched to branch 'master'
+</code></pre>
+<p>然后，敲命令<code>git tag &lt;name&gt;</code>就可以打一个新标签：</p>
+<pre class="hljs"><code class="language-plain">$ git tag v1.0
+</code></pre>
+<p>可以用命令<code>git tag</code>查看所有标签：</p>
+<pre class="hljs"><code class="language-plain">$ git tag
+v1.0
+</code></pre>
+<p>默认标签是打在最新提交的commit上的。有时候，如果忘了打标签，比如，现在已经是周五了，但应该在周一打的标签没有打，怎么办？</p>
+<p>方法是找到历史提交的commit id，然后打上就可以了：</p>
+<pre class="hljs"><code class="language-plain">$ git log --pretty=oneline --abbrev-commit
+12a631b (HEAD -&gt; master, tag: v1.0, origin/master) merged bug fix 101
+4c805e2 fix bug 101
+e1e9c68 merge with no-ff
+f52c633 add merge
+cf810e4 conflict fixed
+5dc6824 &amp; simple
+14096d0 AND simple
+b17d20e branch test
+d46f35e remove test.txt
+b84166e add test.txt
+519219b git tracks changes
+e43a48b understand how stage works
+1094adb append GPL
+e475afc add distributed
+eaadf4e wrote a readme file
+</code></pre>
+<p>比方说要对<code>add merge</code>这次提交打标签，它对应的commit id是<code>f52c633</code>，敲入命令：</p>
+<pre class="hljs"><code class="language-plain">$ git tag v0.9 f52c633
+</code></pre>
+<p>再用命令<code>git tag</code>查看标签：</p>
+<pre class="hljs"><code class="language-plain">$ git tag
+v0.9
+v1.0
+</code></pre>
+<p>注意，标签不是按时间顺序列出，而是按字母排序的。可以用<code>git show &lt;tagname&gt;</code>查看标签信息：</p>
+<pre class="hljs"><code class="language-plain">$ git show v0.9
+commit f52c63349bc3c1593499807e5c8e972b82c8f286 (tag: v0.9)
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 21:56:54 2018 +0800
+
+    add merge
+
+diff --git a/readme.txt b/readme.txt
+...
+</code></pre>
+<p>可以看到，<code>v0.9</code>确实打在<code>add merge</code>这次提交上。</p>
+<p>还可以创建带有说明的标签，用<code>-a</code>指定标签名，<code>-m</code>指定说明文字：</p>
+<pre class="hljs"><code class="language-plain">$ git tag -a v0.1 -m &quot;version 0.1 released&quot; 1094adb
+</code></pre>
+<p>用命令<code>git show &lt;tagname&gt;</code>可以看到说明文字：</p>
+<pre class="hljs"><code class="language-plain">$ git show v0.1
+tag v0.1
+Tagger: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 22:48:43 2018 +0800
+
+version 0.1 released
+
+commit 1094adb7b9b3807259d8cb349e7df1d4d6477073 (tag: v0.1)
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 21:06:15 2018 +0800
+
+    append GPL
+
+diff --git a/readme.txt b/readme.txt
+...
+</code></pre>
+<div class="alert alert-warning">
+<p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg> 注意<span></span></p>
+<p>标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
+</p></div>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1Z4411x7Wh&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1Z4411x7Wh" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><h3>小结</h3>
+<ul>
+<li>命令<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</li>
+<li>命令<code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以指定标签信息；</li>
+<li>命令<code>git tag</code>可以查看所有标签。</li>
+</ul>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/tag/index.html"
+                onclick="gs_load_chapter('/books/git/tag/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                标签管理
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/tag/push-delete/index.html"
+                onclick="gs_load_chapter('/books/git/tag/push-delete/index.html',true);return false;"
+                class="inline-block my-2">
+                操作标签
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="23.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 8. 标签管理</a><a href="25.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">8.2. 操作标签 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/tag/create/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 8.1. 创建标签</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>

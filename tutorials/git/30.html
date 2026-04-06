@@ -74,7 +74,118 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>11.2. 配置别名</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="29.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 11.1. 忽略特殊文件</a><a href="31.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">11.3. 搭建Git服务器 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/customize/alias/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 11.2. 配置别名</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>11.2. 配置别名</h1><div class="tutorial-body"><p>如果敲<code>git st</code>就表示<code>git status</code>那就简单多了，当然这种偷懒的办法我们是极力赞成的。</p>
+<p>我们只需要敲一行命令，告诉Git，以后<code>st</code>就表示<code>status</code>：</p>
+<pre class="hljs"><code class="language-plain">$ git config --global alias.st status
+</code></pre>
+<p>好了，现在敲<code>git st</code>看看效果。</p>
+<p>当然还有别的命令可以简写，很多人都用<code>co</code>表示<code>checkout</code>，<code>ci</code>表示<code>commit</code>，<code>br</code>表示<code>branch</code>：</p>
+<pre class="hljs"><code class="language-plain">$ git config --global alias.co checkout
+$ git config --global alias.ci commit
+$ git config --global alias.br branch
+</code></pre>
+<p>以后提交就可以简写成：</p>
+<pre class="hljs"><code class="language-plain">$ git ci -m &quot;bala bala bala...&quot;
+</code></pre>
+<p><code>--global</code>参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。</p>
+<p>在<a href="../../time-travel/restore/index.html">撤销修改</a>一节中，我们知道，命令<code>git reset HEAD file</code>可以把暂存区的修改撤销掉（unstage），重新放回工作区。既然是一个unstage操作，就可以配置一个<code>unstage</code>别名：</p>
+<pre class="hljs"><code class="language-plain">$ git config --global alias.unstage 'reset HEAD'
+</code></pre>
+<p>当你敲入命令：</p>
+<pre class="hljs"><code class="language-plain">$ git unstage test.py
+</code></pre>
+<p>实际上Git执行的是：</p>
+<pre class="hljs"><code class="language-plain">$ git reset HEAD test.py
+</code></pre>
+<p>配置一个<code>git last</code>，让其显示最后一次提交信息：</p>
+<pre class="hljs"><code class="language-plain">$ git config --global alias.last 'log -1'
+</code></pre>
+<p>这样，用<code>git last</code>就能显示最近一次的提交：</p>
+<pre class="hljs"><code class="language-plain">$ git last
+commit adca45d317e6d8a4b23f9811c3d7b7f0f180bfe2
+Merge: bd6ae48 291bea8
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Thu Aug 22 22:49:22 2013 +0800
+
+    merge &amp; fix hello.py
+</code></pre>
+<p>甚至还有人丧心病狂地把<code>lg</code>配置成了：</p>
+<pre class="hljs"><code class="language-plain">git config --global alias.lg &quot;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;
+</code></pre>
+<p>来看看<code>git lg</code>的效果：</p>
+<p><img src="lg.png" alt="git-lg" loading="lazy"></p>
+<p>为什么不早点告诉我？别激动，咱不是为了多记几个英文单词嘛！</p>
+<h3>配置文件</h3>
+<p>配置Git的时候，加上<code>--global</code>是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用。</p>
+<p>配置文件放哪了？每个仓库的Git配置文件都放在<code>.git/config</code>文件中：</p>
+<pre class="hljs"><code class="language-plain">$ cat .git/config 
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+    ignorecase = true
+    precomposeunicode = true
+[remote &quot;origin&quot;]
+    url = git@github.com:michaelliao/learngit.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+[branch &quot;master&quot;]
+    remote = origin
+    merge = refs/heads/master
+[alias]
+    last = log -1
+</code></pre>
+<p>别名就在<code>[alias]</code>后面，要删除别名，直接把对应的行删掉即可。</p>
+<p>而当前用户的Git配置文件放在用户主目录下的一个隐藏文件<code>.gitconfig</code>中：</p>
+<pre class="hljs"><code class="language-plain">$ cat .gitconfig
+[alias]
+    co = checkout
+    ci = commit
+    br = branch
+    st = status
+[user]
+    name = Your Name
+    email = your@email.com
+</code></pre>
+<p>配置别名也可以直接修改这个文件，如果改错了，可以删掉文件重新通过命令配置，或者直接删掉配置文件错误的那一行。</p>
+<h3>小结</h3>
+<p>给Git配置好别名，就可以输入命令时偷个懒。我们鼓励偷懒。</p>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/customize/ignore/index.html"
+                onclick="gs_load_chapter('/books/git/customize/ignore/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                忽略特殊文件
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/customize/server/index.html"
+                onclick="gs_load_chapter('/books/git/customize/server/index.html',true);return false;"
+                class="inline-block my-2">
+                搭建Git服务器
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="29.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 11.1. 忽略特殊文件</a><a href="31.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">11.3. 搭建Git服务器 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/customize/alias/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 11.2. 配置别名</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>

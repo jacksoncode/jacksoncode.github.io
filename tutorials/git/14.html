@@ -74,7 +74,70 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>6.2. 从远程库克隆</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="13.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 6.1. 添加远程库</a><a href="15.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">7. 分支管理 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/remote/clone/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 6.2. 从远程库克隆</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>6.2. 从远程库克隆</h1><div class="tutorial-body"><p>现在，假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。</p>
+<p>首先，登陆GitHub，创建一个新的仓库，名字叫<code>gitskills</code>：</p>
+<p><img src="create-repo.png" alt="github-init-repo" loading="lazy"></p>
+<p>我们勾选<code>Initialize this repository with a README</code>，这样GitHub会自动为我们创建一个<code>README.md</code>文件。创建完毕后，可以看到<code>README.md</code>文件：</p>
+<p><img src="repo-content.png" alt="github-init-repo-2" loading="lazy"></p>
+<p>现在，远程库已经准备好了，下一步是用命令<code>git clone</code>克隆一个本地库：</p>
+<pre class="hljs"><code class="language-plain">$ git clone git@github.com:michaelliao/gitskills.git
+Cloning into 'gitskills'...
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (3/3), done.
+</code></pre>
+<p>注意把Git库的地址换成你自己的，然后进入<code>gitskills</code>目录看看，已经有<code>README.md</code>文件了：</p>
+<pre class="hljs"><code class="language-plain">$ cd gitskills
+$ ls
+README.md
+</code></pre>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1d4411x7u6&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1d4411x7u6" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><p>如果有多个人协作开发，那么每个人各自从远程克隆一份就可以了。</p>
+<p>你也许还注意到，GitHub给出的地址不止一个，还可以用<code>https://github.com/michaelliao/gitskills.git</code>这样的地址。实际上，Git支持多种协议，默认的<code>git://</code>使用<code>ssh</code>，但也可以使用<code>https</code>等其他协议。</p>
+<p>使用<code>https</code>除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放<code>http</code>端口的公司内部就无法使用<code>ssh</code>协议而只能用<code>https</code>。</p>
+<h3>小结</h3>
+<p>要克隆一个仓库，首先必须知道仓库的地址，然后使用<code>git clone</code>命令克隆。</p>
+<p>Git支持多种协议，包括<code>https</code>，但<code>ssh</code>协议速度最快。</p>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/remote/add-remote/index.html"
+                onclick="gs_load_chapter('/books/git/remote/add-remote/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                添加远程库
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/branch/index.html"
+                onclick="gs_load_chapter('/books/git/branch/index.html',true);return false;"
+                class="inline-block my-2">
+                分支管理
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="13.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 6.1. 添加远程库</a><a href="15.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">7. 分支管理 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/remote/clone/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 6.2. 从远程库克隆</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>

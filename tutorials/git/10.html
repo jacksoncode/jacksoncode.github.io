@@ -74,7 +74,134 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>5.4. 撤销修改</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="9.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 5.3. 管理修改</a><a href="11.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">5.5. 删除文件 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/time-travel/restore/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 5.4. 撤销修改</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>5.4. 撤销修改</h1><div class="tutorial-body"><pre class="hljs"><code class="language-plain">$ cat readme.txt
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+Git has a mutable index called stage.
+Git tracks changes of files.
+My stupid boss still prefers SVN.
+</code></pre>
+<p>在你准备提交前，一杯咖啡起了作用，你猛然发现了<code>stupid boss</code>可能会让你丢掉这个月的奖金！</p>
+<p>既然错误发现得很及时，就可以很容易地纠正它。你可以删掉最后一行，手动把文件恢复到上一个版本的状态。如果用<code>git status</code>查看一下：</p>
+<pre class="hljs"><code class="language-plain">$ git status
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+	modified:   readme.txt
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre>
+<p>你可以发现，Git会告诉你，<code>git checkout -- file</code>可以丢弃工作区的修改：</p>
+<pre class="hljs"><code class="language-plain">$ git checkout -- readme.txt
+</code></pre>
+<p>命令<code>git checkout -- readme.txt</code>意思就是，把<code>readme.txt</code>文件在工作区的修改全部撤销，这里有两种情况：</p>
+<p>一种是<code>readme.txt</code>自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
+<p>一种是<code>readme.txt</code>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</p>
+<p>总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</p>
+<p>现在，看看<code>readme.txt</code>的文件内容：</p>
+<pre class="hljs"><code class="language-plain">$ cat readme.txt
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+Git has a mutable index called stage.
+Git tracks changes of files.
+</code></pre>
+<p>文件内容果然复原了。</p>
+<p><code>git checkout -- file</code>命令中的<code>--</code>很重要，没有<code>--</code>，就变成了“切换到另一个分支”的命令，我们在后面的分支管理中会再次遇到<code>git checkout</code>命令。</p>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1d4411x7cs&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1d4411x7cs" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><p>现在假定是凌晨3点，你不但写了一些胡话，还<code>git add</code>到暂存区了：</p>
+<pre class="hljs"><code class="language-plain">$ cat readme.txt
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+Git has a mutable index called stage.
+Git tracks changes of files.
+My stupid boss still prefers SVN.
+
+$ git add readme.txt
+</code></pre>
+<p>庆幸的是，在<code>commit</code>之前，你发现了这个问题。用<code>git status</code>查看一下，修改只是添加到了暂存区，还没有提交：</p>
+<pre class="hljs"><code class="language-plain">$ git status
+On branch master
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+	modified:   readme.txt
+</code></pre>
+<p>Git同样告诉我们，用命令<code>git reset HEAD &lt;file&gt;</code>可以把暂存区的修改撤销掉（unstage），重新放回工作区：</p>
+<pre class="hljs"><code class="language-plain">$ git reset HEAD readme.txt
+Unstaged changes after reset:
+M	readme.txt
+</code></pre>
+<p><code>git reset</code>命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用<code>HEAD</code>时，表示最新的版本。</p>
+<p>再用<code>git status</code>查看一下，现在暂存区是干净的，工作区有修改：</p>
+<pre class="hljs"><code class="language-plain">$ git status
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+	modified:   readme.txt
+</code></pre>
+<p>还记得如何丢弃工作区的修改吗？</p>
+<pre class="hljs"><code class="language-plain">$ git checkout -- readme.txt
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+</code></pre>
+<p>整个世界终于清静了！</p>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1d4411x7Td&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1d4411x7Td" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><p>现在，假设你不但改错了东西，还从暂存区提交到了版本库，怎么办呢？还记得<a href="../reset/index.html">版本回退</a>一节吗？可以回退到上一个版本。不过，这是有条件的，就是你还没有把自己的本地版本库推送到远程。还记得Git是分布式版本控制系统吗？我们后面会讲到远程版本库，一旦你把<code>stupid boss</code>提交推送到远程版本库，你就真的惨了……</p>
+<h3>小结</h3>
+<p>又到了小结时间。</p>
+<p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- file</code>。</p>
+<p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD &lt;file&gt;</code>，就回到了场景1，第二步按场景1操作。</p>
+<p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考<a href="../reset/index.html">版本回退</a>一节，不过前提是没有推送到远程库。</p>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/time-travel/add/index.html"
+                onclick="gs_load_chapter('/books/git/time-travel/add/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                管理修改
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/time-travel/delete/index.html"
+                onclick="gs_load_chapter('/books/git/time-travel/delete/index.html',true);return false;"
+                class="inline-block my-2">
+                删除文件
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="9.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 5.3. 管理修改</a><a href="11.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">5.5. 删除文件 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/time-travel/restore/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 5.4. 撤销修改</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>

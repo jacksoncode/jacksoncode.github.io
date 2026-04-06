@@ -74,7 +74,178 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>5.1. 版本回退</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="6.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 5. 时光机穿梭</a><a href="8.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">5.2. 工作区和暂存区 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/time-travel/reset/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 5.1. 版本回退</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>5.1. 版本回退</h1><div class="tutorial-body"><pre class="hljs"><code class="language-plain">Git is a distributed version control system.
+Git is free software distributed under the GPL.
+</code></pre>
+<p>然后尝试提交：</p>
+<pre class="hljs"><code class="language-plain">$ git add readme.txt
+$ git commit -m &quot;append GPL&quot;
+[master 1094adb] append GPL
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+<p>像这样，你不断对文件进行修改，然后不断提交修改到版本库里，就好比玩RPG游戏时，每通过一关就会自动把游戏状态存盘，如果某一关没过去，你还可以选择读取前一关的状态。有些时候，在打Boss之前，你会手动存盘，以便万一打Boss失败了，可以从最近的地方重新开始。Git也是一样，每当你觉得文件修改到一定程度的时候，就可以“保存一个快照”，这个快照在Git中被称为<code>commit</code>。一旦你把文件改乱了，或者误删了文件，还可以从最近的一个<code>commit</code>恢复，然后继续工作，而不是把几个月的工作成果全部丢失。</p>
+<p>现在，我们回顾一下<code>readme.txt</code>文件一共有几个版本被提交到Git仓库里了：</p>
+<p>版本1：wrote a readme file</p>
+<pre class="hljs"><code class="language-plain">Git is a version control system.
+Git is free software.
+</code></pre>
+<p>版本2：add distributed</p>
+<pre class="hljs"><code class="language-plain">Git is a distributed version control system.
+Git is free software.
+</code></pre>
+<p>版本3：append GPL</p>
+<pre class="hljs"><code class="language-plain">Git is a distributed version control system.
+Git is free software distributed under the GPL.
+</code></pre>
+<p>当然了，在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用<code>git log</code>命令查看：</p>
+<pre class="hljs"><code class="language-plain">$ git log
+commit 1094adb7b9b3807259d8cb349e7df1d4d6477073 (HEAD -&gt; master)
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 21:06:15 2018 +0800
+
+    append GPL
+
+commit e475afc93c209a690c39c13a46716e8fa000c366
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 21:03:36 2018 +0800
+
+    add distributed
+
+commit eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 20:59:18 2018 +0800
+
+    wrote a readme file
+</code></pre>
+<p><code>git log</code>命令显示从最近到最远的提交日志，我们可以看到3次提交，最近的一次是<code>append GPL</code>，上一次是<code>add distributed</code>，最早的一次是<code>wrote a readme file</code>。</p>
+<p>如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code>--pretty=oneline</code>参数：</p>
+<pre class="hljs"><code class="language-plain">$ git log --pretty=oneline
+1094adb7b9b3807259d8cb349e7df1d4d6477073 (HEAD -&gt; master) append GPL
+e475afc93c209a690c39c13a46716e8fa000c366 add distributed
+eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0 wrote a readme file
+</code></pre>
+<p>需要友情提示的是，你看到的一大串类似<code>1094adb...</code>的是<code>commit id</code>（版本号），和SVN不一样，Git的<code>commit id</code>不是1，2，3……递增的数字，而是一个SHA1计算出来的一个非常大的数字，用十六进制表示，而且你看到的<code>commit id</code>和我的肯定不一样，以你自己的为准。为什么<code>commit id</code>需要用这么一大串数字表示呢？因为Git是分布式的版本控制系统，后面我们还要研究多人在同一个版本库里工作，如果大家都用1，2，3……作为版本号，那肯定就冲突了。</p>
+<p>每提交一个新版本，实际上Git就会把它们自动串成一条时间线。如果使用可视化工具查看Git历史，就可以更清楚地看到提交历史的时间线：</p>
+<p><img src="timeline.jpg" alt="git-log-timeline" loading="lazy"></p>
+<p>好了，现在我们启动时光穿梭机，准备把<code>readme.txt</code>回退到上一个版本，也就是<code>add distributed</code>的那个版本，怎么做呢？</p>
+<p>首先，Git必须知道当前版本是哪个版本，在Git中，用<code>HEAD</code>表示当前版本，也就是最新的提交<code>1094adb...</code>（注意我的提交ID和你的肯定不一样），上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成<code>HEAD~100</code>。</p>
+<p>现在，我们要把当前版本<code>append GPL</code>回退到上一个版本<code>add distributed</code>，就可以使用<code>git reset</code>命令：</p>
+<pre class="hljs"><code class="language-plain">$ git reset --hard HEAD^
+HEAD is now at e475afc add distributed
+</code></pre>
+<p><code>--hard</code>参数有啥意义？<code>--hard</code>会回退到上个版本的已提交状态，而<code>--soft</code>会回退到上个版本的未提交状态，<code>--mixed</code>会回退到上个版本已添加但未提交的状态。现在，先放心使用<code>--hard</code>。</p>
+<p>看看<code>readme.txt</code>的内容是不是版本<code>add distributed</code>：</p>
+<pre class="hljs"><code class="language-plain">$ cat readme.txt
+Git is a distributed version control system.
+Git is free software.
+</code></pre>
+<p>果然被还原了。</p>
+<p>还可以继续回退到上一个版本<code>wrote a readme file</code>，不过且慢，让我们用<code>git log</code>再看看现在版本库的状态：</p>
+<pre class="hljs"><code class="language-plain">$ git log
+commit e475afc93c209a690c39c13a46716e8fa000c366 (HEAD -&gt; master)
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 21:03:36 2018 +0800
+
+    add distributed
+
+commit eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0
+Author: Michael Liao &lt;askxuefeng@gmail.com&gt;
+Date:   Fri May 18 20:59:18 2018 +0800
+
+    wrote a readme file
+</code></pre>
+<p>最新的那个版本<code>append GPL</code>已经看不到了！好比你从21世纪坐时光穿梭机来到了19世纪，想再回去已经回不去了，肿么办？</p>
+<p>办法其实还是有的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个<code>append GPL</code>的<code>commit id</code>是<code>1094adb...</code>，于是就可以指定回到未来的某个版本：</p>
+<pre class="hljs"><code class="language-plain">$ git reset --hard 1094a
+HEAD is now at 83b0afe append GPL
+</code></pre>
+<p>版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。</p>
+<p>再小心翼翼地看看<code>readme.txt</code>的内容：</p>
+<pre class="hljs"><code class="language-plain">$ cat readme.txt
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+</code></pre>
+<p>果然，我胡汉三又回来了。</p>
+<p>Git的版本回退速度非常快，因为Git在内部有个指向当前版本的<code>HEAD</code>指针，当你回退版本的时候，Git仅仅是把HEAD从指向<code>append GPL</code>：</p>
+<pre class="ascii"><code>┌────┐
+│HEAD│
+└────┘
+   │
+   └──▶ ○ append GPL
+        │
+        ○ add distributed
+        │
+        ○ wrote a readme file
+</code></pre>
+<p>改为指向<code>add distributed</code>：</p>
+<pre class="ascii"><code>┌────┐
+│HEAD│
+└────┘
+   │
+   │    ○ append GPL
+   │    │
+   └──▶ ○ add distributed
+        │
+        ○ wrote a readme file
+</code></pre>
+<p>然后顺便把工作区的文件更新了。所以你让<code>HEAD</code>指向哪个版本号，你就把当前版本定位在哪。</p>
+<p>现在，你回退到了某个版本，关掉了电脑，第二天早上就后悔了，想恢复到新版本怎么办？找不到新版本的<code>commit id</code>怎么办？</p>
+<p>在Git中，总是有后悔药可以吃的。当你用<code>$ git reset --hard HEAD^</code>回退到<code>add distributed</code>版本时，再想恢复到<code>append GPL</code>，就必须找到<code>append GPL</code>的commit id。Git提供了一个命令<code>git reflog</code>用来记录你的每一次命令：</p>
+<pre class="hljs"><code class="language-plain">$ git reflog
+e475afc HEAD@{1}: reset: moving to HEAD^
+1094adb (HEAD -&gt; master) HEAD@{2}: commit: append GPL
+e475afc HEAD@{3}: commit: add distributed
+eaadf4e HEAD@{4}: commit (initial): wrote a readme file
+</code></pre>
+<p>终于舒了口气，从输出可知，<code>append GPL</code>的commit id是<code>1094adb</code>，现在，你又可以乘坐时光机回到未来了。</p>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1d4411x785&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1d4411x785" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><h3>小结</h3>
+<p>现在总结一下：</p>
+<ul>
+<li><code>HEAD</code>指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令<code>git reset --hard commit_id</code>。</li>
+<li>穿梭前，用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。</li>
+<li>要重返未来，用<code>git reflog</code>查看命令历史，以便确定要回到未来的哪个版本。</li>
+</ul>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/time-travel/index.html"
+                onclick="gs_load_chapter('/books/git/time-travel/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                时光机穿梭
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/time-travel/working-stage/index.html"
+                onclick="gs_load_chapter('/books/git/time-travel/working-stage/index.html',true);return false;"
+                class="inline-block my-2">
+                工作区和暂存区
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="6.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 5. 时光机穿梭</a><a href="8.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">5.2. 工作区和暂存区 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/time-travel/reset/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 5.1. 版本回退</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>

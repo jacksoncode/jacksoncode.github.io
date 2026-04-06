@@ -74,7 +74,148 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>7.4. Bug分支</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="18.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 7.3. 分支管理策略</a><a href="20.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">7.5. Feature分支 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/branch/bug/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 7.4. Bug分支</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>7.4. Bug分支</h1><div class="tutorial-body"><p>当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支<code>issue-101</code>来修复它，但是，等等，当前正在<code>dev</code>上进行的工作还没有提交：</p>
+<pre class="hljs"><code class="language-plain">$ git status
+On branch dev
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+	new file:   hello.py
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+	modified:   readme.txt
+</code></pre>
+<p>并不是你不想提交，而是工作只进行到一半，还没法提交，预计完成还需1天时间。但是，必须在两个小时内修复该bug，怎么办？</p>
+<p>幸好，Git还提供了一个<code>stash</code>功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：</p>
+<pre class="hljs"><code class="language-plain">$ git stash
+Saved working directory and index state WIP on dev: f52c633 add merge
+</code></pre>
+<p>现在，用<code>git status</code>查看工作区，就是干净的（除非有没有被Git管理的文件），因此可以放心地创建分支来修复bug。</p>
+<p>首先确定要在哪个分支上修复bug，假定需要在<code>master</code>分支上修复，就从<code>master</code>创建临时分支：</p>
+<pre class="hljs"><code class="language-plain">$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 6 commits.
+  (use &quot;git push&quot; to publish your local commits)
+
+$ git checkout -b issue-101
+Switched to a new branch 'issue-101'
+</code></pre>
+<p>现在修复bug，需要把“Git is free software ...”改为“Git is a free software ...”，然后提交：</p>
+<pre class="hljs"><code class="language-plain">$ git add readme.txt 
+$ git commit -m &quot;fix bug 101&quot;
+[issue-101 4c805e2] fix bug 101
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+<p>修复完成后，切换到<code>master</code>分支，并完成合并，最后删除<code>issue-101</code>分支：</p>
+<pre class="hljs"><code class="language-plain">$ git switch master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 6 commits.
+  (use &quot;git push&quot; to publish your local commits)
+
+$ git merge --no-ff -m &quot;merged bug fix 101&quot; issue-101
+Merge made by the 'recursive' strategy.
+ readme.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+<p>太棒了，原计划两个小时的bug修复只花了5分钟！现在，是时候接着回到<code>dev</code>分支干活了！</p>
+<pre class="hljs"><code class="language-plain">$ git switch dev
+Switched to branch 'dev'
+
+$ git status
+On branch dev
+nothing to commit, working tree clean
+</code></pre>
+<p>工作区是干净的，刚才的工作现场存到哪去了？用<code>git stash list</code>命令看看：</p>
+<pre class="hljs"><code class="language-plain">$ git stash list
+stash@{0}: WIP on dev: f52c633 add merge
+</code></pre>
+<p>工作现场还在，Git把<code>stash</code>内容存在某个地方了，但是需要恢复一下，有两个办法：</p>
+<p>一是用<code>git stash apply</code>恢复，但是恢复后，<code>stash</code>内容并不删除，你需要用<code>git stash drop</code>来删除；</p>
+<p>另一种方式是用<code>git stash pop</code>，恢复的同时把<code>stash</code>内容也删了：</p>
+<pre class="hljs"><code class="language-plain">$ git stash pop
+On branch dev
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+	new file:   hello.py
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+	modified:   readme.txt
+
+Dropped refs/stash@{0} (5d677e2ee266f39ea296182fb2354265b91b3b2a)
+</code></pre>
+<p>再用<code>git stash list</code>查看，就看不到任何<code>stash</code>内容了：</p>
+<pre class="hljs"><code class="language-plain">$ git stash list
+</code></pre>
+<p>你可以多次<code>stash</code>，恢复的时候，先用<code>git stash list</code>查看，然后恢复指定的<code>stash</code>，用命令：</p>
+<pre class="hljs"><code class="language-plain">$ git stash apply stash@{0}
+</code></pre>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1Z4411x7Vn&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1Z4411x7Vn" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><p>在<code>master</code>分支上修复了bug后，我们要想一想，<code>dev</code>分支是早期从<code>master</code>分支分出来的，所以，这个bug其实在当前<code>dev</code>分支上也存在。</p>
+<p>那怎么在<code>dev</code>分支上修复同样的bug？重复操作一次，提交不就行了？</p>
+<p>有木有更简单的方法？</p>
+<p>有！</p>
+<p>同样的bug，要在<code>dev</code>上修复，我们只需要把<code>4c805e2 fix bug 101</code>这个提交所做的修改“复制”到<code>dev</code>分支。注意：我们只想复制<code>4c805e2 fix bug 101</code>这个提交所做的修改，并不是把整个<code>master</code>分支merge过来。</p>
+<p>为了方便操作，Git专门提供了一个<code>cherry-pick</code>命令，让我们能复制一个特定的提交到当前分支：</p>
+<pre class="hljs"><code class="language-plain">$ git branch
+* dev
+  master
+$ git cherry-pick 4c805e2
+[master 1d4b803] fix bug 101
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+<p>Git自动给<code>dev</code>分支做了一次提交，注意这次提交的commit是<code>1d4b803</code>，它并不同于<code>master</code>的<code>4c805e2</code>，因为这两个commit只是改动相同，但确实是两个不同的commit。用<code>git cherry-pick</code>，我们就不需要在<code>dev</code>分支上手动再把修bug的过程重复一遍。</p>
+<p>有些聪明的童鞋会想了，既然可以在<code>master</code>分支上修复bug后，在<code>dev</code>分支上可以“重放”这个修复过程，那么直接在<code>dev</code>分支上修复bug，然后在<code>master</code>分支上“重放”行不行？当然可以，不过你仍然需要<code>git stash</code>命令保存现场，才能从<code>dev</code>分支切换到<code>master</code>分支。</p>
+<h3>小结</h3>
+<p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
+<p>当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场；</p>
+<p>在<code>master</code>分支上修复的bug，想要合并到当前<code>dev</code>分支，可以用<code>git cherry-pick &lt;commit&gt;</code>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。</p>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/branch/policy/index.html"
+                onclick="gs_load_chapter('/books/git/branch/policy/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                分支管理策略
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/branch/feature/index.html"
+                onclick="gs_load_chapter('/books/git/branch/feature/index.html',true);return false;"
+                class="inline-block my-2">
+                Feature分支
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="18.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 7.3. 分支管理策略</a><a href="20.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">7.5. Feature分支 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/branch/bug/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 7.4. Bug分支</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>

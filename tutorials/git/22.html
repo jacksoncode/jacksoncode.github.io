@@ -74,7 +74,187 @@
             </ul>
         </div>
     </nav>
-<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>7.7. Rebase</h1><div class="tutorial-body"></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="21.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 7.6. 多人协作</a><a href="23.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">8. 标签管理 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/branch/rebase/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 7.7. Rebase</a></p></div></div>
+<div class="tutorial-container" style="max-width: 960px; margin: 80px auto 40px; padding: 0 20px;"><div class="tutorial-sidebar"><h3>目录</h3><a href="0.html">1. 简介</a><a href="1.html">2. Git是什么</a><a href="2.html">2.1. Git的诞生</a><a href="3.html">2.2. 集中式vs分布式</a><a href="4.html">3. 安装Git</a><a href="5.html">4. 创建版本库</a><a href="6.html">5. 时光机穿梭</a><a href="7.html">5.1. 版本回退</a><a href="8.html">5.2. 工作区和暂存区</a><a href="9.html">5.3. 管理修改</a><a href="10.html">5.4. 撤销修改</a><a href="11.html">5.5. 删除文件</a><a href="12.html">6. 远程仓库</a><a href="13.html">6.1. 添加远程库</a><a href="14.html">6.2. 从远程库克隆</a><a href="15.html">7. 分支管理</a><a href="16.html">7.1. 创建与合并分支</a><a href="17.html">7.2. 解决冲突</a><a href="18.html">7.3. 分支管理策略</a><a href="19.html">7.4. Bug分支</a><a href="20.html">7.5. Feature分支</a><a href="21.html">7.6. 多人协作</a><a href="22.html">7.7. Rebase</a><a href="23.html">8. 标签管理</a><a href="24.html">8.1. 创建标签</a><a href="25.html">8.2. 操作标签</a><a href="26.html">9. 使用GitHub</a><a href="27.html">10. 使用Gitee</a><a href="28.html">11. 自定义Git</a><a href="29.html">11.1. 忽略特殊文件</a><a href="30.html">11.2. 配置别名</a><a href="31.html">11.3. 搭建Git服务器</a><a href="32.html">12. 使用SourceTree</a><a href="33.html">13. 期末总结</a></div><div class="tutorial-content"><h1>7.7. Rebase</h1><div class="tutorial-body"><p>每次合并再push后，分支变成了这样：</p>
+<pre class="hljs"><code class="language-plain">$ git log --graph --pretty=oneline --abbrev-commit
+* d1be385 (HEAD -&gt; master, origin/master) init hello
+*   e5e69f1 Merge branch 'dev'
+|\  
+| *   57c53ab (origin/dev, dev) fix env conflict
+| |\  
+| | * 7a5e5dd add env
+| * | 7bd91f1 add new env
+| |/  
+* |   12a631b merged bug fix 101
+|\ \  
+| * | 4c805e2 fix bug 101
+|/ /  
+* |   e1e9c68 merge with no-ff
+|\ \  
+| |/  
+| * f52c633 add merge
+|/  
+*   cf810e4 conflict fixed
+</code></pre>
+<p>总之看上去很乱，有强迫症的童鞋会问：为什么Git的提交历史不能是一条干净的直线？</p>
+<p>其实是可以做到的！</p>
+<p>Git有一种称为<code>rebase</code>的操作，有人把它翻译成“变基”。</p>
+<p><img src="rebase.png" alt="rebase" loading="lazy"></p>
+<p>先不要随意展开想象。我们还是从实际问题出发，看看怎么把分叉的提交变成直线。</p>
+<p>在和远程分支同步后，我们对<code>hello.py</code>这个文件做了两次提交。用<code>git log</code>命令看看：</p>
+<pre class="hljs"><code class="language-plain">$ git log --graph --pretty=oneline --abbrev-commit
+* 582d922 (HEAD -&gt; master) add author
+* 8875536 add comment
+* d1be385 (origin/master) init hello
+*   e5e69f1 Merge branch 'dev'
+|\  
+| *   57c53ab (origin/dev, dev) fix env conflict
+| |\  
+| | * 7a5e5dd add env
+| * | 7bd91f1 add new env
+...
+</code></pre>
+<p>注意到Git用<code>(HEAD -&gt; master)</code>和<code>(origin/master)</code>标识出当前分支的HEAD和远程origin的位置分别是<code>582d922  add author</code>和<code>d1be385 init hello</code>，本地分支比远程分支快两个提交。</p>
+<p>现在我们尝试推送本地分支：</p>
+<pre class="hljs"><code class="language-plain">$ git push origin master
+To github.com:michaelliao/learngit.git
+ ! [rejected]        master -&gt; master (fetch first)
+error: failed to push some refs to 'git@github.com:michaelliao/learngit.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</code></pre>
+<p>很不幸，失败了，这说明有人先于我们推送了远程分支。按照经验，先pull一下：</p>
+<pre class="hljs"><code class="language-plain">$ git pull
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From github.com:michaelliao/learngit
+   d1be385..f005ed4  master     -&gt; origin/master
+ * [new tag]         v1.0       -&gt; v1.0
+Auto-merging hello.py
+Merge made by the 'recursive' strategy.
+ hello.py | 1 +
+ 1 file changed, 1 insertion(+)
+</code></pre>
+<p>再用<code>git status</code>看看状态：</p>
+<pre class="hljs"><code class="language-plain">$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 3 commits.
+  (use &quot;git push&quot; to publish your local commits)
+
+nothing to commit, working tree clean
+</code></pre>
+<p>加上刚才合并的提交，现在我们本地分支比远程分支超前3个提交。</p>
+<p>用<code>git log</code>看看：</p>
+<pre class="hljs"><code class="language-plain">$ git log --graph --pretty=oneline --abbrev-commit
+*   e0ea545 (HEAD -&gt; master) Merge branch 'master' of github.com:michaelliao/learngit
+|\  
+| * f005ed4 (origin/master) set exit=1
+* | 582d922 add author
+* | 8875536 add comment
+|/  
+* d1be385 init hello
+...
+</code></pre>
+<p>对强迫症童鞋来说，现在事情有点不对头，提交历史分叉了。如果现在把本地分支push到远程，有没有问题？</p>
+<p>有！</p>
+<p>什么问题？</p>
+<p>不好看！</p>
+<p>有没有解决方法？</p>
+<p>有！</p>
+<p>这个时候，rebase就派上了用场。我们输入命令<code>git rebase</code>试试：</p>
+<pre class="hljs"><code class="language-plain">$ git rebase
+First, rewinding head to replay your work on top of it...
+Applying: add comment
+Using index info to reconstruct a base tree...
+M	hello.py
+Falling back to patching base and 3-way merge...
+Auto-merging hello.py
+Applying: add author
+Using index info to reconstruct a base tree...
+M	hello.py
+Falling back to patching base and 3-way merge...
+Auto-merging hello.py
+</code></pre>
+<p>输出了一大堆操作，到底是啥效果？再用<code>git log</code>看看：</p>
+<pre class="hljs"><code class="language-plain">$ git log --graph --pretty=oneline --abbrev-commit
+* 7e61ed4 (HEAD -&gt; master) add author
+* 3611cfe add comment
+* f005ed4 (origin/master) set exit=1
+* d1be385 init hello
+...
+</code></pre>
+<p>原本分叉的提交现在变成一条直线了！这种神奇的操作是怎么实现的？其实原理非常简单。我们注意观察，发现Git把我们本地的提交“挪动”了位置，放到了<code>f005ed4 (origin/master) set exit=1</code>之后，这样，整个提交历史就成了一条直线。rebase操作前后，最终的提交内容是一致的，但是，我们本地的commit修改内容已经变化了，它们的修改不再基于<code>d1be385 init hello</code>，而是基于<code>f005ed4 (origin/master) set exit=1</code>，但最后的提交<code>7e61ed4</code>内容是一致的。</p>
+<p>这就是rebase操作的特点：把分叉的提交历史“整理”成一条直线，看上去更直观。缺点是本地的分叉提交已经被修改过了。</p>
+<p>最后，通过push操作把本地分支推送到远程：</p>
+<pre class="hljs"><code class="language-plain">Mac:~/learngit michael$ git push origin master
+Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 576 bytes | 576.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To github.com:michaelliao/learngit.git
+   f005ed4..7e61ed4  master -&gt; master
+</code></pre>
+<p>再用<code>git log</code>看看效果：</p>
+<pre class="hljs"><code class="language-plain">$ git log --graph --pretty=oneline --abbrev-commit
+* 7e61ed4 (HEAD -&gt; master, origin/master) add author
+* 3611cfe add comment
+* f005ed4 set exit=1
+* d1be385 init hello
+...
+</code></pre>
+<p>远程分支的提交历史也是一条直线。</p>
+<div class="gsc-video-wrapper pdf-hidden" style="margin-left:0;margin-right:auto;max-width:960px;"><div class="gsc-video-container gsc-video-container-bilibili" style="padding-bottom: 56.2500%">
+    <iframe class="gsc-video gsc-video-bilibili" src="https://player.bilibili.com/player.html?bvid=BV1Z4411x7Wd&autoplay=0" allowfullscreen></iframe>
+</div></div>
+<div class="pdf-only" style="margin:10px"><a href="https://www.bilibili.com/video/BV1Z4411x7Wd" style="display:block; width:64px; height:64px;">
+    <img style="width:100%;" src="data:image/svg+xml;base64,   PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0icmdiKDIsMTMyLDE5OSkiIGNsYXNzPSJiaSBiaS1wbGF5LWNpcmNsZSIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCAxNUE3IDcgMCAxIDEgOCAxYTcgNyAwIDAgMSAwIDE0bTAgMUE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2Ii8+CiAgICA8cGF0aCBkPSJNNi4yNzEgNS4wNTVhLjUuNSAwIDAgMSAuNTIuMDM4bDMuNSAyLjVhLjUuNSAwIDAgMSAwIC44MTRsLTMuNSAyLjVBLjUuNSAwIDAgMSA2IDEwLjV2LTVhLjUuNSAwIDAgMSAuMjcxLS40NDUiLz4KICAgIDwvc3ZnPg==" />
+</a></div><h3>小结</h3>
+<ul>
+<li>rebase操作可以把本地未push的分叉提交历史整理成直线；</li>
+<li>rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。</li>
+</ul>
+
+    </div>
+
+
+
+
+
+
+    <hr class="gsc-border">
+    <div id="gsi-chapter-prev-next" class="flex flex-row mt-4">
+        <div id="gsi-chapter-prev" class="basis-1/2 mr-2 text-left">
+
+            <a href="/books/git/branch/collaboration/index.html"
+                onclick="gs_load_chapter('/books/git/branch/collaboration/index.html',true);return false;"
+                class="inline-block my-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+                多人协作
+            </a>
+
+        </div>
+        <div id="gsi-chapter-next" class="basis-1/2 ml-2 text-right">
+
+            <a href="/books/git/tag/index.html"
+                onclick="gs_load_chapter('/books/git/tag/index.html',true);return false;"
+                class="inline-block my-2">
+                标签管理
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </a></div><div style="display: flex; justify-content: space-between; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border, #e5e7eb);"><a href="21.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">&larr; 7.6. 多人协作</a><a href="23.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">8. 标签管理 &rarr;</a></div><p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999);">原文：<a href="https://liaoxuefeng.com/books/git/branch/rebase/index.html" style="color: var(--primary, #3b82f6);">廖雪峰 - 7.7. Rebase</a></p></div></div>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 CodeClub. All rights reserved.</p>
