@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../../css/dark-mode.css">
     <link rel="stylesheet" href="../../css/mobile-optimizations.css">
     <link rel="stylesheet" href="../../css/tutorial.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
     <style>
     .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
     .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
@@ -25,18 +26,18 @@
     .tutorial-main { flex: 1; min-width: 0; }
     .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
     .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
-    .tutorial-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
-    .tutorial-body h2 { font-size: 20px; margin: 24px 0 16px; color: var(--text-primary, #1a1a2e); }
-    .letter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin: 16px 0; }
-    .letter-link { display: block; padding: 8px 12px; background: var(--bg-primary, #f8fafc); border-radius: 6px; text-align: center; text-decoration: none; color: var(--primary, #3b82f6); font-weight: 500; font-size: 14px; transition: all 0.2s; }
-    .letter-link:hover { background: var(--primary, #3b82f6); color: #fff; transform: translateY(-1px); }
-    .letter-link.pdf { background: #fef3c7; color: #92400e; }
-    .letter-link.pdf:hover { background: #f59e0b; color: #fff; }
-    .era-divider { border: none; border-top: 2px solid var(--border, #e5e7eb); margin: 32px 0 16px; }
-    .era-label { font-size: 14px; color: var(--text-secondary, #666); font-weight: 600; margin-bottom: 8px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
     .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
     .source-link a { color: var(--primary, #3b82f6); }
-    @media (max-width: 768px) { .tutorial-page { flex-direction: column; } .tutorial-sidebar { width: 100%; position: static; max-height: 200px; } .letter-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); } }
+    .local-badge { display: inline-block; padding: 2px 8px; background: #10b981; color: #fff; border-radius: 12px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+    .external-badge { display: inline-block; padding: 2px 8px; background: #f59e0b; color: #fff; border-radius: 12px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+    @media (max-width: 768px) { .tutorial-page { flex-direction: column; } .tutorial-sidebar { width: 100%; position: static; max-height: 200px; } }
     </style>
 </head>
 <body>
@@ -115,7 +116,7 @@
         </div>
         <div class="tutorial-main">
             <div class="tutorial-article">
-                <h1>2022 年致股东的信</h1>
+                <h1>2022 年致股东的信 <span class="external-badge">外部</span></h1>
                 <div class="tutorial-body">
                     
                     <div style="text-align: center; padding: 40px 20px;">
