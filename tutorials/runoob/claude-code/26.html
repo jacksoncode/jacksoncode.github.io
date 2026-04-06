@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Claude Code 插件参考手册">
+    <meta name="author" content="Jackson">
+    <title>Claude Code 插件参考手册 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" >Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" >Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" >Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" >Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" >Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" >Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" class="active">Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="25.html" class="page-nav-link">&larr; Claude Code 检查点</a>
+                    <a href="27.html" class="page-nav-link">Claude Code 实战 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code 插件参考手册\n\n\n插件是 Claude Code 的**功能扩展核心**，能帮你添加自定义斜杠命令、子代理、自动化钩子等能力。本教程从**核心组件**、**配置规范**、**CLI 管理**三个维度，带你快速掌握插件的使用与开发要点。\n\n\n\n---\n\n## 插件核心组件：5类扩展能力\n\n插件通过 5 类组件实现功能扩展，每个组件都有固定的存储位置和格式要求。\n\n\n\n    \n        \n            组件类型\n            存储位置\n            文件格式\n            核心作用\n        \n    \n    \n        \n            **命令**\n            插件根目录 \`commands/\`\n            带前置元数据的 Markdown 文件\n            新增自定义斜杠命令，比如 \`/deploy\` \`/code-review\`\n        \n        \n            **代理**\n            插件根目录 \`agents/\`\n            Markdown 文件\n            提供专属子代理，比如代码审查代理、性能测试代理\n        \n        \n            **技能**\n            插件根目录 \`skills/\`\n            包含 \`SKILL.md\` 的目录\n            让 Claude 自动识别场景并调用，比如 PDF 解析、数据可视化\n        \n        \n            **钩子**\n            插件根目录 \`hooks/hooks.json\` 或 \`plugin.json\` 内联\n            JSON 配置文件\n            监听 Claude 事件并自动响应，比如文件编辑后自动格式化代码\n        \n        \n            **MCP 服务器**\n            插件根目录 \`.mcp.json\` 或 \`plugin.json\` 内联\n            JSON 配置文件\n            连接外部工具（如 GitHub、Jira），将其功能转为 Claude 可用工具\n        \n        \n            **LSP 服务器**\n            插件根目录 \`.lsp.json\` 或 \`plugin.json\` 内联\n            JSON 配置文件\n            提供代码智能能力，比如语法检查、跳转定义、悬停提示\n        \n    \n\n\n### 关键组件示例\n\n**1、钩子配置示例**：文件编辑后自动格式化\n\n\n\n\`\`\`\n{\n  "hooks": {\n    "PostToolUse": [\n      {\n        "matcher": "Write|Edit",\n        "hooks": [\n          {\n            "type": "command",\n            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/format-code.sh"\n          }\n        ]\n      }\n    ]\n  }\n\`\`\`\n\n}\n**：支持 Go 语言智能提示\n\n\n\n\`\`\`\n{\n  "go": {\n    "command": "gopls",\n    "args": ["serve"],\n    "extensionToLanguage": {\n      ".go": "go"\n    }\n  }\n}\n\`\`\`\n\n\n---\n\n## 插件基础规范：安装范围与清单\n\n\n### 1. 安装范围：决定插件的可用范围\n\n安装插件时需选择范围，不同范围对应不同的配置文件和使用场景：\n\n\n\n    \n        \n            范围\n            配置文件路径\n            适用场景\n        \n    \n    \n        \n            \`user\`\n            \`~/.claude/settings.json\`\n            个人所有项目通用（默认）\n        \n        \n            \`project\`\n            \`.claude/settings.json\`\n            团队共享，随代码仓同步\n        \n        \n            \`local\`\n            \`.claude/settings.local.json\`\n            项目专属，被 \`.gitignore\` 忽略\n        \n        \n            \`managed\`\n            \`managed-settings.json\`\n            托管插件，只读且自动更新\n        \n    \n\n\n### 2. 插件清单：\`plugin.json\` 必知要点\n\n\`plugin.json\` 是插件的核心配置文件**，存放于 \`.claude-plugin/\` 目录下，用于定义插件元数据和组件路径。\n\n\n\n#### a、必需字段\n\n\n    \n        \n            字段\n            类型\n            要求\n            示例\n        \n    \n    \n        \n            \`name\`\n            string\n            唯一标识符，kebab-case 格式\n            \`"go-code-helper"\`\n        \n    \n\n\n#### b、核心元数据字段\n\n\n\`\`\`\n{\n  "version": "1.0.0", // 语义化版本\n  "description": "提供 Go 语言代码智能和调试能力",\n  "author": {\n    "name": "Dev Team",\n    "email": "dev@example.com"\n  },\n  "license": "MIT"\n}\n\`\`\`\n\n\n#### c、组件路径字段\n\n用于指定自定义组件的位置，路径需**相对插件根目录**且以 \`./\` 开头：\n\n\n\n\`\`\`\n{\n  "commands": ["./custom-commands/deploy.md"],\n  "agents": "./custom-agents/",\n  "hooks": "./hooks.json"\n}\n\`\`\`\n\n\n#### d、环境变量\n\n\`${CLAUDE_PLUGIN_ROOT}\`：插件根目录的绝对路径，用于脚本和配置中引用插件内文件，避免路径错误。\n\n\n\n### 3. 标准插件目录结构\n\n\n\`\`\`\nmy-plugin/\n├── .claude-plugin/           # 元数据目录\n│   └── plugin.json          # 插件清单（必需）\n├── commands/                 # 自定义斜杠命令\n├── agents/                   # 子代理定义\n├── skills/                   # 自动技能\n├── hooks/                    # 事件钩子配置\n├── .mcp.json                # MCP 服务器配置\n├── .lsp.json                # LSP 服务器配置\n└── scripts/                 # 钩子执行脚本\n\`\`\`\n\n\n    注意：\`commands/\` \`agents/\` 等组件目录必须在插件**根目录**，不能放在 \`.claude-plugin/\` 内。\n\n\n\n\n---\n\n## 插件管理：CLI 命令速查\n\n通过 Claude Code CLI 可快速完成插件的安装、卸载、启用/禁用等操作，适合脚本和自动化场景。\n\n\n\n    \n        \n            命令\n            用途\n            示例\n        \n    \n    \n        \n            \`claude plugin install  -s \`\n            安装插件\n            \`claude plugin install go-lsp --scope project\`\n        \n        \n            \`claude plugin uninstall \`\n            卸载插件\n            \`claude plugin uninstall go-lsp\`\n        \n        \n            \`claude plugin enable \`\n            启用已禁用插件\n            \`claude plugin enable go-lsp\`\n        \n        \n            \`claude plugin disable \`\n            禁用插件（不卸载）\n            \`claude plugin disable go-lsp\`\n        \n        \n            \`claude plugin update \`\n            更新插件到最新版本\n            \`claude plugin update go-lsp\`\n        \n    \n\n\n---\n\n## 调试与排错：常见问题解决\n\n\n### 1. 调试命令\n\n运行以下命令查看插件加载详情，定位配置和加载问题：\n\n\n\n\`\`\`\nclaude --debug\n\`\`\`\n\n可查看：插件加载状态、清单语法错误、组件注册情况、MCP/LSP 服务器初始化日志。\n\n\n\n### 2. 高频问题与解决方案\n\n\n    \n        \n            问题\n            原因\n            解决办法\n        \n    \n    \n        \n            插件未加载\n            \`plugin.json\` 语法错误或缺少必需字段\n            用 \`claude plugin validate\` 验证 JSON 语法，补充 \`name\` 字段\n        \n        \n            自定义命令不显示\n            命令文件放在 \`.claude-plugin/\` 内\n            将 \`commands/\` 目录移到插件根目录\n        \n        \n            钩子脚本不执行\n            脚本没有可执行权限\n            运行 \`chmod +x scripts/your-script.sh\` 赋予权限\n        \n        \n            LSP 提示 \`Executable not found\`\n            未安装对应语言服务器\n            安装二进制文件（如 Go 需安装 \`gopls\`）\n        \n        \n            MCP 服务器启动失败\n            路径使用绝对路径，未用 \`${CLAUDE_PLUGIN_ROOT}\`\n            替换为环境变量引用，如 \`${CLAUDE_PLUGIN_ROOT}/server\`\n        \n    \n\n\n---\n\n## 版本管理与分发\n\n\n\n\n- **版本规范**：遵循语义化版本 \`MAJOR.MINOR.PATCH\`，比如 \`1.2.3\`\n\n- **分发渠道**：通过插件市场分发，或直接分享插件目录（需包含完整结构）\n\n- **更新日志**：建议在插件根目录添加 \`CHANGELOG.md\`，记录版本更新内容\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

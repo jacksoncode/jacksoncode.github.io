@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Claude Code 安装与使用">
+    <meta name="author" content="Jackson">
+    <title>Claude Code 安装与使用 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" >Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" class="active">Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" >Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" >Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" >Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" >Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" >Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="1.html" class="page-nav-link">&larr; Claude Code 简介</a>
+                    <a href="3.html" class="page-nav-link">Claude Code 如何工作 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code 安装与使用\n\n在正式安装之前，我们先了解一下 Claude Code 可以怎么用。\n\n\n三种使用方式对比：\n\n\n\n    \n        \n            方式\n            适合人群\n            优点\n            缺点\n        \n    \n    \n        \n            **Web 端**\n            完全新手\n            无需安装,打开就用\n            功能相对有限\n        \n        \n            **CLI(命令行)**\n            有一定基础的开发者\n            功能完整,集成度高\n            需要熟悉命令行\n        \n        \n            **编辑器集成（VS Code / Cursor 等）**\n            日常开发\n            无缝融入工作流\n            依赖插件和环境配置\n        \n    \n\n**我的建议:**\n\n\n\n\n\n- 如果你是**完全新手**，先用 **Web 端 [https://claude.ai/](https://claude.ai/) **试试手感\n\n- 如果你想**真正用于开发**，直接学 **CLI(命令行)**\n\n- 如果你已经熟练使用，再考虑**编辑器集成**\n\n\n目前 Claude Code 的桌面版也发布了，下载地址：[https://claude.com/download](https://claude.com/download)。\n\n\n![](https://static.jyshare.com/images/re/desktop-interface.avif)\n\n\n\n本教程将以 CLI 使用方式为主，因为它最稳定、最通用，也最接近 Claude Code 的设计初衷。\n\n\n\n\n---\n\n\n## 安装 Claude Code CLI(命令行工具)\n\n\n### 1、前置准备\n\n在安装之前，你需要有一个 Claude 账号，当然现在国内很多厂家（DeepSeek/Minimax/GLM）已经适配，后文会介绍怎么切换。\n\n\n\n\n\n- 访问 [claude.ai](https://claude.ai) 注册账号，如果使用国内大模型这边可以跳过\n\n- 如果你已经在用 Claude 聊天，那就已经有账号了\n\n\n\n#### 你的电脑有命令行工具\n\n\n\n\n- **Mac / Linux**:打开 Terminal(终端)\n\n- **Windows**:打开 PowerShell 或者安装 WSL\n\n\n\n###  2、使用官方脚本安装\n\n\nmacOS, Linux, WSL:\n\n\`\`\`\n\ncurl -fsSL https://claude.ai/install.sh | bash\n\`\`\`\n\nWindows PowerShell:\n\n\`\`\`\n\nirm https://claude.ai/install.ps1 | iex\n\`\`\`\n\nWindows CMD:\n\n\`\`\`\n\ncurl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd\n\`\`\`\n\n**安装完成后,验证一下:**\n\n\n\n\`\`\`\nclaude --version\n\`\`\`\n\n如果显示版本号，说明安装成功!\n\n\n\n\n### 3、使用 npm  安装（不推荐）\n\n现在官方已经不推荐 npm 安装了。\n\n\n你的电脑需要安装了 Node.js，在命令行输入：\n\n\n\n\`\`\`\nnode --version\n\`\`\`\n\n如果显示版本号(比如 \`v18.17.0\`)，说明已安装。如果没有，去 [nodejs.org](https://nodejs.org) 下载安装。\n\n\n\n### 安装 Claude Code\n\n打开命令行，输入以下命令:\n\n\n\n\`\`\`\nnpm install -g @anthropic-ai/claude-code\n\`\`\`\n\n等待安装完成(可能需要几分钟)。\n\n\n**安装完成后，验证一下:**\n\n\n\n\`\`\`\nclaude --version\n\`\`\`\n\n如果显示版本号，说明安装成功!\n\n\n\n###  3、更新\n\n\n手动更新 Claude，使用以下命令：\n\n\n\n\`\`\`\nclaude update\n\`\`\`\n\n\nClaude Code 启动及运行时会定期检查更新，后台下载安装后，下次启动生效。\n\n配置在 settings.json 中：\n\n\n\n\n\`\`\`\n{\n  "autoUpdatesChannel": "stable"\n}\n\`\`\`\n\n也通过 /config 命令配置。\n\n\n\n\n禁用自动更新可以在 settings.json 的 env 中配置：\n\n\n\n\n\`\`\`\n{\n  "env": {\n    "DISABLE_AUTOUPDATER": "1"\n  }\n}\n\`\`\`\n\nHomebrew、WinGet 安装不支持自动更新，需手动执行：\n\n\n\n\`\`\`\nbrew upgrade claude-code\nwinget upgrade Anthropic.ClaudeCode\n\`\`\`\n\n\n### 4、常见安装问题与解决\n\n**问题 1: **提示 \`npm command not found\`\n\n\n	\n\n\n- **原因:**你的电脑没有安装 Node.js\n\n\n\n	\n- \n**解决:**去 [nodejs.org](https://nodejs.org) 下载安装,然后重新执行安装命令\n\n\n\n\n\n**问题 2:** 提示 \`permission denied\`\n\n\n	\n\n\n- **原因:**没有管理员权限\n\n\n	\n- \n**解决(Mac/Linux):**在命令前加 \`sudo\`\n\n\n\n\`\`\`\nsudo npm install -g @anthropic-ai/claude-code\n\`\`\`\n\n\n\n	\n- \n**解决(Windows):**以管理员身份运行 PowerShell\n\n\n\n**问题 3:** 安装很慢或者卡住\n\n\n	\n\n\n- **原因:**网络问题\n\n\n	\n- \n**解决:**使用国内镜像源\n\n\n\n\`\`\`\nnpm install -g @anthropic-ai/claude-code --registry=https://registry.npmmirror.com\n\`\`\`\n\n\n\n\n\n**终端推荐：**\n\n	\n\n\n- \nWezTerm（跨平台）：[https://wezterm.org/](https://wezterm.org/)\n- \nAlacritty（跨平台）：[https://alacritty.org/](https://alacritty.org/)\n- \nGhostty（Linux/macOS）：[https://ghostty.org/](https://ghostty.org/)\n- \nKitty（Linux/macOS）：[https://github.com/kovidgoyal/kitty](https://github.com/kovidgoyal/kitty)\n\n\n\n---\n\n## 卸载 Claude Code\n\n不同安装方式的卸载方法如下。\n\n\n\n### 1、原生安装\n\n删除 Claude Code 二进制文件和版本文件。\n\n\n**macOS、Linux、WSL：**\n\n\`\`\`\n\nrm -f ~/.local/bin/claude\nrm -rf ~/.local/share/claude\n\`\`\`\n\n​\n**\nWindows PowerShell**\n\n\n\n\`\`\`\nRemove-Item -Path "$env:USERPROFILE\\.local\\bin\\claude.exe" -Force\nRemove-Item -Path "$env:USERPROFILE\\.local\\share\\claude" -Recurse -Force\n\`\`\`\n\n\n### 2、Homebrew 安装\n\n删除 Homebrew cask：\n\n\`\`\`\n\nbrew uninstall --cask claude-code\n\`\`\`\n\n​\n### \n3、WinGet 安装\n\n删除 WinGet 包：\n\n\`\`\`\n\nwinget uninstall Anthropic.ClaudeCode\n\`\`\`\n\n​\n### \nnpm\n\n4、删除全局 npm 包：\n\n\`\`\`\n\nnpm uninstall -g @anthropic-ai/claude-code\n\`\`\`\n\n​\n### \n5、删除配置文件\n\n删除配置文件将删除所有设置、允许的工具、MCP 服务器配置和会话历史记录。\n\n\n要删除 Claude Code 设置和缓存数据。\n\n\n**macOS、Linux、WSL：**\n\n\n\n\n\`\`\`\n# 删除用户设置和状态\nrm -rf ~/.claude\nrm ~/.claude.json\n\n# 删除特定于项目的设置（从您的项目目录运行）\nrm -rf .claude\nrm -f .mcp.json\n\`\`\`\n\n**Windows PowerShell：**\n\n\n\n\`\`\`\n# 删除用户设置和状态\nRemove-Item -Path "$env:USERPROFILE\\.claude" -Recurse -Force\nRemove-Item -Path "$env:USERPROFILE\\.claude.json" -Force\n\n# 删除特定于项目的设置（从您的项目目录运行）\nRemove-Item -Path ".claude" -Recurse -Force\nRemove-Item -Path ".mcp.json" -Force\n\`\`\`\n\n\n---\n\n\n## 登录 Claude Code\n\n\n### 首次登录流程\n\n当你第一次启动 Claude Code 时,需要登录账号:\n\n\n\n\`\`\`\nclaude\n\`\`\`\n\n启动后，系统会提示你登录，在 Claude Code 界面中输入:\n\n\n\n\`\`\`\n/login\n\`\`\`\n\n然后按照提示完成登录。\n\n\n\n### 支持的账号类型\n\n你可以使用以下任意一种账号类型登录:\n\n\n\n#### 1、Claude 订阅账号(推荐)\n\n\n\n\n- **Claude Pro** - 个人专业版\n\n- **Claude Max** - 最高级别订阅\n\n- **Claude Teams** - 团队版\n\n- **Claude Enterprise** - 企业版\n\n\n\n#### 2、Claude Console 账号\n\n\n\n\n- API 访问账号，使用预付费积分\n\n- 适合开发者和 API 用户\n\n\n**注意:**\n\n\n\n\n\n- 同一个邮箱可以同时拥有两种账号类型\n\n- 登录后，凭据会被保存，下次无需重复登录\n\n- 如需切换账号，使用 \`/login\` 命令重新登录\n\n\n\n### 自动创建工作区(Console 账号)\n\n当你首次使用 Claude Console 账号认证 Claude Code 时,系统会自动创建一个名为 **"Claude Code"** 的工作区。\n\n\n这个工作区用于:\n\n\n\n\n\n- 集中跟踪所有 Claude Code 的使用成本\n\n- 管理组织内的 Claude Code 使用情况\n\n\n\n---\n\n\n## 启动第一次会话\n\n\n### 在项目目录中启动\n\n打开终端,进入你的项目目录,然后启动 Claude Code:\n\n\n\n\`\`\`\ncd /path/to/your/project\nclaude\n\`\`\`\n\n\n### 欢迎界面\n\n启动后，你会看到 Claude Code 的欢迎界面,包括:\n\n\n\n\n\n- **会话信息**\n\n- **最近的对话记录**\n\n- **最新更新**\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/Claude-Code-Screenshot.png)\n\n\n\n### 查看帮助\n\n输入以下命令查看可用功能:\n\n\n\n\`\`\`\n/help\n\`\`\`\n\n或者恢复之前的对话:\n\n\n\n\`\`\`\n/resume\n\`\`\`\n\n输入 / 会列出可用的命令：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/d29e985e-5cb1-43bc-b6fb-e3b290f83bf9.png)\n\n\n\n### 凭据管理\n\n登录后，你的凭据会保存在系统中，下次无需重复登录。\n\n\n详细的凭据管理信息可以查看官方文档的 [Credential Management](https://code.claude.com/docs/en/iam#credential-management) 部分。\n\n\n\n---\n\n\n## 提出第一个问题\n\n\n### 理解项目\n\n让我们从了解代码库开始，试试这些命令:\n\n\n\n\`\`\`\nwhat does this project do?\n\`\`\`\n\nClaude 会分析你的文件并提供项目概要。\n\n\n\n### 更多项目相关问题\n\n你还可以问更具体的问题:\n\n\n\n\`\`\`\n what technologies does this project use?\n\`\`\`\n\n\`\`\`\n\n> where is the main entry point?\n\`\`\`\n\n\`\`\`\n\n> explain the folder structure\n\`\`\`\n\n\n\n\n### 询问 Claude Code 的能力\n\n你也可以问 Claude 关于它自己的问题:\n\n\n\n\`\`\`\n> what can Claude Code do?\n\`\`\`\n\n\`\`\`\n\n> how do I use slash commands in Claude Code?\n\`\`\`\n\n\`\`\`\n\n> can Claude Code work with Docker?\n\`\`\`\n\n**重要特性:**\n\n\n\n\n\n- **Claude Code 会根据需要自动读取文件** - 你不需要手动添加上下文\n\n- **Claude 可以访问自己的文档** - 可以回答关于功能和特性的问题\n\n\n\n---\n\n\n## 进行第一次代码修改\n\n\n### 简单的编码任务\n\n现在让 Claude Code 实际编写代码。\n\n\n试试这个简单任务，在 test.py 文件（没有要创建下）中添加 hello world 函数:\n\n\n\n\n\`\`\`\n\ncd runoob-test     # 进入测试目录\nclaude             # 启用 claude\n\n\`\`\`\n\n在窗口中，输入以下内容：\n\n\n> 在 test.py 文件中添加 hello world 函数\n输出如下，选择 yes 回车就可以了：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/ec77e5ba-1b96-49d4-a580-325b44cc022e.png)\n\n\n\n\n### Claude Code 的工作流程\n\nClaude Code 会:\n\n\n\n\n\n- **找到合适的文件**\n\n- **展示建议的修改**\n\n- **请求你的批准**\n\n- **执行编辑**\n\n\n**重要提示:**\n\n\n\n\n\n- **Claude Code 始终会在修改文件前请求许可**\n\n- 你可以逐个批准修改\n\n- 也可以为当前会话启用"全部接受"模式\n\n\n\n---\n\n\n## 使用 Git 功能\n\n\n### 对话式 Git 操作\n\nClaude Code 让 Git 操作变得像对话一样简单:\n\n\n\n#### 查看修改\n\n\n\`\`\`\n> what files have I changed?\n\`\`\`\n\n\n#### 提交更改\n\n\n\`\`\`\n> commit my changes with a descriptive message\n\`\`\`\n\n\n### 更复杂的 Git 操作\n\n你还可以执行更复杂的 Git 任务:\n\n\n\n#### 创建分支\n\n\n\`\`\`\n> create a new branch called feature/quickstart\n\`\`\`\n\n\n#### 查看提交历史\n\n\n\`\`\`\n> commit my changes with a descriptive message\n\`\`\`\n\n\n#### 解决合并冲突\n\n\n\`\`\`\n> commit my changes with a descriptive message\n\`\`\`\n\n\n---\n\n\n## 修复 Bug 或添加功能\n\n\n### 添加新功能\n\n用自然语言描述你想要的功能:\n\n\`\`\`\n\n> create a new branch called feature/quickstart\n\`\`\`\n\n\`\`\`\n\n> show me the last 5 commits\n\`\`\`\n\n\`\`\`\n\n> help me resolve merge conflicts\n\`\`\`\n\n\n### 修复现有问题\n\n描述 Bug 并让 Claude 修复:\n\n\n\n\`\`\`\n> add input validation to the user registration form\n\`\`\`\n\n描述 Bug 并让 Claude 修复:\n\n\`\`\`\n\n> there\'s a bug where users can submit empty forms - fix it\n\`\`\`\n\n\n\n### Claude Code 的处理流程\n\nClaude Code 会:\n\n\n\n\n\n- **定位相关代码**\n\n- **理解上下文**\n\n- **实现解决方案**\n\n- **运行测试**(如果有的话)\n\n\n\n---\n\n\n## 其他常见工作流\n\n\n### 代码重构\n\n\n\`\`\`\n> refactor the authentication module to use async/await instead of callbacks\n\`\`\`\n\n\n### 编写测试\n\n\n\`\`\`\n> write unit tests for the calculator functions\n\`\`\`\n\n\n### 更新文档\n\n\n\`\`\`\n> update the README with installation instructions\n\`\`\`\n\n\n### 代码审查\n\n\n\`\`\`\n> review my changes and suggest improvements\n\`\`\`\n\n\n### 使用建议\n\n**Claude Code 是你的 AI 结对编程伙伴**\n\n\n\n\n\n- 像跟有帮助的同事交流一样跟它对话\n\n- 描述你想实现什么,它会帮你达成目标\n\n- 不用拘泥于命令格式,用自然语言表达即可\n\n\n\n---\n\n\n## 常用命令速查表\n\n\n### 命令行命令\n\n\n    \n        \n            命令\n            功能\n            示例\n        \n    \n    \n        \n            \`claude\`\n            启动交互模式\n            \`claude\`\n        \n        \n            \`claude "task"\`\n            执行一次性任务\n            \`claude "fix the build error"\`\n        \n        \n            \`claude -p "query"\`\n            执行一次查询后退出\n            \`claude -p "explain this function"\`\n        \n        \n            \`claude -c\`\n            在当前目录继续最近的对话\n            \`claude -c\`\n        \n        \n            \`claude -r\`\n            恢复之前的对话\n            \`claude -r\`\n        \n        \n            \`claude commit\`\n            创建 Git 提交\n            \`claude commit\`\n        \n    \n\n\n### 交互模式内命令\n\n\n    \n        \n            命令\n            功能\n            示例\n        \n    \n    \n        \n            \`/clear\`\n            清除对话历史\n            \`> /clear\`\n        \n        \n            \`/help\`\n            显示可用命令\n            \`> /help\`\n        \n        \n            \`/login\`\n            登录或切换账号\n            \`> /login\`\n        \n        \n            \`/resume\`\n            恢复之前的对话\n            \`> /resume\`\n        \n        \n            \`exit\` 或 \`Ctrl+C\`\n            退出 Claude Code\n            \`> exit\`\n        \n    \n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

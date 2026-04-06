@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Claude Code CLI 参考手册">
+    <meta name="author" content="Jackson">
+    <title>Claude Code CLI 参考手册 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" >Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" >Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" >Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" >Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" >Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" class="active">Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" >Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="21.html" class="page-nav-link">&larr; Claude Code 钩子</a>
+                    <a href="23.html" class="page-nav-link">Claude Code 控制与模式 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code CLI 参考手册\n \n\n\n---\n\n## 一、CLI 命令\n\n\n    \n        \n            命令\n            描述\n            示例\n        \n    \n    \n        \n            \`claude\`\n            启动交互式 REPL\n            \`claude\`\n        \n        \n            \`claude "query"\`\n            带初始提示启动 REPL\n            \`claude "explain this project"\`\n        \n        \n            \`claude -p "query"\`\n            SDK 查询后退出\n            \`claude -p "explain this function"\`\n        \n        \n            cat file | claude -p "query"\n        \n            处理管道输入内容\n            cat logs.txt | claude -p "explain"\n        \n        \n            \`claude -c\`\n            继续当前目录最近对话\n            \`claude -c\`\n        \n        \n            \`claude -c -p "query"\`\n            通过 SDK 继续对话\n            \`claude -c -p "Check for type errors"\`\n        \n        \n            \`claude -r "" "query"\`\n            按 ID/名称恢复会话\n            \`claude -r "auth-refactor" "Finish this PR"\`\n        \n        \n            \`claude update\`\n            更新至最新版本\n            \`claude update\`\n        \n        \n            \`claude mcp\`\n            配置 MCP 服务器\n            详见 [Claude Code MCP 文档](https://www.runoob.com/claude-code/claude-code-mcp.html)\n        \n    \n\n\n---\n\n## 二、CLI 标志\n\n通过以下标志可自定义 Claude Code 运行行为：\n\n\n\n    \n        \n            标志\n            描述\n            示例\n        \n    \n    \n        \n            \`--add-dir\`\n            添加工作目录（自动验证路径有效性）\n            \`claude --add-dir ../apps ../lib\`\n        \n        \n            \`--agent\`\n            指定会话代理（覆盖默认 \`agent\` 设置）\n            \`claude --agent my-custom-agent\`\n        \n        \n            \`--agents\`\n            以 JSON 定义自定义子代理\n            \`claude --agents \'{"reviewer":{"description":"Reviews code","prompt":"You are a code reviewer"}}\'\`\n        \n        \n            \`--allowedTools\`\n            免权限提示的可用工具（限制工具用 \`--tools\`）\n            \`"Bash(git log:*)" "Bash(git diff:*)" "Read"\`\n        \n        \n            \`--append-system-prompt\`\n            追加内容到默认系统提示（交互/打印模式均生效）\n            \`claude --append-system-prompt "Always use TypeScript"\`\n        \n        \n            \`--betas\`\n            API 请求附加 Beta 标头（仅限 API 密钥用户）\n            \`claude --betas interleaved-thinking\`\n        \n        \n            \`--chrome\`\n            启用 Chrome 浏览器集成（网络自动化/测试）\n            \`claude --chrome\`\n        \n        \n            \`--continue\`, \`-c\`\n            加载当前目录最近对话\n            \`claude --continue\`\n        \n        \n            \`--dangerously-skip-permissions\`\n            跳过权限提示（谨慎操作）\n            \`claude --dangerously-skip-permissions\`\n        \n        \n            \`--debug\`\n            启用调试模式，支持类别过滤（如 \`"api,hooks"\`）\n            \`claude --debug "api,mcp"\`\n        \n        \n            \`--disallowedTools\`\n            禁用指定工具（从上下文移除）\n            \`"Bash(git log:*)" "Bash(git diff:*)" "Edit"\`\n        \n        \n            \`--fallback-model\`\n            默认模型过载时自动切换（仅打印模式）\n            \`claude -p --fallback-model sonnet "query"\`\n        \n        \n            \`--fork-session\`\n            恢复会话时生成新 ID（搭配 \`--resume\`/\`--continue\`）\n            \`claude --resume abc123 --fork-session\`\n        \n        \n            \`--ide\`\n            自动连接可用 IDE\n            \`claude --ide\`\n        \n        \n            \`--include-partial-messages\`\n            输出包含部分流事件（需搭配 \`--print\` 和 \`--output-format=stream-json\`）\n            \`claude -p --output-format stream-json --include-partial-messages "query"\`\n        \n        \n            \`--input-format\`\n            打印模式输入格式（可选 \`text\`/\`stream-json\`）\n            \`claude -p --output-format json --input-format stream-json\`\n        \n        \n            \`--json-schema\`\n            输出符合 JSON Schema 的验证结果（仅打印模式）\n            \`claude -p --json-schema \'{"type":"object","properties":{...}}\' "query"\`\n        \n        \n            \`--max-turns\`\n            限制代理轮次（仅打印模式，超限报错退出）\n            \`claude -p --max-turns 3 "query"\`\n        \n        \n            \`--mcp-config\`\n            从 JSON 文件/字符串加载 MCP 配置\n            \`claude --mcp-config ./mcp.json\`\n        \n        \n            \`--model\`\n            指定会话模型（支持别名 \`sonnet\`/\`opus\` 或完整名称）\n            \`claude --model claude-sonnet-4-5-20250929\`\n        \n        \n            \`--no-chrome\`\n            禁用 Chrome 集成\n            \`claude --no-chrome\`\n        \n        \n            \`--output-format\`\n            打印模式输出格式（可选 \`text\`/\`json\`/\`stream-json\`）\n            \`claude -p "query" --output-format json\`\n        \n        \n            \`--permission-mode\`\n            按指定权限模式启动\n            \`claude --permission-mode plan\`\n        \n        \n            \`--permission-prompt-tool\`\n            非交互模式指定权限提示处理工具\n            \`claude -p --permission-prompt-tool mcp_auth_tool "query"\`\n        \n        \n            \`--plugin-dir\`\n            加载指定目录插件（可重复使用）\n            \`claude --plugin-dir ./my-plugins\`\n        \n        \n            \`--print\`, \`-p\`\n            打印响应后退出（非交互模式）\n            \`claude -p "query"\`\n        \n        \n            \`--resume\`, \`-r\`\n            按 ID/名称恢复会话，或唤起交互式选择器\n            \`claude --resume auth-refactor\`\n        \n        \n            \`--session-id\`\n            指定会话 ID（需为有效 UUID）\n            \`claude --session-id "550e8400-e29b-41d4-a716-446655440000"\`\n        \n        \n            \`--setting-sources\`\n            指定加载的设置源（逗号分隔 \`user\`/\`project\`/\`local\`）\n            \`claude --setting-sources user,project\`\n        \n        \n            \`--settings\`\n            加载自定义 JSON 配置文件/字符串\n            \`claude --settings ./settings.json\`\n        \n        \n            \`--strict-mcp-config\`\n            仅使用 \`--mcp-config\` 配置，忽略其他 MCP 设置\n            \`claude --strict-mcp-config --mcp-config ./mcp.json\`\n        \n        \n            \`--system-prompt\`\n            替换默认系统提示（交互/打印模式均生效）\n            \`claude --system-prompt "You are a Python expert"\`\n        \n        \n            \`--system-prompt-file\`\n            从文件加载系统提示（替换默认，仅打印模式）\n            \`claude -p --system-prompt-file ./custom-prompt.txt "query"\`\n        \n        \n            \`--tools\`\n            限制可用内置工具（\`""\` 禁用全部，\`"default"\` 启用全部）\n            \`claude --tools "Bash,Edit,Read"\`\n        \n        \n            \`--verbose\`\n            启用详细日志，展示完整逐轮输出\n            \`claude --verbose\`\n        \n        \n            \`--version\`, \`-v\`\n            输出版本号\n            \`claude -v\`\n        \n    \n\n\n    **提示**：\`--output-format json\` 标志非常适合脚本和自动化场景，可直接编程解析 Claude 响应结果。\n\n\n\n\n---\n\n## 三、扩展说明\n\n\n### 3.1 代理标志格式\n\n\`--agents\` 标志接收 JSON 对象，用于定义一个或多个自定义子代理。每个子代理需配置唯一名称作为键，值为包含以下字段的对象：\n\n\n\n    \n        \n            字段\n            必填\n            描述\n        \n    \n    \n        \n            \`description\`\n            是\n            描述子代理的适用场景\n        \n        \n            \`prompt\`\n            是\n            定义子代理行为的系统提示\n        \n        \n            \`tools\`\n            否\n            子代理专属工具列表（如 \`["Read", "Edit"]\`，省略则继承全部工具）\n        \n        \n            \`model\`\n            否\n            子代理使用模型（支持 \`sonnet\`/\`opus\`/\`haiku\`，省略则用默认模型）\n        \n    \n\n**示例**\n\n\n\n\`\`\`\nclaude --agents \'{\n  "code-reviewer": {\n    "description": "Expert code reviewer. Use proactively after code changes.",\n    "prompt": "You are a senior code reviewer. Focus on code quality, security, and best practices.",\n    "tools": ["Read", "Grep", "Glob", "Bash"],\n    "model": "sonnet"\n  },\n  "debugger": {\n    "description": "Debugging specialist for errors and test failures.",\n    "prompt": "You are an expert debugger. Analyze errors, identify root causes, and provide fixes."\n  }\n}\'\n\`\`\`\n\n\n### 系统提示标志\n\nClaude Code 提供 3 种系统提示自定义方式，满足不同使用需求：\n\n\n\n    \n        \n            标志\n            行为\n            适用模式\n            典型用例\n        \n    \n    \n        \n            \`--system-prompt\`\n            替换默认系统提示\n            交互+打印\n            完全自定义 Claude 行为指令\n        \n        \n            \`--system-prompt-file\`\n            从文件加载提示并替换\n            仅打印\n            团队共享提示模板、版本控制\n        \n        \n            \`--append-system-prompt\`\n            追加内容到默认提示\n            交互+打印\n            保留默认功能，添加个性化指令\n        \n    \n\n\n#### 使用场景与示例\n\n\n\n\n- **\`--system-prompt\`**：完全接管系统提示，清空默认指令\n\n\`\`\`\nclaude --system-prompt "You are a Python expert who only writes type-annotated code"\n\`\`\`\n\n    \n\n- **\`--system-prompt-file\`**：从文件读取提示，适合标准化场景\n\n\`\`\`\nclaude -p --system-prompt-file ./prompts/code-review.txt "Review this PR"\n\`\`\`\n\n    \n\n- **\`--append-system-prompt\`**：保留默认功能，追加定制要求（推荐大多数场景使用）\n\n\`\`\`\nclaude --append-system-prompt "Always use TypeScript and include JSDoc comments"\n\`\`\`\n\n    \n\n\n\n    **注意**：\`--system-prompt\` 和 \`--system-prompt-file\` 互斥，不可同时使用。\n**提示**：优先使用 \`--append-system-prompt\`，既能保留 Claude Code 内置能力，又能满足定制需求；仅需完全自定义时，再使用另外两个标志。\n\n\n\n打印模式（\`-p\`）的详细用法（输出格式、流式传输、程序化集成等），参考 [SDK 文档](https://docs.claude.com/en/docs/agent-sdk)。\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

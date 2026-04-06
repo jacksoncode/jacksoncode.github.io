@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Claude Code 教程">
+    <meta name="author" content="Jackson">
+    <title>Claude Code 教程 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" class="active">Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" >Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" >Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" >Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" >Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" >Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" >Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <span></span>
+                    <a href="1.html" class="page-nav-link">Claude Code 简介 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code 教程\n\n \n![](https://www.runoob.com/wp-content/uploads/2026/01/Gc2r0cfW0AAKQw2.jpg)\n\n\nClaude Code 是 Anthropic 推出的面向开发者的 AI 编程协作工具。\n\n\nClaude Code 定位不是聊天，而是在本地代码仓库中执行高权限、可上下文感知的工程任务。\n\n\n\n\nClaude Code 与在聊天窗口里写几段代码不同，它理解你的整个项目，能直接读取你的文件、运行测试并根据反馈修改代码。\n\n\n\nClaude Code 不是一个代码生成器，而是一个能读项目、懂上下文、遵守约束的 AI 编程搭档。\n\n\n\n\nClaude Code 是 Agent（智能体工具），不是 Chat（聊天工具）。\n\n\n\n\n---\n\n\n## 谁适合阅读本教程？\n\n\n\n\n- 已学习过至少一门编程语言（如 JavaScript / Python / Java / Go）\n\n- 能看懂基础语法、函数、条件判断和循环\n\n- 写过简单项目或练习代码\n\n- 希望借助 AI 提升开发效率与工程能力\n\n- 独立开发者或需要长期维护项目的工程师\n\n- 技术负责人或团队核心成员\n\n\n\n---\n\n\n## 需要具备的基础能力\n\n\n\n\n- 基础编程能力（能读懂并编写简单代码）\n\n- 基本的代码阅读与理解能力\n\n- 会使用常见开发工具（编辑器、命令行）\n\n- 愿意理解代码，而不是完全依赖 AI\n\n\n\n---\n\n\n## Claude Code vs. 网页版 Claude\n\n\n    \n        \n            特性\n            Claude 网页版 / App\n            Claude Code (CLI)\n        \n    \n    \n        \n            **交互方式**\n            复制粘贴代码到对话框\n            直接在终端通过指令操作\n        \n        \n            **文件访问**\n            手动上传文件\n            **自动**读取/搜索整个工程目录\n        \n        \n            **执行能力**\n            仅生成文本\n            **执行** Shell 命令、运行测试、创建文件\n        \n        \n            **上下文感知**\n            有限的对话上下文\n            深度感知项目结构和 Git 历史\n        \n    \n\n\n---\n\n\n## 相关资源\n	\n\n\n- \n官方文档：[https://code.claude.com/docs/en/overview](https://code.claude.com/docs/en/overview)\n	\n- 中文文档：[https://code.claude.com/docs/zh-CN/overview](https://code.claude.com/docs/zh-CN/overview)\n\n	\n- \n\nGithub 开源：[https://github.com/anthropics/claude-code](https://github.com/anthropics/claude-code)\n\n\n\n另外国内阿里与字节也有基于 VS Code 开发的 IDE：\n\n\n	\n\n\n- **阿里 Qoder：**[https://qoder.com/](https://qoder.com/users/sign-up?referral_code=whhACoCj9WryAtAh2HAqjvE2ppbzwWtz)\n\n\n- \n**字节 Trae：**[https://www.trae.com.cn/](https://www.trae.com.cn/?utm_source=advertising&utm_medium=runoob_ug_cpa&utm_term=hw_trae_runoob)\n\n\n\n\n	\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

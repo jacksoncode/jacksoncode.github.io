@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - OpenCode GitLab">
+    <meta name="author" content="Jackson">
+    <title>OpenCode GitLab - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 OpenCode</h3>
+            <a href="0.html" >OpenCode 教程</a>
+<a href="1.html" >OpenCode 简介</a>
+<a href="2.html" >OpenCode 安装</a>
+<a href="3.html" >OpenCode 配置</a>
+<a href="4.html" >OpenCode 第一次使用</a>
+<a href="5.html" >OpenCode VSCode</a>
+<a href="6.html" >OpenCode 终端界面</a>
+<a href="7.html" >OpenCode CLI 使用</a>
+<a href="8.html" >OpenCode Web 使用</a>
+<a href="9.html" >OpenCode GitHub</a>
+<a href="10.html" class="active">OpenCode GitLab</a>
+<a href="11.html" >OpenCode 工具</a>
+<a href="12.html" >OpenCode 规则</a>
+<a href="13.html" >OpenCode 代理</a>
+<a href="14.html" >OpenCode 主题</a>
+<a href="15.html" >OpenCode 快捷键</a>
+<a href="16.html" >OpenCode 自定义命令</a>
+<a href="17.html" >OpenCode 格式化工具</a>
+<a href="18.html" >OpenCode 权限配置</a>
+<a href="19.html" >OpenCode LSP 服务器配置</a>
+<a href="20.html" >OpenCode MCP 服务器配置</a>
+<a href="21.html" >OpenCode Skills</a>
+<a href="22.html" >OpenCode 自定义工具</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="9.html" class="page-nav-link">&larr; OpenCode GitHub</a>
+                    <a href="11.html" class="page-nav-link">OpenCode 工具 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# OpenCode GitLab\n\n\nOpenCode 同样可以集成到 GitLab 工作流中，在 Issue、合并请求（Merge Request）以及 CI/CD 流水线中自动执行任务。\n\n\n\n它的核心特点是：在你的 GitLab Runner 上运行，实现安全可控的 AI 自动化开发。\n\n\n\n**OpenCode GitLab = 把 AI 接入 CI/CD，让代码分析、修复和审查自动化运行。**\n\n\n\n---\n\n\n\n## 一、集成方式概览\n\n\nOpenCode 在 GitLab 中主要有两种使用方式：\n\n\n\n\n\n\n- **GitLab CI（推荐）**：通过 CI/CD 流水线执行 OpenCode\n\n- **GitLab Duo（评论触发）**：通过 @opencode 在评论中触发\n\n\n\n\n---\n\n\n\n## 二、GitLab CI 集成（核心方式）\n\n\nOpenCode 可以作为 CI 组件接入你的流水线，实现自动化任务执行。\n\n\n\n这里使用社区组件：\n\n\n\n\n\`\`\`\n\nnagyv/gitlab-opencode\n\n\`\`\`\n\n\n\n\n### 1、功能特性\n\n\n\n\n\n- **按任务自定义配置**：支持独立配置目录\n\n- **最小化接入成本**：无需复杂初始化\n\n- **高度可定制**：支持多参数控制行为\n\n\n\n\n\n### 2、配置步骤\n\n\n\n#### ① 配置认证信息\n\n\n在 GitLab 项目中：\n\n\n\n\n\n\n- 进入 Settings → CI/CD → Variables\n\n- 添加变量：\n\n\n\n\n\`\`\`\n\nOPENCODE_AUTH_JSON\n\n\`\`\`\n\n\n**要求：**\n\n\n\n\n\n\n- 类型：File\n\n- 勾选 Masked 和 Hidden\n\n\n\n\n---\n\n\n\n#### ② 配置流水线\n\n\n在项目根目录创建或修改：\n\n\n\n\n\`\`\`\n\n.gitlab-ci.yml\n\n\`\`\`\n\n\n示例：\n\n\n\n\n\`\`\`\n\ninclude:\n  - component: $CI_SERVER_FQDN/nagyv/gitlab-opencode/opencode@2\n    inputs:\n      config_dir: ${CI_PROJECT_DIR}/opencode-config\n      auth_json: $OPENCODE_AUTH_JSON\n      command: optional-custom-command\n      message: "Explain the codebase structure"\n\n\`\`\`\n\n\n\n---\n\n\n\n#### ③ 参数说明\n\n\n\n\n\n参数\n说明\n\n\n\n\n\nconfig_dir\nOpenCode 配置目录\n\n\n\nauth_json\n认证信息（API Key）\n\n\n\ncommand\n执行命令（可选）\n\n\n\nmessage\n提示词（Prompt）\n\n\n\n\n\n\n### 3、使用场景\n\n\n\n\n\n- 自动分析代码结构\n\n- 批量重构代码\n\n- 自动生成文档\n\n- CI 阶段自动检查代码质量\n\n\n\n\n---\n\n\n\n## 三、GitLab Duo 集成（评论触发）\n\n\n类似 GitHub 的 /opencode，GitLab 使用 **@opencode** 触发。\n\n\n\n当你在 Issue 或合并请求中评论时：\n\n\n\n\n\`\`\`\n\n@opencode your prompt\n\n\`\`\`\n\n\nOpenCode 会在 GitLab CI 中自动执行任务\n\n\n\n\n\n### 1、功能特性\n\n\n\n\n\n- **Issue 分析**：自动理解问题\n\n- **自动修复**：创建分支并提交 MR\n\n- **代码审查**：分析合并请求\n\n\n\n**特点：**\n\n\n\n\n\n\n- 运行在 GitLab Runner 上\n\n- 安全，不依赖外部执行环境\n\n\n\n\n\n### 2、配置步骤\n\n\n要使用 @opencode，需要完成以下配置：\n\n\n\n\n\n\n- 配置 GitLab CI/CD 流水线\n\n- 准备 API Key\n\n- 创建服务账户（Service Account）\n\n- 配置 CI/CD Variables\n\n- 创建 Flow 配置文件\n\n\n\n**说明：**\n\n\n\n具体细节可参考 GitLab CLI Agents 官方文档（不同版本略有差异）。\n\n\n\n\n---\n\n\n\n## 四、常见使用方式\n\n\n\n### 1、解释 Issue\n\n\n\n\`\`\`\n\n@opencode explain this issue\n\n\`\`\`\n\n\n自动总结问题并给出解释\n\n\n\n\n\n### 2、自动修复 Issue\n\n\n\n\`\`\`\n\n@opencode fix this\n\n\`\`\`\n\n\n自动：\n\n\n\n\n\n\n- 创建新分支\n\n- 修改代码\n\n- 提交 Merge Request\n\n\n\n\n\n### 3、审查合并请求\n\n\n\n\`\`\`\n\n@opencode review this merge request\n\n\`\`\`\n\n\n自动分析：\n\n\n\n\n\n\n- 代码质量\n\n- 潜在 Bug\n\n- 优化建议\n\n\n\n\n---\n\n\n\n## 五、进阶技巧\n\n\n\n### 1、自定义触发词\n\n\n你可以将 \`@opencode\` 替换为其他触发关键词。\n\n\n\n\n### 2、任务级配置\n\n\n通过不同的 config_dir，实现：\n\n\n\n\n\n\n- 不同任务使用不同模型\n\n- 不同项目使用不同规则\n\n\n\n\n\n### 3、结合 CI 自动化\n\n\n可以实现：\n\n\n\n\n\n\n- 定时扫描代码问题\n\n- 自动生成周报\n\n- 自动修复简单 Bug\n\n\n\n\n---\n\n\n\n## 六、安全与最佳实践\n\n\n\n\n\n- 使用 CI/CD Variables 存储密钥\n\n- 避免在代码中写死 API Key\n\n- 合理控制 Runner 权限\n\n- 限制自动修改代码的范围\n\n\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

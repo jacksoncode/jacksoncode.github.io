@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Claude Code MCP">
+    <meta name="author" content="Jackson">
+    <title>Claude Code MCP - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" >Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" >Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" class="active">Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" >Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" >Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" >Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" >Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="12.html" class="page-nav-link">&larr; Claude Code 基础用法</a>
+                    <a href="14.html" class="page-nav-link">Claude Code 子代理 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code MCP\n\n如果说 Claude Code 是一个优秀的打字员（代码生成）和测试员（代码校验），那么加上 MCP（Model Context Protocol，模型上下文协议） 则是让 Claude 真正拥有了外部感官和手脚——它不再局限于当前项目的代码文件，而是能主动连接外部世界的资源与工具，成为你的全链路开发协作伙伴。\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/claude-code-mcp-runoob.svg)\n\n\n\n### 什么是 MCP (Model Context Protocol)？\n\nMCP 是 Anthropic 推出的一套开放的标准化协议，专为解决AI 与外部工具协作的核心痛点而生。\n\n\nMCP 的核心逻辑颠覆了传统思路：不要让 AI 去逐一学习所有工具的使用规则，而是让所有工具都提供一个统一的接口给 AI。\n\n\n这个逻辑就像现实中的通用插座——不用让电器适配不同的插座，只要插座统一标准，所有电器都能直接使用。\n\n\n连接 MCP 服务器后，你可以让 Claude Code：\n\n\n\n\n\n- 从 JIRA/工单系统获取需求并开发功能、创建 GitHub PR\n\n- 分析 Sentry 监控数据、定位生产环境错误\n\n- 查询 PostgreSQL/MySQL 等数据库数据\n\n- 基于 Figma 设计更新代码、自动化生成邮件草稿等\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/0_ydhvFVVoKyOfEHMi.png)\n\n\n\n### 为什么 Claude Code 需要 MCP？\n\n在没有 MCP 之前，Claude Code 的能力被严格限制在你当前打开的项目文件夹内，就像一个坐井观天的助手，只能看到眼前的代码，无法感知项目之外的任何信息。而 MCP 的出现，彻底打破了这个信息孤岛，让 Claude 能深度参与全流程开发：\n\n\n举几个直观的场景对比，你就能快速理解 MCP 的价值：\n\n\n\n    \n        \n            场景\n            无 MCP 时\n            有 MCP 时\n        \n    \n    \n        \n            跨仓库分析\n            只能分析当前文件夹内的代码，无法关联其它仓库\n            跨仓库协作："帮我分析仓库 A 的接口文档，然后在仓库 B 中编写对应的调用方法"\n        \n        \n            需求/讨论同步\n            需要你手动把需求文档、团队讨论记录复制粘贴到对话框\n            实时同步协作信息："查一下 Slack 里 #feature-x 频道的讨论记录，看看大家对该功能的修改建议"\n        \n        \n            数据库验证\n            无法直接验证代码与数据库的适配性，只能手动查表结构\n            直接联动数据库："去查一下 MySQL 中 users 表的结构和前 5 条数据，判断我写的用户查询接口是否匹配"\n        \n        \n            自动化流程\n            只能生成代码片段，供你手动复制使用\n            自动化执行："帮我写浏览器自动化脚本，并通过 MCP 调用 Puppeteer 执行，验证登录页面的交互逻辑"\n        \n    \n\n简单来说，MCP 让 Claude Code 从被动接收信息的助手，变成了主动获取信息、执行操作的协作伙伴。\n\n---\n\n\n## Claude Code 中 MCP 的基本使用方式\n\n\nClaude Code 内置了完整的 MCP 管理能力，核心命令只有一个：\n\n\n\n\`\`\`\n\nclaude mcp\n\`\`\`\n常用子命令:\n\n\n\n    \n        \n            命令\n            作用\n        \n    \n    \n        \n            \`claude mcp add\`\n            添加一个 MCP 服务器\n        \n        \n            \`claude mcp list\`\n            查看所有已配置服务器\n        \n        \n            \`claude mcp get \`\n            查看某个服务器详情\n        \n        \n            \`claude mcp remove \`\n            删除服务器\n        \n        \n            \`/mcp\`\n            在 Claude Code 中查看状态 / 认证\n        \n    \n\n\n\n---\n\n\n## 安装 MCP 服务器\n\nMCP 服务器支持 HTTP/SSE/stdio 三种接入方式，推荐优先使用 HTTP（SSE已弃用）。\n\n\n\n### 1. 远程 HTTP 服务器（推荐）\n\n适用于云服务类工具，是最通用的方式：\n\n\n\n\`\`\`\n# 基础语法\nclaude mcp add --transport http  \n\n# 示例1：连接Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# 示例2：带身份验证的HTTP服务器\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header "Authorization: Bearer 你的令牌"\n\`\`\`\n\n\n### 2. 远程 SSE 服务器（已弃用）\n\n仅兼容旧版工具，优先用 HTTP 替代：\n\n\n\n\`\`\`\n# 基础语法（仅兼容用）\nclaude mcp add --transport sse  \n# 示例：连接Asana\nclaude mcp add --transport sse asana https://mcp.asana.com/sse\n\`\`\`\n\n\n### 3. 本地 stdio 服务器\n\n适用于需要本地系统访问的工具（如本地数据库、自定义脚本）：\n\n\n\n\`\`\`\n# 基础语法（注意：--前是Claude参数，--后是服务器命令）\nclaude mcp add --transport stdio [--env 环境变量]  -- \n\n# 示例：连接Airtable（需替换自己的API密钥）\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=你的密钥 airtable \\\n  -- npx -y airtable-mcp-server\n\`\`\`\n\n\n    关键注意：\`--transport\`/\`--env\` 等参数必须放在服务器名称**前面**，\`--\` 用于分隔Claude参数和服务器命令，避免参数冲突。\n\n\n\n\n## 管理 MCP 服务器\n\n配置完成后，你可以通过以下命令管理服务器：\n\n\n\n\`\`\`\n# 列出所有已配置的服务器\nclaude mcp list\n\n# 查看指定服务器详情（如github）\nclaude mcp get github\n\n# 删除指定服务器\nclaude mcp remove github\n\n# 在Claude Code中检查服务器状态\n/mcp\n\`\`\`\n\n---\n\n\n## 配置范围（控制服务器可见性）\n\n你可以指定 MCP 服务器的生效范围，适配个人/团队使用场景：\n\n\n\n\n    \n        \n            范围\n            用途\n            配置命令示例\n        \n    \n    \n        \n            local（默认）\n            仅当前项目可用，私密配置（如敏感密钥）\n            \`claude mcp add --scope local ...\`\n        \n        \n            project\n            团队共享（存储在.mcp.json，可提交版本库）\n            \`claude mcp add --scope project ...\`\n        \n        \n            user\n            所有项目可用（个人全局配置）\n            \`claude mcp add --scope user ...\`\n        \n    \n\n\n    优先级：local > project > user（同名服务器，本地配置覆盖共享配置）\n\n\n\n\n## 实用示例\n\n\n\n### 示例 1：GitHub 代码审查\n\n\`\`\`\n\nclaude mcp add --transport http github https://api.githubcopilot.com/mcp/\n\`\`\`\n\n\n\n在 Claude Code 中：\n\n\n\n\`\`\`\n\n> Review PR #456 and suggest improvements\n> Show me all open PRs assigned to me\n\`\`\`\n\n\n### \n示例 2：Sentry 生产环境排错\n\n\`\`\`\n\nclaude mcp add --transport http sentry https://mcp.sentry.dev/mcp\n\`\`\`\n\n\n\`\`\`\n\n> /mcp   # 完成 OAuth 登录\n> What are the most common errors in the last 24 hours?\n\`\`\`\n\n\n### \n示例 3：直接查 PostgreSQL\n\n\`\`\`\n\nclaude mcp add --transport stdio db \\\n  -- npx -y @bytebase/dbhub \\\n  --dsn "postgresql://readonly:pass@prod.db.com:5432/analytics"\n\`\`\`\n\n\n\`\`\`\n\n> Show me the schema for the orders table\n> Which users haven\'t purchased in 90 days?\n\`\`\`\n\n\n---\n\n\n## 在对话中使用 MCP 的高级方式\n\n\n### 1、使用 @ 引用 MCP 资源\n\n\n\`\`\`\n> Analyze @github:issue://123 and suggest a fix\n\`\`\`\n\n\n\n支持多个资源对比：\n\n\n\n\`\`\`\n\n> Compare @postgres:schema://users with @docs:file://user-model\n\`\`\`\n\n\n### \n2、MCP Prompt 作为斜杠命令\n\n\nMCP 可以暴露命令：\n\n\`\`\`\n\n/mcp__github__list_prs\n/mcp__jira__create_issue "Login bug" high\n\`\`\`\n\n\n\nClaude 会像执行内置命令一样执行它们。\n\n\n\n---\n\n\n## 关键注意事项\n\n\n\n\n- **身份验证**：远程MCP服务器（如GitHub/Sentry）需在Claude Code中执行 \`/mcp\` 完成OAuth 2.0授权；\n\n- **Windows兼容**：本地stdio服务器若用npx，需加\`cmd /c\`包装（如\`-- cmd /c npx -y 包名\`），否则会报"Connection closed"错误；\n\n- **第三方风险**：使用非官方MCP服务器时，需确认来源可信，避免提示注入/安全风险；\n\n- **参数顺序**：stdio服务器配置时，\`--\` 前后的参数不可颠倒，否则会执行失败。\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

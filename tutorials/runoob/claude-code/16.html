@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Claude Code 记忆系统">
+    <meta name="author" content="Jackson">
+    <title>Claude Code 记忆系统 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" >Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" >Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" >Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" class="active">Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" >Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" >Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" >Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="15.html" class="page-nav-link">&larr; Claude Code 插件</a>
+                    <a href="17.html" class="page-nav-link">Agent Skills &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code 记忆系统（Memory）\n\n\n    每次 Claude Code 会话结束，上下文就会清空。\n\n\n有时候我们每次都要重新告诉 Claude "用 pnpm 而不是 npm"、"我们的缩进是 2 个空格"？**记忆系统（Memory）** 正是为此而生。\n\n\n\n\n---\n\n\n## 什么是 Claude Code 的记忆系统？\n\nClaude Code 没有跨会话的自动记忆——每个新会话都从一个全新的上下文窗口开始。\n\n记忆系统通过两种互补机制，让知识能够**跨会话持久保存**，并在每次对话开始时自动加载：\n\n\n\n    \n        \n            机制\n            谁来写\n            适合什么\n        \n    \n    \n        \n            **CLAUDE.md 文件**\n            你（开发者）手动编写\n            项目规范、团队约定、构建命令等\n        \n        \n            **Auto Memory（自动记忆）**\n            Claude 自动写入\n            从你的纠正和偏好中积累的经验\n        \n    \n\n两种机制在每次会话开始时都会被加载到上下文中。Claude 将它们作为**参考上下文**，而非强制配置——指令越具体、越简洁，Claude 遵循得越一致。\n\n\n\n---\n\n## 记忆文件的层级结构\n\nClaude Code 采用**四层记忆层级**，优先级从高到低：\n\n\n\n\n\`\`\`\n\n1. 企业级配置（Enterprise policy）    ← 最高优先级，只读\n2. 用户级 CLAUDE.md                   ← ~/.claude/CLAUDE.md，对所有项目生效\n3. 项目级 CLAUDE.md                   ← 项目根目录，随 Git 提交共享给团队\n4. 子目录级 CLAUDE.md                 ← src/、api/、tests/ 等子目录，按上下文加载\n\`\`\`\n**最具体的规则优先**：子目录的 CLAUDE.md 会覆盖上层的同类规则。\n\n\n\n---\n\n\n## CLAUDE.md 文件详解\n\n\n### 什么是 CLAUDE.md？\n\n\`CLAUDE.md\` 是一个放在项目根目录（或子目录）的 Markdown 文件。Claude Code 在每次新会话启动时，会**自动将其注入系统提示词**。它是你可以配置的长期记忆。\n\n\n\n### 创建 CLAUDE.md\n\n**方式一：使用 \`/init\` 命令自动生成**\n\n\n\n\`\`\`\n\n# 在 Claude Code 会话中执行\n/init\n\`\`\`\nClaude 会分析你的目录结构，自动生成一份针对你的技术栈的 CLAUDE.md 骨架。例如，在一个 Node.js 项目中运行 \`/init\`，Claude 会自动检测框架、测试工具、构建命令等，30 秒内生成一份 80% 完整度的初始文件。\n\n\n**方式二：手动创建**\n\n\n\n\`\`\`\n\ntouch CLAUDE.md\n\`\`\`\n\n\n\n### 推荐的 CLAUDE.md 结构\n\n\n\`\`\`\n# 项目约定\n\n## 技术栈\n- 前端：Next.js 15、TypeScript 5.7、Tailwind CSS 4\n- 后端：Node.js 22、Prisma 6\n- 测试：Vitest 3.2\n\n## 代码规范\n- 始终使用函数式 React 组件\n- 文件名使用 kebab-case\n- 测试文件与源码放在同一目录\n\n## 常用命令\n- 构建：\`pnpm build\`\n- 测试：\`pnpm test\`\n- 启动开发服务器：\`pnpm dev\`\n\n## API 约定\n- 所有 API 路由以 \`/api/v1/\` 开头\n- 错误响应格式：\`{ error: string, code: number }\`\n\`\`\`\n\n\n\n### 写好 CLAUDE.md 的黄金法则\n\n**✅ 要这样写：**\n\n\n\n\n\n- 使用祈使句和简短列表，而非叙述性段落\n\n- 包含具体的版本号和命令\n\n- 加入代码示例（5 行示例胜过 50 字说明）\n\n- 控制在 **200 行以内**（超过部分不会在会话开始时加载）\n\n\n**❌ 避免这样写：**\n\n\n\n\n\n- 模糊指令如"遵循最佳实践"或"写干净的代码"\n\n- 过多通用规则（只放这个项目独有的约定）\n\n- 过时的信息（建议每月审查一次）\n\n\n\n### 子目录 CLAUDE.md\n\n\n\`\`\`\n\nmy-project/\n├── CLAUDE.md              # 全局项目规范\n├── src/\n│   └── CLAUDE.md          # 仅在处理 src/ 文件时加载\n├── api/\n│   └── CLAUDE.md          # API 特定约定\n└── tests/\n    └── CLAUDE.md          # 测试特定规则\n\`\`\`\nClaude Code 只在处理对应目录的文件时加载子目录的 CLAUDE.md，节省 token 的同时提供更精准的上下文。\n\n\n\n---\n\n\n## Auto Memory（自动记忆）详解\n\n\n### 它是如何工作的？\n\nAuto Memory 让 Claude 能够跨会话**自我积累知识**，无需你手动编写任何内容。Claude 会在工作过程中自动保存笔记，包括：\n\n\n\n\n\n- 构建命令和调试技巧\n\n- 架构决策笔记\n\n- 代码风格偏好\n\n- 工作流习惯\n\n\nClaude 并不会每次都保存内容，它会判断哪些信息在**未来会话中有用**才写入。\n\n\n\n### 自动记忆的文件结构\n\n\n\`\`\`\n\n~/.claude/projects//memory/\n├── MEMORY.md          # 简洁的索引文件，每次会话开始时加载（前 200 行）\n├── debugging.md       # 调试模式的详细笔记\n├── api-conventions.md # API 设计决策\n└── ...                # Claude 创建的其他主题文件\n\`\`\`\n\n\`MEMORY.md\` 是整个记忆目录的索引，Claude 通过它来追踪各文件中存储的内容。\n\n\n\n### 触发自动记忆\n\n当你告诉 Claude 某些事情时，它会自动保存到记忆中：\n\n\n\n\`\`\`\n你：始终使用 pnpm，不要用 npm\n你：记住 API 测试需要本地运行 Redis 实例\n你：我们的日期格式统一用 ISO 8601\n\`\`\`\n\n**想保存到 CLAUDE.md 而不是 Auto Memory？** 明确说明：\n\n\n\n\`\`\`\n\n你：把这条加到 CLAUDE.md\n\`\`\`\n\n### 开启 / 关闭 Auto Memory\n\n**方式一：通过 \`/memory\` 命令切换**（见下节）\n\n\n**方式二：在项目设置中配置**\n\n\n\n\`\`\`\n\n// .claude/settings.json\n{\n  "autoMemoryEnabled": false\n}\n\`\`\`\n**方式三：环境变量**\n\n\`\`\`\nexport CLAUDE_CODE_DISABLE_AUTO_MEMORY=1\n\`\`\`\n\n\n\nblockquote>\n    **注意：** Auto Memory 是**本地机器级别**的，同一 Git 仓库的所有 worktree 和子目录共享一个记忆目录，但**不会跨机器或云环境同步**。\n\n\n\n\n---\n\n\n## \`/memory\` 命令使用指南\n\n\`/memory\` 是管理记忆系统的核心命令。\n\n\n\n### \`/memory\` 命令的功能\n\n在 Claude Code 会话中输入 \`/memory\`，可以：\n\n\n\n\n\n- **查看**当前会话加载的所有 CLAUDE.md 和规则文件列表\n\n- **切换** Auto Memory 的开启/关闭状态\n\n- **打开** Auto Memory 文件夹链接\n\n- **选择任意文件**在编辑器中打开编辑\n\n\n\n### \`#\` 快捷键——快速添加记忆\n\n这是一个隐藏的效率神器：\n\n\`\`\`\n# 始终在函数参数中使用具名参数（named parameters）\n\`\`\`\n按下 \`#\` 键，输入你想记住的内容，按回车——Claude Code 会自动将其写入对应的 CLAUDE.md 文件。非常适合：\n\n\n\n\n\n- 记录项目约定\n\n- 保存常用 Bash 命令\n\n- 记下代码风格细节\n\n\n\n---\n\n\n## 常见问题与调试\n\n\n### Claude 忽略了 CLAUDE.md 的指令？\n\n\n\n\n- 运行 \`/memory\` 确认 CLAUDE.md 文件已被加载\n\n- 确保 Claude Code 在 CLAUDE.md 所在目录（或其子目录）中运行\n\n- 检查指令是否足够具体——"遵循最佳实践"太模糊，"使用具名导入（tree-shaking 兼容性）"则更有效\n\n- 检查文件是否超过 200 行（超出部分不加载）\n\n\n\n### CLAUDE.md 是上下文，不是强制执行\n\nClaude **读取**并尽力遵循 CLAUDE.md，但没有严格合规的保证，尤其是指令模糊或相互冲突时。将其理解为"给 Claude 的工作指南"而非"不可违反的规则"。\n\n\n\n---\n\n\n## 实际工作流示例\n\n\n### 场景一：初始化新项目\n\n\n\n\`\`\`\n# 1. 在项目根目录启动 Claude Code\ncd my-project\nclaude\n\n# 2. 生成记忆文件骨架\n/init\n\n# 3. 审查并完善生成的 CLAUDE.md\n/memory  # 打开文件编辑\n\n# 4. 开始工作，Claude 会自动积累记忆\n\`\`\`\n\n\n### 场景二：记录调试发现\n\n\n\`\`\`\n你：记住，运行集成测试前必须先启动 Docker Compose\nClaude：好的，我已将这条记录到 Auto Memory 中。\n\`\`\`\n\n下次会话，Claude 会自动知道这个依赖关系。\n\n### 场景三：团队协作\n\n将项目根目录的 \`CLAUDE.md\` 提交到 Git 仓库——团队中每个人的 Claude 助手都会读取相同的规范，实现一致的 AI 辅助体验。\n\n\n\n\n\`\`\`\ngit add CLAUDE.md\ngit commit -m "feat: add Claude Code memory configuration"\n\`\`\`\n\n---\n\n\n## 最佳实践总结\n\n\n    \n        \n            场景\n            推荐做法\n        \n    \n    \n        \n            团队共享规范\n            项目根目录的 CLAUDE.md，提交到 Git\n        \n        \n            个人偏好\n            \`~/.claude/CLAUDE.md\`（用户级）\n        \n        \n            模块特定规则\n            子目录 CLAUDE.md\n        \n        \n            让 Claude 自学\n            开启 Auto Memory，口头告知偏好\n        \n        \n            临时告知上下文\n            \`[@docs](https://github.com/docs)/filename.md\` 按需引用，不要塞进 CLAUDE.md\n        \n        \n            任务跟踪\n            在 Markdown 文件中使用 \`[ ]\` 复选框\n        \n    \n\n---\n\n\n## 参考资源\n\n\n\n\n- [官方文档：Memory System](https://code.claude.com/docs/en/memory)\n\n- [Claude Code 概览](https://docs.claude.com/en/docs/claude-code/overview)\n\n- [Prompt Engineering 指南](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>

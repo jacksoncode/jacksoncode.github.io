@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CodeClub - Skills 使用实例">
+    <meta name="author" content="Jackson">
+    <title>Skills 使用实例 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <style>
+    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
+    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
+    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
+    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
+    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
+    .tutorial-main { flex: 1; min-width: 0; }
+    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
+    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
+    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 17px; }
+    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
+    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
+    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
+    .markdown-body img { max-width: 100%; border-radius: 8px; }
+    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
+    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
+    .page-nav-link:hover { text-decoration: underline; }
+    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
+    .source-link a { color: var(--primary, #3b82f6); }
+    @media (max-width: 768px) {
+        .tutorial-page { flex-direction: column; }
+        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
+                <span>CodeClub</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="../../index.html">首页</a></li>
+                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+                <li><a class="nav-link" href="../../blog/">博客</a></li>
+                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+                <li><a class="nav-link active" href="../index.html">教程</a></li>
+                <li><a class="nav-link" href="../../book.html">图书</a></li>
+                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+                <li><a class="nav-link" href="../../about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tutorial-page">
+        <div class="tutorial-sidebar">
+            <h3>📖 Claude Code</h3>
+            <a href="0.html" >Claude Code 教程</a>
+<a href="1.html" >Claude Code 简介</a>
+<a href="2.html" >Claude Code 安装与使用</a>
+<a href="3.html" >Claude Code 如何工作</a>
+<a href="4.html" >Claude Code API 配置</a>
+<a href="5.html" >Coding Plan</a>
+<a href="6.html" >Claude Code 第一次使用</a>
+<a href="7.html" >VS Code Claude Code</a>
+<a href="8.html" >Claude Code 项目初始化</a>
+<a href="9.html" >Claude Code 项目结构</a>
+<a href="10.html" >Claude Code 交互模式</a>
+<a href="11.html" >Claude Code 操作说明</a>
+<a href="12.html" >Claude Code 基础用法</a>
+<a href="13.html" >Claude Code MCP</a>
+<a href="14.html" >Claude Code 子代理</a>
+<a href="15.html" >Claude Code 插件</a>
+<a href="16.html" >Claude Code 记忆系统</a>
+<a href="17.html" >Agent Skills</a>
+<a href="18.html" class="active">Skills 使用实例</a>
+<a href="19.html" >skill-creator 使用</a>
+<a href="20.html" >Claude Code 输出样式</a>
+<a href="21.html" >Claude Code 钩子</a>
+<a href="22.html" >Claude Code CLI 参考手册</a>
+<a href="23.html" >Claude Code 控制与模式</a>
+<a href="24.html" >Claude Code 斜杠 / 命令</a>
+<a href="25.html" >Claude Code 检查点</a>
+<a href="26.html" >Claude Code 插件参考手册</a>
+<a href="27.html" >Claude Code 实战</a>
+<a href="28.html" >Claude Code Chrome</a>
+
+        </div>
+        <div class="tutorial-main">
+            <div class="tutorial-article">
+                <div class="markdown-body" id="md-content"></div>
+                <div class="page-navigation">
+                    <a href="17.html" class="page-nav-link">&larr; Agent Skills</a>
+                    <a href="19.html" class="page-nav-link">skill-creator 使用 &rarr;</a>
+                </div>
+                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+    </footer>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../../js/mobile-menu.js"></script>
+    <script>
+    const md = `# Claude Code Skills 使用实例\n\n在上一章节 [Agent Skills（智能体技能）](https://www.runoob.com/claude-code/claude-agent-skills.html) 中我们已经了解了 Skills 的基本概念，本章节我们将结合一个具体的 Skills 来开发一个项目。\n\n\n\n\n现在市面上已经有很多现成的 skills，我么可以直接拿来使用，我们可以在 [https://skills.sh/](https://skills.sh/) 查找更多的 skill。\n\n\n安装方式：\n\n\n\n\`\`\`\nnpx skills add\n\`\`\`\nnpx 安装 ui-ux-pro-max 可参考：[OpenCode skills 使用](https://www.runoob.com/ai-agent/opencode-skills-intro.html)。\n\n\n**注：**如果对 npx 不了解，可以参阅：[npx 入门教程](https://www.runoob.com/nodejs/npx-intro.html)\n\n\n\n\n\n\n本章节我们将介绍一个支持多平台、多框架的专业级 UI/UX SKILL 插件  - UI UX Pro Max。\n\n\nUI UX Pro Max 旨在为跨平台和多框架开发提供专业的 UI/UX 设计智能支持。\n\n\n\nUI UX Pro Max 本质上是一个可检索的设计数据库，包含样式、色板、字体、组件建议及 UX 准则，专门喂给 Cursor、Claude Code、Windsurf等这些 AI 编码助手。\n\n\n**\n核心亮点：**\n\n\n\n\n\n- 67 种 UI 风格（从 Minimalism 到 Brutalism、Glassmorphism、Bento Grid、AI-Native 等）\n\n- 96 个行业调色盘（SaaS、Fintech、Healthcare、Beauty、EdTech…）\n\n- 57 组字体搭配（Google Fonts 精选组合）\n\n- 25 种常用图表类型（适合 dashboard）\n\n- 99 条 UX 指导原则（包含可访问性、性能、交互规范）\n\n- 100 条行业专项推理规则（包含反面模式 Anti-patterns）\n\n- 支持 13 个技术栈：React / Next.js / Vue / Tailwind / Flutter / SwiftUI / HTML+CSS / Electron 等\n\n\n**工作原理：**\n\n\n	\n\n- 提出需求：构建、设计、实现、优化或评审 UI / UX\n- \n\n\n技能自动触发：AI 会在内部搜索 UI 风格、配色、字体和 UX 规范数据库\n- \n\n智能设计推荐：根据产品类型与使用场景匹配合适的设计体系\n- \n\n直接生成代码：按最佳实践输出包含正确配色、字体、间距和结构的 UI 实现\n\n\n开源地址：[https://github.com/nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)\n\n\n\n官方文档：[https://ui-ux-pro-max-skill.nextlevelbuilder.io/](https://ui-ux-pro-max-skill.nextlevelbuilder.io/)\n\n\n\n### \n安装方式\n\n1、通过 Claude Marketplace（Claude Code）安装\n\n\n\n在 Claude Code 中执行以下两条命令即可直接安装。\n\n\n注册插件市场源：\n\n\n\n\`\`\`\n\n/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill\n\n\`\`\`\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/5cd82658-5a31-4653-ad1d-e8b0d7335744.png)\n\n\n\n安装插件：\n\n\n\n\`\`\`\n\n/plugin install ui-ux-pro-max@ui-ux-pro-max-skill\n\`\`\`\n\n安装成功后重启 Claude Code 就可以使用了:\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/a818e0e6-b4f9-437f-8031-8fc4fb2c25c9.png)\n\n\n2、使用 CLI（推荐）\n\n\n全局安装 CLI：\n\n\n\n\n\`\`\`\nnpm install -g uipro-cli\n\n# 进入你的项目目录\ncd /path/to/your/project\n\n# 为对应 AI 助手安装\nuipro init --ai claude      # Claude Code\nuipro init --ai cursor      # Cursor\nuipro init --ai windsurf    # Windsurf\nuipro init --ai antigravity # Antigravity (.agent + .shared)\nuipro init --ai copilot     # GitHub Copilot\nuipro init --ai kiro        # Kiro\nuipro init --ai codex       # Codex CLI\nuipro init --ai qoder       # Qoder\nuipro init --ai roocode     # Roo Code\nuipro init --ai gemini      # Gemini CLI\nuipro init --ai trae        # Trae\nuipro init --ai all         # 所有助手\n\`\`\`\n\n3、其他 CLI 命令：\n\n\`\`\`\n\nuipro versions              # 查看可用版本\nuipro update                # 更新到最新版本\nuipro init --version v1.0.0 # 安装指定版本\n\`\`\`\n\n\n2、使用 npx\n\n\n\n\`\`\`\nnpx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max\n\`\`\`\n\n5、安装指定版本\n\n\n安装完后，假设在 Claude 中使用，执行以下命令：\n\n\`\`\`\n\nuipro init --ai claude\n\`\`\`\n\n\n\n\n搜索脚本需要使用 Python 3.x：\n\n\n\n\`\`\`\n\n# 查看 Python  是否已经安装\npython3 --version\n\n# macOS\nbrew install python3\n\n# Ubuntu/Debian\nsudo apt update && sudo apt install python3\n\n# Windows\nwinget install Python.Python.3.12\n\`\`\`\n\n\n\n\n安装完成后输出如下：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/ui-ux-pro-runoob.webp)\n\n\n\n然后启用输入命令进入 Claude：\n\n\`\`\`\n\nclaude\n\`\`\`\n\n我们可以使用 /plugin 命令查看已经安装的创建：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/15b4de08-8b55-40eb-81f3-4b6eec604738.png)\n\n\n按 Esc 按键退出。\n\n\n\n注意：通过插件安装的 Skill，目录放在 ～/.claude/plugins/marketplaces。\n\n\n\n\n---\n\n\n## 如何使用\n\n接下来我们就可以直接输入需求：\n\n\n\n\`\`\`\n为宠物美容服务搭建一个着陆页，风格活泼亲和，并设置预约类行动召唤按钮。\n\`\`\`\n\n会提示是否使用我们安装的 skill 来设计，一路回车就好了：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/6832cf20-057a-40d9-8693-06f205d1777e.png)\n\n\n一路回车就好了，会提示完成的功能：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/89a8159c-41bb-454a-b63e-0c743ee5d23d.png)\n\n\n然后查看最终效果，好看很多：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/01/a9d18e1c-ae82-4dfa-bb9f-f7fe30a01cb7-scaled.png)\n\n\n			\n						\n			\n			\n		\n\n		\n		\n\n		\n		\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+    document.getElementById('md-content').innerHTML = marked.parse(md);
+    </script>
+</body>
+</html>
