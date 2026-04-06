@@ -359,8 +359,8 @@ def generate_index_page():
         </div>
         
         <div class="tutorial-card">
-            <span class="badge badge-ai">AI / LLM</span>
-            <h3><a href="anthropic/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">AI / LLM 教程</a></h3>
+            <span class="badge badge-ai">Anthropic</span>
+            <h3><a href="anthropic/index.html" style="color: var(--text-primary, #1a1a2e); text-decoration: none;">Anthropic 官方教程</a></h3>
             <p>本地化 Prompt Engineering Guide（20+ 种技术），外加 Anthropic Academy 视频课程、Claude API 文档等外部资源。</p>
             <a href="anthropic/index.html" style="color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500;">开始学习 →</a>
         </div>
