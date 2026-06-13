@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="AI学习笔记 - 面向零基础新手系统性介绍AI领域的各项概念、原理，包括模型、训练、推理、RAG、向量、标量等" />
-    <meta name="keywords" content="AI学习,AI入门,机器学习,深度学习,模型,训练,推理,RAG,向量,标量,神经网络,Large Language Model" />
+    <meta name="description" content="AI学习笔记 - 面向零基础新手系统性介绍AI领域的各项概念、原理，涵盖16大主题章节，包括模型、训练、推理、RAG、向量、智能体、知识库、工具技能、上下文记忆等" />
+    <meta name="keywords" content="AI学习,AI入门,机器学习,深度学习,模型,训练,推理,RAG,向量,标量,神经网络,AI智能体,Agent,知识库,向量数据库,工具,技能,上下文,记忆,思维链,Large Language Model" />
     <meta name="author" content="Jackson" />
     <title>AI学习笔记 - CodeClub</title>
     <link rel="icon" type="image/x-icon" href="../../img/logo.png" />
@@ -219,7 +219,7 @@
       <!-- Hero Section -->
       <div class="hero-section">
         <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
-        <p class="subtitle">面向零基础新手，系统性介绍AI领域的各项概念与原理<br/>深入浅出，帮助你快速理解AI的核心知识</p>
+        <p class="subtitle">面向零基础新手，系统性介绍AI领域的各项概念与原理<br/>涵盖16大主题章节，包括智能体、知识库、工具技能等前沿内容<br/>深入浅出，帮助你快速理解AI的核心知识</p>
       </div>
 
       <!-- 第一章：AI基础概念 -->
@@ -876,6 +876,608 @@
           <h4><i class="fas fa-sliders-h"></i> 选择建议</h4>
           <p>• 编程问题：temperature=0.2<br/>• 创意写作：temperature=0.8<br/>• 一般对话：temperature=0.5</p>
         </div>
+      </div>
+
+      <!-- 第十一章：AI智能体 -->
+      <h2 class="section-title"><i class="fas fa-user-robot"></i> 第十一章：AI智能体（Agent）</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-robot"></i> 什么是AI智能体？</h2>
+        <p><span class="keyword-highlight">AI智能体（Agent）</span>是一个能够感知环境、做出决策、执行行动以达成目标的AI系统。它不仅仅是回答问题，而是能主动完成任务。</p>
+        
+        <div class="concept-box success">
+          <h4><i class="fas fa-lightbulb"></i> 简单理解</h4>
+          <p>普通AI：你问它答，被动响应<br/>AI智能体：你给目标，它自主规划并执行，主动完成</p>
+        </div>
+
+        <h3>Agent的核心能力</h3>
+        <div class="diagram-section">
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-eye"></i></div>
+            <h4>感知</h4>
+            <p>理解用户指令和环境信息</p>
+          </div>
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-brain"></i></div>
+            <h4>规划</h4>
+            <p>拆解任务，制定执行策略</p>
+          </div>
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-cogs"></i></div>
+            <h4>行动</h4>
+            <p>调用工具，执行具体操作</p>
+          </div>
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-sync-alt"></i></div>
+            <h4>反思</h4>
+            <p>评估结果，调整策略</p>
+          </div>
+        </div>
+
+        <h3>Agent的工作流程</h3>
+        <div class="flow-diagram">
+          <div class="flow-item">接收目标</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">任务拆解</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">选择工具</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">执行操作</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">观察结果</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">调整继续</div>
+        </div>
+
+        <h3>Agent的关键组件</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>组件</th>
+            <th>作用</th>
+            <th>例子</th>
+          </tr>
+          <tr>
+            <td><strong>大脑（Brain）</strong></td>
+            <td>核心LLM，负责理解和决策</td>
+            <td>GPT-4、Claude、Gemini</td>
+          </tr>
+          <tr>
+            <td><strong>记忆（Memory）</strong></td>
+            <td>存储历史对话和知识</td>
+            <td>短期记忆、长期记忆、向量数据库</td>
+          </tr>
+          <tr>
+            <td><strong>工具（Tools）</strong></td>
+            <td>执行具体操作的能力</td>
+            <td>搜索、代码执行、文件操作</td>
+          </tr>
+          <tr>
+            <td><strong>规划（Planning）</strong></td>
+            <td>任务分解和执行策略</td>
+            <td>ReAct、Plan-and-Execute</td>
+          </tr>
+        </table>
+
+        <h3>常见Agent类型</h3>
+        <ul>
+          <li><span class="keyword-highlight">对话型Agent</span>：ChatGPT、Claude等，主要进行对话交流</li>
+          <li><span class="keyword-highlight">任务型Agent</span>：能执行具体任务，如写代码、搜索资料、生成报告</li>
+          <li><span class="keyword-highlight">多Agent系统</span>：多个Agent协作完成复杂任务，如CrewAI</li>
+          <li><span class="keyword-highlight">自主Agent</span>：能长期自主运行，如AutoGPT</li>
+        </ul>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-tools"></i> 常见Agent框架</h4>
+          <p>• LangChain：构建Agent应用的主流框架<br/>• CrewAI：多Agent协作框架<br/>• AutoGPT：自主Agent先驱<br/>• AgentGPT：网页版自主Agent<br/>• OpenAI Assistants API：官方Agent解决方案</p>
+        </div>
+      </div>
+
+      <!-- 第十二章：工具与技能 -->
+      <h2 class="section-title"><i class="fas fa-toolbox"></i> 第十二章：工具（Tools）与技能（Skills）</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-wrench"></i> 什么是工具？</h2>
+        <p><span class="keyword-highlight">工具（Tools）</span>是Agent可以调用的外部功能，让AI能执行实际操作，而不仅仅是生成文本。</p>
+        
+        <div class="concept-box">
+          <h4><i class="fas fa-question-circle"></i> 为什么需要工具？</h4>
+          <p>LLM本身只能生成文本，无法：<br/>• 搜索最新信息<br/>• 执行代码<br/>• 访问数据库<br/>• 操作文件<br/><br/>工具让AI突破这些限制</p>
+        </div>
+
+        <h3>常见工具类型</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>工具类型</th>
+            <th>功能</th>
+            <th>应用场景</th>
+          </tr>
+          <tr>
+            <td><strong>搜索工具</strong></td>
+            <td>搜索网络信息</td>
+            <td>获取实时数据、查找资料</td>
+          </tr>
+          <tr>
+            <td><strong>代码执行</strong></td>
+            <td>运行Python等代码</td>
+            <td>数据分析、计算、自动化</td>
+          </tr>
+          <tr>
+            <td><strong>文件操作</strong></td>
+            <td>读写文件</td>
+            <td>文档处理、数据导入导出</td>
+          </tr>
+          <tr>
+            <td><strong>API调用</strong></td>
+            <td>调用外部服务</td>
+            <td>获取天气、发送邮件、数据库查询</td>
+          </tr>
+          <tr>
+            <td><strong>知识检索</strong></td>
+            <td>从知识库检索</td>
+            <td>RAG、企业知识查询</td>
+          </tr>
+        </table>
+
+        <h3>Function Calling（函数调用）</h3>
+        <p><span class="keyword-highlight">函数调用</span>是LLM调用外部工具的技术机制。</p>
+        
+        <div class="flow-diagram">
+          <div class="flow-item">用户请求</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">LLM判断需要工具</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">生成函数调用参数</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">执行函数</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">返回结果给LLM</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">生成最终回答</div>
+        </div>
+
+        <div class="concept-box success">
+          <h4><i class="fas fa-code"></i> 函数调用示例</h4>
+          <p>用户："今天北京天气怎么样？"<br/>LLM：调用get_weather(city="北京")<br/>函数返回：{"temperature": 25, "weather": "晴"}<br/>LLM："北京今天天气晴朗，温度25°C"</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-trophy"></i> 什么是技能（Skills）？</h2>
+        <p><span class="keyword-highlight">技能（Skills）</span>是AI Agent的特定能力模块，类似于人类的"专业技能"。</p>
+        
+        <div class="concept-box">
+          <h4><i class="fas fa-user-graduate"></i> 类比理解</h4>
+          <p>人：掌握多个技能（编程、写作、设计）<br/>Agent：配置多个技能模块（代码生成、数据分析、文档撰写）</p>
+        </div>
+
+        <h3>技能的特点</h3>
+        <ul>
+          <li><strong>模块化</strong>：可以独立配置和启用/禁用</li>
+          <li><strong>专业化</strong>：针对特定领域优化</li>
+          <li><strong>可扩展</strong>：可以添加新技能</li>
+          <li><strong>可组合</strong>：多个技能协作完成任务</li>
+        </ul>
+
+        <h3>常见技能示例</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>技能领域</th>
+            <th>具体技能</th>
+            <th>应用</th>
+          </tr>
+          <tr>
+            <td><strong>编程技能</strong></td>
+            <td>代码生成、调试、重构</td>
+            <td>软件开发、自动化脚本</td>
+          </tr>
+          <tr>
+            <td><strong>分析技能</strong></td>
+            <td>数据分析、图表生成、报告撰写</td>
+            <td>商业分析、科学研究</td>
+          </tr>
+          <tr>
+            <td><strong>写作技能</strong></td>
+            <td>文章创作、编辑润色、翻译</td>
+            <td>内容创作、文档处理</td>
+          </tr>
+          <tr>
+            <td><strong>搜索技能</strong></td>
+            <td>网络搜索、信息提取、知识检索</td>
+            <td>调研、信息收集</td>
+          </tr>
+          <tr>
+            <td><strong>设计技能</strong></td>
+            <td>图像生成、UI设计建议</td>
+            <td>创意设计、产品开发</td>
+          </tr>
+        </table>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-puzzle-piece"></i> 技能 vs 工具</h4>
+          <p>• 工具：底层能力，如"搜索"、"执行代码"<br/>• 技能：上层组合，整合工具+知识+策略<br/><br/>例如："数据分析技能"包含：<br/>  - 代码执行工具 + 统计知识 + 分析流程策略</p>
+        </div>
+      </div>
+
+      <!-- 第十三章：知识库与向量数据库 -->
+      <h2 class="section-title"><i class="fas fa-database"></i> 第十三章：知识库与向量数据库</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-book"></i> 什么是知识库？</h2>
+        <p><span class="keyword-highlight">知识库（Knowledge Base）</span>是存储结构化或非结构化知识的系统，让AI能访问专业知识、企业数据、实时信息。</p>
+        
+        <div class="concept-box success">
+          <h4><i class="fas fa-building"></i> 为什么需要知识库？</h4>
+          <p>LLM的问题：<br/>• 知识有限（训练数据截止）<br/>• 无法访问企业私有数据<br/>• 可能产生错误信息（幻觉）<br/><br/>知识库解决：<br/>• 提供最新、准确的专业知识<br/>• 让AI"知道"企业内部信息</p>
+        </div>
+
+        <h3>知识库的类型</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>类型</th>
+            <th>特点</th>
+            <th>应用</th>
+          </tr>
+          <tr>
+            <td><strong>文档库</strong></td>
+            <td>PDF、Word、网页等文档集合</td>
+            <td>企业文档查询、政策解读</td>
+          </tr>
+          <tr>
+            <td><strong>结构化数据库</strong></td>
+            <td>SQL数据库，有明确结构</td>
+            <td>客户信息、订单数据、产品目录</td>
+          </tr>
+          <tr>
+            <td><strong>向量数据库</strong></td>
+            <td>存储向量表示，支持语义搜索</td>
+            <td>RAG、相似内容检索</td>
+          </tr>
+          <tr>
+            <td><strong>知识图谱</strong></td>
+            <td>实体和关系的网络结构</td>
+            <td>复杂关系查询、推理</td>
+          </tr>
+        </table>
+
+        <h3>知识库建设流程</h3>
+        <div class="flow-diagram">
+          <div class="flow-item">收集数据</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">清洗处理</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">分块切分</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">向量编码</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">存储入库</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">检索使用</div>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-cubes"></i> 向量数据库详解</h2>
+        <p><span class="keyword-highlight">向量数据库</span>是专门存储和检索向量Embedding的数据库，支持语义相似性搜索。</p>
+
+        <h3>传统搜索 vs 向量搜索</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>搜索方式</th>
+            <th>原理</th>
+            <th>特点</th>
+          </tr>
+          <tr>
+            <td><strong>关键词搜索</strong></td>
+            <td>匹配文字相同</td>
+            <td>"苹果"只能找到包含"苹果"的文档</td>
+          </tr>
+          <tr>
+            <td><strong>向量搜索</strong></td>
+            <td>匹配语义相似</td>
+            <td>"苹果"能找到"水果"、"iOS设备"等相关内容</td>
+          </tr>
+        </table>
+
+        <div class="concept-box">
+          <h4><i class="fas fa-search-plus"></i> 向量搜索的优势</h4>
+          <p>• 理解语义，不是简单匹配文字<br/>• 能找到意思相近的内容<br/>• 支持跨语言搜索<br/>• 处理模糊、抽象的查询</p>
+        </div>
+
+        <h3>常见向量数据库</h3>
+        <ul>
+          <li><span class="keyword-highlight">Pinecone</span>：云端托管，易于使用，适合生产环境</li>
+          <li><span class="keyword-highlight">Weaviate</span>：开源，支持多种数据类型，功能丰富</li>
+          <li><span class="keyword-highlight">Milvus</span>：开源，高性能，适合大规模场景</li>
+          <li><span class="keyword-highlight">Chroma</span>：轻量级开源，适合开发测试</li>
+          <li><span class="keyword-highlight">Qdrant</span>：开源，高效，支持过滤</li>
+        </ul>
+
+        <h3>向量检索流程</h3>
+        <ol>
+          <li><strong>查询向量化</strong>：将用户查询转换为向量</li>
+          <li><strong>相似度计算</strong>：与库中向量计算距离</li>
+          <li><strong>排序筛选</strong>：返回最相似的N个结果</li>
+          <li><strong>返回原文</strong>：返回对应的原始文本</li>
+        </ol>
+      </div>
+
+      <!-- 第十四章：上下文与记忆 -->
+      <h2 class="section-title"><i class="fas fa-memory"></i> 第十四章：上下文（Context）与记忆</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-comments"></i> 什么是上下文？</h2>
+        <p><span class="keyword-highlight">上下文（Context）</span>是LLM处理请求时可用的背景信息，包括历史对话、检索内容、系统提示等。</p>
+        
+        <div class="concept-box">
+          <h4><i class="fas fa-window-maximize"></i> 上下文窗口</h4>
+          <p>LLM一次能处理的文本长度限制：<br/>• GPT-3.5：4K tokens<br/>• GPT-4：8K-32K tokens<br/>• Claude：100K-200K tokens<br/>• GPT-4 Turbo：128K tokens</p>
+        </div>
+
+        <h3>上下文的组成</h3>
+        <div class="diagram-section">
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-user-circle"></i></div>
+            <h4>系统提示</h4>
+            <p>角色设定、行为规范</p>
+          </div>
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-history"></i></div>
+            <h4>历史对话</h4>
+            <p>之前的交流记录</p>
+          </div>
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-file-alt"></i></div>
+            <h4>检索内容</h4>
+            <p>RAG获取的相关文档</p>
+          </div>
+          <div class="diagram-card">
+            <div class="icon"><i class="fas fa-question"></i></div>
+            <h4>用户输入</h4>
+            <p>当前的请求</p>
+          </div>
+        </div>
+
+        <h3>上下文管理策略</h3>
+        <ul>
+          <li><strong>滑动窗口</strong>：只保留最近N轮对话</li>
+          <li><strong>摘要压缩</strong>：用LLM总结历史，减少token占用</li>
+          <li><strong>选择性保留</strong>：只保留关键信息</li>
+          <li><strong>向量检索</strong>：需要时检索相关历史</li>
+        </ul>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-brain"></i> Agent的记忆系统</h2>
+        <p><span class="keyword-highlight">记忆（Memory）</span>是Agent存储和利用历史信息的能力。</p>
+
+        <h3>记忆的类型</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>记忆类型</th>
+            <th>特点</th>
+            <th>存储方式</th>
+          </tr>
+          <tr>
+            <td><strong>短期记忆</strong></td>
+            <td>当前对话上下文</td>
+            <td>在LLM上下文窗口中</td>
+          </tr>
+          <tr>
+            <td><strong>长期记忆</strong></td>
+            <td>跨对话的持久知识</td>
+            <td>向量数据库、文件存储</td>
+          </tr>
+          <tr>
+            <td><strong>工作记忆</strong></td>
+            <td>当前任务相关信息</td>
+            <td>临时存储，任务完成可清除</td>
+          </tr>
+          <tr>
+            <td><strong>语义记忆</strong></td>
+            <td>概念和知识</td>
+            <td>知识库、知识图谱</td>
+          </tr>
+        </table>
+
+        <h3>记忆的作用</h3>
+        <ul>
+          <li><span class="keyword-highlight">记住用户偏好</span>：下次对话能个性化响应</li>
+          <li><span class="keyword-highlight">积累知识</span>：学习新信息，逐步成长</li>
+          <li><span class="keyword-highlight">保持一致性</span>：多轮对话中不重复、不矛盾</li>
+          <li><span class="keyword-highlight">任务延续</span>：长时间任务的进度跟踪</li>
+        </ul>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-save"></i> 记忆存储技术</h4>
+          <p>• 向量数据库：语义检索记忆<br/>• 键值存储：结构化记忆<br/>• 文件系统：文档型记忆<br/>• 时间序列：按时间组织记忆</p>
+        </div>
+      </div>
+
+      <!-- 第十五章：高级提示技术 -->
+      <h2 class="section-title"><i class="fas fa-magic"></i> 第十五章：高级提示技术</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-link"></i> Chain of Thought（思维链）</h2>
+        <p><span class="keyword-highlight">思维链</span>是一种让LLM逐步展示推理过程的提示技术，能显著提高复杂问题的准确率。</p>
+        
+        <div class="concept-box success">
+          <h4><i class="fas fa-step-forward"></i> 基本方法</h4>
+          <p>在Prompt中加入："让我们一步步思考"<br/>或者："请展示你的推理过程"</p>
+        </div>
+
+        <h3>思维链的效果</h3>
+        <div class="flow-diagram">
+          <div class="flow-item">问题</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">步骤1：理解问题</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">步骤2：分解任务</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">步骤3：逐步推理</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">步骤4：验证答案</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">最终结论</div>
+        </div>
+
+        <h3>思维链的应用</h3>
+        <ul>
+          <li><strong>数学推理</strong>：逐步计算，减少错误</li>
+          <li><strong>逻辑分析</strong>：展示推理过程</li>
+          <li><strong>复杂决策</strong>：权衡多个因素</li>
+          <li><strong>问题诊断</strong>：系统性排查</li>
+        </ul>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-layer-group"></i> Zero-shot vs Few-shot</h2>
+        <p><span class="keyword-highlight">零样本（Zero-shot）</span>：不给示例，让LLM直接完成任务。</p>
+        <p><span class="keyword-highlight">少样本（Few-shot）</span>：提供几个示例，让LLM学习模式。</p>
+
+        <div class="concept-box">
+          <h4><i class="fas fa-graduation-cap"></i> 示例对比</h4>
+          <p><strong>Zero-shot：</strong><br/>"将以下句子翻译成法语：你好"<br/><br/><strong>Few-shot：</strong><br/>"将以下句子翻译成法语：<br/>你好 → Bonjour<br/>谢谢 → Merci<br/>再见 → Au revoir<br/>我爱你 → ?"</p>
+        </div>
+
+        <h3>何时使用Few-shot</h3>
+        <ul>
+          <li>任务格式特殊，需要示范</li>
+          <li>输出风格需要统一</li>
+          <li>LLM对任务不够熟悉</li>
+          <li>需要特定格式输出</li>
+        </ul>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-project-diagram"></i> ReAct（推理+行动）</h2>
+        <p><span class="keyword-highlight">ReAct</span>是让Agent交替进行推理和行动的技术，边思考边执行。</p>
+
+        <h3>ReAct流程</h3>
+        <ol>
+          <li><strong>Thought</strong>：思考下一步做什么</li>
+          <li><strong>Action</strong>：执行具体操作</li>
+          <li><strong>Observation</strong>：观察结果</li>
+          <li><strong>循环</strong>：重复直到完成</li>
+        </ol>
+
+        <div class="concept-box success">
+          <h4><i class="fas fa-tasks"></i> ReAct示例</h4>
+          <p>任务："查找北京今天的天气"<br/>Thought: 我需要搜索北京的天气信息<br/>Action: search("北京天气")<br/>Observation: 北京今天晴，25°C<br/>Thought: 我已获得答案<br/>Action: finish("北京今天天气晴朗，温度25°C")</p>
+        </div>
+      </div>
+
+      <!-- 第十六章：AI局限与挑战 -->
+      <h2 class="section-title"><i class="fas fa-exclamation-circle"></i> 第十六章：AI局限与挑战</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-ghost"></i> 幻觉问题（Hallucination）</h2>
+        <p><span class="keyword-highlight">幻觉</span>是LLM生成虚假、不准确信息的现象，是AI应用的主要风险。</p>
+
+        <h3>幻觉的类型</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>类型</th>
+            <th>表现</th>
+            <th>风险</th>
+          </tr>
+          <tr>
+            <td><strong>事实幻觉</strong></td>
+            <td>编造不存在的事实</td>
+            <td>"2025年火星已有人居住"</td>
+          </tr>
+          <tr>
+            <td><strong>来源幻觉</strong></td>
+            <td>引用不存在的来源</td>
+            <td>"根据《AI发展报告2024》..."</td>
+          </tr>
+          <tr>
+            <td><strong>数字幻觉</strong></td>
+            <td>编造统计数据</td>
+            <td>"研究表明85%的用户..."</td>
+          </tr>
+          <tr>
+            <td><strong>逻辑幻觉</strong></td>
+            <td>推理过程出错</td>
+            <td>错误的因果结论</td>
+          </tr>
+        </table>
+
+        <h3>减少幻觉的方法</h3>
+        <ul>
+          <li><span class="keyword-highlight">使用RAG</span>：检索真实信息增强回答</li>
+          <li><span class="keyword-highlight">要求引用来源</span>：让AI说明信息出处</li>
+          <li><span class="keyword-highlight">人工验证</span>：重要信息需要核实</li>
+          <li><span class="keyword-highlight">限定范围</span>：指定只使用已知信息</li>
+          <li><span class="keyword-highlight">多模型交叉验证</span>：对比不同模型输出</li>
+        </ul>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-shield-alt"></i> 安全建议</h4>
+          <p>• 不要完全信任AI的医疗、法律建议<br/>• 重要决策前核实关键信息<br/>• 教育用户了解AI局限性<br/>• 建立信息审核机制</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-balance-scale"></i> 对齐问题（Alignment）</h2>
+        <p><span class="keyword-highlight">对齐</span>是让AI行为符合人类价值观和期望的技术挑战。</p>
+
+        <h3>对齐的维度</h3>
+        <ul>
+          <li><strong>指令对齐</strong>：AI正确理解用户意图</li>
+          <li><strong>价值对齐</strong>：AI行为符合道德伦理</li>
+          <li><strong>安全对齐</strong>：AI不产生有害内容</li>
+          <li><strong>真实对齐</strong>：AI提供准确信息</li>
+        </ul>
+
+        <h3>RLHF（基于人类反馈的强化学习）</h3>
+        <p><span class="keyword-highlight">RLHF</span>是训练AI对齐的主要方法：</p>
+        <ol>
+          <li><strong>预训练</strong>：学习语言能力</li>
+          <li><strong>监督微调</strong>：学习遵循指令</li>
+          <li><strong>奖励模型</strong>：人类评价AI输出质量</li>
+          <li><strong>强化学习</strong>：优化AI生成高奖励内容</li>
+        </ol>
+
+        <div class="concept-box">
+          <h4><i class="fas fa-users"></i> 为什么需要人类反馈？</h4>
+          <p>单纯预训练的模型：<br/>• 可能输出有害内容<br/>• 不一定遵循指令<br/>• 价值观与人类不符<br/><br/>人类反馈让AI学会"好的回答"</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-images"></i> 多模态（Multimodal）</h2>
+        <p><span class="keyword-highlight">多模态AI</span>能同时处理多种类型的数据：文本、图像、音频、视频等。</p>
+
+        <h3>多模态的优势</h3>
+        <ul>
+          <li>理解更丰富：结合视觉和语言信息</li>
+          <li>应用更广：图像分析、视频理解、语音识别</li>
+          <li>交互更自然：支持多种输入方式</li>
+        </ul>
+
+        <h3>常见多模态模型</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>模型</th>
+            <th>能力</th>
+            <th>应用</th>
+          </tr>
+          <tr>
+            <td><strong>GPT-4 Vision</strong></td>
+            <td>理解图像内容</td>
+            <td>图像问答、视觉分析</td>
+          </tr>
+          <tr>
+            <td><strong>Claude 3</strong></td>
+            <td>文本+图像处理</td>
+            <td>文档分析、图表解读</td>
+          </tr>
+          <tr>
+            <td><strong>Gemini</strong></td>
+            <td>文本+图像+视频+音频</td>
+            <td>全面多模态应用</td>
+          </tr>
+        </table>
       </div>
 
       <!-- 总结 -->
