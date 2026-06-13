@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="AI学习笔记 - 面向零基础新手系统性介绍AI领域的各项概念、原理，涵盖16大主题章节，包括模型、训练、推理、RAG、向量、智能体、知识库、工具技能、上下文记忆等" />
-    <meta name="keywords" content="AI学习,AI入门,机器学习,深度学习,模型,训练,推理,RAG,向量,标量,神经网络,AI智能体,Agent,知识库,向量数据库,工具,技能,上下文,记忆,思维链,Large Language Model" />
+    <meta name="description" content="AI学习笔记 - 面向零基础新手系统性介绍AI领域的各项概念、原理，涵盖21大主题章节，包括模型、训练、推理、RAG、向量、智能体、知识库、工具技能、数据、评估、GPU、AI工具平台、发展简史等完整内容" />
+    <meta name="keywords" content="AI学习,AI入门,机器学习,深度学习,模型,训练,推理,RAG,向量,标量,神经网络,AI智能体,Agent,知识库,向量数据库,工具,技能,上下文,记忆,思维链,Large Language Model,数据集,数据标注,数据清洗,模型评估,准确率,召回率,F1分数,GPU,算力,ChatGPT,Claude,Gemini,Hugging Face,开源模型,闭源模型,AI发展史" />
     <meta name="author" content="Jackson" />
     <title>AI学习笔记 - CodeClub</title>
     <link rel="icon" type="image/x-icon" href="../../img/logo.png" />
@@ -219,7 +219,7 @@
       <!-- Hero Section -->
       <div class="hero-section">
         <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
-        <p class="subtitle">面向零基础新手，系统性介绍AI领域的各项概念与原理<br/>涵盖16大主题章节，包括智能体、知识库、工具技能等前沿内容<br/>深入浅出，帮助你快速理解AI的核心知识</p>
+        <p class="subtitle">面向零基础新手，系统性介绍AI领域的各项概念与原理<br/>涵盖21大主题章节，包括数据、评估、GPU、工具平台、发展简史等完整内容<br/>深入浅出，帮助你快速理解AI的核心知识</p>
       </div>
 
       <!-- 第一章：AI基础概念 -->
@@ -1363,6 +1363,587 @@
         <div class="concept-box success">
           <h4><i class="fas fa-tasks"></i> ReAct示例</h4>
           <p>任务："查找北京今天的天气"<br/>Thought: 我需要搜索北京的天气信息<br/>Action: search("北京天气")<br/>Observation: 北京今天晴，25°C<br/>Thought: 我已获得答案<br/>Action: finish("北京今天天气晴朗，温度25°C")</p>
+        </div>
+      </div>
+
+      <!-- 第十七章：数据——AI的燃料 -->
+      <h2 class="section-title"><i class="fas fa-database"></i> 第十七章：数据——AI的燃料</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-chart-bar"></i> 什么是数据集？</h2>
+        <p><span class="keyword-highlight">数据集（Dataset）</span>是用于训练、验证和测试AI模型的数据集合，是AI学习的"教材"。</p>
+        
+        <div class="concept-box success">
+          <h4><i class="fas fa-lightbulb"></i> 简单理解</h4>
+          <p>就像学生需要课本学习一样，AI需要数据集来学习。<br/>数据集质量越高，AI学得越好。</p>
+        </div>
+
+        <h3>数据集的三种划分</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>类型</th>
+            <th>比例</th>
+            <th>作用</th>
+            <th>类比</th>
+          </tr>
+          <tr>
+            <td><strong>训练集</strong></td>
+            <td>70-80%</td>
+            <td>模型学习知识</td>
+            <td>课本，用于学习</td>
+          </tr>
+          <tr>
+            <td><strong>验证集</strong></td>
+            <td>10-15%</td>
+            <td>调优模型参数</td>
+            <td>模拟考试，检验学习效果</td>
+          </tr>
+          <tr>
+            <td><strong>测试集</strong></td>
+            <td>10-15%</td>
+            <td>最终评估性能</td>
+            <td>期末考试，最终评分</td>
+          </tr>
+        </table>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-exclamation-triangle"></i> 重要原则</h4>
+          <p>测试集绝对不能用于训练！否则就像"提前看过期末考试题"，评估结果不真实。</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-tags"></i> 数据标注</h2>
+        <p><span class="keyword-highlight">数据标注</span>是为原始数据添加标签（正确答案）的过程，是监督学习的前提。</p>
+        
+        <h3>标注的类型</h3>
+        <ul>
+          <li><strong>分类标注</strong>：给图片打标签（"猫"、"狗"）</li>
+          <li><strong>边界框标注</strong>：标注物体位置（目标检测）</li>
+          <li><strong>文本标注</strong>：标注情感、意图、实体</li>
+          <li><strong>语音标注</strong>：转录文字、标注说话人</li>
+        </ul>
+
+        <div class="flow-diagram">
+          <div class="flow-item">原始数据</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">人工标注</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">标注数据</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">模型训练</div>
+        </div>
+
+        <div class="concept-box">
+          <h4><i class="fas fa-users"></i> 标注的挑战</h4>
+          <p>• 标注成本高：需要大量人力<br/>• 标注质量关键：错误标注会误导模型<br/>• 专业标注难：医学图像等需要专家知识</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-broom"></i> 数据清洗</h2>
+        <p><span class="keyword-highlight">数据清洗</span>是处理原始数据中的错误、缺失、重复等问题，提高数据质量。</p>
+        
+        <h3>常见数据问题</h3>
+        <ul>
+          <li><strong>缺失值</strong>：部分数据为空</li>
+          <li><strong>重复数据</strong>：同一条数据多次出现</li>
+          <li><strong>错误数据</strong>：标注错误、格式错误</li>
+          <li><strong>噪声数据</strong>：无关信息、干扰信息</li>
+          <li><strong>不平衡数据</strong>：某些类别数据过多/过少</li>
+        </ul>
+
+        <h3>清洗方法</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>问题</th>
+            <th>处理方法</th>
+          </tr>
+          <tr>
+            <td>缺失值</td>
+            <td>填充默认值、删除、预测填充</td>
+          </tr>
+          <tr>
+            <td>重复数据</td>
+            <td>去重处理</td>
+          </tr>
+          <tr>
+            <td>错误数据</td>
+            <td>修正或删除</td>
+          </tr>
+          <tr>
+            <td>噪声数据</td>
+            <td>过滤、平滑处理</td>
+          </tr>
+          <tr>
+            <td>不平衡数据</td>
+            <td>数据增强、重采样</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-expand-arrows-alt"></i> 数据增强</h2>
+        <p><span class="keyword-highlight">数据增强</span>是通过变换现有数据生成新数据，增加数据量的技术。</p>
+        
+        <div class="concept-box success">
+          <h4><i class="fas fa-image"></i> 图像数据增强示例</h4>
+          <p>原始图片 → 翻转、旋转、缩放、裁剪、调整亮度 → 生成多张新图片<br/>一张图片可以变成几十张训练数据</p>
+        </div>
+
+        <h3>为什么需要数据增强</h3>
+        <ul>
+          <li>数据量不足时，增加训练样本</li>
+          <li>提高模型鲁棒性，适应各种变化</li>
+          <li>解决数据不平衡问题</li>
+          <li>降低标注成本</li>
+        </ul>
+      </div>
+
+      <!-- 第十八章：模型评估 -->
+      <h2 class="section-title"><i class="fas fa-chart-line"></i> 第十八章：模型评估</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-tachometer-alt"></i> 为什么需要评估？</h2>
+        <p>训练完成后，需要评估模型性能，判断模型是否达到要求，是否可以投入使用。</p>
+        
+        <div class="concept-box">
+          <h4><i class="fas fa-question-circle"></i> 核心问题</h4>
+          <p>• 模型准确吗？<br/>• 模型稳定吗？<br/>• 模型能处理各种情况吗？</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-bullseye"></i> 核心评估指标</h2>
+        
+        <h3>准确率（Accuracy）</h3>
+        <p><span class="keyword-highlight">准确率</span>是模型预测正确的比例。</p>
+        <div class="concept-box success">
+          <h4><i class="fas fa-calculator"></i> 公式</h4>
+          <p>准确率 = 预测正确的数量 / 总预测数量<br/>例如：100个样本，预测正确90个，准确率=90%</p>
+        </div>
+
+        <h3>精确率与召回率</h3>
+        <p>这两个指标用于评估分类模型的不同角度：</p>
+        <table class="comparison-table">
+          <tr>
+            <th>指标</th>
+            <th>含义</th>
+            <th>应用场景</th>
+          </tr>
+          <tr>
+            <td><strong>精确率（Precision）</strong></td>
+            <td>预测为正的样本中，真正为正的比例</td>
+            <td>"我说对的，有多少真的对"</td>
+          </tr>
+          <tr>
+            <td><strong>召回率（Recall）</strong></td>
+            <td>真正的正样本中，被预测为正的比例</td>
+            <td>"真的对的，我找出来多少"</td>
+          </tr>
+        </table>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-balance-scale"></i> 精确率vs召回率权衡</h4>
+          <p>• 高精确率：宁可漏过，不可错报（医疗诊断）<br/>• 高召回率：宁可错报，不可漏过（垃圾邮件检测）<br/>• 通常需要根据场景权衡</p>
+        </div>
+
+        <h3>F1分数</h3>
+        <p><span class="keyword-highlight">F1分数</span>是精确率和召回率的调和平均，综合评估模型性能。</p>
+        <p>当精确率和召回率都很重要时，使用F1分数作为综合指标。</p>
+
+        <h3>损失值（Loss）</h3>
+        <p><span class="keyword-highlight">损失值</span>衡量模型预测与真实答案的差距，训练过程中持续下降说明模型在学习。</p>
+        <ul>
+          <li>训练初期：损失值高，模型在学习</li>
+          <li>训练中期：损失值下降，模型进步</li>
+          <li>训练后期：损失值稳定，模型收敛</li>
+        </ul>
+
+        <div class="concept-box">
+          <h4><i class="fas fa-chart-area"></i> 查看训练曲线</h4>
+          <p>通过绘制"损失值曲线"可以观察：<br/>• 学习是否正常进行<br/>• 是否过拟合（训练损失降，验证损失升）<br/>• 训练是否需要停止</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-crosshairs"></i> 混淆矩阵</h2>
+        <p><span class="keyword-highlight">混淆矩阵</span>是展示分类结果的表格，清晰显示预测正确和错误的情况。</p>
+        
+        <table class="comparison-table">
+          <tr>
+            <th></th>
+            <th>预测为正</th>
+            <th>预测为负</th>
+          </tr>
+          <tr>
+            <td><strong>实际为正</strong></td>
+            <td>真正例（TP）</td>
+            <td>假负例（FN）</td>
+          </tr>
+          <tr>
+            <td><strong>实际为负</strong></td>
+            <td>假正例（FP）</td>
+            <td>真负例（TN）</td>
+          </tr>
+        </table>
+
+        <p>从混淆矩阵可以计算：<br/>• 准确率 = (TP + TN) / 总数<br/>• 精确率 = TP / (TP + FP)<br/>• 召回率 = TP / (TP + FN)</p>
+      </div>
+
+      <!-- 第十九章：GPU与算力 -->
+      <h2 class="section-title"><i class="fas fa-microchip"></i> 第十九章：GPU与算力</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-server"></i> 什么是算力？</h2>
+        <p><span class="keyword-highlight">算力（Computing Power）</span>是计算机处理数据的能力，用FLOPS（每秒浮点运算次数）衡量。</p>
+        
+        <div class="concept-box">
+          <h4><i class="fas fa-tachometer-alt"></i> 算力单位</h4>
+          <p>• TFLOPS：每秒万亿次运算<br/>• PFLOPS：每秒千万亿次运算<br/>• EFLOPS：每秒百亿亿次运算<br/><br/>GPT-3训练约需要3.64 × 10²³ FLOPS</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-microchip"></i> CPU vs GPU</h2>
+        <p><span class="keyword-highlight">GPU（图形处理器）</span>是AI训练的核心硬件，比CPU更适合大规模计算。</p>
+        
+        <table class="comparison-table">
+          <tr>
+            <th>特性</th>
+            <th>CPU</th>
+            <th>GPU</th>
+          </tr>
+          <tr>
+            <td><strong>设计目的</strong></td>
+            <td>通用计算，逻辑处理</td>
+            <td>图形渲染，并行计算</td>
+          </tr>
+          <tr>
+            <td><strong>核心数量</strong></td>
+            <td>几十个</td>
+            <td>数千个</td>
+          </tr>
+          <tr>
+            <td><strong>擅长任务</strong></td>
+            <td>串行任务、复杂逻辑</td>
+            <td>并行任务、矩阵运算</td>
+          </tr>
+          <tr>
+            <td><strong>AI训练</strong></td>
+            <td>慢，不适合大规模训练</td>
+            <td>快，是AI训练主流</td>
+          </tr>
+        </table>
+
+        <div class="concept-box success">
+          <h4><i class="fas fa-users"></i> 类比理解</h4>
+          <p>CPU：像几个教授，能处理复杂问题<br/>GPU：像几千个小学生，能同时做简单计算<br/><br/>神经网络训练需要大量简单计算，GPU更合适</p>
+        </div>
+
+        <h3>为什么AI训练需要GPU</h3>
+        <ul>
+          <li><strong>并行计算</strong>：神经网络有大量矩阵运算，GPU能同时处理</li>
+          <li><strong>效率高</strong>：GPU训练速度比CPU快几十到几百倍</li>
+          <li><strong>成本合理</strong>：同样的计算量，GPU更经济</li>
+        </ul>
+
+        <h3>主流GPU产品</h3>
+        <table class="comparison-table">
+          <tr>
+            <th>GPU型号</th>
+            <th>特点</th>
+            <th>应用</th>
+          </tr>
+          <tr>
+            <td><strong>NVIDIA RTX 4090</strong></td>
+            <td>消费级最强，24GB显存</td>
+            <td>个人开发、小模型训练</td>
+          </tr>
+          <tr>
+            <td><strong>NVIDIA A100</strong></td>
+            <td>数据中心级，80GB显存</td>
+            <td>大模型训练、企业应用</td>
+          </tr>
+          <tr>
+            <td><strong>NVIDIA H100</strong></td>
+            <td>最新旗舰，专为AI优化</td>
+            <td>GPT-4级别模型训练</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-memory"></i> 显存的重要性</h2>
+        <p><span class="keyword-highlight">显存</span>是GPU的内存，决定了能处理多大的模型。</p>
+        
+        <div class="concept-box warning">
+          <h4><i class="fas fa-exclamation-triangle"></i> 为什么显存重要</h4>
+          <p>模型参数需要存储在显存中：<br/>• 7B参数模型：约需14GB显存<br/>• 13B参数模型：约需26GB显存<br/>• 70B参数模型：约需140GB显存<br/><br/>显存不够，就无法训练或运行大模型</p>
+        </div>
+
+        <h3>显存优化技术</h3>
+        <ul>
+          <li><span class="keyword-highlight">量化</span>：减少参数精度，降低显存需求</li>
+          <li><span class="keyword-highlight">模型分片</strong>：将模型分散到多个GPU</li>
+          <li><span class="keyword-highlight">梯度累积</strong>：小批量多次累积，模拟大批量</li>
+        </ul>
+      </div>
+
+      <!-- 第二十章：常用AI工具与平台 -->
+      <h2 class="section-title"><i class="fas fa-tools"></i> 第二十章：常用AI工具与平台</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-robot"></i> 主流AI助手</h2>
+        
+        <table class="comparison-table">
+          <tr>
+            <th>产品</th>
+            <th>特点</th>
+            <th>优势</th>
+            <th>适合场景</th>
+          </tr>
+          <tr>
+            <td><strong>ChatGPT</strong></td>
+            <td>OpenAI产品，最早流行</td>
+            <td>功能全面、生态完善</td>
+            <td>日常对话、代码辅助、内容创作</td>
+          </tr>
+          <tr>
+            <td><strong>Claude</strong></td>
+            <td>Anthropic产品，安全导向</td>
+            <td>超长上下文、输出质量高</td>
+            <td>长文档分析、深度写作、代码开发</td>
+          </tr>
+          <tr>
+            <td><strong>Gemini</strong></td>
+            <td>Google产品，多模态强</td>
+            <td>图像/视频理解、谷歌生态集成</td>
+            <td>多模态任务、谷歌用户</td>
+          </tr>
+          <tr>
+            <td><strong>Copilot</strong></td>
+            <td>Microsoft产品，代码专用</td>
+            <td>IDE集成、实时辅助</td>
+            <td>编程开发、代码补全</td>
+          </tr>
+        </table>
+
+        <div class="concept-box success">
+          <h4><i class="fas fa-lightbulb"></i> 使用建议</h4>
+          <p>• 写代码：Claude Code、Copilot<br/>• 写文章：Claude、ChatGPT<br/>• 分析图片：Gemini、Claude<br/>• 日常问答：ChatGPT、Claude</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-image"></i> 图像生成工具</h2>
+        
+        <table class="comparison-table">
+          <tr>
+            <th>工具</th>
+            <th>特点</th>
+            <th>应用</th>
+          </tr>
+          <tr>
+            <td><strong>Midjourney</strong></td>
+            <td>艺术风格强，效果精美</td>
+            <td>创意设计、插画生成</td>
+          </tr>
+          <tr>
+            <td><strong>DALL-E</strong></td>
+            <td>OpenAI产品，理解能力强</td>
+            <td>复杂场景图像、商业应用</td>
+          </tr>
+          <tr>
+            <td><strong>Stable Diffusion</strong></td>
+            <td>开源，可本地运行</td>
+            <td>定制化、无限制创作</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-hugging"></i> Hugging Face平台</h2>
+        <p><span class="keyword-highlight">Hugging Face</span>是AI领域的"GitHub"，是最大的开源模型和数据集平台。</p>
+        
+        <div class="concept-box">
+          <h4><i class="fas fa-box-open"></i> Hugging Face提供</h4>
+          <p>• 数万个开源模型（LLM、图像、音频）<br/>• 大量公开数据集<br/>• Transformers库（调用模型的工具）<br/>• 模型演示空间<br/>• 文档和教程</p>
+        </div>
+
+        <h3>如何使用Hugging Face</h3>
+        <ol>
+          <li><strong>浏览模型</strong>：搜索需要的模型类型</li>
+          <li><strong>查看文档</strong>：了解模型用法</li>
+          <li><strong>在线试用</strong>：在Spaces中体验模型</li>
+          <li><strong>下载使用</strong>：用Python代码调用模型</li>
+        </ol>
+
+        <div class="concept-box success">
+          <h4><i class="fas fa-code"></i> 简单示例</h4>
+          <p>使用Python调用模型：<br/>from transformers import pipeline<br/>model = pipeline("text-generation", model="gpt2")<br/>result = model("Hello, I am")</p>
+        </div>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-code-branch"></i> 开源 vs 闭源模型</h2>
+        
+        <table class="comparison-table">
+          <tr>
+            <th>类型</th>
+            <th>特点</th>
+            <th>代表模型</th>
+            <th>适合场景</th>
+          </tr>
+          <tr>
+            <td><strong>闭源模型</strong></td>
+            <td>通过API调用，无法获取源码</td>
+            <td>GPT-4、Claude、Gemini</td>
+            <td>追求最佳效果、无需部署</td>
+          </tr>
+          <tr>
+            <td><strong>开源模型</strong></td>
+            <td>可下载使用，可修改优化</td>
+            <td>Llama、Qwen、Mistral</td>
+            <td>私有部署、定制需求、成本控制</td>
+          </tr>
+        </table>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-balance-scale"></i> 选择考虑</h4>
+          <p>闭源：<br/>• 优点：效果最好、使用简单<br/>• 缺点：有成本、数据隐私风险<br/><br/>开源：<br/>• 优点：免费、数据可控、可定制<br/>• 缺点：效果略差、需要技术能力</p>
+        </div>
+
+        <h3>主流开源模型</h3>
+        <ul>
+          <li><span class="keyword-highlight">Llama（Meta）</span>：性能强，开源模型标杆</li>
+          <li><span class="keyword-highlight">Qwen（阿里巴巴）</span>：中文能力强，开源领先</li>
+          <li><span class="keyword-highlight">Mistral</span>：效率高，小模型性能强</li>
+          <li><span class="keyword-highlight">DeepSeek</span>：国产，性价比高</li>
+        </ul>
+      </div>
+
+      <!-- 第二十一章：AI发展简史 -->
+      <h2 class="section-title"><i class="fas fa-history"></i> 第二十一章：AI发展简史</h2>
+      
+      <div class="concept-section">
+        <h2><i class="fas fa-wave-square"></i> AI的三波浪潮</h2>
+        
+        <h3>第一波：符号主义（1950-1970）</h3>
+        <p><span class="keyword-highlight">符号主义</span>认为智能可以通过逻辑规则实现。</p>
+        <ul>
+          <li>1956年：达特茅斯会议，"人工智能"概念诞生</li>
+          <li>特点：人工编写规则，让机器推理</li>
+          <li>局限：无法处理复杂现实问题</li>
+          <li>应用：简单的棋类游戏、数学证明</li>
+        </ul>
+
+        <h3>第二波：连接主义（1980-2010）</h3>
+        <p><span class="keyword-highlight">连接主义</span>认为智能来自神经网络的学习。</p>
+        <ul>
+          <li>1986年：反向传播算法，神经网络开始实用</li>
+          <li>特点：机器从数据学习，不再人工写规则</li>
+          <li>局限：算力不足，效果有限</li>
+          <li>应用：语音识别、简单图像识别</li>
+        </ul>
+
+        <h3>第三波：深度学习时代（2012-至今）</h3>
+        <p><span class="keyword-highlight">深度学习</span>结合大数据+大算力+大模型，实现突破。</p>
+        <ul>
+          <li>2012年：AlexNet图像识别突破，深度学习开始</li>
+          <li>2016年：AlphaGo战胜人类围棋冠军</li>
+          <li>2017年：Transformer架构诞生</li>
+          <li>2020年：GPT-3展示强大能力</li>
+          <li>2022年：ChatGPT发布，AI进入公众视野</li>
+        </ul>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-landmark"></i> 关键里程碑事件</h2>
+        
+        <table class="comparison-table">
+          <tr>
+            <th>年份</th>
+            <th>事件</th>
+            <th>意义</th>
+          </tr>
+          <tr>
+            <td><strong>1956</strong></td>
+            <td>达特茅斯会议</td>
+            <td>AI学科诞生</td>
+          </tr>
+          <tr>
+            <td><strong>1997</strong></td>
+            <td>深蓝战胜国际象棋冠军</td>
+            <td>AI在特定领域超越人类</td>
+          </tr>
+          <tr>
+            <td><strong>2012</strong></td>
+            <td>AlexNet图像识别突破</td>
+            <td>深度学习时代开启</td>
+          </tr>
+          <tr>
+            <td><strong>2016</strong></td>
+            <td>AlphaGo围棋夺冠</td>
+            <td>AI攻克最难棋类</td>
+          </tr>
+          <tr>
+            <td><strong>2017</strong></td>
+            <td>Transformer论文发表</td>
+            <td>现代LLM的基础架构</td>
+          </tr>
+          <tr>
+            <td><strong>2020</strong></td>
+            <td>GPT-3发布</td>
+            <td>展示大语言模型潜力</td>
+          </tr>
+          <tr>
+            <td><strong>2022</strong></td>
+            <td>ChatGPT发布</td>
+            <td>AI进入公众生活</td>
+          </tr>
+          <tr>
+            <td><strong>2023</strong></td>
+            <td>GPT-4、Claude、Gemini发布</td>
+            <td>多模态AI成熟</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-comments"></i> ChatGPT的影响</h2>
+        <p>2022年11月，ChatGPT的发布是AI历史上的重要转折点：</p>
+        
+        <div class="concept-box success">
+          <h4><i class="fas fa-globe"></i> 为什么ChatGPT影响巨大</h4>
+          <p>• <strong>对话能力</strong>：自然流畅的多轮对话<br/>• <strong>广泛能力</strong>：写作、编程、分析、翻译全能<br/>• <strong>易用性</strong>：普通人也能轻松使用<br/>• <strong>免费开放</strong>：降低了AI使用门槛<br/><br/>两个月用户破亿，成为最快增长的应用</p>
+        </div>
+
+        <h3>ChatGPT带来的变化</h3>
+        <ul>
+          <li><span class="keyword-highlight">公众认知</span>：普通人开始了解和使用AI</li>
+          <li><span class="keyword-highlight">产业变革</span>：各行各业探索AI应用</li>
+          <li><span class="keyword-highlight">人才需求</span>：AI相关岗位需求爆发</li>
+          <li><span class="keyword-highlight">投资热潮</span>：AI创业和投资活跃</li>
+          <li><span class="keyword-highlight">教育变革</span>：学校开始教授AI知识</li>
+        </ul>
+      </div>
+
+      <div class="concept-section">
+        <h2><i class="fas fa-road"></i> 未来趋势</h2>
+        
+        <h3>当前发展方向</h3>
+        <ul>
+          <li><strong>更大更强的模型</strong>：参数量持续增长，能力不断提升</li>
+          <li><strong>多模态融合</strong>：文本+图像+音频+视频综合处理</li>
+          <li><strong>Agent智能体</strong>：从对话到执行，AI主动完成任务</li>
+          <li><strong>专业领域应用</strong>：医疗、法律、金融等垂直领域</li>
+          <li><strong>端侧部署</strong>：手机、电脑本地运行AI</li>
+        </ul>
+
+        <div class="concept-box warning">
+          <h4><i class="fas fa-shield-alt"></i> 同时关注的挑战</h4>
+          <p>• <strong>安全与伦理</strong>：防止AI被滥用<br/>• <strong>就业影响</strong>：AI替代部分岗位<br/>• <strong>监管法规</strong>：各国制定AI管理规则<br/>• <strong>环境影响</strong>：训练消耗大量能源</p>
         </div>
       </div>
 
