@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="吴恩达（Andrew Ng）AI课程完整资源汇总 - 机器学习、深度学习、AI Agent、LangChain、CrewAI等教程" />
+    <meta name="keywords" content="吴恩达,Andrew Ng,机器学习,深度学习,AI课程,神经网络,AI Agent,LangChain,CrewAI,Python,TensorFlow" />
+    <meta name="author" content="Jackson" />
+    <title>吴恩达教程 - CodeClub</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+    <link rel="stylesheet" href="../css/mobile-optimizations.css" />
+    <style>
+      .andrew-ng-container {
+        max-width: 1200px;
+        margin: 70px auto 40px;
+        padding: 0 20px;
+      }
+      .hero-section {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px;
+        color: #fff;
+        margin-bottom: 30px;
+      }
+      .hero-section h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+      .hero-section .subtitle {
+        font-size: 18px;
+        opacity: 0.9;
+      }
+      .hero-section .stats {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+      }
+      .hero-section .stat-item {
+        text-align: center;
+      }
+      .hero-section .stat-number {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .hero-section .stat-label {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+      .intro-section {
+        background: var(--bg-secondary, #fff);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .intro-section h2 {
+        color: var(--text-primary, #1a1a2e);
+        margin-bottom: 16px;
+        font-size: 22px;
+      }
+      .intro-section p {
+        color: var(--text-secondary, #666);
+        line-height: 1.8;
+      }
+      .section-title {
+        font-size: 24px;
+        color: var(--text-primary, #1a1a2e);
+        margin: 30px 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary, #3b82f6);
+      }
+      .course-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .course-card {
+        background: var(--bg-secondary, #fff);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .course-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      }
+      .course-card .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .badge-ml { background: #3b82f6; color: #fff; }
+      .badge-dl { background: #8b5cf6; color: #fff; }
+      .badge-ai { background: #ec4899; color: #fff; }
+      .badge-agent { background: #f97316; color: #fff; }
+      .badge-python { background: #10b981; color: #fff; }
+      .badge-tensorflow { background: #f59e0b; color: #fff; }
+      .badge-nlp { background: #06b6d4; color: #fff; }
+      .badge-math { background: #6366f1; color: #fff; }
+      .badge-free { background: #22c55e; color: #fff; }
+      .badge-video { background: #ef4444; color: #fff; }
+      .badge-note { background: #84cc16; color: #fff; }
+      .badge-stanford { background: #dc2626; color: #fff; }
+      .course-card h3 {
+        font-size: 18px;
+        color: var(--text-primary, #1a1a2e);
+        margin-bottom: 10px;
+      }
+      .course-card p {
+        color: var(--text-secondary, #666);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+      .course-card .features {
+        font-size: 13px;
+        color: var(--text-secondary, #888);
+        margin-bottom: 16px;
+      }
+      .course-card .features i {
+        color: var(--primary, #3b82f6);
+        margin-right: 6px;
+      }
+      .course-links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .course-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .link-primary {
+        background: var(--primary, #3b82f6);
+        color: #fff;
+      }
+      .link-primary:hover {
+        background: #2563eb;
+      }
+      .link-secondary {
+        background: #f1f5f9;
+        color: var(--text-primary, #1a1a2e);
+      }
+      .link-secondary:hover {
+        background: #e2e8f0;
+      }
+      .resource-section {
+        background: var(--bg-secondary, #fff);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .resource-section h3 {
+        font-size: 20px;
+        color: var(--text-primary, #1a1a2e);
+        margin-bottom: 16px;
+      }
+      .resource-list {
+        list-style: none;
+        padding: 0;
+      }
+      .resource-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border, #e5e7eb);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .resource-list li:last-child {
+        border-bottom: none;
+      }
+      .resource-list li i {
+        color: var(--primary, #3b82f6);
+        font-size: 18px;
+      }
+      .resource-list li a {
+        color: var(--primary, #3b82f6);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .resource-list li a:hover {
+        text-decoration: underline;
+      }
+      .resource-list li .desc {
+        color: var(--text-secondary, #666);
+        font-size: 14px;
+      }
+      .roadmap-section {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 30px;
+      }
+      .roadmap-section h3 {
+        font-size: 20px;
+        color: var(--text-primary, #1a1a2e);
+        margin-bottom: 16px;
+      }
+      .roadmap-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .roadmap-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 16px;
+        background: var(--bg-secondary, #fff);
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+      .step-number {
+        width: 32px;
+        height: 32px;
+        background: var(--primary, #3b82f6);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .step-content h4 {
+        font-size: 16px;
+        color: var(--text-primary, #1a1a2e);
+        margin-bottom: 6px;
+      }
+      .step-content p {
+        font-size: 14px;
+        color: var(--text-secondary, #666);
+      }
+      @media (max-width: 768px) {
+        .course-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-section .stats {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a class="navbar-brand" href="../index.html">
+          <img src="../img/logo.png" alt="CodeClub" width="32" height="32" />
+          <span>CodeClub</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+        <ul class="navbar-nav">
+          <li><a class="nav-link" href="../index.html">首页</a></li>
+          <li><a class="nav-link" href="../nav.html">网址导航</a></li>
+          <li><a class="nav-link" href="../blog/">博客</a></li>
+          <li><a class="nav-link" href="../wiki/index.html" target="_blank">WiKi</a></li>
+          <li><a class="nav-link active" href="../tutorials/index.html">教程</a></li>
+          <li><a class="nav-link" href="../book.html">图书</a></li>
+          <li><a class="nav-link" href="../contact.html">联系我</a></li>
+          <li><a class="nav-link" href="../about.html">关于我</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="andrew-ng-container">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <h1><i class="fas fa-graduation-cap"></i> 吴恩达 AI 课程资源大全</h1>
+        <p class="subtitle">Andrew Ng - 全球 AI 教育领域先驱，惠及超过 800 万学习者</p>
+        <div class="stats">
+          <div class="stat-item">
+            <div class="stat-number">800万+</div>
+            <div class="stat-label">全球学员</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">200+</div>
+            <div class="stat-label">学术论文</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">精品课程</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">TIME100</div>
+            <div class="stat-label">2023 AI 影响力人物</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Introduction -->
+      <div class="intro-section">
+        <h2><i class="fas fa-user"></i> 关于吴恩达 (Andrew Ng)</h2>
+        <p>
+          吴恩达（Andrew Ng）是全球人工智能领域的先驱人物，DeepLearning.AI 创始人、Coursera 联合创始人、斯坦福大学 adjunct professor。
+          曾任 Google Brain 团队创始人、百度首席科学家。他被《时代》杂志评为 2023 年全球最具影响力的 AI 人物之一。
+          他的课程通俗易懂、体系完善，是入门人工智能的最佳选择。本页汇总了吴恩达所有公开课程、中文笔记、视频资源，帮助你系统学习 AI。
+        </p>
+      </div>
+
+      <!-- Learning Roadmap -->
+      <div class="roadmap-section">
+        <h3><i class="fas fa-route"></i> 推荐学习路线</h3>
+        <div class="roadmap-steps">
+          <div class="roadmap-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>AI for Everyone → 了解 AI 基础概念</h4>
+              <p>非技术人员也能看懂的 AI 入门课程，了解什么是 AI、AI 能做什么、如何应用 AI。</p>
+            </div>
+          </div>
+          <div class="roadmap-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>AI Python for Beginners → 掌握编程基础</h4>
+              <p>吴恩达最新 Python 课程，AI 辅助学习，边学边练，快速掌握 Python 编程。</p>
+            </div>
+          </div>
+          <div class="roadmap-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Machine Learning Specialization → 系统学习机器学习</h4>
+              <p>经典 ML 课程更新版，涵盖监督学习、无监督学习、最佳实践，Python 实现。</p>
+            </div>
+          </div>
+          <div class="roadmap-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Deep Learning Specialization → 深入深度学习</h4>
+              <p>5 门专项课程，神经网络、CNN、RNN、序列模型，TensorFlow 实战。</p>
+            </div>
+          </div>
+          <div class="roadmap-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>Agentic AI / Multi-Agent → 掌握 AI Agent 技术</h4>
+              <p>最新 Agent 课程，学习反思、工具使用、规划、多智能体协作等前沿技术。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Courses Section -->
+      <h2 class="section-title"><i class="fas fa-star"></i> 核心课程</h2>
+      <div class="course-grid">
+        <!-- AI for Everyone -->
+        <div class="course-card">
+          <span class="badge badge-ai">AI 入门</span>
+          <span class="badge badge-free">免费</span>
+          <h3>AI for Everyone（人人都能学的 AI）</h3>
+          <p>非技术人员的 AI 入门课，通俗易懂，讲解 AI 概念、应用场景、对行业的影响。适合产品经理、管理层、创业者。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 6 小时 | <i class="fas fa-signal"></i> 入门级 | <i class="fas fa-language"></i> 中英文
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/ai-for-everyone/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+            <a href="https://www.bilibili.com/video/BV1pM4y1k7z5/" target="_blank" class="link-secondary"><i class="fas fa-video"></i> B站</a>
+          </div>
+        </div>
+
+        <!-- AI Python for Beginners -->
+        <div class="course-card">
+          <span class="badge badge-python">Python</span>
+          <span class="badge badge-free">免费</span>
+          <h3>AI Python for Beginners（AI 辅助 Python 入门）</h3>
+          <p>2025 最新课程！AI 辅助学习 Python，边学边练，快速掌握编程基础、任务自动化、数据处理。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 4 个模块 | <i class="fas fa-signal"></i> 入门级 | <i class="fas fa-robot"></i> AI 辅助
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/ai-python-for-beginners/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+            <a href="https://www.bilibili.com/video/BV1XZaCz5ERW/" target="_blank" class="link-secondary"><i class="fas fa-video"></i> B站</a>
+          </div>
+        </div>
+
+        <!-- Machine Learning Specialization -->
+        <div class="course-card">
+          <span class="badge badge-ml">机器学习</span>
+          <h3>Machine Learning Specialization（机器学习专项课程）</h3>
+          <p>经典课程 2022 更新版！涵盖线性回归、逻辑回归、神经网络、SVM、K-Means、异常检测等，Python 实现。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 60 小时 | <i class="fas fa-signal"></i> 初中级 | <i class="fas fa-code"></i> Python 编程作业
+          </div>
+          <div class="course-links">
+            <a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> Coursera</a>
+            <a href="https://www.bilibili.com/video/BV1LLWqz3EST/" target="_blank" class="link-secondary"><i class="fas fa-video"></i> B站 2025版</a>
+            <a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes" target="_blank" class="link-secondary"><i class="fas fa-book"></i> 中文笔记</a>
+          </div>
+        </div>
+
+        <!-- Deep Learning Specialization -->
+        <div class="course-card">
+          <span class="badge badge-dl">深度学习</span>
+          <h3>Deep Learning Specialization（深度学习专项课程）</h3>
+          <p>5 门课程组成的深度学习专项：神经网络基础、优化、CNN、RNN、序列模型。TensorFlow 实战，业界最佳入门课程。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 80 小时 | <i class="fas fa-signal"></i> 中级 | <i class="fas fa-code"></i> TensorFlow 作业
+          </div>
+          <div class="course-links">
+            <a href="https://www.coursera.org/specializations/deep-learning" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> Coursera</a>
+            <a href="https://www.bilibili.com/video/BV12urfB1E7s/" target="_blank" class="link-secondary"><i class="fas fa-video"></i> B站 2026版</a>
+            <a href="https://github.com/fengdu78/deeplearning_ai_books" target="_blank" class="link-secondary"><i class="fas fa-book"></i> 中文笔记</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent Courses Section -->
+      <h2 class="section-title"><i class="fas fa-robot"></i> AI Agent 课程（最新）</h2>
+      <div class="course-grid">
+        <!-- Agentic AI -->
+        <div class="course-card">
+          <span class="badge badge-agent">Agentic AI</span>
+          <span class="badge badge-free">免费</span>
+          <h3>Agentic AI（智能体 AI）</h3>
+          <p>吴恩达亲授最新 Agent 课程！学习反思（Reflection）、工具使用（Tool Use）、规划（Planning）、多智能体协作（Multi-Agent）四大设计模式。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 20 小时 | <i class="fas fa-signal"></i> 中高级 | <i class="fas fa-code"></i> Python 从零实现
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/agentic-ai/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+            <a href="https://www.bilibili.com/video/BV1zRbBzcE4Z/" target="_blank" class="link-secondary"><i class="fas fa-video"></i> B站</a>
+          </div>
+        </div>
+
+        <!-- Multi AI Agent Systems with crewAI -->
+        <div class="course-card">
+          <span class="badge badge-agent">Multi-Agent</span>
+          <span class="badge badge-free">免费</span>
+          <h3>Multi AI Agent Systems with crewAI</h3>
+          <p>crewAI 创始人 João Moura 教授，学习角色扮演、记忆、工具、协作模式。自动化简历定制、技术写作、客服等。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 8 小时 | <i class="fas fa-signal"></i> 中级 | <i class="fas fa-code"></i> crewAI 实战
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/multi-ai-agent-systems-with-crewai/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+            <a href="https://www.youtube.com/watch?v=d3WiKofD-34" target="_blank" class="link-secondary"><i class="fas fa-video"></i> YouTube</a>
+          </div>
+        </div>
+
+        <!-- Design, Develop, and Deploy Multi-Agent Systems -->
+        <div class="course-card">
+          <span class="badge badge-agent">Multi-Agent</span>
+          <span class="badge badge-free">免费</span>
+          <h3>Design, Develop, and Deploy Multi-Agent Systems with CrewAI</h3>
+          <p>进阶课程！从原型到生产：MCP 工具、Flows 编排、A2A 协议、版本控制、监控部署。深度研究、会议副驾驶实战项目。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 10 小时 | <i class="fas fa-signal"></i> 高级 | <i class="fas fa-server"></i> 生产部署
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/design-develop-and-deploy-multi-agent-systems-with-crewai/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+          </div>
+        </div>
+
+        <!-- LangChain for LLM -->
+        <div class="course-card">
+          <span class="badge badge-agent">LangChain</span>
+          <span class="badge badge-free">免费</span>
+          <h3>LangChain for LLM Application Development</h3>
+          <p>LangChain 官方课程！学习 LLM 应用开发、链式调用、记忆、RAG、评估。构建实用的 AI 应用。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 4 小时 | <i class="fas fa-signal"></i> 中级 | <i class="fas fa-code"></i> LangChain
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/langchain-for-llm-application-development/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+          </div>
+        </div>
+
+        <!-- ChatGPT Prompt Engineering -->
+        <div class="course-card">
+          <span class="badge badge-agent">Prompt</span>
+          <span class="badge badge-free">免费</span>
+          <h3>ChatGPT Prompt Engineering for Developers</h3>
+          <p>与 OpenAI 合作，Isa Fulford 教授。学习 Prompt Engineering 最佳实践、迭代优化、应用案例。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 2 小时 | <i class="fas fa-signal"></i> 入门级 | <i class="fas fa-lightbulb"></i> Prompt 技巧
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/chatgpt-prompt-engineering-for-developers/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+          </div>
+        </div>
+
+        <!-- Generative AI for Everyone -->
+        <div class="course-card">
+          <span class="badge badge-agent">GenAI</span>
+          <span class="badge badge-free">免费</span>
+          <h3>Generative AI for Everyone（人人都能学的生成式 AI）</h3>
+          <p>吴恩达亲授，了解 GenAI 基础、应用场景、机会与风险。适合所有人快速了解生成式 AI。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 3 小时 | <i class="fas fa-signal"></i> 入门级 | <i class="fas fa-language"></i> 中英文
+          </div>
+          <div class="course-links">
+            <a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TensorFlow & NLP Courses -->
+      <h2 class="section-title"><i class="fas fa-code"></i> TensorFlow & NLP 课程</h2>
+      <div class="course-grid">
+        <!-- TensorFlow Developer -->
+        <div class="course-card">
+          <span class="badge badge-tensorflow">TensorFlow</span>
+          <h3>TensorFlow Developer Professional Certificate</h3>
+          <p>掌握 TensorFlow：神经网络、CNN、RNN、NLP、时间序列。获得 TensorFlow 开发者专业证书。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 40 小时 | <i class="fas fa-signal"></i> 中级 | <i class="fas fa-certificate"></i> 专业证书
+          </div>
+          <div class="course-links">
+            <a href="https://www.coursera.org/professional-certificates/tensorflow-developer" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> Coursera</a>
+          </div>
+        </div>
+
+        <!-- NLP Specialization -->
+        <div class="course-card">
+          <span class="badge badge-nlp">NLP</span>
+          <h3>Natural Language Processing Specialization</h3>
+          <p>自然语言处理专项课程：文本处理、序列模型、注意力机制、Transformer、应用实战。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 40 小时 | <i class="fas fa-signal"></i> 中级 | <i class="fas fa-code"></i> NLP 作业
+          </div>
+          <div class="course-links">
+            <a href="https://www.coursera.org/specializations/natural-language-processing" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> Coursera</a>
+          </div>
+        </div>
+
+        <!-- Math for ML -->
+        <div class="course-card">
+          <span class="badge badge-math">数学</span>
+          <h3>Mathematics for Machine Learning Specialization</h3>
+          <p>机器学习数学基础：线性代数、多变量微积分、PCA。补充数学知识，更好理解 ML 算法。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 30 小时 | <i class="fas fa-signal"></i> 初中级 | <i class="fas fa-calculator"></i> 数学推导
+          </div>
+          <div class="course-links">
+            <a href="https://www.coursera.org/specializations/mathematics-machine-learning" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> Coursera</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stanford University Courses -->
+      <h2 class="section-title"><i class="fas fa-university"></i> 斯坦福大学课程</h2>
+      <div class="course-grid">
+        <!-- CS229 -->
+        <div class="course-card">
+          <span class="badge badge-stanford">Stanford</span>
+          <h3>CS229: Machine Learning（斯坦福机器学习）</h3>
+          <p>斯坦福大学经典 ML 课程，更深入的理论推导。适合有数学基础、想深入理解 ML 原理的学习者。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 40 小时 | <i class="fas fa-signal"></i> 高级 | <i class="fas fa-flask"></i> 理论+实践
+          </div>
+          <div class="course-links">
+            <a href="http://cs229.stanford.edu/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 课程主页</a>
+            <a href="https://github.com/scruel/Notes-ML-AndrewNg" target="_blank" class="link-secondary"><i class="fas fa-book"></i> 中文笔记</a>
+          </div>
+        </div>
+
+        <!-- CS230 -->
+        <div class="course-card">
+          <span class="badge badge-stanford">Stanford</span>
+          <h3>CS230: Deep Learning（斯坦福深度学习）</h3>
+          <p>深度学习进阶课程，翻转课堂形式。CNN、RNN、项目实战，适合掌握基础后深入学习。</p>
+          <div class="features">
+            <i class="fas fa-clock"></i> 约 40 小时 | <i class="fas fa-signal"></i> 高级 | <i class="fas fa-project-diagram"></i> 项目实战
+          </div>
+          <div class="course-links">
+            <a href="http://cs230.stanford.edu/" target="_blank" class="link-primary"><i class="fas fa-external-link-alt"></i> 课程主页</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub Resources -->
+      <div class="resource-section">
+        <h3><i class="fab fa-github"></i> GitHub 中文笔记 & 代码资源</h3>
+        <ul class="resource-list">
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes" target="_blank">Coursera-ML-AndrewNg-Notes</a>
+            <span class="desc">- 黄海广博士整理，机器学习完整中文笔记（PDF/Word/Markdown）+ 视频 + Python 作业</span>
+          </li>
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://github.com/fengdu78/deeplearning_ai_books" target="_blank">deeplearning_ai_books</a>
+            <span class="desc">- 深度学习专项课程完整中文笔记，5 门课全覆盖，B站视频配套</span>
+          </li>
+          <li>
+            <i class="fas fa-code"></i>
+            <a href="https://github.com/Duguce/LearningMLwithAndrewNg" target="_blank">LearningMLwithAndrewNg</a>
+            <span class="desc">- 机器学习课程作业 Python 实现，线性回归/逻辑回归/神经网络/SVM/K-Means/PCA</span>
+          </li>
+          <li>
+            <i class="fas fa-code"></i>
+            <a href="https://github.com/hujinsen/python-machine-learning" target="_blank">python-machine-learning</a>
+            <span class="desc">- 吴恩达 ML 课程 Python 实现，含 scikit-learn 对比实现</span>
+          </li>
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://github.com/scruel/Notes-ML-AndrewNg" target="_blank">Notes-ML-AndrewNg</a>
+            <span class="desc">- 详细 ML 课程笔记，在线阅读版本，百度网盘视频下载</span>
+          </li>
+          <li>
+            <i class="fas fa-code"></i>
+            <a href="https://github.com/sherlockHSY/CourseML_Homework" target="_blank">CourseML_Homework</a>
+            <span class="desc">- Python3 + Jupyter Notebook 实现课后作业</span>
+          </li>
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://github.com/taoxu512/Coursera-ML-AndrewNg-Notes" target="_blank">Coursera-ML-AndrewNg-Notes</a>
+            <span class="desc">- 斯坦福 2014 机器学习中文笔记，含 PPT 课件</span>
+          </li>
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://github.com/noending/Deeplearning-Notes" target="_blank">Deeplearning-Notes</a>
+            <span class="desc">- 深度学习笔记及资源汇总，5 门课讲义 + 作业代码</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- B站视频资源 -->
+      <div class="resource-section">
+        <h3><i class="fas fa-video"></i> B站视频资源（中文翻译版）</h3>
+        <ul class="resource-list">
+          <li>
+            <i class="fas fa-play-circle"></i>
+            <a href="https://www.bilibili.com/video/BV1XZaCz5ERW/" target="_blank">吴恩达 AI 系列课程 600 集</a>
+            <span class="desc">- Python + ML + DL + CV + NLP + LLM 完整合集</span>
+          </li>
+          <li>
+            <i class="fas fa-play-circle"></i>
+            <a href="https://www.bilibili.com/video/BV1LLWqz3EST/" target="_blank">机器学习 2025 官方中英版</a>
+            <span class="desc">- 最新重置版，高清中英字幕，课件代码齐全</span>
+          </li>
+          <li>
+            <i class="fas fa-play-circle"></i>
+            <a href="https://www.bilibili.com/video/BV12urfB1E7s/" target="_blank">深度学习 2026 官方中英版</a>
+            <span class="desc">- 最新版深度学习教程，配套课件代码实战项目</span>
+          </li>
+          <li>
+            <i class="fas fa-play-circle"></i>
+            <a href="https://www.bilibili.com/video/BV1zRbBzcE4Z/" target="_blank">深度学习完整课程</a>
+            <span class="desc">- 2025 版，课件+代码+实战项目</span>
+          </li>
+          <li>
+            <i class="fas fa-play-circle"></i>
+            <a href="https://www.bilibili.com/video/BV1cV411S7Pn/" target="_blank">神经网络与深度学习</a>
+            <span class="depth">- 第一课专题，深度学习基础原理</span>
+          </li>
+          <li>
+            <i class="fas fa-play-circle"></i>
+            <a href="https://www.bilibili.com/video/BV1pM4y1k7z5/" target="_blank">AI for Everyone 中文版</a>
+            <span class="desc">- 人人都能学的 AI，中文配音版</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- More Courses -->
+      <div class="resource-section">
+        <h3><i class="fas fa-plus-circle"></i> 更多课程资源</h3>
+        <ul class="resource-list">
+          <li>
+            <i class="fas fa-link"></i>
+            <a href="https://www.deeplearning.ai/" target="_blank">DeepLearning.AI 官网</a>
+            <span class="desc">- 所有课程汇总，Andrew Ng 每周 AI 信件订阅</span>
+          </li>
+          <li>
+            <i class="fas fa-link"></i>
+            <a href="https://www.andrewng.org/" target="_blank">Andrew Ng 个人主页</a>
+            <span class="desc">- 官方网站，最新动态、演讲、论文</span>
+          </li>
+          <li>
+            <i class="fas fa-link"></i>
+            <a href="https://www.coursera.org/collections/machine-learning" target="_blank">Coursera ML 课程合集</a>
+            <span class="desc">- 吴恩达 Coursera 课程官方合集</span>
+          </li>
+          <li>
+            <i class="fas fa-link"></i>
+            <a href="https://cloud.tencent.com.cn/developer/article/1591100" target="_blank">腾讯云 - 吴恩达 AI 课程汇总</a>
+            <span class="desc">- 中文整理，学习路线推荐</span>
+          </li>
+          <li>
+            <i class="fas fa-link"></i>
+            <a href="https://blog.csdn.net/Datawhale/article/details/104509347" target="_blank">Datawhale - 学习路线梳理</a>
+            <span class="desc">- 从简单到困难的学习路线，详细资源整理</span>
+          </li>
+          <li>
+            <i class="fas fa-link"></i>
+            <a href="https://www.deeplearn.me/2120.html" target="_blank">深度学习笔记打印版</a>
+            <span class="desc">- PDF 版笔记，方便打印学习</span>
+          </li>
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://www.deeplearning.ai/machine-learning-yearning/" target="_blank">Machine Learning Yearning</a>
+            <span class="desc">- 吴恩达免费电子书，ML 项目实践指南</span>
+          </li>
+          <li>
+            <i class="fas fa-book"></i>
+            <a href="https://www.deeplearning.ai/how-to-build-your-career-in-ai/" target="_blank">How to Build Your Career in AI</a>
+            <span class="desc">- AI 职业发展路线图，免费下载</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Footer Note -->
+      <div class="intro-section" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); margin-top: 30px;">
+        <h2><i class="fas fa-lightbulb"></i> 学习建议</h2>
+        <p>
+          <strong>入门顺序：</strong>AI for Everyone → AI Python for Beginners → Machine Learning → Deep Learning → Agentic AI<br>
+          <strong>实践为主：</strong>每个课程都有编程作业，务必动手完成，加深理解。<br>
+          <strong>利用笔记：</strong>GitHub 中文笔记帮助你更快理解课程内容，适合复习。<br>
+          <strong>关注更新：</strong>DeepLearning.AI 持续推出新课程，建议订阅 Andrew Ng 每周信件获取最新动态。
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2026 CodeClub. All rights reserved. | 资源整理：Jackson</p>
+      </div>
+    </footer>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+  </body>
+</html>
