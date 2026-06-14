@@ -1179,6 +1179,108 @@
   </div>
 </div>
 
+<div class="concept-section">
+  <h2><i class="fas fa-code"></i> 代码实践</h2>
+  <p>以下代码使用<strong>matplotlib</strong>绘制AI发展史上的关键里程碑时间线，帮助你直观理解AI的发展历程。</p>
+
+  <pre><code class="language-python">
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
+
+# AI里程碑数据
+milestones = [
+    {"year": 1950, "event": "图灵测试提出", "wave": "规则驱动"},
+    {"year": 1956, "event": "达特茅斯会议\nAI概念诞生", "wave": "规则驱动"},
+    {"year": 1997, "event": "深蓝战胜\n国际象棋冠军", "wave": "数据驱动"},
+    {"year": 2012, "event": "AlexNet\n深度学习革命", "wave": "数据驱动"},
+    {"year": 2016, "event": "AlphaGo战胜\n围棋世界冠军", "wave": "数据驱动"},
+    {"year": 2017, "event": "Transformer\n架构提出", "wave": "大模型时代"},
+    {"year": 2022, "event": "ChatGPT发布\nAI走向大众", "wave": "大模型时代"},
+    {"year": 2023, "event": "GPT-4/Claude 3\n多模态爆发", "wave": "大模型时代"},
+]
+
+# 三波浪潮的颜色
+wave_colors = {
+    "规则驱动": "#4299e1",
+    "数据驱动": "#48bb78",
+    "大模型时代": "#ed8936",
+}
+
+# 创建图形
+fig, ax = plt.subplots(figsize=(14, 7))
+
+# 绘制时间线主轴
+years = [m["year"] for m in milestones]
+ax.plot(years, [0]*len(years), color="#2d3748", linewidth=3, zorder=1)
+
+# 绘制每个里程碑
+for i, m in enumerate(milestones):
+    year = m["year"]
+    color = wave_colors[m["wave"]]
+
+    # 交替上下显示
+    y_offset = 0.4 if i % 2 == 0 else -0.4
+
+    # 绘制连接线
+    ax.plot([year, year], [0, y_offset*0.7], color=color, linewidth=2, zorder=2)
+
+    # 绘制圆点
+    ax.scatter(year, 0, s=150, c=color, zorder=3, edgecolors="white", linewidth=2)
+
+    # 添加事件文本
+    ax.text(year, y_offset, m["event"], ha='center', va='center' if y_offset > 0 else 'center',
+            fontsize=9, fontweight='bold',
+            bbox=dict(boxstyle='round,pad=0.4', facecolor=color, alpha=0.15, edgecolor=color))
+
+    # 添加年份标签
+    ax.text(year, -0.08 if y_offset > 0 else 0.08, str(year), ha='center',
+            fontsize=10, fontweight='bold', color="#2d3748")
+
+# 添加三波浪潮的背景区域
+ax.axvspan(1945, 1985, alpha=0.08, color=wave_colors["规则驱动"], label="规则驱动")
+ax.axvspan(1985, 2015, alpha=0.08, color=wave_colors["数据驱动"], label="数据驱动")
+ax.axvspan(2015, 2026, alpha=0.08, color=wave_colors["大模型时代"], label="大模型时代")
+
+# 设置图形属性
+ax.set_xlim(1945, 2026)
+ax.set_ylim(-0.8, 0.8)
+ax.set_title('AI发展简史：关键里程碑时间线', fontsize=16, fontweight='bold', pad=20)
+
+# 隐藏坐标轴
+ax.set_yticks([])
+ax.spines['left'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['top'].set_visible(False)
+
+# 添加图例
+legend_patches = [mpatches.Patch(color=c, label=w, alpha=0.6) for w, c in wave_colors.items()]
+ax.legend(handles=legend_patches, loc='upper left', fontsize=10)
+
+plt.tight_layout()
+plt.show()
+  </code></pre>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+    <p>运行后会显示一个横向时间线图，包含以下元素：</p>
+    <ul>
+      <li><strong>水平主轴</strong>：从1950年到2024年的时间线</li>
+      <li><strong>彩色圆点</strong>：标记8个关键里程碑事件</li>
+      <li><strong>交替标签</strong>：事件名称在轴线上方和下方交替显示</li>
+      <li><strong>背景色块</strong>：三波浪潮（规则驱动/数据驱动/大模型时代）用不同颜色区分</li>
+    </ul>
+    <p>这个可视化清晰展示了AI发展的加速趋势：从1950年到1997年只有2个里程碑，而从2017年到2023年就有4个重大突破。</p>
+  </div>
+
+  <p>通过这个代码实践，你可以：</p>
+  <ol>
+    <li>学习如何用matplotlib绘制<strong>时间线图表</strong></li>
+    <li>理解AI发展的<strong>三波浪潮</strong>和关键节点</li>
+    <li>掌握数据可视化的基本技巧（散点、文本标注、背景色块）</li>
+  </ol>
+</div>
+
 <div class="chapter-summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>

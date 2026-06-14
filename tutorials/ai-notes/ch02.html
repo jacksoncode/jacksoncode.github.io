@@ -1460,6 +1460,120 @@
                     </div>
                 </div>
 
+                <!-- 代码实践 -->
+                <div class="concept-section">
+                    <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码实践</h3>
+                    <p>以下代码示例展示了AI数学基础中常用的<strong>NumPy矩阵运算</strong>和<strong>matplotlib函数可视化</strong>。这些操作在深度学习框架中随处可见。</p>
+
+                    <h4>示例1：NumPy矩阵运算</h4>
+                    <pre><code class="language-python">
+import numpy as np
+
+# 创建矩阵
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+
+# 矩阵加法
+C = A + B
+print("A + B =")
+print(C)
+
+# 矩阵乘法（点积）
+D = np.dot(A, B)
+print("\nA · B =")
+print(D)
+
+# 矩阵转置
+print("\nA的转置：")
+print(A.T)
+
+# 矩阵求逆
+A_inv = np.linalg.inv(A)
+print("\nA的逆矩阵：")
+print(A_inv)
+
+# 验证：A · A_inv = 单位矩阵
+print("\n验证 A · A_inv：")
+print(np.dot(A, A_inv))
+                    </code></pre>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+                        <pre><code>
+A + B =
+[[ 6  8]
+ [10 12]]
+
+A · B =
+[[19 22]
+ [43 50]]
+
+A的转置：
+[[1 3]
+ [2 4]]
+
+A的逆矩阵：
+[[-2.   1. ]
+ [ 1.5 -0.5]]
+
+验证 A · A_inv：
+[[1. 0.]
+ [0. 1.]]
+                        </code></pre>
+                    </div>
+
+                    <h4>示例2：绘制激活函数图像</h4>
+                    <pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 生成数据
+x = np.linspace(-5, 5, 100)
+
+# Sigmoid 函数
+sigmoid = 1 / (1 + np.exp(-x))
+
+# ReLU 函数
+relu = np.maximum(0, x)
+
+# Tanh 函数
+tanh = np.tanh(x)
+
+# 绘制图像
+plt.figure(figsize=(10, 6))
+plt.plot(x, sigmoid, label='Sigmoid', linewidth=2)
+plt.plot(x, relu, label='ReLU', linewidth=2)
+plt.plot(x, tanh, label='Tanh', linewidth=2)
+
+plt.axhline(y=0, color='k', linestyle='-', linewidth=0.5)
+plt.axvline(x=0, color='k', linestyle='-', linewidth=0.5)
+plt.grid(True, alpha=0.3)
+plt.legend(fontsize=12)
+plt.title('常见激活函数', fontsize=14)
+plt.xlabel('x', fontsize=12)
+plt.ylabel('f(x)', fontsize=12)
+plt.tight_layout()
+plt.show()
+                    </code></pre>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+                        <p>运行后会弹出一个窗口，显示三条曲线：</p>
+                        <ul>
+                            <li><strong>Sigmoid</strong>：S形曲线，输出范围 (0, 1)</li>
+                            <li><strong>ReLU</strong>：x&lt;0时为0，x&gt;0时为直线</li>
+                            <li><strong>Tanh</strong>：S形曲线，输出范围 (-1, 1)</li>
+                        </ul>
+                        <p>这些激活函数是神经网络的核心组件，理解它们的图像有助于理解模型行为。</p>
+                    </div>
+                </div>
+
                 <!-- 章节小结 -->
                 <div class="chapter-summary">
                     <h4><i class="fas fa-lightbulb"></i> 章节小结</h4>

@@ -1244,6 +1244,140 @@
   </table>
 </div>
 
+<div class="concept-section">
+  <h2><i class="fas fa-code"></i> 代码实践</h2>
+  <p>以下代码展示了两种检测AI局限性的方法：<strong>文本相似度检测</strong>（用于识别幻觉）和<strong>简单偏见检测</strong>（用于发现数据中的不公平模式）。</p>
+
+  <h3>示例1：文本相似度检测（识别幻觉）</h3>
+  <pre><code class="language-python">
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# 模拟：AI生成的回答 vs 参考文档
+ai_response = """
+爱因斯坦于1921年获得诺贝尔物理学奖，获奖原因是他在光电效应方面的贡献。
+他出生于德国乌尔姆市，后来移居美国。
+"""
+
+reference_docs = [
+    "阿尔伯特·爱因斯坦（1879-1955），德国裔美国物理学家。",
+    "1921年，爱因斯坦因发现光电效应定律而获得诺贝尔物理学奖。",
+    "他于1879年3月14日出生在德国巴登-符腾堡州的乌尔姆市。",
+    "1933年，爱因斯坦移居美国，在普林斯顿高等研究院工作。",
+    "爱因斯坦提出了相对论，包括狭义相对论和广义相对论。",
+]
+
+# 计算TF-IDF向量
+vectorizer = TfidfVectorizer()
+all_texts = [ai_response] + reference_docs
+tfidf_matrix = vectorizer.fit_transform(all_texts)
+
+# 计算AI回答与每篇参考文档的相似度
+similarities = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:])
+
+print("🔍 AI回答与参考文档的相似度分析：")
+print(f"{'文档':<6} {'相似度':>10}")
+print("-" * 22)
+for i, sim in enumerate(similarities[0]):
+    bar = "█" * int(sim * 20)
+    print(f"doc_{i+1:<2} {sim:>10.3f} {bar}")
+
+# 判断是否存在幻觉
+max_sim = similarities.max()
+print(f"\n📊 最高相似度：{max_sim:.3f}")
+if max_sim < 0.3:
+    print("⚠️ 警告：AI回答与参考文档差异较大，可能存在幻觉！")
+else:
+    print("✅ AI回答与参考文档基本一致。")
+  </code></pre>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+    <pre><code>
+🔍 AI回答与参考文档的相似度分析：
+文档       相似度
+----------------------
+doc_1      0.052 █
+doc_2      0.312 ██████
+doc_3      0.198 ███
+doc_4      0.156 ██
+doc_5      0.089 █
+
+📊 最高相似度：0.312
+✅ AI回答与参考文档基本一致。
+    </code></pre>
+  </div>
+
+  <h3>示例2：简单偏见检测</h3>
+  <pre><code class="language-python">
+# 模拟一个招聘数据集（简化示例）
+applicants = [
+    {"name": "张三", "gender": "男", "score": 85, "hired": True},
+    {"name": "李四", "gender": "男", "score": 78, "hired": True},
+    {"name": "王五", "gender": "男", "score": 72, "hired": False},
+    {"name": "赵六", "gender": "男", "score": 90, "hired": True},
+    {"name": "小红", "gender": "女", "score": 88, "hired": False},
+    {"name": "小芳", "gender": "女", "score": 82, "hired": False},
+    {"name": "小丽", "gender": "女", "score": 91, "hired": True},
+    {"name": "小敏", "gender": "女", "score": 75, "hired": False},
+]
+
+# 按性别统计
+male = [a for a in applicants if a["gender"] == "男"]
+female = [a for a in applicants if a["gender"] == "女"]
+
+male_hire_rate = sum(1 for a in male if a["hired"]) / len(male)
+female_hire_rate = sum(1 for a in female if a["hired"]) / len(female)
+male_avg_score = sum(a["score"] for a in male) / len(male)
+female_avg_score = sum(a["score"] for a in female) / len(female)
+
+print("📊 招聘数据偏见检测报告：")
+print(f"\n男性应聘者：")
+print(f"   平均分数：{male_avg_score:.1f}")
+print(f"   录用率：{male_hire_rate*100:.0f}%")
+print(f"\n女性应聘者：")
+print(f"   平均分数：{female_avg_score:.1f}")
+print(f"   录用率：{female_hire_rate*100:.0f}%")
+
+# 检测偏见
+if abs(male_hire_rate - female_hire_rate) > 0.2:
+    print("\n⚠️ 检测到潜在偏见：")
+    if male_hire_rate > female_hire_rate:
+        print(f"   男性录用率({male_hire_rate*100:.0f}%)显著高于女性({female_hire_rate*100:.0f}%)")
+    else:
+        print(f"   女性录用率({female_hire_rate*100:.0f}%)显著高于男性({male_hire_rate*100:.0f}%)")
+    print("   建议：检查决策过程是否存在性别偏见")
+else:
+    print("\n✅ 未检测到明显偏见")
+  </code></pre>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+    <pre><code>
+📊 招聘数据偏见检测报告：
+
+男性应聘者：
+   平均分数：81.2
+   录用率：75%
+
+女性应聘者：
+   平均分数：84.0
+   录用率：25%
+
+⚠️ 检测到潜在偏见：
+   男性录用率(75%)显著高于女性(25%)
+   建议：检查决策过程是否存在性别偏见
+    </code></pre>
+  </div>
+
+  <p>这两个示例展示了AI局限性的检测方法：</p>
+  <ul>
+    <li><strong>文本相似度</strong>：通过对比AI输出与可靠来源，识别可能的幻觉内容</li>
+    <li><strong>偏见检测</strong>：通过统计分析不同群体的决策结果差异，发现潜在偏见</li>
+  </ul>
+  <p>在实际应用中，这些方法可以作为AI系统的"安全护栏"，帮助提升AI的可靠性。</p>
+</div>
+
 <div class="chapter-summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>

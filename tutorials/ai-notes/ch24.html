@@ -1049,6 +1049,1432 @@
   </div>
 </nav>
 
+<!-- 第二十四章：综合实战——搭建个人AI助手 -->
+<!-- ============================================================ -->
+
+<h2 class="section-title">第二十四章：综合实战——搭建个人AI助手</h2>
+
+<div class="concept-section">
+  <h3>学习目标</h3>
+  <div class="learning-objectives">
+    <ul>
+      <li>能够独立搭建一个功能完整的个人AI助手，整合对话、检索、工具调用和记忆功能</li>
+      <li>掌握从项目初始化到部署上线的完整开发流程</li>
+      <li>理解各模块之间的协作关系，具备模块化设计能力</li>
+      <li>学会使用Gradio快速搭建Web界面，实现用户友好的交互体验</li>
+      <li>具备根据需求扩展AI助手功能的能力，如多模态、语音、多Agent协作等</li>
+    </ul>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>前置要求</h3>
+  <div class="prerequisite-box">
+    <p>在开始本章之前，请确保你已经掌握以下内容：</p>
+    <ul>
+      <li>Python编程基础（函数、类、文件操作、虚拟环境）</li>
+      <li>LLM基本原理（提示工程、Token、温度参数等）</li>
+      <li>RAG技术（文档加载、Embedding、向量检索）</li>
+      <li>Agent概念（工具调用、Function Calling、ReAct模式）</li>
+      <li>基础的前端知识（HTML/CSS概念，有助于理解Gradio界面）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>项目概述</h3>
+
+  <h4>项目功能介绍</h4>
+  <p>本项目将搭建一个个人AI助手，具备以下核心功能：</p>
+  <ul>
+    <li><strong>智能问答</strong>：基于大语言模型的自然语言对话能力</li>
+    <li><strong>文档检索</strong>：上传本地文档后，助手能基于文档内容回答问题（RAG）</li>
+    <li><strong>工具调用</strong>：支持天气查询、计算器、网页搜索等外部工具</li>
+    <li><strong>记忆功能</strong>：记住对话历史和重要信息，实现连续交互</li>
+  </ul>
+
+  <h4>技术架构图</h4>
+  <div class="concept-box info">
+    <p>系统整体架构流程如下：</p>
+    <pre><code class="language-bash">用户输入
+   |
+   v
+[意图识别模块] —— 判断用户意图：闲聊 / 文档问答 / 工具调用
+   |
+   v
+[路由分发模块]
+   |—— 闲聊意图 ——→ [LLM对话模块] ——→ 生成回复
+   |—— 文档意图 ——→ [RAG检索模块] ——→ [LLM生成模块] ——→ 生成回复
+   |—— 工具意图 ——→ [工具调用模块] ——→ [LLM整合模块] ——→ 生成回复
+   |
+   v
+[记忆管理模块] —— 保存对话历史，提取重要信息
+   |
+   v
+[输出模块] —— 流式输出回复内容
+   |
+   v
+用户看到回复
+</code></pre>
+  </div>
+
+  <h4>涉及知识点回顾</h4>
+  <p>本项目将综合运用前面章节的核心知识：</p>
+  <table>
+    <thead>
+      <tr><th>模块</th><th>涉及章节</th><th>核心知识点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>智能问答</td><td>第3-5章</td><td>LLM API调用、提示工程、流式输出</td></tr>
+      <tr><td>文档检索</td><td>第15-17章</td><td>文档加载、文本切分、Embedding、Chroma向量库</td></tr>
+      <tr><td>工具调用</td><td>第19-21章</td><td>Function Calling、ReAct模式、工具定义与路由</td></tr>
+      <tr><td>记忆功能</td><td>第22章</td><td>对话历史管理、长期记忆存储与检索</td></tr>
+      <tr><td>Web界面</td><td>第23章</td><td>Gradio组件、事件处理、界面布局</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="concept-section">
+  <h3>步骤一：项目初始化</h3>
+
+  <h4>创建项目目录结构</h4>
+  <p>首先创建项目根目录和必要的子目录：</p>
+  <pre><code class="language-bash">mkdir -p personal-ai-assistant/{src,data,docs,tests}
+cd personal-ai-assistant
+touch src/__init__.py
+</code></pre>
+  <p>目录结构说明：</p>
+  <ul>
+    <li><code>src/</code>：源代码目录，包含各功能模块</li>
+    <li><code>data/</code>：数据目录，存放上传的文档和向量数据库</li>
+    <li><code>docs/</code>：项目文档</li>
+    <li><code>tests/</code>：测试代码</li>
+  </ul>
+
+  <h4>创建 requirements.txt</h4>
+  <p>列出项目所需的所有依赖包：</p>
+  <pre><code class="language-yaml"># LLM 相关
+openai>=1.0.0
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-community>=0.0.10
+
+# 向量数据库
+chromadb>=0.4.0
+
+# 文档处理
+pypdf>=3.0.0
+python-docx>=0.8.11
+unstructured>=0.11.0
+
+# Embedding
+sentence-transformers>=2.2.0
+
+# Web 界面
+gradio>=4.0.0
+
+# 工具调用
+requests>=2.31.0
+
+# 配置管理
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# 其他工具
+numpy>=1.24.0
+tiktoken>=0.5.0
+</code></pre>
+  <p>安装依赖：</p>
+  <pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+
+  <h4>创建 config.yaml 配置文件</h4>
+  <p>配置文件用于管理非敏感的配置项：</p>
+  <pre><code class="language-yaml"># 模型配置
+model:
+  provider: "openai"  # 可选: openai, ollama
+  name: "gpt-4o-mini"
+  temperature: 0.7
+  max_tokens: 2000
+  streaming: true
+
+# Ollama 配置（如果使用本地模型）
+ollama:
+  base_url: "http://localhost:11434"
+  model: "llama3.1"
+
+# RAG 配置
+rag:
+  chunk_size: 500
+  chunk_overlap: 50
+  top_k: 5
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+
+# 记忆配置
+memory:
+  short_term_limit: 10  # 短期记忆保留最近N轮
+  long_term_enabled: true
+
+# 工具配置
+tools:
+  weather_api_key: ""  # 从环境变量读取，此处仅占位
+  search_api_key: ""
+
+# 向量数据库
+vector_db:
+  persist_directory: "./data/chroma_db"
+</code></pre>
+
+  <h4>创建 .env 文件管理敏感信息</h4>
+  <div class="concept-box warning">
+    <p><strong>注意：</strong> <code>.env</code> 文件包含敏感信息，<strong>切勿提交到Git仓库</strong>！请在 <code>.gitignore</code> 中添加 <code>.env</code>。</p>
+  </div>
+  <pre><code class="language-bash"># OpenAI API Key
+OPENAI_API_KEY=sk-your-api-key-here
+
+# 天气API Key（可选，如使用OpenWeatherMap）
+WEATHER_API_KEY=your-weather-api-key
+
+# 搜索API Key（可选，如使用SerpAPI或Bing Search）
+SEARCH_API_KEY=your-search-api-key
+</code></pre>
+</div>
+
+<div class="concept-section">
+  <h3>步骤二：基础对话功能</h3>
+
+  <h4>使用 OpenAI API 搭建基础对话</h4>
+  <p>在 <code>src/chat.py</code> 中创建基础对话模块：</p>
+  <pre><code class="language-python">import os
+from typing import Iterator
+from dotenv import load_dotenv
+from openai import OpenAI, APIError, RateLimitError
+
+# 加载环境变量
+load_dotenv()
+
+class ChatBot:
+    def __init__(self, model: str = "gpt-4o-mini", temperature: float = 0.7):
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.model = model
+        self.temperature = temperature
+        self.messages = []  # 对话历史
+
+    def chat(self, user_input: str) -> str:
+        """非流式对话"""
+        self.messages.append({"role": "user", "content": user_input})
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=self.messages,
+                temperature=self.temperature,
+            )
+            reply = response.choices[0].message.content
+            self.messages.append({"role": "assistant", "content": reply})
+            return reply
+        except APIError as e:
+            return f"API错误: {e}"
+        except RateLimitError:
+            return "请求过于频繁，请稍后再试。"
+        except Exception as e:
+            return f"发生错误: {e}"
+
+    def chat_stream(self, user_input: str) -> Iterator[str]:
+        """流式对话，逐字返回"""
+        self.messages.append({"role": "user", "content": user_input})
+        try:
+            stream = self.client.chat.completions.create(
+                model=self.model,
+                messages=self.messages,
+                temperature=self.temperature,
+                stream=True,
+            )
+            full_reply = ""
+            for chunk in stream:
+                if chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    full_reply += content
+                    yield content
+            self.messages.append({"role": "assistant", "content": full_reply})
+        except Exception as e:
+            yield f"发生错误: {e}"
+
+    def clear_history(self):
+        """清空对话历史"""
+        self.messages = []
+
+
+# 运行测试
+if __name__ == "__main__":
+    bot = ChatBot()
+    print("=== 基础对话测试 ===")
+    print("Bot:", bot.chat("你好，请介绍一下你自己。"))
+    print("-" * 40)
+    print("流式输出测试:")
+    for chunk in bot.chat_stream("讲一个简短的笑话"):
+        print(chunk, end="", flush=True)
+    print()
+</code></pre>
+
+  <h4>使用 Ollama 本地模型（可选）</h4>
+  <p>如果你希望使用本地模型，可以替换为Ollama客户端：</p>
+  <pre><code class="language-python">from openai import OpenAI
+
+class LocalChatBot:
+    def __init__(self, model: str = "llama3.1", base_url: str = "http://localhost:11434"):
+        # Ollama 兼容 OpenAI API 格式
+        self.client = OpenAI(base_url=f"{base_url}/v1", api_key="ollama")
+        self.model = model
+        self.messages = []
+
+    def chat(self, user_input: str) -> str:
+        self.messages.append({"role": "user", "content": user_input})
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=self.messages,
+        )
+        reply = response.choices[0].message.content
+        self.messages.append({"role": "assistant", "content": reply})
+        return reply
+</code></pre>
+
+  <div class="concept-box success">
+    <p><strong>测试验证：</strong> 运行 <code>python src/chat.py</code>，确认能正常获取AI回复，流式输出能逐字显示。</p>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>步骤三：添加RAG文档检索</h3>
+
+  <h4>创建RAG模块</h4>
+  <p>在 <code>src/rag.py</code> 中实现文档检索功能：</p>
+  <pre><code class="language-python">import os
+from typing import List
+from langchain_community.document_loaders import (
+    PyPDFLoader, TextLoader, UnstructuredMarkdownLoader
+)
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain.schema import Document
+
+class RAGSystem:
+    def __init__(self, persist_dir: str = "./data/chroma_db"):
+        self.persist_dir = persist_dir
+        self.embeddings = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        )
+        self.vector_store = None
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500,
+            chunk_overlap=50,
+            separators=["\n\n", "\n", "。", "，", " ", ""]
+        )
+
+    def load_document(self, file_path: str) -> List[Document]:
+        """加载单个文档"""
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"文件不存在: {file_path}")
+
+        ext = os.path.splitext(file_path)[1].lower()
+        if ext == ".pdf":
+            loader = PyPDFLoader(file_path)
+        elif ext == ".txt":
+            loader = TextLoader(file_path, encoding="utf-8")
+        elif ext in [".md", ".markdown"]:
+            loader = UnstructuredMarkdownLoader(file_path)
+        else:
+            raise ValueError(f"不支持的文件格式: {ext}")
+
+        return loader.load()
+
+    def add_documents(self, file_paths: List[str]):
+        """加载并索引多个文档"""
+        all_docs = []
+        for fp in file_paths:
+            docs = self.load_document(fp)
+            all_docs.extend(docs)
+            print(f"已加载: {fp} ({len(docs)} 页/段)")
+
+        # 文档切分
+        chunks = self.text_splitter.split_documents(all_docs)
+        print(f"文档切分后共 {len(chunks)} 个片段")
+
+        # 存入向量数据库
+        self.vector_store = Chroma.from_documents(
+            documents=chunks,
+            embedding=self.embeddings,
+            persist_directory=self.persist_dir
+        )
+        self.vector_store.persist()
+        print("向量数据库已保存。")
+
+    def load_existing_db(self):
+        """加载已有的向量数据库"""
+        if os.path.exists(self.persist_dir):
+            self.vector_store = Chroma(
+                persist_directory=self.persist_dir,
+                embedding_function=self.embeddings
+            )
+            return True
+        return False
+
+    def search(self, query: str, top_k: int = 5) -> List[Document]:
+        """检索相关文档片段"""
+        if not self.vector_store:
+            if not self.load_existing_db():
+                return []
+        return self.vector_store.similarity_search(query, k=top_k)
+
+    def get_context(self, query: str, top_k: int = 5) -> str:
+        """获取检索结果拼接的上下文文本"""
+        docs = self.search(query, top_k)
+        if not docs:
+            return ""
+        contexts = []
+        for i, doc in enumerate(docs, 1):
+            source = doc.metadata.get("source", "未知来源")
+            contexts.append(f"[文档{i}] 来源: {source}\n{doc.page_content}")
+        return "\n\n".join(contexts)
+
+
+# 测试代码
+if __name__ == "__main__":
+    rag = RAGSystem()
+    # 假设 data/ 目录下有测试文档
+    # rag.add_documents(["data/test.pdf", "data/notes.txt"])
+    # context = rag.get_context("什么是RAG？")
+    # print(context)
+</code></pre>
+
+  <h4>集成RAG到对话中</h4>
+  <p>修改 <code>src/chat.py</code>，添加RAG支持：</p>
+  <pre><code class="language-python">from src.rag import RAGSystem
+
+class ChatBot:
+    def __init__(self, model: str = "gpt-4o-mini", temperature: float = 0.7, use_rag: bool = False):
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.model = model
+        self.temperature = temperature
+        self.messages = []
+        self.use_rag = use_rag
+        self.rag = RAGSystem() if use_rag else None
+
+    def chat(self, user_input: str) -> str:
+        # 如果启用RAG，先检索相关文档
+        if self.use_rag and self.rag:
+            context = self.rag.get_context(user_input)
+            if context:
+                # 将检索结果注入系统提示
+                system_msg = {
+                    "role": "system",
+                    "content": f"你是智能助手。请基于以下参考文档回答问题，如果文档中没有相关信息，请明确说明。\n\n参考文档：\n{context}"
+                }
+                messages = [system_msg] + self.messages + [{"role": "user", "content": user_input}]
+            else:
+                messages = self.messages + [{"role": "user", "content": user_input}]
+        else:
+            messages = self.messages + [{"role": "user", "content": user_input}]
+
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=self.temperature,
+            )
+            reply = response.choices[0].message.content
+            self.messages.append({"role": "user", "content": user_input})
+            self.messages.append({"role": "assistant", "content": reply})
+            return reply
+        except Exception as e:
+            return f"发生错误: {e}"
+</code></pre>
+
+  <div class="concept-box success">
+    <p><strong>测试问答效果：</strong></p>
+    <ol>
+      <li>准备一份测试PDF/TXT文档放入 <code>data/</code> 目录</li>
+      <li>运行 <code>rag.add_documents(["data/你的文档.pdf"])</code> 建立索引</li>
+      <li>提问与文档相关的问题，验证回答是否引用了文档内容</li>
+      <li>提问与文档无关的问题，验证助手是否能正确处理</li>
+    </ol>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>步骤四：添加工具调用</h3>
+
+  <h4>定义工具</h4>
+  <p>在 <code>src/tools.py</code> 中定义可用工具：</p>
+  <pre><code class="language-python">import os
+import json
+import requests
+from typing import Dict, Any, Callable
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class ToolManager:
+    def __init__(self):
+        self.tools: Dict[str, Dict[str, Any]] = {}
+        self._register_default_tools()
+
+    def _register_default_tools(self):
+        """注册默认工具"""
+        self.register_tool(
+            name="weather_query",
+            description="查询指定城市的当前天气",
+            parameters={
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "城市名称，如'北京'、'Shanghai'"
+                    }
+                },
+                "required": ["city"]
+            },
+            func=self._query_weather
+        )
+
+        self.register_tool(
+            name="calculator",
+            description="执行数学计算，如加减乘除、平方根等",
+            parameters={
+                "type": "object",
+                "properties": {
+                    "expression": {
+                        "type": "string",
+                        "description": "数学表达式，如'2+3*4'、'sqrt(16)'"
+                    }
+                },
+                "required": ["expression"]
+            },
+            func=self._calculate
+        )
+
+        self.register_tool(
+            name="web_search",
+            description="搜索互联网获取最新信息",
+            parameters={
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "搜索关键词"
+                    }
+                },
+                "required": ["query"]
+            },
+            func=self._web_search
+        )
+
+    def register_tool(self, name: str, description: str, parameters: dict, func: Callable):
+        """注册新工具"""
+        self.tools[name] = {
+            "name": name,
+            "description": description,
+            "parameters": parameters,
+            "func": func
+        }
+
+    def get_tool_definitions(self) -> list:
+        """获取工具定义列表（用于Function Calling）"""
+        return [
+            {
+                "type": "function",
+                "function": {
+                    "name": t["name"],
+                    "description": t["description"],
+                    "parameters": t["parameters"]
+                }
+            }
+            for t in self.tools.values()
+        ]
+
+    def execute(self, tool_name: str, arguments: dict) -> str:
+        """执行指定工具"""
+        if tool_name not in self.tools:
+            return f"错误：未找到工具 '{tool_name}'"
+        try:
+            result = self.tools[tool_name]["func"](**arguments)
+            return str(result)
+        except Exception as e:
+            return f"工具执行错误: {e}"
+
+    # ===== 工具实现 =====
+    def _query_weather(self, city: str) -> str:
+        """查询天气（示例实现，使用OpenWeatherMap API）"""
+        api_key = os.getenv("WEATHER_API_KEY")
+        if not api_key:
+            return "天气API Key未配置，无法查询天气。"
+        try:
+            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&lang=zh_cn&units=metric"
+            resp = requests.get(url, timeout=10)
+            data = resp.json()
+            if data.get("cod") != 200:
+                return f"查询失败: {data.get('message', '未知错误')}"
+            weather = data["weather"][0]["description"]
+            temp = data["main"]["temp"]
+            feels_like = data["main"]["feels_like"]
+            humidity = data["main"]["humidity"]
+            return f"{city}当前天气：{weather}，温度{temp}°C（体感{feels_like}°C），湿度{humidity}%"
+        except Exception as e:
+            return f"天气查询出错: {e}"
+
+    def _calculate(self, expression: str) -> str:
+        """安全计算器"""
+        allowed_names = {
+            "abs": abs, "round": round,
+            "max": max, "min": min,
+            "sum": sum, "len": len
+        }
+        try:
+            # 安全求值：只允许数字和基本运算符
+            result = eval(expression, {"__builtins__": {}}, allowed_names)
+            return f"计算结果：{result}"
+        except Exception as e:
+            return f"计算错误: {e}"
+
+    def _web_search(self, query: str) -> str:
+        """网页搜索（示例使用DuckDuckGo免费搜索）"""
+        try:
+            from duckduckgo_search import DDGS
+            with DDGS() as ddgs:
+                results = list(ddgs.text(query, max_results=3))
+                if not results:
+                    return "未找到相关搜索结果。"
+                output = []
+                for i, r in enumerate(results, 1):
+                    output.append(f"{i}. {r['title']}\n{r['href']}\n{r['body']}")
+                return "\n\n".join(output)
+        except ImportError:
+            return "未安装 duckduckgo-search，请执行: pip install duckduckgo-search"
+        except Exception as e:
+            return f"搜索出错: {e}"
+</code></pre>
+
+  <h4>工具路由逻辑</h4>
+  <p>在 <code>src/agent.py</code> 中实现工具调用路由：</p>
+  <pre><code class="language-python">import json
+from typing import Optional
+from openai import OpenAI
+from src.tools import ToolManager
+
+class Agent:
+    def __init__(self, model: str = "gpt-4o-mini"):
+        self.client = OpenAI()
+        self.model = model
+        self.tool_manager = ToolManager()
+
+    def run(self, user_input: str) -> str:
+        """运行Agent：判断是否需要调用工具"""
+        messages = [
+            {"role": "system", "content": "你是智能助手，可以使用工具帮助用户。如果需要使用工具，请调用对应函数。"},
+            {"role": "user", "content": user_input}
+        ]
+
+        # 第一次调用：让模型判断是否需要工具
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            tools=self.tool_manager.get_tool_definitions(),
+            tool_choice="auto",
+        )
+
+        message = response.choices[0].message
+
+        # 如果需要调用工具
+        if message.tool_calls:
+            # 添加助手消息到历史
+            messages.append({
+                "role": "assistant",
+                "content": message.content or "",
+                "tool_calls": [tc.model_dump() for tc in message.tool_calls]
+            })
+
+            # 执行每个工具调用
+            for tool_call in message.tool_calls:
+                tool_name = tool_call.function.name
+                arguments = json.loads(tool_call.function.arguments)
+                print(f"[Agent] 调用工具: {tool_name}({arguments})")
+
+                result = self.tool_manager.execute(tool_name, arguments)
+
+                # 添加工具返回结果
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": tool_call.id,
+                    "content": result
+                })
+
+            # 第二次调用：让模型整合工具结果并回复
+            final_response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+            )
+            return final_response.choices[0].message.content
+
+        # 不需要工具，直接返回回复
+        return message.content or ""
+
+
+# 测试
+if __name__ == "__main__":
+    agent = Agent()
+    print(agent.run("北京今天天气怎么样？"))
+    print("-" * 40)
+    print(agent.run("计算 123 * 456"))
+</code></pre>
+
+  <div class="concept-box info">
+    <p><strong>工具调用流程说明：</strong></p>
+    <ol>
+      <li>用户输入问题</li>
+      <li>LLM判断是否需要工具（通过 <code>tools</code> 参数提供工具定义）</li>
+      <li>如需工具，LLM返回 <code>tool_calls</code> 而非直接回复</li>
+      <li>Agent执行对应工具函数，获取结果</li>
+      <li>将工具结果再次传给LLM，生成最终回复</li>
+    </ol>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>步骤五：添加记忆功能</h3>
+
+  <h4>创建记忆管理模块</h4>
+  <p>在 <code>src/memory.py</code> 中实现短期和长期记忆：</p>
+  <pre><code class="language-python">import os
+import json
+from typing import List, Dict
+from datetime import datetime
+
+class MemoryManager:
+    def __init__(self, short_term_limit: int = 10, long_term_file: str = "./data/long_term_memory.json"):
+        self.short_term_limit = short_term_limit
+        self.long_term_file = long_term_file
+        self.short_term: List[Dict] = []  # 短期记忆：最近N轮对话
+        self.long_term: Dict[str, str] = {}  # 长期记忆：关键信息摘要
+        self._load_long_term()
+
+    def add_interaction(self, user_msg: str, assistant_msg: str):
+        """添加一轮对话到短期记忆"""
+        self.short_term.append({
+            "role": "user",
+            "content": user_msg,
+            "timestamp": datetime.now().isoformat()
+        })
+        self.short_term.append({
+            "role": "assistant",
+            "content": assistant_msg,
+            "timestamp": datetime.now().isoformat()
+        })
+        # 保持短期记忆在限制范围内
+        while len(self.short_term) > self.short_term_limit * 2:
+            self.short_term.pop(0)
+
+    def get_short_term_messages(self) -> List[Dict]:
+        """获取短期记忆（用于传给LLM）"""
+        return [{"role": m["role"], "content": m["content"]} for m in self.short_term]
+
+    def add_long_term(self, key: str, value: str):
+        """添加长期记忆"""
+        self.long_term[key] = value
+        self._save_long_term()
+
+    def get_long_term_context(self) -> str:
+        """获取长期记忆文本（用于系统提示）"""
+        if not self.long_term:
+            return ""
+        items = [f"- {k}: {v}" for k, v in self.long_term.items()]
+        return "已记住的用户信息：\n" + "\n".join(items)
+
+    def extract_and_save(self, user_msg: str, assistant_msg: str):
+        """从对话中提取重要信息保存到长期记忆（简化版）"""
+        # 实际项目中可以使用LLM来提取关键信息
+        # 这里仅作示例：如果用户明确说"记住"，则保存
+        if "记住" in user_msg or "记住" in assistant_msg:
+            # 简单提取"记住"后面的内容
+            # 实际应使用LLM进行信息抽取
+            pass
+
+    def _load_long_term(self):
+        """从文件加载长期记忆"""
+        if os.path.exists(self.long_term_file):
+            with open(self.long_term_file, "r", encoding="utf-8") as f:
+                self.long_term = json.load(f)
+
+    def _save_long_term(self):
+        """保存长期记忆到文件"""
+        os.makedirs(os.path.dirname(self.long_term_file), exist_ok=True)
+        with open(self.long_term_file, "w", encoding="utf-8") as f:
+            json.dump(self.long_term, f, ensure_ascii=False, indent=2)
+
+    def clear_short_term(self):
+        """清空短期记忆"""
+        self.short_term = []
+
+    def clear_long_term(self):
+        """清空长期记忆"""
+        self.long_term = {}
+        self._save_long_term()
+</code></pre>
+
+  <h4>集成记忆到对话</h4>
+  <p>更新 <code>src/chat.py</code> 中的 <code>ChatBot</code> 类：</p>
+  <pre><code class="language-python">from src.memory import MemoryManager
+
+class ChatBot:
+    def __init__(self, model: str = "gpt-4o-mini", temperature: float = 0.7,
+                 use_rag: bool = False, use_memory: bool = True):
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.model = model
+        self.temperature = temperature
+        self.use_rag = use_rag
+        self.use_memory = use_memory
+        self.rag = RAGSystem() if use_rag else None
+        self.memory = MemoryManager() if use_memory else None
+
+    def chat(self, user_input: str) -> str:
+        # 构建消息列表
+        messages = []
+
+        # 1. 系统提示
+        system_parts = ["你是智能助手，能够回答问题、检索文档、调用工具。"]
+        if self.memory:
+            lt = self.memory.get_long_term_context()
+            if lt:
+                system_parts.append(lt)
+        system_msg = "\n\n".join(system_parts)
+        messages.append({"role": "system", "content": system_msg})
+
+        # 2. 短期记忆
+        if self.memory:
+            messages.extend(self.memory.get_short_term_messages())
+
+        # 3. RAG上下文（如果是文档相关问题）
+        user_msg_content = user_input
+        if self.use_rag and self.rag:
+            context = self.rag.get_context(user_input)
+            if context:
+                user_msg_content = f"基于以下参考文档回答问题：\n{context}\n\n用户问题：{user_input}"
+
+        messages.append({"role": "user", "content": user_msg_content})
+
+        # 调用LLM
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=self.temperature,
+            )
+            reply = response.choices[0].message.content
+
+            # 保存到记忆
+            if self.memory:
+                self.memory.add_interaction(user_input, reply)
+
+            return reply
+        except Exception as e:
+            return f"发生错误: {e}"
+
+    def remember(self, key: str, value: str):
+        """手动添加长期记忆"""
+        if self.memory:
+            self.memory.add_long_term(key, value)
+            return f"已记住: {key} = {value}"
+        return "记忆功能未启用"
+
+    def clear_memory(self):
+        """清空记忆"""
+        if self.memory:
+            self.memory.clear_short_term()
+            self.memory.clear_long_term()
+</code></pre>
+
+  <div class="concept-box success">
+    <p><strong>测试连续对话：</strong></p>
+    <pre><code class="language-python">bot = ChatBot(use_memory=True)
+print(bot.chat("我叫张三，今年28岁。"))
+print(bot.chat("我叫什么名字？"))  # 应能回答"张三"
+print(bot.remember("职业", "软件工程师"))
+print(bot.chat("我的职业是什么？"))  # 应能回答"软件工程师"
+</code></pre>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>步骤六：Web界面</h3>
+
+  <h4>使用Gradio搭建Web UI</h4>
+  <p>在 <code>src/webui.py</code> 中创建Gradio界面：</p>
+  <pre><code class="language-python">import gradio as gr
+from src.chat import ChatBot
+from src.rag import RAGSystem
+
+class AIAssistantWebUI:
+    def __init__(self):
+        self.bot = ChatBot(use_rag=True, use_memory=True)
+        self.rag = self.bot.rag
+
+    def respond(self, message: str, history: list) -> str:
+        """处理用户消息并返回回复"""
+        if not message.strip():
+            return ""
+        # 使用流式输出
+        full_response = ""
+        for chunk in self.bot.chat_stream(message):
+            full_response += chunk
+            yield full_response
+
+    def upload_files(self, files: list) -> str:
+        """上传文档并建立索引"""
+        if not files:
+            return "未选择文件"
+        file_paths = [f.name for f in files]
+        try:
+            self.rag.add_documents(file_paths)
+            return f"成功上传并索引 {len(file_paths)} 个文件"
+        except Exception as e:
+            return f"上传失败: {e}"
+
+    def clear_chat(self):
+        """清空对话"""
+        self.bot.clear_history()
+        self.bot.clear_memory()
+        return None
+
+    def build_ui(self):
+        """构建Gradio界面"""
+        with gr.Blocks(title="个人AI助手", theme=gr.themes.Soft()) as demo:
+            gr.Markdown("# 个人AI助手")
+            gr.Markdown("智能问答 | 文档检索 | 工具调用 | 记忆功能")
+
+            with gr.Row():
+                # 左侧：聊天窗口
+                with gr.Column(scale=3):
+                    chatbot = gr.Chatbot(
+                        label="对话",
+                        height=500,
+                        bubble_full_width=False
+                    )
+                    msg_input = gr.Textbox(
+                        label="输入消息",
+                        placeholder="请输入你的问题...",
+                        lines=2
+                    )
+                    with gr.Row():
+                        send_btn = gr.Button("发送", variant="primary")
+                        clear_btn = gr.Button("清空对话")
+
+                # 右侧：设置面板
+                with gr.Column(scale=1):
+                    gr.Markdown("### 设置")
+                    with gr.Tab("文档上传"):
+                        file_upload = gr.File(
+                            label="上传文档",
+                            file_types=[".pdf", ".txt", ".md"],
+                            file_count="multiple"
+                        )
+                        upload_btn = gr.Button("建立索引")
+                        upload_status = gr.Textbox(label="状态", interactive=False)
+
+                    with gr.Tab("记忆管理"):
+                        memory_key = gr.Textbox(label="关键词")
+                        memory_value = gr.Textbox(label="内容")
+                        save_mem_btn = gr.Button("保存到长期记忆")
+                        mem_status = gr.Textbox(label="状态", interactive=False)
+
+                    with gr.Tab("关于"):
+                        gr.Markdown("""
+                        **功能说明：**
+                        - 支持自然语言对话
+                        - 上传PDF/TXT/Markdown文档进行问答
+                        - 自动调用天气、计算、搜索等工具
+                        - 记住对话历史和重要信息
+                        """)
+
+            # 事件绑定
+            send_btn.click(
+                self.respond,
+                inputs=[msg_input, chatbot],
+                outputs=chatbot
+            ).then(lambda: "", outputs=msg_input)
+
+            msg_input.submit(
+                self.respond,
+                inputs=[msg_input, chatbot],
+                outputs=chatbot
+            ).then(lambda: "", outputs=msg_input)
+
+            clear_btn.click(self.clear_chat, outputs=chatbot)
+            upload_btn.click(self.upload_files, inputs=file_upload, outputs=upload_status)
+
+            def save_memory(k, v):
+                return self.bot.remember(k, v)
+            save_mem_btn.click(save_memory, inputs=[memory_key, memory_value], outputs=mem_status)
+
+        return demo
+
+
+def main():
+    ui = AIAssistantWebUI()
+    demo = ui.build_ui()
+    demo.launch(server_name="0.0.0.0", server_port=7860, share=False)
+
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+
+  <h4>运行和访问</h4>
+  <pre><code class="language-bash">python src/webui.py
+</code></pre>
+  <p>启动后，在浏览器中访问 <code>http://localhost:7860</code> 即可使用。</p>
+
+  <div class="concept-box info">
+    <p><strong>界面说明：</strong></p>
+    <ul>
+      <li><strong>聊天窗口</strong>：左侧主区域，显示对话历史，支持流式输出</li>
+      <li><strong>文档上传</strong>：右侧面板，支持多文件上传并自动建立向量索引</li>
+      <li><strong>记忆管理</strong>：手动添加长期记忆，如用户偏好、重要信息</li>
+    </ul>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>步骤七：部署与优化</h3>
+
+  <h4>使用Docker打包</h4>
+  <p>创建 <code>Dockerfile</code>：</p>
+  <pre><code class="language-dockerfile">FROM python:3.11-slim
+
+WORKDIR /app
+
+# 安装系统依赖
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libmagic1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 复制依赖文件并安装
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 复制项目代码
+COPY src/ ./src/
+COPY config.yaml .
+
+# 创建数据目录
+RUN mkdir -p data
+
+# 暴露端口
+EXPOSE 7860
+
+# 启动命令
+CMD ["python", "src/webui.py"]
+</code></pre>
+
+  <p>创建 <code>.dockerignore</code>：</p>
+  <pre><code class="language-bash">.env
+.git
+__pycache__
+*.pyc
+data/chroma_db
+</code></pre>
+
+  <p>构建并运行：</p>
+  <pre><code class="language-bash">docker build -t personal-ai-assistant .
+docker run -p 7860:7860 --env-file .env personal-ai-assistant
+</code></pre>
+
+  <h4>部署到云服务器</h4>
+  <p>以阿里云/腾讯云为例：</p>
+  <ol>
+    <li>购买云服务器（建议2核4G以上）</li>
+    <li>安装Docker：<code>curl -fsSL https://get.docker.com | sh</code></li>
+    <li>上传项目代码和 <code>.env</code> 文件</li>
+    <li>构建镜像并运行（同上）</li>
+    <li>配置安全组，开放7860端口</li>
+    <li>（可选）配置Nginx反向代理，绑定域名和HTTPS</li>
+  </ol>
+
+  <h4>性能优化建议</h4>
+  <div class="concept-box info">
+    <ul>
+      <li><strong>模型选择</strong>：日常对话使用 <code>gpt-4o-mini</code> 或本地 <code>llama3.1</code>，降低成本</li>
+      <li><strong>向量缓存</strong>：文档索引后持久化到磁盘，避免重复Embedding</li>
+      <li><strong>异步处理</strong>：文档上传和索引使用后台任务，避免阻塞界面</li>
+      <li><strong>连接池</strong>：使用HTTP连接池复用API连接，减少延迟</li>
+      <li><strong>流式输出</strong>：始终使用流式响应，提升用户体验</li>
+      <li><strong>上下文压缩</strong>：对话历史过长时，使用摘要压缩而非直接截断</li>
+    </ul>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>项目完整代码汇总</h3>
+
+  <h4>整合版 main.py</h4>
+  <p>以下是将所有功能整合后的 <code>main.py</code>，适合快速部署：</p>
+  <pre><code class="language-python">#!/usr/bin/env python3
+"""
+个人AI助手 - 整合版
+功能：智能对话、RAG检索、工具调用、记忆管理、Web界面
+"""
+
+import os
+import json
+import yaml
+from typing import List, Dict, Iterator
+from dotenv import load_dotenv
+from openai import OpenAI
+
+# LangChain相关
+from langchain_community.document_loaders import PyPDFLoader, TextLoader, UnstructuredMarkdownLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain.schema import Document
+
+# Gradio
+import gradio as gr
+
+# 加载配置
+load_dotenv()
+CONFIG = yaml.safe_load(open("config.yaml", "r", encoding="utf-8"))
+
+
+# ==================== RAG模块 ====================
+class RAGSystem:
+    def __init__(self):
+        cfg = CONFIG["rag"]
+        self.persist_dir = CONFIG["vector_db"]["persist_directory"]
+        self.embeddings = HuggingFaceEmbeddings(model_name=cfg["embedding_model"])
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=cfg["chunk_size"],
+            chunk_overlap=cfg["chunk_overlap"]
+        )
+        self.vector_store = None
+        self._load_db()
+
+    def load_document(self, file_path: str) -> List[Document]:
+        ext = os.path.splitext(file_path)[1].lower()
+        loaders = {".pdf": PyPDFLoader, ".txt": TextLoader, ".md": UnstructuredMarkdownLoader}
+        if ext not in loaders:
+            raise ValueError(f"不支持的格式: {ext}")
+        loader = loaders[ext](file_path)
+        return loader.load()
+
+    def add_documents(self, file_paths: List[str]):
+        all_docs = []
+        for fp in file_paths:
+            all_docs.extend(self.load_document(fp))
+        chunks = self.text_splitter.split_documents(all_docs)
+        self.vector_store = Chroma.from_documents(
+            documents=chunks, embedding=self.embeddings, persist_directory=self.persist_dir
+        )
+        self.vector_store.persist()
+
+    def _load_db(self):
+        if os.path.exists(self.persist_dir):
+            self.vector_store = Chroma(persist_directory=self.persist_dir, embedding_function=self.embeddings)
+
+    def get_context(self, query: str, top_k: int = None) -> str:
+        if not self.vector_store:
+            return ""
+        k = top_k or CONFIG["rag"]["top_k"]
+        docs = self.vector_store.similarity_search(query, k=k)
+        return "\n\n".join([f"[来源: {d.metadata.get('source', '未知')}]\n{d.page_content}" for d in docs])
+
+
+# ==================== 工具模块 ====================
+class ToolManager:
+    def __init__(self):
+        self.tools = {}
+        self._register_defaults()
+
+    def _register_defaults(self):
+        self.register("calculator", "数学计算", {"type":"object","properties":{"expression":{"type":"string"}},"required":["expression"]}, self._calc)
+        self.register("weather_query", "天气查询", {"type":"object","properties":{"city":{"type":"string"}},"required":["city"]}, self._weather)
+
+    def register(self, name, desc, params, func):
+        self.tools[name] = {"name": name, "description": desc, "parameters": params, "func": func}
+
+    def get_definitions(self):
+        return [{"type": "function", "function": {"name": t["name"], "description": t["description"], "parameters": t["parameters"]}} for t in self.tools.values()]
+
+    def execute(self, name, args):
+        return self.tools[name]["func"](**args) if name in self.tools else f"未知工具: {name}"
+
+    def _calc(self, expression: str) -> str:
+        try:
+            return f"结果: {eval(expression, {'__builtins__': {}}, {'abs':abs,'round':round,'max':max,'min':min})}"
+        except Exception as e:
+            return f"计算错误: {e}"
+
+    def _weather(self, city: str) -> str:
+        return f"{city}天气：晴天，25°C（示例数据，请配置真实API）"
+
+
+# ==================== 记忆模块 ====================
+class Memory:
+    def __init__(self):
+        cfg = CONFIG["memory"]
+        self.limit = cfg["short_term_limit"]
+        self.lt_file = "./data/long_term_memory.json"
+        self.short_term: List[Dict] = []
+        self.long_term: Dict[str, str] = {}
+        self._load_lt()
+
+    def add(self, user_msg, assistant_msg):
+        self.short_term.extend([{"role":"user","content":user_msg}, {"role":"assistant","content":assistant_msg}])
+        while len(self.short_term) > self.limit * 2:
+            self.short_term.pop(0)
+
+    def get_messages(self):
+        return [{"role": m["role"], "content": m["content"]} for m in self.short_term]
+
+    def add_lt(self, key, value):
+        self.long_term[key] = value
+        self._save_lt()
+
+    def get_lt_text(self):
+        return "已记住的信息:\n" + "\n".join([f"- {k}: {v}" for k, v in self.long_term.items()]) if self.long_term else ""
+
+    def _load_lt(self):
+        if os.path.exists(self.lt_file):
+            with open(self.lt_file, "r", encoding="utf-8") as f:
+                self.long_term = json.load(f)
+
+    def _save_lt(self):
+        os.makedirs(os.path.dirname(self.lt_file), exist_ok=True)
+        with open(self.lt_file, "w", encoding="utf-8") as f:
+            json.dump(self.long_term, f, ensure_ascii=False)
+
+    def clear(self):
+        self.short_term = []
+        self.long_term = {}
+        self._save_lt()
+
+
+# ==================== 主对话模块 ====================
+class AIAssistant:
+    def __init__(self):
+        mcfg = CONFIG["model"]
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.model = mcfg["name"]
+        self.temperature = mcfg["temperature"]
+        self.streaming = mcfg["streaming"]
+        self.rag = RAGSystem()
+        self.tools = ToolManager()
+        self.memory = Memory()
+
+    def chat(self, message: str) -> Iterator[str]:
+        messages = [{"role": "system", "content": f"你是智能助手。\n{self.memory.get_lt_text()}"}]
+        messages.extend(self.memory.get_messages())
+
+        # RAG增强
+        context = self.rag.get_context(message)
+        if context:
+            message = f"参考文档:\n{context}\n\n问题: {message}"
+        messages.append({"role": "user", "content": message})
+
+        # 第一次调用（可能触发工具）
+        response = self.client.chat.completions.create(
+            model=self.model, messages=messages, temperature=self.temperature,
+            tools=self.tools.get_definitions(), tool_choice="auto", stream=False
+        )
+        msg = response.choices[0].message
+
+        if msg.tool_calls:
+            messages.append({"role": "assistant", "content": msg.content or "", "tool_calls": [tc.model_dump() for tc in msg.tool_calls]})
+            for tc in msg.tool_calls:
+                result = self.tools.execute(tc.function.name, json.loads(tc.function.arguments))
+                messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
+            final = self.client.chat.completions.create(model=self.model, messages=messages, temperature=self.temperature, stream=self.streaming)
+        else:
+            final = self.client.chat.completions.create(model=self.model, messages=messages, temperature=self.temperature, stream=self.streaming)
+
+        full_reply = ""
+        if self.streaming:
+            for chunk in final:
+                if chunk.choices[0].delta.content:
+                    c = chunk.choices[0].delta.content
+                    full_reply += c
+                    yield full_reply
+        else:
+            full_reply = final.choices[0].message.content
+            yield full_reply
+
+        self.memory.add(message, full_reply)
+
+
+# ==================== Web界面 ====================
+class WebUI:
+    def __init__(self):
+        self.assistant = AIAssistant()
+
+    def respond(self, message, history):
+        if not message.strip():
+            return ""
+        full = ""
+        for chunk in self.assistant.chat(message):
+            full = chunk
+            yield full
+
+    def upload(self, files):
+        if not files:
+            return "未选择文件"
+        try:
+            self.assistant.rag.add_documents([f.name for f in files])
+            return f"已索引 {len(files)} 个文件"
+        except Exception as e:
+            return f"失败: {e}"
+
+    def build(self):
+        with gr.Blocks(title="个人AI助手", theme=gr.themes.Soft()) as demo:
+            gr.Markdown("# 个人AI助手")
+            with gr.Row():
+                with gr.Column(scale=3):
+                    chat = gr.Chatbot(label="对话", height=500)
+                    inp = gr.Textbox(label="输入", placeholder="请输入...")
+                    with gr.Row():
+                        gr.Button("发送", variant="primary").click(self.respond, [inp, chat], chat).then(lambda: "", outputs=inp)
+                        gr.Button("清空").click(lambda: self.assistant.memory.clear(), outputs=chat)
+                with gr.Column(scale=1):
+                    gr.Markdown("### 文档上传")
+                    fu = gr.File(file_types=[".pdf",".txt",".md"], file_count="multiple")
+                    gr.Button("索引").click(self.upload, fu, gr.Textbox(label="状态"))
+        return demo
+
+
+def main():
+    ui = WebUI()
+    ui.build().launch(server_name="0.0.0.0", server_port=7860)
+
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+
+  <h4>代码结构说明</h4>
+  <pre><code class="language-bash">personal-ai-assistant/
+├── main.py              # 整合版入口（适合快速部署）
+├── src/
+│   ├── __init__.py
+│   ├── chat.py          # 对话模块（基础对话+记忆集成）
+│   ├── rag.py           # RAG检索模块
+│   ├── tools.py         # 工具定义与管理
+│   ├── agent.py         # Agent路由逻辑
+│   ├── memory.py        # 记忆管理模块
+│   └── webui.py         # Gradio Web界面
+├── data/
+│   ├── chroma_db/       # 向量数据库持久化目录
+│   └── long_term_memory.json  # 长期记忆文件
+├── config.yaml          # 配置文件
+├── requirements.txt     # 依赖列表
+├── Dockerfile           # Docker打包文件
+└── .env                 # 敏感信息（不提交Git）
+</code></pre>
+</div>
+
+<div class="concept-section">
+  <h3>扩展方向</h3>
+
+  <h4>多模态支持（图片理解）</h4>
+  <p>集成GPT-4o或Qwen-VL等多模态模型，支持用户上传图片并提问：</p>
+  <pre><code class="language-python"># 多模态消息示例
+messages = [{
+    "role": "user",
+    "content": [
+        {"type": "text", "text": "这张图片里有什么？"},
+        {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64,..."}}
+    ]
+}]
+</code></pre>
+
+  <h4>语音交互</h4>
+  <p>添加语音识别（Whisper）和语音合成（TTS）：</p>
+  <ul>
+    <li>语音输入：使用OpenAI Whisper API将语音转为文字</li>
+    <li>语音输出：使用Edge-TTS或GPT-SoVITS合成语音回复</li>
+  </ul>
+
+  <h4>多Agent协作</h4>
+  <p>将不同功能拆分为专门Agent，通过主Agent协调：</p>
+  <ul>
+    <li><strong>研究Agent</strong>：负责信息检索和资料收集</li>
+    <li><strong>代码Agent</strong>：负责编程和代码分析</li>
+    <li><strong>写作Agent</strong>：负责文案撰写和润色</li>
+    <li><strong>主控Agent</strong>：理解用户需求，分发给子Agent执行</li>
+  </ul>
+
+  <h4>接入更多工具</h4>
+  <p>通过MCP（Model Context Protocol）或自定义接口，扩展助手能力：</p>
+  <ul>
+    <li>日历管理：查询日程、创建提醒</li>
+    <li>邮件助手：读取、撰写、发送邮件</li>
+    <li>代码执行：安全执行Python代码并返回结果</li>
+    <li>数据库查询：连接SQL数据库执行查询</li>
+  </ul>
+</div>
+
+<div class="concept-section">
+  <h3>练习题</h3>
+
+  <div class="exercise-box">
+    <h4>练习1：修改项目支持图片输入</h4>
+    <p>在现有Gradio界面中添加图片上传功能，使助手能够：</p>
+    <ol>
+      <li>接收用户上传的图片</li>
+      <li>将图片转为base64编码</li>
+      <li>使用GPT-4o等多模态模型分析图片内容并回答相关问题</li>
+    </ol>
+    <p><strong>提示：</strong> Gradio的 <code>gr.Image</code> 组件可以接收图片，OpenAI API支持传入base64编码的图片URL。</p>
+  </div>
+
+  <div class="exercise-box">
+    <h4>练习2：添加新的自定义工具</h4>
+    <p>为AI助手添加一个实用的自定义工具，例如：</p>
+    <ul>
+      <li><strong>待办事项工具</strong>：添加、查询、完成待办事项（数据存储到本地JSON文件）</li>
+      <li><strong>翻译工具</strong>：调用翻译API或本地模型进行中英互译</li>
+      <li><strong>股票查询工具</strong>：查询指定股票的实时价格</li>
+    </ul>
+    <p><strong>要求：</strong> 完整实现工具函数、参数定义、注册逻辑，并在Web界面中测试。</p>
+  </div>
+
+  <div class="exercise-box">
+    <h4>练习3：优化RAG检索效果</h4>
+    <p>当前RAG实现使用基础的关键词相似度检索，尝试以下优化：</p>
+    <ol>
+      <li><strong>查询重写</strong>：在检索前，使用LLM将用户问题改写为更适合检索的查询语句</li>
+      <li><strong>混合检索</strong>：结合向量相似度和关键词匹配（BM25），提升召回率</li>
+      <li><strong>重排序</strong>：检索出Top-10结果后，使用Cross-Encoder模型对结果重排序，选出最相关的Top-5</li>
+      <li><strong>上下文增强</strong>：在切分文档时，为每个chunk添加文档标题等元信息</li>
+    </ol>
+    <p><strong>评估：</strong> 准备一组测试问题和标准答案，对比优化前后的回答质量。</p>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h3>章节小结</h3>
+  <div class="chapter-summary">
+    <p>本章通过一个完整的综合项目——<strong>个人AI助手</strong>，将前面所学的核心知识点串联起来，涵盖以下关键内容：</p>
+    <ul>
+      <li><strong>项目初始化</strong>：合理的目录结构、依赖管理、配置分离（config.yaml + .env）</li>
+      <li><strong>基础对话</strong>：使用OpenAI API或Ollama搭建流式对话，含完善的错误处理</li>
+      <li><strong>RAG文档检索</strong>：支持PDF/TXT/Markdown，使用Chroma存储向量，实现检索增强生成</li>
+      <li><strong>工具调用</strong>：基于Function Calling实现天气、计算、搜索等工具的自动调用</li>
+      <li><strong>记忆功能</strong>：短期记忆保留对话上下文，长期记忆持久化重要信息</li>
+      <li><strong>Web界面</strong>：使用Gradio快速搭建包含聊天、上传、设置面板的完整UI</li>
+      <li><strong>部署优化</strong>：Docker打包、云服务器部署、性能优化策略</li>
+    </ul>
+    <p>通过本章的学习，你应该具备了独立开发完整AI应用的能力。建议在此基础上继续探索扩展方向，如多模态、语音交互、多Agent协作等，打造更加强大的个人AI助手。</p>
+  </div>
+</div>
+
         </main>
     </div>
 

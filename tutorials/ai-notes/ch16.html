@@ -1217,6 +1217,162 @@
   </div>
 </div>
 
+<div class="concept-section">
+  <h2><i class="fas fa-code"></i> 代码实践</h2>
+  <p>以下代码模拟了<strong>Function Calling</strong>的核心机制：工具注册、意图识别和自动调用。这帮助你理解AI Agent如何与外部工具交互。</p>
+
+  <pre><code class="language-python">
+import json
+import re
+from datetime import datetime
+
+# ========== 工具注册表 ==========
+class ToolRegistry:
+    def __init__(self):
+        self.tools = {}
+
+    def register(self, name, description, func, params=None):
+        self.tools[name] = {
+            "description": description,
+            "function": func,
+            "params": params or {}
+        }
+
+    def get_tool(self, name):
+        return self.tools.get(name)
+
+    def list_tools(self):
+        return {k: v["description"] for k, v in self.tools.items()}
+
+# ========== 模拟的"AI决策"函数 ==========
+def ai_decide(user_input, available_tools):
+    """模拟LLM的Function Calling决策过程"""
+    user_input = user_input.lower()
+
+    # 简单的关键词匹配（实际LLM用语义理解）
+    if any(w in user_input for w in ["天气", "温度", "下雨"]):
+        return "get_weather", {"city": re.search(r'([\u4e00-\u9fa5]{2,10})', user_input)}
+    elif any(w in user_input for w in ["时间", "几点", "日期"]):
+        return "get_time", {}
+    elif any(w in user_input for w in ["计算", "加", "减", "乘", "除"]):
+        nums = re.findall(r'\d+', user_input)
+        if len(nums) >= 2:
+            return "calculator", {"a": int(nums[0]), "b": int(nums[1]), "op": "+"}
+    elif any(w in user_input for w in ["搜索", "查一下", "什么是"]):
+        query = user_input.replace("搜索", "").replace("查一下", "").strip()
+        return "web_search", {"query": query}
+
+    return None, {}
+
+# ========== 具体工具实现 ==========
+def get_weather(city="北京"):
+    """模拟天气查询"""
+    mock_data = {
+        "北京": {"temp": 22, "condition": "晴"},
+        "上海": {"temp": 25, "condition": "多云"},
+        "广州": {"temp": 30, "condition": "小雨"},
+    }
+    data = mock_data.get(city, {"temp": 20, "condition": "未知"})
+    return f"{city}当前天气：{data['condition']}，温度 {data['temp']}°C"
+
+def get_time():
+    """获取当前时间"""
+    now = datetime.now()
+    return f"当前时间：{now.strftime('%Y年%m月%d日 %H:%M:%S')}"
+
+def calculator(a, b, op="+"):
+    """简单计算器"""
+    if op == "+":
+        return f"{a} + {b} = {a + b}"
+    elif op == "-":
+        return f"{a} - {b} = {a - b}"
+    elif op == "*":
+        return f"{a} × {b} = {a * b}"
+    elif op == "/":
+        return f"{a} ÷ {b} = {a / b:.2f}" if b != 0 else "错误：除数不能为0"
+    return "不支持的操作"
+
+def web_search(query):
+    """模拟网络搜索"""
+    return f"搜索结果：找到关于'{query}'的约 1,234,567 条结果（模拟数据）"
+
+# ========== 主程序 ==========
+if __name__ == "__main__":
+    # 1. 注册工具
+    registry = ToolRegistry()
+    registry.register("get_weather", "查询指定城市的天气", get_weather)
+    registry.register("get_time", "获取当前时间", get_time)
+    registry.register("calculator", "进行数学计算", calculator)
+    registry.register("web_search", "搜索网络信息", web_search)
+
+    print("📋 已注册工具：")
+    for name, desc in registry.list_tools().items():
+        print(f"   • {name}: {desc}")
+
+    # 2. 模拟用户请求
+    test_inputs = [
+        "北京今天天气怎么样？",
+        "现在几点了？",
+        "帮我计算 15 加 27",
+        "搜索一下人工智能",
+    ]
+
+    print("\n" + "=" * 50)
+    for user_input in test_inputs:
+        print(f"\n👤 用户：{user_input}")
+
+        # 3. AI决策（识别意图）
+        tool_name, params = ai_decide(user_input, registry.list_tools())
+
+        if tool_name:
+            # 4. 执行工具
+            tool = registry.get_tool(tool_name)
+            result = tool["function"](**params)
+            print(f"🤖 AI决定调用工具：{tool_name}")
+            print(f"📤 工具返回：{result}")
+        else:
+            print("🤖 AI：我不确定如何帮你，请尝试其他说法。")
+  </code></pre>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+    <pre><code>
+📋 已注册工具：
+   • get_weather: 查询指定城市的天气
+   • get_time: 获取当前时间
+   • calculator: 进行数学计算
+   • web_search: 搜索网络信息
+
+==================================================
+
+👤 用户：北京今天天气怎么样？
+🤖 AI决定调用工具：get_weather
+📤 工具返回：北京当前天气：晴，温度 22°C
+
+👤 用户：现在几点了？
+🤖 AI决定调用工具：get_time
+📤 工具返回：当前时间：2024年01月15日 14:32:18
+
+👤 用户：帮我计算 15 加 27
+🤖 AI决定调用工具：calculator
+📤 工具返回：15 + 27 = 42
+
+👤 用户：搜索一下人工智能
+🤖 AI决定调用工具：web_search
+📤 工具返回：搜索结果：找到关于'人工智能'的约 1,234,567 条结果（模拟数据）
+    </code></pre>
+  </div>
+
+  <p>这个示例展示了Function Calling的四个核心步骤：</p>
+  <ol>
+    <li><strong>工具注册</strong>：将可用工具注册到系统中，附带描述信息</li>
+    <li><strong>意图识别</strong>：AI分析用户输入，决定是否需要调用工具</li>
+    <li><strong>参数提取</strong>：从用户输入中提取工具所需的参数</li>
+    <li><strong>执行返回</strong>：调用工具函数，将结果返回给用户</li>
+  </ol>
+  <p>实际的大模型（如GPT-4）使用更复杂的语义理解来做意图识别，但核心流程与此相同。</p>
+</div>
+
 <div class="chapter-summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>

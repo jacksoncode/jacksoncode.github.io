@@ -1193,6 +1193,99 @@
                 </div>
             </section>
 
+            <div class="concept-section">
+  <h2><i class="fas fa-code"></i> 代码实践</h2>
+  <p>以下是一个简单的<strong>学习进度追踪器</strong>，使用Python和JSON来记录你的AI学习进度。你可以运行这个代码来跟踪每个章节的学习状态。</p>
+
+  <pre><code class="language-python">
+import json
+import os
+from datetime import datetime
+
+# 学习进度追踪器
+class LearningTracker:
+    def __init__(self, data_file="learning_progress.json"):
+        self.data_file = data_file
+        self.progress = self._load()
+
+    def _load(self):
+        if os.path.exists(self.data_file):
+            with open(self.data_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        return {}
+
+    def _save(self):
+        with open(self.data_file, 'w', encoding='utf-8') as f:
+            json.dump(self.progress, f, ensure_ascii=False, indent=2)
+
+    def mark_complete(self, chapter, status="已完成"):
+        self.progress[chapter] = {
+            "status": status,
+            "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M")
+        }
+        self._save()
+        print(f"✅ 已标记 {chapter} 为：{status}")
+
+    def get_progress(self):
+        total = 8  # 假设共8个章节
+        completed = sum(1 for v in self.progress.values() if v["status"] == "已完成")
+        return completed, total
+
+    def show_report(self):
+        completed, total = self.get_progress()
+        percent = (completed / total) * 100
+        print(f"\n📊 学习进度报告")
+        print(f"   已完成：{completed}/{total} ({percent:.1f}%)")
+        print(f"   进度条：[{'█' * completed}{'░' * (total - completed)}]")
+        print("\n📋 详细记录：")
+        for chapter, info in self.progress.items():
+            print(f"   • {chapter}: {info['status']} ({info['completed_at']})")
+
+# 使用示例
+if __name__ == "__main__":
+    tracker = LearningTracker()
+
+    # 标记已完成的章节
+    tracker.mark_complete("ch00-学习路线图")
+    tracker.mark_complete("ch02-数学基础")
+    tracker.mark_complete("ch03-AI基础概念")
+
+    # 查看学习报告
+    tracker.show_report()
+  </code></pre>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 运行结果</h4>
+    <pre><code>
+✅ 已标记 ch00-学习路线图 为：已完成
+✅ 已标记 ch02-数学基础 为：已完成
+✅ 已标记 ch03-AI基础概念 为：已完成
+
+📊 学习进度报告
+   已完成：3/8 (37.5%)
+   进度条：[███░░░░░]
+
+📋 详细记录：
+   • ch00-学习路线图: 已完成 (2024-01-15 10:30)
+   • ch02-数学基础: 已完成 (2024-01-15 10:30)
+   • ch03-AI基础概念: 已完成 (2024-01-15 10:30)
+    </code></pre>
+  </div>
+
+  <p>这个简单的追踪器展示了如何用Python进行<strong>JSON数据持久化</strong>，是学习编程和文件操作的好例子。你可以扩展它，添加更多功能如学习时长记录、笔记存储等。</p>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>AI学习需要系统化的路径，从基础到进阶逐步深入。</li>
+    <li>学习路线分为五个阶段：前置基础、核心原理、工程实践、应用工具、进阶展望。</li>
+    <li>每个阶段都有明确的学习目标和推荐资源。</li>
+    <li>实践是学习AI的关键，建议在学习理论的同时动手实践。</li>
+    <li>持续学习和关注最新发展是AI学习者的必备素质。</li>
+  </ol>
+</div>
+
             
     </main>
 
