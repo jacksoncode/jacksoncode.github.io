@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI工具速览——即学即用，涵盖对话AI、图像AI、办公AI、编程AI、搜索AI、视频音频AI及提示词技巧">
+    <meta name="keywords" content="AI, 人工智能, ChatGPT, Claude, Midjourney, Copilot, Cursor, Perplexity, 提示词">
+    <meta name="author" content="AI Learner">
+    <title>第二十五章：AI工具速览——即学即用 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section 样式 ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block-header .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c5c8c6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .code-block-header .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 知识点标记 ========== */
+        .knowledge-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+        }
+
+        .knowledge-point i {
+            font-size: 0.75rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        /* ========== 章节导航 ========== */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .chapter-nav a {
+            color: #4299e1;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-nav a:hover {
+            color: #2b6cb0;
+        }
+
+        .chapter-nav .toc-link {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* ========== 工具卡片网格 ========== */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tool-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .tool-card .tool-name {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-card .tool-desc {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        /* ========== 提示词示例框 ========== */
+        .prompt-example {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            position: relative;
+        }
+
+        .prompt-example .prompt-label {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .prompt-example .prompt-content {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #2d3748;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .tool-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
+            <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
+            <li><a href="ch17.html"><i class="fas fa-book-open"></i> 知识库</a></li>
+            <li><a href="ch18.html"><i class="fas fa-layer-group"></i> 记忆</a></li>
+            <li><a href="ch19.html"><i class="fas fa-comment-dots"></i> 提示</a></li>
+            <li><a href="ch20.html"><i class="fas fa-database"></i> 数据</a></li>
+            <li><a href="ch21.html"><i class="fas fa-exclamation-circle"></i> 局限</a></li>
+            <li><a href="ch22.html"><i class="fas fa-toolbox"></i> 平台</a></li>
+            <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
+            <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ==================== Hero Section ==================== -->
+    <section class="hero-section">
+        <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
+        <p>第二十五章：AI工具速览——即学即用</p>
+        <div class="hero-badges">
+            <span class="hero-badge"><i class="fas fa-wrench"></i> 工具导向</span>
+            <span class="hero-badge"><i class="fas fa-hand-pointer"></i> 即学即用</span>
+        </div>
+    </section>
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第二十五章：AI工具速览——即学即用 -->
+<!-- ============================================================ -->
+
+<h2 class="section-title"><i class="fas fa-tools"></i> 第二十五章：AI工具速览——即学即用</h2>
+
+<div class="learning-objectives">
+  <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+  <ul>
+    <li>了解当前主流AI工具的分类和用途</li>
+    <li>掌握至少3款AI工具的基本使用方法</li>
+    <li>学会编写简单的提示词（Prompt）</li>
+    <li>能够将AI工具应用到日常工作和生活中</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h4><i class="fas fa-book"></i> 前置要求</h4>
+  <p>无（本章是最接地气的入门章节，零基础也能看懂）</p>
+</div>
+
+<!-- 一、对话AI -->
+<div class="concept-section" id="sec1">
+  <h2 class="section-subtitle"><i class="fas fa-comments"></i> 一、对话AI——你的智能助手</h2>
+
+  <p>对话AI是最常见、最容易上手的AI工具。你只需要像和朋友聊天一样输入文字，AI就能回答问题、写文章、翻译语言、写代码……</p>
+
+  <h3>主流对话AI工具一览</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具名称</th>
+        <th>开发方</th>
+        <th>一句话特点</th>
+        <th>访问方式</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ChatGPT</strong></td>
+        <td>OpenAI</td>
+        <td>全球最流行的对话AI，功能全面，擅长写作和编程</td>
+        <td>chat.openai.com</td>
+      </tr>
+      <tr>
+        <td><strong>Claude</strong></td>
+        <td>Anthropic</td>
+        <td>长文本处理能力极强，擅长文档分析和深度推理</td>
+        <td>claude.ai</td>
+      </tr>
+      <tr>
+        <td><strong>DeepSeek</strong></td>
+        <td>深度求索</td>
+        <td>国产开源模型代表，推理能力强，性价比高</td>
+        <td>chat.deepseek.com</td>
+      </tr>
+      <tr>
+        <td><strong>文心一言</strong></td>
+        <td>百度</td>
+        <td>中文理解优秀，与百度生态深度整合</td>
+        <td>yiyan.baidu.com</td>
+      </tr>
+      <tr>
+        <td><strong>通义千问</strong></td>
+        <td>阿里巴巴</td>
+        <td>阿里系AI，在电商和办公场景有优势</td>
+        <td>tongyi.aliyun.com</td>
+      </tr>
+      <tr>
+        <td><strong>Kimi</strong></td>
+        <td>月之暗面</td>
+        <td>超长上下文窗口，适合读长文档和小说</td>
+        <td>kimi.moonshot.cn</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <h5><i class="fas fa-lightbulb"></i> 新手建议</h5>
+    <p>如果你刚开始接触AI，推荐从 <strong>ChatGPT</strong> 或 <strong>DeepSeek</strong> 入手。前者功能全面、生态丰富；后者免费且中文体验好。不需要注册多个，先用熟一个，再逐步尝试其他。</p>
+  </div>
+
+  <h3>3个实用场景示例</h3>
+
+  <h4>场景1：写一封专业的商务邮件</h4>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 提示词模板</div>
+    <div class="prompt-content">你是一位资深商务经理。请帮我写一封邮件，向客户说明项目延期的原因，并给出新的交付时间。语气要诚恳、专业，同时维护好合作关系。</div>
+  </div>
+  <p>把上面的提示词复制到对话AI中，AI会生成一封完整的邮件。你可以根据实际需求修改细节，比如具体的延期原因、新的时间等。</p>
+
+  <h4>场景2：将Excel数据整理成分析报告</h4>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 提示词模板</div>
+    <div class="prompt-content">我有一份销售数据，包含以下列：日期、产品名称、销售额、地区。请帮我写一份数据分析报告的框架，包括：1）总体销售趋势分析；2）各地区对比；3）热销产品排名；4）下月销售建议。</div>
+  </div>
+  <p>你可以把Excel里的数据直接粘贴给AI，让AI帮你分析趋势、找出规律，甚至生成可视化的图表代码。</p>
+
+  <h4>场景3：翻译一段技术文档并解释术语</h4>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 提示词模板</div>
+    <div class="prompt-content">请将以下英文技术文档翻译成中文，并对其中加粗的专业术语给出简单解释：
+
+[粘贴你的英文文档]</div>
+  </div>
+  <p>AI不仅能翻译，还能用通俗易懂的方式解释专业术语，非常适合学习新技术。</p>
+
+  <h3>提示词基础技巧</h3>
+  <div class="concept-box">
+    <h4><i class="fas fa-magic"></i> 技巧1：角色设定</h4>
+    <p>给AI一个明确的角色，输出质量会大幅提升。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">你是一位有10年经验的Python工程师……
+你是一位资深产品经理……
+你是一位小学语文老师……</div>
+    </div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-magic"></i> 技巧2：输出格式</h4>
+    <p>明确告诉AI你希望以什么格式输出。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">请用Markdown格式输出……
+请用表格形式列出……
+请分三点说明……</div>
+    </div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-magic"></i> 技巧3：分步骤</h4>
+    <p>复杂任务拆成步骤，AI执行更准确。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">第一步，分析以下代码的问题；
+第二步，给出修改后的代码；
+第三步，解释修改的原因。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 二、图像AI -->
+<div class="concept-section" id="sec2">
+  <h2 class="section-subtitle"><i class="fas fa-image"></i> 二、图像AI——你的设计师</h2>
+
+  <p>图像AI可以根据文字描述生成图片，或者对现有图片进行编辑。即使你完全不会画画，也能创作出精美的图像。</p>
+
+  <h3>主流图像AI工具</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具名称</th>
+        <th>特点</th>
+        <th>适合人群</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Midjourney</strong></td>
+        <td>艺术风格出众，画面精美，社区活跃</td>
+        <td>设计师、艺术创作者</td>
+      </tr>
+      <tr>
+        <td><strong>Stable Diffusion</strong></td>
+        <td>开源免费，可本地部署，高度可定制</td>
+        <td>技术爱好者、进阶用户</td>
+      </tr>
+      <tr>
+        <td><strong>即梦（Dreamina）</strong></td>
+        <td>字节跳动出品，中文提示词友好</td>
+        <td>国内用户、短视频创作者</td>
+      </tr>
+      <tr>
+        <td><strong>可灵（Kling）</strong></td>
+        <td>视频生成能力强，支持图生视频</td>
+        <td>视频创作者</td>
+      </tr>
+      <tr>
+        <td><strong>通义万相</strong></td>
+        <td>阿里出品，中文场景优化好</td>
+        <td>国内用户、电商从业者</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>文生图基础操作</h3>
+  <p>所有图像AI的基本用法都一样：输入文字描述（提示词），AI生成对应的图片。</p>
+
+  <h3>提示词结构解析</h3>
+  <p>一个好的图像提示词通常包含四个部分：</p>
+  <div class="concept-box">
+    <h4><i class="fas fa-puzzle-piece"></i> 提示词公式</h4>
+    <p><strong>主体 + 风格 + 细节 + 参数</strong></p>
+    <ul>
+      <li><strong>主体</strong>：画面主要是什么（人物、建筑、动物等）</li>
+      <li><strong>风格</strong>：艺术风格（赛博朋克、水墨画、油画、像素风等）</li>
+      <li><strong>细节</strong>：光线、色彩、氛围、构图等</li>
+      <li><strong>参数</strong>：画面比例、分辨率等（部分工具支持）</li>
+    </ul>
+  </div>
+
+  <h3>示例：生成一张"赛博朋克风格的中国古城"</h3>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-image"></i> 图像提示词</div>
+    <div class="prompt-content">A traditional Chinese ancient city at night, cyberpunk style, neon lights reflecting on wet stone streets, pagodas with holographic advertisements, flying vehicles in the sky, misty atmosphere, highly detailed, 8k resolution, cinematic lighting</div>
+  </div>
+  <p>中文版本：</p>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-image"></i> 图像提示词（中文）</div>
+    <div class="prompt-content">夜晚的中国古城，赛博朋克风格，霓虹灯倒映在潮湿的石板路上，宝塔上投射着全息广告，天空中有飞行汽车，雾气弥漫，超高细节，8K分辨率，电影级灯光</div>
+  </div>
+
+  <div class="success-box">
+    <h5><i class="fas fa-check-circle"></i> 小贴士</h5>
+    <p>刚开始不用追求完美的提示词，先描述你想要的画面，然后多试几次、逐步调整。很多工具（如Midjourney）还支持"图生图"功能——上传一张参考图，AI会在此基础上创作。</p>
+  </div>
+</div>
+
+<!-- 三、办公AI -->
+<div class="concept-section" id="sec3">
+  <h2 class="section-subtitle"><i class="fas fa-briefcase"></i> 三、办公AI——你的效率工具</h2>
+
+  <p>办公AI直接嵌入在你熟悉的办公软件中，帮你自动生成PPT、分析Excel数据、整理会议纪要，大幅提升工作效率。</p>
+
+  <h3>主流办公AI工具</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具名称</th>
+        <th>集成平台</th>
+        <th>核心功能</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Microsoft Copilot</strong></td>
+        <td>Office 365（Word/Excel/PPT）</td>
+        <td>文档生成、数据分析、PPT制作</td>
+      </tr>
+      <tr>
+        <td><strong>WPS AI</strong></td>
+        <td>WPS Office</td>
+        <td>中文文档处理、表格分析、PDF阅读</td>
+      </tr>
+      <tr>
+        <td><strong>飞书智能伙伴</strong></td>
+        <td>飞书（Lark）</td>
+        <td>会议纪要、文档协作、日程管理</td>
+      </tr>
+      <tr>
+        <td><strong>钉钉魔法棒</strong></td>
+        <td>钉钉</td>
+        <td>智能文档、会议摘要、审批辅助</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>PPT生成：从大纲到完整幻灯片</h3>
+  <p>以WPS AI为例，制作PPT只需三步：</p>
+  <ol>
+    <li><strong>输入主题</strong>：告诉AI你要做什么主题的PPT，比如"2024年Q3销售总结"</li>
+    <li><strong>生成大纲</strong>：AI会自动生成PPT的章节结构和每页内容要点</li>
+    <li><strong>选择模板</strong>：AI根据内容推荐合适的模板，一键生成完整PPT</li>
+  </ol>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 你可以这样描述</div>
+    <div class="prompt-content">帮我做一份关于"新能源汽车市场分析"的PPT，需要包含市场现状、主要竞争对手、未来趋势三个部分，风格要商务简洁。</div>
+  </div>
+
+  <h3>Excel分析：自动图表和数据洞察</h3>
+  <p>把Excel文件上传给AI，它可以：</p>
+  <ul>
+    <li>自动识别数据类型和结构</li>
+    <li>生成统计图表（柱状图、折线图、饼图等）</li>
+    <li>发现数据中的异常和趋势</li>
+    <li>用自然语言回答你关于数据的问题</li>
+  </ul>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 你可以这样问</div>
+    <div class="prompt-content">这份销售数据中，哪个月的销售额最高？哪个地区的增长最快？请用图表展示各品类的销售占比。</div>
+  </div>
+
+  <h3>会议纪要：语音转文字+要点提炼</h3>
+  <p>开会时打开飞书或钉钉的会议功能，AI会自动：</p>
+  <ol>
+    <li>将语音实时转为文字</li>
+    <li>区分不同发言人的内容</li>
+    <li>自动提炼会议要点和待办事项</li>
+    <li>生成结构化的会议纪要</li>
+  </ol>
+  <div class="success-box">
+    <h5><i class="fas fa-check-circle"></i> 效率提升</h5>
+    <p>以前整理1小时会议的纪要需要30分钟，现在AI在会议结束的同时就能生成初稿，你只需要花5分钟检查和补充。</p>
+  </div>
+</div>
+
+<!-- 四、编程AI -->
+<div class="concept-section" id="sec4">
+  <h2 class="section-subtitle"><i class="fas fa-code"></i> 四、编程AI——你的代码助手</h2>
+
+  <p>编程AI可以帮你写代码、改Bug、解释代码逻辑，甚至帮你设计整个程序的结构。即使你不是程序员，也能借助编程AI完成很多自动化任务。</p>
+
+  <h3>主流编程AI工具</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具名称</th>
+        <th>特点</th>
+        <th>使用场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Cursor</strong></td>
+        <td>AI原生代码编辑器，体验流畅，功能强大</td>
+        <td>专业开发、项目开发</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Copilot</strong></td>
+        <td>与VS Code深度集成，代码补全能力强</td>
+        <td>日常编码、学习编程</td>
+      </tr>
+      <tr>
+        <td><strong>通义灵码</strong></td>
+        <td>阿里出品，中文注释和文档生成优秀</td>
+        <td>国内开发者、中文项目</td>
+      </tr>
+      <tr>
+        <td><strong>CodeGeeX</strong></td>
+        <td>清华出品，开源免费，支持多种语言</td>
+        <td>学生、初学者</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>一句话描述需求生成代码</h3>
+  <p>这是编程AI最神奇的功能。你只需要用自然语言描述你想做什么，AI就能生成对应的代码。</p>
+
+  <h3>示例："写一个Python函数，计算斐波那契数列"</h3>
+  <div class="code-block">
+    <div class="code-block-header">
+      <span class="lang-label"><i class="fab fa-python"></i> Python</span>
+    </div>
+    <pre><code class="language-python">def fibonacci(n):
+    """计算斐波那契数列的前n项"""
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+    elif n == 2:
+        return [0, 1]
+
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1] + fib[i-2])
+    return fib
+
+# 使用示例
+print(fibonacci(10))  # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</code></pre>
+  </div>
+
+  <p>你可以继续和AI对话，让它优化这段代码：</p>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 后续提问</div>
+    <div class="prompt-content">请用递归的方式重写这个函数，并加上缓存优化。</div>
+  </div>
+
+  <h3>代码解释和Debug</h3>
+  <p>遇到看不懂的代码？直接粘贴给AI，让它解释：</p>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 你可以这样问</div>
+    <div class="prompt-content">请解释以下代码的作用，以及每一行的含义：
+
+[粘贴你的代码]</div>
+  </div>
+
+  <p>程序出错了？把错误信息和代码一起给AI：</p>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-comment"></i> 你可以这样问</div>
+    <div class="prompt-content">我的代码报错了，错误信息是：IndexError: list index out of range。请帮我找出问题并修复。
+
+[粘贴你的代码]</div>
+  </div>
+
+  <div class="tip-box">
+    <h5><i class="fas fa-lightbulb"></i> 非程序员也能用</h5>
+    <p>即使你不会编程，也可以用编程AI做很多有用的事：批量重命名文件、自动整理文件夹、从网页抓取数据、自动生成Excel报表……只要描述清楚需求，AI会帮你写出可运行的代码。</p>
+  </div>
+</div>
+
+<!-- 五、搜索AI -->
+<div class="concept-section" id="sec5">
+  <h2 class="section-subtitle"><i class="fas fa-search"></i> 五、搜索AI——你的研究助手</h2>
+
+  <p>传统搜索引擎给你一堆链接，让你自己找答案。搜索AI直接给你答案，还能告诉你答案的来源。</p>
+
+  <h3>主流搜索AI工具</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具名称</th>
+        <th>特点</th>
+        <th>适合场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Perplexity</strong></td>
+        <td>英文搜索质量高，引用来源清晰</td>
+        <td>学术研究、技术查询</td>
+      </tr>
+      <tr>
+        <td><strong>秘塔AI搜索</strong></td>
+        <td>国产搜索AI，中文体验好，支持深度搜索</td>
+        <td>中文资料查询、日常问题</td>
+      </tr>
+      <tr>
+        <td><strong>天工AI</strong></td>
+        <td>昆仑万维出品，支持多模态搜索</td>
+        <td>综合搜索、创意灵感</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>与传统搜索的区别</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>对比项</th>
+        <th>传统搜索（Google/百度）</th>
+        <th>搜索AI（Perplexity/秘塔）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>输出形式</strong></td>
+        <td>返回10个网页链接</td>
+        <td>直接给出总结性答案</td>
+      </tr>
+      <tr>
+        <td><strong>交互方式</strong></td>
+        <td>关键词匹配</td>
+        <td>自然语言对话，可追问</td>
+      </tr>
+      <tr>
+        <td><strong>信息整合</strong></td>
+        <td>用户自己浏览多个网页</td>
+        <td>AI自动整合多源信息</td>
+      </tr>
+      <tr>
+        <td><strong>信息溯源</strong></td>
+        <td>链接即来源</td>
+        <td>答案中标注引用来源</td>
+      </tr>
+      <tr>
+        <td><strong>适合问题</strong></td>
+        <td>找网站、找资源</td>
+        <td>找答案、做研究</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>信息溯源和可信度判断</h3>
+  <p>搜索AI虽然方便，但也要注意判断信息的可信度：</p>
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 使用建议</h5>
+    <ul>
+      <li><strong>查看引用来源</strong>：优先相信来自权威网站（政府、学术机构、知名媒体）的信息</li>
+      <li><strong>交叉验证</strong>：重要信息用多个搜索AI或传统搜索引擎验证</li>
+      <li><strong>注意时效性</strong>：AI可能引用过时的信息，关注答案中的时间标注</li>
+      <li><strong>警惕AI幻觉</strong>：搜索AI也可能"编造"不存在的来源，关键信息务必核实</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 六、视频/音频AI -->
+<div class="concept-section" id="sec6">
+  <h2 class="section-subtitle"><i class="fas fa-video"></i> 六、视频/音频AI</h2>
+
+  <p>视频和音频AI让内容创作变得前所未有的简单。从自动生成字幕到AI作曲，这些工具正在改变创意产业。</p>
+
+  <h3>主流视频/音频AI工具</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具名称</th>
+        <th>类型</th>
+        <th>功能</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>剪映AI</strong></td>
+        <td>视频编辑</td>
+        <td>一键生成字幕、智能抠图、图文成片</td>
+      </tr>
+      <tr>
+        <td><strong>Suno</strong></td>
+        <td>AI作曲</td>
+        <td>输入文字描述生成完整歌曲</td>
+      </tr>
+      <tr>
+        <td><strong>ElevenLabs</strong></td>
+        <td>语音合成</td>
+        <td>高质量文字转语音，支持语音克隆</td>
+      </tr>
+      <tr>
+        <td><strong>可灵（Kling）</strong></td>
+        <td>视频生成</td>
+        <td>文生视频、图生视频，效果逼真</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>一键生成视频字幕</h3>
+  <p>使用剪映AI：</p>
+  <ol>
+    <li>导入视频文件</li>
+    <li>点击"识别字幕"按钮</li>
+    <li>AI自动识别语音并生成字幕</li>
+    <li>自动匹配时间轴，支持多语言翻译</li>
+  </ol>
+  <p>以前手动打1小时视频的字幕需要2-3小时，现在AI几分钟就能完成，准确率通常在95%以上。</p>
+
+  <h3>AI作曲</h3>
+  <p>以Suno为例，创作一首歌曲只需：</p>
+  <div class="prompt-example">
+    <div class="prompt-label"><i class="fas fa-music"></i> 描述你想要的音乐</div>
+    <div class="prompt-content">一首轻快的流行歌曲，关于夏天的海边，有吉他和钢琴，节奏明快，适合开车时听。</div>
+  </div>
+  <p>Suno会生成包含歌词、旋律、伴奏的完整歌曲，你可以多次生成直到满意。</p>
+
+  <h3>语音克隆</h3>
+  <p>ElevenLabs等工具可以克隆任何人的声音：</p>
+  <ol>
+    <li>上传一段目标声音的录音（通常需要1-5分钟）</li>
+    <li>AI分析声音特征</li>
+    <li>输入任意文字，AI用克隆的声音朗读</li>
+  </ol>
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 重要提醒</h5>
+    <p>语音克隆技术存在被滥用的风险。请务必遵守法律法规，只在获得授权的情况下使用他人的声音，切勿用于诈骗、伪造等非法用途。</p>
+  </div>
+</div>
+
+<!-- 七、提示词通用技巧 -->
+<div class="concept-section" id="sec7">
+  <h2 class="section-subtitle"><i class="fas fa-wand-magic-sparkles"></i> 七、提示词通用技巧</h2>
+
+  <p>提示词（Prompt）是你和AI沟通的桥梁。掌握以下技巧，能让AI的输出质量提升数倍。</p>
+
+  <h3>角色设定法</h3>
+  <div class="concept-box">
+    <h4><i class="fas fa-user-tie"></i> "你是一位资深……"</h4>
+    <p>给AI设定一个专业角色，它会更倾向于用该领域的知识和语言风格来回答。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">你是一位资深营养师，请为一位糖尿病患者设计一周的健康食谱。</div>
+    </div>
+    <div class="prompt-example">
+      <div class="prompt-content">你是一位有20年经验的面试官，请模拟一场互联网产品经理的面试。</div>
+    </div>
+  </div>
+
+  <h3>输出格式法</h3>
+  <div class="concept-box">
+    <h4><i class="fas fa-file-alt"></i> "请用Markdown格式……"</h4>
+    <p>明确指定输出格式，AI会按照你的要求组织内容。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">请用Markdown格式输出，包含标题、要点列表和代码块。</div>
+    </div>
+    <div class="prompt-example">
+      <div class="prompt-content">请用表格形式对比Python和JavaScript的语法差异。</div>
+    </div>
+  </div>
+
+  <h3>分步骤法</h3>
+  <div class="concept-box">
+    <h4><i class="fas fa-list-ol"></i> "第一步……第二步……"</h4>
+    <p>复杂任务拆分成步骤，AI执行更准确，输出更有条理。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">请帮我制定一个学习计划：
+第一步，分析我目前的基础水平；
+第二步，设定3个月后的目标；
+第三步，制定每周的学习安排；
+第四步，推荐适合的学习资源。</div>
+    </div>
+  </div>
+
+  <h3>示例法</h3>
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> "请参考以下示例……"</h4>
+    <p>给AI一个示例，它会更清楚你想要什么样的输出。</p>
+    <div class="prompt-example">
+      <div class="prompt-content">请参考以下示例的风格，帮我写5条类似的文案：
+
+示例："不是咖啡选择了你，是你选择了清醒。"</div>
+    </div>
+  </div>
+
+  <div class="success-box">
+    <h5><i class="fas fa-check-circle"></i> 提示词黄金法则</h5>
+    <p><strong>具体 > 模糊</strong>：与其说"写得好一点"，不如说"用更正式的语气，增加数据支撑"</p>
+    <p><strong>结构化 > 碎片化</strong>：用编号、分点、表格让AI的输出更有条理</p>
+    <p><strong>迭代优化 > 一次完美</strong>：先让AI生成初稿，再逐步提出修改意见</p>
+  </div>
+</div>
+
+<!-- 八、避坑指南 -->
+<div class="concept-section" id="sec8">
+  <h2 class="section-subtitle"><i class="fas fa-shield-alt"></i> 八、避坑指南</h2>
+
+  <p>AI工具虽然强大，但使用不当也会带来问题。以下是新手最容易踩的坑。</p>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 不要泄露敏感信息</h5>
+    <p>不要在对话AI中输入身份证号、银行卡号、公司机密、客户隐私等信息。AI对话可能被记录和分析，存在泄露风险。</p>
+  </div>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 核实AI生成的事实</h5>
+    <p>AI会"一本正经地胡说八道"——生成看似合理但实际错误的信息。涉及数据、日期、人名、专业术语时，务必交叉验证。</p>
+  </div>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 了解版权风险</h5>
+    <p>AI生成的图片、文字、音乐可能涉及版权争议。商业用途前，请了解所用工具的版权政策。部分工具（如Midjourney）对商业使用有特定限制。</p>
+  </div>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 不要过度依赖</h5>
+    <p>AI是辅助工具，不是替代品。过度依赖AI会削弱你的独立思考能力。建议把AI当作"助手"而非"大脑"，关键决策仍需自己判断。</p>
+  </div>
+
+  <div class="info-box">
+    <h5><i class="fas fa-info-circle"></i> 安全使用 checklist</h5>
+    <ul>
+      <li>使用公司/学校提供的AI工具时，遵守内部规定</li>
+      <li>涉及敏感内容时，优先使用本地部署或私有化方案</li>
+      <li>定期清理对话历史，减少信息留存</li>
+      <li>对AI生成的内容保持批判性思维</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 练习题 -->
+<div class="concept-section" id="sec9">
+  <h2 class="section-subtitle"><i class="fas fa-pencil-alt"></i> 练习题</h2>
+
+  <div class="exercise-box">
+    <h4><i class="fas fa-tasks"></i> 动手实践</h4>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习1：</span>
+      <strong>用对话AI写一份本周工作总结</strong>
+      <p>选择任意一款对话AI（ChatGPT、Claude、DeepSeek等），输入你的工作内容和成果，让AI帮你整理成一份结构清晰的工作总结。尝试用"角色设定法"让AI以"你的直属领导"的视角来审视和优化这份总结。</p>
+    </div>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习2：</span>
+      <strong>用图像AI生成一张你家乡的风景图</strong>
+      <p>使用即梦、通义万相或任何图像AI工具，用文字描述你家乡的特色风景（如"江南水乡的清晨，小桥流水，白墙黑瓦，薄雾笼罩"），生成图片后尝试调整提示词，看看不同描述会产生什么效果。</p>
+    </div>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习3：</span>
+      <strong>尝试用3种不同的提示词技巧询问同一个问题，对比结果</strong>
+      <p>选择一个你感兴趣的问题（如"如何学习Python编程"），分别用以下三种方式提问：</p>
+      <ol>
+        <li>直接提问："如何学习Python编程？"</li>
+        <li>角色设定："你是一位有10年经验的Python工程师，请给零基础学习者制定一份Python学习计划。"</li>
+        <li>分步骤+格式要求："请分三步回答：第一步，分析零基础学习Python的难点；第二步，列出前两周的具体学习安排（用表格形式）；第三步，推荐3个适合初学者的练习项目。"</li>
+      </ol>
+      <p>对比三种方式的回答质量，体会提示词技巧的重要性。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 章节小结 -->
+<div class="concept-section" id="sec10">
+  <h2 class="section-subtitle"><i class="fas fa-clipboard-list"></i> 章节小结</h2>
+
+  <div class="chapter-summary">
+    <h4><i class="fas fa-star"></i> 本章要点回顾</h4>
+    <ul>
+      <li><strong>对话AI</strong>：ChatGPT、Claude、DeepSeek等是最易上手的AI工具，掌握"角色设定+输出格式+分步骤"的提示词技巧，能大幅提升使用效果</li>
+      <li><strong>图像AI</strong>：Midjourney、即梦、通义万相等工具让零基础用户也能创作精美图片，提示词结构为"主体+风格+细节+参数"</li>
+      <li><strong>办公AI</strong>：Microsoft Copilot、WPS AI、飞书智能伙伴等嵌入办公软件，能自动生成PPT、分析Excel、整理会议纪要</li>
+      <li><strong>编程AI</strong>：Cursor、GitHub Copilot、通义灵码等工具可以写代码、改Bug、解释代码，非程序员也能借助它们完成自动化任务</li>
+      <li><strong>搜索AI</strong>：Perplexity、秘塔AI搜索等直接给出答案而非链接，适合做研究和找答案，但要注意核实信息来源</li>
+      <li><strong>视频/音频AI</strong>：剪映AI、Suno、ElevenLabs等工具让字幕生成、AI作曲、语音克隆变得简单</li>
+      <li><strong>避坑指南</strong>：不泄露敏感信息、核实AI生成的事实、了解版权风险、避免过度依赖</li>
+    </ul>
+    <p>AI工具正在快速迭代，今天介绍的工具可能明天就有更好的替代品。最重要的是建立<strong>"遇到问题先想AI能不能帮我"</strong的思维习惯，持续探索新工具，让AI真正成为提升效率的得力助手。</p>
+  </div>
+</div>
+
+<!-- 章节导航 -->
+<div class="chapter-nav">
+  <a href="ch24.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章：综合实战</a>
+  <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+  <a href="ch26.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+</div>
+
+        </main>
+
+        <!-- ========== 右侧目录导航 ========== -->
+        <aside class="toc-sidebar">
+            <h3><i class="fas fa-list-ul"></i> 本章目录</h3>
+            <ul>
+                <li><a href="#sec1">一、对话AI</a></li>
+                <li class="toc-sub"><a href="#sec1">智能助手</a></li>
+                <li><a href="#sec2">二、图像AI</a></li>
+                <li class="toc-sub"><a href="#sec2">你的设计师</a></li>
+                <li><a href="#sec3">三、办公AI</a></li>
+                <li class="toc-sub"><a href="#sec3">效率工具</a></li>
+                <li><a href="#sec4">四、编程AI</a></li>
+                <li class="toc-sub"><a href="#sec4">代码助手</a></li>
+                <li><a href="#sec5">五、搜索AI</a></li>
+                <li class="toc-sub"><a href="#sec5">研究助手</a></li>
+                <li><a href="#sec6">六、视频/音频AI</a></li>
+                <li><a href="#sec7">七、提示词通用技巧</a></li>
+                <li><a href="#sec8">八、避坑指南</a></li>
+                <li><a href="#sec9">练习题</a></li>
+                <li><a href="#sec10">章节小结</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p>第1-11章：基础与核心</p>
+                <p>第12-24章：工程实践与进阶</p>
+                <p>第25章+：AI工具与应用</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+    <script>
+    // 目录滚动高亮
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-sidebar a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const el = document.querySelector(id);
+          if (el) sections.push({ link, el });
+        }
+      });
+      function updateActive() {
+        const scrollY = window.scrollY + 100;
+        let current = sections[0];
+        for (const s of sections) {
+          if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+      }
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+    </script>
+</body>
+</html>
