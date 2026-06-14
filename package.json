@@ -10,9 +10,9 @@
     "url": "https://github.com/jacksoncode/jacksoncode.github.io.git"
   },
   "scripts": {
-    "start": "npx live-server --port=3000 --open=/index.html",
+    "start": "npx serve . -l 3000 -s",
     "serve": "npx http-server -p 3000 -c-1",
-    "optimize:images": "echo '请安装: npm install -g imagemin-cli optipng jpegoptim'",
+    "optimize:images": "./scripts/optimize-images.sh",
     "optimize:css": "npx csso css/*.css -o dist/css/",
     "audit": "npm audit && npm audit fix",
     "clean": "rm -rf node_modules/.cache .sass-cache dist/",
@@ -27,19 +27,18 @@
     "format": "npx prettier --write \"**/*.{js,css,html,json,md}\"",
     "format:check": "npx prettier --check \"**/*.{js,css,html,json,md}\"",
     "webp:convert": "./scripts/optimize-images.sh --webp",
-    "optimize:images": "./scripts/optimize-images.sh",
     "optimize:pages": "./scripts/optimize-pages.sh",
     "validate": "npm run lint && npm run format:check && npm run test"
   },
   "devDependencies": {
-    "bootstrap": "^5.3.3",
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "bootstrap": "^5.3.3",
     "csso-cli": "^4.0.2",
+    "eslint": "^9.0.0",
     "http-server": "^14.1.1",
-    "lighthouse": "^11.0.0",
-    "live-server": "^1.2.2",
-    "eslint": "^8.50.0",
-    "prettier": "^3.0.0"
+    "lighthouse": "^12.0.0",
+    "prettier": "^3.0.0",
+    "serve": "^14.2.0"
   },
   "engines": {
     "node": ">=16.0.0",
