@@ -3,41 +3,41 @@
  * 支持 URL 搜索、文章搜索、Wiki 搜索
  */
 
-(function() {
+(function () {
     'use strict';
-    
+
     // 搜索数据
     let searchData = {
         urls: [],
         articles: [],
-        wiki: []
+        wiki: [],
     };
-    
+
     // 搜索配置
     const config = {
         minQueryLength: 2,
         maxResults: 10,
-        debounceDelay: 300
+        debounceDelay: 300,
     };
-    
+
     // DOM 元素
     let searchOverlay = null;
     let searchInput = null;
     let searchResults = null;
     let searchSpinner = null;
     let isSearchOpen = false;
-    
+
     // 初始化搜索
     function init() {
         if (document.querySelector('.search-overlay')) {
             return; // 已经初始化过
         }
-        
+
         createSearchOverlay();
         loadSearchData();
         bindEvents();
     }
-    
+
     // 创建搜索覆盖层
     function createSearchOverlay() {
         const overlay = document.createElement('div');
@@ -63,24 +63,24 @@
                 </div>
             </div>
         `;
-        
+
         document.body.appendChild(overlay);
-        
+
         searchOverlay = overlay;
         searchInput = overlay.querySelector('.search-input');
         searchResults = overlay.querySelector('.search-results');
         searchSpinner = overlay.querySelector('.search-spinner');
-        
+
         // 添加样式
         addSearchStyles();
     }
-    
+
     // 添加搜索样式
     function addSearchStyles() {
         if (document.querySelector('#search-styles')) {
             return;
         }
-        
+
         const style = document.createElement('style');
         style.id = 'search-styles';
         style.textContent = `
@@ -353,66 +353,66 @@
                 }
             }
         `;
-        
+
         document.head.appendChild(style);
     }
-    
+
     // 加载搜索数据
     function loadSearchData() {
         // 加载导航数据
         fetch('/data/nav.json')
-            .then(response => response.json())
-            .then(data => {
-                data.categories.forEach(category => {
-                    category.links.forEach(link => {
+            .then((response) => response.json())
+            .then((data) => {
+                data.categories.forEach((category) => {
+                    category.links.forEach((link) => {
                         searchData.urls.push({
                             title: link.name,
                             url: link.url,
                             category: category.name,
-                            type: 'url'
+                            type: 'url',
                         });
                     });
                 });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('加载导航数据失败:', error);
             });
-        
+
         // 加载文章数据（这里可以扩展为实际的文章搜索）
         const articles = document.querySelectorAll('.post-card');
-        articles.forEach(article => {
+        articles.forEach((article) => {
             const title = article.querySelector('.post-title')?.textContent || '';
             const url = article.getAttribute('href') || '';
             const desc = article.querySelector('.post-excerpt')?.textContent || '';
-            
+
             if (title && url) {
                 searchData.articles.push({
                     title: title,
                     url: url,
                     description: desc,
-                    type: 'article'
+                    type: 'article',
                 });
             }
         });
     }
-    
+
     // 绑定事件
     function bindEvents() {
         // 键盘快捷键
         document.addEventListener('keydown', handleKeydown);
-        
+
         // 搜索输入
         if (searchInput) {
             searchInput.addEventListener('input', debounce(handleSearch, config.debounceDelay));
             searchInput.addEventListener('keydown', handleSearchKeydown);
         }
-        
+
         // 关闭按钮
         const closeBtn = searchOverlay?.querySelector('.search-close');
         if (closeBtn) {
             closeBtn.addEventListener('click', closeSearch);
         }
-        
+
         // 点击覆盖层关闭
         searchOverlay?.addEventListener('click', (e) => {
             if (e.target === searchOverlay) {
@@ -420,7 +420,7 @@
             }
         });
     }
-    
+
     // 处理键盘事件
     function handleKeydown(e) {
         // Cmd/Ctrl + K 打开搜索
@@ -428,62 +428,62 @@
             e.preventDefault();
             toggleSearch();
         }
-        
+
         // ESC 关闭搜索
         if (e.key === 'Escape' && isSearchOpen) {
             closeSearch();
         }
     }
-    
+
     // 处理搜索输入
     function handleSearchKeydown(e) {
         const items = searchResults?.querySelectorAll('.search-item');
         if (!items.length) return;
-        
+
         const activeItem = searchResults.querySelector('.search-item.active');
         const currentIndex = Array.from(items).indexOf(activeItem);
-        
+
         // 向下箭头
         if (e.key === 'ArrowDown') {
             e.preventDefault();
             const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
             setActiveItem(items[nextIndex]);
         }
-        
+
         // 向上箭头
         if (e.key === 'ArrowUp') {
             e.preventDefault();
             const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
             setActiveItem(items[prevIndex]);
         }
-        
+
         // Enter 选择结果
         if (e.key === 'Enter' && activeItem) {
             e.preventDefault();
             activeItem.click();
         }
     }
-    
+
     // 设置激活项
     function setActiveItem(item) {
-        searchResults.querySelectorAll('.search-item').forEach(i => {
+        searchResults.querySelectorAll('.search-item').forEach((i) => {
             i.classList.remove('active');
         });
         item.classList.add('active');
         item.scrollIntoView({ block: 'nearest' });
     }
-    
+
     // 执行搜索
     function handleSearch() {
         const query = searchInput.value.trim();
-        
+
         if (!query || query.length < config.minQueryLength) {
             showEmptyState();
             return;
         }
-        
+
         showSpinner();
-        
+
         // 模拟搜索延迟
         setTimeout(() => {
             const results = performSearch(query);
@@ -491,41 +491,47 @@
             hideSpinner();
         }, 300);
     }
-    
+
     // 执行搜索
     function performSearch(query) {
         const results = [];
         const lowerQuery = query.toLowerCase();
-        
+
         // 搜索 URL
-        const urlResults = searchData.urls.filter(item => 
-            item.title.toLowerCase().includes(lowerQuery) ||
-            item.category.toLowerCase().includes(lowerQuery)
-        ).slice(0, config.maxResults);
-        
+        const urlResults = searchData.urls
+            .filter(
+                (item) =>
+                    item.title.toLowerCase().includes(lowerQuery) ||
+                    item.category.toLowerCase().includes(lowerQuery)
+            )
+            .slice(0, config.maxResults);
+
         if (urlResults.length > 0) {
             results.push({
                 category: '网址导航',
-                items: urlResults
+                items: urlResults,
             });
         }
-        
+
         // 搜索文章
-        const articleResults = searchData.articles.filter(item => 
-            item.title.toLowerCase().includes(lowerQuery) ||
-            (item.description && item.description.toLowerCase().includes(lowerQuery))
-        ).slice(0, config.maxResults);
-        
+        const articleResults = searchData.articles
+            .filter(
+                (item) =>
+                    item.title.toLowerCase().includes(lowerQuery) ||
+                    (item.description && item.description.toLowerCase().includes(lowerQuery))
+            )
+            .slice(0, config.maxResults);
+
         if (articleResults.length > 0) {
             results.push({
                 category: '文章',
-                items: articleResults
+                items: articleResults,
             });
         }
-        
+
         return results;
     }
-    
+
     // 显示搜索结果
     function displayResults(results) {
         if (!results.length) {
@@ -537,16 +543,18 @@
             `;
             return;
         }
-        
+
         let html = '';
-        
-        results.forEach(category => {
+
+        results.forEach((category) => {
             html += `<div class="search-category">${category.category}</div>`;
-            
-            category.items.forEach(item => {
+
+            category.items.forEach((item) => {
                 const highlightedTitle = highlightText(item.title, searchInput.value);
-                const highlightedDesc = item.description ? highlightText(item.description, searchInput.value) : '';
-                
+                const highlightedDesc = item.description
+                    ? highlightText(item.description, searchInput.value)
+                    : '';
+
                 html += `
                     <a href="${escapeHtml(item.url)}" class="search-item" target="${item.type === 'url' ? '_blank' : '_self'}">
                         <div class="search-item-title">${highlightedTitle}</div>
@@ -556,23 +564,23 @@
                 `;
             });
         });
-        
+
         searchResults.innerHTML = html;
     }
-    
+
     // 高亮搜索词
     function highlightText(text, query) {
         if (!query) return escapeHtml(text);
-        
+
         const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
         return escapeHtml(text).replace(regex, '<span class="search-item-highlight">$1</span>');
     }
-    
+
     // 转义正则表达式
     function escapeRegExp(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
-    
+
     // 显示空状态
     function showEmptyState() {
         searchResults.innerHTML = `
@@ -583,49 +591,49 @@
             </div>
         `;
     }
-    
+
     // 显示/隐藏加载动画
     function showSpinner() {
         if (searchSpinner) {
             searchSpinner.classList.add('active');
         }
     }
-    
+
     function hideSpinner() {
         if (searchSpinner) {
             searchSpinner.classList.remove('active');
         }
     }
-    
+
     // 打开搜索
     function openSearch() {
         if (searchOverlay) {
             searchOverlay.classList.add('active');
             isSearchOpen = true;
-            
+
             if (searchInput) {
                 setTimeout(() => searchInput.focus(), 100);
             }
-            
+
             document.body.style.overflow = 'hidden';
         }
     }
-    
+
     // 关闭搜索
     function closeSearch() {
         if (searchOverlay) {
             searchOverlay.classList.remove('active');
             isSearchOpen = false;
-            
+
             if (searchInput) {
                 searchInput.value = '';
                 showEmptyState();
             }
-            
+
             document.body.style.overflow = '';
         }
     }
-    
+
     // 切换搜索
     function toggleSearch() {
         if (isSearchOpen) {
@@ -634,7 +642,7 @@
             openSearch();
         }
     }
-    
+
     // 防抖函数
     function debounce(func, wait) {
         let timeout;
@@ -647,28 +655,28 @@
             timeout = setTimeout(later, wait);
         };
     }
-    
+
     // HTML 转义
     function escapeHtml(text) {
         if (typeof text !== 'string') {
             return '';
         }
         return text
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
-    
+
     // 暴露全局方法
     window.SiteSearch = {
         init: init,
         open: openSearch,
         close: closeSearch,
-        toggle: toggleSearch
+        toggle: toggleSearch,
     };
-    
+
     // 自动初始化
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

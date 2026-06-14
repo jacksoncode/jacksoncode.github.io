@@ -1,141 +1,291 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CodeClub - OpenClaw 一键部署">
-    <meta name="author" content="Jackson">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="CodeClub - OpenClaw 一键部署" />
+    <meta name="author" content="Jackson" />
     <title>OpenClaw 一键部署 - CodeClub</title>
-    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/dark-mode.css">
-    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/dark-mode.css" />
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
     <style>
-    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
-    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
-    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
-    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
-    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
-    .tutorial-main { flex: 1; min-width: 0; }
-    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
-    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
-    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
-    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
-    .markdown-body h3 { font-size: 17px; }
-    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
-    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
-    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
-    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
-    .markdown-body img { max-width: 100%; border-radius: 8px; }
-    .markdown-body table { border-collapse: collapse; width: 100%; margin: 16px 0; }
-    .markdown-body table th, .markdown-body table td { border: 1px solid var(--border, #e5e7eb); padding: 8px 12px; text-align: left; }
-    .markdown-body table th { background: var(--bg-primary, #f8fafc); font-weight: 600; }
-    .markdown-body table tr:nth-child(2n) { background: var(--bg-primary, #f8fafc); }
-    .markdown-body ul, .markdown-body ol { padding-left: 24px; margin: 12px 0; }
-    .markdown-body li { margin: 4px 0; }
-    .markdown-body hr { border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 24px 0; }
-    .markdown-body a { color: var(--primary, #3b82f6); text-decoration: none; }
-    .markdown-body a:hover { text-decoration: underline; }
-    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
-    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
-    .page-nav-link:hover { text-decoration: underline; }
-    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
-    .source-link a { color: var(--primary, #3b82f6); }
-    @media (max-width: 768px) {
-        .tutorial-page { flex-direction: column; }
-        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
-    }
+      .tutorial-page {
+        max-width: 1200px;
+        margin: 70px auto 40px;
+        padding: 0 20px;
+        display: flex;
+        gap: 20px;
+      }
+      .tutorial-sidebar {
+        width: 240px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 70px;
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+        background: var(--bg-secondary, #fff);
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .tutorial-sidebar h3 {
+        font-size: 15px;
+        margin: 0 0 12px;
+        color: var(--text-primary, #1a1a2e);
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--primary, #3b82f6);
+      }
+      .tutorial-sidebar a {
+        display: block;
+        padding: 5px 8px;
+        color: var(--text-secondary, #666);
+        text-decoration: none;
+        font-size: 13px;
+        border-radius: 4px;
+        line-height: 1.4;
+      }
+      .tutorial-sidebar a:hover {
+        background: var(--primary, #3b82f6);
+        color: #fff;
+      }
+      .tutorial-sidebar a.active {
+        background: var(--primary, #3b82f6);
+        color: #fff;
+        font-weight: 600;
+      }
+      .tutorial-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .tutorial-article {
+        background: var(--bg-secondary, #fff);
+        border-radius: 8px;
+        padding: 32px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .tutorial-article h1 {
+        font-size: 26px;
+        margin-bottom: 16px;
+        color: var(--text-primary, #1a1a2e);
+        border-bottom: 2px solid var(--primary, #3b82f6);
+        padding-bottom: 12px;
+      }
+      .markdown-body {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-secondary, #333);
+      }
+      .markdown-body h1 {
+        font-size: 24px;
+        border-bottom: 1px solid var(--border, #e5e7eb);
+        padding-bottom: 8px;
+      }
+      .markdown-body h2 {
+        font-size: 20px;
+        border-bottom: 1px solid var(--border, #e5e7eb);
+        padding-bottom: 6px;
+      }
+      .markdown-body h3 {
+        font-size: 17px;
+      }
+      .markdown-body pre {
+        background: #1e1e2e;
+        color: #cdd6f4;
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      .markdown-body code {
+        font-family: 'Fira Code', 'Cascadia Code', monospace;
+        font-size: 14px;
+      }
+      .markdown-body p code {
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #e83e8c;
+      }
+      .markdown-body blockquote {
+        border-left: 4px solid var(--primary, #3b82f6);
+        padding: 12px 20px;
+        margin: 16px 0;
+        background: #f8fafc;
+        border-radius: 0 8px 8px 0;
+      }
+      .markdown-body img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+      .markdown-body table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 16px 0;
+      }
+      .markdown-body table th,
+      .markdown-body table td {
+        border: 1px solid var(--border, #e5e7eb);
+        padding: 8px 12px;
+        text-align: left;
+      }
+      .markdown-body table th {
+        background: var(--bg-primary, #f8fafc);
+        font-weight: 600;
+      }
+      .markdown-body table tr:nth-child(2n) {
+        background: var(--bg-primary, #f8fafc);
+      }
+      .markdown-body ul,
+      .markdown-body ol {
+        padding-left: 24px;
+        margin: 12px 0;
+      }
+      .markdown-body li {
+        margin: 4px 0;
+      }
+      .markdown-body hr {
+        border: none;
+        border-top: 1px solid var(--border, #e5e7eb);
+        margin: 24px 0;
+      }
+      .markdown-body a {
+        color: var(--primary, #3b82f6);
+        text-decoration: none;
+      }
+      .markdown-body a:hover {
+        text-decoration: underline;
+      }
+      .page-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border, #e5e7eb);
+      }
+      .page-nav-link {
+        color: var(--primary, #3b82f6);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .page-nav-link:hover {
+        text-decoration: underline;
+      }
+      .source-link {
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--text-secondary, #999);
+      }
+      .source-link a {
+        color: var(--primary, #3b82f6);
+      }
+      @media (max-width: 768px) {
+        .tutorial-page {
+          flex-direction: column;
+        }
+        .tutorial-sidebar {
+          width: 100%;
+          position: static;
+          max-height: 200px;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="navbar-container">
-            <a class="navbar-brand" href="../../index.html">
-                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
-                <span>CodeClub</span>
-            </a>
-            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
-            <ul class="navbar-nav">
-                <li><a class="nav-link" href="../../index.html">首页</a></li>
-                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
-                <li><a class="nav-link" href="../../blog/">博客</a></li>
-                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
-                <li><a class="nav-link active" href="../index.html">教程</a></li>
-                <li><a class="nav-link" href="../../book.html">图书</a></li>
-                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
-                <li><a class="nav-link" href="../../about.html">关于我</a></li>
-            </ul>
-        </div>
+      <div class="navbar-container">
+        <a class="navbar-brand" href="../../index.html">
+          <img src="../../img/logo.png" alt="CodeClub" width="32" height="32" />
+          <span>CodeClub</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+        <ul class="navbar-nav">
+          <li><a class="nav-link" href="../../index.html">首页</a></li>
+          <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+          <li><a class="nav-link" href="../../blog/">博客</a></li>
+          <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+          <li><a class="nav-link active" href="../index.html">教程</a></li>
+          <li><a class="nav-link" href="../../book.html">图书</a></li>
+          <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+          <li><a class="nav-link" href="../../about.html">关于我</a></li>
+        </ul>
+      </div>
     </nav>
     <div class="tutorial-page">
-        <div class="tutorial-sidebar">
-            <h3>📖 AI Agent</h3>
-            <a href="0.html" >AI Agent(智能体) 教程</a>
-<a href="1.html" >AI Agent 简介</a>
-<a href="2.html" >AI Agent  核心组件</a>
-<a href="3.html" >AI Agent 工作原理</a>
-<a href="4.html" >大语言模型基础</a>
-<a href="5.html" >提示词工程</a>
-<a href="6.html" >Token (词元)</a>
-<a href="7.html" >Harness Engineering</a>
-<a href="8.html" >第一个 AI Agent</a>
-<a href="9.html" >OpenClaw (Clawdbot) 教程</a>
-<a href="10.html" >OpenClaw 快速上手</a>
-<a href="11.html" >QoderWork 教程</a>
-<a href="12.html" class="active">OpenClaw 一键部署</a>
-<a href="13.html" >OpenClaw 配置目录</a>
-<a href="14.html" >OpenClaw 工作原理</a>
-<a href="15.html" >OpenClaw 接入微信</a>
-<a href="16.html" >OpenClaw 接入飞书</a>
-<a href="17.html" >OpenClaw Skills</a>
-<a href="18.html" >OpenClaw 卸载指南</a>
-<a href="19.html" >CrewAI 构建智能体</a>
-<a href="20.html" >LangChain 制作智能体</a>
-<a href="21.html" >LangGraph 入门教程</a>
-<a href="22.html" >Claude Code 入门教程</a>
-<a href="23.html" >OpenCode 入门教程</a>
-<a href="24.html" >OpenCode Coding Plan</a>
-<a href="25.html" >CC Switch</a>
-<a href="26.html" >Skills 教程</a>
-<a href="27.html" >OpenCode skills</a>
-<a href="28.html" >Qoder 教程</a>
-<a href="29.html" >Qoder Quest 模式</a>
-<a href="30.html" >Qoder CLI</a>
-<a href="31.html" >Trae 教程</a>
-<a href="32.html" >Trae Solo</a>
-<a href="33.html" >Python 实现 AI Agent</a>
-<a href="34.html" >工具调用</a>
-<a href="35.html" >记忆系统</a>
-<a href="36.html" >Python 智能体环境配置</a>
-<a href="37.html" >AI Agent 问答实例</a>
-
+      <div class="tutorial-sidebar">
+        <h3>📖 AI Agent</h3>
+        <a href="0.html">AI Agent(智能体) 教程</a>
+        <a href="1.html">AI Agent 简介</a>
+        <a href="2.html">AI Agent 核心组件</a>
+        <a href="3.html">AI Agent 工作原理</a>
+        <a href="4.html">大语言模型基础</a>
+        <a href="5.html">提示词工程</a>
+        <a href="6.html">Token (词元)</a>
+        <a href="7.html">Harness Engineering</a>
+        <a href="8.html">第一个 AI Agent</a>
+        <a href="9.html">OpenClaw (Clawdbot) 教程</a>
+        <a href="10.html">OpenClaw 快速上手</a>
+        <a href="11.html">QoderWork 教程</a>
+        <a href="12.html" class="active">OpenClaw 一键部署</a>
+        <a href="13.html">OpenClaw 配置目录</a>
+        <a href="14.html">OpenClaw 工作原理</a>
+        <a href="15.html">OpenClaw 接入微信</a>
+        <a href="16.html">OpenClaw 接入飞书</a>
+        <a href="17.html">OpenClaw Skills</a>
+        <a href="18.html">OpenClaw 卸载指南</a>
+        <a href="19.html">CrewAI 构建智能体</a>
+        <a href="20.html">LangChain 制作智能体</a>
+        <a href="21.html">LangGraph 入门教程</a>
+        <a href="22.html">Claude Code 入门教程</a>
+        <a href="23.html">OpenCode 入门教程</a>
+        <a href="24.html">OpenCode Coding Plan</a>
+        <a href="25.html">CC Switch</a>
+        <a href="26.html">Skills 教程</a>
+        <a href="27.html">OpenCode skills</a>
+        <a href="28.html">Qoder 教程</a>
+        <a href="29.html">Qoder Quest 模式</a>
+        <a href="30.html">Qoder CLI</a>
+        <a href="31.html">Trae 教程</a>
+        <a href="32.html">Trae Solo</a>
+        <a href="33.html">Python 实现 AI Agent</a>
+        <a href="34.html">工具调用</a>
+        <a href="35.html">记忆系统</a>
+        <a href="36.html">Python 智能体环境配置</a>
+        <a href="37.html">AI Agent 问答实例</a>
+      </div>
+      <div class="tutorial-main">
+        <div class="tutorial-article">
+          <div class="markdown-body" id="md-content"></div>
+          <div class="page-navigation">
+            <a href="11.html" class="page-nav-link">&larr; QoderWork 教程</a>
+            <a href="13.html" class="page-nav-link">OpenClaw 配置目录 &rarr;</a>
+          </div>
+          <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
         </div>
-        <div class="tutorial-main">
-            <div class="tutorial-article">
-                <div class="markdown-body" id="md-content"></div>
-                <div class="page-navigation">
-                    <a href="11.html" class="page-nav-link">&larr; QoderWork 教程</a>
-                    <a href="13.html" class="page-nav-link">OpenClaw 配置目录 &rarr;</a>
-                </div>
-                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
-            </div>
-        </div>
+      </div>
     </div>
     <footer class="footer">
-        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+      <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
     </footer>
     <script src="../../js/dark-mode.js"></script>
     <script src="../../js/mobile-menu.js"></script>
     <script>
-    const md = `# OpenClaw 一键部署\n\n\n现在各大平台都已经支持这个智能体，如果不想安装在本机，可以一键部署云上 OpenClaw：\n\n\n	\n\n\n	\n- 阿里云：[https://www.aliyun.com/activity/ecs/clawdbot](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n\n- \n腾讯云：[https://cloud.tencent.com/developer/article/2624973](https://cloud.tencent.com/act/cps/redirect?redirect=37925&cps_key=4537fb0f9e70f157220dafdec0f9c750)\n\n\nCoding plan 资源包：\n\n\n\n\n\n\n- 阿里云：[https://www.aliyun.com/benefit/scene/codingplan](https://www.aliyun.com/benefit/scene/codingplan?source=5176.29345612&userCode=i5mn5r7m)\n\n\n\n	\n- \n腾讯云：[https://cloud.tencent.com/act/pro/codingplan](https://curl.qcloud.com/JyptkE2Z)\n\n\n\n\n---\n\n\n## 阿里云部署 OpenClaw\n\n本章节将详细介绍如何使用阿里云部署 OpenClaw，访问 [https://www.aliyun.com/activity/ecs/clawdbot](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)，选择一键购买并部署：\n\n\n\n[![](https://www.runoob.com/wp-content/uploads/2026/02/ab4d1d52-43f3-4525-9728-6ae85ee7a304.png)](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n\n如果手速快的，可以每天 9.9 抢服务器。\n\n\n云服务器部署优势还是很明显的：\n\n\n[![](https://www.runoob.com/wp-content/uploads/2026/01/c6da4d06-b50f-4b11-aebc-bdea5c5db859-scaled.png)](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n\n套餐已经包含了服务器与大模型：\n\n[\n![](https://www.runoob.com/wp-content/uploads/2026/02/7fdb80c6-7af8-4cb0-8757-638a88cfefe6.png)\n\n\n](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n我们可以使用它们的镜像，一键安装：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/53ea9fb0-d4ea-4582-a16f-38e7d6906880.png)\n\n\n\n购买完成后就可以到控制台配置 OpenClaw：\n\n\n[![](https://www.runoob.com/wp-content/uploads/2026/02/aliyun-openclaw-setup.png)](https://www.runoob.com/wp-content/uploads/2026/02/aliyun-openclaw-setup.png)\n\n\n\n---\n\n\n## 配置 OpenClaw\n\nOpenClaw 执行过程中默认调用百炼模型，模型调用的主要计费方式有两种：\n\n\n	\n\n\n- \n**Coding Plan AI 编码套餐（推荐）：**采用固定月费模式，提供月度请求额度，超出时段限额的调用会报错且不计费用，可避免产生超出预期的费用，目前支持 qwen3.5-plus、kimi-k2.5、MiniMax-M2.5、glm-5等模型。\n\n	\n- \n**按 Token 用量计费：**OpenClaw 2026.2.26 版本默认使用 qwen3.5-plus 模型作为文本和图像处理模型，如果用的多这个就不划算了。\n\n\n\n	\n\n我们可以先使用阿里云主账号访问百炼模型服务平台：[https://bailian.console.aliyun.com/](https://bailian.console.aliyun.com/)，然后点击右上角登录，登录成功后点击右上角的齿轮⚙️图标，选择 API key，然后复制 API key，如果没有也可以创建 API key：\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2025/09/83536c84-3956-4679-ad14-99d53e697692-scaled.png)\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2025/09/p994209.png)\n\n\n\n\n开通阿里云百炼不会产生费用，仅模型调用（超出免费额度后）、模型部署、模型调优会产生相应计费。\n\n\nOpenClaw 还是比较消耗 token 的，如果要长期使用，我们可以先购买个最便宜的包：[阿里云百炼大模型服务平台](https://cn.aliyun.com/benefit?from_alibabacloud=&userCode=i5mn5r7m)。\n\n\n\n\n[![](https://www.runoob.com/wp-content/uploads/2025/09/f9be5f87-2ed0-4d85-b2a4-ad8542312d6f.png)](https://dashi.aliyun.com/activity/ydsbl?userCode=i5mn5r7m)\n\n\n\n\n\n### Coding Plan\n\n另外，使用百炼的 Coding Plan 套餐更便宜：[https://www.aliyun.com/benefit/scene/codingplan](https://www.aliyun.com/benefit/scene/codingplan?source=5176.29345612&userCode=i5mn5r7m)\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/55f28438-580a-45a3-b1c0-d621d8d674fd.png)\n\n\n\n购买完 Coding Plan 套餐，可以在  [Coding Plan](https://bailian.console.aliyun.com/cn-beijing/?userCode=i5mn5r7m&tab=coding-plan#/efm/detail) 页面，获取 Coding Plan 专属 API Key（格式为 sk-sp-xxxxx）。\n\n\n\n后续需在 AI 工具中配置以下其中一个 Base URL（因工具而异）：\n\n\n	\n- \n\nOpenAI 兼容协议（OpenClaw 可使用）：https://coding.dashscope.aliyuncs.com/v1\n	\n- \n\nAnthropic 兼容协议：https://coding.dashscope.aliyuncs.com/apps/anthropic\n\n\n\n\n\n\n\n**说明：**Coding Plan 专属的 API Key 和 Base URL 与百炼按量计费的 API Key（sk-xxxxx）和Base URL（https://dashscope.aliyuncs.com/xxxxxx）不互通，请勿混用。\n\n如果抢不到，可以直接购买资源包：[https://cn.aliyun.com/benefit?from_alibabacloud=&userCode=i5mn5r7m](https://cn.aliyun.com/benefit?from_alibabacloud=&userCode=i5mn5r7m)\n\n\n\n\n\n\n\n\n在[服务器页面](https://swasnext.console.aliyun.com/servers)，单击服务器卡片中的实例 ID，进入服务器概览页面。\n\n\n\n单击应用详情页签，配置 OpenClaw。\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/clawbot-233.png)\n\n\n	\n\n\n- **\n端口放通：**需要放通对应端口的防火墙，单击一键放通即可。\n\n	\n- \n**配置 OpenClaw：**单击执行命令，输入百炼的 API-Key，单击下一步。\n\n	\n- \n**访问控制页面：**单击执行命令可获取 Clawdbot 对话的地址。\n	\n- **查看 Token: **在帮助  Config。\n\n	\n- \n在 Config 页面左侧导航栏单击 Gateway，切换至 Http 页签，在 Responses 区域将 Enabled 切换至开启，单击 Save。\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/clawbot-23333-scaled.png)\n\n\n\n### （可选）配置联网搜索功能\n\n\n目前中国内地地域（除香港）暂不支持联网搜索。香港和海外地域若需使用联网功能，可参考 [OpenClaw 官网配置](https://docs.openclaw.ai/brave-search)。\n\n			\n						\n			\n			\n		\n\n		\n		\n			[ Trae Solo](http://www.runoob.com/ai-agent/trae-solo.html)\n		\n\n		\n		\n				\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n    \n        \n    \n    \n    \n    \n\n\n    \n    \n        \n                \n        \n        \n        \n                \n    \n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
-    document.getElementById('md-content').innerHTML = marked.parse(md);
+      const md = `# OpenClaw 一键部署\n\n\n现在各大平台都已经支持这个智能体，如果不想安装在本机，可以一键部署云上 OpenClaw：\n\n\n	\n\n\n	\n- 阿里云：[https://www.aliyun.com/activity/ecs/clawdbot](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n\n- \n腾讯云：[https://cloud.tencent.com/developer/article/2624973](https://cloud.tencent.com/act/cps/redirect?redirect=37925&cps_key=4537fb0f9e70f157220dafdec0f9c750)\n\n\nCoding plan 资源包：\n\n\n\n\n\n\n- 阿里云：[https://www.aliyun.com/benefit/scene/codingplan](https://www.aliyun.com/benefit/scene/codingplan?source=5176.29345612&userCode=i5mn5r7m)\n\n\n\n	\n- \n腾讯云：[https://cloud.tencent.com/act/pro/codingplan](https://curl.qcloud.com/JyptkE2Z)\n\n\n\n\n---\n\n\n## 阿里云部署 OpenClaw\n\n本章节将详细介绍如何使用阿里云部署 OpenClaw，访问 [https://www.aliyun.com/activity/ecs/clawdbot](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)，选择一键购买并部署：\n\n\n\n[![](https://www.runoob.com/wp-content/uploads/2026/02/ab4d1d52-43f3-4525-9728-6ae85ee7a304.png)](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n\n如果手速快的，可以每天 9.9 抢服务器。\n\n\n云服务器部署优势还是很明显的：\n\n\n[![](https://www.runoob.com/wp-content/uploads/2026/01/c6da4d06-b50f-4b11-aebc-bdea5c5db859-scaled.png)](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n\n套餐已经包含了服务器与大模型：\n\n[\n![](https://www.runoob.com/wp-content/uploads/2026/02/7fdb80c6-7af8-4cb0-8757-638a88cfefe6.png)\n\n\n](https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m)\n\n我们可以使用它们的镜像，一键安装：\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/53ea9fb0-d4ea-4582-a16f-38e7d6906880.png)\n\n\n\n购买完成后就可以到控制台配置 OpenClaw：\n\n\n[![](https://www.runoob.com/wp-content/uploads/2026/02/aliyun-openclaw-setup.png)](https://www.runoob.com/wp-content/uploads/2026/02/aliyun-openclaw-setup.png)\n\n\n\n---\n\n\n## 配置 OpenClaw\n\nOpenClaw 执行过程中默认调用百炼模型，模型调用的主要计费方式有两种：\n\n\n	\n\n\n- \n**Coding Plan AI 编码套餐（推荐）：**采用固定月费模式，提供月度请求额度，超出时段限额的调用会报错且不计费用，可避免产生超出预期的费用，目前支持 qwen3.5-plus、kimi-k2.5、MiniMax-M2.5、glm-5等模型。\n\n	\n- \n**按 Token 用量计费：**OpenClaw 2026.2.26 版本默认使用 qwen3.5-plus 模型作为文本和图像处理模型，如果用的多这个就不划算了。\n\n\n\n	\n\n我们可以先使用阿里云主账号访问百炼模型服务平台：[https://bailian.console.aliyun.com/](https://bailian.console.aliyun.com/)，然后点击右上角登录，登录成功后点击右上角的齿轮⚙️图标，选择 API key，然后复制 API key，如果没有也可以创建 API key：\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2025/09/83536c84-3956-4679-ad14-99d53e697692-scaled.png)\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2025/09/p994209.png)\n\n\n\n\n开通阿里云百炼不会产生费用，仅模型调用（超出免费额度后）、模型部署、模型调优会产生相应计费。\n\n\nOpenClaw 还是比较消耗 token 的，如果要长期使用，我们可以先购买个最便宜的包：[阿里云百炼大模型服务平台](https://cn.aliyun.com/benefit?from_alibabacloud=&userCode=i5mn5r7m)。\n\n\n\n\n[![](https://www.runoob.com/wp-content/uploads/2025/09/f9be5f87-2ed0-4d85-b2a4-ad8542312d6f.png)](https://dashi.aliyun.com/activity/ydsbl?userCode=i5mn5r7m)\n\n\n\n\n\n### Coding Plan\n\n另外，使用百炼的 Coding Plan 套餐更便宜：[https://www.aliyun.com/benefit/scene/codingplan](https://www.aliyun.com/benefit/scene/codingplan?source=5176.29345612&userCode=i5mn5r7m)\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/55f28438-580a-45a3-b1c0-d621d8d674fd.png)\n\n\n\n购买完 Coding Plan 套餐，可以在  [Coding Plan](https://bailian.console.aliyun.com/cn-beijing/?userCode=i5mn5r7m&tab=coding-plan#/efm/detail) 页面，获取 Coding Plan 专属 API Key（格式为 sk-sp-xxxxx）。\n\n\n\n后续需在 AI 工具中配置以下其中一个 Base URL（因工具而异）：\n\n\n	\n- \n\nOpenAI 兼容协议（OpenClaw 可使用）：https://coding.dashscope.aliyuncs.com/v1\n	\n- \n\nAnthropic 兼容协议：https://coding.dashscope.aliyuncs.com/apps/anthropic\n\n\n\n\n\n\n\n**说明：**Coding Plan 专属的 API Key 和 Base URL 与百炼按量计费的 API Key（sk-xxxxx）和Base URL（https://dashscope.aliyuncs.com/xxxxxx）不互通，请勿混用。\n\n如果抢不到，可以直接购买资源包：[https://cn.aliyun.com/benefit?from_alibabacloud=&userCode=i5mn5r7m](https://cn.aliyun.com/benefit?from_alibabacloud=&userCode=i5mn5r7m)\n\n\n\n\n\n\n\n\n在[服务器页面](https://swasnext.console.aliyun.com/servers)，单击服务器卡片中的实例 ID，进入服务器概览页面。\n\n\n\n单击应用详情页签，配置 OpenClaw。\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/clawbot-233.png)\n\n\n	\n\n\n- **\n端口放通：**需要放通对应端口的防火墙，单击一键放通即可。\n\n	\n- \n**配置 OpenClaw：**单击执行命令，输入百炼的 API-Key，单击下一步。\n\n	\n- \n**访问控制页面：**单击执行命令可获取 Clawdbot 对话的地址。\n	\n- **查看 Token: **在帮助  Config。\n\n	\n- \n在 Config 页面左侧导航栏单击 Gateway，切换至 Http 页签，在 Responses 区域将 Enabled 切换至开启，单击 Save。\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/02/clawbot-23333-scaled.png)\n\n\n\n### （可选）配置联网搜索功能\n\n\n目前中国内地地域（除香港）暂不支持联网搜索。香港和海外地域若需使用联网功能，可参考 [OpenClaw 官网配置](https://docs.openclaw.ai/brave-search)。\n\n			\n						\n			\n			\n		\n\n		\n		\n			[ Trae Solo](http://www.runoob.com/ai-agent/trae-solo.html)\n		\n\n		\n		\n				\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n    \n        \n    \n    \n    \n    \n\n\n    \n    \n        \n                \n        \n        \n        \n                \n    \n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+      document.getElementById('md-content').innerHTML = marked.parse(md);
     </script>
-</body>
+  </body>
 </html>

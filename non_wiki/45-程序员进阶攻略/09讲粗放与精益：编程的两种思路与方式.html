@@ -1,440 +1,1666 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                09讲粗放与精益：编程的两种思路与方式
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/4a/a7/4abf31b53ee4845c4c3b2d3561b18aa7.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">09讲粗放与精益：编程的两种思路与方式</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/4a/a7/4abf31b53ee4845c4c3b2d3561b18aa7.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>几年前，我给团队负责的整个系统写过一些公共库，有一次同事发现这个库里存在一个Bug，并告诉了我出错的现象。然后我便去修复这个Bug，最终只修改了一行代码，但发现一上午就这么过去了。</p>
-<p>一上午只修复了一个Bug，而且只改了一行代码，到底发生了什么？时间都去哪里了？以前觉得自己写代码很快，怎么后来越来越慢了？我认真地思考了这个问题，开始认识到我的编程方式和习惯在那几年已经慢慢发生了变化，形成了明显的两个阶段的转变。这两个阶段是：</p>
-<ul>
-<li>写得粗放，写得多</li>
-<li>写得精益，写得好</li>
-</ul>
-<h2>多与粗放</h2>
-<p>粗放，在软件开发这个年轻的行业里其实没有确切的定义，但在传统行业中确实存在相近的关于 “粗放经营” 的概念可类比。引用其百科词条定义如下：</p>
-<blockquote>
-<p>粗放经营（Extensive Management），泛指技术和管理水平不高，生产要素利用效率低，产品粗制滥造，物质和劳动消耗高的生产经营方式。</p>
-</blockquote>
-<p>若把上面这段话里面的 “经营” 二字改成 “编程”，就很明确地道出了我想表达的粗放式编程的含义。</p>
-<p>一个典型的粗放式编程场景大概是这样的：需求到开发手上后，开始编码，编码完成，人肉测试，没问题后快速发布到线上，然后进入下一个迭代。</p>
-<p>我早期参与的大量项目过程都与此类似，不停地重复接需求，快速开发，发布上线。在这个过程中，我只是在不停地堆砌功能代码，每天产出的代码量不算少，但感觉都很类似，也很粗糙。这样的过程持续了挺长一个阶段，一度让我怀疑：这样大量而粗放地写代码到底有什么作用和意义？</p><!-- [[[read_end]]] -->
-<p>后来读到一个故事，我逐渐明白这个阶段是必要的，它因人、因环境而异，或长或短。而那个给我启发的故事，是这样的。</p>
-<p>有一个陶艺老师在第一堂课上说，他会把班上学生分成两组，一组的成绩将会以最终完成的陶器作品数量来评定；而另一组，则会以最终完成的陶器品质来评定。</p>
-<p>在交作业的时候，一个很有趣的现象出现了：“数量” 组如预期一般拿出了很多作品，但出乎意料的是质量最好的作品也全部是由 “数量” 组制作出来的。</p>
-<p>按 “数量” 组的评定标准，他们似乎应该忙于粗制滥造大量的陶器呀。但实际情况是他们每做出一个垃圾作品，都会吸取上一次制作的错误教训，然后在做下一个作品时得到改进。</p>
-<p>而 “品质” 组一开始就追求完美的作品，他们花费了大量的时间从理论上不断论证如何才能做出一个完美的作品，而到了最后拿出来的东西，似乎只是一堆建立在宏大理论上的陶土。</p>
-<p>读完这个故事，我陷入了沉思，感觉故事里的制作陶器和编程提升之路是如此类似。很显然，“品质” 组的同学一开始就在追求理想上的 “好与精益” ，而 “数量” 组同学的完成方式则似我早期堆砌代码时的“多与粗放”，但他们正是通过做得多，不断尝试，快速迭代 ，最后取得到了更好的结果。</p>
-<p>庆幸的是，我在初学编程时，就是在不断通过编程训练来解答一个又一个书本上得来的困惑；后来工作时，则是在不断写程序来解决一个又一个工作中遇到的问题。看到书上探讨各种优雅的代码之道、编程的艺术哲学，那时的我也完全不知道该如何通往这座编程的 “圣杯”，只能看着自己写出的蹩脚代码，然后继续不断重复去制作下一个丑陋的 “陶器”，不断尝试，不断精进和进阶。</p>
-<p>《黑客与画家》书里说：“编程和画画近乎异曲同工。”所以，你看那些成名画家的作品，如果按时间顺序来排列展示，你会发现每幅画所用的技巧，都是建立在上一幅作品学到的东西之上；如果某幅作品特别出众，你往往也能在更早期的作品中找到类似的版本。而编程的精进过程也是类似的。</p>
-<p>总之，这些故事和经历都印证了一个道理：<strong>在通往 “更好” 的路上，总会经过 “更多” 这条路。</strong></p>
-<h2>好与精益</h2>
-<p>精益，也是借鉴自传统行业里的一个类比：精益生产。</p>
-<blockquote>
-<p>精益生产（Lean Production），简言之，就是一种以满足用户需求为目标、力求降低成本、提高产品的质量、不断创新的资源节约型生产方式。</p>
-</blockquote>
-<p>若将定义中的 “生产” 二字换成 “编程”，也就道出了精益编程的内涵。它有几个关键点：质量、成本与效率。但要注意：在编程路上，如果一开始就像 “品质” 组同学那样去追求完美，也许你就会被定义 “完美” 的品质所绊住，而忽视了制作的成本与效率。</p>
-<p>因为编程的难点是，无论你在开始动手编程时看过多少有关编程理论、方法、哲学与艺术的书，一开始你还是无法领悟到什么是编程的正确方法，以及什么是“完美” 的程序。毕竟纸上得来终觉浅，绝知此事要躬行。</p>
-<p>曾经，还在学校学习编程时，有一次老师布置了一个期中课程设计，我很快完成了这个课程设计中的编程作业。而另一位同学，刚刚看完了那本经典的《设计模式》书。</p>
-<p>他尝试用书里学到的新概念来设计这个编程作业，并且又用 UML 画了一大堆交互和类图，去推导设计的完美与优雅。然后兴致勃勃向我（因为我刚好坐在他旁边）讲解他的完美设计，我若有所悟，觉得里面确实有值得我借鉴的地方，就准备吸收一些我能听明白的东西，重构一遍已经写好的作业程序。</p>
-<p>后来，这位同学在动手实现他的完美设计时，发现程序越写越复杂，交作业的时间已经不够了，只好借用我的不完美的第一版代码改改凑合交了。而我在这第一版代码基础上，又按领悟到的正确思路重构了一次、改进了一番后交了作业。</p>
-<p>所以，别被所谓 “完美“ 的程序所困扰，只管先去盯住你要用编程解决的问题，把问题解决，把任务完成。</p>
-<p><strong>编程，其实一开始哪有什么完美，只有不断变得更好。</strong></p>
-<p>工作后，我做了大量的项目，发现这些项目都有很多类似之处。每次，即使项目上线后，我也必然重构项目代码，提取其中可复用的代码，然后在下一个项目中使用。循环往复，一直干了七八年。每次提炼重构，都是一次从 “更多” 走向 “更好” 的过程。我想，很多程序员都有类似的经历吧？</p>
-<p>回到开头修改Bug 的例子，我用半天的时间改一个Bug，感觉效率不算高，这符合精益编程的思路吗？先来回顾下这半天改这个Bug 的过程。</p>
-<p>由于出问题的那个公共库是我接到Bug 时的半年前开发的，所以发现那个Bug 后，我花了一些时间来回忆整个公共库的代码结构设计。然后我研究了一下，发现其出现的场景比较罕见，要不不至于线上运行了很久也没人发现，属于重要但不紧急。</p>
-<p>因此，我没有立刻着手去修改代码，而是先在公共库的单元测试集中新写了一组单元测试案例。单元测试构建了该Bug的重现场景，并顺利让单元测试运行失败了，之后我再开始去修改代码，并找到了出问题的那一行，修改后重新运行了单元测试集，并顺利看见了测试通过的绿色进度条。</p>
-<p>而作为一个公共库，修改完成后我还要为本次修改更新发布版本，编写对应的文档，并上传到 Maven 仓库中，才算完成。回想这一系列的步骤，我发现时间主要花在了构建重现Bug 的测试案例场景中，有时为了构建一个测试场景编写代码的难度可能比开发功能本身更困难。</p>
-<p>为修改一个Bug 付出的额外单元测试时间成本，算一种浪费吗？虽说这确实提高了代码的修复成本，但也带来了程序质量的提升。按前面精益的定义，这似乎是矛盾的，但其实更是一种权衡与取舍。</p>
-<p>就是在这样的过程与反复中，我渐渐形成了属于自己的编程价值观：世上没有完美的解决方案，任何方案总是有这样或那样一些因子可以优化。一些方案可能面临的权衡取舍会少些，而另一些方案则会更纠结一些，但最终都要做取舍。</p>
-<p>以上，也说明了一个道理：<strong>好不是完美，好是一个过程，一个不断精益化的过程。</strong></p>
-<p>编程，当写得足够多了，也足够好了，你才可能自如地在 “多” 与 “好” 之间做出平衡。</p>
-<p>编程的背后是交付程序系统，交付关心的是三点：功能多少，质量好坏，效率快慢。真实的编程环境下， 你需要在三者间取得平衡，哪些部分可能是多而粗放的交付，哪些部分是好而精益的完成，同时还要考虑效率快慢（时间）的需求。</p>
-<p>编程路上，“粗放的多” 是 “精益的好和快” 的前提，而好和快则是你的取舍：是追求好的极致，还是快的极致，或者二者的平衡？</p>
-<p>在多而粗放和好而精益之间，现在你处在哪个阶段了？欢迎留言谈谈你的看法。</p>
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">我感觉自己处在一个由粗到细的转换过程，回想我们的代码产生过程，大概如下：<br>1:prd评审<br>2:表结构设计、缓存结构设计、程序逻辑梳理，输出对应的文档，进行初评<br>3:代码编写<br>4:自测、提测<br>5:代码review<br>6:调整和完善代码<br>7:合并主干回归测试<br>8:上线准备、上线申请、上线、产品及业务线上验证<br>9:线上观察<br><br>其中第5步，资深和架构都会参与，一般都会提出一些改进和完善意见。这个环节可看出编码功力的深浅及考虑的是否全面。<br>主要会考察一下方面：<br>1:业务逻辑是否OK<br>2:是否打点<br>3:日志是否OK<br>4:代码性能是否良好<br>5:基本的编码规范是否符合<br>6:代码可读性如何<br>7:异常处理的是否合理<br><br>刚开始总会拉下些什么，现在这个模式已经比较熟练了，不过还是会有一些改进意见，比如：应用交互是否OK、代码抽象层级是否合理<br><br>非常感谢我们的代码review同学们，让我成长不少。 <br></div>
-                            <span class="time">2018-08-22 08:38</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">不错，但是为什么Review在提测之后？</p>
-                                <p class="reply-time">2018-08-22 18:42</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">1.个人觉得粗放并不是多，核心在“迭代”，这是一个慢慢变好的过程<br>迭代的好处就是试错和反馈。<br>试错，是快速找到自己根本没有意识到的错误，看一遍和做一遍差距太大<br>反馈，你会在做不停做中得到反馈，并迭代<br><br>2.快速是其中关键因素，迭代速度越高，成长也越快<br><br>3.粗放和精细，背后其实是成本<br><br>比如文中老师和老师同学的例子。老师做了改进，吸收到了《设计模式》的一些知识，很大程度上，是因为老师开始做这件事情的成本其实比那个刚开始做的老师同学低得多。<br>毕竟，当时的老师已经有一个程序了。<br>而老师的同学在一个零基础上做程序，其实成本更高。<br><br>4.个人想法<br>理解我们在当下得到的一切，都是此前一切总和结果中，最好的一个。<br>粗放也好，精益也好。<br>其实我们的能力都是一样的<br>变得精益也许只是一个结果，成本更低。<br>要写更优雅的代码，更好的运行一切的一切，都是因为越来越复杂的代码和框架逻辑，更加大型的用户使用量等等硬性制约而已。<br><br>慢慢成长就好 <br></div>
-                            <span class="time">2018-08-22 15:52</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对，成本是一个核心考虑点。从多到好的过程中，反馈与迭代改进在发挥关键作用</p>
-                                <p class="reply-time">2018-08-22 18:25</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">粗方式才能有快速产出，产出积累到一定量之后，精益才能提取精华，浓缩沉淀。 <br></div>
-                            <span class="time">2018-08-22 15:42</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，是这样的。关键是你得去迭代并提炼，而非重复</p>
-                                <p class="reply-time">2018-08-22 18:26</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/d8/4f/a6c1c8b3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">KaitoShy🐬</span>
-                            </div>
-                            <div class="bd">在没有成熟方案时，以快速实现为主，而有了之后再慢工出细活？ <br></div>
-                            <span class="time">2018-08-22 07:36</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">哪里该快，哪里该慢，是考验人的地方</p>
-                                <p class="reply-time">2018-08-22 18:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">因为架构师更贵 <br></div>
-                            <span class="time">2018-08-22 19:06</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/32/7f/7e1bd12c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Sands</span>
-                            </div>
-                            <div class="bd">陶器故事在黑匣子思维看到过 <br></div>
-                            <span class="time">2018-08-22 18:48</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/fc/7d/800888a3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">belongcai蔡炳榕</span>
-                            </div>
-                            <div class="bd">是的，我觉得码农的蜕变在于不断地迭代，提炼。 <br></div>
-                            <span class="time">2018-09-15 00:38</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对</p>
-                                <p class="reply-time">2018-09-15 21:46</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/ce/6d/6de830ef.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Kuzaman</span>
-                            </div>
-                            <div class="bd">本章收获颇多，我是做测试的，甚至不是测试开发级别，只是偶尔写写代码。目前只能处于粗放阶段，我一直困惑于精细还是粗矿，买了很多书很多视频看，总想着精细化，后来代码一直没有产出。听了老师的课，真是答疑解惑，因此决定先出量粗矿着到一定程度再说。感谢！ <br></div>
-                            <span class="time">2018-08-25 07:14</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，写得多了，感觉就来了</p>
-                                <p class="reply-time">2018-08-25 11:42</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/fe/e5/c3f3c3ff.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">天行冕下</span>
-                            </div>
-                            <div class="bd">我理解的粗犷应该是:在有限的时间内解决我们需要解决的问题，而不是谨小慎微，面面俱到。<br>但是，粗犷不是一种借口。我们的工作始终都是建立前人基础之上的，已有的设计模式、架构模式、成熟的框架等等，都是我们工作的基础。 <br></div>
-                            <span class="time">2018-08-24 06:24</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ac/a1/43d83698.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">云学</span>
-                            </div>
-                            <div class="bd">用心写代码成就卓越软件 <br></div>
-                            <span class="time">2018-08-22 08:34</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/d0/a1/07027529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">偏偏喜欢你</span>
-                            </div>
-                            <div class="bd">老师您好，我现在正处于粗放的阶段，都是以完成需求为目的，暂时还没考虑到你所说的精益。 <br></div>
-                            <span class="time">2018-08-22 07:50</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">有意识的形成这种写代码的思维方式，不要陷入重复中</p>
-                                <p class="reply-time">2018-08-22 18:47</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/84/4a/abb7bfe3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Xhavit🍭</span>
-                            </div>
-                            <div class="bd">在质量、成本和效率之间做好权衡和取舍，先完成，后完美，嗯，改掉这个阶段的完美主义思维 <br></div>
-                            <span class="time">2018-11-26 09:17</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯；完美主义总是相对的</p>
-                                <p class="reply-time">2018-11-26 19:57</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/7e/4c/727f3912.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">依米</span>
-                            </div>
-                            <div class="bd">老师，我也是发现自己编码速度越来越慢，不过不是老师的情况，大约是和你的同学类似，越来越不敢下手写代码了，写之前要纠结很久，各种考虑，很不喜欢现在的样子，但还是会不自觉的沉浸在里面，该咋办？ <br></div>
-                            <span class="time">2018-11-14 08:02</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">限定时间，必须交付，纠结是无法交付的</p>
-                                <p class="reply-time">2018-11-18 15:24</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/48/f7/aa54bf65.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">拿破仑</span>
-                            </div>
-                            <div class="bd">“粗放的多”到“精益的好和快”，是一个由量变到质变的过程 <br></div>
-                            <span class="time">2018-10-30 18:22</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/87/6b/0b6cd39a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">朱月俊</span>
-                            </div>
-                            <div class="bd">我现在编码状态是:务必要在可能出异常的代码附近加日志；一定要测试程序的性能是否符合要求；编码风格务必符合规范；参照同类开源代码参考编码方式。 <br></div>
-                            <span class="time">2018-10-17 23:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">这样的状态和要求不错呀</p>
-                                <p class="reply-time">2018-10-18 21:27</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIVy4eB1Ncz4HNDnatoib4x3D8icA5AwbV8aoP13N7bibOibCWw0bZiar3vjearzMU6KItmK5ibuxZe68tw/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小特</span>
-                            </div>
-                            <div class="bd">看了峰哥的分享很受启发，我的感触是:先完成，后完美！ <br></div>
-                            <span class="time">2018-10-13 07:35</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">🤝^_^</p>
-                                <p class="reply-time">2018-10-13 19:34</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/e1/5c/86606d9c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">湮汐</span>
-                            </div>
-                            <div class="bd">在该快的地方快，在该慢的地方慢。该囫囵吞枣的地方就应该粗，该精益求精的地方就应该细。不能所有的地方都粗，那样代码只会越堆越烂，单纯的为了完成功能代码只是最基本的要求。但是也不能每个地方都细，那样整个成本的消耗都太大了，不管是个人精力还是项目的deadline都经不起这样的消耗。但是写粗代码的时候，也一定要带着“细”的思想去思考，形成一种习惯，不断的多练多写代码。有了量的积累，才有质的飞跃！ <br></div>
-                            <span class="time">2018-09-26 08:33</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">在粗和精之间的平衡能拿捏的恰到好处，肯定已是高手了😄</p>
-                                <p class="reply-time">2018-09-26 21:48</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/3e/fb/eb0273a0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">like_jun</span>
-                            </div>
-                            <div class="bd">写多了。就会思考了。然后再改变。 <br></div>
-                            <span class="time">2018-09-10 19:00</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的</p>
-                                <p class="reply-time">2018-09-10 19:18</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">liangjf</span>
-                            </div>
-                            <div class="bd">粗而快，是实现功能需求效率高迭代快。精而慢，是粗而快的进阶，是前者经过长期经验积累和总结的进阶 <br></div>
-                            <span class="time">2018-09-06 21:30</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/19/69/5daf7a5b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">八戒</span>
-                            </div>
-                            <div class="bd">老师，最近在处理问题的时候，总是觉得项目以前的代码有问题，冗余不够精简，喜欢去提取公共模块封装再处理，尝试着怎么把代码质量提上去，不知道这是不是就是您说的精益阶段呢 <br></div>
-                            <span class="time">2018-09-03 22:00</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的，不过干这个事情要谨慎些，步步为营</p>
-                                <p class="reply-time">2018-09-04 18:29</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  几年前，我给团队负责的整个系统写过一些公共库，有一次同事发现这个库里存在一个Bug，并告诉了我出错的现象。然后我便去修复这个Bug，最终只修改了一行代码，但发现一上午就这么过去了。
+                </p>
+                <p>
+                  一上午只修复了一个Bug，而且只改了一行代码，到底发生了什么？时间都去哪里了？以前觉得自己写代码很快，怎么后来越来越慢了？我认真地思考了这个问题，开始认识到我的编程方式和习惯在那几年已经慢慢发生了变化，形成了明显的两个阶段的转变。这两个阶段是：
+                </p>
+                <ul>
+                  <li>写得粗放，写得多</li>
+                  <li>写得精益，写得好</li>
                 </ul>
+                <h2>多与粗放</h2>
+                <p>
+                  粗放，在软件开发这个年轻的行业里其实没有确切的定义，但在传统行业中确实存在相近的关于 “粗放经营”
+                  的概念可类比。引用其百科词条定义如下：
+                </p>
+                <blockquote>
+                  <p>
+                    粗放经营（Extensive
+                    Management），泛指技术和管理水平不高，生产要素利用效率低，产品粗制滥造，物质和劳动消耗高的生产经营方式。
+                  </p>
+                </blockquote>
+                <p>若把上面这段话里面的 “经营” 二字改成 “编程”，就很明确地道出了我想表达的粗放式编程的含义。</p>
+                <p>
+                  一个典型的粗放式编程场景大概是这样的：需求到开发手上后，开始编码，编码完成，人肉测试，没问题后快速发布到线上，然后进入下一个迭代。
+                </p>
+                <p>
+                  我早期参与的大量项目过程都与此类似，不停地重复接需求，快速开发，发布上线。在这个过程中，我只是在不停地堆砌功能代码，每天产出的代码量不算少，但感觉都很类似，也很粗糙。这样的过程持续了挺长一个阶段，一度让我怀疑：这样大量而粗放地写代码到底有什么作用和意义？
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  后来读到一个故事，我逐渐明白这个阶段是必要的，它因人、因环境而异，或长或短。而那个给我启发的故事，是这样的。
+                </p>
+                <p>
+                  有一个陶艺老师在第一堂课上说，他会把班上学生分成两组，一组的成绩将会以最终完成的陶器作品数量来评定；而另一组，则会以最终完成的陶器品质来评定。
+                </p>
+                <p>
+                  在交作业的时候，一个很有趣的现象出现了：“数量”
+                  组如预期一般拿出了很多作品，但出乎意料的是质量最好的作品也全部是由 “数量” 组制作出来的。
+                </p>
+                <p>
+                  按 “数量”
+                  组的评定标准，他们似乎应该忙于粗制滥造大量的陶器呀。但实际情况是他们每做出一个垃圾作品，都会吸取上一次制作的错误教训，然后在做下一个作品时得到改进。
+                </p>
+                <p>
+                  而 “品质”
+                  组一开始就追求完美的作品，他们花费了大量的时间从理论上不断论证如何才能做出一个完美的作品，而到了最后拿出来的东西，似乎只是一堆建立在宏大理论上的陶土。
+                </p>
+                <p>
+                  读完这个故事，我陷入了沉思，感觉故事里的制作陶器和编程提升之路是如此类似。很显然，“品质”
+                  组的同学一开始就在追求理想上的 “好与精益” ，而 “数量”
+                  组同学的完成方式则似我早期堆砌代码时的“多与粗放”，但他们正是通过做得多，不断尝试，快速迭代
+                  ，最后取得到了更好的结果。
+                </p>
+                <p>
+                  庆幸的是，我在初学编程时，就是在不断通过编程训练来解答一个又一个书本上得来的困惑；后来工作时，则是在不断写程序来解决一个又一个工作中遇到的问题。看到书上探讨各种优雅的代码之道、编程的艺术哲学，那时的我也完全不知道该如何通往这座编程的
+                  “圣杯”，只能看着自己写出的蹩脚代码，然后继续不断重复去制作下一个丑陋的
+                  “陶器”，不断尝试，不断精进和进阶。
+                </p>
+                <p>
+                  《黑客与画家》书里说：“编程和画画近乎异曲同工。”所以，你看那些成名画家的作品，如果按时间顺序来排列展示，你会发现每幅画所用的技巧，都是建立在上一幅作品学到的东西之上；如果某幅作品特别出众，你往往也能在更早期的作品中找到类似的版本。而编程的精进过程也是类似的。
+                </p>
+                <p>
+                  总之，这些故事和经历都印证了一个道理：<strong>在通往 “更好” 的路上，总会经过 “更多” 这条路。</strong>
+                </p>
+                <h2>好与精益</h2>
+                <p>精益，也是借鉴自传统行业里的一个类比：精益生产。</p>
+                <blockquote>
+                  <p>
+                    精益生产（Lean
+                    Production），简言之，就是一种以满足用户需求为目标、力求降低成本、提高产品的质量、不断创新的资源节约型生产方式。
+                  </p>
+                </blockquote>
+                <p>
+                  若将定义中的 “生产” 二字换成
+                  “编程”，也就道出了精益编程的内涵。它有几个关键点：质量、成本与效率。但要注意：在编程路上，如果一开始就像
+                  “品质” 组同学那样去追求完美，也许你就会被定义 “完美” 的品质所绊住，而忽视了制作的成本与效率。
+                </p>
+                <p>
+                  因为编程的难点是，无论你在开始动手编程时看过多少有关编程理论、方法、哲学与艺术的书，一开始你还是无法领悟到什么是编程的正确方法，以及什么是“完美”
+                  的程序。毕竟纸上得来终觉浅，绝知此事要躬行。
+                </p>
+                <p>
+                  曾经，还在学校学习编程时，有一次老师布置了一个期中课程设计，我很快完成了这个课程设计中的编程作业。而另一位同学，刚刚看完了那本经典的《设计模式》书。
+                </p>
+                <p>
+                  他尝试用书里学到的新概念来设计这个编程作业，并且又用 UML
+                  画了一大堆交互和类图，去推导设计的完美与优雅。然后兴致勃勃向我（因为我刚好坐在他旁边）讲解他的完美设计，我若有所悟，觉得里面确实有值得我借鉴的地方，就准备吸收一些我能听明白的东西，重构一遍已经写好的作业程序。
+                </p>
+                <p>
+                  后来，这位同学在动手实现他的完美设计时，发现程序越写越复杂，交作业的时间已经不够了，只好借用我的不完美的第一版代码改改凑合交了。而我在这第一版代码基础上，又按领悟到的正确思路重构了一次、改进了一番后交了作业。
+                </p>
+                <p>所以，别被所谓 “完美“ 的程序所困扰，只管先去盯住你要用编程解决的问题，把问题解决，把任务完成。</p>
+                <p><strong>编程，其实一开始哪有什么完美，只有不断变得更好。</strong></p>
+                <p>
+                  工作后，我做了大量的项目，发现这些项目都有很多类似之处。每次，即使项目上线后，我也必然重构项目代码，提取其中可复用的代码，然后在下一个项目中使用。循环往复，一直干了七八年。每次提炼重构，都是一次从
+                  “更多” 走向 “更好” 的过程。我想，很多程序员都有类似的经历吧？
+                </p>
+                <p>
+                  回到开头修改Bug
+                  的例子，我用半天的时间改一个Bug，感觉效率不算高，这符合精益编程的思路吗？先来回顾下这半天改这个Bug
+                  的过程。
+                </p>
+                <p>
+                  由于出问题的那个公共库是我接到Bug 时的半年前开发的，所以发现那个Bug
+                  后，我花了一些时间来回忆整个公共库的代码结构设计。然后我研究了一下，发现其出现的场景比较罕见，要不不至于线上运行了很久也没人发现，属于重要但不紧急。
+                </p>
+                <p>
+                  因此，我没有立刻着手去修改代码，而是先在公共库的单元测试集中新写了一组单元测试案例。单元测试构建了该Bug的重现场景，并顺利让单元测试运行失败了，之后我再开始去修改代码，并找到了出问题的那一行，修改后重新运行了单元测试集，并顺利看见了测试通过的绿色进度条。
+                </p>
+                <p>
+                  而作为一个公共库，修改完成后我还要为本次修改更新发布版本，编写对应的文档，并上传到 Maven
+                  仓库中，才算完成。回想这一系列的步骤，我发现时间主要花在了构建重现Bug
+                  的测试案例场景中，有时为了构建一个测试场景编写代码的难度可能比开发功能本身更困难。
+                </p>
+                <p>
+                  为修改一个Bug
+                  付出的额外单元测试时间成本，算一种浪费吗？虽说这确实提高了代码的修复成本，但也带来了程序质量的提升。按前面精益的定义，这似乎是矛盾的，但其实更是一种权衡与取舍。
+                </p>
+                <p>
+                  就是在这样的过程与反复中，我渐渐形成了属于自己的编程价值观：世上没有完美的解决方案，任何方案总是有这样或那样一些因子可以优化。一些方案可能面临的权衡取舍会少些，而另一些方案则会更纠结一些，但最终都要做取舍。
+                </p>
+                <p>以上，也说明了一个道理：<strong>好不是完美，好是一个过程，一个不断精益化的过程。</strong></p>
+                <p>编程，当写得足够多了，也足够好了，你才可能自如地在 “多” 与 “好” 之间做出平衡。</p>
+                <p>
+                  编程的背后是交付程序系统，交付关心的是三点：功能多少，质量好坏，效率快慢。真实的编程环境下，
+                  你需要在三者间取得平衡，哪些部分可能是多而粗放的交付，哪些部分是好而精益的完成，同时还要考虑效率快慢（时间）的需求。
+                </p>
+                <p>
+                  编程路上，“粗放的多” 是 “精益的好和快”
+                  的前提，而好和快则是你的取舍：是追求好的极致，还是快的极致，或者二者的平衡？
+                </p>
+                <p>在多而粗放和好而精益之间，现在你处在哪个阶段了？欢迎留言谈谈你的看法。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    我感觉自己处在一个由粗到细的转换过程，回想我们的代码产生过程，大概如下：<br />1:prd评审<br />2:表结构设计、缓存结构设计、程序逻辑梳理，输出对应的文档，进行初评<br />3:代码编写<br />4:自测、提测<br />5:代码review<br />6:调整和完善代码<br />7:合并主干回归测试<br />8:上线准备、上线申请、上线、产品及业务线上验证<br />9:线上观察<br /><br />其中第5步，资深和架构都会参与，一般都会提出一些改进和完善意见。这个环节可看出编码功力的深浅及考虑的是否全面。<br />主要会考察一下方面：<br />1:业务逻辑是否OK<br />2:是否打点<br />3:日志是否OK<br />4:代码性能是否良好<br />5:基本的编码规范是否符合<br />6:代码可读性如何<br />7:异常处理的是否合理<br /><br />刚开始总会拉下些什么，现在这个模式已经比较熟练了，不过还是会有一些改进意见，比如：应用交互是否OK、代码抽象层级是否合理<br /><br />非常感谢我们的代码review同学们，让我成长不少。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-22 08:38</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">不错，但是为什么Review在提测之后？</p>
+                    <p class="reply-time">2018-08-22 18:42</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    1.个人觉得粗放并不是多，核心在“迭代”，这是一个慢慢变好的过程 <br />迭代的好处就是试错和反馈。
+                    <br />试错，是快速找到自己根本没有意识到的错误，看一遍和做一遍差距太大
+                    <br />反馈，你会在做不停做中得到反馈，并迭代
+                    <br />
+                    <br />2.快速是其中关键因素，迭代速度越高，成长也越快
+                    <br />
+                    <br />3.粗放和精细，背后其实是成本
+                    <br />
+                    <br />比如文中老师和老师同学的例子。老师做了改进，吸收到了《设计模式》的一些知识，很大程度上，是因为老师开始做这件事情的成本其实比那个刚开始做的老师同学低得多。
+                    <br />毕竟，当时的老师已经有一个程序了。 <br />而老师的同学在一个零基础上做程序，其实成本更高。
+                    <br />
+                    <br />4.个人想法 <br />理解我们在当下得到的一切，都是此前一切总和结果中，最好的一个。
+                    <br />粗放也好，精益也好。 <br />其实我们的能力都是一样的 <br />变得精益也许只是一个结果，成本更低。
+                    <br />要写更优雅的代码，更好的运行一切的一切，都是因为越来越复杂的代码和框架逻辑，更加大型的用户使用量等等硬性制约而已。
+                    <br />
+                    <br />慢慢成长就好 <br />
+                  </div>
+                  <span class="time">2018-08-22 15:52</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      对，成本是一个核心考虑点。从多到好的过程中，反馈与迭代改进在发挥关键作用
+                    </p>
+                    <p class="reply-time">2018-08-22 18:25</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">粗方式才能有快速产出，产出积累到一定量之后，精益才能提取精华，浓缩沉淀。 <br /></div>
+                  <span class="time">2018-08-22 15:42</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，是这样的。关键是你得去迭代并提炼，而非重复</p>
+                    <p class="reply-time">2018-08-22 18:26</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/d8/4f/a6c1c8b3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">KaitoShy🐬</span></div>
+                  <div class="bd">在没有成熟方案时，以快速实现为主，而有了之后再慢工出细活？ <br /></div>
+                  <span class="time">2018-08-22 07:36</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">哪里该快，哪里该慢，是考验人的地方</p>
+                    <p class="reply-time">2018-08-22 18:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">因为架构师更贵 <br /></div>
+                  <span class="time">2018-08-22 19:06</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/32/7f/7e1bd12c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Sands</span></div>
+                  <div class="bd">陶器故事在黑匣子思维看到过 <br /></div>
+                  <span class="time">2018-08-22 18:48</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/fc/7d/800888a3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">belongcai蔡炳榕</span></div>
+                  <div class="bd">是的，我觉得码农的蜕变在于不断地迭代，提炼。 <br /></div>
+                  <span class="time">2018-09-15 00:38</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对</p>
+                    <p class="reply-time">2018-09-15 21:46</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/ce/6d/6de830ef.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Kuzaman</span></div>
+                  <div class="bd">
+                    本章收获颇多，我是做测试的，甚至不是测试开发级别，只是偶尔写写代码。目前只能处于粗放阶段，我一直困惑于精细还是粗矿，买了很多书很多视频看，总想着精细化，后来代码一直没有产出。听了老师的课，真是答疑解惑，因此决定先出量粗矿着到一定程度再说。感谢！
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 07:14</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，写得多了，感觉就来了</p>
+                    <p class="reply-time">2018-08-25 11:42</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/fe/e5/c3f3c3ff.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">天行冕下</span></div>
+                  <div class="bd">
+                    我理解的粗犷应该是:在有限的时间内解决我们需要解决的问题，而不是谨小慎微，面面俱到。<br />但是，粗犷不是一种借口。我们的工作始终都是建立前人基础之上的，已有的设计模式、架构模式、成熟的框架等等，都是我们工作的基础。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 06:24</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ac/a1/43d83698.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">云学</span></div>
+                  <div class="bd">用心写代码成就卓越软件 <br /></div>
+                  <span class="time">2018-08-22 08:34</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/d0/a1/07027529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">偏偏喜欢你</span></div>
+                  <div class="bd">
+                    老师您好，我现在正处于粗放的阶段，都是以完成需求为目的，暂时还没考虑到你所说的精益。 <br />
+                  </div>
+                  <span class="time">2018-08-22 07:50</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">有意识的形成这种写代码的思维方式，不要陷入重复中</p>
+                    <p class="reply-time">2018-08-22 18:47</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/84/4a/abb7bfe3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Xhavit🍭</span></div>
+                  <div class="bd">
+                    在质量、成本和效率之间做好权衡和取舍，先完成，后完美，嗯，改掉这个阶段的完美主义思维 <br />
+                  </div>
+                  <span class="time">2018-11-26 09:17</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯；完美主义总是相对的</p>
+                    <p class="reply-time">2018-11-26 19:57</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/7e/4c/727f3912.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">依米</span></div>
+                  <div class="bd">
+                    老师，我也是发现自己编码速度越来越慢，不过不是老师的情况，大约是和你的同学类似，越来越不敢下手写代码了，写之前要纠结很久，各种考虑，很不喜欢现在的样子，但还是会不自觉的沉浸在里面，该咋办？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-14 08:02</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">限定时间，必须交付，纠结是无法交付的</p>
+                    <p class="reply-time">2018-11-18 15:24</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/48/f7/aa54bf65.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">拿破仑</span></div>
+                  <div class="bd">“粗放的多”到“精益的好和快”，是一个由量变到质变的过程 <br /></div>
+                  <span class="time">2018-10-30 18:22</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/87/6b/0b6cd39a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">朱月俊</span></div>
+                  <div class="bd">
+                    我现在编码状态是:务必要在可能出异常的代码附近加日志；一定要测试程序的性能是否符合要求；编码风格务必符合规范；参照同类开源代码参考编码方式。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-17 23:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">这样的状态和要求不错呀</p>
+                    <p class="reply-time">2018-10-18 21:27</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIVy4eB1Ncz4HNDnatoib4x3D8icA5AwbV8aoP13N7bibOibCWw0bZiar3vjearzMU6KItmK5ibuxZe68tw/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">小特</span></div>
+                  <div class="bd">看了峰哥的分享很受启发，我的感触是:先完成，后完美！ <br /></div>
+                  <span class="time">2018-10-13 07:35</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">🤝^_^</p>
+                    <p class="reply-time">2018-10-13 19:34</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/e1/5c/86606d9c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">湮汐</span></div>
+                  <div class="bd">
+                    在该快的地方快，在该慢的地方慢。该囫囵吞枣的地方就应该粗，该精益求精的地方就应该细。不能所有的地方都粗，那样代码只会越堆越烂，单纯的为了完成功能代码只是最基本的要求。但是也不能每个地方都细，那样整个成本的消耗都太大了，不管是个人精力还是项目的deadline都经不起这样的消耗。但是写粗代码的时候，也一定要带着“细”的思想去思考，形成一种习惯，不断的多练多写代码。有了量的积累，才有质的飞跃！
+                    <br />
+                  </div>
+                  <span class="time">2018-09-26 08:33</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">在粗和精之间的平衡能拿捏的恰到好处，肯定已是高手了😄</p>
+                    <p class="reply-time">2018-09-26 21:48</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/3e/fb/eb0273a0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">like_jun</span></div>
+                  <div class="bd">写多了。就会思考了。然后再改变。 <br /></div>
+                  <span class="time">2018-09-10 19:00</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是的</p>
+                    <p class="reply-time">2018-09-10 19:18</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">liangjf</span></div>
+                  <div class="bd">
+                    粗而快，是实现功能需求效率高迭代快。精而慢，是粗而快的进阶，是前者经过长期经验积累和总结的进阶
+                    <br />
+                  </div>
+                  <span class="time">2018-09-06 21:30</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/19/69/5daf7a5b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">八戒</span></div>
+                  <div class="bd">
+                    老师，最近在处理问题的时候，总是觉得项目以前的代码有问题，冗余不够精简，喜欢去提取公共模块封装再处理，尝试着怎么把代码质量提上去，不知道这是不是就是您说的精益阶段呢
+                    <br />
+                  </div>
+                  <span class="time">2018-09-03 22:00</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是的，不过干这个事情要谨慎些，步步为营</p>
+                    <p class="reply-time">2018-09-04 18:29</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

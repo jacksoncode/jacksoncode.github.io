@@ -1,469 +1,1669 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ1046877154，微信loveu_110获取</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                01讲初心：为什么成为一名程序员
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/03/b4/03d4b082f8894a2781567c510970a3b4.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">01讲初心：为什么成为一名程序员</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/03/b4/03d4b082f8894a2781567c510970a3b4.jpg"
+            />
 
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  在走上程序的道路前，你不妨先问问自己成为程序员的初心是什么。回首往昔，我似乎是阴差阳错地走上了这条路，正因初心未明，所以早期的路上就多了很多迟疑和曲折。
+                </p>
+                <p>
+                  人生路漫漫，在专栏的第一个模块里，我会和你讲讲自己走上程序道路的故事，希望这些故事能够给迷茫或者奋进中的你以启发。在人生的不同阶段里，我都喜欢做“复盘”，一方面审视过去的自己，另外一方面思索未来的方向。现在看来，这些有节奏的复盘也给我自己留下了深深的印记，也让我在某些关键节点的决策更加坚决。
+                </p>
+                <h2>首次接触</h2>
+                <p>说起我和程序的渊源，大概可以回溯到二十多年前。</p>
+                <p>
+                  那时，我还在读初中二年级，那是四川一所少数民族中学，硬件条件不是太好。那是1995年，国际友人赞助赠送了学校几台苹果
+                  II 代电脑。作为学校成绩名列前茅的学生，在比较重视分数排名的背景下我还算有点
+                  “小特权”。这点“小特权”就是可以接触这批电脑，所以在那时我为了搞懂怎么 “玩” 这些电脑去学了下 BASIC
+                  语言，然后在上面编程并在单调的绿色屏幕上画出了一些几何图形。
+                </p>
+                <p>
+                  当时还挺有成就感的，一度畅想将来要考清华的计算机专业。可能，那时觉得清华就是最好的学校，而计算机和编程是当时的最爱。然而，实际情况是上了高中以后学习压力大增，再也没时间去
+                  “玩” 这些电脑了，光应对考试已然应接不暇，渐渐就忘了初中那时的想法。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  现在回想起来第一次接触程序的时候，感觉它们还算是好 “玩”
+                  的，有一种智力上的挑战，但当时也不太可能想到十年后我将会以此为生，走上程序之路。
+                </p>
+                <p>彼时，初心未有。</p>
+                <h2>选择专业</h2>
+                <p>对我们80后这一代人，高考算是人生第一次重要的选择了吧。</p>
+                <p>
+                  我那时高考填志愿，都是在考试前进行。高中三年，我都再没接触过程序了，早已忘记当年的想法。高考前，当时觉得自己对物理最有兴趣就填报了南京大学的物理系，应该也考虑过清华什么的，但没什么信心。
+                </p>
+                <p>
+                  关于兴趣有一个有趣的说法：“往往并不是有兴趣才能做好，而是做好了才有兴趣。”高中后可能觉得当时物理学得还不错，所以就有了兴趣，并在填报高考志愿时选择了物理专业。
+                </p>
+                <p>
+                  后来高考的结果，一方面信心不是很足，另一方面单科数学发挥也失常。南大的物理系没能上成，落到了第二志愿东北大学，调剂成了机械工程专业。这是一个随机调剂的专业，着实让我无比苦闷，学了一年后，我非常清楚，我并不喜欢这个专业，也看不清未来的职业前景。
+                </p>
+                <p>
+                  再回首时你总会发现，有些最重要的人生路径选择，就这么有点 “无厘头”
+                  地完成了。在面临人生重要路径的选择时，当时只考虑了兴趣，如今看来也没那么靠谱。应该多听听众人的看法，参考前人的路径，最后再自己做出决定。人生路径还是需要自己来主动、有意识地掌舵的。
+                </p>
+                <p>彼时，初心已有，但却是混乱的。</p>
+                <h2>转换专业</h2>
+                <p>机械专业煎熬了两年，迎来了第二次选择专业的机会。</p>
+                <p>
+                  在我读完大二的时候，国家开始兴办软件学院，新开软件工程专业。我当时在机械专业也会学一门编程课：C
+                  语言。那时对 C 语言比较感兴趣，而对专业课机械制图则完全无感，所以当机会出现时就义无反顾去转了专业。
+                </p>
+                <p>
+                  新专业面向所有非计算机的工程专业招生，但有一个门槛是：高学费。当时，机械专业一年学费四千多点，而软件工程本科一年一万六，学费读一年就抵得上别人读四年了，这对一个工薪家庭的压力不算小。
+                </p>
+                <p>
+                  总之，我就是这么阴差阳错地又绕到了计算机专业这条路上。作为一门新开专业，软件工程相对计算机专业更偏应用，对接企业用人需求。可见，当时（2002
+                  年）整个 IT
+                  行业已经面临人才缺乏的问题，国家之所以新开软件工程专业，恐怕也是经济规律在发挥作用，平衡供需两端。
+                </p>
+                <p>
+                  于我而言，转换专业算是时代给予的机遇，我在懵懂中做出了一次正确的选择。当时并不明了，但如今回顾却是如此清晰：面对新开的软件工程专业，其实表明了一个信息，这个行业发展很快，前景很好。
+                </p>
+                <p>人生路很长，走了一段，也需要时不时重新审视当前的路径是否适合，是否无意错过了前途更好的岔路口。</p>
+                <p>
+                  我如今会感到庆幸没有错过这个路口，当时的确是没想过从机械专业换到软件工程会有更好的发展前景，但就是这样，我绕绕弯弯、曲曲折折地入了行，成为了一名程序员。
+                </p>
+                <p>彼时，初心虽已不乱，但依然未明。</p>
+                <h2>转换行业</h2>
+                <p>人的一生面临很多重要选择，除了高考选专业，我想转行也是其中之一。</p>
+                <p>
+                  入行后，一路走来也碰到过很多从其他行业转行成为程序员的人。曾经在招聘面试时碰到过两个程序员，他们一个是毕业于中医药大学，在药房工作两年后转行并干了
+                  3 年；另外一个主修环境工程专业，在该行业工作 9 年后才转行程序员，并在这行干了 5 年。
+                </p>
+                <p>
+                  那时我就在想，为什么他们都要转行做一名程序员呢？也许，客观上来说，行业的景气度让程序员的薪酬水平水涨船高。需求的持续上涨，吸引着更多的人进入，这也是经济规律。但主观上来说，可能我们也没有想好为什么就要转行成为一名程序员。
+                </p>
+                <p>
+                  我转换到软件工程专业，毕业后顺利进入程序这行。早期一开始就是为一些传统行业公司写企业应用程序，提供 IT
+                  服务，完成一份合同。工作五年后，我才渐渐明白，同样写程序，但为不同的行业写的程序价值真是完全不同。因此，我选择了切换到电商互联网行业来写程序。
+                </p>
+                <p>
+                  而这一次的选择我很确定的是，至少我模糊地看到了这条路的前景，并坚定地在众多选项中排除其他路径。转行，不同的跨度，代价或大或小。但不转变就没代价吗？不见得，因为有时不做选择的代价可能更大。
+                </p>
+                <p>此时，初心才算渐渐明了。</p>
+                <h2>心明行远</h2>
+                <p>在成长的路上，我先后经历了换专业、换城市、换行业。</p>
+                <p>
+                  去年底（2017）我适时地驻足回顾了一下从进入大学到如今这些年的学习、工作和成长经历。其中有一些重要的时间事件节点，我把它们连接起来，就成了我们大多数人的成长线。下图，是我过去18年的成长线：
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/13/37/139a061b33fd0d711136c2846ff90c37.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  在这张图上，选专业、换专业、换城市、换行业，这几个重要的人生选择点，我都用红色字体标记了。把过往的18年浓缩到一张图上后，我就清晰地看出了趋势，在切换行业之前，初心未明，成长的路上起起伏伏，波动很大，也因为不成熟的选择带来过巨大的落差感。
+                </p>
+                <p>
+                  在工作的前几年，图上也有一段快速的自然成长期。因为这时我们就像一张白纸，只要是在认真地做事儿，总是能成长。这段时期，心其实是乱的，但因为忙而充实，也获得了很多成长，但它的问题是：这样的自然成长期有多长取决于你所做事情的天花板，所以才有了后面的一次切换城市带来的落差。
+                </p>
+                <p>切换了行业，一路走到现在，前路不尽，心已明，行将远。</p>
+                <p>
+                  为什么成为一名程序员，初心若何？有人有天赋，有人凭兴趣，有人看前景。也许，你上路之初还未曾明了，但在路上不时叩问内心，找到初心，会走得更坚定，更长远。
+                </p>
+                <p>闭上眼睛，你可以试着问自己走上程序道路的初心是否已经明了呢？欢迎给我留言，我们一起分享和讨论。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/9f/26/5a56830a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">无奈的瓶子</span></div>
+                  <div class="bd">
+                    汽修专业干了两年，不喜欢。转行前端2年多，进入程序员行业才知道要终身学习。从单手敲键盘到盲打，从早把英语还给了老师，到能读懂英文文档，体会到了当程序员的好处。对学习再也不像原来的抵触与懈怠。体会到了
+                    只要踏下心来学 就一定能学会 剩下的就是快慢的问题了。 <br />
+                  </div>
+                  <span class="time">2018-08-03 08:24</span>
 
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>在走上程序的道路前，你不妨先问问自己成为程序员的初心是什么。回首往昔，我似乎是阴差阳错地走上了这条路，正因初心未明，所以早期的路上就多了很多迟疑和曲折。</p>
-<p>人生路漫漫，在专栏的第一个模块里，我会和你讲讲自己走上程序道路的故事，希望这些故事能够给迷茫或者奋进中的你以启发。在人生的不同阶段里，我都喜欢做“复盘”，一方面审视过去的自己，另外一方面思索未来的方向。现在看来，这些有节奏的复盘也给我自己留下了深深的印记，也让我在某些关键节点的决策更加坚决。</p>
-<h2>首次接触</h2>
-<p>说起我和程序的渊源，大概可以回溯到二十多年前。</p>
-<p>那时，我还在读初中二年级，那是四川一所少数民族中学，硬件条件不是太好。那是1995年，国际友人赞助赠送了学校几台苹果 II 代电脑。作为学校成绩名列前茅的学生，在比较重视分数排名的背景下我还算有点 “小特权”。这点“小特权”就是可以接触这批电脑，所以在那时我为了搞懂怎么 “玩” 这些电脑去学了下 BASIC 语言，然后在上面编程并在单调的绿色屏幕上画出了一些几何图形。</p>
-<p>当时还挺有成就感的，一度畅想将来要考清华的计算机专业。可能，那时觉得清华就是最好的学校，而计算机和编程是当时的最爱。然而，实际情况是上了高中以后学习压力大增，再也没时间去 “玩” 这些电脑了，光应对考试已然应接不暇，渐渐就忘了初中那时的想法。</p><!-- [[[read_end]]] -->
-<p>现在回想起来第一次接触程序的时候，感觉它们还算是好 “玩” 的，有一种智力上的挑战，但当时也不太可能想到十年后我将会以此为生，走上程序之路。</p>
-<p>彼时，初心未有。</p>
-<h2>选择专业</h2>
-<p>对我们80后这一代人，高考算是人生第一次重要的选择了吧。</p>
-<p>我那时高考填志愿，都是在考试前进行。高中三年，我都再没接触过程序了，早已忘记当年的想法。高考前，当时觉得自己对物理最有兴趣就填报了南京大学的物理系，应该也考虑过清华什么的，但没什么信心。</p>
-<p>关于兴趣有一个有趣的说法：“往往并不是有兴趣才能做好，而是做好了才有兴趣。”高中后可能觉得当时物理学得还不错，所以就有了兴趣，并在填报高考志愿时选择了物理专业。</p>
-<p>后来高考的结果，一方面信心不是很足，另一方面单科数学发挥也失常。南大的物理系没能上成，落到了第二志愿东北大学，调剂成了机械工程专业。这是一个随机调剂的专业，着实让我无比苦闷，学了一年后，我非常清楚，我并不喜欢这个专业，也看不清未来的职业前景。</p>
-<p>再回首时你总会发现，有些最重要的人生路径选择，就这么有点 “无厘头” 地完成了。在面临人生重要路径的选择时，当时只考虑了兴趣，如今看来也没那么靠谱。应该多听听众人的看法，参考前人的路径，最后再自己做出决定。人生路径还是需要自己来主动、有意识地掌舵的。</p>
-<p>彼时，初心已有，但却是混乱的。</p>
-<h2>转换专业</h2>
-<p>机械专业煎熬了两年，迎来了第二次选择专业的机会。</p>
-<p>在我读完大二的时候，国家开始兴办软件学院，新开软件工程专业。我当时在机械专业也会学一门编程课：C 语言。那时对 C 语言比较感兴趣，而对专业课机械制图则完全无感，所以当机会出现时就义无反顾去转了专业。</p>
-<p>新专业面向所有非计算机的工程专业招生，但有一个门槛是：高学费。当时，机械专业一年学费四千多点，而软件工程本科一年一万六，学费读一年就抵得上别人读四年了，这对一个工薪家庭的压力不算小。</p>
-<p>总之，我就是这么阴差阳错地又绕到了计算机专业这条路上。作为一门新开专业，软件工程相对计算机专业更偏应用，对接企业用人需求。可见，当时（2002 年）整个 IT 行业已经面临人才缺乏的问题，国家之所以新开软件工程专业，恐怕也是经济规律在发挥作用，平衡供需两端。</p>
-<p>于我而言，转换专业算是时代给予的机遇，我在懵懂中做出了一次正确的选择。当时并不明了，但如今回顾却是如此清晰：面对新开的软件工程专业，其实表明了一个信息，这个行业发展很快，前景很好。</p>
-<p>人生路很长，走了一段，也需要时不时重新审视当前的路径是否适合，是否无意错过了前途更好的岔路口。</p>
-<p>我如今会感到庆幸没有错过这个路口，当时的确是没想过从机械专业换到软件工程会有更好的发展前景，但就是这样，我绕绕弯弯、曲曲折折地入了行，成为了一名程序员。</p>
-<p>彼时，初心虽已不乱，但依然未明。</p>
-<h2>转换行业</h2>
-<p>人的一生面临很多重要选择，除了高考选专业，我想转行也是其中之一。</p>
-<p>入行后，一路走来也碰到过很多从其他行业转行成为程序员的人。曾经在招聘面试时碰到过两个程序员，他们一个是毕业于中医药大学，在药房工作两年后转行并干了 3 年；另外一个主修环境工程专业，在该行业工作 9 年后才转行程序员，并在这行干了 5 年。</p>
-<p>那时我就在想，为什么他们都要转行做一名程序员呢？也许，客观上来说，行业的景气度让程序员的薪酬水平水涨船高。需求的持续上涨，吸引着更多的人进入，这也是经济规律。但主观上来说，可能我们也没有想好为什么就要转行成为一名程序员。</p>
-<p>我转换到软件工程专业，毕业后顺利进入程序这行。早期一开始就是为一些传统行业公司写企业应用程序，提供 IT 服务，完成一份合同。工作五年后，我才渐渐明白，同样写程序，但为不同的行业写的程序价值真是完全不同。因此，我选择了切换到电商互联网行业来写程序。</p>
-<p>而这一次的选择我很确定的是，至少我模糊地看到了这条路的前景，并坚定地在众多选项中排除其他路径。转行，不同的跨度，代价或大或小。但不转变就没代价吗？不见得，因为有时不做选择的代价可能更大。</p>
-<p>此时，初心才算渐渐明了。</p>
-<h2>心明行远</h2>
-<p>在成长的路上，我先后经历了换专业、换城市、换行业。</p>
-<p>去年底（2017）我适时地驻足回顾了一下从进入大学到如今这些年的学习、工作和成长经历。其中有一些重要的时间事件节点，我把它们连接起来，就成了我们大多数人的成长线。下图，是我过去18年的成长线：</p>
-<p><img src="https://static001.geekbang.org/resource/image/13/37/139a061b33fd0d711136c2846ff90c37.png" alt="" /></p>
-<p>在这张图上，选专业、换专业、换城市、换行业，这几个重要的人生选择点，我都用红色字体标记了。把过往的18年浓缩到一张图上后，我就清晰地看出了趋势，在切换行业之前，初心未明，成长的路上起起伏伏，波动很大，也因为不成熟的选择带来过巨大的落差感。</p>
-<p>在工作的前几年，图上也有一段快速的自然成长期。因为这时我们就像一张白纸，只要是在认真地做事儿，总是能成长。这段时期，心其实是乱的，但因为忙而充实，也获得了很多成长，但它的问题是：这样的自然成长期有多长取决于你所做事情的天花板，所以才有了后面的一次切换城市带来的落差。</p>
-<p>切换了行业，一路走到现在，前路不尽，心已明，行将远。</p>
-<p>为什么成为一名程序员，初心若何？有人有天赋，有人凭兴趣，有人看前景。也许，你上路之初还未曾明了，但在路上不时叩问内心，找到初心，会走得更坚定，更长远。</p>
-<p>闭上眼睛，你可以试着问自己走上程序道路的初心是否已经明了呢？欢迎给我留言，我们一起分享和讨论。</p>
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，这个心态很好，相信你会走得更远</p>
+                    <p class="reply-time">2018-08-03 18:57</p>
+                  </div>
                 </div>
+              </li>
 
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/9f/26/5a56830a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">无奈的瓶子</span>
-                            </div>
-                            <div class="bd">汽修专业干了两年，不喜欢。转行前端2年多，进入程序员行业才知道要终身学习。从单手敲键盘到盲打，从早把英语还给了老师，到能读懂英文文档，体会到了当程序员的好处。对学习再也不像原来的抵触与懈怠。体会到了 只要踏下心来学 就一定能学会 剩下的就是快慢的问题了。 <br></div>
-                            <span class="time">2018-08-03 08:24</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，这个心态很好，相信你会走得更远</p>
-                                <p class="reply-time">2018-08-03 18:57</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/eb/a3/c43c3203.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">龙王庙⇔三根杉</span>
-                            </div>
-                            <div class="bd">36岁从部队退役才开始选择干程序。不晓得还来得及不 <br></div>
-                            <span class="time">2018-08-05 12:21</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">佩服👍</p>
-                                <p class="reply-time">2018-08-05 20:56</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/2d/f6/15abf014.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小白</span>
-                            </div>
-                            <div class="bd">”转行，不同的跨度，代价或大或小。但不转变就没代价吗？不见得，因为有时不做选择的代价可能更大。”这句话真走心，一个跨专业入行的孩子完全能体会和理解因为选择而付出代价的辛酸。 <br></div>
-                            <span class="time">2018-08-03 00:32</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">拍拍肩，安慰下。至少我们是主动选择的，不是被迫</p>
-                                <p class="reply-time">2018-08-03 17:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">其实，并不知道自己到底能不能成为程序员，总感觉自学还是比不上科班出身的。<br>大学考得不好，但毕业想去北上广，想拼一把，不过觉得自己能力差。我虽然喜欢自学，但是都是网课，且比较偏向软的思考和思维方面，很难在简历上体现，可能根本就熬不到面试。<br>但是，挺感谢编程，花了很长时间培养了兴趣，我知道这是一个生产性兴趣，而且可以终身学习。<br>他给了我向前的信心，我相信我能靠努力，在大城市拿到我想要的一切 <br></div>
-                            <span class="time">2018-08-03 12:02</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，编程是个硬技能，相信努力不会辜负</p>
-                                <p class="reply-time">2018-08-03 19:13</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/97/4b/bbdaa3dc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">陈鑫</span>
-                            </div>
-                            <div class="bd">复盘自己的程序员之路，寻找初心，回顾每次关键阶段选择的得失，进而明确自我定位与认知，找到在当下十字路口适合自己的方向。文章很有启发，谢谢老师。 <br></div>
-                            <span class="time">2018-08-03 09:30</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">也谢谢你😊</p>
-                                <p class="reply-time">2018-08-03 19:07</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/58/1f/9dc4d475.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">@XP</span>
-                            </div>
-                            <div class="bd">2012年金融学专业毕业，做过财务、保险、电销、司机等，混了四年，看不到希望，听说程序员工资高，赌上可怜的积蓄搏一把，混不好就认命进富士康。现在还过得去，还在拼搏，奔三了，入行晚，迷茫 <br></div>
-                            <span class="time">2018-08-03 07:46</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">积蓄都花在哪了？人生的试错成本真是很高，不年轻了，加油</p>
-                                <p class="reply-time">2018-08-03 18:01</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/77/59/d081afd9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">onthemooner</span>
-                            </div>
-                            <div class="bd">同物理专业转行程序员哈哈 <br></div>
-                            <span class="time">2018-08-03 10:01</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😄</p>
-                                <p class="reply-time">2018-08-03 19:08</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/2d/f6/15abf014.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小白</span>
-                            </div>
-                            <div class="bd">从来没有忘记自己想到程序员的初心，虽然大学学的专业不匹配，就业后的工作岗位有点偏差，但还是进到了计算机互联网这个大行业。初心未变，逐渐纠偏。 <br></div>
-                            <span class="time">2018-08-03 00:37</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，目标清晰，总会走回正轨的😄</p>
-                                <p class="reply-time">2018-08-03 17:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/39/ac/76beadf1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Quincy</span>
-                            </div>
-                            <div class="bd">双非硕士，通信专业，即将毕业，导师需要，无奈自学的Java，有点项目经验。看着企业校招逐步开始，感觉做程序员跟科班比，基础太弱，刷BAT的题很困扰，做本行，机会少，专业知识又忘掉的太多，又加双非。在机会面前，总是望而却步，信心不足，家里又建议考公，自己现在也不知道该往哪个方向，该怎么走下去。 <br></div>
-                            <span class="time">2018-08-03 08:31</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">还是要自己想清楚呀，当年家里还建议我读中专呢，还好我执著的坚持了考大学。起点不如你的人我相信更多，学历文凭也只是个起点而已</p>
-                                <p class="reply-time">2018-08-03 19:04</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">helloworld</span>
-                            </div>
-                            <div class="bd">&quot;在工作的前几年，图上也有一段快速的自然成长期。因为这时我们就像一张白纸，只要是在认真地做事儿，总是能成长。&quot;说得很正确。那时候完成了功能就感觉技术又提升了一步！而工作几年后对自己的要求是如果只做这些增删查改的工作就是在浪费时间浪费生命，眼界宽了，欲望就来了，唯一需要做的就是做好技术储备，让能力配得上欲望。 <br></div>
-                            <span class="time">2018-08-03 07:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">欲望适当超前能力两步，可能正好，拽着你向上走😄</p>
-                                <p class="reply-time">2018-08-03 18:06</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/38/57/a9f9705a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">无聊夫斯基</span>
-                            </div>
-                            <div class="bd">只能说学校安排，自己接触之后又有兴趣，感觉又能有成就感，就继续走下来了 <br></div>
-                            <span class="time">2018-08-03 07:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">这样也挺好呀，follow heart😊</p>
-                                <p class="reply-time">2018-08-03 18:04</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/dc/90/f4fced83.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">行问</span>
-                            </div>
-                            <div class="bd">男生，教师行业工作2.5年，转行前端开发，前端工作一年4个月，初心未明，带着迷茫与困惑学习、成长。 <br></div>
-                            <span class="time">2018-08-03 07:35</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">干过教师的人其实有个优势呀，懂得如何传递知识。边学，边积累，边总结，边传递</p>
-                                <p class="reply-time">2018-08-03 17:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/45/19/09e31a8a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Tang</span>
-                            </div>
-                            <div class="bd">目前做销售6年，学校接触过C,后来自学过php,现在用python爬工作需要的信息。因为学历低，在迟疑，有没有可能以后做职业程序员😂 <br></div>
-                            <span class="time">2018-08-05 07:52</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">我觉得做能用程序技术赋能的市场营销，对你而言更有优势呀，信息时代，营销也很有技术含量的</p>
-                                <p class="reply-time">2018-08-05 20:48</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/30/3f/3993a1cf.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">卢泡泡</span>
-                            </div>
-                            <div class="bd">2017年毕业，来到北京漂泊，毅然决然的放弃自己学习了7年的化学，转行自学了计算机，摸爬滚打走了一年。不忘初心，努力前进 <br></div>
-                            <span class="time">2018-08-26 18:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">加油💪，前路漫漫</p>
-                                <p class="reply-time">2018-08-27 18:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/66/e6/d8a85eb5.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ylcoder</span>
-                            </div>
-                            <div class="bd">胡老师，您好。<br>我是09年高中毕业后，<br>因成绩不佳选择了进入培训机构，<br>学习软件编程。<br>短暂的2年混沌的学习生活，初入门槛。<br>来到大城市，包装简历。<br>进了一家企业做政府办公系统。<br>一头扎进去，边工作边学习，混沌了7年。<br>意识到学历，自考了本科，考了PMP项目管理。<br>意识到技术，在网络上各种资源学习。<br>现在自己的职位是个java高级，<br>但是自己有目标成为架构师，<br>而且乐于参加技术交流活动，<br>我相信7年前选择的编程之路是对的选择。<br>虽然高中毕业，但是我有毅力去学习。<br>我不懒惰，勤奋，喜欢挑战。<br>现在复盘自己这些年，感恩自己之前的努力💪<br>他山之石 可以攻玉，愿自己走的更远 <br></div>
-                            <span class="time">2018-08-12 00:22</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍😊，加油</p>
-                                <p class="reply-time">2018-08-12 19:36</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/14/ee/8126a5b1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小新是也</span>
-                            </div>
-                            <div class="bd">还记得因为高考考不好，报考专业的时候没几个专业可以选，最后进了制药工程。第一年还很努力学习拿奖学金，后面渐渐接触到ps并且喜欢上了，然后大二实习之后发现不是自己想要的。接着接触到了编程，然后一发不可收拾，各种报班。。。专业课全部落下，不过我觉得倒是挺值得，毕竟是自己感兴趣的 <br></div>
-                            <span class="time">2018-08-04 17:31</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍😄兴趣是最好的老师</p>
-                                <p class="reply-time">2018-08-05 12:28</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/5c/8f/551b5624.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小可</span>
-                            </div>
-                            <div class="bd">接触编程是通过小霸王学习机😂志愿填的是机械工程，被调剂到gis专业，毕业先做实施，后自学j2ee转开发，待的都是传统非互联网公司，近来感觉这样下去可能就废了，出来换了家做物联网的，离开原来的坑才发现外面天地真广阔，得好好成长！ <br></div>
-                            <span class="time">2018-08-04 11:10</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍恭喜跳坑成功</p>
-                                <p class="reply-time">2018-08-05 12:24</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/b8/3c/09d86b6f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Panda</span>
-                            </div>
-                            <div class="bd">以后也许不会全职写代码，但一定不会不写代码 <br></div>
-                            <span class="time">2018-08-03 23:20</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-08-05 11:42</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/3a/6d/6ab8c54e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">彭超</span>
-                            </div>
-                            <div class="bd">建筑汪误入代码圈~~ <br></div>
-                            <span class="time">2018-08-03 22:32</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">哈哈😄</p>
-                                <p class="reply-time">2018-08-05 11:38</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/78/5a/0e0da1fa.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">cc</span>
-                            </div>
-                            <div class="bd">在工作的前几年，图上也有一段快速的自然成长期。<br><br>这段深有同感 <br></div>
-                            <span class="time">2018-08-03 12:09</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊</p>
-                                <p class="reply-time">2018-08-03 19:13</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/eb/a3/c43c3203.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">龙王庙⇔三根杉</span></div>
+                  <div class="bd">36岁从部队退役才开始选择干程序。不晓得还来得及不 <br /></div>
+                  <span class="time">2018-08-05 12:21</span>
 
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">佩服👍</p>
+                    <p class="reply-time">2018-08-05 20:56</p>
+                  </div>
+                </div>
+              </li>
 
-                </ul>
-            </div>
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/2d/f6/15abf014.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小白</span></div>
+                  <div class="bd">
+                    ”转行，不同的跨度，代价或大或小。但不转变就没代价吗？不见得，因为有时不做选择的代价可能更大。”这句话真走心，一个跨专业入行的孩子完全能体会和理解因为选择而付出代价的辛酸。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 00:32</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">拍拍肩，安慰下。至少我们是主动选择的，不是被迫</p>
+                    <p class="reply-time">2018-08-03 17:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    其实，并不知道自己到底能不能成为程序员，总感觉自学还是比不上科班出身的。<br />大学考得不好，但毕业想去北上广，想拼一把，不过觉得自己能力差。我虽然喜欢自学，但是都是网课，且比较偏向软的思考和思维方面，很难在简历上体现，可能根本就熬不到面试。<br />但是，挺感谢编程，花了很长时间培养了兴趣，我知道这是一个生产性兴趣，而且可以终身学习。<br />他给了我向前的信心，我相信我能靠努力，在大城市拿到我想要的一切
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 12:02</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，编程是个硬技能，相信努力不会辜负</p>
+                    <p class="reply-time">2018-08-03 19:13</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/97/4b/bbdaa3dc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">陈鑫</span></div>
+                  <div class="bd">
+                    复盘自己的程序员之路，寻找初心，回顾每次关键阶段选择的得失，进而明确自我定位与认知，找到在当下十字路口适合自己的方向。文章很有启发，谢谢老师。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 09:30</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">也谢谢你😊</p>
+                    <p class="reply-time">2018-08-03 19:07</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/58/1f/9dc4d475.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">@XP</span></div>
+                  <div class="bd">
+                    2012年金融学专业毕业，做过财务、保险、电销、司机等，混了四年，看不到希望，听说程序员工资高，赌上可怜的积蓄搏一把，混不好就认命进富士康。现在还过得去，还在拼搏，奔三了，入行晚，迷茫
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 07:46</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">积蓄都花在哪了？人生的试错成本真是很高，不年轻了，加油</p>
+                    <p class="reply-time">2018-08-03 18:01</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/77/59/d081afd9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">onthemooner</span></div>
+                  <div class="bd">同物理专业转行程序员哈哈 <br /></div>
+                  <span class="time">2018-08-03 10:01</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😄</p>
+                    <p class="reply-time">2018-08-03 19:08</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/2d/f6/15abf014.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小白</span></div>
+                  <div class="bd">
+                    从来没有忘记自己想到程序员的初心，虽然大学学的专业不匹配，就业后的工作岗位有点偏差，但还是进到了计算机互联网这个大行业。初心未变，逐渐纠偏。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 00:37</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，目标清晰，总会走回正轨的😄</p>
+                    <p class="reply-time">2018-08-03 17:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/39/ac/76beadf1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Quincy</span></div>
+                  <div class="bd">
+                    双非硕士，通信专业，即将毕业，导师需要，无奈自学的Java，有点项目经验。看着企业校招逐步开始，感觉做程序员跟科班比，基础太弱，刷BAT的题很困扰，做本行，机会少，专业知识又忘掉的太多，又加双非。在机会面前，总是望而却步，信心不足，家里又建议考公，自己现在也不知道该往哪个方向，该怎么走下去。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 08:31</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      还是要自己想清楚呀，当年家里还建议我读中专呢，还好我执著的坚持了考大学。起点不如你的人我相信更多，学历文凭也只是个起点而已
+                    </p>
+                    <p class="reply-time">2018-08-03 19:04</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">helloworld</span></div>
+                  <div class="bd">
+                    &quot;在工作的前几年，图上也有一段快速的自然成长期。因为这时我们就像一张白纸，只要是在认真地做事儿，总是能成长。&quot;说得很正确。那时候完成了功能就感觉技术又提升了一步！而工作几年后对自己的要求是如果只做这些增删查改的工作就是在浪费时间浪费生命，眼界宽了，欲望就来了，唯一需要做的就是做好技术储备，让能力配得上欲望。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 07:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">欲望适当超前能力两步，可能正好，拽着你向上走😄</p>
+                    <p class="reply-time">2018-08-03 18:06</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/38/57/a9f9705a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">无聊夫斯基</span></div>
+                  <div class="bd">只能说学校安排，自己接触之后又有兴趣，感觉又能有成就感，就继续走下来了 <br /></div>
+                  <span class="time">2018-08-03 07:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">这样也挺好呀，follow heart😊</p>
+                    <p class="reply-time">2018-08-03 18:04</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/dc/90/f4fced83.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">行问</span></div>
+                  <div class="bd">
+                    男生，教师行业工作2.5年，转行前端开发，前端工作一年4个月，初心未明，带着迷茫与困惑学习、成长。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-03 07:35</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      干过教师的人其实有个优势呀，懂得如何传递知识。边学，边积累，边总结，边传递
+                    </p>
+                    <p class="reply-time">2018-08-03 17:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/45/19/09e31a8a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Tang</span></div>
+                  <div class="bd">
+                    目前做销售6年，学校接触过C,后来自学过php,现在用python爬工作需要的信息。因为学历低，在迟疑，有没有可能以后做职业程序员😂
+                    <br />
+                  </div>
+                  <span class="time">2018-08-05 07:52</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      我觉得做能用程序技术赋能的市场营销，对你而言更有优势呀，信息时代，营销也很有技术含量的
+                    </p>
+                    <p class="reply-time">2018-08-05 20:48</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/30/3f/3993a1cf.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">卢泡泡</span></div>
+                  <div class="bd">
+                    2017年毕业，来到北京漂泊，毅然决然的放弃自己学习了7年的化学，转行自学了计算机，摸爬滚打走了一年。不忘初心，努力前进
+                    <br />
+                  </div>
+                  <span class="time">2018-08-26 18:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">加油💪，前路漫漫</p>
+                    <p class="reply-time">2018-08-27 18:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/66/e6/d8a85eb5.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ylcoder</span></div>
+                  <div class="bd">
+                    胡老师，您好。<br />我是09年高中毕业后，<br />因成绩不佳选择了进入培训机构，<br />学习软件编程。<br />短暂的2年混沌的学习生活，初入门槛。<br />来到大城市，包装简历。<br />进了一家企业做政府办公系统。<br />一头扎进去，边工作边学习，混沌了7年。<br />意识到学历，自考了本科，考了PMP项目管理。<br />意识到技术，在网络上各种资源学习。<br />现在自己的职位是个java高级，<br />但是自己有目标成为架构师，<br />而且乐于参加技术交流活动，<br />我相信7年前选择的编程之路是对的选择。<br />虽然高中毕业，但是我有毅力去学习。<br />我不懒惰，勤奋，喜欢挑战。<br />现在复盘自己这些年，感恩自己之前的努力💪<br />他山之石
+                    可以攻玉，愿自己走的更远 <br />
+                  </div>
+                  <span class="time">2018-08-12 00:22</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍😊，加油</p>
+                    <p class="reply-time">2018-08-12 19:36</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/14/ee/8126a5b1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小新是也</span></div>
+                  <div class="bd">
+                    还记得因为高考考不好，报考专业的时候没几个专业可以选，最后进了制药工程。第一年还很努力学习拿奖学金，后面渐渐接触到ps并且喜欢上了，然后大二实习之后发现不是自己想要的。接着接触到了编程，然后一发不可收拾，各种报班。。。专业课全部落下，不过我觉得倒是挺值得，毕竟是自己感兴趣的
+                    <br />
+                  </div>
+                  <span class="time">2018-08-04 17:31</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍😄兴趣是最好的老师</p>
+                    <p class="reply-time">2018-08-05 12:28</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/5c/8f/551b5624.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小可</span></div>
+                  <div class="bd">
+                    接触编程是通过小霸王学习机😂志愿填的是机械工程，被调剂到gis专业，毕业先做实施，后自学j2ee转开发，待的都是传统非互联网公司，近来感觉这样下去可能就废了，出来换了家做物联网的，离开原来的坑才发现外面天地真广阔，得好好成长！
+                    <br />
+                  </div>
+                  <span class="time">2018-08-04 11:10</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍恭喜跳坑成功</p>
+                    <p class="reply-time">2018-08-05 12:24</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/b8/3c/09d86b6f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Panda</span></div>
+                  <div class="bd">以后也许不会全职写代码，但一定不会不写代码 <br /></div>
+                  <span class="time">2018-08-03 23:20</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-08-05 11:42</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/3a/6d/6ab8c54e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">彭超</span></div>
+                  <div class="bd">建筑汪误入代码圈~~ <br /></div>
+                  <span class="time">2018-08-03 22:32</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">哈哈😄</p>
+                    <p class="reply-time">2018-08-05 11:38</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/78/5a/0e0da1fa.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">cc</span></div>
+                  <div class="bd">在工作的前几年，图上也有一段快速的自然成长期。<br /><br />这段深有同感 <br /></div>
+                  <span class="time">2018-08-03 12:09</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊</p>
+                    <p class="reply-time">2018-08-03 19:13</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

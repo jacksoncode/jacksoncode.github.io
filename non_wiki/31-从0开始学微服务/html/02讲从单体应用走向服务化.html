@@ -1,422 +1,1613 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                02讲从单体应用走向服务化
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/96/89/96c41d0f37aa068a66c963c1bc53a189.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">02讲从单体应用走向服务化</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/96/89/96c41d0f37aa068a66c963c1bc53a189.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>专栏上一期，我给你讲述了什么是微服务，以及微服务架构的由来。简单回顾一下，微服务就是将庞杂臃肿的单体应用拆分成细粒度的服务，独立部署，并交给各个中小团队来负责开发、测试、上线和运维整个生命周期。</p>
-<p><strong>那么到底什么时候应该拆分单体应用？拆分单体应用有哪些标准可依呢？</strong></p>
-<p>为了解答这两个问题，今天我将通过具体案例来阐述，希望你能够学会<span class="orange">单体应用拆分成微服务的正确姿势</span>。</p>
-<h2>什么时候进行服务化拆分？</h2>
-<p>从我所经历过的多个项目来看，项目第一阶段的主要目标是快速开发和验证想法，证明产品思路是否可行。这个阶段功能设计一般不会太复杂，开发采取快速迭代的方式，架构也不适合过度设计。所以将所有功能打包部署在一起，集中地进行开发、测试和运维，对于项目起步阶段，是最高效也是最节省成本的方式。当可行性验证通过，功能进一步迭代，就可以加入越来越多的新特性。</p>
-<p>比如做一个社交App，初期为了快速上线，验证可行性，可以只开发首页信息流、评论等基本功能。产品上线后，经过一段时间的运营，用户开始逐步增多，可行性验证通过，下一阶段就需要进一步增加更多的新特性来吸引更多的目标用户，比如再给这个社交App添加个人主页显示、消息通知等功能。</p>
-<p>一般情况下，这个时候就需要大规模地扩张开发人员，以支撑多个功能的开发。如果这个时候继续采用单体应用架构，多个功能模块混杂在一起开发、测试和部署的话，就会导致不同功能之间相互影响，一次打包部署需要所有的功能都测试OK才能上线。</p><!-- [[[read_end]]] -->
-<p>不仅如此，多个功能模块混部在一起，对线上服务的稳定性也是个巨大的挑战。比如A开发的一个功能由于代码编写考虑不够全面，上线后产生了内存泄漏，运行一段时间后进程异常退出，那么部署在这个服务池中的所有功能都不可访问。一个经典的案例就是，曾经有一个视频App，因为短时间内某个付费视频访问量巨大，超过了服务器的承载能力，造成了这个视频无法访问。不幸的是，这个网站付费视频和免费视频的服务部署在一起，也波及了免费视频，几乎全站崩溃。</p>
-<p>根据我的实际项目经验，一旦单体应用同时进行开发的人员超过10人，就会遇到上面的问题，这个时候就该考虑进行服务化拆分了。</p>
-<h2>服务化拆分的两种姿势</h2>
-<p>那么服务化拆分具体该如何实施呢？一个最有效的手段就是将不同的功能模块服务化，独立部署和运维。以前面提到的社交App为例，你可以认为首页信息流是一个服务，评论是一个服务，消息通知是一个服务，个人主页也是一个服务。</p>
-<p>这种服务化拆分方式是<strong>纵向拆分</strong>，是从业务维度进行拆分。标准是按照业务的关联程度来决定，关联比较密切的业务适合拆分为一个微服务，而功能相对比较独立的业务适合单独拆分为一个微服务。</p>
-<p>还有一种服务化拆分方式是<strong>横向拆分</strong>，是从公共且独立功能维度拆分。标准是按照是否有公共的被多个其他服务调用，且依赖的资源独立不与其他业务耦合。</p>
-<p>继续以前面提到的社交App举例，无论是首页信息流、评论、消息箱还是个人主页，都需要显示用户的昵称。假如用户的昵称功能有产品需求的变更，你需要上线几乎所有的服务，这个成本就有点高了。显而易见，如果我把用户的昵称功能单独部署成一个独立的服务，那么有什么变更我只需要上线这个服务即可，其他服务不受影响，开发和上线成本就大大降低了。</p>
-<h2>服务化拆分的前置条件</h2>
-<p>一般情况下，业务系统引入新技术就必然会带来架构的复杂度提升，在具体决策前，你先要认识到新架构会带来哪些新的问题，这些问题你和你的团队是否能够解决？如何解决？是自己投入人力建设，还是采用业界开源方案？</p>
-<p>下面几个问题，是从单体应用迁移到微服务架构时必将面临也必须解决的。</p>
-<ul>
-<li>
-<p><strong>服务如何定义</strong>。对于单体应用来说，不同功能模块之前相互交互时，通常是以类库的方式来提供各个模块的功能。对于微服务来说，每个服务都运行在各自的进程之中，应该以何种形式向外界传达自己的信息呢？答案就是接口，无论采用哪种通讯协议，是HTTP还是RPC，服务之间的调用都通过接口描述来约定，约定内容包括接口名、接口参数以及接口返回值。</p>
-</li>
-<li>
-<p><strong>服务如何发布和订阅</strong>。单体应用由于部署在同一个WAR包里，接口之间的调用属于进程内的调用。而拆分为微服务独立部署后，服务提供者该如何对外暴露自己的地址，服务调用者该如何查询所需要调用的服务的地址呢？这个时候你就需要一个类似登记处的地方，能够记录每个服务提供者的地址以供服务调用者查询，在微服务架构里，这个地方就是注册中心。</p>
-</li>
-<li>
-<p><strong>服务如何监控</strong>。通常对于一个服务，我们最关心的是QPS（调用量）、AvgTime（平均耗时）以及P999（99.9%的请求性能在多少毫秒以内）这些指标。这时候你就需要一种通用的监控方案，能够覆盖业务埋点、数据收集、数据处理，最后到数据展示的全链路功能。</p>
-</li>
-<li>
-<p><strong>服务如何治理</strong>。可以想象，拆分为微服务架构后，服务的数量变多了，依赖关系也变复杂了。比如一个服务的性能有问题时，依赖的服务都势必会受到影响。可以设定一个调用性能阈值，如果一段时间内一直超过这个值，那么依赖服务的调用可以直接返回，这就是熔断，也是服务治理最常用的手段之一。</p>
-</li>
-<li>
-<p><strong>故障如何定位</strong>。在单体应用拆分为微服务之后，一次用户调用可能依赖多个服务，每个服务又部署在不同的节点上，如果用户调用出现问题，你需要有一种解决方案能够将一次用户请求进行标记，并在多个依赖的服务系统中继续传递，以便串联所有路径，从而进行故障定位。</p>
-</li>
-</ul>
-<p>针对上述问题，你必须有可行的解决方案之后，才能进一步进行服务化拆分。专栏后面的文章，我会给你逐一讲解相应的解决方案。</p>
-<h2>总结</h2>
-<p>无论是纵向拆分还是横向拆分，都是将单体应用庞杂的功能进行拆分，抽离成单独的服务部署。</p>
-<p>但并不是说功能拆分的越细越好，过度的拆分反而会让服务数量膨胀变得难以管理，因此找到符合自己业务现状和团队人员技术水平的拆分粒度才是可取的。我建议的标准是按照每个开发人员负责不超过3个大的服务为标准，毕竟每个人的精力是有限的，所以在拆分微服务时，可以按照开发人员的总人数来决定。</p>
-<h2>思考题</h2>
-<p>想想你现在的业务场景，如果是单体应用的话，是否需要进行服务化拆分？如果需要的话，你觉得纵向拆分还是横向拆分合适？具体可以拆分到什么粒度？</p>
-<p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
-<p><img src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/d4/c2/910d231e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">oddrock</span>
-                            </div>
-                            <div class="bd">我现在对拆分的考量：<br>一是业务维度聚类，业务和数据关系密切的应该放在一起。<br>二是功能维度聚类，公共功能聚合为一个服务。<br>三是人员聚类，这是个实际中的考量，如果某几个业务就是这几个人比较熟，那么最好放在一起，未来开发部署都好办。<br>四是性能聚类，性能要求高的并发大的和性能要求低的并发小的，要分开为不同的服务，这样部署和运行都独立，好维护。<br>还请老师指教 <br></div>
-                            <span class="time">2018-08-27 17:36</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的很好，看得出来属于业务经验很丰富的。😁</p>
-                                <p class="reply-time">2018-08-28 20:35</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/0c/c5/2f59fe5d.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">唐伯虎点蚊香</span>
-                            </div>
-                            <div class="bd">纵向拆分和横向拆分感觉还是不太理解 <br></div>
-                            <span class="time">2018-08-25 09:38</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/75/9b/e226f023.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">日拱一卒</span>
-                            </div>
-                            <div class="bd">关于服务拆分策略，我理解在实际工作中应该是横向和纵向相结合的方式:<br>1. 首先收集整理公用的模块，将其进行服务化处理，这是横向拆分。<br>2. 其次根据不同业务之间的耦合程度，将相对独立的服务拆分到不同的服务中，这属于纵向拆分。<br><br>最后的微服务列表中，既有被其他微服务使用的公共服务，也有彼此独立运行的业务服务。<br> <br></div>
-                            <span class="time">2018-08-26 09:16</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对，实际业务中这两种拆分方式一般是相互结合使用的，如果业务比较多分散，适合做纵向拆分。如果多个业务之间有公共模块耦合，适合把公共模块拆分出来，适合做横向拆分。</p>
-                                <p class="reply-time">2018-08-28 20:38</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/3f/b7/0d8b5431.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">snakorse</span>
-                            </div>
-                            <div class="bd">还有必须要解决的一个问题是 拆分后带来的跨服务事务的一致性问题 <br></div>
-                            <span class="time">2018-08-25 20:33</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/bb/28/914b5664.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">jogin</span>
-                            </div>
-                            <div class="bd">看评论感觉好多人不需要微服务。<br>1.业务复杂度问题单体应用没能梳理清楚，微服务也搞不懂定。<br>2.人手太少，微服务只会增加系统复杂度，运维成本，大家不要看到把原先的函数调用改成接口调用，没真正了解服务拆分后带来的系统复杂度。<br>3.系统设计问题，代码写的乱，开发流程问题，不是微服务能解决的。 <br></div>
-                            <span class="time">2018-08-25 19:34</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对，微服务只能解决单体膨胀后的痛，但也会带来架构复杂性，要权衡利弊</p>
-                                <p class="reply-time">2018-08-27 11:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/6f/a8/c1625c9b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">常玉棋</span>
-                            </div>
-                            <div class="bd">我觉得目前单体能搞定的话就不要为了拆分而拆分，因为拆分后涉及到的问题有可能会让现有人员手忙脚乱，最好等做好了技术和人员准备再拆分。 <br></div>
-                            <span class="time">2018-08-25 08:00</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是这样的</p>
-                                <p class="reply-time">2018-08-28 20:41</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/68/c0/178a5b16.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">科大大👏🏻</span>
-                            </div>
-                            <div class="bd">当公司技术人员不足时就没必要考虑微服务了，好好做好单体架构，但是做的同时也要考虑未来有可能过渡到微服务，所以如果明确了以后会变成微服务的话单体架构有没有什么设计标准呢？ <br></div>
-                            <span class="time">2018-08-25 08:54</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/04/18/07ee18ad.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">明天更美好</span>
-                            </div>
-                            <div class="bd">我们是单体应用，一共22个接口，但是有一个接口并发巨大，二期势必拆分微服务架构。我觉得按照功能进行垂直拆分比较合适，我们之前有17个开发人员，现在裁员就剩下4个。希望胡老师给个建议 <br></div>
-                            <span class="time">2018-08-25 10:45</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">4个人搞微服务，有没有基础架构人员？没有就算了吧……</p>
-                                <p class="reply-time">2018-08-27 11:54</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/0a/61/1d79376b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">🤕 ～ 😮</span>
-                            </div>
-                            <div class="bd">横向拆分:把一些不会和其他主业务有依赖的功能拆分出来，最典型的就是common。<br>纵向拆分:按照业务来拆分，比如用户访问一个商城，从访问到下单成功会调用很多服务，我们可以把用户登录做一个服务，商城首页以及商品信息做一个服务，购物车模块是一个服务，支付模块又是另一个服务，这样整个商城都是微服务架构，不管哪个单独的服务出现问题，都不会影响别的服务，方便于技术人员最快定位问题，解决问题。<br>准确来说，一个项目里边是横向和纵向都有的，并不冲突，微服务带给我们的好处有很多，但具体能不能使用微服务还要根据具体的项目和团队来决定。<br>(以上拆分仅供举例参考，具体拆分视项目而定) <br></div>
-                            <span class="time">2018-08-26 04:50</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对，视具体项目而定</p>
-                                <p class="reply-time">2018-08-27 11:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/37/9c/4c56ff47.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">丢</span>
-                            </div>
-                            <div class="bd">实际项目通常是横向和纵向拆分相结合，公共的服务单独拆分出来，然后上层业务按功能模块拆分 <br></div>
-                            <span class="time">2018-08-28 14:18</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Geek_8d2caa</span>
-                            </div>
-                            <div class="bd">开始是10多人的团队，对业务进行了拆分，上线后，人员陆续离职，现在是6个人背着将近30个微服务，开发一个功能点，基本上所有人都得上，就演变成天天开会还解决不了问题，效率奇低……所以，有没有微服务退回到单体的做法？ <br></div>
-                            <span class="time">2018-08-28 10:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">可以适当做服务合并</p>
-                                <p class="reply-time">2018-08-28 20:04</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/f5/1f/577265ea.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">少帅</span>
-                            </div>
-                            <div class="bd">是否需要拆分要看目前公司项目的具体的情况，如果现有架构无法满足当前业务发展速度，比如构建一次要半天，上一次线经常搞通宵，牵一发而动全身，那么这个时候可以考虑一下微服务，拆微服务势必会提高运维、问题追踪、分布式事务等复杂度，所以微服务整个技术栈都要考虑进去 <br></div>
-                            <span class="time">2018-08-26 11:53</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯，搞不定微服务的技术栈就不要往这个坑里跳</p>
-                                <p class="reply-time">2018-08-27 11:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/77/79/a0a7c6a6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">🇨🇳光🇨🇳</span>
-                            </div>
-                            <div class="bd">目前根据业务  拆分出来了两个 独立服务 接口走rpc 调用  还在测试环境验证中！ <br></div>
-                            <span class="time">2018-08-25 22:28</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/bb/28/914b5664.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">jogin</span>
-                            </div>
-                            <div class="bd">没有推行微服务之前，单体应用的业务逻辑拆分，整体系统设计做得好，会给后期服务化改造铺平道路。 <br></div>
-                            <span class="time">2018-08-25 19:21</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/0e/c77ad9b1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">eason2017</span>
-                            </div>
-                            <div class="bd">前期，可以稍微粗粒度一些。先进行纵向拆分，把基础功能（用户系统）独立部署以维护。其它业务功能关联不紧密的可以独立部署，可以看这些业务在公司发展方向的重要性<br>后面，可以看清哪些功能是其他业务系统一定要调用的，同时，自身系统内也有其他繁杂的功能，那么可以进行横向切分，把被频繁调用的服务抽象并独立部署。 <br></div>
-                            <span class="time">2018-08-25 17:38</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对</p>
-                                <p class="reply-time">2018-08-27 11:51</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/52/53/a30b1eb2.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">lovedebug</span>
-                            </div>
-                            <div class="bd">微服务对运维和运维架构要求很高，没有运维就搞微服务就是给自己埋坑。 <br></div>
-                            <span class="time">2018-08-28 14:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的</p>
-                                <p class="reply-time">2018-08-28 20:03</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/f7/09/3e6a0c26.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">🐢先生</span>
-                            </div>
-                            <div class="bd">我们不要为了微服务而做微服务，做了服务拆分，我们会投入更大。个人觉得，做了服务拆分后，带来的最大的挑战应该是分布式事务，这个原因也导致了我们微服务的难落地。另外的话，大部分的初创公司不适合，需要结合公司自身的人员储备和业务情况等来综合考虑。 <br></div>
-                            <span class="time">2018-08-27 07:56</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的</p>
-                                <p class="reply-time">2018-08-27 11:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/bb/28/914b5664.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">jogin</span>
-                            </div>
-                            <div class="bd">什么时候推行微服务，不同技术栈有区别，之前最多的一次4，50个php技术维护一个单体应用，整个系统结构，业务模块之间划分比较清晰，不同小组负责不同模块，开发上采用多版本并行开发，每个版本7，8个技术。这时候整个团队开发效率上没有太大问题，架构组把控非常好。 <br></div>
-                            <span class="time">2018-08-25 19:18</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/05/97/b83ebf66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">softtwilight</span>
-                            </div>
-                            <div class="bd">横向拆分我的理解是就像aop，把共用但又跟其他部分不太相关的抽离出来，而纵向拆分是把高没聚的拆分出来 <br></div>
-                            <span class="time">2018-08-25 10:57</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Santo</span>
-                            </div>
-                            <div class="bd">我们现在也是单体应用，目前人员差不多只有我一个可以进行重构。我现在的思路是这样的，所有新开发的服务采用httpclient的形式调用用户的部分接口，这样的话慢慢的一块一块的抽离，然后想在做完第一个服务之后采用springcloud+httpclient，大概10几个微服务，老师这样合理不？ <br></div>
-                            <span class="time">2018-08-25 09:07</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">拆分是一方面，是否用微服务改造，还要看能否掌握spring cloud相关的一系列组件，这方面的人才也需要。</p>
-                                <p class="reply-time">2018-08-28 20:41</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  专栏上一期，我给你讲述了什么是微服务，以及微服务架构的由来。简单回顾一下，微服务就是将庞杂臃肿的单体应用拆分成细粒度的服务，独立部署，并交给各个中小团队来负责开发、测试、上线和运维整个生命周期。
+                </p>
+                <p><strong>那么到底什么时候应该拆分单体应用？拆分单体应用有哪些标准可依呢？</strong></p>
+                <p>
+                  为了解答这两个问题，今天我将通过具体案例来阐述，希望你能够学会<span class="orange"
+                    >单体应用拆分成微服务的正确姿势</span
+                  >。
+                </p>
+                <h2>什么时候进行服务化拆分？</h2>
+                <p>
+                  从我所经历过的多个项目来看，项目第一阶段的主要目标是快速开发和验证想法，证明产品思路是否可行。这个阶段功能设计一般不会太复杂，开发采取快速迭代的方式，架构也不适合过度设计。所以将所有功能打包部署在一起，集中地进行开发、测试和运维，对于项目起步阶段，是最高效也是最节省成本的方式。当可行性验证通过，功能进一步迭代，就可以加入越来越多的新特性。
+                </p>
+                <p>
+                  比如做一个社交App，初期为了快速上线，验证可行性，可以只开发首页信息流、评论等基本功能。产品上线后，经过一段时间的运营，用户开始逐步增多，可行性验证通过，下一阶段就需要进一步增加更多的新特性来吸引更多的目标用户，比如再给这个社交App添加个人主页显示、消息通知等功能。
+                </p>
+                <p>
+                  一般情况下，这个时候就需要大规模地扩张开发人员，以支撑多个功能的开发。如果这个时候继续采用单体应用架构，多个功能模块混杂在一起开发、测试和部署的话，就会导致不同功能之间相互影响，一次打包部署需要所有的功能都测试OK才能上线。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  不仅如此，多个功能模块混部在一起，对线上服务的稳定性也是个巨大的挑战。比如A开发的一个功能由于代码编写考虑不够全面，上线后产生了内存泄漏，运行一段时间后进程异常退出，那么部署在这个服务池中的所有功能都不可访问。一个经典的案例就是，曾经有一个视频App，因为短时间内某个付费视频访问量巨大，超过了服务器的承载能力，造成了这个视频无法访问。不幸的是，这个网站付费视频和免费视频的服务部署在一起，也波及了免费视频，几乎全站崩溃。
+                </p>
+                <p>
+                  根据我的实际项目经验，一旦单体应用同时进行开发的人员超过10人，就会遇到上面的问题，这个时候就该考虑进行服务化拆分了。
+                </p>
+                <h2>服务化拆分的两种姿势</h2>
+                <p>
+                  那么服务化拆分具体该如何实施呢？一个最有效的手段就是将不同的功能模块服务化，独立部署和运维。以前面提到的社交App为例，你可以认为首页信息流是一个服务，评论是一个服务，消息通知是一个服务，个人主页也是一个服务。
+                </p>
+                <p>
+                  这种服务化拆分方式是<strong>纵向拆分</strong>，是从业务维度进行拆分。标准是按照业务的关联程度来决定，关联比较密切的业务适合拆分为一个微服务，而功能相对比较独立的业务适合单独拆分为一个微服务。
+                </p>
+                <p>
+                  还有一种服务化拆分方式是<strong>横向拆分</strong>，是从公共且独立功能维度拆分。标准是按照是否有公共的被多个其他服务调用，且依赖的资源独立不与其他业务耦合。
+                </p>
+                <p>
+                  继续以前面提到的社交App举例，无论是首页信息流、评论、消息箱还是个人主页，都需要显示用户的昵称。假如用户的昵称功能有产品需求的变更，你需要上线几乎所有的服务，这个成本就有点高了。显而易见，如果我把用户的昵称功能单独部署成一个独立的服务，那么有什么变更我只需要上线这个服务即可，其他服务不受影响，开发和上线成本就大大降低了。
+                </p>
+                <h2>服务化拆分的前置条件</h2>
+                <p>
+                  一般情况下，业务系统引入新技术就必然会带来架构的复杂度提升，在具体决策前，你先要认识到新架构会带来哪些新的问题，这些问题你和你的团队是否能够解决？如何解决？是自己投入人力建设，还是采用业界开源方案？
+                </p>
+                <p>下面几个问题，是从单体应用迁移到微服务架构时必将面临也必须解决的。</p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong>服务如何定义</strong
+                      >。对于单体应用来说，不同功能模块之前相互交互时，通常是以类库的方式来提供各个模块的功能。对于微服务来说，每个服务都运行在各自的进程之中，应该以何种形式向外界传达自己的信息呢？答案就是接口，无论采用哪种通讯协议，是HTTP还是RPC，服务之间的调用都通过接口描述来约定，约定内容包括接口名、接口参数以及接口返回值。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>服务如何发布和订阅</strong
+                      >。单体应用由于部署在同一个WAR包里，接口之间的调用属于进程内的调用。而拆分为微服务独立部署后，服务提供者该如何对外暴露自己的地址，服务调用者该如何查询所需要调用的服务的地址呢？这个时候你就需要一个类似登记处的地方，能够记录每个服务提供者的地址以供服务调用者查询，在微服务架构里，这个地方就是注册中心。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>服务如何监控</strong
+                      >。通常对于一个服务，我们最关心的是QPS（调用量）、AvgTime（平均耗时）以及P999（99.9%的请求性能在多少毫秒以内）这些指标。这时候你就需要一种通用的监控方案，能够覆盖业务埋点、数据收集、数据处理，最后到数据展示的全链路功能。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>服务如何治理</strong
+                      >。可以想象，拆分为微服务架构后，服务的数量变多了，依赖关系也变复杂了。比如一个服务的性能有问题时，依赖的服务都势必会受到影响。可以设定一个调用性能阈值，如果一段时间内一直超过这个值，那么依赖服务的调用可以直接返回，这就是熔断，也是服务治理最常用的手段之一。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>故障如何定位</strong
+                      >。在单体应用拆分为微服务之后，一次用户调用可能依赖多个服务，每个服务又部署在不同的节点上，如果用户调用出现问题，你需要有一种解决方案能够将一次用户请求进行标记，并在多个依赖的服务系统中继续传递，以便串联所有路径，从而进行故障定位。
+                    </p>
+                  </li>
                 </ul>
+                <p>
+                  针对上述问题，你必须有可行的解决方案之后，才能进一步进行服务化拆分。专栏后面的文章，我会给你逐一讲解相应的解决方案。
+                </p>
+                <h2>总结</h2>
+                <p>无论是纵向拆分还是横向拆分，都是将单体应用庞杂的功能进行拆分，抽离成单独的服务部署。</p>
+                <p>
+                  但并不是说功能拆分的越细越好，过度的拆分反而会让服务数量膨胀变得难以管理，因此找到符合自己业务现状和团队人员技术水平的拆分粒度才是可取的。我建议的标准是按照每个开发人员负责不超过3个大的服务为标准，毕竟每个人的精力是有限的，所以在拆分微服务时，可以按照开发人员的总人数来决定。
+                </p>
+                <h2>思考题</h2>
+                <p>
+                  想想你现在的业务场景，如果是单体应用的话，是否需要进行服务化拆分？如果需要的话，你觉得纵向拆分还是横向拆分合适？具体可以拆分到什么粒度？
+                </p>
+                <p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/d4/c2/910d231e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">oddrock</span></div>
+                  <div class="bd">
+                    我现在对拆分的考量：<br />一是业务维度聚类，业务和数据关系密切的应该放在一起。<br />二是功能维度聚类，公共功能聚合为一个服务。<br />三是人员聚类，这是个实际中的考量，如果某几个业务就是这几个人比较熟，那么最好放在一起，未来开发部署都好办。<br />四是性能聚类，性能要求高的并发大的和性能要求低的并发小的，要分开为不同的服务，这样部署和运行都独立，好维护。<br />还请老师指教
+                    <br />
+                  </div>
+                  <span class="time">2018-08-27 17:36</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">总结的很好，看得出来属于业务经验很丰富的。😁</p>
+                    <p class="reply-time">2018-08-28 20:35</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/0c/c5/2f59fe5d.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">唐伯虎点蚊香</span></div>
+                  <div class="bd">纵向拆分和横向拆分感觉还是不太理解 <br /></div>
+                  <span class="time">2018-08-25 09:38</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/75/9b/e226f023.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">日拱一卒</span></div>
+                  <div class="bd">
+                    关于服务拆分策略，我理解在实际工作中应该是横向和纵向相结合的方式:<br />1.
+                    首先收集整理公用的模块，将其进行服务化处理，这是横向拆分。<br />2.
+                    其次根据不同业务之间的耦合程度，将相对独立的服务拆分到不同的服务中，这属于纵向拆分。<br /><br />最后的微服务列表中，既有被其他微服务使用的公共服务，也有彼此独立运行的业务服务。<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-08-26 09:16</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      对，实际业务中这两种拆分方式一般是相互结合使用的，如果业务比较多分散，适合做纵向拆分。如果多个业务之间有公共模块耦合，适合把公共模块拆分出来，适合做横向拆分。
+                    </p>
+                    <p class="reply-time">2018-08-28 20:38</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/3f/b7/0d8b5431.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">snakorse</span></div>
+                  <div class="bd">还有必须要解决的一个问题是 拆分后带来的跨服务事务的一致性问题 <br /></div>
+                  <span class="time">2018-08-25 20:33</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/bb/28/914b5664.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">jogin</span></div>
+                  <div class="bd">
+                    看评论感觉好多人不需要微服务。<br />1.业务复杂度问题单体应用没能梳理清楚，微服务也搞不懂定。<br />2.人手太少，微服务只会增加系统复杂度，运维成本，大家不要看到把原先的函数调用改成接口调用，没真正了解服务拆分后带来的系统复杂度。<br />3.系统设计问题，代码写的乱，开发流程问题，不是微服务能解决的。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 19:34</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对，微服务只能解决单体膨胀后的痛，但也会带来架构复杂性，要权衡利弊</p>
+                    <p class="reply-time">2018-08-27 11:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/6f/a8/c1625c9b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">常玉棋</span></div>
+                  <div class="bd">
+                    我觉得目前单体能搞定的话就不要为了拆分而拆分，因为拆分后涉及到的问题有可能会让现有人员手忙脚乱，最好等做好了技术和人员准备再拆分。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 08:00</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是这样的</p>
+                    <p class="reply-time">2018-08-28 20:41</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/68/c0/178a5b16.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">科大大👏🏻</span></div>
+                  <div class="bd">
+                    当公司技术人员不足时就没必要考虑微服务了，好好做好单体架构，但是做的同时也要考虑未来有可能过渡到微服务，所以如果明确了以后会变成微服务的话单体架构有没有什么设计标准呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 08:54</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/04/18/07ee18ad.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">明天更美好</span></div>
+                  <div class="bd">
+                    我们是单体应用，一共22个接口，但是有一个接口并发巨大，二期势必拆分微服务架构。我觉得按照功能进行垂直拆分比较合适，我们之前有17个开发人员，现在裁员就剩下4个。希望胡老师给个建议
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 10:45</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">4个人搞微服务，有没有基础架构人员？没有就算了吧……</p>
+                    <p class="reply-time">2018-08-27 11:54</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/0a/61/1d79376b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">🤕 ～ 😮</span></div>
+                  <div class="bd">
+                    横向拆分:把一些不会和其他主业务有依赖的功能拆分出来，最典型的就是common。<br />纵向拆分:按照业务来拆分，比如用户访问一个商城，从访问到下单成功会调用很多服务，我们可以把用户登录做一个服务，商城首页以及商品信息做一个服务，购物车模块是一个服务，支付模块又是另一个服务，这样整个商城都是微服务架构，不管哪个单独的服务出现问题，都不会影响别的服务，方便于技术人员最快定位问题，解决问题。<br />准确来说，一个项目里边是横向和纵向都有的，并不冲突，微服务带给我们的好处有很多，但具体能不能使用微服务还要根据具体的项目和团队来决定。<br />(以上拆分仅供举例参考，具体拆分视项目而定)
+                    <br />
+                  </div>
+                  <span class="time">2018-08-26 04:50</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对，视具体项目而定</p>
+                    <p class="reply-time">2018-08-27 11:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/37/9c/4c56ff47.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">丢</span></div>
+                  <div class="bd">
+                    实际项目通常是横向和纵向拆分相结合，公共的服务单独拆分出来，然后上层业务按功能模块拆分 <br />
+                  </div>
+                  <span class="time">2018-08-28 14:18</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Geek_8d2caa</span></div>
+                  <div class="bd">
+                    开始是10多人的团队，对业务进行了拆分，上线后，人员陆续离职，现在是6个人背着将近30个微服务，开发一个功能点，基本上所有人都得上，就演变成天天开会还解决不了问题，效率奇低……所以，有没有微服务退回到单体的做法？
+                    <br />
+                  </div>
+                  <span class="time">2018-08-28 10:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">可以适当做服务合并</p>
+                    <p class="reply-time">2018-08-28 20:04</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/f5/1f/577265ea.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">少帅</span></div>
+                  <div class="bd">
+                    是否需要拆分要看目前公司项目的具体的情况，如果现有架构无法满足当前业务发展速度，比如构建一次要半天，上一次线经常搞通宵，牵一发而动全身，那么这个时候可以考虑一下微服务，拆微服务势必会提高运维、问题追踪、分布式事务等复杂度，所以微服务整个技术栈都要考虑进去
+                    <br />
+                  </div>
+                  <span class="time">2018-08-26 11:53</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯，搞不定微服务的技术栈就不要往这个坑里跳</p>
+                    <p class="reply-time">2018-08-27 11:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/77/79/a0a7c6a6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">🇨🇳光🇨🇳</span></div>
+                  <div class="bd">目前根据业务 拆分出来了两个 独立服务 接口走rpc 调用 还在测试环境验证中！ <br /></div>
+                  <span class="time">2018-08-25 22:28</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/bb/28/914b5664.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">jogin</span></div>
+                  <div class="bd">
+                    没有推行微服务之前，单体应用的业务逻辑拆分，整体系统设计做得好，会给后期服务化改造铺平道路。 <br />
+                  </div>
+                  <span class="time">2018-08-25 19:21</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/0e/c77ad9b1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">eason2017</span></div>
+                  <div class="bd">
+                    前期，可以稍微粗粒度一些。先进行纵向拆分，把基础功能（用户系统）独立部署以维护。其它业务功能关联不紧密的可以独立部署，可以看这些业务在公司发展方向的重要性<br />后面，可以看清哪些功能是其他业务系统一定要调用的，同时，自身系统内也有其他繁杂的功能，那么可以进行横向切分，把被频繁调用的服务抽象并独立部署。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 17:38</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对</p>
+                    <p class="reply-time">2018-08-27 11:51</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/52/53/a30b1eb2.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">lovedebug</span></div>
+                  <div class="bd">微服务对运维和运维架构要求很高，没有运维就搞微服务就是给自己埋坑。 <br /></div>
+                  <span class="time">2018-08-28 14:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是的</p>
+                    <p class="reply-time">2018-08-28 20:03</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/f7/09/3e6a0c26.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">🐢先生</span></div>
+                  <div class="bd">
+                    我们不要为了微服务而做微服务，做了服务拆分，我们会投入更大。个人觉得，做了服务拆分后，带来的最大的挑战应该是分布式事务，这个原因也导致了我们微服务的难落地。另外的话，大部分的初创公司不适合，需要结合公司自身的人员储备和业务情况等来综合考虑。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-27 07:56</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是的</p>
+                    <p class="reply-time">2018-08-27 11:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/bb/28/914b5664.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">jogin</span></div>
+                  <div class="bd">
+                    什么时候推行微服务，不同技术栈有区别，之前最多的一次4，50个php技术维护一个单体应用，整个系统结构，业务模块之间划分比较清晰，不同小组负责不同模块，开发上采用多版本并行开发，每个版本7，8个技术。这时候整个团队开发效率上没有太大问题，架构组把控非常好。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 19:18</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/05/97/b83ebf66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">softtwilight</span></div>
+                  <div class="bd">
+                    横向拆分我的理解是就像aop，把共用但又跟其他部分不太相关的抽离出来，而纵向拆分是把高没聚的拆分出来
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 10:57</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Santo</span></div>
+                  <div class="bd">
+                    我们现在也是单体应用，目前人员差不多只有我一个可以进行重构。我现在的思路是这样的，所有新开发的服务采用httpclient的形式调用用户的部分接口，这样的话慢慢的一块一块的抽离，然后想在做完第一个服务之后采用springcloud+httpclient，大概10几个微服务，老师这样合理不？
+                    <br />
+                  </div>
+                  <span class="time">2018-08-25 09:07</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      拆分是一方面，是否用微服务改造，还要看能否掌握spring cloud相关的一系列组件，这方面的人才也需要。
+                    </p>
+                    <p class="reply-time">2018-08-28 20:41</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

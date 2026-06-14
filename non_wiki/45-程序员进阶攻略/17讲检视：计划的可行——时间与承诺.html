@@ -1,314 +1,1516 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                17讲检视：计划的可行——时间与承诺
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/17/7c/17d8b597d17f7aa2e6b335d85a5e617c.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">17讲检视：计划的可行——时间与承诺</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/17/7c/17d8b597d17f7aa2e6b335d85a5e617c.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>有了愿景，也有了具体的计划，但经常还是一年过去，发现实际和计划相比，总是有差距。是的，这是普遍现象，你可能并不孤独和例外：统计数字表明，在年初制定了计划的人中，只有8% 实现了这些计划。</p>
-<p>老实说，我回顾了近几年的个人年度计划完成情况，也只完成了约 70% 的样子。但我个人把这70% 的比例算作“完成”，毕竟一年中谁还没个变化呢？于是，我把另外的30%留给变化，毕竟一成不变地按计划来的人生，感觉太过枯燥，有 30% 的变化还可能会碰到 “惊喜”；而如果 70% 都是变化，那可能就是 “惊吓”了。</p>
-<p>程序员啊，有一个特点就是偏乐观，所以对于计划的估计总是过于乐观，乐观地期待 “惊喜”，然后又“惊吓”地接受现实。那如何才能让计划更具可行性呢？又可以从哪些方面来检视呢？</p>
-<h2>时间与周期</h2>
-<p>计划的第一个影响因素是和时间有关。</p>
-<p>在过去的人类社会生活中，人们已经习惯了以年为单位来进行时间分界，所以我们都会习惯于做年度计划。在个人的时间感觉中，一年，似乎也算是挺长一段时间了，但在过去这么些年的计划与实践中，我学到的经验是：做计划不能靠模糊的感觉，而是需要精确理性的计算。</p>
-<p>先来计算下，一年，我们到底有多少时间？一个正常参与社会工作的人，时间大约会被平均分成三份。</p><!-- [[[read_end]]] -->
-<p>其中的 1/3（约 8 小时）会被睡过去了，这里假设一个正常人的生理睡眠需求大约 8 小时。虽然有一些讲述成功人士关于睡眠的说法，比如：“你见过凌晨四点钟的…”，似乎在暗示他们之所以成功，是因为每天都很努力只睡四个小时。但这个说法并没有提每天几点入睡，只是说四点起床而已。而我写这篇文字也是在周末的早晨五点开始的，但前一晚十点之前便睡了过去，至少我对睡眠时间的要求是没法长期低于 8 小时的。</p>
-<p>另一个 1/3 你会贡献到和你的工作有关的各种事项中，虽然国家法律规定了每周只用上 5 天班，每天 8 小时，似乎用不了 1/3 的时间。但如果你的工作不是那种 “混日子” 的清闲工作的话，实际占用的时间基本总会多于法律规定的，至少程序员这份工作肯定是这样了。不过值得庆幸的是程序员的工作是可以随着时间积累起相应的知识、技能和经验，那么这份时间投入就是很有价值的了，随着时间积累，慢慢你就会成为工作领域内的行家。</p>
-<p>最后的 1/3 就是我们常说的决定人生的业余 8 小时。可能有人会说我根本就没有业余 8 小时，天天都在加班。实际上工作和业余的 8 小时有时不太那么具有明显的分界线。程序员的工作，是一份知识性工作，很可能工作时间你在学习，也有很多情况是你在业余时间处理工作的事务。对于严格区分工作和业余时间的思维，我碰到过一种人：上厕所都要忍着，到了公司利用工作时间再去，以达成变相在工作时间偷懒的感觉。但，其实时间总是自己的。</p>
-<p>一年 52 周，会有一些法定的长假和个人的休假安排，我们先扣除两周用于休假。那么一天业余 8 小时，一年算 350 天，那么一年总共有 2800 小时的业余时间。但实际这 2800 小时里还包括了你全部的周末和一些零星的假期，再预扣除每周 8 小时用于休闲娱乐、处理各种社会关系事务等等，那么你还剩下 2400 小时。</p>
-<p>这2400 小时就是你可以比较自由地用来安排的全部业余时间了，这就是理性计算的结果。这样看来，一年实际能用来计划的时间并不多，需要仔细挑选合理的事项，放进计划表，并真正地执行。而实际，一年中你还需要把时间合理地分配在 “短、中、长” 三种不同周期的计划上。</p>
-<ul>
-<li>短期：完成事项，获取结果，得到即时反馈与成就感（比如：写这个专栏）。</li>
-<li>中期：学习技能，实践经验，积累能力（比如：学一门语言）。</li>
-<li>长期：建立信念，达成愿景（比如：成长为一名架构师）。</li>
-</ul>
-<p>你可以从时间的维度，看看你计划的时间安排是否合理分配在了不同周期的计划事项上。如果计划的事项和周期匹配错了，计划的执行就容易产生挫败感从而导致半途而废，曾经的我就犯过这样的错误。</p>
-<p>这个错误就是在学习英语的计划上。两年多以前，工作十年后的我又重启了英语提升计划，希望能通过每天 3 ～ 4 小时的英语学习，一年内使自己的英语听读都能达到接近汉语的水平。但实际情况是，我用了两年（接近 1500 小时吧）才勉强比刚从学校毕业时上了一个台阶，离母语水平，我不知道前面还有多少个台阶。</p>
-<p>英语提升计划，我搞错了周期，一度颇受打击。英语技能，实际就是一个 10000 小时技能，虽然我是从初中开始学习，然后至大学毕业拿到六级证，差不多有十年时间。但实际真正有效的学习时间有多少呢？假如每天一节课算 1 小时，一周 6 小时，每年 50 周，十年上课下来也就 3000 小时，再考虑为了考试自己的主动复习时间，再加 2000 小时，那么过去在学校总共投入了 5000 小时。</p>
-<p>但从学校毕业后的十年，实际工作环境中，除了技术英语阅读，我几乎很少再接触英语了。而语言基本就是用进废退的技能，所以再重启学习提升计划时，我对此计划的周期完全估算错误，最后得到的效果也远低于我的预期。其实这应该是一个长期的计划，定一个合理的愿景，循序渐进成为一名熟练的英语使用者。</p>
-<p>要让计划可行，就是<strong>选择合适的事项，匹配正确的周期，建立合理的预期，得到不断进步的反馈</strong>。</p>
-<h2>兴趣与承诺</h2>
-<p>既然时间有限，那该如何选择有限的事项，才可能更有效地被执行下去呢？</p>
-<p>其中有一个很重要的因素：兴趣。有的人兴趣可能广泛些，有的人兴趣可能少一些，但每个人多多少少都会有些个人的兴趣爱好。对于兴趣广泛的人来说，这就有个选择取舍问题，若不取舍，都由着兴趣来驱动，计划个十几、二十件事，每样都浅尝辄止。实际从理性上来说价值不大，从感性上来说只能算是丰富了个人生活吧。</p>
-<p>彼得·蒂尔在《从 0 到 1 》这本书里批判了现在的一个观点：过程胜于实效。他解释说：“当人们缺乏一些具体的计划去执行时，就会用很正式的规则来建立一些可做的事情选项的组合。就像今天美国中学里一样，鼓励学生参与各种各样的课外活动，表现的似乎全面发展。到了大学，再准备好一份看似非常多元化的简历来应对完全不确定的将来。言外之意，不管将来如何变化，都在这个组合内能找到可以应对的准备。但实际情况是，他们在任何一个特定方面都没有准备好。”</p>
-<p>因此，在有限的学校生涯中，你就得做出选择。就好像我大学那时，学校开了几十门（记得大概有 45 门）各类专业课，这就是一个组合。但其中真正重要的课程实际只有个位数，重心应该放在少数课程上，其他的只起到一个开阔眼界和凑够学分的作用。</p>
-<p>几十门课是学校给的选项，你可以从中做出选择。那应该选择哪些事项放进计划表呢？我建议你可以从兴趣作为出发点，因为这样更容易启动；而对于中期目标，像学习提升一项技能，只靠兴趣是不足以驱动去有效执行的，甚至达不到预期效果。关于此，吴军有一个观点：</p>
-<blockquote>
-<p>凡事从 0 分做到 50 分，靠的是直觉和经验；从 50 分到 90 分，就要靠技艺了。</p>
-</blockquote>
-<p>凭借兴趣驱动的尝试，结合直觉和经验就能达成 50 分的效果，而要到 90 分就需要靠技艺了。而技艺的习得是靠刻意练习的，而刻意练习通常来说都不太有趣。要坚持长期的刻意练习，唯一可靠的办法就是对其做出郑重的承诺。</p>
-<p>通过兴趣来启动，但要靠承诺才能有效地执行下去。感兴趣和做承诺的差别在于，只是感兴趣的事，到了执行的时候，总可以给自己找出各种各样的原因、借口或外部因素的影响去延期执行；而承诺就是这件事是每天的最高优先级，除非不可抗力的因素，都应该优先执行。</p>
-<p>比如，写作本是我的兴趣，但接下 “极客时间” 的专栏后，这就是承诺了，所以为此我就只能放弃很多可以用于休闲、娱乐的时间。</p>
-<p><strong>兴趣让计划更容易启动，而承诺让计划得以完成。</strong></p>
-<p>而在现实生活中，让计划不可行或半途而废的常见错误有：</p>
-<ul>
-<li>以为一年之内自己有足够多的自由支配时间；</li>
-<li>对计划的事情误判了其开发与成长的周期；</li>
-<li>兴趣很多，一直在尝试，却不见有结果。</li>
-</ul>
-<p>放进计划表的事项是你精心识别、选择并做出的承诺，而承诺也是一种负担，若承诺太多，负担可能就太重，会让你感觉自己不堪重负，最后就可能放弃了，到头来又是一场空。其实，一年下来，重要的不是开启了多少计划，而是完成了几个计划。</p>
-<p>所以，可行的计划应该是：<strong>有限的时间，适合的周期，兴趣的选择，郑重的承诺</strong>。</p>
-<hr />
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李正阳Lee</span>
-                            </div>
-                            <div class="bd">教师节快乐😊 <br></div>
-                            <span class="time">2018-09-10 09:32</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^</p>
-                                <p class="reply-time">2018-09-10 19:31</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">首先，祝胡哥，教师节快乐！迟到总比不到好！<br>哈哈，感觉这个专栏是为我量身定制的，现在正好也在思索这些事情。<br>感觉，听胡哥的专栏，能提高一些自己认知的高度，同样是计划、学习、成长，有些事情自己好像从来没有想过，也不知道还可以这么想。<br>听过来人，讲自己是怎么一步步牛逼起来的，感觉自己也可以，按部就班的成长起来。<br>当然，成长的疼是没法不去感受的，否则哪来的挣脱出来的劲力和技巧呢？ <br></div>
-                            <span class="time">2018-09-11 09:41</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^，成长的痛，这个比喻好呀</p>
-                                <p class="reply-time">2018-09-11 19:01</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">心得如下：<br><br>1，计划的执行需要两个重要维度，时间和承诺<br><br>2，扣除基本的生活和工作，一年的时间大约是2400小时<br><br>3，补充：时间很少，使用时间是个大学问（来自知识就是力量）<br>锚定时间，节约时间<br>多元收益，同一份时间获得多种价值<br>复制时间，一份时间支出，获取多份的时间收益<br>营造预期，营造别人对你未来的预期，然后转换成当下的收益<br>购买时间，购买别人的时间，把自己的时间花在更重要的事情上<br><br>4，承诺，首先要选择，你的目标。all in 他。 <br></div>
-                            <span class="time">2018-09-10 21:51</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">关于时间补充的部分，都是非常难且复杂的题目了，加油💪</p>
-                                <p class="reply-time">2018-09-11 18:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">教师节快乐，英语真的是个10000小时的活。。。 <br></div>
-                            <span class="time">2018-09-10 13:53</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是呀</p>
-                                <p class="reply-time">2018-09-10 19:18</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李正阳Lee</span>
-                            </div>
-                            <div class="bd">可行的计划应该是：<br><br>有限的时间<br>利用好业余八小时， 积水成渊，蛟龙生焉。<br><br>适合的周期<br>把时间分配到不同周期的计划上。选择周期时，要合理评估计划的量级和自己的能力。计划和实际实力不匹配时容易产生挫败感，影响任务完成。<br><br>兴趣的选择<br>通过有兴趣来开启计划。（注意力是有限的，计划数量要少、精）<br><br>郑重的承诺<br>人是有惰性的，单靠兴趣很难支撑计划执行。可以建立承诺，倒逼完成计划。比如，每周一篇技术文章，每日阅读打卡等。 <br></div>
-                            <span class="time">2018-09-10 09:25</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">认清现实的限制，理解自己的边界👍</p>
-                                <p class="reply-time">2018-09-10 19:31</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">liangjf</span>
-                            </div>
-                            <div class="bd">看了这篇，获益良多，偶然发现毕业到现在虽然一直保持学习，但是涉猎的方向比较广，最后好像还是空荡荡的，。接下来一定要制定好计划表，有目的，同时定下短中长期目标，制定好职业方向，不让自己忙在“忙” 中 <br></div>
-                            <span class="time">2018-09-11 21:12</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，太散就失去了力度</p>
-                                <p class="reply-time">2018-09-12 18:39</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7a/42/e6477279.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ben001</span>
-                            </div>
-                            <div class="bd">能分享你学英语的经历吗？ <br></div>
-                            <span class="time">2018-09-10 23:42</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">失败的经历😂</p>
-                                <p class="reply-time">2018-09-11 18:51</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/47/bd/8b3c7bcb.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Bob.Chen</span>
-                            </div>
-                            <div class="bd">还可以在完成一些短期或者中期目标之后给自己一些适当的激励 <br></div>
-                            <span class="time">2018-09-10 09:34</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的，这属于小技巧😄</p>
-                                <p class="reply-time">2018-09-10 19:20</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/66/2a/3bac3cec.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">sunny</span>
-                            </div>
-                            <div class="bd">嗯，计划应对变化，😀。计划不在多，而在于实现了几个。决定从下一年开始也给自己定计划。😆 <br></div>
-                            <span class="time">2018-09-10 08:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">离下一年还有三个月多哦😏</p>
-                                <p class="reply-time">2018-09-10 19:28</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ywengirl</span>
-                            </div>
-                            <div class="bd">取舍，做少量的承诺。不能失信，不准失信！ <br></div>
-                            <span class="time">2018-11-09 08:26</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/c0/f0/1aabc056.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Jiantao</span>
-                            </div>
-                            <div class="bd">选择太多，阻碍执行啊 <br></div>
-                            <span class="time">2018-09-12 08:45</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">所以要取舍，聚焦啊</p>
-                                <p class="reply-time">2018-09-12 18:39</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  有了愿景，也有了具体的计划，但经常还是一年过去，发现实际和计划相比，总是有差距。是的，这是普遍现象，你可能并不孤独和例外：统计数字表明，在年初制定了计划的人中，只有8%
+                  实现了这些计划。
+                </p>
+                <p>
+                  老实说，我回顾了近几年的个人年度计划完成情况，也只完成了约 70% 的样子。但我个人把这70%
+                  的比例算作“完成”，毕竟一年中谁还没个变化呢？于是，我把另外的30%留给变化，毕竟一成不变地按计划来的人生，感觉太过枯燥，有
+                  30% 的变化还可能会碰到 “惊喜”；而如果 70% 都是变化，那可能就是 “惊吓”了。
+                </p>
+                <p>
+                  程序员啊，有一个特点就是偏乐观，所以对于计划的估计总是过于乐观，乐观地期待
+                  “惊喜”，然后又“惊吓”地接受现实。那如何才能让计划更具可行性呢？又可以从哪些方面来检视呢？
+                </p>
+                <h2>时间与周期</h2>
+                <p>计划的第一个影响因素是和时间有关。</p>
+                <p>
+                  在过去的人类社会生活中，人们已经习惯了以年为单位来进行时间分界，所以我们都会习惯于做年度计划。在个人的时间感觉中，一年，似乎也算是挺长一段时间了，但在过去这么些年的计划与实践中，我学到的经验是：做计划不能靠模糊的感觉，而是需要精确理性的计算。
+                </p>
+                <p>先来计算下，一年，我们到底有多少时间？一个正常参与社会工作的人，时间大约会被平均分成三份。</p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  其中的 1/3（约 8 小时）会被睡过去了，这里假设一个正常人的生理睡眠需求大约 8
+                  小时。虽然有一些讲述成功人士关于睡眠的说法，比如：“你见过凌晨四点钟的…”，似乎在暗示他们之所以成功，是因为每天都很努力只睡四个小时。但这个说法并没有提每天几点入睡，只是说四点起床而已。而我写这篇文字也是在周末的早晨五点开始的，但前一晚十点之前便睡了过去，至少我对睡眠时间的要求是没法长期低于
+                  8 小时的。
+                </p>
+                <p>
+                  另一个 1/3 你会贡献到和你的工作有关的各种事项中，虽然国家法律规定了每周只用上 5 天班，每天 8
+                  小时，似乎用不了 1/3 的时间。但如果你的工作不是那种 “混日子”
+                  的清闲工作的话，实际占用的时间基本总会多于法律规定的，至少程序员这份工作肯定是这样了。不过值得庆幸的是程序员的工作是可以随着时间积累起相应的知识、技能和经验，那么这份时间投入就是很有价值的了，随着时间积累，慢慢你就会成为工作领域内的行家。
+                </p>
+                <p>
+                  最后的 1/3 就是我们常说的决定人生的业余 8 小时。可能有人会说我根本就没有业余 8
+                  小时，天天都在加班。实际上工作和业余的 8
+                  小时有时不太那么具有明显的分界线。程序员的工作，是一份知识性工作，很可能工作时间你在学习，也有很多情况是你在业余时间处理工作的事务。对于严格区分工作和业余时间的思维，我碰到过一种人：上厕所都要忍着，到了公司利用工作时间再去，以达成变相在工作时间偷懒的感觉。但，其实时间总是自己的。
+                </p>
+                <p>
+                  一年 52 周，会有一些法定的长假和个人的休假安排，我们先扣除两周用于休假。那么一天业余 8 小时，一年算
+                  350 天，那么一年总共有 2800 小时的业余时间。但实际这 2800
+                  小时里还包括了你全部的周末和一些零星的假期，再预扣除每周 8
+                  小时用于休闲娱乐、处理各种社会关系事务等等，那么你还剩下 2400 小时。
+                </p>
+                <p>
+                  这2400
+                  小时就是你可以比较自由地用来安排的全部业余时间了，这就是理性计算的结果。这样看来，一年实际能用来计划的时间并不多，需要仔细挑选合理的事项，放进计划表，并真正地执行。而实际，一年中你还需要把时间合理地分配在
+                  “短、中、长” 三种不同周期的计划上。
+                </p>
+                <ul>
+                  <li>短期：完成事项，获取结果，得到即时反馈与成就感（比如：写这个专栏）。</li>
+                  <li>中期：学习技能，实践经验，积累能力（比如：学一门语言）。</li>
+                  <li>长期：建立信念，达成愿景（比如：成长为一名架构师）。</li>
                 </ul>
+                <p>
+                  你可以从时间的维度，看看你计划的时间安排是否合理分配在了不同周期的计划事项上。如果计划的事项和周期匹配错了，计划的执行就容易产生挫败感从而导致半途而废，曾经的我就犯过这样的错误。
+                </p>
+                <p>
+                  这个错误就是在学习英语的计划上。两年多以前，工作十年后的我又重启了英语提升计划，希望能通过每天 3 ～ 4
+                  小时的英语学习，一年内使自己的英语听读都能达到接近汉语的水平。但实际情况是，我用了两年（接近 1500
+                  小时吧）才勉强比刚从学校毕业时上了一个台阶，离母语水平，我不知道前面还有多少个台阶。
+                </p>
+                <p>
+                  英语提升计划，我搞错了周期，一度颇受打击。英语技能，实际就是一个 10000
+                  小时技能，虽然我是从初中开始学习，然后至大学毕业拿到六级证，差不多有十年时间。但实际真正有效的学习时间有多少呢？假如每天一节课算
+                  1 小时，一周 6 小时，每年 50 周，十年上课下来也就 3000 小时，再考虑为了考试自己的主动复习时间，再加
+                  2000 小时，那么过去在学校总共投入了 5000 小时。
+                </p>
+                <p>
+                  但从学校毕业后的十年，实际工作环境中，除了技术英语阅读，我几乎很少再接触英语了。而语言基本就是用进废退的技能，所以再重启学习提升计划时，我对此计划的周期完全估算错误，最后得到的效果也远低于我的预期。其实这应该是一个长期的计划，定一个合理的愿景，循序渐进成为一名熟练的英语使用者。
+                </p>
+                <p>
+                  要让计划可行，就是<strong>选择合适的事项，匹配正确的周期，建立合理的预期，得到不断进步的反馈</strong>。
+                </p>
+                <h2>兴趣与承诺</h2>
+                <p>既然时间有限，那该如何选择有限的事项，才可能更有效地被执行下去呢？</p>
+                <p>
+                  其中有一个很重要的因素：兴趣。有的人兴趣可能广泛些，有的人兴趣可能少一些，但每个人多多少少都会有些个人的兴趣爱好。对于兴趣广泛的人来说，这就有个选择取舍问题，若不取舍，都由着兴趣来驱动，计划个十几、二十件事，每样都浅尝辄止。实际从理性上来说价值不大，从感性上来说只能算是丰富了个人生活吧。
+                </p>
+                <p>
+                  彼得·蒂尔在《从 0 到 1
+                  》这本书里批判了现在的一个观点：过程胜于实效。他解释说：“当人们缺乏一些具体的计划去执行时，就会用很正式的规则来建立一些可做的事情选项的组合。就像今天美国中学里一样，鼓励学生参与各种各样的课外活动，表现的似乎全面发展。到了大学，再准备好一份看似非常多元化的简历来应对完全不确定的将来。言外之意，不管将来如何变化，都在这个组合内能找到可以应对的准备。但实际情况是，他们在任何一个特定方面都没有准备好。”
+                </p>
+                <p>
+                  因此，在有限的学校生涯中，你就得做出选择。就好像我大学那时，学校开了几十门（记得大概有 45
+                  门）各类专业课，这就是一个组合。但其中真正重要的课程实际只有个位数，重心应该放在少数课程上，其他的只起到一个开阔眼界和凑够学分的作用。
+                </p>
+                <p>
+                  几十门课是学校给的选项，你可以从中做出选择。那应该选择哪些事项放进计划表呢？我建议你可以从兴趣作为出发点，因为这样更容易启动；而对于中期目标，像学习提升一项技能，只靠兴趣是不足以驱动去有效执行的，甚至达不到预期效果。关于此，吴军有一个观点：
+                </p>
+                <blockquote>
+                  <p>凡事从 0 分做到 50 分，靠的是直觉和经验；从 50 分到 90 分，就要靠技艺了。</p>
+                </blockquote>
+                <p>
+                  凭借兴趣驱动的尝试，结合直觉和经验就能达成 50 分的效果，而要到 90
+                  分就需要靠技艺了。而技艺的习得是靠刻意练习的，而刻意练习通常来说都不太有趣。要坚持长期的刻意练习，唯一可靠的办法就是对其做出郑重的承诺。
+                </p>
+                <p>
+                  通过兴趣来启动，但要靠承诺才能有效地执行下去。感兴趣和做承诺的差别在于，只是感兴趣的事，到了执行的时候，总可以给自己找出各种各样的原因、借口或外部因素的影响去延期执行；而承诺就是这件事是每天的最高优先级，除非不可抗力的因素，都应该优先执行。
+                </p>
+                <p>
+                  比如，写作本是我的兴趣，但接下 “极客时间”
+                  的专栏后，这就是承诺了，所以为此我就只能放弃很多可以用于休闲、娱乐的时间。
+                </p>
+                <p><strong>兴趣让计划更容易启动，而承诺让计划得以完成。</strong></p>
+                <p>而在现实生活中，让计划不可行或半途而废的常见错误有：</p>
+                <ul>
+                  <li>以为一年之内自己有足够多的自由支配时间；</li>
+                  <li>对计划的事情误判了其开发与成长的周期；</li>
+                  <li>兴趣很多，一直在尝试，却不见有结果。</li>
+                </ul>
+                <p>
+                  放进计划表的事项是你精心识别、选择并做出的承诺，而承诺也是一种负担，若承诺太多，负担可能就太重，会让你感觉自己不堪重负，最后就可能放弃了，到头来又是一场空。其实，一年下来，重要的不是开启了多少计划，而是完成了几个计划。
+                </p>
+                <p>所以，可行的计划应该是：<strong>有限的时间，适合的周期，兴趣的选择，郑重的承诺</strong>。</p>
+                <hr />
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李正阳Lee</span></div>
+                  <div class="bd">教师节快乐😊 <br /></div>
+                  <span class="time">2018-09-10 09:32</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^</p>
+                    <p class="reply-time">2018-09-10 19:31</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    首先，祝胡哥，教师节快乐！迟到总比不到好！<br />哈哈，感觉这个专栏是为我量身定制的，现在正好也在思索这些事情。<br />感觉，听胡哥的专栏，能提高一些自己认知的高度，同样是计划、学习、成长，有些事情自己好像从来没有想过，也不知道还可以这么想。<br />听过来人，讲自己是怎么一步步牛逼起来的，感觉自己也可以，按部就班的成长起来。<br />当然，成长的疼是没法不去感受的，否则哪来的挣脱出来的劲力和技巧呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-11 09:41</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^，成长的痛，这个比喻好呀</p>
+                    <p class="reply-time">2018-09-11 19:01</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    心得如下：
+                    <br />
+                    <br />1，计划的执行需要两个重要维度，时间和承诺
+                    <br />
+                    <br />2，扣除基本的生活和工作，一年的时间大约是2400小时
+                    <br />
+                    <br />3，补充：时间很少，使用时间是个大学问（来自知识就是力量） <br />锚定时间，节约时间
+                    <br />多元收益，同一份时间获得多种价值 <br />复制时间，一份时间支出，获取多份的时间收益
+                    <br />营造预期，营造别人对你未来的预期，然后转换成当下的收益
+                    <br />购买时间，购买别人的时间，把自己的时间花在更重要的事情上
+                    <br />
+                    <br />4，承诺，首先要选择，你的目标。all in 他。 <br />
+                  </div>
+                  <span class="time">2018-09-10 21:51</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">关于时间补充的部分，都是非常难且复杂的题目了，加油💪</p>
+                    <p class="reply-time">2018-09-11 18:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">教师节快乐，英语真的是个10000小时的活。。。 <br /></div>
+                  <span class="time">2018-09-10 13:53</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是呀</p>
+                    <p class="reply-time">2018-09-10 19:18</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李正阳Lee</span></div>
+                  <div class="bd">
+                    可行的计划应该是：<br /><br />有限的时间<br />利用好业余八小时， 积水成渊，蛟龙生焉。<br /><br />适合的周期<br />把时间分配到不同周期的计划上。选择周期时，要合理评估计划的量级和自己的能力。计划和实际实力不匹配时容易产生挫败感，影响任务完成。<br /><br />兴趣的选择<br />通过有兴趣来开启计划。（注意力是有限的，计划数量要少、精）<br /><br />郑重的承诺<br />人是有惰性的，单靠兴趣很难支撑计划执行。可以建立承诺，倒逼完成计划。比如，每周一篇技术文章，每日阅读打卡等。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-10 09:25</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">认清现实的限制，理解自己的边界👍</p>
+                    <p class="reply-time">2018-09-10 19:31</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">liangjf</span></div>
+                  <div class="bd">
+                    看了这篇，获益良多，偶然发现毕业到现在虽然一直保持学习，但是涉猎的方向比较广，最后好像还是空荡荡的，。接下来一定要制定好计划表，有目的，同时定下短中长期目标，制定好职业方向，不让自己忙在“忙”
+                    中 <br />
+                  </div>
+                  <span class="time">2018-09-11 21:12</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，太散就失去了力度</p>
+                    <p class="reply-time">2018-09-12 18:39</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7a/42/e6477279.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ben001</span></div>
+                  <div class="bd">能分享你学英语的经历吗？ <br /></div>
+                  <span class="time">2018-09-10 23:42</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">失败的经历😂</p>
+                    <p class="reply-time">2018-09-11 18:51</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/47/bd/8b3c7bcb.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Bob.Chen</span></div>
+                  <div class="bd">还可以在完成一些短期或者中期目标之后给自己一些适当的激励 <br /></div>
+                  <span class="time">2018-09-10 09:34</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是的，这属于小技巧😄</p>
+                    <p class="reply-time">2018-09-10 19:20</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/66/2a/3bac3cec.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">sunny</span></div>
+                  <div class="bd">
+                    嗯，计划应对变化，😀。计划不在多，而在于实现了几个。决定从下一年开始也给自己定计划。😆 <br />
+                  </div>
+                  <span class="time">2018-09-10 08:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">离下一年还有三个月多哦😏</p>
+                    <p class="reply-time">2018-09-10 19:28</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ywengirl</span></div>
+                  <div class="bd">取舍，做少量的承诺。不能失信，不准失信！ <br /></div>
+                  <span class="time">2018-11-09 08:26</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/c0/f0/1aabc056.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Jiantao</span></div>
+                  <div class="bd">选择太多，阻碍执行啊 <br /></div>
+                  <span class="time">2018-09-12 08:45</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">所以要取舍，聚焦啊</p>
+                    <p class="reply-time">2018-09-12 18:39</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

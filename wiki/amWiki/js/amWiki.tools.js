@@ -3,20 +3,17 @@
  * @author Tevin
  */
 
-;
 (function (win) {
-
     'use strict';
 
-    return win.tools = {
-
+    return (win.tools = {
         /**
          * @desc 获取url参数
          * @param name {string}
          * @returns {string|null} - 获取的参数
          */
         getURLParameter: function (name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
             if (r != null) {
                 return r[2];
@@ -32,20 +29,22 @@
          * @returns {string} - 编码后的字符串
          */
         simString: function (str, mod) {
-            mod = mod == 'short';  //短字符串
+            mod = mod == 'short'; //短字符串
             var str2 = '';
             var s = '';
             var encodeURI = win.encodeURI;
             for (var i = 0; i < str.length; i++) {
                 s = str.substr(i, 1);
                 if (/[\u4e00-\u9fa5]/.test(s)) {
-                    encodeURI(s).split('%').forEach(function (item) {
-                        if (item == '') {
-                            s = [];
-                        } else {
-                            s.push(parseInt('0x' + item));
-                        }
-                    });
+                    encodeURI(s)
+                        .split('%')
+                        .forEach(function (item) {
+                            if (item == '') {
+                                s = [];
+                            } else {
+                                s.push(parseInt('0x' + item));
+                            }
+                        });
                     if (mod) {
                         str2 += (s[0] + s[1] + s[2]).toString(16).substr(-1, 1);
                     } else {
@@ -71,7 +70,8 @@
                 PADDING = '    ';
             var options = {};
             // remove newline where '{' or '[' follows ':'
-            options.newlineAfterColonIfBeforeBraceOrBracket = options.newlineAfterColonIfBeforeBraceOrBracket === true;
+            options.newlineAfterColonIfBeforeBraceOrBracket =
+                options.newlineAfterColonIfBeforeBraceOrBracket === true;
             // use a space after a colon
             options.spaceAfterColon = options.spaceAfterColon !== false;
             // begin formatting...
@@ -148,7 +148,6 @@
             var second = time.getSeconds();
             second = second <= 9 ? '0' + second : second;
             return year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
-        }
-    }
-
+        },
+    });
 })(window);

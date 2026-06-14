@@ -6,7 +6,8 @@
 
 点击[这里](http://wiki.jikexueyuan.com/project/fend_note/)开始在极客学院 Wiki 阅读！（中国大陆访问速度较快）
 
-前端开发笔记本的 GitHub 项目地址在[这里](https://github.com/li-xinyang/FEND_Note)。如果你觉得这个项目不错，请点击 **Star** 一下，您的支持是我最大的动力。
+前端开发笔记本的 GitHub 项目地址在[这里](https://github.com/li-xinyang/FEND_Note)。如果你觉得这个项目不错，请点击
+**Star** 一下，您的支持是我最大的动力。
 
 <!-- Place this tag where you want the button to render. -->
 
@@ -24,15 +25,15 @@
 
 ### 写作进程
 
-*第一版草稿* 完成时间 1507252244
+_第一版草稿_ 完成时间 1507252244
 
-| 章节   | 名称              | 进程                                |
-| :--- | :-------------- | :-------------------------------- |
-| 第一章  | 页面制作            | ![](http://progressed.io/bar/100) |
-| 第二章  | JavaScript 程序设计 | ![](http://progressed.io/bar/100) |
-| 第三章  | DOM 编程          | ![](http://progressed.io/bar/100) |
-| 第四章  | 页面构架            | ![](http://progressed.io/bar/100) |
-| 第五章  | 前端产品构架          | ![](http://progressed.io/bar/100) |
+| 章节   | 名称                | 进程                              |
+| :----- | :------------------ | :-------------------------------- |
+| 第一章 | 页面制作            | ![](http://progressed.io/bar/100) |
+| 第二章 | JavaScript 程序设计 | ![](http://progressed.io/bar/100) |
+| 第三章 | DOM 编程            | ![](http://progressed.io/bar/100) |
+| 第四章 | 页面构架            | ![](http://progressed.io/bar/100) |
+| 第五章 | 前端产品构架        | ![](http://progressed.io/bar/100) |
 
 ### 成就
 
@@ -54,7 +55,7 @@
 
 **1610050000** - 900 Stars: [@but0n](https://github.com/but0n)
 
-**1612210000** - 1k  Stars: [@arcobalenoi27](https://github.com/arcobalenoi27) :tada: :tada: :tada:
+**1612210000** - 1k Stars: [@arcobalenoi27](https://github.com/arcobalenoi27) :tada: :tada: :tada:
 
 ### 相关链接
 
@@ -64,7 +65,11 @@
 
 前端笔记本大纲及内容由网易云课堂前端专业改编
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />This work by <a xmlns:cc="http://creativecommons.org/ns#" href="li-xinyang.com" property="cc:attributionName" rel="cc:attributionURL">Li Xinyang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />This
+work by
+<a xmlns:cc="http://creativecommons.org/ns#" href="li-xinyang.com" property="cc:attributionName" rel="cc:attributionURL">Li
+Xinyang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 <!-- Place this tag right after the last button or just before your close body tag. -->
 

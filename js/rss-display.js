@@ -4,62 +4,62 @@
  */
 
 class RSSDisplay {
-  constructor() {
-    this.rssReader = rssReader;
-    this.maxArticles = 10;
-  }
-
-  /**
-   * 初始化 RSS 显示
-   */
-  async init() {
-    console.log('初始化 RSS 显示...');
-
-    const container = document.querySelector('.rss-feed-container');
-    if (!container) {
-      console.log('未找到 RSS 显示容器');
-      return;
+    constructor() {
+        this.rssReader = rssReader;
+        this.maxArticles = 10;
     }
 
-    // 显示加载状态
-    this.showLoading(container);
+    /**
+     * 初始化 RSS 显示
+     */
+    async init() {
+        console.log('初始化 RSS 显示...');
 
-    try {
-      // 获取 RSS 数据
-      const articles = await this.rssReader.fetchAllFeeds();
+        const container = document.querySelector('.rss-feed-container');
+        if (!container) {
+            console.log('未找到 RSS 显示容器');
+            return;
+        }
 
-      if (articles.length === 0) {
-        this.showEmpty(container);
-        return;
-      }
+        // 显示加载状态
+        this.showLoading(container);
 
-      // 显示文章
-      this.displayArticles(container, articles.slice(0, this.maxArticles));
+        try {
+            // 获取 RSS 数据
+            const articles = await this.rssReader.fetchAllFeeds();
 
-      console.log(`RSS 显示完成，共 ${articles.length} 篇文章`);
-    } catch (error) {
-      console.error('RSS 显示失败:', error);
-      this.showError(container);
+            if (articles.length === 0) {
+                this.showEmpty(container);
+                return;
+            }
+
+            // 显示文章
+            this.displayArticles(container, articles.slice(0, this.maxArticles));
+
+            console.log(`RSS 显示完成，共 ${articles.length} 篇文章`);
+        } catch (error) {
+            console.error('RSS 显示失败:', error);
+            this.showError(container);
+        }
     }
-  }
 
-  /**
-   * 显示加载状态
-   */
-  showLoading(container) {
-    container.innerHTML = `
+    /**
+     * 显示加载状态
+     */
+    showLoading(container) {
+        container.innerHTML = `
       <div class="rss-loading">
         <i class="fa fa-spinner fa-spin"></i>
         <span>正在加载订阅内容...</span>
       </div>
     `;
-  }
+    }
 
-  /**
-   * 显示错误信息
-   */
-  showError(container) {
-    container.innerHTML = `
+    /**
+     * 显示错误信息
+     */
+    showError(container) {
+        container.innerHTML = `
       <div class="rss-error">
         <i class="fa fa-exclamation-circle"></i>
         <span>无法加载订阅内容</span>
@@ -68,26 +68,26 @@ class RSSDisplay {
         </button>
       </div>
     `;
-  }
+    }
 
-  /**
-   * 显示空状态
-   */
-  showEmpty(container) {
-    container.innerHTML = `
+    /**
+     * 显示空状态
+     */
+    showEmpty(container) {
+        container.innerHTML = `
       <div class="rss-empty">
         <i class="fa fa-rss"></i>
         <span>暂无订阅内容</span>
         <p>敬请期待更多精彩文章</p>
       </div>
     `;
-  }
+    }
 
-  /**
-   * 显示文章列表
-   */
-  displayArticles(container, articles) {
-    const html = `
+    /**
+     * 显示文章列表
+     */
+    displayArticles(container, articles) {
+        const html = `
       <div class="rss-feed-header">
         <div class="rss-feed-title">
           <i class="fa fa-rss"></i>
@@ -113,19 +113,19 @@ class RSSDisplay {
       </div>
     `;
 
-    container.innerHTML = html;
-    container.classList.remove('rss-loading');
-  }
+        container.innerHTML = html;
+        container.classList.remove('rss-loading');
+    }
 
-  /**
-   * 渲染单篇文章
-   */
-  renderArticle(article, index) {
-    const truncatedDesc = this.rssReader.truncate(article.description, 120);
-    const formattedDate = this.rssReader.formatDate(article.pubDate);
-    const animationDelay = index * 0.1;
+    /**
+     * 渲染单篇文章
+     */
+    renderArticle(article, index) {
+        const truncatedDesc = this.rssReader.truncate(article.description, 120);
+        const formattedDate = this.rssReader.formatDate(article.pubDate);
+        const animationDelay = index * 0.1;
 
-    return `
+        return `
       <article class="rss-article" style="animation-delay: ${animationDelay}s">
         <div class="article-header">
           <div class="article-category">${article.category || '未分类'}</div>
@@ -154,47 +154,47 @@ class RSSDisplay {
         </div>
       </article>
     `;
-  }
-
-  /**
-   * 创建 RSS 订阅按钮
-   */
-  createRSSButton() {
-    const button = document.createElement('a');
-    button.href = './blog/feed.xml';
-    button.className = 'rss-subscribe-button';
-    button.target = '_blank';
-    button.title = '订阅 RSS';
-    button.innerHTML = '<i class="fa fa-rss"></i> RSS 订阅';
-
-    return button;
-  }
-
-  /**
-   * 在指定位置插入 RSS 按钮
-   */
-  insertRSSButton(selector) {
-    const container = document.querySelector(selector);
-    if (container) {
-      container.appendChild(this.createRSSButton());
     }
-  }
 
-  /**
-   * 手动刷新
-   */
-  async refresh() {
-    console.log('刷新 RSS 数据...');
-    localStorage.removeItem('rss-feed-cache');
-    await this.init();
-  }
+    /**
+     * 创建 RSS 订阅按钮
+     */
+    createRSSButton() {
+        const button = document.createElement('a');
+        button.href = './blog/feed.xml';
+        button.className = 'rss-subscribe-button';
+        button.target = '_blank';
+        button.title = '订阅 RSS';
+        button.innerHTML = '<i class="fa fa-rss"></i> RSS 订阅';
 
-  /**
-   * 设置最大文章数
-   */
-  setMaxArticles(count) {
-    this.maxArticles = count;
-  }
+        return button;
+    }
+
+    /**
+     * 在指定位置插入 RSS 按钮
+     */
+    insertRSSButton(selector) {
+        const container = document.querySelector(selector);
+        if (container) {
+            container.appendChild(this.createRSSButton());
+        }
+    }
+
+    /**
+     * 手动刷新
+     */
+    async refresh() {
+        console.log('刷新 RSS 数据...');
+        localStorage.removeItem('rss-feed-cache');
+        await this.init();
+    }
+
+    /**
+     * 设置最大文章数
+     */
+    setMaxArticles(count) {
+        this.maxArticles = count;
+    }
 }
 
 // 创建全局实例
@@ -202,12 +202,12 @@ const rssDisplay = new RSSDisplay();
 
 // 页面加载完成后自动初始化
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => rssDisplay.init());
+    document.addEventListener('DOMContentLoaded', () => rssDisplay.init());
 } else {
-  rssDisplay.init();
+    rssDisplay.init();
 }
 
 // 导出供其他模块使用
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = RSSDisplay;
+    module.exports = RSSDisplay;
 }

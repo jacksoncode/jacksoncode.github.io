@@ -6,7 +6,6 @@
  */
 
 (function (win, $) {
-
     'use strict';
 
     /**
@@ -25,7 +24,7 @@
             //面板显示隐藏按钮
             $testingShow: null,
             //参数列表的容器
-            $testingParam: $('#testingParam')
+            $testingParam: $('#testingParam'),
         };
         //缓存数据
         this.data = {
@@ -34,7 +33,7 @@
             //全局参数是否生效
             globalParamWorking: true,
             //单条参数模板
-            paramTemplate: $('#template\\:formList').text()
+            paramTemplate: $('#template\\:formList').text(),
         };
         //请求数据
         this.request = {
@@ -45,7 +44,7 @@
             //请求参数
             params: [],
             //全局参数
-            paramGlobal: []
+            paramGlobal: [],
         };
         this.useGlobalParam();
         this.bindPanelCtrl();
@@ -94,36 +93,78 @@
                 that.request.params.length = 0;
                 //不存在table直接无参数，存在table时开始解析
                 if ($this.next('table').length > 0) {
-                    $this.next('table').find('tbody').find('tr').each(function () {
-                        var $tds = $(this).find('td');
-                        //抓取内容
-                        var param = {
-                            keyName: $tds.eq(0).text().replace(/^\s+|\s+$/g, ''),
-                            valueType: $tds.eq(1).text().replace(/^\s+|\s+$/g, ''),
-                            required: $tds.eq(2).text().replace(/^\s+|\s+$/g, ''),
-                            describe: $tds.eq(3).text().replace(/^\s+|\s+$/g, ''),
-                            default: $tds.eq(4).text().replace(/^\s+|\s+$/g, ''),
-                            reference: $tds.eq(5).text().replace(/^\s+|\s+$/g, '')
-                        };
-                        //修正请求参数，正确键名才添加参数
-                        if (param.keyName != '无' && param.keyName != '-' && param.keyName != '') {
-                            //“必填”转换
-                            if (param.required == '是' || param.required == '必填' || param.required == 'yes' || param.required == 'true') {
-                                param.required = 'required';
-                            } else {
-                                param.required = '';
-                            }
-                            //“默认值”转换
-                            if (param.default == '-' || param.default == '无' || param.default == 'Null' || param.default == 'null') {
-                                if (param.reference && param.reference != '-' && param.reference != '无' && param.reference != 'Null' && param.reference != 'null') {
-                                    param.default = param.reference;
+                    $this
+                        .next('table')
+                        .find('tbody')
+                        .find('tr')
+                        .each(function () {
+                            var $tds = $(this).find('td');
+                            //抓取内容
+                            var param = {
+                                keyName: $tds
+                                    .eq(0)
+                                    .text()
+                                    .replace(/^\s+|\s+$/g, ''),
+                                valueType: $tds
+                                    .eq(1)
+                                    .text()
+                                    .replace(/^\s+|\s+$/g, ''),
+                                required: $tds
+                                    .eq(2)
+                                    .text()
+                                    .replace(/^\s+|\s+$/g, ''),
+                                describe: $tds
+                                    .eq(3)
+                                    .text()
+                                    .replace(/^\s+|\s+$/g, ''),
+                                default: $tds
+                                    .eq(4)
+                                    .text()
+                                    .replace(/^\s+|\s+$/g, ''),
+                                reference: $tds
+                                    .eq(5)
+                                    .text()
+                                    .replace(/^\s+|\s+$/g, ''),
+                            };
+                            //修正请求参数，正确键名才添加参数
+                            if (
+                                param.keyName != '无' &&
+                                param.keyName != '-' &&
+                                param.keyName != ''
+                            ) {
+                                //“必填”转换
+                                if (
+                                    param.required == '是' ||
+                                    param.required == '必填' ||
+                                    param.required == 'yes' ||
+                                    param.required == 'true'
+                                ) {
+                                    param.required = 'required';
                                 } else {
-                                    param.default = '';
+                                    param.required = '';
                                 }
+                                //“默认值”转换
+                                if (
+                                    param.default == '-' ||
+                                    param.default == '无' ||
+                                    param.default == 'Null' ||
+                                    param.default == 'null'
+                                ) {
+                                    if (
+                                        param.reference &&
+                                        param.reference != '-' &&
+                                        param.reference != '无' &&
+                                        param.reference != 'Null' &&
+                                        param.reference != 'null'
+                                    ) {
+                                        param.default = param.reference;
+                                    } else {
+                                        param.default = '';
+                                    }
+                                }
+                                that.request.params.push(param);
                             }
-                            that.request.params.push(param);
-                        }
-                    });
+                        });
                 }
                 testingReqState[2] = true;
             }
@@ -162,7 +203,9 @@
         //填充请求地址
         $('#testingSendUrl').val(this.request.url);
         //填充请求类型
-        $('#testingSendType').find('option[value="' + this.request.method + '"]').prop('selected', true);
+        $('#testingSendType')
+            .find('option[value="' + this.request.method + '"]')
+            .prop('selected', true);
         //清空现有参数列表
         this.elm.$testingParam.html('');
         //填充参数列表
@@ -188,35 +231,48 @@
         if (type == 'off') {
             this.elm.$testingShow.removeClass('on').find('span').text('测试接口');
             this.elm.$testingBox.css({
-                'position': 'absolute'
+                position: 'absolute',
             });
             this.elm.$view.show().addClass('scroller-content');
             this.elm.$sibling.addClass('scroller-content').addClass('on');
-            this.elm.$testingBox.removeClass('scroller-content').stop().animate({
-                'width': '30%',
-                'opacity': 0
-            }, 200, 'swing', function () {
-                that.elm.$testingBox.removeAttr('style');
-            });
+            this.elm.$testingBox
+                .removeClass('scroller-content')
+                .stop()
+                .animate(
+                    {
+                        width: '30%',
+                        opacity: 0,
+                    },
+                    200,
+                    'swing',
+                    function () {
+                        that.elm.$testingBox.removeAttr('style');
+                    }
+                );
         } else if (type == 'on') {
             this.elm.$testingShow.addClass('on').find('span').text('关闭测试');
             this.elm.$testingBox
                 .css({
-                    'display': 'block',
-                    'width': '0',
-                    'opacity': 0
+                    display: 'block',
+                    width: '0',
+                    opacity: 0,
                 })
                 .stop()
-                .animate({
-                    'width': '100%',
-                    'opacity': 1
-                }, 300, 'swing', function () {
-                    that.elm.$view.hide().removeClass('scroller-content');
-                    that.elm.$sibling.removeClass('scroller-content').removeClass('on');
-                    that.elm.$testingBox.addClass('scroller-content').css({
-                        'position': 'relative'
-                    });
-                });
+                .animate(
+                    {
+                        width: '100%',
+                        opacity: 1,
+                    },
+                    300,
+                    'swing',
+                    function () {
+                        that.elm.$view.hide().removeClass('scroller-content');
+                        that.elm.$sibling.removeClass('scroller-content').removeClass('on');
+                        that.elm.$testingBox.addClass('scroller-content').css({
+                            position: 'relative',
+                        });
+                    }
+                );
         }
     };
 
@@ -240,7 +296,7 @@
         });
         //填充请求类型
         $('#testingSendType').on('change', function () {
-            that.request.method = $(this).find("option:selected").val();
+            that.request.method = $(this).find('option:selected').val();
         });
         //清空所有普通参数的值
         $('#testingBtnReset').on('click', function () {
@@ -261,11 +317,11 @@
     //全局参数模块
     Testing.prototype.useGlobalParam = function () {
         var that = this;
-        this.data.globalParams = JSON.parse(localStorage['amWikiGlobalParam'] || '[]');  //全局参数
-        var gParamTmpl = $('#template\\:globalParam').text();  //全局参数模板
-        var $testingGlobalParam = $('#testingGlobalParam');  //全局参数显示容器
-        var $testingGlobal = $('#testingGlobal');  //全局参数弹窗
-        this.data.globalParamWorking = (localStorage['amWikiGParamWorking'] || 'on') == 'on';  //全局参数是否工作
+        this.data.globalParams = JSON.parse(localStorage['amWikiGlobalParam'] || '[]'); //全局参数
+        var gParamTmpl = $('#template\\:globalParam').text(); //全局参数模板
+        var $testingGlobalParam = $('#testingGlobalParam'); //全局参数显示容器
+        var $testingGlobal = $('#testingGlobal'); //全局参数弹窗
+        this.data.globalParamWorking = (localStorage['amWikiGParamWorking'] || 'on') == 'on'; //全局参数是否工作
         //显示弹窗
         $('#testingBtnGParam').on('click', function () {
             $testingGlobalParam.html('');
@@ -274,9 +330,12 @@
                 $testingGlobalParam.append('<li data-type="empty">无</li>');
             } else {
                 for (var p = 0; p < that.data.globalParams.length; p++) {
-                    $testingGlobalParam.append(gParamTmpl.replace('{{describe}}', that.data.globalParams[p].describe)
-                        .replace('{{keyName}}', that.data.globalParams[p].keyName)
-                        .replace('{{value}}', that.data.globalParams[p].value));
+                    $testingGlobalParam.append(
+                        gParamTmpl
+                            .replace('{{describe}}', that.data.globalParams[p].describe)
+                            .replace('{{keyName}}', that.data.globalParams[p].keyName)
+                            .replace('{{value}}', that.data.globalParams[p].value)
+                    );
                 }
             }
             $testingGlobal.show();
@@ -291,9 +350,12 @@
             //新增
             else if ($elm.hasClass('add')) {
                 $testingGlobalParam.find('[data-type="empty"]').remove();
-                $testingGlobalParam.append(gParamTmpl.replace('{{describe}}', '')
-                    .replace('{{keyName}}', '')
-                    .replace('{{value}}', ''));
+                $testingGlobalParam.append(
+                    gParamTmpl
+                        .replace('{{describe}}', '')
+                        .replace('{{keyName}}', '')
+                        .replace('{{value}}', '')
+                );
             }
             //保存
             else if ($elm.hasClass('save')) {
@@ -304,7 +366,7 @@
                         that.data.globalParams.push({
                             describe: $inputs.eq(0).val(),
                             keyName: $inputs.eq(1).val(),
-                            value: $inputs.eq(2).val()
+                            value: $inputs.eq(2).val(),
                         });
                     }
                 });
@@ -319,34 +381,38 @@
                 $testingGlobalParam.append('<li data-type="empty">无</li>');
             }
         });
-        $('#testingGlobalWorking').on('click', function () {
-            if (that.data.globalParamWorking) {
-                that.data.globalParamWorking = false;
-                localStorage['amWikiGParamWorking'] = 'off';
-                $(this).addClass('off');
-            } else {
-                that.data.globalParamWorking = true;
-                localStorage['amWikiGParamWorking'] = 'on';
-                $(this).removeClass('off');
-            }
-        }).addClass(this.data.globalParamWorking ? '' : 'off');
+        $('#testingGlobalWorking')
+            .on('click', function () {
+                if (that.data.globalParamWorking) {
+                    that.data.globalParamWorking = false;
+                    localStorage['amWikiGParamWorking'] = 'off';
+                    $(this).addClass('off');
+                } else {
+                    that.data.globalParamWorking = true;
+                    localStorage['amWikiGParamWorking'] = 'on';
+                    $(this).removeClass('off');
+                }
+            })
+            .addClass(this.data.globalParamWorking ? '' : 'off');
     };
 
     //发送请求
     Testing.prototype.bindAjaxSend = function () {
         var that = this;
         var frame = $('#testingResponse')[0];
-        var $duration = $('#testingDuration');  //耗时输出
+        var $duration = $('#testingDuration'); //耗时输出
         var $loading = $('#testingLoading');
-        var $testingParam = $('#testingParam');  //参数列表
+        var $testingParam = $('#testingParam'); //参数列表
         $('#testingBtnSend').on('click', function () {
             $duration.text('');
-            var realParam = {};  //合并参数列表
+            var realParam = {}; //合并参数列表
             //从面板获取最新(可能已修改)接口参数
             if ($testingParam.find('input').length > 0) {
                 $testingParam.find('li').each(function () {
                     var $this = $(this);
-                    realParam[$this.find('.testing-param-key').val()] = $this.find('.testing-param-val').val();
+                    realParam[$this.find('.testing-param-key').val()] = $this
+                        .find('.testing-param-val')
+                        .val();
                 });
             }
             //全局参数
@@ -355,7 +421,7 @@
                     realParam[that.data.globalParams[i].keyName] = that.data.globalParams[i].value;
                 }
             }
-            frame.contentWindow.location.reload();  //刷新iframe以便重新输出内容
+            frame.contentWindow.location.reload(); //刷新iframe以便重新输出内容
             $loading.show();
             var startTime = Date.now();
             $.ajax({
@@ -365,15 +431,21 @@
                 dataType: 'text',
                 success: function (data) {
                     $loading.hide();
-                    $duration.text('耗时：' + parseFloat(Date.now() - startTime).toLocaleString() + ' ms');
+                    $duration.text(
+                        '耗时：' + parseFloat(Date.now() - startTime).toLocaleString() + ' ms'
+                    );
                     var $frameBody = $(frame.contentWindow.document).find('body');
                     $frameBody.css('wordBreak', 'break-all');
                     if (/^\s*\{[\s\S]*\}\s*$/.test(data)) {
-                        $frameBody[0].innerHTML = '<pre style="white-space:pre-wrap;word-break:break-all;"><pre>';
+                        $frameBody[0].innerHTML =
+                            '<pre style="white-space:pre-wrap;word-break:break-all;"><pre>';
                         //json格式化输出
                         $frameBody.find('pre').text(win.tools.formatJson(data));
                     } else {
-                        $frameBody[0].innerHTML = data.replace(/<!(doctype|DOCTYPE)\s+(html|HTML)>/, '');
+                        $frameBody[0].innerHTML = data.replace(
+                            /<!(doctype|DOCTYPE)\s+(html|HTML)>/,
+                            ''
+                        );
                     }
                     setTimeout(function () {
                         $(frame).height($frameBody.height());
@@ -381,14 +453,21 @@
                 },
                 error: function (xhr, textStatus) {
                     $loading.hide();
-                    $duration.text('耗时：' + parseFloat(Date.now() - startTime).toLocaleString() + ' ms');
+                    $duration.text(
+                        '耗时：' + parseFloat(Date.now() - startTime).toLocaleString() + ' ms'
+                    );
                     var $frameBody = $(frame.contentWindow.document).find('body');
                     $frameBody.css('wordBreak', 'break-all');
-                    var html = '<div style="margin-bottom:20px;padding:10px;background:#ffebe5;">HTTP Status: <b>' +
-                        xhr.status + '</b> ' + xhr.statusText + '</div>';
+                    var html =
+                        '<div style="margin-bottom:20px;padding:10px;background:#ffebe5;">HTTP Status: <b>' +
+                        xhr.status +
+                        '</b> ' +
+                        xhr.statusText +
+                        '</div>';
                     //根据readyState简单判断跨域
                     if (xhr.readyState == 0) {
-                        html += '<div style="font-size:14px;">请求未发送！可能是因为：' +
+                        html +=
+                            '<div style="font-size:14px;">请求未发送！可能是因为：' +
                             '<ul style="line-height:22px;">' +
                             '<li>请求了<b style="color:#FF201E;margin-right:1px;">跨域</b>地址</li>' +
                             '<li>接口被302重定向到跨域地址</li>' +
@@ -411,7 +490,7 @@
                     setTimeout(function () {
                         $(frame).height($frameBody.height());
                     }, 100);
-                }
+                },
             });
         });
     };
@@ -421,6 +500,5 @@
         return this.elm.$testingShow.hasClass('on');
     };
 
-    return win.AWTesting = Testing;
-
+    return (win.AWTesting = Testing);
 })(window, jQuery);

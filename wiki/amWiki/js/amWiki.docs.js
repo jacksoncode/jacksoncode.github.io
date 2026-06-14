@@ -3,14 +3,12 @@
  * @author Tevin
  */
 
-;
 (function (win, doc, $) {
-
     'use strict';
 
     var hljs = win.hljs;
     var marked = win.marked;
-    var URL_ENCODE_NAME = 'AMWikiUrlEncode';  //记录url编码的键名
+    var URL_ENCODE_NAME = 'AMWikiUrlEncode'; //记录url编码的键名
 
     /**
      * @class 创建一个文档管理对象
@@ -23,11 +21,11 @@
             //网页 title 标签
             title: $('title'),
             //目录悬浮窗标题
-            contentsTitle: $('#contentsTitle')
+            contentsTitle: $('#contentsTitle'),
         };
         this.data = {
             //记录页面宽度
-            pageWidth: 0
+            pageWidth: 0,
         };
         this.initUrlEncode();
         this.initHashEvent();
@@ -41,11 +39,14 @@
          */
         if (!localStorage[URL_ENCODE_NAME]) {
             localStorage[URL_ENCODE_NAME] = 'utf8';
-        } else if (localStorage[URL_ENCODE_NAME] != 'utf8' && localStorage[URL_ENCODE_NAME] != 'gbk') {
+        } else if (
+            localStorage[URL_ENCODE_NAME] != 'utf8' &&
+            localStorage[URL_ENCODE_NAME] != 'gbk'
+        ) {
             localStorage[URL_ENCODE_NAME] = 'utf8';
         }
         //旧版本记录移除
-        delete localStorage.urlEcode
+        delete localStorage.urlEcode;
     };
 
     //修正移动端hash变化时滚动位置
@@ -72,13 +73,13 @@
     //转换链接文本
     Docs.prototype._tramsformLinkText = function (str) {
         return str
-            .replace(/^\s+|\s+$/g, '')  //去除首尾空格
-            .replace(/'/g, '&#39;')  //转义单引号
-            .replace(/"/g, '&#34;')  //转义双引号，由于双引号无法正确传递给html属性，当作为hash时将删除处理
-            .replace(/\(/g, '&#40;')  //转义左圆括号
-            .replace(/\)/g, '&#41;')  //转义右圆括号
-            .replace(/\[/g, '&#91;')  //转义左中括号
-            .replace(/\]/g, '&#93;');  //转义右中括号
+            .replace(/^\s+|\s+$/g, '') //去除首尾空格
+            .replace(/'/g, '&#39;') //转义单引号
+            .replace(/"/g, '&#34;') //转义双引号，由于双引号无法正确传递给html属性，当作为hash时将删除处理
+            .replace(/\(/g, '&#40;') //转义左圆括号
+            .replace(/\)/g, '&#41;') //转义右圆括号
+            .replace(/\[/g, '&#91;') //转义左中括号
+            .replace(/\]/g, '&#93;'); //转义右中括号
     };
 
     //设置文档h1、h2、h3描记
@@ -86,17 +87,18 @@
         var that = this;
         var $titles = null;
         var hash = '';
-        var contentsMd = '';  //提取目录为markdown字符串
+        var contentsMd = ''; //提取目录为markdown字符串
         if (location.hash && location.hash.length > 1) {
             hash = location.hash.split('#')[1];
         }
-        var anchorHtml = '<a class="anchor" href="#{title}" name="{title}">' +
+        var anchorHtml =
+            '<a class="anchor" href="#{title}" name="{title}">' +
             '<svg><use xlink:href="#icon:linkAnchor"></use></svg></a>';
         $titles = that.$e.view.find('h1,h2,h3');
         $titles.each(function (index, element) {
             var $this = $(element);
             var text1 = that._tramsformLinkText($this.text());
-            var text2 = text1.replace(/&#34;/g, '');  //删除双引号
+            var text2 = text1.replace(/&#34;/g, ''); //删除双引号
             //提取目录
             if ($this.is('h2')) {
                 contentsMd += '1. [' + text1 + '](#' + text2 + ' "' + text2 + '")\n';
@@ -139,17 +141,19 @@
                 note: s1,
                 content: s2,
                 title: title,
-                used: false
+                used: false,
             });
             //从页面上删除底部脚注内容
             return '';
         });
         //将脚注的标记转为序号
         text = text.replace(noteReg, function (match, s1) {
-            for (var i = 0, foot; foot = footnotes[i]; i++) {
+            for (var i = 0, foot; (foot = footnotes[i]); i++) {
                 if (foot.note == s1) {
                     foot.used = true;
-                    return templates[0].replace(/{{index}}/g, i + 1 + '').replace('{{title}}', foot.title);
+                    return templates[0]
+                        .replace(/{{index}}/g, i + 1 + '')
+                        .replace('{{title}}', foot.title);
                 }
             }
             //当脚注的正文不存在，视标记文本为正文
@@ -157,13 +161,13 @@
                 index: 0,
                 note: s1,
                 content: s1,
-                used: true
+                used: true,
             });
             return templates[0].replace(/{{index}}/g, length + '');
         });
         //生成底部脚注html
         if (footnotes.length >= 1) {
-            for (var i = 0, foot; foot = footnotes[i]; i++) {
+            for (var i = 0, foot; (foot = footnotes[i]); i++) {
                 if (foot.used) {
                     html += templates[2]
                         .replace('{{index}}', i + 1)
@@ -207,17 +211,17 @@
             'line-color': '#666',
             'text-margin': 10,
             'font-size': 12,
-            'font': 'normal',
+            font: 'normal',
             'font-family': 'Helvetica',
             'font-weight': 'normal',
             'font-color': 'black',
             'element-color': '#888',
-            'fill': '#fff',
+            fill: '#fff',
             'yes-text': '是',
             'no-text': '否',
             'arrow-end': 'block-wide-long',
-            'symbols': {},
-            'flowstate': {}
+            symbols: {},
+            flowstate: {},
         });
     };
 
@@ -247,7 +251,7 @@
                 url = 'library/' + encodeURI(path);
             }
         }
-        url += '.md?t=' + (new Date()).getTime();
+        url += '.md?t=' + new Date().getTime();
         return url;
     };
 
@@ -263,28 +267,29 @@
         content = this.createFootnote(content);
         //编译 markdown
         html = marked(content)
-        //创建目录标记，和悬浮窗格式统一
+            //创建目录标记，和悬浮窗格式统一
             .replace(/\[(TOC|MENU)]/g, '<blockquote class="markdown-contents"></blockquote>');
         //功能化代码块
         this.$e.view
             .html(html)
-            .find('pre code').each(function (i, element) {
-            var $elm = $(element);
-            var className = $elm.attr('class') || '';
-            //创建流程图
-            if (className.indexOf('lang-flow') >= 0) {
-                that.createFlowChart($elm);
-            }
-            //创建语法高亮
-            else if (className.indexOf('lang') >= 0) {
-                hljs.highlightBlock(element);
-            }
-            //创建js注释开关
-            className = $elm.attr('class') || '';
-            if (className.indexOf('javascript') >= 0) {
-                that.setJSCommentDisable($elm);
-            }
-        });
+            .find('pre code')
+            .each(function (i, element) {
+                var $elm = $(element);
+                var className = $elm.attr('class') || '';
+                //创建流程图
+                if (className.indexOf('lang-flow') >= 0) {
+                    that.createFlowChart($elm);
+                }
+                //创建语法高亮
+                else if (className.indexOf('lang') >= 0) {
+                    hljs.highlightBlock(element);
+                }
+                //创建js注释开关
+                className = $elm.attr('class') || '';
+                if (className.indexOf('javascript') >= 0) {
+                    that.setJSCommentDisable($elm);
+                }
+            });
         //设置网页title
         var title = this.$e.view.find('h1').eq(0).text();
         this.$e.title.text(title);
@@ -301,7 +306,7 @@
         var ajaxData = {
             type: 'get',
             url: url,
-            dataType: 'text'
+            dataType: 'text',
         };
         $.ajax(ajaxData)
             .done(function (data) {
@@ -343,7 +348,8 @@
                     }
                     //如果第二次才成功，转换保存的编码类型标记
                     else if (type == 'done') {
-                        localStorage[URL_ENCODE_NAME] = localStorage[URL_ENCODE_NAME] == 'utf8' ? 'gbk' : 'utf8';
+                        localStorage[URL_ENCODE_NAME] =
+                            localStorage[URL_ENCODE_NAME] == 'utf8' ? 'gbk' : 'utf8';
                         callback && callback('success', data);
                     }
                 });
@@ -361,6 +367,5 @@
         this.$e.view.html('');
     };
 
-    return win.AWDocs = Docs;
-
+    return (win.AWDocs = Docs);
 })(window, document, jQuery);

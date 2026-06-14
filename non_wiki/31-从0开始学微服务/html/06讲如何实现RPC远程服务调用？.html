@@ -1,482 +1,1725 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                06讲如何实现RPC远程服务调用？
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/27/f1/27580b72363e997375547b9dd2ddf2f1.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">06讲如何实现RPC远程服务调用？</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/27/f1/27580b72363e997375547b9dd2ddf2f1.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>专栏上一期我讲过，要完成一次服务调用，首先要解决的问题是服务消费者如何得到服务提供者的地址，其中注册中心扮演了关键角色，服务提供者把自己的地址登记到注册中心，服务消费者就可以查询注册中心得到服务提供者的地址，可以说注册中心犹如海上的一座灯塔，为服务消费者指引了前行的方向。</p>
-<p>有了服务提供者的地址后，服务消费者就可以向这个地址发起请求了，但这时候也产生了一个新的问题。你知道，在单体应用时，一次服务调用发生在同一台机器上的同一个进程内部，也就是说调用发生在本机内部，因此也被叫作本地方法调用。在进行服务化拆分之后，服务提供者和服务消费者运行在两台不同物理机上的不同进程内，它们之间的调用相比于本地方法调用，可称之为远程方法调用，简称RPC（Remote Procedure Call），那么<span class="orange">RPC调用是如何实现的呢？</span></p>
-<p>在介绍RPC调用的原理之前，先来想象一下一次电话通话的过程。首先，呼叫者A通过查询号码簿找到被呼叫者B的电话号码，然后拨打B的电话。B接到来电提示时，如果方便接听的话就会接听；如果不方便接听的话，A就得一直等待。当等待超过一段时间后，电话会因超时被挂断，这个时候A需要再次拨打电话，一直等到B空闲的时候，才能接听。</p><!-- [[[read_end]]] -->
-<p>RPC调用的原理与此类似，我习惯把服务消费者叫作<strong>客户端</strong>，服务提供者叫作<strong>服务端</strong>，两者通常位于网络上两个不同的地址，要完成一次RPC调用，就必须先建立网络连接。建立连接后，双方还必须按照某种约定的协议进行网络通信，这个协议就是通信协议。双方能够正常通信后，服务端接收到请求时，需要以某种方式进行处理，处理成功后，把请求结果返回给客户端。为了减少传输的数据大小，还要对数据进行压缩，也就是对数据进行序列化。</p>
-<p>上面就是RPC调用的过程，由此可见，想要完成调用，你需要解决四个问题：</p>
-<ul>
-<li>
-<p>客户端和服务端如何建立网络连接？</p>
-</li>
-<li>
-<p>服务端如何处理请求？</p>
-</li>
-<li>
-<p>数据传输采用什么协议？</p>
-</li>
-<li>
-<p>数据该如何序列化和反序列化？</p>
-</li>
-</ul>
-<h2>客户端和服务端如何建立网络连接？</h2>
-<p>根据我的实践经验，客户端和服务端之间基于TCP协议建立网络连接最常用的途径有两种。</p>
-<p><strong>1. HTTP通信</strong></p>
-<p>HTTP通信是基于应用层HTTP协议的，而HTTP协议又是基于传输层TCP协议的。一次HTTP通信过程就是发起一次HTTP调用，而一次HTTP调用就会建立一个TCP连接，经历一次下图所示的“<a href="http://condor.depaul.edu/jkristof/technotes/tcp.html">三次握手</a>”的过程来建立连接。</p>
-<p><img src="https://static001.geekbang.org/resource/image/61/bd/61bfb298c82c441681fb88b7519ecebd.jpg" alt="" /></p>
-<p>完成请求后，再经历一次“四次挥手”的过程来断开连接。</p>
-<p><img src="https://static001.geekbang.org/resource/image/cb/6f/cb614475054bc5895013748c1139a66f.jpg" alt="" /></p>
-<p><strong>2. Socket通信</strong></p>
-<p>Socket通信是基于TCP/IP协议的封装，建立一次Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket ；另一个运行于服务器端，称为ServerSocket 。就像下图所描述的，Socket通信的过程分为四个步骤：服务器监听、客户端请求、连接确认、数据传输。</p>
-<ul>
-<li>
-<p>服务器监听：ServerSocket通过调用bind()函数绑定某个具体端口，然后调用listen()函数实时监控网络状态，等待客户端的连接请求。</p>
-</li>
-<li>
-<p>客户端请求：ClientSocket调用connect()函数向ServerSocket绑定的地址和端口发起连接请求。</p>
-</li>
-<li>
-<p>服务端连接确认：当ServerSocket监听到或者接收到ClientSocket的连接请求时，调用accept()函数响应ClientSocket的请求，同客户端建立连接。</p>
-</li>
-<li>
-<p>数据传输：当ClientSocket和ServerSocket建立连接后，ClientSocket调用send()函数，ServerSocket调用receive()函数，ServerSocket处理完请求后，调用send()函数，ClientSocket调用receive()函数，就可以得到得到返回结果。</p>
-</li>
-</ul>
-<p>直接理解可能有点抽象，你可以把这个过程套入前面我举的“打电话”的例子，可以方便你理解Socket通信过程。</p>
-<p><img src="https://static001.geekbang.org/resource/image/14/94/14362fab592dee5226bb498e3e46e994.jpg" alt="" /></p>
-<p>当客户端和服务端建立网络连接后，就可以发起请求了。但网络不一定总是可靠的，经常会遇到网络闪断、连接超时、服务端宕机等各种异常，通常的处理手段有两种。</p>
-<ul>
-<li>
-<p>链路存活检测：客户端需要定时地发送心跳检测消息（一般是通过ping请求）给服务端，如果服务端连续n次心跳检测或者超过规定的时间都没有回复消息，则认为此时链路已经失效，这个时候客户端就需要重新与服务端建立连接。</p>
-</li>
-<li>
-<p>断连重试：通常有多种情况会导致连接断开，比如客户端主动关闭、服务端宕机或者网络故障等。这个时候客户端就需要与服务端重新建立连接，但一般不能立刻完成重连，而是要等待固定的间隔后再发起重连，避免服务端的连接回收不及时，而客户端瞬间重连的请求太多而把服务端的连接数占满。</p>
-</li>
-</ul>
-<h2>服务端如何处理请求？</h2>
-<p>假设这时候客户端和服务端已经建立了网络连接，服务端又该如何处理客户端的请求呢？通常来讲，有三种处理方式。</p>
-<ul>
-<li>
-<p>同步阻塞方式（BIO），客户端每发一次请求，服务端就生成一个线程去处理。当客户端同时发起的请求很多时，服务端需要创建很多的线程去处理每一个请求，如果达到了系统最大的线程数瓶颈，新来的请求就没法处理了。</p>
-</li>
-<li>
-<p>同步非阻塞方式 (NIO)，客户端每发一次请求，服务端并不是每次都创建一个新线程来处理，而是通过I/O多路复用技术进行处理。就是把多个I/O的阻塞复用到同一个select的阻塞上，从而使系统在单线程的情况下可以同时处理多个客户端请求。这种方式的优势是开销小，不用为每个请求创建一个线程，可以节省系统开销。</p>
-</li>
-<li>
-<p>异步非阻塞方式（AIO），客户端只需要发起一个I/O操作然后立即返回，等I/O操作真正完成以后，客户端会得到I/O操作完成的通知，此时客户端只需要对数据进行处理就好了，不需要进行实际的I/O读写操作，因为真正的I/O读取或者写入操作已经由内核完成了。这种方式的优势是客户端无需等待，不存在阻塞等待问题。</p>
-</li>
-</ul>
-<p>从前面的描述，可以看出来不同的处理方式适用于不同的业务场景，根据我的经验：</p>
-<ul>
-<li>
-<p>BIO适用于连接数比较小的业务场景，这样的话不至于系统中没有可用线程去处理请求。这种方式写的程序也比较简单直观，易于理解。</p>
-</li>
-<li>
-<p>NIO适用于连接数比较多并且请求消耗比较轻的业务场景，比如聊天服务器。这种方式相比BIO，相对来说编程比较复杂。</p>
-</li>
-<li>
-<p>AIO适用于连接数比较多而且请求消耗比较重的业务场景，比如涉及I/O操作的相册服务器。这种方式相比另外两种，编程难度最大，程序也不易于理解。</p>
-</li>
-</ul>
-<p>上面两个问题就是“通信框架”要解决的问题，你可以基于现有的Socket通信，在服务消费者和服务提供者之间建立网络连接，然后在服务提供者一侧基于BIO、NIO和AIO三种方式中的任意一种实现服务端请求处理，最后再花费一些精力去解决服务消费者和服务提供者之间的网络可靠性问题。这种方式对于Socket网络编程、多线程编程知识都要求比较高，感兴趣的话可以尝试自己实现一个通信框架。<strong>但我建议最为稳妥的方式是使用成熟的开源方案</strong>，比如Netty、MINA等，它们都是经过业界大规模应用后，被充分论证是很可靠的方案。</p>
-<p>假设客户端和服务端的连接已经建立了，服务端也能正确地处理请求了，接下来完成一次正常地RPC调用还需要解决两个问题，即数据传输采用什么协议以及数据该如何序列化和反序列化。</p>
-<h2>数据传输采用什么协议？</h2>
-<p>首先来看第一个问题，数据传输采用什么协议？</p>
-<p>最常用的有HTTP协议，它是一种开放的协议，各大网站的服务器和浏览器之间的数据传输大都采用了这种协议。还有一些定制的私有协议，比如阿里巴巴开源的Dubbo协议，也可以用于服务端和客户端之间的数据传输。无论是开放的还是私有的协议，都必须定义一个“契约”，以便服务消费和服务提供者之间能够达成共识。服务消费者按照契约，对传输的数据进行编码，然后通过网络传输过去；服务提供者从网络上接收到数据后，按照契约，对传输的数据进行解码，然后处理请求，再把处理后的结果进行编码，通过网络传输返回给服务消费者；服务消费者再对返回的结果进行解码，最终得到服务提供者处理后的返回值。</p>
-<p>通常协议契约包括两个部分：消息头和消息体。其中消息头存放的是协议的公共字段以及用户扩展字段，消息体存放的是传输数据的具体内容。</p>
-<p>以HTTP协议为例，下图展示了一段采用HTTP协议传输的数据响应报文，主要分为消息头和消息体两部分，其中消息头中存放的是协议的公共字段，比如Server代表是服务端服务器类型、Content-Length代表返回数据的长度、Content-Type代表返回数据的类型；消息体中存放的是具体的返回结果，这里就是一段HTML网页代码。</p>
-<p><img src="https://static001.geekbang.org/resource/image/e2/b7/e2b3614e1ea94b08b903d00757a3feb7.png" alt="" /></p>
-<h2>数据该如何序列化和反序列化？</h2>
-<p>再看第二个问题，数据该如何序列化和反序列化。</p>
-<p>一般数据在网络中进行传输前，都要先在发送方一端对数据进行编码，经过网络传输到达另一端后，再对数据进行解码，这个过程就是序列化和反序列化。</p>
-<p>为什么要对数据进行序列化和反序列化呢？要知道网络传输的耗时一方面取决于网络带宽的大小，另一方面取决于数据传输量。要想加快网络传输，要么提高带宽，要么减小数据传输量，而对数据进行编码的主要目的就是减小数据传输量。比如一部高清电影原始大小为30GB，如果经过特殊编码格式处理，可以减小到3GB，同样是100MB/s的网速，下载时间可以从300s减小到30s。</p>
-<p>常用的序列化方式分为两类：文本类如XML/JSON等，二进制类如PB/Thrift等，而具体采用哪种序列化方式，主要取决于三个方面的因素。</p>
-<ul>
-<li>
-<p>支持数据结构类型的丰富度。数据结构种类支持的越多越好，这样的话对于使用者来说在编程时更加友好，有些序列化框架如Hessian  2.0还支持复杂的数据结构比如Map、List等。</p>
-</li>
-<li>
-<p>跨语言支持。序列化方式是否支持跨语言也是一个很重要的因素，否则使用的场景就比较局限，比如Java序列化只支持Java语言，就不能用于跨语言的服务调用了。</p>
-</li>
-<li>
-<p>性能。主要看两点，一个是序列化后的压缩比，一个是序列化的速度。以常用的PB序列化和JSON序列化协议为例来对比分析，PB序列化的压缩比和速度都要比JSON序列化高很多，所以对性能和存储空间要求比较高的系统选用PB序列化更合适；而JSON序列化虽然性能要差一些，但可读性更好，更适合对外部提供服务。</p>
-</li>
-</ul>
-<h2>总结</h2>
-<p>今天我给你讲解了服务调用需要解决的几个问题，其中你需要掌握：</p>
-<ul>
-<li>
-<p><strong>通信框架</strong>。它主要解决客户端和服务端如何建立连接、管理连接以及服务端如何处理请求的问题。</p>
-</li>
-<li>
-<p><strong>通信协议</strong>。它主要解决客户端和服务端采用哪种数据传输协议的问题。</p>
-</li>
-<li>
-<p><strong>序列化和反序列化</strong>。它主要解决客户端和服务端采用哪种数据编解码的问题。</p>
-</li>
-</ul>
-<p>这三个部分就组成了一个完整的RPC调用框架，通信框架提供了基础的通信能力，通信协议描述了通信契约，而序列化和反序列化则用于数据的编/解码。一个通信框架可以适配多种通信协议，也可以采用多种序列化和反序列化的格式，比如服务化框架Dubbo不仅支持Dubbo协议，还支持RMI协议、HTTP协议等，而且还支持多种序列化和反序列化格式，比如JSON、Hession  2.0以及Java序列化等。</p>
-<h2>思考题</h2>
-<p>gRPC是一个优秀的跨语言RPC调用框架，按照今天我给你讲的服务调用知识，通过阅读<a href="https://grpc.io/docs/">官方文档</a>，你能给出gRPC调用的实现原理吗？</p>
-<p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
-<p><img src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/aa/21/81ee4e60.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">lfn</span>
-                            </div>
-                            <div class="bd">我觉得压缩只是序列化的一个原因，但却不是最本质的原因。序列化是为了解决内存中数据结构到字节序列的映射过程中，如何保留各个结构和字段间的关系而生的技术。 <br></div>
-                            <span class="time">2018-09-04 09:28</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">确实，理论上用字符串就也可以，序列化能映射的同时也能压缩数据</p>
-                                <p class="reply-time">2018-09-05 18:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/f5/72/ee4c3df7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">萨洪志</span>
-                            </div>
-                            <div class="bd">沙发，珍惜在车上的时间，😂 <br></div>
-                            <span class="time">2018-09-04 07:28</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/85/a5/471ce926.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">靖远小和尚</span>
-                            </div>
-                            <div class="bd">老师你好aio是异步阻塞是不是写错了！他应该是异步非阻塞吧！ <br></div>
-                            <span class="time">2018-09-04 08:33</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">写错了，已修改👍</p>
-                                <p class="reply-time">2018-09-04 10:10</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/d7/df/fc0a6709.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">WolvesLeader</span>
-                            </div>
-                            <div class="bd">服务A调用B，B调用C，假如B响应较慢，会造成整个调用链挂掉吗？有啥好办法防止这种问题吗？ <br></div>
-                            <span class="time">2018-09-06 16:23</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/5f/83/bb728e53.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">jimforcode</span>
-                            </div>
-                            <div class="bd">老师，  nio  多路复用io 解决并发连接数问题，  但是，io密集型的应用，业务还是应该 放到单独的线程里面处理的吧，可以创建一个线程池， nio 事件监听连接建立之后， 直接从 业务线程池中获取一个线程来处理业务？ <br></div>
-                            <span class="time">2018-10-09 13:32</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/32/c5/4b5cea9f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">逍遥子</span>
-                            </div>
-                            <div class="bd">搞不懂为什么区分长http与socket两种通信，个人理解这两者不是一种概念呀，一个是协议一个是通信基石，http协议访问不也是基于套接字么 <br></div>
-                            <span class="time">2018-09-29 00:00</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/a5/c9/eb389183.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Hungry</span>
-                            </div>
-                            <div class="bd">老师，我觉得序列化最大的目的是解决异构系统的数据传输，比如大小端、远端的持久存储；至于不同语言的代码结构上的变量映射，TLV压缩，这些应该是其次的 <br></div>
-                            <span class="time">2018-09-09 01:47</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯，在服务框架里序列号最主要的作用是数据编码</p>
-                                <p class="reply-time">2018-09-11 19:06</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7a/5d/b2e68df2.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">九斤鱼</span>
-                            </div>
-                            <div class="bd">感觉这几篇还是在入门，实战什么时候开始呢？，老师，我更关心的实际操作层面，比如技术栈选型方面，是spring cloud呢还是dubbo还是其他什么，<br>系统划分后的工程如何管理，如何部署，如何测试，多容器环境下需要注意什么等等问题，望老师可以在接下来的课程里可以用实际项目解答一下🙏 <br></div>
-                            <span class="time">2018-09-06 19:24</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">可以看下专栏目录，在原理讲完之后开始讲实践</p>
-                                <p class="reply-time">2018-09-08 10:34</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ac/a1/43d83698.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">云学</span>
-                            </div>
-                            <div class="bd">这篇文章感觉有些地方不太严谨，序列化是和异构系统有关 <br></div>
-                            <span class="time">2018-09-05 08:32</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">序列化跟异构系统没有直接关联，比如java序列化，主要是为了解决数据编解码的问题</p>
-                                <p class="reply-time">2018-09-05 18:55</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7e/c6/63915456.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">先来</span>
-                            </div>
-                            <div class="bd">NIO,AIO描述有问题。<br>NIO （New I&#47;O）：同时支持阻塞与非阻塞模式，但主要是使用同步非阻塞IO。<br><br>AIO （Asynchronous I&#47;O）：异步非阻塞I&#47;O模型。 <br></div>
-                            <span class="time">2018-09-04 09:15</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">抱歉，手误了，已修改👍</p>
-                                <p class="reply-time">2018-09-04 10:08</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/07/8c/51401220.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小美</span>
-                            </div>
-                            <div class="bd">老师 nioq这块方便详细说下嘛 <br></div>
-                            <span class="time">2018-12-12 00:08</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">batman</span>
-                            </div>
-                            <div class="bd">TCP三次握手的英文，有没中文对照呀 <br></div>
-                            <span class="time">2018-10-23 10:16</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/4b/d4/b7719327.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">波波安</span>
-                            </div>
-                            <div class="bd"><br>一、gRPC数据传输采用的http2通信协议。连接管理的方式有<br>1.GOAWAY帧<br>服务端发出这种帧给客户端表示服务端在相关的连接上不再接受任何新流<br>2.PING帧<br>客户端和服务端均可以发送一个ping帧，对方必须精确回显它们所接收的消息。这可以用来确认连接任然是活动的。<br>3.连接失败<br>  客户端检测到连接失败，所有的调用都会以不可用状态关闭。服务端侧所有已经打开的调用都会被以取消状态关闭。<br>二、在多数语言里，gRPC编程接口同时支持同步和异步。<br>三、默认使用Protocol buffers协议对数据进行序列化和反序列化 <br></div>
-                            <span class="time">2018-10-11 22:01</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/4d/fe/abb7bfe3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">kid</span>
-                            </div>
-                            <div class="bd">我认为序列化主要解决三点:<br>1.大小端虚，异构系统网络通信时候的大小端序问题，这点由通信底层库实现<br>2.一种协议，在异构语言中进行数据翻译<br>3.压缩优化，提高网络通信能力 <br></div>
-                            <span class="time">2018-10-11 08:13</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/06/81/28418795.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">衣申人</span>
-                            </div>
-                            <div class="bd">原来不只是我觉得序列化不是为了压缩的，嘻嘻。我认为序列化和反序列化是解决内存数据到字节流的相互转换的。而压缩不压缩，其实不是必要的。当然序列化后的大小是评估一种序列化方式的优劣因素之一。 <br></div>
-                            <span class="time">2018-09-23 14:30</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是啊，这里着重强调下压缩比来体现差异</p>
-                                <p class="reply-time">2018-09-25 11:22</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ed/1a/ce7f7d54.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">asdf100</span>
-                            </div>
-                            <div class="bd">（1）同步阻塞IO（Blocking IO）：即传统的IO模型。<br>（2）同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。<br>（3）IO多路复用（IO Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型。高性能并发服务程序使用IO多路复用模型+多线程任务处理的架构。<br>（4）异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。<br><br>上面提到的“同步非阻塞“方式怎么不一样？ <br></div>
-                            <span class="time">2018-09-04 15:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">IO多路复用属于同步非阻塞的</p>
-                                <p class="reply-time">2018-09-06 01:11</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/0e/c77ad9b1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">eason2017</span>
-                            </div>
-                            <div class="bd">可以理解，一边看着老师的讲解，一边可以看着dubbo框架的实现了。老师的讲解应该就是这类框架的一个提纲挈领，也可以自己手动试着写这个这样的框架，更能体会其中的奥秘了。对吧，谢谢。 <br></div>
-                            <span class="time">2018-09-04 09:33</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/3f/b7/0d8b5431.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">snakorse</span>
-                            </div>
-                            <div class="bd">grpc在通信层面应该是异步非阻塞的模型(不是特别确定，java基于netty是异步非阻塞，c#用的c+ +库，猜测应该是用的IOCP)，通信协议是http2 stream，序列化采用PB。 <br></div>
-                            <span class="time">2018-09-04 09:11</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/45/f7/0f9bcf1f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ServerCoder</span>
-                            </div>
-                            <div class="bd">图配错了吧，那可是断链的四次挥手过程 <br></div>
-                            <span class="time">2018-09-04 09:03</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">本来有两种图的，一个是建连，一个是断连，待会把建连图补上</p>
-                                <p class="reply-time">2018-09-04 10:09</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a7/aa/2a8c15fa.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">AhianZhang</span>
-                            </div>
-                            <div class="bd">目前公司是用dubbo框架，需要搭建监控系统以便日后的限流和降级，日志系统原来有elk，结果一启动就宕机，带不起来。各位有什么解法 <br></div>
-                            <span class="time">2018-09-04 08:44</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  专栏上一期我讲过，要完成一次服务调用，首先要解决的问题是服务消费者如何得到服务提供者的地址，其中注册中心扮演了关键角色，服务提供者把自己的地址登记到注册中心，服务消费者就可以查询注册中心得到服务提供者的地址，可以说注册中心犹如海上的一座灯塔，为服务消费者指引了前行的方向。
+                </p>
+                <p>
+                  有了服务提供者的地址后，服务消费者就可以向这个地址发起请求了，但这时候也产生了一个新的问题。你知道，在单体应用时，一次服务调用发生在同一台机器上的同一个进程内部，也就是说调用发生在本机内部，因此也被叫作本地方法调用。在进行服务化拆分之后，服务提供者和服务消费者运行在两台不同物理机上的不同进程内，它们之间的调用相比于本地方法调用，可称之为远程方法调用，简称RPC（Remote
+                  Procedure Call），那么<span class="orange">RPC调用是如何实现的呢？</span>
+                </p>
+                <p>
+                  在介绍RPC调用的原理之前，先来想象一下一次电话通话的过程。首先，呼叫者A通过查询号码簿找到被呼叫者B的电话号码，然后拨打B的电话。B接到来电提示时，如果方便接听的话就会接听；如果不方便接听的话，A就得一直等待。当等待超过一段时间后，电话会因超时被挂断，这个时候A需要再次拨打电话，一直等到B空闲的时候，才能接听。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  RPC调用的原理与此类似，我习惯把服务消费者叫作<strong>客户端</strong>，服务提供者叫作<strong>服务端</strong>，两者通常位于网络上两个不同的地址，要完成一次RPC调用，就必须先建立网络连接。建立连接后，双方还必须按照某种约定的协议进行网络通信，这个协议就是通信协议。双方能够正常通信后，服务端接收到请求时，需要以某种方式进行处理，处理成功后，把请求结果返回给客户端。为了减少传输的数据大小，还要对数据进行压缩，也就是对数据进行序列化。
+                </p>
+                <p>上面就是RPC调用的过程，由此可见，想要完成调用，你需要解决四个问题：</p>
+                <ul>
+                  <li>
+                    <p>客户端和服务端如何建立网络连接？</p>
+                  </li>
+                  <li>
+                    <p>服务端如何处理请求？</p>
+                  </li>
+                  <li>
+                    <p>数据传输采用什么协议？</p>
+                  </li>
+                  <li>
+                    <p>数据该如何序列化和反序列化？</p>
+                  </li>
                 </ul>
+                <h2>客户端和服务端如何建立网络连接？</h2>
+                <p>根据我的实践经验，客户端和服务端之间基于TCP协议建立网络连接最常用的途径有两种。</p>
+                <p><strong>1. HTTP通信</strong></p>
+                <p>
+                  HTTP通信是基于应用层HTTP协议的，而HTTP协议又是基于传输层TCP协议的。一次HTTP通信过程就是发起一次HTTP调用，而一次HTTP调用就会建立一个TCP连接，经历一次下图所示的“<a
+                    href="http://condor.depaul.edu/jkristof/technotes/tcp.html"
+                    >三次握手</a
+                  >”的过程来建立连接。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/61/bd/61bfb298c82c441681fb88b7519ecebd.jpg"
+                    alt=""
+                  />
+                </p>
+                <p>完成请求后，再经历一次“四次挥手”的过程来断开连接。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/cb/6f/cb614475054bc5895013748c1139a66f.jpg"
+                    alt=""
+                  />
+                </p>
+                <p><strong>2. Socket通信</strong></p>
+                <p>
+                  Socket通信是基于TCP/IP协议的封装，建立一次Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket
+                  ；另一个运行于服务器端，称为ServerSocket
+                  。就像下图所描述的，Socket通信的过程分为四个步骤：服务器监听、客户端请求、连接确认、数据传输。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      服务器监听：ServerSocket通过调用bind()函数绑定某个具体端口，然后调用listen()函数实时监控网络状态，等待客户端的连接请求。
+                    </p>
+                  </li>
+                  <li>
+                    <p>客户端请求：ClientSocket调用connect()函数向ServerSocket绑定的地址和端口发起连接请求。</p>
+                  </li>
+                  <li>
+                    <p>
+                      服务端连接确认：当ServerSocket监听到或者接收到ClientSocket的连接请求时，调用accept()函数响应ClientSocket的请求，同客户端建立连接。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      数据传输：当ClientSocket和ServerSocket建立连接后，ClientSocket调用send()函数，ServerSocket调用receive()函数，ServerSocket处理完请求后，调用send()函数，ClientSocket调用receive()函数，就可以得到得到返回结果。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  直接理解可能有点抽象，你可以把这个过程套入前面我举的“打电话”的例子，可以方便你理解Socket通信过程。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/14/94/14362fab592dee5226bb498e3e46e994.jpg"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  当客户端和服务端建立网络连接后，就可以发起请求了。但网络不一定总是可靠的，经常会遇到网络闪断、连接超时、服务端宕机等各种异常，通常的处理手段有两种。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      链路存活检测：客户端需要定时地发送心跳检测消息（一般是通过ping请求）给服务端，如果服务端连续n次心跳检测或者超过规定的时间都没有回复消息，则认为此时链路已经失效，这个时候客户端就需要重新与服务端建立连接。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      断连重试：通常有多种情况会导致连接断开，比如客户端主动关闭、服务端宕机或者网络故障等。这个时候客户端就需要与服务端重新建立连接，但一般不能立刻完成重连，而是要等待固定的间隔后再发起重连，避免服务端的连接回收不及时，而客户端瞬间重连的请求太多而把服务端的连接数占满。
+                    </p>
+                  </li>
+                </ul>
+                <h2>服务端如何处理请求？</h2>
+                <p>
+                  假设这时候客户端和服务端已经建立了网络连接，服务端又该如何处理客户端的请求呢？通常来讲，有三种处理方式。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      同步阻塞方式（BIO），客户端每发一次请求，服务端就生成一个线程去处理。当客户端同时发起的请求很多时，服务端需要创建很多的线程去处理每一个请求，如果达到了系统最大的线程数瓶颈，新来的请求就没法处理了。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      同步非阻塞方式
+                      (NIO)，客户端每发一次请求，服务端并不是每次都创建一个新线程来处理，而是通过I/O多路复用技术进行处理。就是把多个I/O的阻塞复用到同一个select的阻塞上，从而使系统在单线程的情况下可以同时处理多个客户端请求。这种方式的优势是开销小，不用为每个请求创建一个线程，可以节省系统开销。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      异步非阻塞方式（AIO），客户端只需要发起一个I/O操作然后立即返回，等I/O操作真正完成以后，客户端会得到I/O操作完成的通知，此时客户端只需要对数据进行处理就好了，不需要进行实际的I/O读写操作，因为真正的I/O读取或者写入操作已经由内核完成了。这种方式的优势是客户端无需等待，不存在阻塞等待问题。
+                    </p>
+                  </li>
+                </ul>
+                <p>从前面的描述，可以看出来不同的处理方式适用于不同的业务场景，根据我的经验：</p>
+                <ul>
+                  <li>
+                    <p>
+                      BIO适用于连接数比较小的业务场景，这样的话不至于系统中没有可用线程去处理请求。这种方式写的程序也比较简单直观，易于理解。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      NIO适用于连接数比较多并且请求消耗比较轻的业务场景，比如聊天服务器。这种方式相比BIO，相对来说编程比较复杂。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      AIO适用于连接数比较多而且请求消耗比较重的业务场景，比如涉及I/O操作的相册服务器。这种方式相比另外两种，编程难度最大，程序也不易于理解。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  上面两个问题就是“通信框架”要解决的问题，你可以基于现有的Socket通信，在服务消费者和服务提供者之间建立网络连接，然后在服务提供者一侧基于BIO、NIO和AIO三种方式中的任意一种实现服务端请求处理，最后再花费一些精力去解决服务消费者和服务提供者之间的网络可靠性问题。这种方式对于Socket网络编程、多线程编程知识都要求比较高，感兴趣的话可以尝试自己实现一个通信框架。<strong>但我建议最为稳妥的方式是使用成熟的开源方案</strong>，比如Netty、MINA等，它们都是经过业界大规模应用后，被充分论证是很可靠的方案。
+                </p>
+                <p>
+                  假设客户端和服务端的连接已经建立了，服务端也能正确地处理请求了，接下来完成一次正常地RPC调用还需要解决两个问题，即数据传输采用什么协议以及数据该如何序列化和反序列化。
+                </p>
+                <h2>数据传输采用什么协议？</h2>
+                <p>首先来看第一个问题，数据传输采用什么协议？</p>
+                <p>
+                  最常用的有HTTP协议，它是一种开放的协议，各大网站的服务器和浏览器之间的数据传输大都采用了这种协议。还有一些定制的私有协议，比如阿里巴巴开源的Dubbo协议，也可以用于服务端和客户端之间的数据传输。无论是开放的还是私有的协议，都必须定义一个“契约”，以便服务消费和服务提供者之间能够达成共识。服务消费者按照契约，对传输的数据进行编码，然后通过网络传输过去；服务提供者从网络上接收到数据后，按照契约，对传输的数据进行解码，然后处理请求，再把处理后的结果进行编码，通过网络传输返回给服务消费者；服务消费者再对返回的结果进行解码，最终得到服务提供者处理后的返回值。
+                </p>
+                <p>
+                  通常协议契约包括两个部分：消息头和消息体。其中消息头存放的是协议的公共字段以及用户扩展字段，消息体存放的是传输数据的具体内容。
+                </p>
+                <p>
+                  以HTTP协议为例，下图展示了一段采用HTTP协议传输的数据响应报文，主要分为消息头和消息体两部分，其中消息头中存放的是协议的公共字段，比如Server代表是服务端服务器类型、Content-Length代表返回数据的长度、Content-Type代表返回数据的类型；消息体中存放的是具体的返回结果，这里就是一段HTML网页代码。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/e2/b7/e2b3614e1ea94b08b903d00757a3feb7.png"
+                    alt=""
+                  />
+                </p>
+                <h2>数据该如何序列化和反序列化？</h2>
+                <p>再看第二个问题，数据该如何序列化和反序列化。</p>
+                <p>
+                  一般数据在网络中进行传输前，都要先在发送方一端对数据进行编码，经过网络传输到达另一端后，再对数据进行解码，这个过程就是序列化和反序列化。
+                </p>
+                <p>
+                  为什么要对数据进行序列化和反序列化呢？要知道网络传输的耗时一方面取决于网络带宽的大小，另一方面取决于数据传输量。要想加快网络传输，要么提高带宽，要么减小数据传输量，而对数据进行编码的主要目的就是减小数据传输量。比如一部高清电影原始大小为30GB，如果经过特殊编码格式处理，可以减小到3GB，同样是100MB/s的网速，下载时间可以从300s减小到30s。
+                </p>
+                <p>
+                  常用的序列化方式分为两类：文本类如XML/JSON等，二进制类如PB/Thrift等，而具体采用哪种序列化方式，主要取决于三个方面的因素。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      支持数据结构类型的丰富度。数据结构种类支持的越多越好，这样的话对于使用者来说在编程时更加友好，有些序列化框架如Hessian
+                      2.0还支持复杂的数据结构比如Map、List等。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      跨语言支持。序列化方式是否支持跨语言也是一个很重要的因素，否则使用的场景就比较局限，比如Java序列化只支持Java语言，就不能用于跨语言的服务调用了。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      性能。主要看两点，一个是序列化后的压缩比，一个是序列化的速度。以常用的PB序列化和JSON序列化协议为例来对比分析，PB序列化的压缩比和速度都要比JSON序列化高很多，所以对性能和存储空间要求比较高的系统选用PB序列化更合适；而JSON序列化虽然性能要差一些，但可读性更好，更适合对外部提供服务。
+                    </p>
+                  </li>
+                </ul>
+                <h2>总结</h2>
+                <p>今天我给你讲解了服务调用需要解决的几个问题，其中你需要掌握：</p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong>通信框架</strong
+                      >。它主要解决客户端和服务端如何建立连接、管理连接以及服务端如何处理请求的问题。
+                    </p>
+                  </li>
+                  <li>
+                    <p><strong>通信协议</strong>。它主要解决客户端和服务端采用哪种数据传输协议的问题。</p>
+                  </li>
+                  <li>
+                    <p><strong>序列化和反序列化</strong>。它主要解决客户端和服务端采用哪种数据编解码的问题。</p>
+                  </li>
+                </ul>
+                <p>
+                  这三个部分就组成了一个完整的RPC调用框架，通信框架提供了基础的通信能力，通信协议描述了通信契约，而序列化和反序列化则用于数据的编/解码。一个通信框架可以适配多种通信协议，也可以采用多种序列化和反序列化的格式，比如服务化框架Dubbo不仅支持Dubbo协议，还支持RMI协议、HTTP协议等，而且还支持多种序列化和反序列化格式，比如JSON、Hession
+                  2.0以及Java序列化等。
+                </p>
+                <h2>思考题</h2>
+                <p>
+                  gRPC是一个优秀的跨语言RPC调用框架，按照今天我给你讲的服务调用知识，通过阅读<a
+                    href="https://grpc.io/docs/"
+                    >官方文档</a
+                  >，你能给出gRPC调用的实现原理吗？
+                </p>
+                <p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/aa/21/81ee4e60.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">lfn</span></div>
+                  <div class="bd">
+                    我觉得压缩只是序列化的一个原因，但却不是最本质的原因。序列化是为了解决内存中数据结构到字节序列的映射过程中，如何保留各个结构和字段间的关系而生的技术。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-04 09:28</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">确实，理论上用字符串就也可以，序列化能映射的同时也能压缩数据</p>
+                    <p class="reply-time">2018-09-05 18:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/f5/72/ee4c3df7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">萨洪志</span></div>
+                  <div class="bd">沙发，珍惜在车上的时间，😂 <br /></div>
+                  <span class="time">2018-09-04 07:28</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/85/a5/471ce926.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">靖远小和尚</span></div>
+                  <div class="bd">老师你好aio是异步阻塞是不是写错了！他应该是异步非阻塞吧！ <br /></div>
+                  <span class="time">2018-09-04 08:33</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">写错了，已修改👍</p>
+                    <p class="reply-time">2018-09-04 10:10</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/d7/df/fc0a6709.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">WolvesLeader</span></div>
+                  <div class="bd">
+                    服务A调用B，B调用C，假如B响应较慢，会造成整个调用链挂掉吗？有啥好办法防止这种问题吗？ <br />
+                  </div>
+                  <span class="time">2018-09-06 16:23</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/5f/83/bb728e53.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">jimforcode</span></div>
+                  <div class="bd">
+                    老师， nio 多路复用io 解决并发连接数问题， 但是，io密集型的应用，业务还是应该
+                    放到单独的线程里面处理的吧，可以创建一个线程池， nio 事件监听连接建立之后， 直接从
+                    业务线程池中获取一个线程来处理业务？ <br />
+                  </div>
+                  <span class="time">2018-10-09 13:32</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/32/c5/4b5cea9f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">逍遥子</span></div>
+                  <div class="bd">
+                    搞不懂为什么区分长http与socket两种通信，个人理解这两者不是一种概念呀，一个是协议一个是通信基石，http协议访问不也是基于套接字么
+                    <br />
+                  </div>
+                  <span class="time">2018-09-29 00:00</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/a5/c9/eb389183.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Hungry</span></div>
+                  <div class="bd">
+                    老师，我觉得序列化最大的目的是解决异构系统的数据传输，比如大小端、远端的持久存储；至于不同语言的代码结构上的变量映射，TLV压缩，这些应该是其次的
+                    <br />
+                  </div>
+                  <span class="time">2018-09-09 01:47</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯，在服务框架里序列号最主要的作用是数据编码</p>
+                    <p class="reply-time">2018-09-11 19:06</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7a/5d/b2e68df2.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">九斤鱼</span></div>
+                  <div class="bd">
+                    感觉这几篇还是在入门，实战什么时候开始呢？，老师，我更关心的实际操作层面，比如技术栈选型方面，是spring
+                    cloud呢还是dubbo还是其他什么，<br />系统划分后的工程如何管理，如何部署，如何测试，多容器环境下需要注意什么等等问题，望老师可以在接下来的课程里可以用实际项目解答一下🙏
+                    <br />
+                  </div>
+                  <span class="time">2018-09-06 19:24</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">可以看下专栏目录，在原理讲完之后开始讲实践</p>
+                    <p class="reply-time">2018-09-08 10:34</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ac/a1/43d83698.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">云学</span></div>
+                  <div class="bd">这篇文章感觉有些地方不太严谨，序列化是和异构系统有关 <br /></div>
+                  <span class="time">2018-09-05 08:32</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      序列化跟异构系统没有直接关联，比如java序列化，主要是为了解决数据编解码的问题
+                    </p>
+                    <p class="reply-time">2018-09-05 18:55</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7e/c6/63915456.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">先来</span></div>
+                  <div class="bd">
+                    NIO,AIO描述有问题。<br />NIO （New I&#47;O）：同时支持阻塞与非阻塞模式，但主要是使用同步非阻塞IO。
+                    <br />
+                    <br />AIO （Asynchronous I&#47;O）：异步非阻塞I&#47;O模型。 <br />
+                  </div>
+                  <span class="time">2018-09-04 09:15</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">抱歉，手误了，已修改👍</p>
+                    <p class="reply-time">2018-09-04 10:08</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/07/8c/51401220.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小美</span></div>
+                  <div class="bd">老师 nioq这块方便详细说下嘛 <br /></div>
+                  <span class="time">2018-12-12 00:08</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">batman</span></div>
+                  <div class="bd">TCP三次握手的英文，有没中文对照呀 <br /></div>
+                  <span class="time">2018-10-23 10:16</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/4b/d4/b7719327.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">波波安</span></div>
+                  <div class="bd">
+                    <br />一、gRPC数据传输采用的http2通信协议。连接管理的方式有<br />1.GOAWAY帧<br />服务端发出这种帧给客户端表示服务端在相关的连接上不再接受任何新流<br />2.PING帧<br />客户端和服务端均可以发送一个ping帧，对方必须精确回显它们所接收的消息。这可以用来确认连接任然是活动的。<br />3.连接失败<br />
+                    客户端检测到连接失败，所有的调用都会以不可用状态关闭。服务端侧所有已经打开的调用都会被以取消状态关闭。<br />二、在多数语言里，gRPC编程接口同时支持同步和异步。<br />三、默认使用Protocol
+                    buffers协议对数据进行序列化和反序列化 <br />
+                  </div>
+                  <span class="time">2018-10-11 22:01</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/4d/fe/abb7bfe3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">kid</span></div>
+                  <div class="bd">
+                    我认为序列化主要解决三点:<br />1.大小端虚，异构系统网络通信时候的大小端序问题，这点由通信底层库实现<br />2.一种协议，在异构语言中进行数据翻译<br />3.压缩优化，提高网络通信能力
+                    <br />
+                  </div>
+                  <span class="time">2018-10-11 08:13</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/06/81/28418795.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">衣申人</span></div>
+                  <div class="bd">
+                    原来不只是我觉得序列化不是为了压缩的，嘻嘻。我认为序列化和反序列化是解决内存数据到字节流的相互转换的。而压缩不压缩，其实不是必要的。当然序列化后的大小是评估一种序列化方式的优劣因素之一。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-23 14:30</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是啊，这里着重强调下压缩比来体现差异</p>
+                    <p class="reply-time">2018-09-25 11:22</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ed/1a/ce7f7d54.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">asdf100</span></div>
+                  <div class="bd">
+                    （1）同步阻塞IO（Blocking IO）：即传统的IO模型。<br />（2）同步非阻塞IO（Non-blocking
+                    IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。<br />（3）IO多路复用（IO
+                    Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型。高性能并发服务程序使用IO多路复用模型+多线程任务处理的架构。<br />（4）异步IO（Asynchronous
+                    IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。<br /><br />上面提到的“同步非阻塞“方式怎么不一样？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-04 15:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">IO多路复用属于同步非阻塞的</p>
+                    <p class="reply-time">2018-09-06 01:11</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/0e/c77ad9b1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">eason2017</span></div>
+                  <div class="bd">
+                    可以理解，一边看着老师的讲解，一边可以看着dubbo框架的实现了。老师的讲解应该就是这类框架的一个提纲挈领，也可以自己手动试着写这个这样的框架，更能体会其中的奥秘了。对吧，谢谢。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-04 09:33</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/3f/b7/0d8b5431.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">snakorse</span></div>
+                  <div class="bd">
+                    grpc在通信层面应该是异步非阻塞的模型(不是特别确定，java基于netty是异步非阻塞，c#用的c+
+                    +库，猜测应该是用的IOCP)，通信协议是http2 stream，序列化采用PB。 <br />
+                  </div>
+                  <span class="time">2018-09-04 09:11</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/45/f7/0f9bcf1f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ServerCoder</span></div>
+                  <div class="bd">图配错了吧，那可是断链的四次挥手过程 <br /></div>
+                  <span class="time">2018-09-04 09:03</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">本来有两种图的，一个是建连，一个是断连，待会把建连图补上</p>
+                    <p class="reply-time">2018-09-04 10:09</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a7/aa/2a8c15fa.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">AhianZhang</span></div>
+                  <div class="bd">
+                    目前公司是用dubbo框架，需要搭建监控系统以便日后的限流和降级，日志系统原来有elk，结果一启动就宕机，带不起来。各位有什么解法
+                    <br />
+                  </div>
+                  <span class="time">2018-09-04 08:44</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

@@ -1,465 +1,1810 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                12讲套路篇：CPU性能优化的几个思路
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/2b/04/2b47e19b576c3091e2da801fe2b30304.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">12讲套路篇：CPU性能优化的几个思路</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/2b/04/2b47e19b576c3091e2da801fe2b30304.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>上一节我们一起回顾了常见的 CPU 性能指标，梳理了核心的 CPU 性能观测工具，最后还总结了快速分析 CPU 性能问题的思路。虽然 CPU 的性能指标很多，相应的性能分析工具也很多，但理解了各种指标的含义后，你就会发现它们其实都有一定的关联。</p><p>顺着这些关系往下理解，你就会发现，掌握这些常用的瓶颈分析套路，其实并不难。</p><p>在找到 CPU 的性能瓶颈后，下一步要做的就是优化了，也就是找出充分利用CPU的方法，以便完成更多的工作。</p><p>今天，我就来说说，优化 CPU 性能问题的思路和注意事项。</p><h2>性能优化方法论</h2><p>在我们历经千辛万苦，通过各种性能分析方法，终于找到引发性能问题的瓶颈后，是不是立刻就要开始优化了呢？别急，动手之前，你可以先看看下面这三个问题。</p><ul>
-<li>
-<p>首先，既然要做性能优化，那要怎么判断它是不是有效呢？特别是优化后，到底能提升多少性能呢？</p>
-</li>
-<li>
-<p>第二，性能问题通常不是独立的，如果有多个性能问题同时发生，你应该先优化哪一个呢？</p>
-</li>
-<li>
-<p>第三，提升性能的方法并不是唯一的，当有多种方法可以选择时，你会选用哪一种呢？是不是总选那个最大程度提升性能的方法就行了呢？</p>
-</li>
-</ul><p>如果你可以轻松回答这三个问题，那么二话不说就可以开始优化。</p><p>比如，在前面的不可中断进程案例中，通过性能分析，我们发现是因为一个进程的<strong>直接 I/O</strong>  ，导致了 iowait 高达 90%。那是不是用“<strong>直接 I/O 换成缓存 I/O</strong>”的方法，就可以立即优化了呢？</p><!-- [[[read_end]]] --><p>按照上面讲的，你可以先自己思考下那三点。如果不能确定，我们一起来看看。</p><ul>
-<li>
-<p>第一个问题，直接 I/O 换成缓存 I/O，可以把 iowait 从 90% 降到接近 0，性能提升很明显。</p>
-</li>
-<li>
-<p>第二个问题，我们没有发现其他性能问题，直接 I/O 是唯一的性能瓶颈，所以不用挑选优化对象。</p>
-</li>
-<li>
-<p>第三个问题，缓存 I/O 是我们目前用到的最简单的优化方法，而且这样优化并不会影响应用的功能。</p>
-</li>
-</ul><p>好的，这三个问题很容易就能回答，所以立即优化没有任何问题。</p><p>但是，很多现实情况，并不像我举的例子那么简单。性能评估可能有多重指标，性能问题可能会多个同时发生，而且，优化某一个指标的性能，可能又导致其他指标性能的下降。</p><p>那么，面对这种复杂的情况，我们该怎么办呢？</p><p>接下来，我们就来深入分析这三个问题。</p><h3>怎么评估性能优化的效果？</h3><p>首先，来看第一个问题，怎么评估性能优化的效果。</p><p>我们解决性能问题的目的，自然是想得到一个性能提升的效果。为了评估这个效果，我们需要对系统的性能指标进行量化，并且要分别测试出优化前、后的性能指标，用前后指标的变化来对比呈现效果。我把这个方法叫做性能评估“三步走”。</p><ol>
-<li>
-<p>确定性能的量化指标。</p>
-</li>
-<li>
-<p>测试优化前的性能指标。</p>
-</li>
-<li>
-<p>测试优化后的性能指标。</p>
-</li>
-</ol><p>先看第一步，性能的量化指标有很多，比如 CPU 使用率、应用程序的吞吐量、客户端请求的延迟等，都可以评估性能。那我们应该选择什么指标来评估呢？</p><p>我的建议是<strong>不要局限在单一维度的指标上</strong>，你至少要从应用程序和系统资源这两个维度，分别选择不同的指标。比如，以 Web 应用为例：</p><ul>
-<li>
-<p>应用程序的维度，我们可以用<strong>吞吐量和请求延迟</strong>来评估应用程序的性能。</p>
-</li>
-<li>
-<p>系统资源的维度，我们可以用 <strong>CPU 使用率</strong>来评估系统的 CPU 使用情况。</p>
-</li>
-</ul><p>之所以从这两个不同维度选择指标，主要是因为应用程序和系统资源这两者间相辅相成的关系。</p><ul>
-<li>
-<p>好的应用程序是性能优化的最终目的和结果，系统优化总是为应用程序服务的。所以，必须要使用应用程序的指标，来评估性能优化的整体效果。</p>
-</li>
-<li>
-<p>系统资源的使用情况是影响应用程序性能的根源。所以，需要用系统资源的指标，来观察和分析瓶颈的来源。</p>
-</li>
-</ul><p>至于接下来的两个步骤，主要是为了对比优化前后的性能，更直观地呈现效果。如果你的第一步，是从两个不同维度选择了多个指标，那么在性能测试时，你就需要获得这些指标的具体数值。</p><p>还是以刚刚的 Web 应用为例，对应上面提到的几个指标，我们可以选择 ab 等工具，测试 Web 应用的并发请求数和响应延迟。而测试的同时，还可以用 vmstat、pidstat 等性能工具，观察系统和进程的 CPU 使用率。这样，我们就同时获得了应用程序和系统资源这两个维度的指标数值。</p><p>不过，在进行性能测试时，有两个特别重要的地方你需要注意下。</p><p>第一，要避免性能测试工具干扰应用程序的性能。通常，对 Web 应用来说，性能测试工具跟目标应用程序要在不同的机器上运行。</p><p>比如，在之前的 Nginx 案例中，我每次都会强调要用两台虚拟机，其中一台运行 Nginx 服务，而另一台运行模拟客户端的工具，就是为了避免这个影响。</p><p>第二，避免外部环境的变化影响性能指标的评估。这要求优化前、后的应用程序，都运行在相同配置的机器上，并且它们的外部依赖也要完全一致。</p><p>比如还是拿 Nginx 来说，就可以运行在同一台机器上，并用相同参数的客户端工具来进行性能测试。</p><h3>多个性能问题同时存在，要怎么选择？</h3><p>再来看第二个问题，开篇词里我们就说过，系统性能总是牵一发而动全身，所以性能问题通常也不是独立存在的。那当多个性能问题同时发生的时候，应该先去优化哪一个呢？</p><p>在性能测试的领域，流传很广的一个说法是“二八原则”，也就是说 80% 的问题都是由 20% 的代码导致的。只要找出这 20% 的位置，你就可以优化 80% 的性能。所以，我想表达的是，<strong>并不是所有的性能问题都值得优化</strong>。</p><p>我的建议是，动手优化之前先动脑，先把所有这些性能问题给分析一遍，找出最重要的、可以最大程度提升性能的问题，从它开始优化。这样的好处是，不仅性能提升的收益最大，而且很可能其他问题都不用优化，就已经满足了性能要求。</p><p>那关键就在于，怎么判断出哪个性能问题最重要。这其实还是我们性能分析要解决的核心问题，只不过这里要分析的对象，从原来的一个问题，变成了多个问题，思路其实还是一样的。</p><p>所以，你依然可以用我前面讲过的方法挨个分析，分别找出它们的瓶颈。分析完所有问题后，再按照因果等关系，排除掉有因果关联的性能问题。最后，再对剩下的性能问题进行优化。</p><p>如果剩下的问题还是好几个，你就得分别进行性能测试了。比较不同的优化效果后，选择能明显提升性能的那个问题进行修复。这个过程通常会花费较多的时间，这里，我推荐两个可以简化这个过程的方法。</p><p>第一，如果发现是系统资源达到了瓶颈，比如 CPU 使用率达到了 100%，那么首先优化的一定是系统资源使用问题。完成系统资源瓶颈的优化后，我们才要考虑其他问题。</p><p>第二，针对不同类型的指标，首先去优化那些由瓶颈导致的，性能指标变化幅度最大的问题。比如产生瓶颈后，用户 CPU 使用率升高了 10%，而系统 CPU 使用率却升高了 50%，这个时候就应该首先优化系统 CPU 的使用。</p><h3>有多种优化方法时，要如何选择?</h3><p>接着来看第三个问题，当多种方法都可用时，应该选择哪一种呢？是不是最大提升性能的方法，一定最好呢？</p><p>一般情况下，我们当然想选能最大提升性能的方法，这其实也是性能优化的目标。</p><p>但要注意，现实情况要考虑的因素却没那么简单。最直观来说，<strong>性能优化并非没有成本</strong>。性能优化通常会带来复杂度的提升，降低程序的可维护性，还可能在优化一个指标时，引发其他指标的异常。也就是说，很可能你优化了一个指标，另一个指标的性能却变差了。</p><p>一个很典型的例子是我将在网络部分讲到的 DPDK（Data Plane Development Kit）。DPDK 是一种优化网络处理速度的方法，它通过绕开内核网络协议栈的方法，提升网络的处理能力。</p><p>不过它有一个很典型的要求，就是要独占一个 CPU 以及一定数量的内存大页，并且总是以 100% 的 CPU 使用率运行。所以，如果你的 CPU 核数很少，就有点得不偿失了。</p><p>所以，在考虑选哪个性能优化方法时，你要综合多方面的因素。切记，不要想着“一步登天”，试图一次性解决所有问题；也不要只会“拿来主义”，把其他应用的优化方法原封不动拿来用，却不经过任何思考和分析。</p><h2>CPU 优化</h2><p>清楚了性能优化最基本的三个问题后，我们接下来从应用程序和系统的角度，分别来看看如何才能降低 CPU 使用率，提高 CPU 的并行处理能力。</p><h3>应用程序优化</h3><p>首先，从应用程序的角度来说，降低 CPU 使用率的最好方法当然是，排除所有不必要的工作，只保留最核心的逻辑。比如减少循环的层次、减少递归、减少动态内存分配等等。</p><p>除此之外，应用程序的性能优化也包括很多种方法，我在这里列出了最常见的几种，你可以记下来。</p><ul>
-<li>
-<p><strong>编译器优化</strong>：很多编译器都会提供优化选项，适当开启它们，在编译阶段你就可以获得编译器的帮助，来提升性能。比如， gcc 就提供了优化选项 -O2，开启后会自动对应用程序的代码进行优化。</p>
-</li>
-<li>
-<p><strong>算法优化</strong>：使用复杂度更低的算法，可以显著加快处理速度。比如，在数据比较大的情况下，可以用 O(nlogn) 的排序算法（如快排、归并排序等），代替 O(n^2) 的排序算法（如冒泡、插入排序等）。</p>
-</li>
-<li>
-<p><strong>异步处理</strong>：使用异步处理，可以避免程序因为等待某个资源而一直阻塞，从而提升程序的并发处理能力。比如，把轮询替换为事件通知，就可以避免轮询耗费 CPU 的问题。</p>
-</li>
-<li>
-<p><strong>多线程代替多进程</strong>：前面讲过，相对于进程的上下文切换，线程的上下文切换并不切换进程地址空间，因此可以降低上下文切换的成本。</p>
-</li>
-<li>
-<p><strong>善用缓存</strong>：经常访问的数据或者计算过程中的步骤，可以放到内存中缓存起来，这样在下次用时就能直接从内存中获取，加快程序的处理速度。</p>
-</li>
-</ul><h3>系统优化</h3><p>从系统的角度来说，优化 CPU 的运行，一方面要充分利用 CPU 缓存的本地性，加速缓存访问；另一方面，就是要控制进程的 CPU 使用情况，减少进程间的相互影响。</p><p>具体来说，系统层面的 CPU 优化方法也有不少，这里我同样列举了最常见的一些方法，方便你记忆和使用。</p><ul>
-<li>
-<p><strong>CPU 绑定</strong>：把进程绑定到一个或者多个 CPU 上，可以提高 CPU 缓存的命中率，减少跨 CPU 调度带来的上下文切换问题。</p>
-</li>
-<li>
-<p><strong>CPU 独占</strong>：跟 CPU 绑定类似，进一步将 CPU 分组，并通过 CPU 亲和性机制为其分配进程。这样，这些 CPU 就由指定的进程独占，换句话说，不允许其他进程再来使用这些CPU。</p>
-</li>
-<li>
-<p><strong>优先级调整</strong>：使用 nice 调整进程的优先级，正值调低优先级，负值调高优先级。优先级的数值含义前面我们提到过，忘了的话及时复习一下。在这里，适当降低非核心应用的优先级，增高核心应用的优先级，可以确保核心应用得到优先处理。</p>
-</li>
-<li>
-<p><strong>为进程设置资源限制</strong>：使用 Linux cgroups  来设置进程的 CPU 使用上限，可以防止由于某个应用自身的问题，而耗尽系统资源。</p>
-</li>
-<li>
-<p><strong>NUMA（Non-Uniform Memory Access）优化</strong>：支持 NUMA 的处理器会被划分为多个 node，每个 node 都有自己的本地内存空间。NUMA 优化，其实就是让 CPU 尽可能只访问本地内存。</p>
-</li>
-<li>
-<p><strong>中断负载均衡</strong>：无论是软中断还是硬中断，它们的中断处理程序都可能会耗费大量的CPU。开启 irqbalance 服务或者配置 smp_affinity，就可以把中断处理过程自动负载均衡到多个 CPU 上。</p>
-</li>
-</ul><h2>千万避免过早优化</h2><p>掌握上面这些优化方法后，我估计，很多人即使没发现性能瓶颈，也会忍不住把各种各样的优化方法带到实际的开发中。</p><p>不过，我想你一定听说过高德纳的这句名言， “过早优化是万恶之源”，我也非常赞同这一点，过早优化不可取。</p><p>因为，一方面，优化会带来复杂性的提升，降低可维护性；另一方面，需求不是一成不变的。针对当前情况进行的优化，很可能并不适应快速变化的新需求。这样，在新需求出现时，这些复杂的优化，反而可能阻碍新功能的开发。</p><p>所以，性能优化最好是逐步完善，动态进行，不追求一步到位，而要首先保证能满足当前的性能要求。当发现性能不满足要求或者出现性能瓶颈时，再根据性能评估的结果，选择最重要的性能问题进行优化。</p><h2>总结</h2><p>今天，我带你梳理了常见的 CPU 性能优化思路和优化方法。发现性能问题后，不要急于动手优化，而要先找出最重要的、可以获得最大性能提升的问题，然后再从应用程序和系统两个方面入手优化。</p><p>这样不仅可以获得最大的性能提升，而且很可能不需要优化其他问题，就已经满足了性能要求。</p><p>但是记住，一定要忍住“把 CPU 性能优化到极致”的冲动，因为 CPU 并不是唯一的性能因素。在后续的文章中，我还会介绍更多的性能问题，比如内存、网络、I/O 甚至是架构设计的问题。</p><p>如果不做全方位的分析和测试，只是单纯地把某个指标提升到极致，并不一定能带来整体的收益。</p><h2>思考</h2><p>由于篇幅的限制，我在这里只列举了几个最常见的 CPU 性能优化方法。除了这些，还有很多其他应用程序，或者系统资源角度的性能优化方法。我想请你一起来聊聊，你还知道哪些其他优化方法呢？</p><p>欢迎在留言区跟我讨论，也欢迎你把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">每天晒白牙</span>
-                            </div>
-                            <div class="bd">【D12打卡】<br>CPU性能优化思路<br>方法论<br>1.性能优化的效果判断<br>三步走理论<br>(1)确定性能的量化指标－一般从应用程序纬度和系统资源纬度分析<br>(2)测试优化前的性能指标<br>(3)测试性能优化后的性能指标<br>2.当性能问题有多个时，优先级问题<br>先优化最重要的且最大程度提升性能的问题开始优化<br>3.优化方法有多个时，该如何选<br>综合多方面因素<br>CPU优化<br>应用程序优化:排除不必要工作，只留核心逻辑<br>1.减少循环次数  减少递归  减少动态没错分配<br>2.编译器优化<br>3.算法优化<br>4.异步处理<br>5.多线程代替多进程<br>6.缓存<br>系统优化:利用CPU缓存本地性，加速缓存访问;控制进程的cpu使用情况，减少程序的处理速度<br>1.CPU绑定<br>2.CPU独占<br>3.优先级调整<br>4.为进程设置资源限制<br>5.NUMA优化<br>6.中断负载均衡<br>很重要的一点:切记过早优化<br><br> <br></div>
-                            <span class="time">2018-12-17 07:11</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-12-18 23:05</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">C家族的铁粉儿</span>
-                            </div>
-                            <div class="bd">又一篇精华满满的惊喜！<br>看到有人说，这些东西应该自己总结。是的，没错，很赞同。我也把用到的所有工具、指标、思路总结了一遍，但是看到老师给出了更全面系统的总结，仍然很受用。因为老师能从原理、关联多个角度给出更全面的知识网，也会指出一些易错的地方，是我们通学一遍、自己总结一遍以后的升华。起码，有些地方，因为原理知道的不多，我想错了或者漏了，看到这篇后，豁然开朗<br>老师给总结了，不等于你就会了，该学还得学，该记还得记，就像是满满的金子堆你面前，要不要弯腰去捡😊 <br></div>
-                            <span class="time">2018-12-17 00:27</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊</p>
-                                <p class="reply-time">2018-12-18 23:14</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">我来也</span>
-                            </div>
-                            <div class="bd">[D12打卡]<br>这些常见的性能优化方法,之前都了解的不全面,待其他大神给我们开开眼界.<br>我以前优化大多都是感性的,就是凭感觉或经验,并没有些实际的指标来观测.<br>一方面自己只是做开发,管好自己的程序即可,其他方便(比如系统环境)可能是有心无力.<br>-------------------------<br>&quot;过早优化是万恶之源&quot;<br>我也是很赞同的,用户没几个,花那么多精力做过度优化没必要,还不如拿那些时间来学学专栏.等真的有一定规模和趋势了,再用&quot;二八原则&quot;有针对性的优化.<br>我个人一般在写代码时,会在可以进一步优化的地方加个注释,暂时先在够用的情况下,怎么简单怎么来,后期如果有必要了,再来找这些注释,看什么地方值得优化.<br>-------------------------<br>应用程序优化方面,可以谈谈我的经历:<br>编译器优化: 刚参加工作时,培训期间练习一些算法,会对比每个人程序的性能. 我当时还是用的VC6.0++. 而有的同学用dev-c++编译器, 结果成绩经常被吊打. 即使是同一份源码,编译出来的程序也是有很大的差距.<br>算法优化: 正在学算法专栏. 也是要根据实际情况来优化, 利用二八原则,有针对性的优化,不要什么都优化,一天才执行一次的程序, 耗时1s 和0.001s的差距并不大. 虽然数字上相差了很多倍.<br>异步优化: 比如lua的协程,epoll代替原来的select和poll.<br>多线程代替多进程: 线程的切换理论上是比进程切换的成本低. 但有时候考虑到扩展性,还会从单进程改为多进程模型.<br>善用缓存:也可利用二八原则, 看值不值得. 是用空间换时间,还是时间换空间.<br>------------------<br>做优化,真的是要见机行事,像老师说的,[不要只会“拿来主义”] <br></div>
-                            <span class="time">2018-12-17 16:24</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的真棒，也谢谢分享你的经历</p>
-                                <p class="reply-time">2018-12-18 22:54</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/cb/b3/4325ffc4.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ivy是猪</span>
-                            </div>
-                            <div class="bd">买了几个课程里觉得最好的一门课，有条理，干货满满！ <br></div>
-                            <span class="time">2018-12-19 00:51</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">谢谢</p>
-                                <p class="reply-time">2018-12-19 13:01</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/5f/28/17ed19bc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">J</span>
-                            </div>
-                            <div class="bd">有没有可能讲一讲cpufreq  Intel的E系列CPU影响很大啊 升级内核之后 谢谢 <br></div>
-                            <span class="time">2018-12-17 20:02</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">没有涉及这一块。碰到了什么问题可以分享下？</p>
-                                <p class="reply-time">2018-12-18 22:47</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/02/5b/ce326cfc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Orcsir</span>
-                            </div>
-                            <div class="bd">Flag<br>2019&#47;01&#47;12 <br></div>
-                            <span class="time">2019-01-12 09:59</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/93/43/0e84492d.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Maxwell</span>
-                            </div>
-                            <div class="bd">CPU利用率多少算是比较合适的呢，CPU优化需要优化到多少比较合适？ <br></div>
-                            <span class="time">2019-01-10 09:39</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">要结合实际业务来确定优化目标</p>
-                                <p class="reply-time">2019-01-10 20:42</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">shibo</span>
-                            </div>
-                            <div class="bd">之前做过服务器上的数据库性能优化，也是运用了这些套路，要是早点这篇文章，就能少走点弯路 <br></div>
-                            <span class="time">2019-01-09 15:21</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">现在也不晚😊</p>
-                                <p class="reply-time">2019-01-09 17:38</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ae/95/d1b13c9e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">f</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2019-01-07 09:37</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a9/90/0c5ed3d9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">颇忒妥</span>
-                            </div>
-                            <div class="bd">“分析完所有问题后，再按照因果等关系，排除掉有因果关联的性能问题。最后，再对剩下的性能问题进行优化。”<br>这句话不是太理解，为何要排除掉有因果关联的性能问题？<br> <br></div>
-                            <span class="time">2019-01-04 15:22</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">目的是找根本而不是只看结果，比如软中断CPU使用率升高后要从网络方面来排查，而不是只盯着软中断的CPU使用率</p>
-                                <p class="reply-time">2019-01-12 10:15</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/dd/c8/3f100905.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">walt</span>
-                            </div>
-                            <div class="bd">倪老师好，4核8G Centos7,cpu load 超过15，单核任务数接近4了，但是 cpu idle还有20～30%，这个情况下如何评价CPU资源呢？ <br></div>
-                            <span class="time">2018-12-28 01:27</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">繁忙呀，这时候系统就需要不停在调度进程，也会有大量的上下文切换</p>
-                                <p class="reply-time">2018-12-28 21:56</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">如果</span>
-                            </div>
-                            <div class="bd">DAY12，打卡 <br></div>
-                            <span class="time">2018-12-27 14:05</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">大飞</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2018-12-25 09:28</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/47/46/61f16147.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">唯美</span>
-                            </div>
-                            <div class="bd">打卡D12 <br></div>
-                            <span class="time">2018-12-21 21:15</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">风飘，吾独思</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2018-12-19 23:17</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/0e/f5/c4a26e84.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Im Robin</span>
-                            </div>
-                            <div class="bd">打开，谢谢老师干货满满的教学<br>--------------------------------------------------------------<br>这里有一个问题， 我们线上的nginx两个实例之间QPS差2倍，nginx前面是四层SLB，两者唯一的区别就是centos6.5跟centos7.3，QPS高的机器load也高，推论就是centos6.5的那台压力上不去，在&#47;proc&#47;interrupts看到centos6.5的只有cpu0在处理虚拟网卡中断，而另一台四个cpu都在工作，不知道是不是这里的原因，看到这篇里老师有提到中断负载均衡，在想跟这里有没有关系，想向老师请教下 <br></div>
-                            <span class="time">2018-12-19 22:29</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">试试irqbalance或者配置 smp_affinity </p>
-                                <p class="reply-time">2018-12-20 21:47</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/f8/70/f3a33a14.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">某、人</span>
-                            </div>
-                            <div class="bd">老师，numa应该是有利也有弊吧，特别是针对数据库来说。那么应该怎么分析是否开启numa呢？ <br></div>
-                            <span class="time">2018-12-18 23:27</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/5c/cb/3ebdcc49.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">怀特</span>
-                            </div>
-                            <div class="bd">不知道咋回事，每次都是mysql的cpu占满，注意是mysql，不是mysqld。当时没有看老师的专栏，酥手无策，业务也着急，所以后来重装了系统好了。<br>如果当时看过了老师的专栏，就可以立刻分析分析了，是一个很好的实际操练提高自己的机会，可惜了。 <br></div>
-                            <span class="time">2018-12-18 11:54</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">以后就会了😊</p>
-                                <p class="reply-time">2018-12-18 22:18</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/92/c5/a2946220.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">陈启永</span>
-                            </div>
-                            <div class="bd">倪老师您好，你讲的知识很有条理，跟着您的思路来走是能够很好的理解的。自己在工作用也会尝试使用这里学到的知识来解决实际问题，感觉不会有以前那样碰到问题没头绪的尴尬处境了。<br>但是使用起来还没那么顺手，有可能是接触不够多的原因，但我觉得更多的原因是对知识的理解不够深入导致的。<br>所以在这里想请教下您，有哪些书籍可以帮助我们更加深入地系统的理解您讲的知识呢？ <br></div>
-                            <span class="time">2018-12-18 09:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">涉及的东西比较多，以后会推荐一些书籍和资料</p>
-                                <p class="reply-time">2018-12-18 22:34</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/12/d8/12879eb7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">善良的男人</span>
-                            </div>
-                            <div class="bd">top  中的  %mem   总和  超过 百分之百  不是很明白   还有就是  res  时所占用的物理内存   可是 想加之后也远超 与 实际内存  其中有 共享内存的占用吗 ？ <br></div>
-                            <span class="time">2018-12-17 18:58</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">有可能共享，也有可能swap。别急，接下来就到内存模块了</p>
-                                <p class="reply-time">2018-12-18 22:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  上一节我们一起回顾了常见的 CPU 性能指标，梳理了核心的 CPU 性能观测工具，最后还总结了快速分析 CPU
+                  性能问题的思路。虽然 CPU
+                  的性能指标很多，相应的性能分析工具也很多，但理解了各种指标的含义后，你就会发现它们其实都有一定的关联。
+                </p>
+                <p>顺着这些关系往下理解，你就会发现，掌握这些常用的瓶颈分析套路，其实并不难。</p>
+                <p>
+                  在找到 CPU 的性能瓶颈后，下一步要做的就是优化了，也就是找出充分利用CPU的方法，以便完成更多的工作。
+                </p>
+                <p>今天，我就来说说，优化 CPU 性能问题的思路和注意事项。</p>
+                <h2>性能优化方法论</h2>
+                <p>
+                  在我们历经千辛万苦，通过各种性能分析方法，终于找到引发性能问题的瓶颈后，是不是立刻就要开始优化了呢？别急，动手之前，你可以先看看下面这三个问题。
+                </p>
+                <ul>
+                  <li>
+                    <p>首先，既然要做性能优化，那要怎么判断它是不是有效呢？特别是优化后，到底能提升多少性能呢？</p>
+                  </li>
+                  <li>
+                    <p>第二，性能问题通常不是独立的，如果有多个性能问题同时发生，你应该先优化哪一个呢？</p>
+                  </li>
+                  <li>
+                    <p>
+                      第三，提升性能的方法并不是唯一的，当有多种方法可以选择时，你会选用哪一种呢？是不是总选那个最大程度提升性能的方法就行了呢？
+                    </p>
+                  </li>
                 </ul>
+                <p>如果你可以轻松回答这三个问题，那么二话不说就可以开始优化。</p>
+                <p>
+                  比如，在前面的不可中断进程案例中，通过性能分析，我们发现是因为一个进程的<strong>直接 I/O</strong>
+                  ，导致了 iowait 高达 90%。那是不是用“<strong>直接 I/O 换成缓存 I/O</strong
+                  >”的方法，就可以立即优化了呢？
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>按照上面讲的，你可以先自己思考下那三点。如果不能确定，我们一起来看看。</p>
+                <ul>
+                  <li>
+                    <p>第一个问题，直接 I/O 换成缓存 I/O，可以把 iowait 从 90% 降到接近 0，性能提升很明显。</p>
+                  </li>
+                  <li>
+                    <p>第二个问题，我们没有发现其他性能问题，直接 I/O 是唯一的性能瓶颈，所以不用挑选优化对象。</p>
+                  </li>
+                  <li>
+                    <p>第三个问题，缓存 I/O 是我们目前用到的最简单的优化方法，而且这样优化并不会影响应用的功能。</p>
+                  </li>
+                </ul>
+                <p>好的，这三个问题很容易就能回答，所以立即优化没有任何问题。</p>
+                <p>
+                  但是，很多现实情况，并不像我举的例子那么简单。性能评估可能有多重指标，性能问题可能会多个同时发生，而且，优化某一个指标的性能，可能又导致其他指标性能的下降。
+                </p>
+                <p>那么，面对这种复杂的情况，我们该怎么办呢？</p>
+                <p>接下来，我们就来深入分析这三个问题。</p>
+                <h3>怎么评估性能优化的效果？</h3>
+                <p>首先，来看第一个问题，怎么评估性能优化的效果。</p>
+                <p>
+                  我们解决性能问题的目的，自然是想得到一个性能提升的效果。为了评估这个效果，我们需要对系统的性能指标进行量化，并且要分别测试出优化前、后的性能指标，用前后指标的变化来对比呈现效果。我把这个方法叫做性能评估“三步走”。
+                </p>
+                <ol>
+                  <li>
+                    <p>确定性能的量化指标。</p>
+                  </li>
+                  <li>
+                    <p>测试优化前的性能指标。</p>
+                  </li>
+                  <li>
+                    <p>测试优化后的性能指标。</p>
+                  </li>
+                </ol>
+                <p>
+                  先看第一步，性能的量化指标有很多，比如 CPU
+                  使用率、应用程序的吞吐量、客户端请求的延迟等，都可以评估性能。那我们应该选择什么指标来评估呢？
+                </p>
+                <p>
+                  我的建议是<strong>不要局限在单一维度的指标上</strong>，你至少要从应用程序和系统资源这两个维度，分别选择不同的指标。比如，以
+                  Web 应用为例：
+                </p>
+                <ul>
+                  <li>
+                    <p>应用程序的维度，我们可以用<strong>吞吐量和请求延迟</strong>来评估应用程序的性能。</p>
+                  </li>
+                  <li>
+                    <p>系统资源的维度，我们可以用 <strong>CPU 使用率</strong>来评估系统的 CPU 使用情况。</p>
+                  </li>
+                </ul>
+                <p>之所以从这两个不同维度选择指标，主要是因为应用程序和系统资源这两者间相辅相成的关系。</p>
+                <ul>
+                  <li>
+                    <p>
+                      好的应用程序是性能优化的最终目的和结果，系统优化总是为应用程序服务的。所以，必须要使用应用程序的指标，来评估性能优化的整体效果。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      系统资源的使用情况是影响应用程序性能的根源。所以，需要用系统资源的指标，来观察和分析瓶颈的来源。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  至于接下来的两个步骤，主要是为了对比优化前后的性能，更直观地呈现效果。如果你的第一步，是从两个不同维度选择了多个指标，那么在性能测试时，你就需要获得这些指标的具体数值。
+                </p>
+                <p>
+                  还是以刚刚的 Web 应用为例，对应上面提到的几个指标，我们可以选择 ab 等工具，测试 Web
+                  应用的并发请求数和响应延迟。而测试的同时，还可以用 vmstat、pidstat 等性能工具，观察系统和进程的 CPU
+                  使用率。这样，我们就同时获得了应用程序和系统资源这两个维度的指标数值。
+                </p>
+                <p>不过，在进行性能测试时，有两个特别重要的地方你需要注意下。</p>
+                <p>
+                  第一，要避免性能测试工具干扰应用程序的性能。通常，对 Web
+                  应用来说，性能测试工具跟目标应用程序要在不同的机器上运行。
+                </p>
+                <p>
+                  比如，在之前的 Nginx 案例中，我每次都会强调要用两台虚拟机，其中一台运行 Nginx
+                  服务，而另一台运行模拟客户端的工具，就是为了避免这个影响。
+                </p>
+                <p>
+                  第二，避免外部环境的变化影响性能指标的评估。这要求优化前、后的应用程序，都运行在相同配置的机器上，并且它们的外部依赖也要完全一致。
+                </p>
+                <p>比如还是拿 Nginx 来说，就可以运行在同一台机器上，并用相同参数的客户端工具来进行性能测试。</p>
+                <h3>多个性能问题同时存在，要怎么选择？</h3>
+                <p>
+                  再来看第二个问题，开篇词里我们就说过，系统性能总是牵一发而动全身，所以性能问题通常也不是独立存在的。那当多个性能问题同时发生的时候，应该先去优化哪一个呢？
+                </p>
+                <p>
+                  在性能测试的领域，流传很广的一个说法是“二八原则”，也就是说 80% 的问题都是由 20%
+                  的代码导致的。只要找出这 20% 的位置，你就可以优化 80%
+                  的性能。所以，我想表达的是，<strong>并不是所有的性能问题都值得优化</strong>。
+                </p>
+                <p>
+                  我的建议是，动手优化之前先动脑，先把所有这些性能问题给分析一遍，找出最重要的、可以最大程度提升性能的问题，从它开始优化。这样的好处是，不仅性能提升的收益最大，而且很可能其他问题都不用优化，就已经满足了性能要求。
+                </p>
+                <p>
+                  那关键就在于，怎么判断出哪个性能问题最重要。这其实还是我们性能分析要解决的核心问题，只不过这里要分析的对象，从原来的一个问题，变成了多个问题，思路其实还是一样的。
+                </p>
+                <p>
+                  所以，你依然可以用我前面讲过的方法挨个分析，分别找出它们的瓶颈。分析完所有问题后，再按照因果等关系，排除掉有因果关联的性能问题。最后，再对剩下的性能问题进行优化。
+                </p>
+                <p>
+                  如果剩下的问题还是好几个，你就得分别进行性能测试了。比较不同的优化效果后，选择能明显提升性能的那个问题进行修复。这个过程通常会花费较多的时间，这里，我推荐两个可以简化这个过程的方法。
+                </p>
+                <p>
+                  第一，如果发现是系统资源达到了瓶颈，比如 CPU 使用率达到了
+                  100%，那么首先优化的一定是系统资源使用问题。完成系统资源瓶颈的优化后，我们才要考虑其他问题。
+                </p>
+                <p>
+                  第二，针对不同类型的指标，首先去优化那些由瓶颈导致的，性能指标变化幅度最大的问题。比如产生瓶颈后，用户
+                  CPU 使用率升高了 10%，而系统 CPU 使用率却升高了 50%，这个时候就应该首先优化系统 CPU 的使用。
+                </p>
+                <h3>有多种优化方法时，要如何选择?</h3>
+                <p>接着来看第三个问题，当多种方法都可用时，应该选择哪一种呢？是不是最大提升性能的方法，一定最好呢？</p>
+                <p>一般情况下，我们当然想选能最大提升性能的方法，这其实也是性能优化的目标。</p>
+                <p>
+                  但要注意，现实情况要考虑的因素却没那么简单。最直观来说，<strong>性能优化并非没有成本</strong>。性能优化通常会带来复杂度的提升，降低程序的可维护性，还可能在优化一个指标时，引发其他指标的异常。也就是说，很可能你优化了一个指标，另一个指标的性能却变差了。
+                </p>
+                <p>
+                  一个很典型的例子是我将在网络部分讲到的 DPDK（Data Plane Development Kit）。DPDK
+                  是一种优化网络处理速度的方法，它通过绕开内核网络协议栈的方法，提升网络的处理能力。
+                </p>
+                <p>
+                  不过它有一个很典型的要求，就是要独占一个 CPU 以及一定数量的内存大页，并且总是以 100% 的 CPU
+                  使用率运行。所以，如果你的 CPU 核数很少，就有点得不偿失了。
+                </p>
+                <p>
+                  所以，在考虑选哪个性能优化方法时，你要综合多方面的因素。切记，不要想着“一步登天”，试图一次性解决所有问题；也不要只会“拿来主义”，把其他应用的优化方法原封不动拿来用，却不经过任何思考和分析。
+                </p>
+                <h2>CPU 优化</h2>
+                <p>
+                  清楚了性能优化最基本的三个问题后，我们接下来从应用程序和系统的角度，分别来看看如何才能降低 CPU
+                  使用率，提高 CPU 的并行处理能力。
+                </p>
+                <h3>应用程序优化</h3>
+                <p>
+                  首先，从应用程序的角度来说，降低 CPU
+                  使用率的最好方法当然是，排除所有不必要的工作，只保留最核心的逻辑。比如减少循环的层次、减少递归、减少动态内存分配等等。
+                </p>
+                <p>除此之外，应用程序的性能优化也包括很多种方法，我在这里列出了最常见的几种，你可以记下来。</p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong>编译器优化</strong
+                      >：很多编译器都会提供优化选项，适当开启它们，在编译阶段你就可以获得编译器的帮助，来提升性能。比如，
+                      gcc 就提供了优化选项 -O2，开启后会自动对应用程序的代码进行优化。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>算法优化</strong
+                      >：使用复杂度更低的算法，可以显著加快处理速度。比如，在数据比较大的情况下，可以用 O(nlogn)
+                      的排序算法（如快排、归并排序等），代替 O(n^2) 的排序算法（如冒泡、插入排序等）。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>异步处理</strong
+                      >：使用异步处理，可以避免程序因为等待某个资源而一直阻塞，从而提升程序的并发处理能力。比如，把轮询替换为事件通知，就可以避免轮询耗费
+                      CPU 的问题。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>多线程代替多进程</strong
+                      >：前面讲过，相对于进程的上下文切换，线程的上下文切换并不切换进程地址空间，因此可以降低上下文切换的成本。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>善用缓存</strong
+                      >：经常访问的数据或者计算过程中的步骤，可以放到内存中缓存起来，这样在下次用时就能直接从内存中获取，加快程序的处理速度。
+                    </p>
+                  </li>
+                </ul>
+                <h3>系统优化</h3>
+                <p>
+                  从系统的角度来说，优化 CPU 的运行，一方面要充分利用 CPU
+                  缓存的本地性，加速缓存访问；另一方面，就是要控制进程的 CPU 使用情况，减少进程间的相互影响。
+                </p>
+                <p>具体来说，系统层面的 CPU 优化方法也有不少，这里我同样列举了最常见的一些方法，方便你记忆和使用。</p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong>CPU 绑定</strong>：把进程绑定到一个或者多个 CPU 上，可以提高 CPU 缓存的命中率，减少跨 CPU
+                      调度带来的上下文切换问题。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>CPU 独占</strong>：跟 CPU 绑定类似，进一步将 CPU 分组，并通过 CPU
+                      亲和性机制为其分配进程。这样，这些 CPU
+                      就由指定的进程独占，换句话说，不允许其他进程再来使用这些CPU。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>优先级调整</strong>：使用 nice
+                      调整进程的优先级，正值调低优先级，负值调高优先级。优先级的数值含义前面我们提到过，忘了的话及时复习一下。在这里，适当降低非核心应用的优先级，增高核心应用的优先级，可以确保核心应用得到优先处理。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>为进程设置资源限制</strong>：使用 Linux cgroups 来设置进程的 CPU
+                      使用上限，可以防止由于某个应用自身的问题，而耗尽系统资源。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>NUMA（Non-Uniform Memory Access）优化</strong>：支持 NUMA 的处理器会被划分为多个
+                      node，每个 node 都有自己的本地内存空间。NUMA 优化，其实就是让 CPU 尽可能只访问本地内存。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong>中断负载均衡</strong
+                      >：无论是软中断还是硬中断，它们的中断处理程序都可能会耗费大量的CPU。开启 irqbalance 服务或者配置
+                      smp_affinity，就可以把中断处理过程自动负载均衡到多个 CPU 上。
+                    </p>
+                  </li>
+                </ul>
+                <h2>千万避免过早优化</h2>
+                <p>
+                  掌握上面这些优化方法后，我估计，很多人即使没发现性能瓶颈，也会忍不住把各种各样的优化方法带到实际的开发中。
+                </p>
+                <p>
+                  不过，我想你一定听说过高德纳的这句名言， “过早优化是万恶之源”，我也非常赞同这一点，过早优化不可取。
+                </p>
+                <p>
+                  因为，一方面，优化会带来复杂性的提升，降低可维护性；另一方面，需求不是一成不变的。针对当前情况进行的优化，很可能并不适应快速变化的新需求。这样，在新需求出现时，这些复杂的优化，反而可能阻碍新功能的开发。
+                </p>
+                <p>
+                  所以，性能优化最好是逐步完善，动态进行，不追求一步到位，而要首先保证能满足当前的性能要求。当发现性能不满足要求或者出现性能瓶颈时，再根据性能评估的结果，选择最重要的性能问题进行优化。
+                </p>
+                <h2>总结</h2>
+                <p>
+                  今天，我带你梳理了常见的 CPU
+                  性能优化思路和优化方法。发现性能问题后，不要急于动手优化，而要先找出最重要的、可以获得最大性能提升的问题，然后再从应用程序和系统两个方面入手优化。
+                </p>
+                <p>这样不仅可以获得最大的性能提升，而且很可能不需要优化其他问题，就已经满足了性能要求。</p>
+                <p>
+                  但是记住，一定要忍住“把 CPU 性能优化到极致”的冲动，因为 CPU
+                  并不是唯一的性能因素。在后续的文章中，我还会介绍更多的性能问题，比如内存、网络、I/O
+                  甚至是架构设计的问题。
+                </p>
+                <p>如果不做全方位的分析和测试，只是单纯地把某个指标提升到极致，并不一定能带来整体的收益。</p>
+                <h2>思考</h2>
+                <p>
+                  由于篇幅的限制，我在这里只列举了几个最常见的 CPU
+                  性能优化方法。除了这些，还有很多其他应用程序，或者系统资源角度的性能优化方法。我想请你一起来聊聊，你还知道哪些其他优化方法呢？
+                </p>
+                <p>
+                  欢迎在留言区跟我讨论，也欢迎你把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">每天晒白牙</span></div>
+                  <div class="bd">
+                    【D12打卡】<br />CPU性能优化思路<br />方法论<br />1.性能优化的效果判断<br />三步走理论<br />(1)确定性能的量化指标－一般从应用程序纬度和系统资源纬度分析<br />(2)测试优化前的性能指标<br />(3)测试性能优化后的性能指标<br />2.当性能问题有多个时，优先级问题<br />先优化最重要的且最大程度提升性能的问题开始优化<br />3.优化方法有多个时，该如何选<br />综合多方面因素<br />CPU优化<br />应用程序优化:排除不必要工作，只留核心逻辑<br />1.减少循环次数
+                    减少递归 减少动态没错分配<br />2.编译器优化<br />3.算法优化<br />4.异步处理<br />5.多线程代替多进程<br />6.缓存<br />系统优化:利用CPU缓存本地性，加速缓存访问;控制进程的cpu使用情况，减少程序的处理速度<br />1.CPU绑定<br />2.CPU独占<br />3.优先级调整<br />4.为进程设置资源限制<br />5.NUMA优化<br />6.中断负载均衡<br />很重要的一点:切记过早优化<br /><br />
+                    <br />
+                  </div>
+                  <span class="time">2018-12-17 07:11</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-12-18 23:05</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">C家族的铁粉儿</span></div>
+                  <div class="bd">
+                    又一篇精华满满的惊喜！<br />看到有人说，这些东西应该自己总结。是的，没错，很赞同。我也把用到的所有工具、指标、思路总结了一遍，但是看到老师给出了更全面系统的总结，仍然很受用。因为老师能从原理、关联多个角度给出更全面的知识网，也会指出一些易错的地方，是我们通学一遍、自己总结一遍以后的升华。起码，有些地方，因为原理知道的不多，我想错了或者漏了，看到这篇后，豁然开朗<br />老师给总结了，不等于你就会了，该学还得学，该记还得记，就像是满满的金子堆你面前，要不要弯腰去捡😊
+                    <br />
+                  </div>
+                  <span class="time">2018-12-17 00:27</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊</p>
+                    <p class="reply-time">2018-12-18 23:14</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">我来也</span></div>
+                  <div class="bd">
+                    [D12打卡]<br />这些常见的性能优化方法,之前都了解的不全面,待其他大神给我们开开眼界.<br />我以前优化大多都是感性的,就是凭感觉或经验,并没有些实际的指标来观测.<br />一方面自己只是做开发,管好自己的程序即可,其他方便(比如系统环境)可能是有心无力.<br />-------------------------<br />&quot;过早优化是万恶之源&quot;<br />我也是很赞同的,用户没几个,花那么多精力做过度优化没必要,还不如拿那些时间来学学专栏.等真的有一定规模和趋势了,再用&quot;二八原则&quot;有针对性的优化.<br />我个人一般在写代码时,会在可以进一步优化的地方加个注释,暂时先在够用的情况下,怎么简单怎么来,后期如果有必要了,再来找这些注释,看什么地方值得优化.<br />-------------------------<br />应用程序优化方面,可以谈谈我的经历:<br />编译器优化:
+                    刚参加工作时,培训期间练习一些算法,会对比每个人程序的性能. 我当时还是用的VC6.0++.
+                    而有的同学用dev-c++编译器, 结果成绩经常被吊打. 即使是同一份源码,编译出来的程序也是有很大的差距.<br />算法优化:
+                    正在学算法专栏. 也是要根据实际情况来优化,
+                    利用二八原则,有针对性的优化,不要什么都优化,一天才执行一次的程序, 耗时1s 和0.001s的差距并不大.
+                    虽然数字上相差了很多倍.<br />异步优化: 比如lua的协程,epoll代替原来的select和poll.<br />多线程代替多进程:
+                    线程的切换理论上是比进程切换的成本低. 但有时候考虑到扩展性,还会从单进程改为多进程模型.<br />善用缓存:也可利用二八原则,
+                    看值不值得. 是用空间换时间,还是时间换空间.<br />------------------<br />做优化,真的是要见机行事,像老师说的,[不要只会“拿来主义”]
+                    <br />
+                  </div>
+                  <span class="time">2018-12-17 16:24</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">总结的真棒，也谢谢分享你的经历</p>
+                    <p class="reply-time">2018-12-18 22:54</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/cb/b3/4325ffc4.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ivy是猪</span></div>
+                  <div class="bd">买了几个课程里觉得最好的一门课，有条理，干货满满！ <br /></div>
+                  <span class="time">2018-12-19 00:51</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">谢谢</p>
+                    <p class="reply-time">2018-12-19 13:01</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/5f/28/17ed19bc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">J</span></div>
+                  <div class="bd">有没有可能讲一讲cpufreq Intel的E系列CPU影响很大啊 升级内核之后 谢谢 <br /></div>
+                  <span class="time">2018-12-17 20:02</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">没有涉及这一块。碰到了什么问题可以分享下？</p>
+                    <p class="reply-time">2018-12-18 22:47</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/02/5b/ce326cfc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Orcsir</span></div>
+                  <div class="bd">Flag<br />2019&#47;01&#47;12 <br /></div>
+                  <span class="time">2019-01-12 09:59</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/93/43/0e84492d.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Maxwell</span></div>
+                  <div class="bd">CPU利用率多少算是比较合适的呢，CPU优化需要优化到多少比较合适？ <br /></div>
+                  <span class="time">2019-01-10 09:39</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">要结合实际业务来确定优化目标</p>
+                    <p class="reply-time">2019-01-10 20:42</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">shibo</span></div>
+                  <div class="bd">
+                    之前做过服务器上的数据库性能优化，也是运用了这些套路，要是早点这篇文章，就能少走点弯路 <br />
+                  </div>
+                  <span class="time">2019-01-09 15:21</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">现在也不晚😊</p>
+                    <p class="reply-time">2019-01-09 17:38</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ae/95/d1b13c9e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">f</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2019-01-07 09:37</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a9/90/0c5ed3d9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">颇忒妥</span></div>
+                  <div class="bd">
+                    “分析完所有问题后，再按照因果等关系，排除掉有因果关联的性能问题。最后，再对剩下的性能问题进行优化。”<br />这句话不是太理解，为何要排除掉有因果关联的性能问题？<br />
+                    <br />
+                  </div>
+                  <span class="time">2019-01-04 15:22</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      目的是找根本而不是只看结果，比如软中断CPU使用率升高后要从网络方面来排查，而不是只盯着软中断的CPU使用率
+                    </p>
+                    <p class="reply-time">2019-01-12 10:15</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/dd/c8/3f100905.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">walt</span></div>
+                  <div class="bd">
+                    倪老师好，4核8G Centos7,cpu load 超过15，单核任务数接近4了，但是 cpu
+                    idle还有20～30%，这个情况下如何评价CPU资源呢？ <br />
+                  </div>
+                  <span class="time">2018-12-28 01:27</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">繁忙呀，这时候系统就需要不停在调度进程，也会有大量的上下文切换</p>
+                    <p class="reply-time">2018-12-28 21:56</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">如果</span></div>
+                  <div class="bd">DAY12，打卡 <br /></div>
+                  <span class="time">2018-12-27 14:05</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">大飞</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2018-12-25 09:28</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/47/46/61f16147.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">唯美</span></div>
+                  <div class="bd">打卡D12 <br /></div>
+                  <span class="time">2018-12-21 21:15</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">风飘，吾独思</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2018-12-19 23:17</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/0e/f5/c4a26e84.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Im Robin</span></div>
+                  <div class="bd">
+                    打开，谢谢老师干货满满的教学<br />--------------------------------------------------------------<br />这里有一个问题，
+                    我们线上的nginx两个实例之间QPS差2倍，nginx前面是四层SLB，两者唯一的区别就是centos6.5跟centos7.3，QPS高的机器load也高，推论就是centos6.5的那台压力上不去，在&#47;proc&#47;interrupts看到centos6.5的只有cpu0在处理虚拟网卡中断，而另一台四个cpu都在工作，不知道是不是这里的原因，看到这篇里老师有提到中断负载均衡，在想跟这里有没有关系，想向老师请教下
+                    <br />
+                  </div>
+                  <span class="time">2018-12-19 22:29</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">试试irqbalance或者配置 smp_affinity</p>
+                    <p class="reply-time">2018-12-20 21:47</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/f8/70/f3a33a14.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">某、人</span></div>
+                  <div class="bd">
+                    老师，numa应该是有利也有弊吧，特别是针对数据库来说。那么应该怎么分析是否开启numa呢？ <br />
+                  </div>
+                  <span class="time">2018-12-18 23:27</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/5c/cb/3ebdcc49.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">怀特</span></div>
+                  <div class="bd">
+                    不知道咋回事，每次都是mysql的cpu占满，注意是mysql，不是mysqld。当时没有看老师的专栏，酥手无策，业务也着急，所以后来重装了系统好了。<br />如果当时看过了老师的专栏，就可以立刻分析分析了，是一个很好的实际操练提高自己的机会，可惜了。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-18 11:54</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">以后就会了😊</p>
+                    <p class="reply-time">2018-12-18 22:18</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/92/c5/a2946220.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">陈启永</span></div>
+                  <div class="bd">
+                    倪老师您好，你讲的知识很有条理，跟着您的思路来走是能够很好的理解的。自己在工作用也会尝试使用这里学到的知识来解决实际问题，感觉不会有以前那样碰到问题没头绪的尴尬处境了。<br />但是使用起来还没那么顺手，有可能是接触不够多的原因，但我觉得更多的原因是对知识的理解不够深入导致的。<br />所以在这里想请教下您，有哪些书籍可以帮助我们更加深入地系统的理解您讲的知识呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-18 09:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">涉及的东西比较多，以后会推荐一些书籍和资料</p>
+                    <p class="reply-time">2018-12-18 22:34</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/12/d8/12879eb7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">善良的男人</span></div>
+                  <div class="bd">
+                    top 中的 %mem 总和 超过 百分之百 不是很明白 还有就是 res 时所占用的物理内存 可是 想加之后也远超 与
+                    实际内存 其中有 共享内存的占用吗 ？ <br />
+                  </div>
+                  <span class="time">2018-12-17 18:58</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">有可能共享，也有可能swap。别急，接下来就到内存模块了</p>
+                    <p class="reply-time">2018-12-18 22:50</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

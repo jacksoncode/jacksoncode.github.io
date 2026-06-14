@@ -1,88 +1,1288 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                06讲案例篇：系统的CPU使用率很高，但为啥却找不到高CPU的应用
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/83/32/833d93982458c72d094e867a9d2a5532.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">
+            06讲案例篇：系统的CPU使用率很高，但为啥却找不到高CPU的应用
+          </h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/83/32/833d93982458c72d094e867a9d2a5532.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>上一节我讲了 CPU 使用率是什么，并通过一个案例教你使用 top、vmstat、pidstat 等工具，排查高 CPU 使用率的进程，然后再使用 perf top 工具，定位应用内部函数的问题。不过就有人留言了，说似乎感觉高 CPU 使用率的问题，还是挺容易排查的。</p><p>那是不是所有 CPU 使用率高的问题，都可以这么分析呢？我想，你的答案应该是否定的。</p><p>回顾前面的内容，我们知道，系统的 CPU 使用率，不仅包括进程用户态和内核态的运行，还包括中断处理、等待 I/O 以及内核线程等。所以，<strong>当你发现系统的 CPU 使用率很高的时候，不一定能找到相对应的高 CPU 使用率的进程</strong>。</p><p>今天，我就用一个 Nginx + PHP 的 Web 服务的案例，带你来分析这种情况。</p><h2>案例分析</h2><h3>你的准备</h3><p>今天依旧探究系统CPU使用率高的情况，所以这次实验的准备工作，与上节课的准备工作基本相同，差别在于案例所用的 Docker 镜像不同。</p><p>本次案例还是基于 Ubuntu 18.04，同样适用于其他的 Linux 系统。我使用的案例环境如下所示：</p><ul>
-<li>
-<p>机器配置：2 CPU，8GB 内存</p>
-</li>
-<li>
-<p>预先安装 docker、sysstat、perf、ab 等工具，如 apt install <a href="http://docker.io">docker.io</a> sysstat linux-tools-common apache2-utils</p>
-</li>
-</ul><!-- [[[read_end]]] --><p>前面我们讲到过，ab（apache bench）是一个常用的 HTTP 服务性能测试工具，这里同样用来模拟 Nginx 的客户端。由于 Nginx 和 PHP 的配置比较麻烦，我把它们打包成了两个 <a href="https://github.com/feiskyer/linux-perf-examples/tree/master/nginx-short-process">Docker 镜像</a>，这样只需要运行两个容器，就可以得到模拟环境。</p><p>注意，这个案例要用到两台虚拟机，如下图所示：</p><p><img src="https://static001.geekbang.org/resource/image/90/3d/90c30b4f555218f77241bfe2ac27723d.png" alt=""></p><p>你可以看到，其中一台用作 Web 服务器，来模拟性能问题；另一台用作 Web 服务器的客户端，来给 Web 服务增加压力请求。使用两台虚拟机是为了相互隔离，避免“交叉感染”。</p><p>接下来，我们打开两个终端，分别 SSH 登录到两台机器上，并安装上述工具。</p><p>同样注意，下面所有命令都默认以 root 用户运行，如果你是用普通用户身份登陆系统，请运行 sudo su root 命令切换到 root 用户。</p><p>走到这一步，准备工作就完成了。接下来，我们正式进入操作环节。</p><blockquote>
-<p>温馨提示：案例中 PHP 应用的核心逻辑比较简单，你可能一眼就能看出问题，但实际生产环境中的源码就复杂多了。所以，我依旧建议，<strong>操作之前别看源码</strong>，避免先入为主，而要把它当成一个黑盒来分析。这样，你可以更好把握，怎么从系统的资源使用问题出发，分析出瓶颈所在的应用，以及瓶颈在应用中大概的位置。</p>
-</blockquote><h3>操作和分析</h3><p>首先，我们在第一个终端，执行下面的命令运行 Nginx 和 PHP 应用：</p><pre><code>$ docker run --name nginx -p 10000:80 -itd feisky/nginx:sp
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  上一节我讲了 CPU 使用率是什么，并通过一个案例教你使用 top、vmstat、pidstat 等工具，排查高 CPU
+                  使用率的进程，然后再使用 perf top 工具，定位应用内部函数的问题。不过就有人留言了，说似乎感觉高 CPU
+                  使用率的问题，还是挺容易排查的。
+                </p>
+                <p>那是不是所有 CPU 使用率高的问题，都可以这么分析呢？我想，你的答案应该是否定的。</p>
+                <p>
+                  回顾前面的内容，我们知道，系统的 CPU 使用率，不仅包括进程用户态和内核态的运行，还包括中断处理、等待
+                  I/O 以及内核线程等。所以，<strong
+                    >当你发现系统的 CPU 使用率很高的时候，不一定能找到相对应的高 CPU 使用率的进程</strong
+                  >。
+                </p>
+                <p>今天，我就用一个 Nginx + PHP 的 Web 服务的案例，带你来分析这种情况。</p>
+                <h2>案例分析</h2>
+                <h3>你的准备</h3>
+                <p>
+                  今天依旧探究系统CPU使用率高的情况，所以这次实验的准备工作，与上节课的准备工作基本相同，差别在于案例所用的
+                  Docker 镜像不同。
+                </p>
+                <p>本次案例还是基于 Ubuntu 18.04，同样适用于其他的 Linux 系统。我使用的案例环境如下所示：</p>
+                <ul>
+                  <li>
+                    <p>机器配置：2 CPU，8GB 内存</p>
+                  </li>
+                  <li>
+                    <p>
+                      预先安装 docker、sysstat、perf、ab 等工具，如 apt install
+                      <a href="http://docker.io">docker.io</a> sysstat linux-tools-common apache2-utils
+                    </p>
+                  </li>
+                </ul>
+                <!-- [[[read_end]]] -->
+                <p>
+                  前面我们讲到过，ab（apache bench）是一个常用的 HTTP 服务性能测试工具，这里同样用来模拟 Nginx
+                  的客户端。由于 Nginx 和 PHP 的配置比较麻烦，我把它们打包成了两个
+                  <a href="https://github.com/feiskyer/linux-perf-examples/tree/master/nginx-short-process"
+                    >Docker 镜像</a
+                  >，这样只需要运行两个容器，就可以得到模拟环境。
+                </p>
+                <p>注意，这个案例要用到两台虚拟机，如下图所示：</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/90/3d/90c30b4f555218f77241bfe2ac27723d.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  你可以看到，其中一台用作 Web 服务器，来模拟性能问题；另一台用作 Web 服务器的客户端，来给 Web
+                  服务增加压力请求。使用两台虚拟机是为了相互隔离，避免“交叉感染”。
+                </p>
+                <p>接下来，我们打开两个终端，分别 SSH 登录到两台机器上，并安装上述工具。</p>
+                <p>
+                  同样注意，下面所有命令都默认以 root 用户运行，如果你是用普通用户身份登陆系统，请运行 sudo su root
+                  命令切换到 root 用户。
+                </p>
+                <p>走到这一步，准备工作就完成了。接下来，我们正式进入操作环节。</p>
+                <blockquote>
+                  <p>
+                    温馨提示：案例中 PHP
+                    应用的核心逻辑比较简单，你可能一眼就能看出问题，但实际生产环境中的源码就复杂多了。所以，我依旧建议，<strong>操作之前别看源码</strong>，避免先入为主，而要把它当成一个黑盒来分析。这样，你可以更好把握，怎么从系统的资源使用问题出发，分析出瓶颈所在的应用，以及瓶颈在应用中大概的位置。
+                  </p>
+                </blockquote>
+                <h3>操作和分析</h3>
+                <p>首先，我们在第一个终端，执行下面的命令运行 Nginx 和 PHP 应用：</p>
+                <pre><code>$ docker run --name nginx -p 10000:80 -itd feisky/nginx:sp
 $ docker run --name phpfpm -itd --network container:nginx feisky/php-fpm:sp
-</code></pre><p>然后，在第二个终端，使用 curl 访问 http://[VM1的IP]:10000，确认 Nginx 已正常启动。你应该可以看到 It works! 的响应。</p><pre><code># 192.168.0.10是第一台虚拟机的IP地址
+</code></pre>
+                <p>
+                  然后，在第二个终端，使用 curl 访问 http://[VM1的IP]:10000，确认 Nginx 已正常启动。你应该可以看到 It
+                  works! 的响应。
+                </p>
+                <pre><code># 192.168.0.10是第一台虚拟机的IP地址
 $ curl http://192.168.0.10:10000/
 It works!
-</code></pre><p>接着，我们来测试一下这个 Nginx 服务的性能。在第二个终端运行下面的 ab 命令。要注意，与上次操作不同的是，这次我们需要并发100个请求测试Nginx性能，总共测试1000个请求。</p><pre><code># 并发100个请求测试Nginx性能，总共测试1000个请求
+</code></pre>
+                <p>
+                  接着，我们来测试一下这个 Nginx 服务的性能。在第二个终端运行下面的 ab
+                  命令。要注意，与上次操作不同的是，这次我们需要并发100个请求测试Nginx性能，总共测试1000个请求。
+                </p>
+                <pre><code># 并发100个请求测试Nginx性能，总共测试1000个请求
 $ ab -c 100 -n 1000 http://192.168.0.10:10000/
 This is ApacheBench, Version 2.3 &lt;$Revision: 1706008 $&gt;
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, 
@@ -90,8 +1290,20 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd,
 Requests per second:    87.86 [#/sec] (mean)
 Time per request:       1138.229 [ms] (mean)
 ...
-</code></pre><p>从ab的输出结果我们可以看到，Nginx能承受的每秒平均请求数，只有 87 多一点，是不是感觉它的性能有点差呀。那么，到底是哪里出了问题呢？我们再用 top 和 pidstat 来观察一下。</p><p>这次，我们在第二个终端，将测试的并发请求数改成5，同时把请求时长设置为10分钟（-t 600）。这样，当你在第一个终端使用性能分析工具时， Nginx 的压力还是继续的。</p><p>继续在第二个终端运行 ab 命令：</p><pre><code>$ ab -c 5 -t 600 http://192.168.0.10:10000/
-</code></pre><p>然后，我们在第一个终端运行 top 命令，观察系统的 CPU 使用情况：</p><pre><code>$ top
+</code></pre>
+                <p>
+                  从ab的输出结果我们可以看到，Nginx能承受的每秒平均请求数，只有 87
+                  多一点，是不是感觉它的性能有点差呀。那么，到底是哪里出了问题呢？我们再用 top 和 pidstat 来观察一下。
+                </p>
+                <p>
+                  这次，我们在第二个终端，将测试的并发请求数改成5，同时把请求时长设置为10分钟（-t
+                  600）。这样，当你在第一个终端使用性能分析工具时， Nginx 的压力还是继续的。
+                </p>
+                <p>继续在第二个终端运行 ab 命令：</p>
+                <pre><code>$ ab -c 5 -t 600 http://192.168.0.10:10000/
+</code></pre>
+                <p>然后，我们在第一个终端运行 top 命令，观察系统的 CPU 使用情况：</p>
+                <pre><code>$ top
 ...
 %Cpu(s): 80.8 us, 15.1 sy,  0.0 ni,  2.8 id,  0.0 wa,  0.0 hi,  1.3 si,  0.0 st
 ...
@@ -107,17 +1319,33 @@ Time per request:       1138.229 [ms] (mean)
 15006 root      20   0 1168608  66264  37536 S   1.0  0.8   9:39.51 dockerd
  4323 root      20   0       0      0      0 I   0.3  0.0   0:00.87 kworker/u4:1
 ...
-</code></pre><p>观察 top 输出的进程列表可以发现，CPU 使用率最高的进程也只不过才 2.7%，看起来并不高。</p><p>然而，再看系统 CPU 使用率（ %Cpu ）这一行，你会发现，系统的整体 CPU 使用率是比较高的：用户 CPU 使用率（us）已经到了 80%，系统 CPU 为 15.1%，而空闲 CPU （id）则只有 2.8%。</p><p>为什么用户 CPU 使用率这么高呢？我们再重新分析一下进程列表，看看有没有可疑进程：</p><ul>
-<li>
-<p>docker-containerd 进程是用来运行容器的，2.7% 的 CPU 使用率看起来正常；</p>
-</li>
-<li>
-<p>Nginx 和 php-fpm 是运行 Web 服务的，它们会占用一些 CPU 也不意外，并且 2% 的 CPU 使用率也不算高；</p>
-</li>
-<li>
-<p>再往下看，后面的进程呢，只有 0.3% 的 CPU 使用率，看起来不太像会导致用户 CPU 使用率达到 80%。</p>
-</li>
-</ul><p>那就奇怪了，明明用户 CPU 使用率都80%了，可我们挨个分析了一遍进程列表，还是找不到高 CPU 使用率的进程。看来top是不管用了，那还有其他工具可以查看进程 CPU 使用情况吗？不知道你记不记得我们的老朋友  pidstat，它可以用来分析进程的 CPU 使用情况。</p><p>接下来，我们还是在第一个终端，运行 pidstat 命令：</p><pre><code># 间隔1秒输出一组数据（按Ctrl+C结束）
+</code></pre>
+                <p>观察 top 输出的进程列表可以发现，CPU 使用率最高的进程也只不过才 2.7%，看起来并不高。</p>
+                <p>
+                  然而，再看系统 CPU 使用率（ %Cpu ）这一行，你会发现，系统的整体 CPU 使用率是比较高的：用户 CPU
+                  使用率（us）已经到了 80%，系统 CPU 为 15.1%，而空闲 CPU （id）则只有 2.8%。
+                </p>
+                <p>为什么用户 CPU 使用率这么高呢？我们再重新分析一下进程列表，看看有没有可疑进程：</p>
+                <ul>
+                  <li>
+                    <p>docker-containerd 进程是用来运行容器的，2.7% 的 CPU 使用率看起来正常；</p>
+                  </li>
+                  <li>
+                    <p>
+                      Nginx 和 php-fpm 是运行 Web 服务的，它们会占用一些 CPU 也不意外，并且 2% 的 CPU 使用率也不算高；
+                    </p>
+                  </li>
+                  <li>
+                    <p>再往下看，后面的进程呢，只有 0.3% 的 CPU 使用率，看起来不太像会导致用户 CPU 使用率达到 80%。</p>
+                  </li>
+                </ul>
+                <p>
+                  那就奇怪了，明明用户 CPU 使用率都80%了，可我们挨个分析了一遍进程列表，还是找不到高 CPU
+                  使用率的进程。看来top是不管用了，那还有其他工具可以查看进程 CPU
+                  使用情况吗？不知道你记不记得我们的老朋友 pidstat，它可以用来分析进程的 CPU 使用情况。
+                </p>
+                <p>接下来，我们还是在第一个终端，运行 pidstat 命令：</p>
+                <pre><code># 间隔1秒输出一组数据（按Ctrl+C结束）
 $ pidstat 1
 ...
 04:36:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
@@ -133,7 +1361,21 @@ $ pidstat 1
 04:36:25        1     17084    1.00    0.00    0.00    2.00    1.00     0  stress
 04:36:25        0     31116    0.00    1.00    0.00    0.00    1.00     0  atopacctd
 ...
-</code></pre><p>观察一会儿，你是不是发现，所有进程的 CPU 使用率也都不高啊，最高的 Docker 和 Nginx 也只有 4% 和 3%，即使所有进程的 CPU 使用率都加起来，也不过是 21%，离 80% 还差得远呢！</p><p>最早的时候，我碰到这种问题就完全懵了：明明用户 CPU 使用率已经高达 80%，但我却怎么都找不到是哪个进程的问题。到这里，你也可以想想，你是不是也遇到过这种情况？还能不能再做进一步的分析呢？</p><p>后来我发现，会出现这种情况，很可能是因为前面的分析漏了一些关键信息。你可以先暂停一下，自己往上翻，重新操作检查一遍。或者，我们一起返回去分析 top 的输出，看看能不能有新发现。</p><p>现在，我们回到第一个终端，重新运行 top 命令，并观察一会儿：</p><pre><code>$ top
+</code></pre>
+                <p>
+                  观察一会儿，你是不是发现，所有进程的 CPU 使用率也都不高啊，最高的 Docker 和 Nginx 也只有 4% 和
+                  3%，即使所有进程的 CPU 使用率都加起来，也不过是 21%，离 80% 还差得远呢！
+                </p>
+                <p>
+                  最早的时候，我碰到这种问题就完全懵了：明明用户 CPU 使用率已经高达
+                  80%，但我却怎么都找不到是哪个进程的问题。到这里，你也可以想想，你是不是也遇到过这种情况？还能不能再做进一步的分析呢？
+                </p>
+                <p>
+                  后来我发现，会出现这种情况，很可能是因为前面的分析漏了一些关键信息。你可以先暂停一下，自己往上翻，重新操作检查一遍。或者，我们一起返回去分析
+                  top 的输出，看看能不能有新发现。
+                </p>
+                <p>现在，我们回到第一个终端，重新运行 top 命令，并观察一会儿：</p>
+                <pre><code>$ top
 top - 04:58:24 up 14 days, 15:47,  1 user,  load average: 3.39, 3.82, 2.74
 Tasks: 149 total,   6 running,  93 sleeping,   0 stopped,   0 zombie
 %Cpu(s): 77.7 us, 19.3 sy,  0.0 ni,  2.0 id,  0.0 wa,  0.0 hi,  1.0 si,  0.0 st
@@ -155,13 +1397,42 @@ KiB Swap:        0 total,        0 free,        0 used.  7363908 avail Mem
 24344 daemon    20   0    8188   1056    492 R   1.0  0.0   0:00.01 stress
 24347 daemon    20   0    8184   1356    540 R   1.0  0.0   0:00.01 stress
 ...
-</code></pre><p>这次从头开始看 top 的每行输出，咦？Tasks 这一行看起来有点奇怪，就绪队列中居然有 6 个 Running 状态的进程（6 running），是不是有点多呢？</p><p>回想一下 ab 测试的参数，并发请求数是 5。再看进程列表里， php-fpm 的数量也是 5，再加上 Nginx，好像同时有 6 个进程也并不奇怪。但真的是这样吗？</p><p>再仔细看进程列表，这次主要看 Running（R） 状态的进程。你有没有发现， Nginx 和所有的 php-fpm 都处于Sleep（S）状态，而真正处于 Running（R）状态的，却是几个 stress 进程。这几个 stress 进程就比较奇怪了，需要我们做进一步的分析。</p><p>我们还是使用 pidstat 来分析这几个进程，并且使用 -p 选项指定进程的 PID。首先，从上面 top 的结果中，找到这几个进程的 PID。比如，先随便找一个 24344，然后用 pidstat 命令看一下它的 CPU 使用情况：</p><pre><code>$ pidstat -p 24344
+</code></pre>
+                <p>
+                  这次从头开始看 top 的每行输出，咦？Tasks 这一行看起来有点奇怪，就绪队列中居然有 6 个 Running
+                  状态的进程（6 running），是不是有点多呢？
+                </p>
+                <p>
+                  回想一下 ab 测试的参数，并发请求数是 5。再看进程列表里， php-fpm 的数量也是 5，再加上
+                  Nginx，好像同时有 6 个进程也并不奇怪。但真的是这样吗？
+                </p>
+                <p>
+                  再仔细看进程列表，这次主要看 Running（R） 状态的进程。你有没有发现， Nginx 和所有的 php-fpm
+                  都处于Sleep（S）状态，而真正处于 Running（R）状态的，却是几个 stress 进程。这几个 stress
+                  进程就比较奇怪了，需要我们做进一步的分析。
+                </p>
+                <p>
+                  我们还是使用 pidstat 来分析这几个进程，并且使用 -p 选项指定进程的 PID。首先，从上面 top
+                  的结果中，找到这几个进程的 PID。比如，先随便找一个 24344，然后用 pidstat 命令看一下它的 CPU 使用情况：
+                </p>
+                <pre><code>$ pidstat -p 24344
 
 16:14:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
-</code></pre><p>奇怪，居然没有任何输出。难道是pidstat 命令出问题了吗？之前我说过，<strong>在怀疑性能工具出问题前，最好还是先用其他工具交叉确认一下</strong>。那用什么工具呢？ ps 应该是最简单易用的。我们在终端里运行下面的命令，看看 24344 进程的状态：</p><pre><code># 从所有进程中查找PID是24344的进程
+</code></pre>
+                <p>
+                  奇怪，居然没有任何输出。难道是pidstat
+                  命令出问题了吗？之前我说过，<strong>在怀疑性能工具出问题前，最好还是先用其他工具交叉确认一下</strong>。那用什么工具呢？
+                  ps 应该是最简单易用的。我们在终端里运行下面的命令，看看 24344 进程的状态：
+                </p>
+                <pre><code># 从所有进程中查找PID是24344的进程
 $ ps aux | grep 24344
 root      9628  0.0  0.0  14856  1096 pts/0    S+   16:15   0:00 grep --color=auto 24344
-</code></pre><p>还是没有输出。现在终于发现问题，原来这个进程已经不存在了，所以 pidstat 就没有任何输出。既然进程都没了，那性能问题应该也跟着没了吧。我们再用 top 命令确认一下：</p><pre><code>$ top
+</code></pre>
+                <p>
+                  还是没有输出。现在终于发现问题，原来这个进程已经不存在了，所以 pidstat
+                  就没有任何输出。既然进程都没了，那性能问题应该也跟着没了吧。我们再用 top 命令确认一下：
+                </p>
+                <pre><code>$ top
 ...
 %Cpu(s): 80.9 us, 14.9 sy,  0.0 ni,  2.8 id,  0.0 wa,  0.0 hi,  1.3 si,  0.0 st
 ...
@@ -172,24 +1443,67 @@ root      9628  0.0  0.0  14856  1096 pts/0    S+   16:15   0:00 grep --color=au
  3865 daemon    20   0  336696  15056   7376 S   2.0  0.2   0:00.15 php-fpm
   6779 daemon    20   0    8184   1112    556 R   0.3  0.0   0:00.01 stress
 ...
-</code></pre><p>好像又错了。结果还跟原来一样，用户 CPU 使用率还是高达 80.9%，系统 CPU 接近 15%，而空闲 CPU 只有 2.8%，Running 状态的进程有 Nginx、stress等。</p><p>可是，刚刚我们看到stress 进程不存在了，怎么现在还在运行呢？再细看一下 top 的输出，原来，这次 stress 进程的 PID 跟前面不一样了，原来的 PID 24344 不见了，现在的是 6779。</p><p>进程的 PID 在变，这说明什么呢？在我看来，要么是这些进程在不停地重启，要么就是全新的进程，这无非也就两个原因：</p><ul>
-<li>
-<p>第一个原因，进程在不停地崩溃重启，比如因为段错误、配置错误等等，这时，进程在退出后可能又被监控系统自动重启了。</p>
-</li>
-<li>
-<p>第二个原因，这些进程都是短时进程，也就是在其他应用内部通过 exec 调用的外面命令。这些命令一般都只运行很短的时间就会结束，你很难用 top 这种间隔时间比较长的工具发现（上面的案例，我们碰巧发现了）。</p>
-</li>
-</ul><p>至于 stress，我们前面提到过，它是一个常用的压力测试工具。它的 PID 在不断变化中，看起来像是被其他进程调用的短时进程。要想继续分析下去，还得找到它们的父进程。</p><p>要怎么查找一个进程的父进程呢？没错，用 pstree  就可以用树状形式显示所有进程之间的关系：</p><pre><code>$ pstree | grep stress
+</code></pre>
+                <p>
+                  好像又错了。结果还跟原来一样，用户 CPU 使用率还是高达 80.9%，系统 CPU 接近 15%，而空闲 CPU 只有
+                  2.8%，Running 状态的进程有 Nginx、stress等。
+                </p>
+                <p>
+                  可是，刚刚我们看到stress 进程不存在了，怎么现在还在运行呢？再细看一下 top 的输出，原来，这次 stress
+                  进程的 PID 跟前面不一样了，原来的 PID 24344 不见了，现在的是 6779。
+                </p>
+                <p>
+                  进程的 PID
+                  在变，这说明什么呢？在我看来，要么是这些进程在不停地重启，要么就是全新的进程，这无非也就两个原因：
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      第一个原因，进程在不停地崩溃重启，比如因为段错误、配置错误等等，这时，进程在退出后可能又被监控系统自动重启了。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      第二个原因，这些进程都是短时进程，也就是在其他应用内部通过 exec
+                      调用的外面命令。这些命令一般都只运行很短的时间就会结束，你很难用 top
+                      这种间隔时间比较长的工具发现（上面的案例，我们碰巧发现了）。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  至于 stress，我们前面提到过，它是一个常用的压力测试工具。它的 PID
+                  在不断变化中，看起来像是被其他进程调用的短时进程。要想继续分析下去，还得找到它们的父进程。
+                </p>
+                <p>要怎么查找一个进程的父进程呢？没错，用 pstree 就可以用树状形式显示所有进程之间的关系：</p>
+                <pre><code>$ pstree | grep stress
         |-docker-containe-+-php-fpm-+-php-fpm---sh---stress
         |         |-3*[php-fpm---sh---stress---stress]
-</code></pre><p>从这里可以看到，stress 是被 php-fpm 调用的子进程，并且进程数量不止一个（这里是3个）。找到父进程后，我们能进入 app 的内部分析了。</p><p>首先，当然应该去看看它的源码。运行下面的命令，把案例应用的源码拷贝到 app 目录，然后再执行 grep 查找是不是有代码再调用 stress 命令：</p><pre><code># 拷贝源码到本地
+</code></pre>
+                <p>
+                  从这里可以看到，stress 是被 php-fpm
+                  调用的子进程，并且进程数量不止一个（这里是3个）。找到父进程后，我们能进入 app 的内部分析了。
+                </p>
+                <p>
+                  首先，当然应该去看看它的源码。运行下面的命令，把案例应用的源码拷贝到 app 目录，然后再执行 grep
+                  查找是不是有代码再调用 stress 命令：
+                </p>
+                <pre><code># 拷贝源码到本地
 $ docker cp phpfpm:/app .
 
 # grep 查找看看是不是有代码在调用stress命令
 $ grep stress -r app
 app/index.php:// fake I/O with stress (via write()/unlink()).
 app/index.php:$result = exec(&quot;/usr/local/bin/stress -t 1 -d 1 2&gt;&amp;1&quot;, $output, $status);
-</code></pre><p>找到了，果然是 app/index.php 文件中直接调用了 stress 命令。</p><p>再来看看<a href="https://github.com/feiskyer/linux-perf-examples/blob/master/nginx-short-process/app/index.php"> app/index.php </a>的源代码：</p><pre><code>$ cat app/index.php
+</code></pre>
+                <p>找到了，果然是 app/index.php 文件中直接调用了 stress 命令。</p>
+                <p>
+                  再来看看<a
+                    href="https://github.com/feiskyer/linux-perf-examples/blob/master/nginx-short-process/app/index.php"
+                  >
+                    app/index.php </a
+                  >的源代码：
+                </p>
+                <pre><code>$ cat app/index.php
 &lt;?php
 // fake I/O with stress (via write()/unlink()).
 $result = exec(&quot;/usr/local/bin/stress -t 1 -d 1 2&gt;&amp;1&quot;, $output, $status);
@@ -200,7 +1514,20 @@ if (isset($_GET[&quot;verbose&quot;]) &amp;&amp; $_GET[&quot;verbose&quot;]==1 &
   echo &quot;It works!&quot;;
 }
 ?&gt;
-</code></pre><p>可以看到，源码里对每个请求都会调用一个 stress 命令，模拟 I/O 压力。从注释上看，stress 会通过 write() 和 unlink() 对 I/O 进程进行压测，看来，这应该就是系统 CPU 使用率升高的根源了。</p><p>不过，stress 模拟的是 I/O 压力，而之前在 top 的输出中看到的，却一直是用户 CPU 和系统 CPU 升高，并没见到 iowait 升高。这又是怎么回事呢？stress 到底是不是 CPU 使用率升高的原因呢？</p><p>我们还得继续往下走。从代码中可以看到，给请求加入 verbose=1 参数后，就可以查看 stress 的输出。你先试试看，在第二个终端运行：</p><pre><code>$ curl http://192.168.0.10:10000?verbose=1
+</code></pre>
+                <p>
+                  可以看到，源码里对每个请求都会调用一个 stress 命令，模拟 I/O 压力。从注释上看，stress 会通过 write()
+                  和 unlink() 对 I/O 进程进行压测，看来，这应该就是系统 CPU 使用率升高的根源了。
+                </p>
+                <p>
+                  不过，stress 模拟的是 I/O 压力，而之前在 top 的输出中看到的，却一直是用户 CPU 和系统 CPU
+                  升高，并没见到 iowait 升高。这又是怎么回事呢？stress 到底是不是 CPU 使用率升高的原因呢？
+                </p>
+                <p>
+                  我们还得继续往下走。从代码中可以看到，给请求加入 verbose=1 参数后，就可以查看 stress
+                  的输出。你先试试看，在第二个终端运行：
+                </p>
+                <pre><code>$ curl http://192.168.0.10:10000?verbose=1
 Server internal error: Array
 (
     [0] =&gt; stress: info: [19607] dispatching hogs: 0 cpu, 0 io, 0 vm, 1 hdd
@@ -210,13 +1537,72 @@ Server internal error: Array
     [4] =&gt; stress: FAIL: [19607] (400) kill error: No such process
     [5] =&gt; stress: FAIL: [19607] (451) failed run completed in 0s
 )
-</code></pre><p>看错误消息 <span class="orange">mkstemp failed: Permission denied </span>，以及 <span class="orange">failed run completed in 0s</span>。原来 stress 命令并没有成功，它因为权限问题失败退出了。看来，我们发现了一个 PHP 调用外部 stress 命令的 bug：没有权限创建临时文件。</p><p>从这里我们可以猜测，正是由于权限错误，大量的 stress 进程在启动时初始化失败，进而导致用户 CPU 使用率的升高。</p><p>分析出问题来源，下一步是不是就要开始优化了呢？当然不是！既然只是猜测，那就需要再确认一下，这个猜测到底对不对，是不是真的有大量的 stress 进程。该用什么工具或指标呢？</p><p>我们前面已经用了 top、pidstat、pstree 等工具，没有发现大量的 stress 进程。那么，还有什么其他的工具可以用吗？</p><p>还记得上一期提到的 perf 吗？它可以用来分析 CPU 性能事件，用在这里就很合适。依旧在第一个终端中运行 perf record -g 命令 ，并等待一会儿（比如15秒）后按 Ctrl+C 退出。然后再运行 perf report 查看报告：</p><pre><code># 记录性能事件，等待大约15秒后按 Ctrl+C 退出
+</code></pre>
+                <p>
+                  看错误消息 <span class="orange">mkstemp failed: Permission denied </span>，以及
+                  <span class="orange">failed run completed in 0s</span>。原来 stress
+                  命令并没有成功，它因为权限问题失败退出了。看来，我们发现了一个 PHP 调用外部 stress 命令的
+                  bug：没有权限创建临时文件。
+                </p>
+                <p>
+                  从这里我们可以猜测，正是由于权限错误，大量的 stress 进程在启动时初始化失败，进而导致用户 CPU
+                  使用率的升高。
+                </p>
+                <p>
+                  分析出问题来源，下一步是不是就要开始优化了呢？当然不是！既然只是猜测，那就需要再确认一下，这个猜测到底对不对，是不是真的有大量的
+                  stress 进程。该用什么工具或指标呢？
+                </p>
+                <p>
+                  我们前面已经用了 top、pidstat、pstree 等工具，没有发现大量的 stress
+                  进程。那么，还有什么其他的工具可以用吗？
+                </p>
+                <p>
+                  还记得上一期提到的 perf 吗？它可以用来分析 CPU 性能事件，用在这里就很合适。依旧在第一个终端中运行 perf
+                  record -g 命令 ，并等待一会儿（比如15秒）后按 Ctrl+C 退出。然后再运行 perf report 查看报告：
+                </p>
+                <pre><code># 记录性能事件，等待大约15秒后按 Ctrl+C 退出
 $ perf record -g
 
 # 查看报告
 $ perf report
-</code></pre><p>这样，你就可以看到下图这个性能报告：</p><p><img src="https://static001.geekbang.org/resource/image/c9/33/c99445b401301147fa41cb2b5739e833.png" alt=""></p><p>你看，stress 占了所有CPU时钟事件的 77%，而 stress  调用调用栈中比例最高的，是随机数生成函数 random()，看来它的确就是 CPU 使用率升高的元凶了。随后的优化就很简单了，只要修复权限问题，并减少或删除 stress 的调用，就可以减轻系统的 CPU 压力。</p><p>当然，实际生产环境中的问题一般都要比这个案例复杂，在你找到触发瓶颈的命令行后，却可能发现，这个外部命令的调用过程是应用核心逻辑的一部分，并不能轻易减少或者删除。</p><p>这时，你就得继续排查，为什么被调用的命令，会导致 CPU 使用率升高或 I/O 升高等问题。这些复杂场景的案例，我会在后面的综合实战里详细分析。</p><p>最后，在案例结束时，不要忘了清理环境，执行下面的 Docker 命令，停止案例中用到的 Nginx 进程：</p><pre><code>$ docker rm -f nginx phpfpm
-</code></pre><h2>execsnoop</h2><p>在这个案例中，我们使用了 top、pidstat、pstree 等工具分析了系统 CPU 使用率高的问题，并发现 CPU 升高是短时进程 stress 导致的，但是整个分析过程还是比较复杂的。对于这类问题，有没有更好的方法监控呢？</p><p><a href="https://github.com/brendangregg/perf-tools/blob/master/execsnoop">execsnoop</a> 就是一个专为短时进程设计的工具。它通过 ftrace 实时监控进程的 exec() 行为，并输出短时进程的基本信息，包括进程 PID、父进程 PID、命令行参数以及执行的结果。</p><p>比如，用 execsnoop 监控上述案例，就可以直接得到 stress 进程的父进程 PID 以及它的命令行参数，并可以发现大量的 stress 进程在不停启动：</p><pre><code># 按 Ctrl+C 结束
+</code></pre>
+                <p>这样，你就可以看到下图这个性能报告：</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/c9/33/c99445b401301147fa41cb2b5739e833.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  你看，stress 占了所有CPU时钟事件的 77%，而 stress 调用调用栈中比例最高的，是随机数生成函数
+                  random()，看来它的确就是 CPU 使用率升高的元凶了。随后的优化就很简单了，只要修复权限问题，并减少或删除
+                  stress 的调用，就可以减轻系统的 CPU 压力。
+                </p>
+                <p>
+                  当然，实际生产环境中的问题一般都要比这个案例复杂，在你找到触发瓶颈的命令行后，却可能发现，这个外部命令的调用过程是应用核心逻辑的一部分，并不能轻易减少或者删除。
+                </p>
+                <p>
+                  这时，你就得继续排查，为什么被调用的命令，会导致 CPU 使用率升高或 I/O
+                  升高等问题。这些复杂场景的案例，我会在后面的综合实战里详细分析。
+                </p>
+                <p>最后，在案例结束时，不要忘了清理环境，执行下面的 Docker 命令，停止案例中用到的 Nginx 进程：</p>
+                <pre><code>$ docker rm -f nginx phpfpm
+</code></pre>
+                <h2>execsnoop</h2>
+                <p>
+                  在这个案例中，我们使用了 top、pidstat、pstree 等工具分析了系统 CPU 使用率高的问题，并发现 CPU
+                  升高是短时进程 stress 导致的，但是整个分析过程还是比较复杂的。对于这类问题，有没有更好的方法监控呢？
+                </p>
+                <p>
+                  <a href="https://github.com/brendangregg/perf-tools/blob/master/execsnoop">execsnoop</a>
+                  就是一个专为短时进程设计的工具。它通过 ftrace 实时监控进程的 exec()
+                  行为，并输出短时进程的基本信息，包括进程 PID、父进程 PID、命令行参数以及执行的结果。
+                </p>
+                <p>
+                  比如，用 execsnoop 监控上述案例，就可以直接得到 stress 进程的父进程 PID
+                  以及它的命令行参数，并可以发现大量的 stress 进程在不停启动：
+                </p>
+                <pre><code># 按 Ctrl+C 结束
 $ execsnoop
 PCOMM            PID    PPID   RET ARGS
 sh               30394  30393    0
@@ -228,284 +1614,349 @@ stress           30403  30402    0 /usr/local/bin/stress -t 1 -d 1
 sh               30405  30393    0
 stress           30407  30405    0 /usr/local/bin/stress -t 1 -d 1
 ...
-</code></pre><p>execsnoop 所用的 ftrace 是一种常用的动态追踪技术，一般用于分析 Linux 内核的运行时行为，后面课程我也会详细介绍并带你使用。</p><h2>小结</h2><p>碰到常规问题无法解释的 CPU 使用率情况时，首先要想到有可能是短时应用导致的问题，比如有可能是下面这两种情况。</p><ul>
-<li>
-<p>第一，<strong>应用里直接调用了其他二进制程序，这些程序通常运行时间比较短，通过 top 等工具也不容易发现</strong>。</p>
-</li>
-<li>
-<p>第二，<strong>应用本身在不停地崩溃重启，而启动过程的资源初始化，很可能会占用相当多的 CPU</strong>。</p>
-</li>
-</ul><p>对于这类进程，我们可以用 pstree 或者 execsnoop 找到它们的父进程，再从父进程所在的应用入手，排查问题的根源。</p><h2>思考</h2><p>最后，我想邀请你一起来聊聊，你所碰到的 CPU 性能问题。有没有哪个印象深刻的经历可以跟我分享呢？或者，在今天的案例操作中，你遇到了什么问题，又解决了哪些呢？你可以结合我的讲述，总结自己的思路。</p><p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/a4/39/6a5cd1d8.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">sotey</span>
-                            </div>
-                            <div class="bd">对老师膜拜！今天一早生产tomcat夯住了，16颗cpu全部98%以上，使用老师的方法加上java的工具成功定位到了问题线程和问题函数。 <br></div>
-                            <span class="time">2018-12-03 11:29</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">举一反三动手实践的楷模😊 希望看到更多的人把这些思路用起来</p>
-                                <p class="reply-time">2018-12-03 18:01</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/35/25/e5aeecc7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">好好学习</span>
-                            </div>
-                            <div class="bd">perf record -ag -- sleep 2;perf report<br>一部到位 <br></div>
-                            <span class="time">2018-12-10 21:12</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-12-11 17:47</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/8c/3e/e767c15f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">western</span>
-                            </div>
-                            <div class="bd">感觉看侦探小说，遍看遍等老师说那句话——”真相只有一个” <br></div>
-                            <span class="time">2018-12-06 10:19</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">每天晒白牙</span>
-                            </div>
-                            <div class="bd">【D6补卡】<br>如果碰到不好解释的CPU问题时，比如现象：<br>通过top观察CPU使用率很高，但是看下面的进程的CPU使用率好像很正常，通过pidstat命令查看cpu也很正常。但通过top查看task数量不正常，处于R状态的进程是可疑点。<br><br>首先要想到可能是短时间的应用导致的问题，如下面的两个：<br>（1）应用里直接调用了其他二进制程序，这些程序通常运行时间比较短，通过top等工具发现不了<br>（2）应用本身在不停地崩溃重启，而启动过程的资源初始化，很可能会占用很多CPU资源<br><br>对于这类进程就需要 pstree 或execsnoop命令查找父进程，再从父进程的应用入手，找原因。<br>我实战的问题：<br>（1）centos的系统，发现通过 yum install pstress命令或其他命令，总是说没有匹配的软件包，这个很头疼<br>①pstress装不上可以尝试 yum install psmisc<br>②execsnoop这个命令我没有装上，想请教下老师如何解决这种yum install命令报没有匹配包的情况<br>（2）然后就是通过perf命令只能看到十六进制符号，看不到具体函数名的问题，这个可以使用上篇文章中我的留言的方法，我在copy一份，供大家参考<br>分析：当没有看到函数名，只看到十六进制时，说明perf无法找到待分析进程所依赖的库。<br>解决办法：<br>在容器外面把分析记录保存，到容器里面查看结果<br>操作：<br>（1）在centos系统上运行 perf record -g ，执行一会儿按ctrl+c停止<br>（2）把生成的perf.data（通常文件生成在命令执行的当前目录下，当然可以通过find | grep perf.data或 find &#47; -name perf.data查看路径）文件拷贝到容器里面分析：<br>docker cp perf.data phpfpm:&#47;tpm<br>docker exec -i -t phpfpm bash<br>cd &#47;tmp&#47;<br>apt-get update &amp;&amp; apt-get install -y linux-perf linux-tools procps<br>perf_4.9 report<br>这样就可以看到函数名了 <br></div>
-                            <span class="time">2018-12-05 07:18</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/18/e4/46d002ed.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">looperX</span>
-                            </div>
-                            <div class="bd">Day03留言。<br>Github上找到一个链接，里面有各种工具，包括execsnoop。 <br></div>
-                            <span class="time">2018-12-04 10:57</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/34/bb/0b971fca.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">walker</span>
-                            </div>
-                            <div class="bd">execsnoop这个工具在centos里找不到，有类似的代替品吗 <br></div>
-                            <span class="time">2018-12-03 10:43</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">点击链接到github上。<br><br>完全一样的工具应该没有，但可以基于内核追踪技术（比如BPF）来自己写一个。</p>
-                                <p class="reply-time">2018-12-03 18:06</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">dexter</span>
-                            </div>
-                            <div class="bd">环境已搭建好，但现在不知道怎么通过github链接来安装execsnoop <br></div>
-                            <span class="time">2018-12-22 20:46</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">划时代</span>
-                            </div>
-                            <div class="bd">今天早上收到线上一台机器的CPU使用率告警邮件，马上登陆机器查看告警进程号的&#47;proc情况，使用uptime、pidstat和top命令查当前运行情况，后面定位到是crontab定时任务中的程序引起负载过高。 <br></div>
-                            <span class="time">2018-12-04 11:03</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/57/6e/dd0eee5f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">夜空中最亮的星（华仔）</span>
-                            </div>
-                            <div class="bd">execsnoop<br>这个工具没找到 <br></div>
-                            <span class="time">2018-12-03 15:09</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">之前的链接有错误，已经修复了，可以点击链接跳过去</p>
-                                <p class="reply-time">2018-12-03 17:40</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">每天晒白牙</span>
-                            </div>
-                            <div class="bd">【D6打卡】这几天回丈母娘家，没带电脑，没能实战，只能看文章了，回来后要补上 <br></div>
-                            <span class="time">2018-12-03 09:02</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/f9/3c/f75ab868.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">风</span>
-                            </div>
-                            <div class="bd">老师好，我在实验的过程中，在最后使用 perf record -ag 的时候，发现记录下来的值，其中 stress 并不是消耗 CPU 最猛的进程，而是swapper，不知道什么原因？碰到这种情况时，该如何继续排查下去？以下是我的 perf report<br>Samples: 223K of event &#39;cpu-clock&#39;, Event count (approx.): 55956000000<br>  Children      Self  Command          Shared Object            Symbol<br>+   11.54%     0.00%  swapper          [kernel.kallsyms]        [k] cpu_startup_entry<br>+   11.42%     0.00%  swapper          [kernel.kallsyms]        [k] default_idle_call<br>+   11.42%     0.00%  swapper          [kernel.kallsyms]        [k] arch_cpu_idle<br>+   11.42%     0.00%  swapper          [kernel.kallsyms]        [k] default_idle<br>+   11.05%    11.05%  swapper          [kernel.kallsyms]        [k] native_safe_halt<br>+    8.69%     0.00%  swapper          [kernel.kallsyms]        [k] start_secondary<br>+    4.36%     4.36%  stress           libc-2.24.so             [.] 0x0000000000036387<br>+    3.44%     0.00%  php-fpm          libc-2.24.so             [.] 0xffff808406d432e1<br>+    3.44%     0.00%  php-fpm          [unknown]                [k] 0x6cb6258d4c544155<br>+    3.43%     3.43%  stress           stress                   [.] 0x0000000000002eff<br>+    3.20%     0.00%  stress           [kernel.kallsyms]        [k] page_fault<br>+    3.20%     0.00%  stress           [kernel.kallsyms]        [k] do_page_fault<br>+    3.15%     0.76%  stress           [kernel.kallsyms]        [k] __do_page_fault <br></div>
-                            <span class="time">2018-12-16 23:27</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯嗯 很好的问题。简单的说，swapper跟我们要分析的对象无关。这也是为什么我们不上来就用perf，而是先用其他方法缩小范围。我还会在答疑篇里解释swapper的作用</p>
-                                <p class="reply-time">2018-12-17 07:34</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/97/61/34a0da09.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Griffin</span>
-                            </div>
-                            <div class="bd">实际生产环境中的进程更多，stress藏在ps中根本不容易发现，pstree的结果也非常大。老师有空讲讲如何找到这些异常进程的方法和灵感。 <br></div>
-                            <span class="time">2018-12-09 13:53</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯嗯，这是一个模块，侧重于CPU的分析，后面还会讲磁盘、网络等等</p>
-                                <p class="reply-time">2018-12-10 18:21</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1e/8d/4239f463.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username"></span>
-                            </div>
-                            <div class="bd">400%cpu  150%user   3%nice  119%sys   127%idle  0% iow  0%irq  1%  sirq 0%host <br>PID    USER    PR   NI   VIRT   RES    SHR  S[%CPU] %MEM   TIME+ARGS<br>4149  system  10  -10 1.8G    176M  113M   141        6.4         7:13.67<br>4127   root      20   0     0        0         0          98.3        0            7:23.93<br>老师你好，板卡上linux 系统好多工具无法使用，只能用top查看CPU使用率很高，<br>uptime  load average:  9.26  4.37  1.70  <br><br>目前分析到 用户空间占用CPU比较高，内核态的CPU占用也比较高。有没有什么可以进一步分析的工具或方法吗？感谢 <br></div>
-                            <span class="time">2018-12-04 21:45</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/17/07/83f030c9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">kakasir</span>
-                            </div>
-                            <div class="bd">因为开放面比较窄，老师后面提到的一些php，docker，ngix都比较陌生，新的虚拟机环境都需要安装，操作起来就困难重重，不过确实能通过案例领会解决问题的思路，还是会坚持下去 <br></div>
-                            <span class="time">2018-12-04 10:36</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/57/ed/d96acbd7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">mj4ever</span>
-                            </div>
-                            <div class="bd">整理下今天学到的知识：<br>1、遇到CPU使用率高，但又无法通过top定位到某个进程时，就需要考虑是否是短时应用所导致，如：<br>（1）应用本身问题，导致反复重启<br>（2）应用通过exec调用了其他二进制程序，这些程序运行时间又比较短<br>2、使用top工具查看CPU时，还需要同时关注下其他参数，比如，运行的进程数<br>3、对perf工具有了近一步的实操；后续可以切换到Ubuntu再试下，有机会需要看下The<br>Flame Graph<br>4、execsnoop转为短时程序设计的工具，通过ftrace来实时监控exec()的行为；<br>5、接着实操的机会，顺便温习了下docker的一些简单命令。 <br></div>
-                            <span class="time">2018-12-03 22:52</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/b3/a9/c1e36654.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">阿蒙</span>
-                            </div>
-                            <div class="bd">老师在某楼的回复中说 strace 没有统计功能，这里提一下，-c 可以统计某 pid 的系统调用次数，但确实没法对整个系统进行统计。 <br></div>
-                            <span class="time">2018-12-03 20:09</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83ernR4NKI5tejJAV3HMTF3gszBBUAjkjLO2QYic2gx5dMGelFv4LWibib7CUGexmMcMp5HiaaibmOH3dyHg/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">渡渡鸟_linux</span>
-                            </div>
-                            <div class="bd">这个案例当中，使用perf抓取CPU时钟信息，制作火焰图，放入web服务器目录，通过浏览器查看就能非常直观的看到是那个函数引起的问题。 <br></div>
-                            <span class="time">2018-12-03 19:56</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/61/bc/88a905a5.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">赵强强</span>
-                            </div>
-                            <div class="bd">倪老师您好，我在网上看到一个关于iowait指标的解释，非常形象，但不确定是否准确，帮忙鉴别一下，谢谢，链接 http:&#47;&#47;linuxperf.com&#47;?p=33 <br></div>
-                            <span class="time">2018-12-03 19:30</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/88/cd/2c3808ce.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Yangjing</span>
-                            </div>
-                            <div class="bd">这里的 perf 命令是否有问题？ 实际使用的时候，发现 &quot;perf record -g&quot; 需要改为 &quot;perf record -ag&quot; 才能实际记录数据到 perf.data 文件。 <br></div>
-                            <span class="time">2019-01-12 22:37</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/60/98/b519a361.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Wind～</span>
-                            </div>
-                            <div class="bd">老师呀 我看了文章三遍之后进行实战操作，但是在实战中碰到了问题，弟子对docker使用比较生疏，麻烦老师指点一二，按照步骤操作到这里 docker cp phpfpm:&#47;app .  的时候，我发现并没有出现目录下面只多出来一个 start.sh 的可执行文件，然后我在第一部的时候就是启动docker的时候 ，sudo docker run --name nginx_test -p 10000:80 -itd nginx:latest &#47;bin&#47;bash，是这样启动的，我搞不懂 feisky&#47;nginx:sp 是什么意思，如果是换成一个通用写法该怎样写，求指点，实验进行不下去了。。。 <br></div>
-                            <span class="time">2019-01-11 16:55</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+</code></pre>
+                <p>
+                  execsnoop 所用的 ftrace 是一种常用的动态追踪技术，一般用于分析 Linux
+                  内核的运行时行为，后面课程我也会详细介绍并带你使用。
+                </p>
+                <h2>小结</h2>
+                <p>
+                  碰到常规问题无法解释的 CPU
+                  使用率情况时，首先要想到有可能是短时应用导致的问题，比如有可能是下面这两种情况。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      第一，<strong
+                        >应用里直接调用了其他二进制程序，这些程序通常运行时间比较短，通过 top 等工具也不容易发现</strong
+                      >。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      第二，<strong>应用本身在不停地崩溃重启，而启动过程的资源初始化，很可能会占用相当多的 CPU</strong
+                      >。
+                    </p>
+                  </li>
                 </ul>
+                <p>
+                  对于这类进程，我们可以用 pstree 或者 execsnoop
+                  找到它们的父进程，再从父进程所在的应用入手，排查问题的根源。
+                </p>
+                <h2>思考</h2>
+                <p>
+                  最后，我想邀请你一起来聊聊，你所碰到的 CPU
+                  性能问题。有没有哪个印象深刻的经历可以跟我分享呢？或者，在今天的案例操作中，你遇到了什么问题，又解决了哪些呢？你可以结合我的讲述，总结自己的思路。
+                </p>
+                <p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/a4/39/6a5cd1d8.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">sotey</span></div>
+                  <div class="bd">
+                    对老师膜拜！今天一早生产tomcat夯住了，16颗cpu全部98%以上，使用老师的方法加上java的工具成功定位到了问题线程和问题函数。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-03 11:29</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">举一反三动手实践的楷模😊 希望看到更多的人把这些思路用起来</p>
+                    <p class="reply-time">2018-12-03 18:01</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/35/25/e5aeecc7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">好好学习</span></div>
+                  <div class="bd">perf record -ag -- sleep 2;perf report<br />一部到位 <br /></div>
+                  <span class="time">2018-12-10 21:12</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-12-11 17:47</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/8c/3e/e767c15f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">western</span></div>
+                  <div class="bd">感觉看侦探小说，遍看遍等老师说那句话——”真相只有一个” <br /></div>
+                  <span class="time">2018-12-06 10:19</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">每天晒白牙</span></div>
+                  <div class="bd">
+                    【D6补卡】<br />如果碰到不好解释的CPU问题时，比如现象：<br />通过top观察CPU使用率很高，但是看下面的进程的CPU使用率好像很正常，通过pidstat命令查看cpu也很正常。但通过top查看task数量不正常，处于R状态的进程是可疑点。<br /><br />首先要想到可能是短时间的应用导致的问题，如下面的两个：<br />（1）应用里直接调用了其他二进制程序，这些程序通常运行时间比较短，通过top等工具发现不了<br />（2）应用本身在不停地崩溃重启，而启动过程的资源初始化，很可能会占用很多CPU资源<br /><br />对于这类进程就需要
+                    pstree 或execsnoop命令查找父进程，再从父进程的应用入手，找原因。<br />我实战的问题：<br />（1）centos的系统，发现通过
+                    yum install pstress命令或其他命令，总是说没有匹配的软件包，这个很头疼<br />①pstress装不上可以尝试
+                    yum install psmisc<br />②execsnoop这个命令我没有装上，想请教下老师如何解决这种yum
+                    install命令报没有匹配包的情况<br />（2）然后就是通过perf命令只能看到十六进制符号，看不到具体函数名的问题，这个可以使用上篇文章中我的留言的方法，我在copy一份，供大家参考<br />分析：当没有看到函数名，只看到十六进制时，说明perf无法找到待分析进程所依赖的库。<br />解决办法：<br />在容器外面把分析记录保存，到容器里面查看结果<br />操作：<br />（1）在centos系统上运行
+                    perf record -g ，执行一会儿按ctrl+c停止<br />（2）把生成的perf.data（通常文件生成在命令执行的当前目录下，当然可以通过find
+                    | grep perf.data或 find &#47; -name perf.data查看路径）文件拷贝到容器里面分析：<br />docker cp
+                    perf.data phpfpm:&#47;tpm<br />docker exec -i -t phpfpm bash<br />cd &#47;tmp&#47;<br />apt-get
+                    update &amp;&amp; apt-get install -y linux-perf linux-tools procps<br />perf_4.9 report<br />这样就可以看到函数名了
+                    <br />
+                  </div>
+                  <span class="time">2018-12-05 07:18</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/18/e4/46d002ed.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">looperX</span></div>
+                  <div class="bd">Day03留言。<br />Github上找到一个链接，里面有各种工具，包括execsnoop。 <br /></div>
+                  <span class="time">2018-12-04 10:57</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/34/bb/0b971fca.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">walker</span></div>
+                  <div class="bd">execsnoop这个工具在centos里找不到，有类似的代替品吗 <br /></div>
+                  <span class="time">2018-12-03 10:43</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      点击链接到github上。<br /><br />完全一样的工具应该没有，但可以基于内核追踪技术（比如BPF）来自己写一个。
+                    </p>
+                    <p class="reply-time">2018-12-03 18:06</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">dexter</span></div>
+                  <div class="bd">环境已搭建好，但现在不知道怎么通过github链接来安装execsnoop <br /></div>
+                  <span class="time">2018-12-22 20:46</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">划时代</span></div>
+                  <div class="bd">
+                    今天早上收到线上一台机器的CPU使用率告警邮件，马上登陆机器查看告警进程号的&#47;proc情况，使用uptime、pidstat和top命令查当前运行情况，后面定位到是crontab定时任务中的程序引起负载过高。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-04 11:03</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/57/6e/dd0eee5f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">夜空中最亮的星（华仔）</span></div>
+                  <div class="bd">execsnoop<br />这个工具没找到 <br /></div>
+                  <span class="time">2018-12-03 15:09</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">之前的链接有错误，已经修复了，可以点击链接跳过去</p>
+                    <p class="reply-time">2018-12-03 17:40</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">每天晒白牙</span></div>
+                  <div class="bd">
+                    【D6打卡】这几天回丈母娘家，没带电脑，没能实战，只能看文章了，回来后要补上 <br />
+                  </div>
+                  <span class="time">2018-12-03 09:02</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/f9/3c/f75ab868.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">风</span></div>
+                  <div class="bd">
+                    老师好，我在实验的过程中，在最后使用 perf record -ag 的时候，发现记录下来的值，其中 stress
+                    并不是消耗 CPU
+                    最猛的进程，而是swapper，不知道什么原因？碰到这种情况时，该如何继续排查下去？以下是我的 perf
+                    report<br />Samples: 223K of event &#39;cpu-clock&#39;, Event count (approx.): 55956000000<br />
+                    Children Self Command Shared Object Symbol<br />+ 11.54% 0.00% swapper [kernel.kallsyms] [k]
+                    cpu_startup_entry<br />+ 11.42% 0.00% swapper [kernel.kallsyms] [k] default_idle_call<br />+ 11.42%
+                    0.00% swapper [kernel.kallsyms] [k] arch_cpu_idle<br />+ 11.42% 0.00% swapper [kernel.kallsyms] [k]
+                    default_idle<br />+ 11.05% 11.05% swapper [kernel.kallsyms] [k] native_safe_halt<br />+ 8.69% 0.00%
+                    swapper [kernel.kallsyms] [k] start_secondary<br />+ 4.36% 4.36% stress libc-2.24.so [.]
+                    0x0000000000036387<br />+ 3.44% 0.00% php-fpm libc-2.24.so [.] 0xffff808406d432e1<br />+ 3.44% 0.00%
+                    php-fpm [unknown] [k] 0x6cb6258d4c544155<br />+ 3.43% 3.43% stress stress [.] 0x0000000000002eff<br />+
+                    3.20% 0.00% stress [kernel.kallsyms] [k] page_fault<br />+ 3.20% 0.00% stress [kernel.kallsyms] [k]
+                    do_page_fault<br />+ 3.15% 0.76% stress [kernel.kallsyms] [k] __do_page_fault <br />
+                  </div>
+                  <span class="time">2018-12-16 23:27</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      嗯嗯
+                      很好的问题。简单的说，swapper跟我们要分析的对象无关。这也是为什么我们不上来就用perf，而是先用其他方法缩小范围。我还会在答疑篇里解释swapper的作用
+                    </p>
+                    <p class="reply-time">2018-12-17 07:34</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/97/61/34a0da09.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Griffin</span></div>
+                  <div class="bd">
+                    实际生产环境中的进程更多，stress藏在ps中根本不容易发现，pstree的结果也非常大。老师有空讲讲如何找到这些异常进程的方法和灵感。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-09 13:53</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯嗯，这是一个模块，侧重于CPU的分析，后面还会讲磁盘、网络等等</p>
+                    <p class="reply-time">2018-12-10 18:21</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1e/8d/4239f463.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username"></span></div>
+                  <div class="bd">
+                    400%cpu 150%user 3%nice 119%sys 127%idle 0% iow 0%irq 1% sirq 0%host <br />PID USER PR NI VIRT RES
+                    SHR S[%CPU] %MEM TIME+ARGS<br />4149 system 10 -10 1.8G 176M 113M 141 6.4 7:13.67<br />4127 root 20
+                    0 0 0 0 98.3 0 7:23.93<br />老师你好，板卡上linux
+                    系统好多工具无法使用，只能用top查看CPU使用率很高，<br />uptime load average: 9.26 4.37 1.70
+                    <br /><br />目前分析到
+                    用户空间占用CPU比较高，内核态的CPU占用也比较高。有没有什么可以进一步分析的工具或方法吗？感谢 <br />
+                  </div>
+                  <span class="time">2018-12-04 21:45</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/17/07/83f030c9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">kakasir</span></div>
+                  <div class="bd">
+                    因为开放面比较窄，老师后面提到的一些php，docker，ngix都比较陌生，新的虚拟机环境都需要安装，操作起来就困难重重，不过确实能通过案例领会解决问题的思路，还是会坚持下去
+                    <br />
+                  </div>
+                  <span class="time">2018-12-04 10:36</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/57/ed/d96acbd7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">mj4ever</span></div>
+                  <div class="bd">
+                    整理下今天学到的知识：<br />1、遇到CPU使用率高，但又无法通过top定位到某个进程时，就需要考虑是否是短时应用所导致，如：<br />（1）应用本身问题，导致反复重启<br />（2）应用通过exec调用了其他二进制程序，这些程序运行时间又比较短<br />2、使用top工具查看CPU时，还需要同时关注下其他参数，比如，运行的进程数<br />3、对perf工具有了近一步的实操；后续可以切换到Ubuntu再试下，有机会需要看下The<br />Flame
+                    Graph<br />4、execsnoop转为短时程序设计的工具，通过ftrace来实时监控exec()的行为；<br />5、接着实操的机会，顺便温习了下docker的一些简单命令。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-03 22:52</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/b3/a9/c1e36654.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">阿蒙</span></div>
+                  <div class="bd">
+                    老师在某楼的回复中说 strace 没有统计功能，这里提一下，-c 可以统计某 pid
+                    的系统调用次数，但确实没法对整个系统进行统计。 <br />
+                  </div>
+                  <span class="time">2018-12-03 20:09</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83ernR4NKI5tejJAV3HMTF3gszBBUAjkjLO2QYic2gx5dMGelFv4LWibib7CUGexmMcMp5HiaaibmOH3dyHg/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">渡渡鸟_linux</span></div>
+                  <div class="bd">
+                    这个案例当中，使用perf抓取CPU时钟信息，制作火焰图，放入web服务器目录，通过浏览器查看就能非常直观的看到是那个函数引起的问题。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-03 19:56</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/61/bc/88a905a5.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">赵强强</span></div>
+                  <div class="bd">
+                    倪老师您好，我在网上看到一个关于iowait指标的解释，非常形象，但不确定是否准确，帮忙鉴别一下，谢谢，链接
+                    http:&#47;&#47;linuxperf.com&#47;?p=33 <br />
+                  </div>
+                  <span class="time">2018-12-03 19:30</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/88/cd/2c3808ce.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Yangjing</span></div>
+                  <div class="bd">
+                    这里的 perf 命令是否有问题？ 实际使用的时候，发现 &quot;perf record -g&quot; 需要改为 &quot;perf
+                    record -ag&quot; 才能实际记录数据到 perf.data 文件。 <br />
+                  </div>
+                  <span class="time">2019-01-12 22:37</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/60/98/b519a361.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Wind～</span></div>
+                  <div class="bd">
+                    老师呀
+                    我看了文章三遍之后进行实战操作，但是在实战中碰到了问题，弟子对docker使用比较生疏，麻烦老师指点一二，按照步骤操作到这里
+                    docker cp phpfpm:&#47;app . 的时候，我发现并没有出现目录下面只多出来一个 start.sh
+                    的可执行文件，然后我在第一部的时候就是启动docker的时候 ，sudo docker run --name nginx_test -p
+                    10000:80 -itd nginx:latest &#47;bin&#47;bash，是这样启动的，我搞不懂 feisky&#47;nginx:sp
+                    是什么意思，如果是换成一个通用写法该怎样写，求指点，实验进行不下去了。。。 <br />
+                  </div>
+                  <span class="time">2019-01-11 16:55</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

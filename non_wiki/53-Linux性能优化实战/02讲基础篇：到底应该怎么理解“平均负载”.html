@@ -1,153 +1,1437 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                02讲基础篇：到底应该怎么理解“平均负载”
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/85/0c/85f16db44241044d76f6321c44331d0c.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">02讲基础篇：到底应该怎么理解“平均负载”</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/85/0c/85f16db44241044d76f6321c44331d0c.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>每次发现系统变慢时，我们通常做的第一件事，就是执行top或者uptime命令，来了解系统的负载情况。比如像下面这样，我在命令行里输入了uptime命令，系统也随即给出了结果。</p><pre><code>$ uptime
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  每次发现系统变慢时，我们通常做的第一件事，就是执行top或者uptime命令，来了解系统的负载情况。比如像下面这样，我在命令行里输入了uptime命令，系统也随即给出了结果。
+                </p>
+                <pre><code>$ uptime
 02:34:03 up 2 days, 20:14,  1 user,  load average: 0.63, 0.83, 0.88
-</code></pre><p>但我想问的是，你真的知道这里每列输出的含义吗？</p><p>我相信你对前面的几列比较熟悉，它们分别是当前时间、系统运行时间以及正在登录用户数。</p><pre><code>02:34:03              //当前时间
+</code></pre>
+                <p>但我想问的是，你真的知道这里每列输出的含义吗？</p>
+                <p>我相信你对前面的几列比较熟悉，它们分别是当前时间、系统运行时间以及正在登录用户数。</p>
+                <pre><code>02:34:03              //当前时间
 up 2 days, 20:14      //系统运行时间
 1 user                //正在登录用户数
-</code></pre><p>而最后三个数字呢，依次则是过去1分钟、5分钟、15分钟的平均负载（Load Average）。</p><p><strong>平均负载</strong>？这个词对很多人来说，可能既熟悉又陌生，我们每天的工作中，也都会提到这个词，但你真正理解它背后的含义吗？如果你们团队来了一个实习生，他揪住你不放，你能给他讲清楚什么是平均负载吗？</p><p>其实，6年前，我就遇到过这样的一个场景。公司一个实习生一直追问我，什么是平均负载，我支支吾吾半天，最后也没能解释明白。明明总看到也总会用到，怎么就说不明白呢？后来我静下来想想，其实还是自己的功底不够。</p><p>于是，这几年，我遇到问题，特别是基础问题，都会多问自己几个“为什么”，以求能够彻底理解现象背后的本质原理，用起来更灵活，也更有底气。</p><p>今天，我就带你来学习下，如何观测和理解这个最常见、也是最重要的系统指标。</p><!-- [[[read_end]]] --><p>我猜一定有人会说，平均负载不就是单位时间内的 CPU 使用率吗？上面的0.63，就代表CPU使用率是63%。其实并不是这样，如果你方便的话，可以通过执行man uptime命令，来了解平均负载的详细解释。</p><p>简单来说，平均负载是指单位时间内，系统处于<strong>可运行状态</strong>和<strong>不可中断状态</strong>的平均进程数，也就是<strong>平均活跃进程数</strong>，它和CPU使用率并没有直接关系。这里我先解释下，可运行状态和不可中断状态这俩词儿。</p><p>所谓可运行状态的进程，是指正在使用CPU或者正在等待CPU的进程，也就是我们常用ps命令看到的，处于R状态（Running 或 Runnable）的进程。</p><p>不可中断状态的进程则是正处于内核态关键流程中的进程，并且这些流程是不可打断的，比如最常见的是等待硬件设备的I/O响应，也就是我们在ps命令中看到的D状态（Uninterruptible Sleep，也称为Disk Sleep）的进程。</p><p>比如，当一个进程向磁盘读写数据时，为了保证数据的一致性，在得到磁盘回复前，它是不能被其他进程或者中断打断的，这个时候的进程就处于不可中断状态。如果此时的进程被打断了，就容易出现磁盘数据与进程数据不一致的问题。</p><p>所以，<span class="orange">不可中断状态实际上是系统对进程和硬件设备的一种保护机制</span>。</p><p>因此，你可以简单理解为，平均负载其实就是平均活跃进程数。平均活跃进程数，直观上的理解就是单位时间内的活跃进程数，但它实际上是活跃进程数的指数衰减平均值。这个“指数衰减平均”的详细含义你不用计较，这只是系统的一种更快速的计算方式，你把它直接当成活跃进程数的平均值也没问题。</p><p>既然平均的是活跃进程数，那么最理想的，就是每个CPU上都刚好运行着一个进程，这样每个CPU都得到了充分利用。比如当平均负载为2时，意味着什么呢？</p><ul>
-<li>
-<p>在只有2个CPU的系统上，意味着所有的CPU都刚好被完全占用。</p>
-</li>
-<li>
-<p>在4个CPU的系统上，意味着CPU有50%的空闲。</p>
-</li>
-<li>
-<p>而在只有1个CPU的系统中，则意味着有一半的进程竞争不到CPU。</p>
-</li>
-</ul><h2>平均负载为多少时合理</h2><p>讲完了什么是平均负载，现在我们再回到最开始的例子，不知道你能否判断出，在 uptime 命令的结果里，那三个时间段的平均负载数，多大的时候能说明系统负载高？或是多小的时候就能说明系统负载很低呢？</p><p>我们知道，平均负载最理想的情况是等于 CPU个数。所以在评判平均负载时，<strong>首先你要知道系统有几个 CPU</strong>，这可以通过 top 命令或者从文件 /proc/cpuinfo 中读取，比如：</p><pre><code># 关于grep和wc的用法请查询它们的手册或者网络搜索
+</code></pre>
+                <p>而最后三个数字呢，依次则是过去1分钟、5分钟、15分钟的平均负载（Load Average）。</p>
+                <p>
+                  <strong>平均负载</strong
+                  >？这个词对很多人来说，可能既熟悉又陌生，我们每天的工作中，也都会提到这个词，但你真正理解它背后的含义吗？如果你们团队来了一个实习生，他揪住你不放，你能给他讲清楚什么是平均负载吗？
+                </p>
+                <p>
+                  其实，6年前，我就遇到过这样的一个场景。公司一个实习生一直追问我，什么是平均负载，我支支吾吾半天，最后也没能解释明白。明明总看到也总会用到，怎么就说不明白呢？后来我静下来想想，其实还是自己的功底不够。
+                </p>
+                <p>
+                  于是，这几年，我遇到问题，特别是基础问题，都会多问自己几个“为什么”，以求能够彻底理解现象背后的本质原理，用起来更灵活，也更有底气。
+                </p>
+                <p>今天，我就带你来学习下，如何观测和理解这个最常见、也是最重要的系统指标。</p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  我猜一定有人会说，平均负载不就是单位时间内的 CPU
+                  使用率吗？上面的0.63，就代表CPU使用率是63%。其实并不是这样，如果你方便的话，可以通过执行man
+                  uptime命令，来了解平均负载的详细解释。
+                </p>
+                <p>
+                  简单来说，平均负载是指单位时间内，系统处于<strong>可运行状态</strong>和<strong>不可中断状态</strong>的平均进程数，也就是<strong>平均活跃进程数</strong>，它和CPU使用率并没有直接关系。这里我先解释下，可运行状态和不可中断状态这俩词儿。
+                </p>
+                <p>
+                  所谓可运行状态的进程，是指正在使用CPU或者正在等待CPU的进程，也就是我们常用ps命令看到的，处于R状态（Running
+                  或 Runnable）的进程。
+                </p>
+                <p>
+                  不可中断状态的进程则是正处于内核态关键流程中的进程，并且这些流程是不可打断的，比如最常见的是等待硬件设备的I/O响应，也就是我们在ps命令中看到的D状态（Uninterruptible
+                  Sleep，也称为Disk Sleep）的进程。
+                </p>
+                <p>
+                  比如，当一个进程向磁盘读写数据时，为了保证数据的一致性，在得到磁盘回复前，它是不能被其他进程或者中断打断的，这个时候的进程就处于不可中断状态。如果此时的进程被打断了，就容易出现磁盘数据与进程数据不一致的问题。
+                </p>
+                <p>所以，<span class="orange">不可中断状态实际上是系统对进程和硬件设备的一种保护机制</span>。</p>
+                <p>
+                  因此，你可以简单理解为，平均负载其实就是平均活跃进程数。平均活跃进程数，直观上的理解就是单位时间内的活跃进程数，但它实际上是活跃进程数的指数衰减平均值。这个“指数衰减平均”的详细含义你不用计较，这只是系统的一种更快速的计算方式，你把它直接当成活跃进程数的平均值也没问题。
+                </p>
+                <p>
+                  既然平均的是活跃进程数，那么最理想的，就是每个CPU上都刚好运行着一个进程，这样每个CPU都得到了充分利用。比如当平均负载为2时，意味着什么呢？
+                </p>
+                <ul>
+                  <li>
+                    <p>在只有2个CPU的系统上，意味着所有的CPU都刚好被完全占用。</p>
+                  </li>
+                  <li>
+                    <p>在4个CPU的系统上，意味着CPU有50%的空闲。</p>
+                  </li>
+                  <li>
+                    <p>而在只有1个CPU的系统中，则意味着有一半的进程竞争不到CPU。</p>
+                  </li>
+                </ul>
+                <h2>平均负载为多少时合理</h2>
+                <p>
+                  讲完了什么是平均负载，现在我们再回到最开始的例子，不知道你能否判断出，在 uptime
+                  命令的结果里，那三个时间段的平均负载数，多大的时候能说明系统负载高？或是多小的时候就能说明系统负载很低呢？
+                </p>
+                <p>
+                  我们知道，平均负载最理想的情况是等于 CPU个数。所以在评判平均负载时，<strong
+                    >首先你要知道系统有几个 CPU</strong
+                  >，这可以通过 top 命令或者从文件 /proc/cpuinfo 中读取，比如：
+                </p>
+                <pre><code># 关于grep和wc的用法请查询它们的手册或者网络搜索
 $ grep 'model name' /proc/cpuinfo | wc -l
 2
-</code></pre><p>有了CPU 个数，我们就可以判断出，当平均负载比 CPU 个数还大的时候，系统已经出现了过载。</p><p>不过，且慢，新的问题又来了。我们在例子中可以看到，平均负载有三个数值，到底该参考哪一个呢？</p><p>实际上，都要看。三个不同时间间隔的平均值，其实给我们提供了，分析<strong>系统负载趋势</strong>的数据来源，让我们能更全面、更立体地理解目前的负载状况。</p><p>打个比方，就像初秋时北京的天气，如果只看中午的温度，你可能以为还在7月份的大夏天呢。但如果你结合了早上、中午、晚上三个时间点的温度来看，基本就可以全方位了解这一天的天气情况了。</p><p>同样的，前面说到的CPU的三个负载时间段也是这个道理。</p><ul>
-<li>
-<p>如果1分钟、5分钟、15分钟的三个值基本相同，或者相差不大，那就说明系统负载很平稳。</p>
-</li>
-<li>
-<p>但如果1分钟的值远小于15 分钟的值，就说明系统最近1分钟的负载在减少，而过去15分钟内却有很大的负载。</p>
-</li>
-<li>
-<p>反过来，如果1分钟的值远大于 15 分钟的值，就说明最近1分钟的负载在增加，这种增加有可能只是临时性的，也有可能还会持续增加下去，所以就需要持续观察。一旦1分钟的平均负载接近或超过了CPU的个数，就意味着系统正在发生过载的问题，这时就得分析调查是哪里导致的问题，并要想办法优化了。</p>
-</li>
-</ul><p>这里我再举个例子，假设我们在一个单 CPU 系统上看到平均负载为 1.73，0.60，7.98，那么说明在过去 1 分钟内，系统有 73% 的超载，而在 15 分钟内，有 698% 的超载，从整体趋势来看，系统的负载在降低。</p><p>那么，在实际生产环境中，平均负载多高时，需要我们重点关注呢？</p><p>在我看来，<strong>当平均负载高于 CPU 数量70%的时候</strong>，你就应该分析排查负载高的问题了。一旦负载过高，就可能导致进程响应变慢，进而影响服务的正常功能。</p><p>但70%这个数字并不是绝对的，最推荐的方法，还是把系统的平均负载监控起来，然后根据更多的历史数据，判断负载的变化趋势。当发现负载有明显升高趋势时，比如说负载翻倍了，你再去做分析和调查。</p><h2>平均负载与CPU使用率</h2><p>现实工作中，我们经常容易把平均负载和 CPU 使用率混淆，所以在这里，我也做一个区分。</p><p>可能你会疑惑，既然平均负载代表的是活跃进程数，那平均负载高了，不就意味着 CPU 使用率高吗？</p><p>我们还是要回到平均负载的含义上来，平均负载是指单位时间内，处于可运行状态和不可中断状态的进程数。所以，它不仅包括了<strong>正在使用 CPU</strong> 的进程，还包括<strong>等待 CPU</strong> 和<strong>等待 I/O</strong> 的进程。</p><p>而 CPU 使用率，是单位时间内 CPU 繁忙情况的统计，跟平均负载并不一定完全对应。比如：</p><ul>
-<li>
-<p>CPU 密集型进程，使用大量 CPU 会导致平均负载升高，此时这两者是一致的；</p>
-</li>
-<li>
-<p>I/O 密集型进程，等待 I/O 也会导致平均负载升高，但 CPU 使用率不一定很高；</p>
-</li>
-<li>
-<p>大量等待 CPU 的进程调度也会导致平均负载升高，此时的CPU使用率也会比较高。</p>
-</li>
-</ul><h2>平均负载案例分析</h2><p>下面，我们以三个示例分别来看这三种情况，并用 iostat、mpstat、pidstat 等工具，找出平均负载升高的根源。</p><p>因为案例分析都是基于机器上的操作，所以不要只是听听、看看就够了，最好还是跟着我实际操作一下。</p><h3>你的准备</h3><p>下面的案例都是基于 Ubuntu 18.04，当然，同样适用于其他 Linux 系统。我使用的案例环境如下所示。</p><ul>
-<li>
-<p>机器配置：2 CPU，8GB 内存。</p>
-</li>
-<li>
-<p>预先安装 stress 和 sysstat 包，如 apt install stress sysstat。</p>
-</li>
-</ul><p>在这里，我先简单介绍一下 stress 和 sysstat。</p><p>stress 是一个 Linux 系统压力测试工具，这里我们用作异常进程模拟平均负载升高的场景。</p><p>而 sysstat 包含了常用的 Linux 性能工具，用来监控和分析系统的性能。我们的案例会用到这个包的两个命令 mpstat 和 pidstat。</p><ul>
-<li>
-<p>mpstat 是一个常用的多核 CPU 性能分析工具，用来实时查看每个 CPU 的性能指标，以及所有CPU的平均指标。</p>
-</li>
-<li>
-<p>pidstat 是一个常用的进程性能分析工具，用来实时查看进程的 CPU、内存、I/O 以及上下文切换等性能指标。</p>
-</li>
-</ul><p>此外，每个场景都需要你开三个终端，登录到同一台 Linux 机器中。</p><p>实验之前，你先做好上面的准备。如果包的安装有问题，可以先在Google一下自行解决，如果还是解决不了，再来留言区找我，这事儿应该不难。</p><p>另外要注意，下面的所有命令，我们都是默认以 root 用户运行。所以，如果你是用普通用户登陆的系统，一定要先运行 sudo su root 命令切换到 root 用户。</p><p>如果上面的要求都已经完成了，你可以先用 uptime 命令，看一下测试前的平均负载情况：</p><pre><code>$ uptime
+</code></pre>
+                <p>有了CPU 个数，我们就可以判断出，当平均负载比 CPU 个数还大的时候，系统已经出现了过载。</p>
+                <p>不过，且慢，新的问题又来了。我们在例子中可以看到，平均负载有三个数值，到底该参考哪一个呢？</p>
+                <p>
+                  实际上，都要看。三个不同时间间隔的平均值，其实给我们提供了，分析<strong>系统负载趋势</strong>的数据来源，让我们能更全面、更立体地理解目前的负载状况。
+                </p>
+                <p>
+                  打个比方，就像初秋时北京的天气，如果只看中午的温度，你可能以为还在7月份的大夏天呢。但如果你结合了早上、中午、晚上三个时间点的温度来看，基本就可以全方位了解这一天的天气情况了。
+                </p>
+                <p>同样的，前面说到的CPU的三个负载时间段也是这个道理。</p>
+                <ul>
+                  <li>
+                    <p>如果1分钟、5分钟、15分钟的三个值基本相同，或者相差不大，那就说明系统负载很平稳。</p>
+                  </li>
+                  <li>
+                    <p>
+                      但如果1分钟的值远小于15 分钟的值，就说明系统最近1分钟的负载在减少，而过去15分钟内却有很大的负载。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      反过来，如果1分钟的值远大于 15
+                      分钟的值，就说明最近1分钟的负载在增加，这种增加有可能只是临时性的，也有可能还会持续增加下去，所以就需要持续观察。一旦1分钟的平均负载接近或超过了CPU的个数，就意味着系统正在发生过载的问题，这时就得分析调查是哪里导致的问题，并要想办法优化了。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  这里我再举个例子，假设我们在一个单 CPU 系统上看到平均负载为 1.73，0.60，7.98，那么说明在过去 1
+                  分钟内，系统有 73% 的超载，而在 15 分钟内，有 698% 的超载，从整体趋势来看，系统的负载在降低。
+                </p>
+                <p>那么，在实际生产环境中，平均负载多高时，需要我们重点关注呢？</p>
+                <p>
+                  在我看来，<strong>当平均负载高于 CPU 数量70%的时候</strong
+                  >，你就应该分析排查负载高的问题了。一旦负载过高，就可能导致进程响应变慢，进而影响服务的正常功能。
+                </p>
+                <p>
+                  但70%这个数字并不是绝对的，最推荐的方法，还是把系统的平均负载监控起来，然后根据更多的历史数据，判断负载的变化趋势。当发现负载有明显升高趋势时，比如说负载翻倍了，你再去做分析和调查。
+                </p>
+                <h2>平均负载与CPU使用率</h2>
+                <p>现实工作中，我们经常容易把平均负载和 CPU 使用率混淆，所以在这里，我也做一个区分。</p>
+                <p>可能你会疑惑，既然平均负载代表的是活跃进程数，那平均负载高了，不就意味着 CPU 使用率高吗？</p>
+                <p>
+                  我们还是要回到平均负载的含义上来，平均负载是指单位时间内，处于可运行状态和不可中断状态的进程数。所以，它不仅包括了<strong
+                    >正在使用 CPU</strong
+                  >
+                  的进程，还包括<strong>等待 CPU</strong> 和<strong>等待 I/O</strong> 的进程。
+                </p>
+                <p>而 CPU 使用率，是单位时间内 CPU 繁忙情况的统计，跟平均负载并不一定完全对应。比如：</p>
+                <ul>
+                  <li>
+                    <p>CPU 密集型进程，使用大量 CPU 会导致平均负载升高，此时这两者是一致的；</p>
+                  </li>
+                  <li>
+                    <p>I/O 密集型进程，等待 I/O 也会导致平均负载升高，但 CPU 使用率不一定很高；</p>
+                  </li>
+                  <li>
+                    <p>大量等待 CPU 的进程调度也会导致平均负载升高，此时的CPU使用率也会比较高。</p>
+                  </li>
+                </ul>
+                <h2>平均负载案例分析</h2>
+                <p>
+                  下面，我们以三个示例分别来看这三种情况，并用 iostat、mpstat、pidstat 等工具，找出平均负载升高的根源。
+                </p>
+                <p>因为案例分析都是基于机器上的操作，所以不要只是听听、看看就够了，最好还是跟着我实际操作一下。</p>
+                <h3>你的准备</h3>
+                <p>下面的案例都是基于 Ubuntu 18.04，当然，同样适用于其他 Linux 系统。我使用的案例环境如下所示。</p>
+                <ul>
+                  <li>
+                    <p>机器配置：2 CPU，8GB 内存。</p>
+                  </li>
+                  <li>
+                    <p>预先安装 stress 和 sysstat 包，如 apt install stress sysstat。</p>
+                  </li>
+                </ul>
+                <p>在这里，我先简单介绍一下 stress 和 sysstat。</p>
+                <p>stress 是一个 Linux 系统压力测试工具，这里我们用作异常进程模拟平均负载升高的场景。</p>
+                <p>
+                  而 sysstat 包含了常用的 Linux 性能工具，用来监控和分析系统的性能。我们的案例会用到这个包的两个命令
+                  mpstat 和 pidstat。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      mpstat 是一个常用的多核 CPU 性能分析工具，用来实时查看每个 CPU 的性能指标，以及所有CPU的平均指标。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      pidstat 是一个常用的进程性能分析工具，用来实时查看进程的 CPU、内存、I/O 以及上下文切换等性能指标。
+                    </p>
+                  </li>
+                </ul>
+                <p>此外，每个场景都需要你开三个终端，登录到同一台 Linux 机器中。</p>
+                <p>
+                  实验之前，你先做好上面的准备。如果包的安装有问题，可以先在Google一下自行解决，如果还是解决不了，再来留言区找我，这事儿应该不难。
+                </p>
+                <p>
+                  另外要注意，下面的所有命令，我们都是默认以 root
+                  用户运行。所以，如果你是用普通用户登陆的系统，一定要先运行 sudo su root 命令切换到 root 用户。
+                </p>
+                <p>如果上面的要求都已经完成了，你可以先用 uptime 命令，看一下测试前的平均负载情况：</p>
+                <pre><code>$ uptime
 ...,  load average: 0.11, 0.15, 0.09
-</code></pre><h3>场景一：CPU  密集型进程</h3><p>首先，我们在第一个终端运行  stress  命令，模拟一个  CPU  使用率 100% 的场景：</p><pre><code>$ stress --cpu 1 --timeout 600
-</code></pre><p>接着，在第二个终端运行uptime查看平均负载的变化情况：</p><pre><code># -d 参数表示高亮显示变化的区域
+</code></pre>
+                <h3>场景一：CPU 密集型进程</h3>
+                <p>首先，我们在第一个终端运行 stress 命令，模拟一个 CPU 使用率 100% 的场景：</p>
+                <pre><code>$ stress --cpu 1 --timeout 600
+</code></pre>
+                <p>接着，在第二个终端运行uptime查看平均负载的变化情况：</p>
+                <pre><code># -d 参数表示高亮显示变化的区域
 $ watch -d uptime
 ...,  load average: 1.00, 0.75, 0.39
-</code></pre><p>最后，在第三个终端运行mpstat查看  CPU  使用率的变化情况：</p><pre><code># -P ALL 表示监控所有CPU，后面数字5表示间隔5秒后输出一组数据
+</code></pre>
+                <p>最后，在第三个终端运行mpstat查看 CPU 使用率的变化情况：</p>
+                <pre><code># -P ALL 表示监控所有CPU，后面数字5表示间隔5秒后输出一组数据
 $ mpstat -P ALL 5
 Linux 4.15.0 (ubuntu) 09/22/18 _x86_64_ (2 CPU)
 13:30:06     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
 13:30:11     all   50.05    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   49.95
 13:30:11       0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
 13:30:11       1  100.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-</code></pre><p>从终端二中可以看到，1 分钟的平均负载会慢慢增加到 1.00，而从终端三中还可以看到，正好有一个 CPU 的使用率为 100%，但它的 iowait 只有 0。这说明，平均负载的升高正是由于 CPU 使用率为 100% 。</p><p>那么，到底是哪个进程导致了 CPU 使用率为 100% 呢？你可以使用 pidstat 来查询：</p><pre><code># 间隔5秒后输出一组数据
+</code></pre>
+                <p>
+                  从终端二中可以看到，1 分钟的平均负载会慢慢增加到 1.00，而从终端三中还可以看到，正好有一个 CPU
+                  的使用率为 100%，但它的 iowait 只有 0。这说明，平均负载的升高正是由于 CPU 使用率为 100% 。
+                </p>
+                <p>那么，到底是哪个进程导致了 CPU 使用率为 100% 呢？你可以使用 pidstat 来查询：</p>
+                <pre><code># 间隔5秒后输出一组数据
 $ pidstat -u 5 1
 13:37:07      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
 13:37:12        0      2962  100.00    0.00    0.00    0.00  100.00     1  stress
-</code></pre><p>从这里可以明显看到，stress进程的CPU使用率为100%。</p><h3>场景二：I/O  密集型进程</h3><p>首先还是运行  stress  命令，但这次模拟  I/O  压力，即不停地执行  sync：</p><pre><code>$ stress -i 1 --timeout 600
-</code></pre><p>还是在第二个终端运行uptime查看平均负载的变化情况：</p><pre><code>$ watch -d uptime
+</code></pre>
+                <p>从这里可以明显看到，stress进程的CPU使用率为100%。</p>
+                <h3>场景二：I/O 密集型进程</h3>
+                <p>首先还是运行 stress 命令，但这次模拟 I/O 压力，即不停地执行 sync：</p>
+                <pre><code>$ stress -i 1 --timeout 600
+</code></pre>
+                <p>还是在第二个终端运行uptime查看平均负载的变化情况：</p>
+                <pre><code>$ watch -d uptime
 ...,  load average: 1.06, 0.58, 0.37
-</code></pre><p>然后，第三个终端运行mpstat查看  CPU  使用率的变化情况：</p><pre><code># 显示所有CPU的指标，并在间隔5秒输出一组数据
+</code></pre>
+                <p>然后，第三个终端运行mpstat查看 CPU 使用率的变化情况：</p>
+                <pre><code># 显示所有CPU的指标，并在间隔5秒输出一组数据
 $ mpstat -P ALL 5 1
 Linux 4.15.0 (ubuntu)     09/22/18     _x86_64_    (2 CPU)
 13:41:28     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
 13:41:33     all    0.21    0.00   12.07   32.67    0.00    0.21    0.00    0.00    0.00   54.84
 13:41:33       0    0.43    0.00   23.87   67.53    0.00    0.43    0.00    0.00    0.00    7.74
 13:41:33       1    0.00    0.00    0.81    0.20    0.00    0.00    0.00    0.00    0.00   98.99
-</code></pre><p>从这里可以看到，1 分钟的平均负载会慢慢增加到 1.06，其中一个 CPU 的系统CPU使用率升高到了 23.87，而 iowait 高达 67.53%。这说明，平均负载的升高是由于 iowait 的升高。</p><p>那么到底是哪个进程，导致 iowait 这么高呢？我们还是用 pidstat 来查询：</p><pre><code># 间隔5秒后输出一组数据，-u表示CPU指标
+</code></pre>
+                <p>
+                  从这里可以看到，1 分钟的平均负载会慢慢增加到 1.06，其中一个 CPU 的系统CPU使用率升高到了 23.87，而
+                  iowait 高达 67.53%。这说明，平均负载的升高是由于 iowait 的升高。
+                </p>
+                <p>那么到底是哪个进程，导致 iowait 这么高呢？我们还是用 pidstat 来查询：</p>
+                <pre><code># 间隔5秒后输出一组数据，-u表示CPU指标
 $ pidstat -u 5 1
 Linux 4.15.0 (ubuntu)     09/22/18     _x86_64_    (2 CPU)
 13:42:08      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
@@ -155,10 +1439,21 @@ Linux 4.15.0 (ubuntu)     09/22/18     _x86_64_    (2 CPU)
 13:42:13        0       109    0.00    0.40    0.00    0.00    0.40     0  kworker/0:1H
 13:42:13        0      2997    2.00   35.53    0.00    3.99   37.52     1  stress
 13:42:13        0      3057    0.00    0.40    0.00    0.00    0.40     0  pidstat
-</code></pre><p>可以发现，还是  stress  进程导致的。</p><h3>场景三：大量进程的场景</h3><p>当系统中运行进程超出 CPU 运行能力时，就会出现等待 CPU 的进程。</p><p>比如，我们还是使用 stress，但这次模拟的是 8 个进程：</p><pre><code>$ stress -c 8 --timeout 600
-</code></pre><p>由于系统只有 2 个CPU，明显比 8 个进程要少得多，因而，系统的 CPU 处于严重过载状态，平均负载高达7.97：</p><pre><code>$ uptime
+</code></pre>
+                <p>可以发现，还是 stress 进程导致的。</p>
+                <h3>场景三：大量进程的场景</h3>
+                <p>当系统中运行进程超出 CPU 运行能力时，就会出现等待 CPU 的进程。</p>
+                <p>比如，我们还是使用 stress，但这次模拟的是 8 个进程：</p>
+                <pre><code>$ stress -c 8 --timeout 600
+</code></pre>
+                <p>
+                  由于系统只有 2 个CPU，明显比 8 个进程要少得多，因而，系统的 CPU 处于严重过载状态，平均负载高达7.97：
+                </p>
+                <pre><code>$ uptime
 ...,  load average: 7.97, 5.93, 3.02
-</code></pre><p>接着再运行pidstat来看一下进程的情况：</p><pre><code># 间隔5秒后输出一组数据
+</code></pre>
+                <p>接着再运行pidstat来看一下进程的情况：</p>
+                <pre><code># 间隔5秒后输出一组数据
 $ pidstat -u 5 1
 14:23:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
 14:23:30        0      3190   25.00    0.00    0.00   74.80   25.00     0  stress
@@ -170,317 +1465,381 @@ $ pidstat -u 5 1
 14:23:30        0      3196   24.80    0.00    0.00   74.60   24.80     1  stress
 14:23:30        0      3197   24.80    0.00    0.00   74.80   24.80     1  stress
 14:23:30        0      3200    0.00    0.20    0.00    0.20    0.20     0  pidstat
-</code></pre><p>可以看出，8 个进程在争抢 2 个 CPU，每个进程等待 CPU 的时间（也就是代码块中的 %wait 列）高达 75%。这些超出 CPU 计算能力的进程，最终导致 CPU 过载。</p><h2>小结</h2><p>分析完这三个案例，我再来归纳一下<span class="orange">平均负载的理解</span>。</p><p>平均负载提供了一个快速查看系统整体性能的手段，反映了整体的负载情况。但只看平均负载本身，我们并不能直接发现，到底是哪里出现了瓶颈。所以，在理解平均负载时，也要注意：</p><ul>
-<li>
-<p>平均负载高有可能是 CPU 密集型进程导致的；</p>
-</li>
-<li>
-<p>平均负载高并不一定代表 CPU 使用率高，还有可能是 I/O 更繁忙了；</p>
-</li>
-<li>
-<p>当发现负载高的时候，你可以使用 mpstat、pidstat 等工具，辅助分析负载的来源。</p>
-</li>
-</ul><h2>思考</h2><p>最后，我想邀请你一起来聊聊你所理解的平均负载，当你发现平均负载升高后，又是怎么分析排查的呢？你可以结合我前面的讲解，来总结自己的思考。欢迎在留言区和我讨论。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/47/42/1d7db2f6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">倪朋飞</span>
-                            </div>
-                            <div class="bd">没想到大家的热情这么高，太激动了。统一回复一下案例中的几个问题：<br><br>1. iowait无法升高的问题，是因为案例中stress使用的是 sync() 系统调用，它的作用是刷新缓冲区内存到磁盘中。对于新安装的虚拟机，缓冲区可能比较小，无法产生大的IO压力，这样大部分就都是系统调用的消耗了。所以，你会看到只有系统CPU使用率升高。解决方法是使用stress的下一代stress-ng，它支持更丰富的选项，比如 stress-ng -i 1 --hdd 1 --timeout 600（--hdd表示读写临时文件）。<br>2. pidstat输出中没有%wait的问题，是因为CentOS默认的sysstat稍微有点老，源码或者RPM升级到11.5.5版本以后就可以看到了。而Ubuntu的包一般都比较新，没有这个问题。<br>3. mpstat无法观测的问题，案例中是等待5秒后输出1次结果就停止了，更好的做法是持续监控一段时间，比如持续观测20次：mpstat -P ALL 5 20。 <br></div>
-                            <span class="time">2018-11-25 12:50</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/31/c6/27225119.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">longhaiqwe</span>
-                            </div>
-                            <div class="bd"> 倪老师提到的软件，最好都用源码安装吧，版本比较新，尤其是centos的同学们。 <br></div>
-                            <span class="time">2018-11-23 18:36</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍 源码或者RPM升级都可以</p>
-                                <p class="reply-time">2018-11-23 20:41</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/4e/b81969fa.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李昭文TSOS</span>
-                            </div>
-                            <div class="bd">老师,在跟着操作场景三的时候,使用命令pidstat -u 5 1,并没有出%wait的值,我用的是阿里云centos(CentOS Linux release 7.5.1804 (Core) <br>),Linux 3.10.0-693.2.2.el7.x86_64 (izbp13056tlb7huifh6gm3z) 	11&#47;23&#47;2018 	_x86_64_	(1 CPU)<br>Average:      UID       PID    %usr %system  %guest    %CPU   CPU  Command<br>Average:        0       252     0.00    2.02          0.00    2.02     -  kworker&#47;0:1H<br>Average:        0       257     0.00    0.20          0.00    0.20     -  jbd2&#47;vda1-8<br>Average:        0      1079    0.20    0.00          0.00    0.20     -  AliYunDun<br>Average:        0     20256    0.20    0.00         0.00    0.20     -  java<br>Average:        0     24482    0.00    0.61         0.00    0.61     -  kworker&#47;u2:1<br>Average:        0     31305    0.20   60.00        0.00   60.20    -  stress<br>Average:        0     31306    0.20    0.00    0.00    0.20     -  watch<br> <br></div>
-                            <span class="time">2018-11-23 11:25</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">版本的问题，centos自带的sysstat版本稍微老一点，11.5.5之后才增加的这个选项</p>
-                                <p class="reply-time">2018-11-23 13:02</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/0c/e1/e54540b9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">冯宇</span>
-                            </div>
-                            <div class="bd">我一直用htop看负载，因为它更直接（在F2配置中勾选所有开关项，打开颜色区分功能），不同的负载会用不同的颜色标识。比如cpu密集型的应用，它的负载颜色是绿色偏高，iowait的操作，它的负载颜色是红色偏高等等，根据这些指标再用htop的sort就很容易定位到有问题的进程。还有个更好用的atop命令，好像是基于sar的统计生成的报告，直接就把有问题的进程标红了，更直观 <br></div>
-                            <span class="time">2018-11-23 09:36</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍这几个工具也很好用</p>
-                                <p class="reply-time">2018-11-23 21:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/40/07/050a63ee.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">slam</span>
-                            </div>
-                            <div class="bd">io高的例子 ，为何还是通过pidstat 看cpu？不应该是看哪个进程io高吗？只看sys占比就可以确认了？这里不是很理解 <br></div>
-                            <span class="time">2018-11-23 08:51</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍眼光很毒，的确更好的方法是进程的io情况，比如可以试试pidstat -d</p>
-                                <p class="reply-time">2018-11-23 22:09</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/XUzvuoBCNx3G7Ih2Re1JpA9SdKCS0Tx9spLfBlMd3fdRlibg1EZXh92YsqoDHJcXlTx486Ps5gTXPY7Fmhd3cvw/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">shellmode</span>
-                            </div>
-                            <div class="bd">在 sched&#47;loadavg.c 中计算平均值的算法为EMA，这种算法的目的主要是“距离目标预测窗口越近，则数据的价值越高，对未来影响越大”<br><br>如果说“更快的计算”应该只有里面的 fixed_power_int 函数用 O(log n) 的时间来算 x^n<br><br>所以内核中用 EMA 来算 loadavg 本质上并不是增加计算性能，而是让 loadavg 的趋势化更明显<br> <br></div>
-                            <span class="time">2018-11-23 08:49</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍源码级分析</p>
-                                <p class="reply-time">2018-11-23 22:09</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/bd/b5/b8dfa30a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">双</span>
-                            </div>
-                            <div class="bd">还是建议用top和ps或者lsof来分析，因为一般线上的机器不会额外安装这之外的工具，而且很多公司用堡垒机登录上去之后其他的基本上都用不了，用其自带的最保险 <br></div>
-                            <span class="time">2018-11-26 10:06</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/2d/24/28acca15.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">DJH</span>
-                            </div>
-                            <div class="bd">老师你好，请教一个问题，现在大多数CPU有超线程能力，在计算和评估平均负载的时候，CPU的核数是指物理核数，还是超线程功能的逻辑核数？ <br></div>
-                            <span class="time">2018-11-23 07:21</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">逻辑核数</p>
-                                <p class="reply-time">2018-11-23 22:13</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/f6/99/114bfea1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">孤岛</span>
-                            </div>
-                            <div class="bd">我有一点自己的理解，请老师指正。CPU比喻成一辆地铁，正在使用CPU的进程就是在地铁上的人；等待CPU的进程就是在下一站等地铁来的人；等待I&#47;O的进程就是在下一站要上车和下车的人，虽然现在对CPU没影响，可未来会影响，所以也要考虑到平均负载上。 <br></div>
-                            <span class="time">2018-11-23 13:04</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">很好的比喻，补充一下这个地铁的乘客容量就是CPU个数</p>
-                                <p class="reply-time">2018-11-23 21:32</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/9b/a8/6a391c66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Leon📷</span>
-                            </div>
-                            <div class="bd">老师你好，我在centos下模拟IO等待比较高场景，发现mpstat -P ALL 5 1没有出现iowait很高的情况<br>watch -d uptime指令是这样<br> 10:47:15 up 20 min,  5 users,  load average: 1.34, 0.85, 0.52<br>mpstat -P ALL 5 1指令结果是这样<br>平均时间:  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle<br>平均时间:  all    1.21    0.00   98.79    0.00    0.00    0.00    0.00    0.00    0.00    0.00<br>平均时间:    0    1.21    0.00   98.79    0.00    0.00    0.00    0.00    0.00    0.00    0.00<br> <br></div>
-                            <span class="time">2018-11-23 10:48</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/ef/f1/8b06801a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">谁都别拦着我</span>
-                            </div>
-                            <div class="bd">有个疑问，就像置顶评论说需要最新的版本才能看到某些系统运行指标，但是常常出问题的线上机器我们作为开发工程师并没有root权限去安装，找运维同事给装他们也不一定答应开这个口子，有可能用系统自带的或者说各类linux发行版都比较通用的系统命令（例如uptime）来完成系统状态的查看吗？ <br></div>
-                            <span class="time">2018-11-23 20:29</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/9c/d48473ab.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">dancer</span>
-                            </div>
-                            <div class="bd">学习笔记：<br>一、什么是平均负载<br>正确定义：单位时间内，系统中处于可运行状态和不可中断状态的平均进程数。<br>错误定义：单位时间内的cpu使用率。<br>可运行状态的进程：正在使用cpu或者正在等待cpu的进程，即ps aux命令下STAT处于R状态的进程<br>不可中断状态的进程：处于内核态关键流程中的进程，且不可被打断，如等待硬件设备IO响应，ps命令D状态的进程<br>理想状态：每个cpu上都有一个活跃进程，即平均负载数等于cpu数<br>过载经验值：平均负载高于cpu数量70%的时候<br><br>二、相关命令<br>cpu核数: lscpu、 grep &#39;model name&#39; &#47;proc&#47;cpuinfo | wc -l<br>显示平均负载：uptime、top，显示的顺序是最近1分钟、5分钟、15分钟，从此可以看出平均负载的趋势<br>watch -d uptime: -d会高亮显示变化的区域<br>strees: 压测命令，--cpu cpu压测选项，-i io压测选项，-c 进程数压测选项，--timeout 执行时间<br>mpstat: 多核cpu性能分析工具，-P ALL监视所有cpu<br>pidstat:  进程性能分析工具，-u 显示cpu利用率<br><br>三、平均负载与cpu使用率的区别<br>CPU使用率：单位时间内cpu繁忙情况的统计<br>情况1：CPU密集型进程，CPU使用率和平均负载基本一致<br>情况2：IO密集型进程，平均负载升高，CPU使用率不一定升高<br>情况3：大量等待CPU的进程调度，平均负载升高，CPU使用率也升高<br><br>四、平均负载过高时，如何调优<br>工具：stress、sysstat，yum即可安装<br>1. CPU密集型进程case：<br>mpstat -P ALL 5: -P ALL表示监控所有CPU，5表示每5秒刷新一次数据，观察是否有某个cpu的%usr会很高，但iowait应很低<br>pidstat -u 5 1：每5秒输出一组数据，观察哪个进程%cpu很高，但是%wait很低，极有可能就是这个进程导致cpu飚高<br>2. IO密集型进程case：<br>mpstat -P ALL 5: 观察是否有某个cpu的%iowait很高，同时%usr也较高<br>pidstat -u 5 1：观察哪个进程%wait较高，同时%CPU也较高<br>3. 大量进程case：<br>pidstat -u 5 1：观察那些%wait较高的进程是否有很多 <br></div>
-                            <span class="time">2018-12-04 13:32</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">C家族的铁粉儿</span>
-                            </div>
-                            <div class="bd">『D3打卡』<br><br>本来想偷个懒不动手了，结果听着听着音频，就激动地爬起来去操作了。我就是那个把load average和CPU使用率搞混的人，虽然以前每次都会用uptime查一下，但是只能隐约感觉去判断。老师说的确实很对，最简单的概念都不能清楚理解，复杂的系统关系更难抽丝剥茧。<br><br>老实说，很多工具确实都记不清咋用了，网上查了一下，又重新温习了一遍。学习果然永远不可能只靠一篇文章，真那么详细面面俱到，估计得几万字的操作手册了，就跟在学校上课似的，讲的是重点，自己基础不够的，该查字典查字典，该练习的练习。<br><br>期待后面的内容更精彩<br> <br></div>
-                            <span class="time">2018-11-23 01:55</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的很好👍 补充一下，工具的使用最好先查一查手册，网络上的搜索结果不一定完全准确。</p>
-                                <p class="reply-time">2018-11-23 08:16</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/07/8c/51401220.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小美</span>
-                            </div>
-                            <div class="bd">不可中断状态的进程则是正处于内核态关键流程中的进程，并且这些流程是不可打断的，比如最常见的是等待硬件设备的 I&#47;O 响应。----linux是有I&#47;O中断的，为什么等待I&#47;O响应却是不可中断的呢？那I&#47;O中断用来干什么呢？ <br></div>
-                            <span class="time">2018-11-26 22:06</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">每天晒白牙</span>
-                            </div>
-                            <div class="bd">Centos7系统<br><br>安装stress（Linux系统压力测试工具）和sysstat（Linux性能工具）<br><br>yum install stress 一直找不到镜像处理方式   所以用了rpm方式安装<br>用rpm方式安装，先从下面的地址下载rpm包<br>http:&#47;&#47;ftp.tu-chemnitz.de&#47;pub&#47;linux&#47;dag&#47;redhat&#47;el7&#47;en&#47;x86_64&#47;rpmforge&#47;RPMS&#47;stress-1.0.2-1.el7.rf.x86_64.rpm<br>然后 rpm -Uvh stress-1.0.2-1.el7.rf.x86_64.rpm 安装<br>sysstat使用yum安装 yum install sysstat<br><br> <br></div>
-                            <span class="time">2018-11-24 16:49</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-11-24 19:20</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">白华</span>
-                            </div>
-                            <div class="bd">进行实验二 stress  -i 1 --timeout  600模拟sync  ，平均负载确实上升了，但是在mpstst  -P  ALL 5  1查看是sys那一列接近100% 而不是iowait  <br></div>
-                            <span class="time">2018-11-23 11:09</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/5b/e7/49a0ce91.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">低头走路，抬头看天</span>
-                            </div>
-                            <div class="bd">有些建议，cpu和cpu核心数不是一个概念，也不能划等号吧。 <br></div>
-                            <span class="time">2018-11-23 08:59</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/dd/b8/9cfb6ada.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">萬萬沒想到</span>
-                            </div>
-                            <div class="bd">解开了我多年来对平均负载的疑问，就凭这点，花的钱也值了！！ <br></div>
-                            <span class="time">2018-11-23 09:14</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊</p>
-                                <p class="reply-time">2018-11-23 21:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/15/0f/954be2db.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">茴香根</span>
-                            </div>
-                            <div class="bd">我的理解cpu在时间片轮转调度是以线程为单位的。每个进程内可以存在很多线程。每个线程也都可以是cpu密集型，io密集型。从底层微观来说cpu负载应该可以观测到线程这个层次。但操作系统只提供了细化到进程这一级别的观测工具。针对一些多线程程序，不知道有没有能够观测到线程级别的工具？ <br></div>
-                            <span class="time">2018-11-23 08:17</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">man pidstat </p>
-                                <p class="reply-time">2018-11-23 22:11</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/4d/fe/882eaf0f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">威</span>
-                            </div>
-                            <div class="bd">请问老师，处于不可中断状态的进程，还会占用CPU时钟周期吗 <br></div>
-                            <span class="time">2018-11-24 16:57</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+</code></pre>
+                <p>
+                  可以看出，8 个进程在争抢 2 个 CPU，每个进程等待 CPU 的时间（也就是代码块中的 %wait 列）高达
+                  75%。这些超出 CPU 计算能力的进程，最终导致 CPU 过载。
+                </p>
+                <h2>小结</h2>
+                <p>分析完这三个案例，我再来归纳一下<span class="orange">平均负载的理解</span>。</p>
+                <p>
+                  平均负载提供了一个快速查看系统整体性能的手段，反映了整体的负载情况。但只看平均负载本身，我们并不能直接发现，到底是哪里出现了瓶颈。所以，在理解平均负载时，也要注意：
+                </p>
+                <ul>
+                  <li>
+                    <p>平均负载高有可能是 CPU 密集型进程导致的；</p>
+                  </li>
+                  <li>
+                    <p>平均负载高并不一定代表 CPU 使用率高，还有可能是 I/O 更繁忙了；</p>
+                  </li>
+                  <li>
+                    <p>当发现负载高的时候，你可以使用 mpstat、pidstat 等工具，辅助分析负载的来源。</p>
+                  </li>
                 </ul>
+                <h2>思考</h2>
+                <p>
+                  最后，我想邀请你一起来聊聊你所理解的平均负载，当你发现平均负载升高后，又是怎么分析排查的呢？你可以结合我前面的讲解，来总结自己的思考。欢迎在留言区和我讨论。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/47/42/1d7db2f6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">倪朋飞</span></div>
+                  <div class="bd">
+                    没想到大家的热情这么高，太激动了。统一回复一下案例中的几个问题：<br /><br />1.
+                    iowait无法升高的问题，是因为案例中stress使用的是 sync()
+                    系统调用，它的作用是刷新缓冲区内存到磁盘中。对于新安装的虚拟机，缓冲区可能比较小，无法产生大的IO压力，这样大部分就都是系统调用的消耗了。所以，你会看到只有系统CPU使用率升高。解决方法是使用stress的下一代stress-ng，它支持更丰富的选项，比如
+                    stress-ng -i 1 --hdd 1 --timeout 600（--hdd表示读写临时文件）。<br />2.
+                    pidstat输出中没有%wait的问题，是因为CentOS默认的sysstat稍微有点老，源码或者RPM升级到11.5.5版本以后就可以看到了。而Ubuntu的包一般都比较新，没有这个问题。<br />3.
+                    mpstat无法观测的问题，案例中是等待5秒后输出1次结果就停止了，更好的做法是持续监控一段时间，比如持续观测20次：mpstat
+                    -P ALL 5 20。 <br />
+                  </div>
+                  <span class="time">2018-11-25 12:50</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/31/c6/27225119.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">longhaiqwe</span></div>
+                  <div class="bd">倪老师提到的软件，最好都用源码安装吧，版本比较新，尤其是centos的同学们。 <br /></div>
+                  <span class="time">2018-11-23 18:36</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍 源码或者RPM升级都可以</p>
+                    <p class="reply-time">2018-11-23 20:41</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/4e/b81969fa.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李昭文TSOS</span></div>
+                  <div class="bd">
+                    老师,在跟着操作场景三的时候,使用命令pidstat -u 5 1,并没有出%wait的值,我用的是阿里云centos(CentOS
+                    Linux release 7.5.1804 (Core) <br />),Linux 3.10.0-693.2.2.el7.x86_64 (izbp13056tlb7huifh6gm3z)
+                    11&#47;23&#47;2018 _x86_64_ (1 CPU)<br />Average: UID PID %usr %system %guest %CPU CPU Command<br />Average:
+                    0 252 0.00 2.02 0.00 2.02 - kworker&#47;0:1H<br />Average: 0 257 0.00 0.20 0.00 0.20 -
+                    jbd2&#47;vda1-8<br />Average: 0 1079 0.20 0.00 0.00 0.20 - AliYunDun<br />Average: 0 20256 0.20 0.00
+                    0.00 0.20 - java<br />Average: 0 24482 0.00 0.61 0.00 0.61 - kworker&#47;u2:1<br />Average: 0 31305
+                    0.20 60.00 0.00 60.20 - stress<br />Average: 0 31306 0.20 0.00 0.00 0.20 - watch<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 11:25</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      版本的问题，centos自带的sysstat版本稍微老一点，11.5.5之后才增加的这个选项
+                    </p>
+                    <p class="reply-time">2018-11-23 13:02</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/0c/e1/e54540b9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">冯宇</span></div>
+                  <div class="bd">
+                    我一直用htop看负载，因为它更直接（在F2配置中勾选所有开关项，打开颜色区分功能），不同的负载会用不同的颜色标识。比如cpu密集型的应用，它的负载颜色是绿色偏高，iowait的操作，它的负载颜色是红色偏高等等，根据这些指标再用htop的sort就很容易定位到有问题的进程。还有个更好用的atop命令，好像是基于sar的统计生成的报告，直接就把有问题的进程标红了，更直观
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 09:36</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍这几个工具也很好用</p>
+                    <p class="reply-time">2018-11-23 21:53</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/40/07/050a63ee.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">slam</span></div>
+                  <div class="bd">
+                    io高的例子 ，为何还是通过pidstat
+                    看cpu？不应该是看哪个进程io高吗？只看sys占比就可以确认了？这里不是很理解 <br />
+                  </div>
+                  <span class="time">2018-11-23 08:51</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍眼光很毒，的确更好的方法是进程的io情况，比如可以试试pidstat -d</p>
+                    <p class="reply-time">2018-11-23 22:09</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/XUzvuoBCNx3G7Ih2Re1JpA9SdKCS0Tx9spLfBlMd3fdRlibg1EZXh92YsqoDHJcXlTx486Ps5gTXPY7Fmhd3cvw/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">shellmode</span></div>
+                  <div class="bd">
+                    在 sched&#47;loadavg.c
+                    中计算平均值的算法为EMA，这种算法的目的主要是“距离目标预测窗口越近，则数据的价值越高，对未来影响越大”<br /><br />如果说“更快的计算”应该只有里面的
+                    fixed_power_int 函数用 O(log n) 的时间来算 x^n<br /><br />所以内核中用 EMA 来算 loadavg
+                    本质上并不是增加计算性能，而是让 loadavg 的趋势化更明显<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 08:49</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍源码级分析</p>
+                    <p class="reply-time">2018-11-23 22:09</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/bd/b5/b8dfa30a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">双</span></div>
+                  <div class="bd">
+                    还是建议用top和ps或者lsof来分析，因为一般线上的机器不会额外安装这之外的工具，而且很多公司用堡垒机登录上去之后其他的基本上都用不了，用其自带的最保险
+                    <br />
+                  </div>
+                  <span class="time">2018-11-26 10:06</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/2d/24/28acca15.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">DJH</span></div>
+                  <div class="bd">
+                    老师你好，请教一个问题，现在大多数CPU有超线程能力，在计算和评估平均负载的时候，CPU的核数是指物理核数，还是超线程功能的逻辑核数？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 07:21</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">逻辑核数</p>
+                    <p class="reply-time">2018-11-23 22:13</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/f6/99/114bfea1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">孤岛</span></div>
+                  <div class="bd">
+                    我有一点自己的理解，请老师指正。CPU比喻成一辆地铁，正在使用CPU的进程就是在地铁上的人；等待CPU的进程就是在下一站等地铁来的人；等待I&#47;O的进程就是在下一站要上车和下车的人，虽然现在对CPU没影响，可未来会影响，所以也要考虑到平均负载上。
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 13:04</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">很好的比喻，补充一下这个地铁的乘客容量就是CPU个数</p>
+                    <p class="reply-time">2018-11-23 21:32</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/9b/a8/6a391c66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Leon📷</span></div>
+                  <div class="bd">
+                    老师你好，我在centos下模拟IO等待比较高场景，发现mpstat -P ALL 5 1没有出现iowait很高的情况<br />watch
+                    -d uptime指令是这样<br />
+                    10:47:15 up 20 min, 5 users, load average: 1.34, 0.85, 0.52<br />mpstat -P ALL 5 1指令结果是这样<br />平均时间:
+                    CPU %usr %nice %sys %iowait %irq %soft %steal %guest %gnice %idle<br />平均时间: all 1.21 0.00 98.79
+                    0.00 0.00 0.00 0.00 0.00 0.00 0.00<br />平均时间: 0 1.21 0.00 98.79 0.00 0.00 0.00 0.00 0.00 0.00
+                    0.00<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 10:48</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/ef/f1/8b06801a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">谁都别拦着我</span></div>
+                  <div class="bd">
+                    有个疑问，就像置顶评论说需要最新的版本才能看到某些系统运行指标，但是常常出问题的线上机器我们作为开发工程师并没有root权限去安装，找运维同事给装他们也不一定答应开这个口子，有可能用系统自带的或者说各类linux发行版都比较通用的系统命令（例如uptime）来完成系统状态的查看吗？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 20:29</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/9c/d48473ab.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">dancer</span></div>
+                  <div class="bd">
+                    学习笔记：<br />一、什么是平均负载<br />正确定义：单位时间内，系统中处于可运行状态和不可中断状态的平均进程数。<br />错误定义：单位时间内的cpu使用率。<br />可运行状态的进程：正在使用cpu或者正在等待cpu的进程，即ps
+                    aux命令下STAT处于R状态的进程<br />不可中断状态的进程：处于内核态关键流程中的进程，且不可被打断，如等待硬件设备IO响应，ps命令D状态的进程<br />理想状态：每个cpu上都有一个活跃进程，即平均负载数等于cpu数<br />过载经验值：平均负载高于cpu数量70%的时候<br /><br />二、相关命令<br />cpu核数:
+                    lscpu、 grep &#39;model name&#39; &#47;proc&#47;cpuinfo | wc -l<br />显示平均负载：uptime、top，显示的顺序是最近1分钟、5分钟、15分钟，从此可以看出平均负载的趋势<br />watch
+                    -d uptime: -d会高亮显示变化的区域<br />strees: 压测命令，--cpu cpu压测选项，-i io压测选项，-c
+                    进程数压测选项，--timeout 执行时间<br />mpstat: 多核cpu性能分析工具，-P ALL监视所有cpu<br />pidstat:
+                    进程性能分析工具，-u 显示cpu利用率<br /><br />三、平均负载与cpu使用率的区别<br />CPU使用率：单位时间内cpu繁忙情况的统计<br />情况1：CPU密集型进程，CPU使用率和平均负载基本一致<br />情况2：IO密集型进程，平均负载升高，CPU使用率不一定升高<br />情况3：大量等待CPU的进程调度，平均负载升高，CPU使用率也升高<br /><br />四、平均负载过高时，如何调优<br />工具：stress、sysstat，yum即可安装<br />1.
+                    CPU密集型进程case：<br />mpstat -P ALL 5: -P
+                    ALL表示监控所有CPU，5表示每5秒刷新一次数据，观察是否有某个cpu的%usr会很高，但iowait应很低<br />pidstat
+                    -u 5 1：每5秒输出一组数据，观察哪个进程%cpu很高，但是%wait很低，极有可能就是这个进程导致cpu飚高<br />2.
+                    IO密集型进程case：<br />mpstat -P ALL 5: 观察是否有某个cpu的%iowait很高，同时%usr也较高<br />pidstat
+                    -u 5 1：观察哪个进程%wait较高，同时%CPU也较高<br />3. 大量进程case：<br />pidstat -u 5
+                    1：观察那些%wait较高的进程是否有很多 <br />
+                  </div>
+                  <span class="time">2018-12-04 13:32</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">C家族的铁粉儿</span></div>
+                  <div class="bd">
+                    『D3打卡』<br /><br />本来想偷个懒不动手了，结果听着听着音频，就激动地爬起来去操作了。我就是那个把load
+                    average和CPU使用率搞混的人，虽然以前每次都会用uptime查一下，但是只能隐约感觉去判断。老师说的确实很对，最简单的概念都不能清楚理解，复杂的系统关系更难抽丝剥茧。<br /><br />老实说，很多工具确实都记不清咋用了，网上查了一下，又重新温习了一遍。学习果然永远不可能只靠一篇文章，真那么详细面面俱到，估计得几万字的操作手册了，就跟在学校上课似的，讲的是重点，自己基础不够的，该查字典查字典，该练习的练习。<br /><br />期待后面的内容更精彩<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 01:55</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      总结的很好👍 补充一下，工具的使用最好先查一查手册，网络上的搜索结果不一定完全准确。
+                    </p>
+                    <p class="reply-time">2018-11-23 08:16</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/07/8c/51401220.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小美</span></div>
+                  <div class="bd">
+                    不可中断状态的进程则是正处于内核态关键流程中的进程，并且这些流程是不可打断的，比如最常见的是等待硬件设备的
+                    I&#47;O
+                    响应。----linux是有I&#47;O中断的，为什么等待I&#47;O响应却是不可中断的呢？那I&#47;O中断用来干什么呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-26 22:06</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">每天晒白牙</span></div>
+                  <div class="bd">
+                    Centos7系统<br /><br />安装stress（Linux系统压力测试工具）和sysstat（Linux性能工具）<br /><br />yum
+                    install stress 一直找不到镜像处理方式 所以用了rpm方式安装<br />用rpm方式安装，先从下面的地址下载rpm包<br />http:&#47;&#47;ftp.tu-chemnitz.de&#47;pub&#47;linux&#47;dag&#47;redhat&#47;el7&#47;en&#47;x86_64&#47;rpmforge&#47;RPMS&#47;stress-1.0.2-1.el7.rf.x86_64.rpm<br />然后
+                    rpm -Uvh stress-1.0.2-1.el7.rf.x86_64.rpm 安装<br />sysstat使用yum安装 yum install sysstat<br /><br />
+                    <br />
+                  </div>
+                  <span class="time">2018-11-24 16:49</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-11-24 19:20</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">白华</span></div>
+                  <div class="bd">
+                    进行实验二 stress -i 1 --timeout 600模拟sync ，平均负载确实上升了，但是在mpstst -P ALL 5
+                    1查看是sys那一列接近100% 而不是iowait <br />
+                  </div>
+                  <span class="time">2018-11-23 11:09</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/5b/e7/49a0ce91.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">低头走路，抬头看天</span></div>
+                  <div class="bd">有些建议，cpu和cpu核心数不是一个概念，也不能划等号吧。 <br /></div>
+                  <span class="time">2018-11-23 08:59</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/dd/b8/9cfb6ada.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">萬萬沒想到</span></div>
+                  <div class="bd">解开了我多年来对平均负载的疑问，就凭这点，花的钱也值了！！ <br /></div>
+                  <span class="time">2018-11-23 09:14</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊</p>
+                    <p class="reply-time">2018-11-23 21:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/15/0f/954be2db.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">茴香根</span></div>
+                  <div class="bd">
+                    我的理解cpu在时间片轮转调度是以线程为单位的。每个进程内可以存在很多线程。每个线程也都可以是cpu密集型，io密集型。从底层微观来说cpu负载应该可以观测到线程这个层次。但操作系统只提供了细化到进程这一级别的观测工具。针对一些多线程程序，不知道有没有能够观测到线程级别的工具？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-23 08:17</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">man pidstat</p>
+                    <p class="reply-time">2018-11-23 22:11</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/4d/fe/882eaf0f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">威</span></div>
+                  <div class="bd">请问老师，处于不可中断状态的进程，还会占用CPU时钟周期吗 <br /></div>
+                  <span class="time">2018-11-24 16:57</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

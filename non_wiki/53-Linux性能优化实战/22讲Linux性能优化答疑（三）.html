@@ -1,104 +1,1277 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                22讲Linux性能优化答疑（三）
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/10/b9/1012be3625c19b019caba97caa644ab9.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">22讲Linux性能优化答疑（三）</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/10/b9/1012be3625c19b019caba97caa644ab9.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>专栏更新至今，四大基础模块的第二个模块——内存性能篇，我们就已经学完了。很开心你还没有掉队，仍然在积极学习和实践操作，并且热情地留言与讨论。</p><p>这些留言中，我非常高兴看到，很多同学用学过的案例思路，解决了实际工作中的性能问题。我也非常感谢 espzest、大甜菜、Smile 等积极思考的同学，指出了文章中某些不当或者不严谨的地方。另外，还有我来也、JohnT3e、白华等同学，积极在留言区讨论学习和实践中的问题，也分享了宝贵的经验，在这里也非常感谢你们。</p><p>今天是性能优化的第三期。照例，我从内存模块的留言中摘出了一些典型问题，作为今天的答疑内容，集中回复。为了便于你学习理解，它们并不是严格按照文章顺序排列的。</p><p>每个问题，我都附上了留言区提问的截屏。如果你需要回顾内容原文，可以扫描每个问题右下方的二维码查看。</p><h2>问题1：内存回收与OOM</h2><p>虎虎的这个问题，实际上包括四个子问题，即，</p><ul>
-<li>
-<p>怎么理解 LRU 内存回收？</p>
-</li>
-<li>
-<p>回收后的内存又到哪里去了？</p>
-</li>
-<li>
-<p>OOM 是按照虚拟内存还是实际内存来打分？</p>
-</li>
-<li>
-<p>怎么估计应用程序的最小内存？</p>
-</li>
-</ul><p><img src="https://static001.geekbang.org/resource/image/90/36/905b15ee0df924038befe0e61ce81436.png" alt=""></p><p>其实在 Linux <a href="https://time.geekbang.org/column/article/74272">内存的原理篇</a>和 <a href="https://time.geekbang.org/column/article/75797">Swap 原理篇</a>中我曾经讲到，一旦发现内存紧张，系统会通过三种方式回收内存。我们来复习一下，这三种方式分别是 ：</p><!-- [[[read_end]]] --><ul>
-<li>
-<p>基于 LRU（Least Recently Used）算法，回收缓存；</p>
-</li>
-<li>
-<p>基于 Swap 机制，回收不常访问的匿名页；</p>
-</li>
-<li>
-<p>基于 OOM（Out of Memory）机制，杀掉占用大量内存的进程。</p>
-</li>
-</ul><p>前两种方式，缓存回收和 Swap 回收，实际上都是基于 LRU 算法，也就是优先回收不常访问的内存。LRU 回收算法，实际上维护着 active 和 inactive 两个双向链表，其中：</p><ul>
-<li>
-<p>active 记录活跃的内存页；</p>
-</li>
-<li>
-<p>inactive 记录非活跃的内存页。</p>
-</li>
-</ul><p>越接近链表尾部，就表示内存页越不常访问。这样，在回收内存时，系统就可以根据活跃程度，优先回收不活跃的内存。</p><p>活跃和非活跃的内存页，按照类型的不同，又分别分为文件页和匿名页，对应着缓存回收和 Swap 回收。</p><p>当然，你可以从 /proc/meminfo 中，查询它们的大小，比如：</p><pre><code># grep表示只保留包含active的指标（忽略大小写）
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  专栏更新至今，四大基础模块的第二个模块——内存性能篇，我们就已经学完了。很开心你还没有掉队，仍然在积极学习和实践操作，并且热情地留言与讨论。
+                </p>
+                <p>
+                  这些留言中，我非常高兴看到，很多同学用学过的案例思路，解决了实际工作中的性能问题。我也非常感谢
+                  espzest、大甜菜、Smile
+                  等积极思考的同学，指出了文章中某些不当或者不严谨的地方。另外，还有我来也、JohnT3e、白华等同学，积极在留言区讨论学习和实践中的问题，也分享了宝贵的经验，在这里也非常感谢你们。
+                </p>
+                <p>
+                  今天是性能优化的第三期。照例，我从内存模块的留言中摘出了一些典型问题，作为今天的答疑内容，集中回复。为了便于你学习理解，它们并不是严格按照文章顺序排列的。
+                </p>
+                <p>
+                  每个问题，我都附上了留言区提问的截屏。如果你需要回顾内容原文，可以扫描每个问题右下方的二维码查看。
+                </p>
+                <h2>问题1：内存回收与OOM</h2>
+                <p>虎虎的这个问题，实际上包括四个子问题，即，</p>
+                <ul>
+                  <li>
+                    <p>怎么理解 LRU 内存回收？</p>
+                  </li>
+                  <li>
+                    <p>回收后的内存又到哪里去了？</p>
+                  </li>
+                  <li>
+                    <p>OOM 是按照虚拟内存还是实际内存来打分？</p>
+                  </li>
+                  <li>
+                    <p>怎么估计应用程序的最小内存？</p>
+                  </li>
+                </ul>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/90/36/905b15ee0df924038befe0e61ce81436.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  其实在 Linux <a href="https://time.geekbang.org/column/article/74272">内存的原理篇</a>和
+                  <a href="https://time.geekbang.org/column/article/75797">Swap 原理篇</a
+                  >中我曾经讲到，一旦发现内存紧张，系统会通过三种方式回收内存。我们来复习一下，这三种方式分别是 ：
+                </p>
+                <!-- [[[read_end]]] -->
+                <ul>
+                  <li>
+                    <p>基于 LRU（Least Recently Used）算法，回收缓存；</p>
+                  </li>
+                  <li>
+                    <p>基于 Swap 机制，回收不常访问的匿名页；</p>
+                  </li>
+                  <li>
+                    <p>基于 OOM（Out of Memory）机制，杀掉占用大量内存的进程。</p>
+                  </li>
+                </ul>
+                <p>
+                  前两种方式，缓存回收和 Swap 回收，实际上都是基于 LRU 算法，也就是优先回收不常访问的内存。LRU
+                  回收算法，实际上维护着 active 和 inactive 两个双向链表，其中：
+                </p>
+                <ul>
+                  <li>
+                    <p>active 记录活跃的内存页；</p>
+                  </li>
+                  <li>
+                    <p>inactive 记录非活跃的内存页。</p>
+                  </li>
+                </ul>
+                <p>
+                  越接近链表尾部，就表示内存页越不常访问。这样，在回收内存时，系统就可以根据活跃程度，优先回收不活跃的内存。
+                </p>
+                <p>活跃和非活跃的内存页，按照类型的不同，又分别分为文件页和匿名页，对应着缓存回收和 Swap 回收。</p>
+                <p>当然，你可以从 /proc/meminfo 中，查询它们的大小，比如：</p>
+                <pre><code># grep表示只保留包含active的指标（忽略大小写）
 # sort表示按照字母顺序排序
 $ cat /proc/meminfo | grep -i active | sort
 Active(anon):     167976 kB
@@ -107,41 +1280,193 @@ Active:          1139464 kB
 Inactive(anon):      720 kB
 Inactive(file):  2109536 kB
 Inactive:        2110256 kB
-</code></pre><p>第三种方式，OOM 机制按照 oom_score 给进程排序。oom_score 越大，进程就越容易被系统杀死。</p><p>当系统发现内存不足以分配新的内存请求时，就会尝试<a href="https://time.geekbang.org/column/article/75797">直接内存回收</a>。这种情况下，如果回收完文件页和匿名页后，内存够用了，当然皆大欢喜，把回收回来的内存分配给进程就可以了。但如果内存还是不足，OOM就要登场了。</p><p>OOM 发生时，你可以在 dmesg 中看到 Out of memory 的信息，从而知道是哪些进程被 OOM 杀死了。比如，你可以执行下面的命令，查询 OOM 日志：</p><pre><code>$ dmesg | grep -i &quot;Out of memory&quot;
+</code></pre>
+                <p>第三种方式，OOM 机制按照 oom_score 给进程排序。oom_score 越大，进程就越容易被系统杀死。</p>
+                <p>
+                  当系统发现内存不足以分配新的内存请求时，就会尝试<a
+                    href="https://time.geekbang.org/column/article/75797"
+                    >直接内存回收</a
+                  >。这种情况下，如果回收完文件页和匿名页后，内存够用了，当然皆大欢喜，把回收回来的内存分配给进程就可以了。但如果内存还是不足，OOM就要登场了。
+                </p>
+                <p>
+                  OOM 发生时，你可以在 dmesg 中看到 Out of memory 的信息，从而知道是哪些进程被 OOM
+                  杀死了。比如，你可以执行下面的命令，查询 OOM 日志：
+                </p>
+                <pre><code>$ dmesg | grep -i &quot;Out of memory&quot;
 Out of memory: Kill process 9329 (java) score 321 or sacrifice child
-</code></pre><p>当然了，如果你不希望应用程序被 OOM 杀死，可以调整进程的 oom_score_adj，减小 OOM 分值，进而降低被杀死的概率。或者，你还可以开启内存的 overcommit，允许进程申请超过物理内存的虚拟内存（这儿实际上假设的是，进程不会用光申请到的虚拟内存）。</p><p>这三种方式，我们就复习完了。接下来，我们回到开始的四个问题，相信你自己已经有了答案。</p><ol>
-<li>
-<p>LRU 算法的原理刚才已经提到了，这里不再重复。</p>
-</li>
-<li>
-<p>内存回收后，会被重新放到未使用内存中。这样，新的进程就可以请求、使用它们。</p>
-</li>
-<li>
-<p>OOM 触发的时机基于虚拟内存。换句话说，进程在申请内存时，如果申请的虚拟内存加上服务器实际已用的内存之和，比总的物理内存还大，就会触发 OOM。</p>
-</li>
-<li>
-<p>要确定一个进程或者容器的最小内存，最简单的方法就是让它运行起来，再通过 ps 或者 smap ，查看它的内存使用情况。不过要注意，进程刚启动时，可能还没开始处理实际业务，一旦开始处理实际业务，就会占用更多内存。所以，要记得给内存留一定的余量。</p>
-</li>
-</ol><h2>问题2: 文件系统与磁盘的区别</h2><p>文件系统和磁盘的原理，我将在下一个模块中讲解，它们跟内存的关系也十分密切。不过，在学习Buffer 和 Cache 的原理时，我曾提到，Buffer 用于磁盘，而 Cache 用于文件。因此，有不少同学困惑了，比如 JJ 留言中的这两个问题。</p><ul>
-<li>
-<p>读写文件最终也是读写磁盘，到底要怎么区分，是读写文件还是读写磁盘呢？</p>
-</li>
-<li>
-<p>读写磁盘难道可以不经过文件系统吗？</p>
-</li>
-</ul><p><img src="https://static001.geekbang.org/resource/image/6a/b1/6ac5f2e0bf43098a3ba2d14f057eeeb1.png" alt=""></p><p>如果你也有相同的疑问，主要还是没搞清楚，磁盘和文件的区别。我在“<a href="https://time.geekbang.org/column/article/74633">怎么理解内存中的Buffer和Cache</a>”文章的留言区简单回复过，不过担心有同学没有看到，所以在这里重新讲一下。</p><p>磁盘是一个存储设备（确切地说是块设备），可以被划分为不同的磁盘分区。而在磁盘或者磁盘分区上，还可以再创建文件系统，并挂载到系统的某个目录中。这样，系统就可以通过这个挂载目录，来读写文件。</p><p>换句话说，磁盘是存储数据的块设备，也是文件系统的载体。所以，文件系统确实还是要通过磁盘，来保证数据的持久化存储。</p><p>你在很多地方都会看到这句话， Linux 中一切皆文件。换句话说，你可以通过相同的文件接口，来访问磁盘和文件（比如 open、read、write、close 等）。</p><ul>
-<li>
-<p>我们通常说的“文件”，其实是指普通文件。</p>
-</li>
-<li>
-<p>而磁盘或者分区，则是指块设备文件。</p>
-</li>
-</ul><p>你可以执行 “ls -l &lt;路径&gt;” 查看它们的区别。如果不懂ls 输出的含义，别忘了man一下就可以。执行 man ls 命令，以及 info ‘(coreutils) ls invocation’ 命令，就可以查到了。</p><p>在读写普通文件时，I/O 请求会首先经过文件系统，然后由文件系统负责，来与磁盘进行交互。而在读写块设备文件时，会跳过文件系统，直接与磁盘交互，也就是所谓的“裸I/O”。</p><p>这两种读写方式使用的缓存自然不同。文件系统管理的缓存，其实就是 Cache 的一部分。而裸磁盘的缓存，用的正是Buffer。</p><p>更多关于文件系统、磁盘以及 I/O 的原理，你先不要着急，往后我们都会讲到。</p><h2>问题3: 如何统计所有进程的物理内存使用量</h2><p>这其实是 <a href="https://time.geekbang.org/column/article/74633">怎么理解内存中的Buffer和Cache</a> 的课后思考题，无名老卒、Griffin、JohnT3e 等少数几个同学，都给出了一些思路。</p><p>比如，无名老卒同学的方法，是把所有进程的 RSS 全部累加：</p><p><img src="https://static001.geekbang.org/resource/image/ba/64/baa48809addf1f7b4d7c280f4ce03764.png" alt=""></p><p>这种方法，实际上导致不少地方会被重复计算。RSS 表示常驻内存，把进程用到的共享内存也算了进去。所以，直接累加会导致共享内存被重复计算，不能得到准确的答案。</p><p>留言中好几个同学的答案都有类似问题。你可以重新检查一下自己的方法，弄清楚每个指标的定义和原理，防止重复计算。</p><p>当然，也有同学的思路非常正确，比如 JohnT3e 提到的，这个问题的关键在于理解 PSS 的含义。</p><p><img src="https://static001.geekbang.org/resource/image/f5/1c/f5c56462ba5c821de1454a9c021e0f1c.png" alt=""></p><p>你当然可以通过 stackexchange 上的<a href="https://unix.stackexchange.com/questions/33381/getting-information-about-a-process-memory-usage-from-proc-pid-smaps">链接</a>找到答案，不过，我还是更推荐，直接查 proc 文件系统的<a href="https://www.kernel.org/doc/Documentation/filesystems/proc.txt">文档</a>：</p><blockquote>
-<p>The “proportional set size” (PSS) of a process is the count of pages it has in memory, where each page is divided by the number of processes sharing it. So if a process has 1000 pages all to itself, and 1000 shared with one other process, its PSS will be 1500.</p>
-</blockquote><p>这里我简单解释一下，每个进程的PSS ，是指把共享内存平分到各个进程后，再加上进程本身的非共享内存大小的和。</p><p>就像文档中的这个例子，一个进程的非共享内存为  1000 页，它和另一个进程的共享进程也是  1000 页，那么它的PSS=1000/2+1000=1500 页。</p><p>这样，你就可以直接累加 PSS ，不用担心共享内存重复计算的问题了。</p><p>比如，你可以运行下面的命令来计算：</p><pre><code># 使用grep查找Pss指标后，再用awk计算累加值
+</code></pre>
+                <p>
+                  当然了，如果你不希望应用程序被 OOM 杀死，可以调整进程的 oom_score_adj，减小 OOM
+                  分值，进而降低被杀死的概率。或者，你还可以开启内存的
+                  overcommit，允许进程申请超过物理内存的虚拟内存（这儿实际上假设的是，进程不会用光申请到的虚拟内存）。
+                </p>
+                <p>这三种方式，我们就复习完了。接下来，我们回到开始的四个问题，相信你自己已经有了答案。</p>
+                <ol>
+                  <li>
+                    <p>LRU 算法的原理刚才已经提到了，这里不再重复。</p>
+                  </li>
+                  <li>
+                    <p>内存回收后，会被重新放到未使用内存中。这样，新的进程就可以请求、使用它们。</p>
+                  </li>
+                  <li>
+                    <p>
+                      OOM
+                      触发的时机基于虚拟内存。换句话说，进程在申请内存时，如果申请的虚拟内存加上服务器实际已用的内存之和，比总的物理内存还大，就会触发
+                      OOM。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      要确定一个进程或者容器的最小内存，最简单的方法就是让它运行起来，再通过 ps 或者 smap
+                      ，查看它的内存使用情况。不过要注意，进程刚启动时，可能还没开始处理实际业务，一旦开始处理实际业务，就会占用更多内存。所以，要记得给内存留一定的余量。
+                    </p>
+                  </li>
+                </ol>
+                <h2>问题2: 文件系统与磁盘的区别</h2>
+                <p>
+                  文件系统和磁盘的原理，我将在下一个模块中讲解，它们跟内存的关系也十分密切。不过，在学习Buffer 和 Cache
+                  的原理时，我曾提到，Buffer 用于磁盘，而 Cache 用于文件。因此，有不少同学困惑了，比如 JJ
+                  留言中的这两个问题。
+                </p>
+                <ul>
+                  <li>
+                    <p>读写文件最终也是读写磁盘，到底要怎么区分，是读写文件还是读写磁盘呢？</p>
+                  </li>
+                  <li>
+                    <p>读写磁盘难道可以不经过文件系统吗？</p>
+                  </li>
+                </ul>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/6a/b1/6ac5f2e0bf43098a3ba2d14f057eeeb1.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  如果你也有相同的疑问，主要还是没搞清楚，磁盘和文件的区别。我在“<a
+                    href="https://time.geekbang.org/column/article/74633"
+                    >怎么理解内存中的Buffer和Cache</a
+                  >”文章的留言区简单回复过，不过担心有同学没有看到，所以在这里重新讲一下。
+                </p>
+                <p>
+                  磁盘是一个存储设备（确切地说是块设备），可以被划分为不同的磁盘分区。而在磁盘或者磁盘分区上，还可以再创建文件系统，并挂载到系统的某个目录中。这样，系统就可以通过这个挂载目录，来读写文件。
+                </p>
+                <p>
+                  换句话说，磁盘是存储数据的块设备，也是文件系统的载体。所以，文件系统确实还是要通过磁盘，来保证数据的持久化存储。
+                </p>
+                <p>
+                  你在很多地方都会看到这句话， Linux
+                  中一切皆文件。换句话说，你可以通过相同的文件接口，来访问磁盘和文件（比如 open、read、write、close
+                  等）。
+                </p>
+                <ul>
+                  <li>
+                    <p>我们通常说的“文件”，其实是指普通文件。</p>
+                  </li>
+                  <li>
+                    <p>而磁盘或者分区，则是指块设备文件。</p>
+                  </li>
+                </ul>
+                <p>
+                  你可以执行 “ls -l &lt;路径&gt;” 查看它们的区别。如果不懂ls 输出的含义，别忘了man一下就可以。执行 man
+                  ls 命令，以及 info ‘(coreutils) ls invocation’ 命令，就可以查到了。
+                </p>
+                <p>
+                  在读写普通文件时，I/O
+                  请求会首先经过文件系统，然后由文件系统负责，来与磁盘进行交互。而在读写块设备文件时，会跳过文件系统，直接与磁盘交互，也就是所谓的“裸I/O”。
+                </p>
+                <p>
+                  这两种读写方式使用的缓存自然不同。文件系统管理的缓存，其实就是 Cache
+                  的一部分。而裸磁盘的缓存，用的正是Buffer。
+                </p>
+                <p>更多关于文件系统、磁盘以及 I/O 的原理，你先不要着急，往后我们都会讲到。</p>
+                <h2>问题3: 如何统计所有进程的物理内存使用量</h2>
+                <p>
+                  这其实是
+                  <a href="https://time.geekbang.org/column/article/74633">怎么理解内存中的Buffer和Cache</a>
+                  的课后思考题，无名老卒、Griffin、JohnT3e 等少数几个同学，都给出了一些思路。
+                </p>
+                <p>比如，无名老卒同学的方法，是把所有进程的 RSS 全部累加：</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/ba/64/baa48809addf1f7b4d7c280f4ce03764.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  这种方法，实际上导致不少地方会被重复计算。RSS
+                  表示常驻内存，把进程用到的共享内存也算了进去。所以，直接累加会导致共享内存被重复计算，不能得到准确的答案。
+                </p>
+                <p>
+                  留言中好几个同学的答案都有类似问题。你可以重新检查一下自己的方法，弄清楚每个指标的定义和原理，防止重复计算。
+                </p>
+                <p>当然，也有同学的思路非常正确，比如 JohnT3e 提到的，这个问题的关键在于理解 PSS 的含义。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/f5/1c/f5c56462ba5c821de1454a9c021e0f1c.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  你当然可以通过 stackexchange 上的<a
+                    href="https://unix.stackexchange.com/questions/33381/getting-information-about-a-process-memory-usage-from-proc-pid-smaps"
+                    >链接</a
+                  >找到答案，不过，我还是更推荐，直接查 proc 文件系统的<a
+                    href="https://www.kernel.org/doc/Documentation/filesystems/proc.txt"
+                    >文档</a
+                  >：
+                </p>
+                <blockquote>
+                  <p>
+                    The “proportional set size” (PSS) of a process is the count of pages it has in memory, where each
+                    page is divided by the number of processes sharing it. So if a process has 1000 pages all to itself,
+                    and 1000 shared with one other process, its PSS will be 1500.
+                  </p>
+                </blockquote>
+                <p>
+                  这里我简单解释一下，每个进程的PSS
+                  ，是指把共享内存平分到各个进程后，再加上进程本身的非共享内存大小的和。
+                </p>
+                <p>
+                  就像文档中的这个例子，一个进程的非共享内存为 1000 页，它和另一个进程的共享进程也是 1000
+                  页，那么它的PSS=1000/2+1000=1500 页。
+                </p>
+                <p>这样，你就可以直接累加 PSS ，不用担心共享内存重复计算的问题了。</p>
+                <p>比如，你可以运行下面的命令来计算：</p>
+                <pre><code># 使用grep查找Pss指标后，再用awk计算累加值
 $ grep Pss /proc/[1-9]*/smaps | awk '{total+=$2}; END {printf &quot;%d kB\n&quot;, total }'
 391266 kB
-</code></pre><h2>问题4: CentOS系统中如何安装 bcc-tools</h2><p>很多同学留言说用的是 CentOS 系统。虽然我在文章中也给出了一个<a href="https://github.com/iovisor/bcc/issues/462">参考文档</a>，不过 bcc-tools 工具安装起来还是有些困难。</p><p>比如白华同学留言表示，网络上的教程不太完整，步骤有些乱：</p><p><img src="https://static001.geekbang.org/resource/image/03/91/036cde548f2455e3d80b6b1c50e33c91.png" alt=""></p><p>不过，白华和渡渡鸟_linux同学在探索实践后，留言分享了他们的经验，感谢你们的分享。</p><p><img src="https://static001.geekbang.org/resource/image/8b/17/8b80a335c3fa543226f42dcb2c506017.png" alt=""><img src="https://static001.geekbang.org/resource/image/f3/0d/f34b80fc9f7eefc928959bfb41ce590d.png" alt=""></p><p>在这里，我也统一回复一下，在 CentOS 中安装 bcc-tools 的步骤。以 CentOS 7 为例，整个安装主要可以分两步。</p><p>第一步，升级内核。你可以运行下面的命令来操作：</p><pre><code># 升级系统
+</code></pre>
+                <h2>问题4: CentOS系统中如何安装 bcc-tools</h2>
+                <p>
+                  很多同学留言说用的是 CentOS 系统。虽然我在文章中也给出了一个<a
+                    href="https://github.com/iovisor/bcc/issues/462"
+                    >参考文档</a
+                  >，不过 bcc-tools 工具安装起来还是有些困难。
+                </p>
+                <p>比如白华同学留言表示，网络上的教程不太完整，步骤有些乱：</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/03/91/036cde548f2455e3d80b6b1c50e33c91.png"
+                    alt=""
+                  />
+                </p>
+                <p>不过，白华和渡渡鸟_linux同学在探索实践后，留言分享了他们的经验，感谢你们的分享。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/8b/17/8b80a335c3fa543226f42dcb2c506017.png"
+                    alt=""
+                  /><img
+                    src="https://static001.geekbang.org/resource/image/f3/0d/f34b80fc9f7eefc928959bfb41ce590d.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  在这里，我也统一回复一下，在 CentOS 中安装 bcc-tools 的步骤。以 CentOS 7
+                  为例，整个安装主要可以分两步。
+                </p>
+                <p>第一步，升级内核。你可以运行下面的命令来操作：</p>
+                <pre><code># 升级系统
 yum update -y
 
 # 安装ELRepo
@@ -159,7 +1484,9 @@ reboot
 
 # 重启后确认内核版本已升级为4.20.0-1.el7.elrepo.x86_64
 uname -r
-</code></pre><p>第二步，安装 bcc-tools：</p><pre><code># 安装bcc-tools
+</code></pre>
+                <p>第二步，安装 bcc-tools：</p>
+                <pre><code># 安装bcc-tools
 yum install -y bcc-tools
 
 # 配置PATH路径
@@ -167,196 +1494,250 @@ export PATH=$PATH:/usr/share/bcc/tools
 
 # 验证安装成功
 cachestat 
-</code></pre><h2>问题5: 内存泄漏案例的优化方法</h2><p>这是我在 <a href="https://time.geekbang.org/column/article/75670">内存泄漏了，我该如何定位和处理</a> 中留的一个思考题。这个问题是这样的：</p><p>在内存泄漏案例的最后，我们通过增加 free() 调用，释放了函数 fibonacci() 分配的内存，修复了内存泄漏的问题。就这个案例而言，还有没有其他更好的修复方法呢？</p><p>很多同学留言写下了自己的想法，都很不错。这里，我重点表扬下郭江伟同学，他给出的方法非常好：</p><p><img src="https://static001.geekbang.org/resource/image/75/e4/757c532b561d142306c435a57277cae4.png" alt=""></p><p>他的思路是不用动态内存分配的方法，而是用数组来暂存计算结果。这样就可以由系统自动管理这些栈内存，也不存在内存泄漏的问题了。</p><p>这种减少动态内存分配的思路，除了可以解决内存泄漏问题，其实也是常用的内存优化方法。比如，在需要大量内存的场景中，你就可以考虑用栈内存、内存池、HugePage 等方法，来优化内存的分配和管理。</p><p>除了这五个问题，还有一点我也想说一下。很多同学在说工具的版本问题，的确，生产环境中的 Linux 版本往往都比较低，导致很多新工具不能在生产环境中直接使用。</p><p>不过，这并不代表我们就无能为力了。毕竟，系统的原理都是大同小异的。这其实也是我一直强调的观点。</p><ul>
-<li>
-<p>在学习时，最好先用最新的系统和工具，它们可以为你提供更简单直观的结果，帮你更好的理解系统的原理。</p>
-</li>
-<li>
-<p>在你掌握了这些原理后，回过头来，再去理解旧版本系统中的工具和原理，你会发现，即便旧版本中的很多工具并不是那么好用，但是原理和指标是类似的，你依然可以轻松掌握它们的使用方法。</p>
-</li>
-</ul><p>最后，欢迎继续在留言区写下你的疑问，我会持续不断地解答。我的目的不变，希望可以和你一起，把文章的知识变成你的能力，我们不仅仅在实战中演练，也要在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">白华</span>
-                            </div>
-                            <div class="bd">自己跑虚拟机跑的k8s小集群，node节点跑的镜像太多，就特别卡，看集群情况发现好多pod都死了，看虚拟机上面就写到oom自动杀进程了，以前从没遇到过oom，这次一下就知道怎么回事了 <br></div>
-                            <span class="time">2019-01-09 07:28</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊 k8s别忘了设置好内存资源的请求和限制</p>
-                                <p class="reply-time">2019-01-09 17:51</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">划时代</span>
-                            </div>
-                            <div class="bd">老师，在“如何统计所有进程的物理内存使用量”的问题中，我曾尝试将&#47;proc&#47;[pid]&#47;smaps中的项Pss相加，但发现一个进程中有多个地址段的Pss为0kB，而Rss是不为0kB的，该区域占用了物理内存却没有计算在Pss内，表示不太理解？ <br></div>
-                            <span class="time">2019-01-09 10:16</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">什么进程？</p>
-                                <p class="reply-time">2019-01-10 20:57</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/20/36/b3e2f1d5.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">wykkx</span>
-                            </div>
-                            <div class="bd">老师您好，请教一个问题，您说匿名页回收是使用swap机制，那么这里有几个问题：一是如果我的系统不开启swap（现在很多系统都是不开启swap的，尤其是web类应用，为了提升响应时间），那么匿名页还怎么回收？二是即使我开启了swap，匿名页被放到了swap上，那么swap是如何清理这些匿名页的，总不能一致保存这些匿名页吧。谢谢老师<br>2019-01-10<br> 作者回复<br>1. 不开swap，没法回收<br>2. 取决于这些页的实际访问情况，只要一访问，就会换入到内存中<br>---------追问-------------------------<br>首先谢谢老师的问答，可能是我没有描述清楚。一是，如果按照老师说的“不开swap，没法回收”那么我系统产生的大量匿名页怎么办？是不是一直在内存里，不能被回收？直到引发oom，把这个进程干掉？；二是“ 取决于这些页的实际访问情况，只要一访问，就会换入到内存中”如果这些被换到swap上的匿名页量很大 ，把swap都写满了，这个时候是怎么选择从swap里清理哪些匿名页呢？ <br></div>
-                            <span class="time">2019-01-12 11:19</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/dwehJHP4ycAfDb9MoudXb4QSt7YgmISqwwsa928XZ6aTWqwWh0kx0iatjocSibLa7iajXmbGlJ5svegY3P6LfKJ0w/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">solar</span>
-                            </div>
-                            <div class="bd">我想请教一个问题，在我的系统中，64G的内存基本被耗尽，但是有14个G的cache，我想查询到底是哪个进程使用了这么多的cache，如何查询呢？我使用top,smem等工具，都看不到到底是哪个进程使用这么多的cache，请指教如何查询。 <br></div>
-                            <span class="time">2019-01-11 15:23</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/12/04/5837b21c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Brown羊羊</span>
-                            </div>
-                            <div class="bd">打卡一下 <br></div>
-                            <span class="time">2019-01-11 11:16</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/02/5b/ce326cfc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Orcsir</span>
-                            </div>
-                            <div class="bd">Flag<br>还好没掉队，这种定期的答疑与总结超赞。 <br></div>
-                            <span class="time">2019-01-10 21:00</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">我来也</span>
-                            </div>
-                            <div class="bd">[D22打卡]<br>通过学习 内存性能篇 对linux内存的分配有了更深入的理解.<br>准备用学习的知识来分析生产环境中的一个内存问题:<br>某个进程(C+LUA)内存持续升高,c部分的内存是程序启动时就申请好了的,运行过程中不会有明显变化.<br>lua中通过调用 collectgarbage(&#39;count&#39;)  和   collectgarbage(&#39;collect&#39;) 比较回收前和回收后的内存.<br>启动时整个程序的实际占用内存100M, 跑不了一天, 实际内存就升到了400M+,而LUA中打印的内存也才70M+.<br>虽然也了解lua虚拟机释放的内存,并不会及时的被程序释放, 但这多出来的200M内存不知道消耗在什么地方了.<br>一台机器上,十几个进程都这样,总消耗的内存就比较可观了.<br><br>期待接下来的 I&#47;O 性能篇.<br>最近几天太忙了, 昨天出的文章现在才有时间看.<br> <br></div>
-                            <span class="time">2019-01-10 16:04</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/20/36/b3e2f1d5.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">wykkx</span>
-                            </div>
-                            <div class="bd">老师您好，请教一个问题，您说匿名页回收是使用swap机制，那么这里有几个问题：一是如果我的系统不开启swap（现在很多系统都是不开启swap的，尤其是web类应用，为了提升响应时间），那么匿名页还怎么回收？二是即使我开启了swap，匿名页被放到了swap上，那么swap是如何清理这些匿名页的，总不能一致保存这些匿名页吧。谢谢老师 <br></div>
-                            <span class="time">2019-01-10 08:43</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">1. 不开swap，没法回收<br>2. 取决于这些页的实际访问情况，只要一访问，就会换入到内存中</p>
-                                <p class="reply-time">2019-01-10 20:44</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/40/12/b0206f40.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Bruce</span>
-                            </div>
-                            <div class="bd">老师好，工作中遇到这样情景：  一个服务跑在Linux上， 客户端通过http和服务端通信，不管客户端怎么增加，服务端的cpu mem始终变化不大， 这种情况下想听听老师平时一般是怎么系统性debug的 <br></div>
-                            <span class="time">2019-01-10 07:58</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">除了CPU、Mem，还有 I&#47;O 和网络，具体怎么分析还要看你碰到了什么问题。cpu和mem变化不大看起来是个好事呀</p>
-                                <p class="reply-time">2019-01-10 20:48</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/ec/21/b0fe1bfd.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Adam</span>
-                            </div>
-                            <div class="bd">这个专栏，对于运维同学来说真是太棒了。 <br></div>
-                            <span class="time">2019-01-09 10:58</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊 谢谢</p>
-                                <p class="reply-time">2019-01-09 17:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">风飘，吾独思</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2019-01-09 08:52</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ninuxer</span>
-                            </div>
-                            <div class="bd">打卡day23<br>喜欢一篇文章看两次，第一次看，第二次是实践的时候再看一遍 <br></div>
-                            <span class="time">2019-01-09 08:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2019-01-09 17:51</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+</code></pre>
+                <h2>问题5: 内存泄漏案例的优化方法</h2>
+                <p>
+                  这是我在
+                  <a href="https://time.geekbang.org/column/article/75670">内存泄漏了，我该如何定位和处理</a>
+                  中留的一个思考题。这个问题是这样的：
+                </p>
+                <p>
+                  在内存泄漏案例的最后，我们通过增加 free() 调用，释放了函数 fibonacci()
+                  分配的内存，修复了内存泄漏的问题。就这个案例而言，还有没有其他更好的修复方法呢？
+                </p>
+                <p>很多同学留言写下了自己的想法，都很不错。这里，我重点表扬下郭江伟同学，他给出的方法非常好：</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/75/e4/757c532b561d142306c435a57277cae4.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  他的思路是不用动态内存分配的方法，而是用数组来暂存计算结果。这样就可以由系统自动管理这些栈内存，也不存在内存泄漏的问题了。
+                </p>
+                <p>
+                  这种减少动态内存分配的思路，除了可以解决内存泄漏问题，其实也是常用的内存优化方法。比如，在需要大量内存的场景中，你就可以考虑用栈内存、内存池、HugePage
+                  等方法，来优化内存的分配和管理。
+                </p>
+                <p>
+                  除了这五个问题，还有一点我也想说一下。很多同学在说工具的版本问题，的确，生产环境中的 Linux
+                  版本往往都比较低，导致很多新工具不能在生产环境中直接使用。
+                </p>
+                <p>不过，这并不代表我们就无能为力了。毕竟，系统的原理都是大同小异的。这其实也是我一直强调的观点。</p>
+                <ul>
+                  <li>
+                    <p>
+                      在学习时，最好先用最新的系统和工具，它们可以为你提供更简单直观的结果，帮你更好的理解系统的原理。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      在你掌握了这些原理后，回过头来，再去理解旧版本系统中的工具和原理，你会发现，即便旧版本中的很多工具并不是那么好用，但是原理和指标是类似的，你依然可以轻松掌握它们的使用方法。
+                    </p>
+                  </li>
                 </ul>
+                <p>
+                  最后，欢迎继续在留言区写下你的疑问，我会持续不断地解答。我的目的不变，希望可以和你一起，把文章的知识变成你的能力，我们不仅仅在实战中演练，也要在交流中进步。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/13/52/db1b01fc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">白华</span></div>
+                  <div class="bd">
+                    自己跑虚拟机跑的k8s小集群，node节点跑的镜像太多，就特别卡，看集群情况发现好多pod都死了，看虚拟机上面就写到oom自动杀进程了，以前从没遇到过oom，这次一下就知道怎么回事了
+                    <br />
+                  </div>
+                  <span class="time">2019-01-09 07:28</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊 k8s别忘了设置好内存资源的请求和限制</p>
+                    <p class="reply-time">2019-01-09 17:51</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">划时代</span></div>
+                  <div class="bd">
+                    老师，在“如何统计所有进程的物理内存使用量”的问题中，我曾尝试将&#47;proc&#47;[pid]&#47;smaps中的项Pss相加，但发现一个进程中有多个地址段的Pss为0kB，而Rss是不为0kB的，该区域占用了物理内存却没有计算在Pss内，表示不太理解？
+                    <br />
+                  </div>
+                  <span class="time">2019-01-09 10:16</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">什么进程？</p>
+                    <p class="reply-time">2019-01-10 20:57</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/20/36/b3e2f1d5.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">wykkx</span></div>
+                  <div class="bd">
+                    老师您好，请教一个问题，您说匿名页回收是使用swap机制，那么这里有几个问题：一是如果我的系统不开启swap（现在很多系统都是不开启swap的，尤其是web类应用，为了提升响应时间），那么匿名页还怎么回收？二是即使我开启了swap，匿名页被放到了swap上，那么swap是如何清理这些匿名页的，总不能一致保存这些匿名页吧。谢谢老师<br />2019-01-10<br />
+                    作者回复<br />1. 不开swap，没法回收<br />2.
+                    取决于这些页的实际访问情况，只要一访问，就会换入到内存中<br />---------追问-------------------------<br />首先谢谢老师的问答，可能是我没有描述清楚。一是，如果按照老师说的“不开swap，没法回收”那么我系统产生的大量匿名页怎么办？是不是一直在内存里，不能被回收？直到引发oom，把这个进程干掉？；二是“
+                    取决于这些页的实际访问情况，只要一访问，就会换入到内存中”如果这些被换到swap上的匿名页量很大
+                    ，把swap都写满了，这个时候是怎么选择从swap里清理哪些匿名页呢？ <br />
+                  </div>
+                  <span class="time">2019-01-12 11:19</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/dwehJHP4ycAfDb9MoudXb4QSt7YgmISqwwsa928XZ6aTWqwWh0kx0iatjocSibLa7iajXmbGlJ5svegY3P6LfKJ0w/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">solar</span></div>
+                  <div class="bd">
+                    我想请教一个问题，在我的系统中，64G的内存基本被耗尽，但是有14个G的cache，我想查询到底是哪个进程使用了这么多的cache，如何查询呢？我使用top,smem等工具，都看不到到底是哪个进程使用这么多的cache，请指教如何查询。
+                    <br />
+                  </div>
+                  <span class="time">2019-01-11 15:23</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/12/04/5837b21c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Brown羊羊</span></div>
+                  <div class="bd">打卡一下 <br /></div>
+                  <span class="time">2019-01-11 11:16</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/02/5b/ce326cfc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Orcsir</span></div>
+                  <div class="bd">Flag<br />还好没掉队，这种定期的答疑与总结超赞。 <br /></div>
+                  <span class="time">2019-01-10 21:00</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">我来也</span></div>
+                  <div class="bd">
+                    [D22打卡]<br />通过学习 内存性能篇 对linux内存的分配有了更深入的理解.<br />准备用学习的知识来分析生产环境中的一个内存问题:<br />某个进程(C+LUA)内存持续升高,c部分的内存是程序启动时就申请好了的,运行过程中不会有明显变化.<br />lua中通过调用
+                    collectgarbage(&#39;count&#39;) 和 collectgarbage(&#39;collect&#39;) 比较回收前和回收后的内存.<br />启动时整个程序的实际占用内存100M,
+                    跑不了一天, 实际内存就升到了400M+,而LUA中打印的内存也才70M+.<br />虽然也了解lua虚拟机释放的内存,并不会及时的被程序释放,
+                    但这多出来的200M内存不知道消耗在什么地方了.<br />一台机器上,十几个进程都这样,总消耗的内存就比较可观了.<br /><br />期待接下来的
+                    I&#47;O 性能篇.<br />最近几天太忙了, 昨天出的文章现在才有时间看.<br />
+                    <br />
+                  </div>
+                  <span class="time">2019-01-10 16:04</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/20/36/b3e2f1d5.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">wykkx</span></div>
+                  <div class="bd">
+                    老师您好，请教一个问题，您说匿名页回收是使用swap机制，那么这里有几个问题：一是如果我的系统不开启swap（现在很多系统都是不开启swap的，尤其是web类应用，为了提升响应时间），那么匿名页还怎么回收？二是即使我开启了swap，匿名页被放到了swap上，那么swap是如何清理这些匿名页的，总不能一致保存这些匿名页吧。谢谢老师
+                    <br />
+                  </div>
+                  <span class="time">2019-01-10 08:43</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      1. 不开swap，没法回收<br />2. 取决于这些页的实际访问情况，只要一访问，就会换入到内存中
+                    </p>
+                    <p class="reply-time">2019-01-10 20:44</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/40/12/b0206f40.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Bruce</span></div>
+                  <div class="bd">
+                    老师好，工作中遇到这样情景： 一个服务跑在Linux上，
+                    客户端通过http和服务端通信，不管客户端怎么增加，服务端的cpu mem始终变化不大，
+                    这种情况下想听听老师平时一般是怎么系统性debug的 <br />
+                  </div>
+                  <span class="time">2019-01-10 07:58</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      除了CPU、Mem，还有 I&#47;O
+                      和网络，具体怎么分析还要看你碰到了什么问题。cpu和mem变化不大看起来是个好事呀
+                    </p>
+                    <p class="reply-time">2019-01-10 20:48</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/ec/21/b0fe1bfd.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Adam</span></div>
+                  <div class="bd">这个专栏，对于运维同学来说真是太棒了。 <br /></div>
+                  <span class="time">2019-01-09 10:58</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊 谢谢</p>
+                    <p class="reply-time">2019-01-09 17:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">风飘，吾独思</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2019-01-09 08:52</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">ninuxer</span></div>
+                  <div class="bd">打卡day23<br />喜欢一篇文章看两次，第一次看，第二次是实践的时候再看一遍 <br /></div>
+                  <span class="time">2019-01-09 08:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2019-01-09 17:51</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

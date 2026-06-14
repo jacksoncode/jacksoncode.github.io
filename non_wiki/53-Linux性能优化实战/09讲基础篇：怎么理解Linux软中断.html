@@ -1,95 +1,1321 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                09讲基础篇：怎么理解Linux软中断
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/b9/38/b9e5ea73297a62f1eebc98e7b45d5838.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">09讲基础篇：怎么理解Linux软中断</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/b9/38/b9e5ea73297a62f1eebc98e7b45d5838.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>上一期，我用一个不可中断进程的案例，带你学习了iowait（也就是等待I/O的CPU使用率）升高时的分析方法。这里你要记住，进程的不可中断状态是系统的一种保护机制，可以保证硬件的交互过程不被意外打断。所以，短时间的不可中断状态是很正常的。</p><p>但是，当进程长时间都处于不可中断状态时，你就得当心了。这时，你可以使用 dstat、pidstat 等工具，确认是不是磁盘 I/O 的问题，进而排查相关的进程和磁盘设备。关于磁盘 I/O 的性能问题，你暂且不用专门去背，我会在后续的 I/O 部分详细介绍，到时候理解了也就记住了。</p><p>其实除了 iowait，软中断（softirq）CPU使用率升高也是最常见的一种性能问题。接下来的两节课，我们就来学习软中断的内容，我还会以最常见的反向代理服务器 Nginx 的案例，带你分析这种情况。</p><h2>从“取外卖”看中断</h2><p>说到中断，我在前面<a href="https://time.geekbang.org/column/article/69859">关于“上下文切换”的文章</a>，简单说过中断的含义，先来回顾一下。中断是系统用来响应硬件设备请求的一种机制，它会打断进程的正常调度和执行，然后调用内核中的中断处理程序来响应设备的请求。</p><p>你可能要问了，为什么要有中断呢？我可以举个生活中的例子，让你感受一下中断的魅力。</p><!-- [[[read_end]]] --><p>比如说你订了一份外卖，但是不确定外卖什么时候送到，也没有别的方法了解外卖的进度，但是，配送员送外卖是不等人的，到了你这儿没人取的话，就直接走人了。所以你只能苦苦等着，时不时去门口看看外卖送到没，而不能干其他事情。</p><p>不过呢，如果在订外卖的时候，你就跟配送员约定好，让他送到后给你打个电话，那你就不用苦苦等待了，就可以去忙别的事情，直到电话一响，接电话、取外卖就可以了。</p><p>这里的“打电话”，其实就是一个中断。没接到电话的时候，你可以做其他的事情；只有接到了电话（也就是发生中断），你才要进行另一个动作：取外卖。</p><p>这个例子你就可以发现，<strong>中断其实是一种异步的事件处理机制，可以提高系统的并发处理能力</strong>。</p><p>由于中断处理程序会打断其他进程的运行，所以，<strong>为了减少对正常进程运行调度的影响，中断处理程序就需要尽可能快地运行</strong>。如果中断本身要做的事情不多，那么处理起来也不会有太大问题；但如果中断要处理的事情很多，中断服务程序就有可能要运行很长时间。</p><p>特别是，中断处理程序在响应中断时，还会临时关闭中断。这就会导致上一次中断处理完成之前，其他中断都不能响应，也就是说中断有可能会丢失。</p><p>那么还是以取外卖为例。假如你订了 2 份外卖，一份主食和一份饮料，并且是由2个不同的配送员来配送。这次你不用时时等待着，两份外卖都约定了电话取外卖的方式。但是，问题又来了。</p><p>当第一份外卖送到时，配送员给你打了个长长的电话，商量发票的处理方式。与此同时，第二个配送员也到了，也想给你打电话。</p><p>但是很明显，因为电话占线（也就是关闭了中断响应），第二个配送员的电话是打不通的。所以，第二个配送员很可能试几次后就走掉了（也就是丢失了一次中断）。</p><h2>软中断</h2><p>如果你弄清楚了“取外卖”的模式，那对系统的中断机制就很容易理解了。事实上，为了解决中断处理程序执行过长和中断丢失的问题，Linux 将中断处理过程分成了两个阶段，也就是<strong>上半部和下半部</strong>：</p><ul>
-<li>
-<p><strong>上半部用来快速处理中断</strong>，它在中断禁止模式下运行，主要处理跟硬件紧密相关的或时间敏感的工作。</p>
-</li>
-<li>
-<p><strong>下半部用来延迟处理上半部未完成的工作，通常以内核线程的方式运行</strong>。</p>
-</li>
-</ul><p>比如说前面取外卖的例子，上半部就是你接听电话，告诉配送员你已经知道了，其他事儿见面再说，然后电话就可以挂断了；下半部才是取外卖的动作，以及见面后商量发票处理的动作。</p><p>这样，第一个配送员不会占用你太多时间，当第二个配送员过来时，照样能正常打通你的电话。</p><p>除了取外卖，我再举个最常见的网卡接收数据包的例子，让你更好地理解。</p><p>网卡接收到数据包后，会通过<strong>硬件中断</strong>的方式，通知内核有新的数据到了。这时，内核就应该调用中断处理程序来响应它。你可以自己先想一下，这种情况下的上半部和下半部分别负责什么工作呢？</p><p>对上半部来说，既然是快速处理，其实就是要把网卡的数据读到内存中，然后更新一下硬件寄存器的状态（表示数据已经读好了），最后再发送一个<strong>软中断</strong>信号，通知下半部做进一步的处理。</p><p>而下半部被软中断信号唤醒后，需要从内存中找到网络数据，再按照网络协议栈，对数据进行逐层解析和处理，直到把它送给应用程序。</p><p>所以，这两个阶段你也可以这样理解：</p><ul>
-<li>
-<p>上半部直接处理硬件请求，也就是我们常说的硬中断，特点是快速执行；</p>
-</li>
-<li>
-<p>而下半部则是由内核触发，也就是我们常说的软中断，特点是延迟执行。</p>
-</li>
-</ul><p>实际上，上半部会打断CPU正在执行的任务，然后立即执行中断处理程序。而下半部以内核线程的方式执行，并且每个 CPU 都对应一个软中断内核线程，名字为 “ksoftirqd/CPU编号”，比如说， 0 号CPU对应的软中断内核线程的名字就是 ksoftirqd/0。</p><p>不过要注意的是，软中断不只包括了刚刚所讲的硬件设备中断处理程序的下半部，一些内核自定义的事件也属于软中断，比如内核调度和RCU锁（Read-Copy Update 的缩写，RCU 是 Linux 内核中最常用的锁之一）等。</p><p>那要怎么知道你的系统里有哪些软中断呢？</p><h2>查看软中断和内核线程</h2><p>不知道你还记不记得，前面提到过的 proc 文件系统。它是一种内核空间和用户空间进行通信的机制，可以用来查看内核的数据结构，或者用来动态修改内核的配置。其中：</p><ul>
-<li>
-<p>/proc/softirqs 提供了软中断的运行情况；</p>
-</li>
-<li>
-<p>/proc/interrupts 提供了硬中断的运行情况。</p>
-</li>
-</ul><p>运行下面的命令，查看 /proc/softirqs 文件的内容，你就可以看到各种类型软中断在不同 CPU 上的累积运行次数：</p><pre><code>$ cat /proc/softirqs
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  上一期，我用一个不可中断进程的案例，带你学习了iowait（也就是等待I/O的CPU使用率）升高时的分析方法。这里你要记住，进程的不可中断状态是系统的一种保护机制，可以保证硬件的交互过程不被意外打断。所以，短时间的不可中断状态是很正常的。
+                </p>
+                <p>
+                  但是，当进程长时间都处于不可中断状态时，你就得当心了。这时，你可以使用 dstat、pidstat
+                  等工具，确认是不是磁盘 I/O 的问题，进而排查相关的进程和磁盘设备。关于磁盘 I/O
+                  的性能问题，你暂且不用专门去背，我会在后续的 I/O 部分详细介绍，到时候理解了也就记住了。
+                </p>
+                <p>
+                  其实除了
+                  iowait，软中断（softirq）CPU使用率升高也是最常见的一种性能问题。接下来的两节课，我们就来学习软中断的内容，我还会以最常见的反向代理服务器
+                  Nginx 的案例，带你分析这种情况。
+                </p>
+                <h2>从“取外卖”看中断</h2>
+                <p>
+                  说到中断，我在前面<a href="https://time.geekbang.org/column/article/69859">关于“上下文切换”的文章</a
+                  >，简单说过中断的含义，先来回顾一下。中断是系统用来响应硬件设备请求的一种机制，它会打断进程的正常调度和执行，然后调用内核中的中断处理程序来响应设备的请求。
+                </p>
+                <p>你可能要问了，为什么要有中断呢？我可以举个生活中的例子，让你感受一下中断的魅力。</p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  比如说你订了一份外卖，但是不确定外卖什么时候送到，也没有别的方法了解外卖的进度，但是，配送员送外卖是不等人的，到了你这儿没人取的话，就直接走人了。所以你只能苦苦等着，时不时去门口看看外卖送到没，而不能干其他事情。
+                </p>
+                <p>
+                  不过呢，如果在订外卖的时候，你就跟配送员约定好，让他送到后给你打个电话，那你就不用苦苦等待了，就可以去忙别的事情，直到电话一响，接电话、取外卖就可以了。
+                </p>
+                <p>
+                  这里的“打电话”，其实就是一个中断。没接到电话的时候，你可以做其他的事情；只有接到了电话（也就是发生中断），你才要进行另一个动作：取外卖。
+                </p>
+                <p>
+                  这个例子你就可以发现，<strong>中断其实是一种异步的事件处理机制，可以提高系统的并发处理能力</strong>。
+                </p>
+                <p>
+                  由于中断处理程序会打断其他进程的运行，所以，<strong>为了减少对正常进程运行调度的影响，中断处理程序就需要尽可能快地运行</strong>。如果中断本身要做的事情不多，那么处理起来也不会有太大问题；但如果中断要处理的事情很多，中断服务程序就有可能要运行很长时间。
+                </p>
+                <p>
+                  特别是，中断处理程序在响应中断时，还会临时关闭中断。这就会导致上一次中断处理完成之前，其他中断都不能响应，也就是说中断有可能会丢失。
+                </p>
+                <p>
+                  那么还是以取外卖为例。假如你订了 2
+                  份外卖，一份主食和一份饮料，并且是由2个不同的配送员来配送。这次你不用时时等待着，两份外卖都约定了电话取外卖的方式。但是，问题又来了。
+                </p>
+                <p>
+                  当第一份外卖送到时，配送员给你打了个长长的电话，商量发票的处理方式。与此同时，第二个配送员也到了，也想给你打电话。
+                </p>
+                <p>
+                  但是很明显，因为电话占线（也就是关闭了中断响应），第二个配送员的电话是打不通的。所以，第二个配送员很可能试几次后就走掉了（也就是丢失了一次中断）。
+                </p>
+                <h2>软中断</h2>
+                <p>
+                  如果你弄清楚了“取外卖”的模式，那对系统的中断机制就很容易理解了。事实上，为了解决中断处理程序执行过长和中断丢失的问题，Linux
+                  将中断处理过程分成了两个阶段，也就是<strong>上半部和下半部</strong>：
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong>上半部用来快速处理中断</strong
+                      >，它在中断禁止模式下运行，主要处理跟硬件紧密相关的或时间敏感的工作。
+                    </p>
+                  </li>
+                  <li>
+                    <p><strong>下半部用来延迟处理上半部未完成的工作，通常以内核线程的方式运行</strong>。</p>
+                  </li>
+                </ul>
+                <p>
+                  比如说前面取外卖的例子，上半部就是你接听电话，告诉配送员你已经知道了，其他事儿见面再说，然后电话就可以挂断了；下半部才是取外卖的动作，以及见面后商量发票处理的动作。
+                </p>
+                <p>这样，第一个配送员不会占用你太多时间，当第二个配送员过来时，照样能正常打通你的电话。</p>
+                <p>除了取外卖，我再举个最常见的网卡接收数据包的例子，让你更好地理解。</p>
+                <p>
+                  网卡接收到数据包后，会通过<strong>硬件中断</strong>的方式，通知内核有新的数据到了。这时，内核就应该调用中断处理程序来响应它。你可以自己先想一下，这种情况下的上半部和下半部分别负责什么工作呢？
+                </p>
+                <p>
+                  对上半部来说，既然是快速处理，其实就是要把网卡的数据读到内存中，然后更新一下硬件寄存器的状态（表示数据已经读好了），最后再发送一个<strong>软中断</strong>信号，通知下半部做进一步的处理。
+                </p>
+                <p>
+                  而下半部被软中断信号唤醒后，需要从内存中找到网络数据，再按照网络协议栈，对数据进行逐层解析和处理，直到把它送给应用程序。
+                </p>
+                <p>所以，这两个阶段你也可以这样理解：</p>
+                <ul>
+                  <li>
+                    <p>上半部直接处理硬件请求，也就是我们常说的硬中断，特点是快速执行；</p>
+                  </li>
+                  <li>
+                    <p>而下半部则是由内核触发，也就是我们常说的软中断，特点是延迟执行。</p>
+                  </li>
+                </ul>
+                <p>
+                  实际上，上半部会打断CPU正在执行的任务，然后立即执行中断处理程序。而下半部以内核线程的方式执行，并且每个
+                  CPU 都对应一个软中断内核线程，名字为 “ksoftirqd/CPU编号”，比如说， 0
+                  号CPU对应的软中断内核线程的名字就是 ksoftirqd/0。
+                </p>
+                <p>
+                  不过要注意的是，软中断不只包括了刚刚所讲的硬件设备中断处理程序的下半部，一些内核自定义的事件也属于软中断，比如内核调度和RCU锁（Read-Copy
+                  Update 的缩写，RCU 是 Linux 内核中最常用的锁之一）等。
+                </p>
+                <p>那要怎么知道你的系统里有哪些软中断呢？</p>
+                <h2>查看软中断和内核线程</h2>
+                <p>
+                  不知道你还记不记得，前面提到过的 proc
+                  文件系统。它是一种内核空间和用户空间进行通信的机制，可以用来查看内核的数据结构，或者用来动态修改内核的配置。其中：
+                </p>
+                <ul>
+                  <li>
+                    <p>/proc/softirqs 提供了软中断的运行情况；</p>
+                  </li>
+                  <li>
+                    <p>/proc/interrupts 提供了硬中断的运行情况。</p>
+                  </li>
+                </ul>
+                <p>
+                  运行下面的命令，查看 /proc/softirqs 文件的内容，你就可以看到各种类型软中断在不同 CPU
+                  上的累积运行次数：
+                </p>
+                <pre><code>$ cat /proc/softirqs
                     CPU0       CPU1
           HI:          0          0
        TIMER:     811613    1972736
@@ -101,323 +1327,389 @@
        SCHED:     689718    1897539
      HRTIMER:          0          0
          RCU:    1330771    1354737
-</code></pre><p>在查看 /proc/softirqs 文件内容时，你要特别注意以下这两点。</p><p>第一，要注意软中断的类型，也就是这个界面中第一列的内容。从第一列你可以看到，软中断包括了10个类别，分别对应不同的工作类型。比如 NET_RX 表示网络接收中断，而 NET_TX 表示网络发送中断。</p><p>第二，要注意同一种软中断在不同 CPU 上的分布情况，也就是同一行的内容。正常情况下，同一种中断在不同 CPU 上的累积次数应该差不多。比如这个界面中，NET_RX 在 CPU0 和 CPU1 上的中断次数基本是同一个数量级，相差不大。</p><p>不过你可能发现，TASKLET  在不同CPU上的分布并不均匀。TASKLET 是最常用的软中断实现机制，每个 TASKLET 只运行一次就会结束 ，并且只在调用它的函数所在的 CPU 上运行。</p><p>因此，使用 TASKLET 特别简便，当然也会存在一些问题，比如说由于只在一个CPU上运行导致的调度不均衡，再比如因为不能在多个 CPU 上并行运行带来了性能限制。</p><p>另外，刚刚提到过，软中断实际上是以内核线程的方式运行的，每个 CPU 都对应一个软中断内核线程，这个软中断内核线程就叫做  ksoftirqd/CPU编号。那要怎么查看这些线程的运行状况呢？</p><p>其实用 ps 命令就可以做到，比如执行下面的指令：</p><pre><code>$ ps aux | grep softirq
+</code></pre>
+                <p>在查看 /proc/softirqs 文件内容时，你要特别注意以下这两点。</p>
+                <p>
+                  第一，要注意软中断的类型，也就是这个界面中第一列的内容。从第一列你可以看到，软中断包括了10个类别，分别对应不同的工作类型。比如
+                  NET_RX 表示网络接收中断，而 NET_TX 表示网络发送中断。
+                </p>
+                <p>
+                  第二，要注意同一种软中断在不同 CPU 上的分布情况，也就是同一行的内容。正常情况下，同一种中断在不同 CPU
+                  上的累积次数应该差不多。比如这个界面中，NET_RX 在 CPU0 和 CPU1
+                  上的中断次数基本是同一个数量级，相差不大。
+                </p>
+                <p>
+                  不过你可能发现，TASKLET 在不同CPU上的分布并不均匀。TASKLET 是最常用的软中断实现机制，每个 TASKLET
+                  只运行一次就会结束 ，并且只在调用它的函数所在的 CPU 上运行。
+                </p>
+                <p>
+                  因此，使用 TASKLET
+                  特别简便，当然也会存在一些问题，比如说由于只在一个CPU上运行导致的调度不均衡，再比如因为不能在多个 CPU
+                  上并行运行带来了性能限制。
+                </p>
+                <p>
+                  另外，刚刚提到过，软中断实际上是以内核线程的方式运行的，每个 CPU
+                  都对应一个软中断内核线程，这个软中断内核线程就叫做
+                  ksoftirqd/CPU编号。那要怎么查看这些线程的运行状况呢？
+                </p>
+                <p>其实用 ps 命令就可以做到，比如执行下面的指令：</p>
+                <pre><code>$ ps aux | grep softirq
 root         7  0.0  0.0      0     0 ?        S    Oct10   0:01 [ksoftirqd/0]
 root        16  0.0  0.0      0     0 ?        S    Oct10   0:01 [ksoftirqd/1]
-</code></pre><p>注意，这些线程的名字外面都有中括号，这说明 ps 无法获取它们的命令行参数（cmline）。一般来说，ps  的输出中，名字括在中括号里的，一般都是内核线程。</p><h2>小结</h2><p>Linux 中的中断处理程序分为上半部和下半部：</p><ul>
-<li>
-<p>上半部对应硬件中断，用来快速处理中断。</p>
-</li>
-<li>
-<p>下半部对应软中断，用来异步处理上半部未完成的工作。</p>
-</li>
-</ul><p>Linux 中的软中断包括网络收发、定时、调度、RCU锁等各种类型，可以通过查看 /proc/softirqs 来观察软中断的运行情况。</p><h2>思考</h2><p>最后，我想请你一起聊聊，你是怎么理解软中断的？你有没有碰到过因为软中断出现的性能问题？你又是怎么分析它们的瓶颈的呢？你可以结合今天的内容，总结自己的思路，写下自己的问题。</p><p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">我来也</span>
-                            </div>
-                            <div class="bd">[D9打卡]<br>======================================<br>问题:怎么理解软中断?<br>我的理解比较简单粗暴, 硬中断是硬件产生的,比如键盘、鼠标的输入，硬盘的写入读取、网卡有数据了；软中断是软件产生的，比如程序内的定时器、[文中提到的RCU锁]。<br>再加上今天的上半部下半部，更好的理解了网卡的处理实际是有硬中断和软中断的。<br>======================================<br>问题:有没有碰到过因为软中断出现的性能问题?<br>有，且是血淋淋的教训。<br>之前的c程序用到了别人写的动态库[如:lib.a]，在物理机上，进程的cpu利用率在0%；而切换到了云服务器，即使空载，单进程的cpu利用率都有30%+。<br>以前没经验嘛,各种自查,无结果,但是自己的进程cpu利用率又那么高,总是不安心.<br>后来才通过vmstat 检测到系统的软中断每秒有100W+次.<br>最后各自百度,找人,才发现是那个动态库在处理网络收发消息时,使用了usleep(1)来休息,每次休息1纳秒,单次中断的耗时都不止1纳秒.<br>--------------------------------------<br>如果是现在,我会如下分析:<br>1.检测是哪个线程占用了cpu: top -H -p XX 1 &#47; pidstat -wut -p XX 1 <br>2.在进程中打印各线程号. 找到是哪个线程.[ 此过程也可以省略 但可以快速定位线程]<br>3.第一步应该可以判断出来中断数过高. 再使用 cat &#47;proc&#47;softirqs 查看是哪种类型的中断数过高.<br>4.不知道perf report -g -p XX 是否可以定位到具体的系统调用函数.<br>5.最终还是要查看源码,定位具体的位置,并加以验证.<br>--------------------------------------<br>感觉现在随便怎么分析都可以快速定位到是动态库的锅.<br>想当初可是好几个月都无能为力啊, 最后还是几个人各种查,搞了一周多才定位到原因.<br>最后再吐槽下,没有root权限的普通账户真是不方便啊,有些工具只能安装在自己的目录下, 还有些好用的工具根本无权限运行,哎... <br></div>
-                            <span class="time">2018-12-10 12:15</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯嗯，已经是很有经验的老手了😊<br><br>大多数情况下 root 权限都是必须的，还是准备个root权限的环境实践吧</p>
-                                <p class="reply-time">2018-12-10 17:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/9b/ba/333b59e5.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Linuxer</span>
-                            </div>
-                            <div class="bd">经常听同事说大量的网络小包会导致性能问题，一直不太理解，从今天的课程来看，是不是大量的小网络包会导致频繁的硬中断和软中断呢？希望老师给予指点，谢谢 <br></div>
-                            <span class="time">2018-12-10 08:19</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">正解</p>
-                                <p class="reply-time">2018-12-10 18:13</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">每天晒白牙</span>
-                            </div>
-                            <div class="bd">【D9打卡】<br>主题:软中断<br>中断:系统用来响应硬件设备请求的一种机制，会打断进程的正常调度和执行，通过调用内核中的中断处理程序来响应设备的请求。<br>1.中断是一种异步的事件处理机制，能提高系统的并发处理能力<br>2.为了减少对正常进程运行进行影响，中断处理程序需要尽快运行。<br>3.中断分为上下两个部分<br>(1)上部分用来快速处理中断，在中断禁止模式下，主要处理跟硬件紧密相关的或时间敏感的工作<br>(2)下部分用来延迟处理上半部分未完成的工作，通常以内核线程的方式运行。<br>小结:<br>上半部分直接处理硬件请求，即硬中断，特点是快速执行<br>下部分由内核触发，即软中断，特点是延迟执行<br>软中断除了上面的下部分，还包括一些内核自定义的事件，如:内核调度 RCU锁 网络收发 定时等<br>软中断内核线程的名字:ksoftirq&#47;cpu编号<br>4.proc文件系统是一种内核空间和用户空间进行通信的机制，可以同时用来查看内核的数据结构又能用了动态修改内核的配置，如:<br>&#47;proc&#47;softirqs 提供软中断的运行情况<br>&#47;proc&#47;interrupts 提供硬中断的运行情况<br> <br></div>
-                            <span class="time">2018-12-10 07:13</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-12-10 18:14</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/67/0e/2a51a2df.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Eric</span>
-                            </div>
-                            <div class="bd">中断不是可以嵌套的吗？在中断处理程序中可以开中断以响应更高优先级的中断，为什么第二次中断会丢失？是指中断隐指令过程吗？？？ <br></div>
-                            <span class="time">2018-12-10 00:23</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ninuxer</span>
-                            </div>
-                            <div class="bd">打卡，day10<br>用外卖的例子，延伸到网卡的例子，非常形象，👍 <br></div>
-                            <span class="time">2018-12-10 08:15</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-12-10 18:14</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/35/25/e5aeecc7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">好好学习</span>
-                            </div>
-                            <div class="bd">期待第二篇，我有个业务48核心，怎么调整都是只用了前面24核心的软中断，期待更新 <br></div>
-                            <span class="time">2018-12-10 19:10</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/7a/8b/2c81a375.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">好说</span>
-                            </div>
-                            <div class="bd">老师，生产环境的服务器的磁盘数量一般有很多，每块盘读写都比较高，有某块盘特别高，这个时候想要获取哪个进程使得这块盘IO特别高要怎么分析呢 <br></div>
-                            <span class="time">2018-12-10 09:44</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">先留个悬念😊，I&#47;O部分会讲的</p>
-                                <p class="reply-time">2018-12-10 18:10</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/20/9e/3278e1d8.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">胡萝卜</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2018-12-10 09:18</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/1b/ca/9afb89a2.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Days</span>
-                            </div>
-                            <div class="bd">而下半部以内核线程的方式执行，并且每个 CPU 都对应一个软中断内核线程，<br>这里我觉得不是所有软中断直接被ksoftirqd处理，只有大量软中断产生，或者处理软终端超时才唤醒ksoftirqd线程 <br></div>
-                            <span class="time">2018-12-10 08:27</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/dwehJHP4ycAfDb9MoudXb4QSt7YgmISqwwsa928XZ6aTWqwWh0kx0iatjocSibLa7iajXmbGlJ5svegY3P6LfKJ0w/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">solar</span>
-                            </div>
-                            <div class="bd">打卡，又学到一些很细节的东西，感动 <br></div>
-                            <span class="time">2018-12-10 06:23</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊</p>
-                                <p class="reply-time">2018-12-14 08:15</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erJR5Kj0Xm6LykFHLaWqHjQiaroVxgdoGI7uHEGz2D3PfibWNkBYP23QLzFmcuicgKLbqUch0ZJ2ZNOA/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">湖湘志</span>
-                            </div>
-                            <div class="bd">D9 <br></div>
-                            <span class="time">2018-12-10 02:22</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/4a/fb/70f14340.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">maoxiajun</span>
-                            </div>
-                            <div class="bd">lesson9打卡 <br></div>
-                            <span class="time">2019-01-06 22:24</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKibu8C3CeYGF6JCBribiaEPia5gibaQnj9icryPVwoF6ibosmdicXJIhBEUdn0aDwZQ32oTyJL86DgDswhAg/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">花开蝶自来</span>
-                            </div>
-                            <div class="bd">D3 <br></div>
-                            <span class="time">2018-12-29 15:14</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/70/23/972dcd30.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">allan</span>
-                            </div>
-                            <div class="bd">老师您好，中断优先级 针对高优先级的中断服务程序先执行，它是在下半部起作用的吗？因为上半部运行在中断禁止模式。这样理解对吗？ <br></div>
-                            <span class="time">2018-12-27 19:35</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">上半部也有，中断可以嵌套</p>
-                                <p class="reply-time">2018-12-28 22:10</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83epGMibYc0m7cDHMsNRBUur2NPVnlBZFXoNjWomibfjnHeAO3XRt27VaH3WNtdUX11d3uIT1ZHWCxLeg/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">york</span>
-                            </div>
-                            <div class="bd">老师，可否把&#47;proc&#47;softirqs输出信息中的10个类别解释一下含义？网上自行搜索了一下也没查到。 <br></div>
-                            <span class="time">2018-12-27 10:42</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/04/8a/ff94bd60.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">涛涛</span>
-                            </div>
-                            <div class="bd">倪老师是不是总吃外卖。 <br></div>
-                            <span class="time">2018-12-26 19:55</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">吃外卖露馅了😊</p>
-                                <p class="reply-time">2018-12-26 22:01</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7c/59/26b1e65a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">科学Jia</span>
-                            </div>
-                            <div class="bd">老师老师，女童鞋举手问您，软中断既然是内核方式运行，那就没有可能是应用程序引起，那如果软中断很频繁，作为应用程序该怎么考虑解决内核的问题？很忧伤啊。 <br></div>
-                            <span class="time">2018-12-24 15:31</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">当然可能了，比如还是以网络软中断为例，同样发送1GB数据包，每次发送1KB跟每次发送32B带来的结果肯定是不同的。<br><br>具体优化方法不要太着急，先定位出根源，之后一般都不难找出解决方法。</p>
-                                <p class="reply-time">2018-12-25 07:54</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/13/15/5dabb390.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Geek_fbe6fe</span>
-                            </div>
-                            <div class="bd">想问下老师，现在一些的语言中实现协程是不是就是利用中断的系统命令实现的协程操作呢？ <br></div>
-                            <span class="time">2018-12-18 14:16</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">协程是用户态的轻量级线程，也就是协程的切换都在用户态完成，用户自己来控制上下文切换</p>
-                                <p class="reply-time">2018-12-18 22:17</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/02/5b/ce326cfc.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Orcsir</span>
-                            </div>
-                            <div class="bd">Flag <br></div>
-                            <span class="time">2018-12-17 20:22</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">+1</p>
-                                <p class="reply-time">2018-12-18 22:45</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/1e/0d/f8ad03fb.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Glen</span>
-                            </div>
-                            <div class="bd">留言里也有很多资深的同学啊 <br></div>
-                            <span class="time">2018-12-17 18:53</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊</p>
-                                <p class="reply-time">2018-12-18 22:47</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+</code></pre>
+                <p>
+                  注意，这些线程的名字外面都有中括号，这说明 ps 无法获取它们的命令行参数（cmline）。一般来说，ps
+                  的输出中，名字括在中括号里的，一般都是内核线程。
+                </p>
+                <h2>小结</h2>
+                <p>Linux 中的中断处理程序分为上半部和下半部：</p>
+                <ul>
+                  <li>
+                    <p>上半部对应硬件中断，用来快速处理中断。</p>
+                  </li>
+                  <li>
+                    <p>下半部对应软中断，用来异步处理上半部未完成的工作。</p>
+                  </li>
                 </ul>
+                <p>
+                  Linux 中的软中断包括网络收发、定时、调度、RCU锁等各种类型，可以通过查看 /proc/softirqs
+                  来观察软中断的运行情况。
+                </p>
+                <h2>思考</h2>
+                <p>
+                  最后，我想请你一起聊聊，你是怎么理解软中断的？你有没有碰到过因为软中断出现的性能问题？你又是怎么分析它们的瓶颈的呢？你可以结合今天的内容，总结自己的思路，写下自己的问题。
+                </p>
+                <p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">我来也</span></div>
+                  <div class="bd">
+                    [D9打卡]<br />======================================<br />问题:怎么理解软中断?<br />我的理解比较简单粗暴,
+                    硬中断是硬件产生的,比如键盘、鼠标的输入，硬盘的写入读取、网卡有数据了；软中断是软件产生的，比如程序内的定时器、[文中提到的RCU锁]。<br />再加上今天的上半部下半部，更好的理解了网卡的处理实际是有硬中断和软中断的。<br />======================================<br />问题:有没有碰到过因为软中断出现的性能问题?<br />有，且是血淋淋的教训。<br />之前的c程序用到了别人写的动态库[如:lib.a]，在物理机上，进程的cpu利用率在0%；而切换到了云服务器，即使空载，单进程的cpu利用率都有30%+。<br />以前没经验嘛,各种自查,无结果,但是自己的进程cpu利用率又那么高,总是不安心.<br />后来才通过vmstat
+                    检测到系统的软中断每秒有100W+次.<br />最后各自百度,找人,才发现是那个动态库在处理网络收发消息时,使用了usleep(1)来休息,每次休息1纳秒,单次中断的耗时都不止1纳秒.<br />--------------------------------------<br />如果是现在,我会如下分析:<br />1.检测是哪个线程占用了cpu:
+                    top -H -p XX 1 &#47; pidstat -wut -p XX 1 <br />2.在进程中打印各线程号. 找到是哪个线程.[
+                    此过程也可以省略 但可以快速定位线程]<br />3.第一步应该可以判断出来中断数过高. 再使用 cat
+                    &#47;proc&#47;softirqs 查看是哪种类型的中断数过高.<br />4.不知道perf report -g -p XX
+                    是否可以定位到具体的系统调用函数.<br />5.最终还是要查看源码,定位具体的位置,并加以验证.<br />--------------------------------------<br />感觉现在随便怎么分析都可以快速定位到是动态库的锅.<br />想当初可是好几个月都无能为力啊,
+                    最后还是几个人各种查,搞了一周多才定位到原因.<br />最后再吐槽下,没有root权限的普通账户真是不方便啊,有些工具只能安装在自己的目录下,
+                    还有些好用的工具根本无权限运行,哎... <br />
+                  </div>
+                  <span class="time">2018-12-10 12:15</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      嗯嗯，已经是很有经验的老手了😊<br /><br />大多数情况下 root
+                      权限都是必须的，还是准备个root权限的环境实践吧
+                    </p>
+                    <p class="reply-time">2018-12-10 17:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/9b/ba/333b59e5.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Linuxer</span></div>
+                  <div class="bd">
+                    经常听同事说大量的网络小包会导致性能问题，一直不太理解，从今天的课程来看，是不是大量的小网络包会导致频繁的硬中断和软中断呢？希望老师给予指点，谢谢
+                    <br />
+                  </div>
+                  <span class="time">2018-12-10 08:19</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">正解</p>
+                    <p class="reply-time">2018-12-10 18:13</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/54/9a/76c0af70.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">每天晒白牙</span></div>
+                  <div class="bd">
+                    【D9打卡】<br />主题:软中断<br />中断:系统用来响应硬件设备请求的一种机制，会打断进程的正常调度和执行，通过调用内核中的中断处理程序来响应设备的请求。<br />1.中断是一种异步的事件处理机制，能提高系统的并发处理能力<br />2.为了减少对正常进程运行进行影响，中断处理程序需要尽快运行。<br />3.中断分为上下两个部分<br />(1)上部分用来快速处理中断，在中断禁止模式下，主要处理跟硬件紧密相关的或时间敏感的工作<br />(2)下部分用来延迟处理上半部分未完成的工作，通常以内核线程的方式运行。<br />小结:<br />上半部分直接处理硬件请求，即硬中断，特点是快速执行<br />下部分由内核触发，即软中断，特点是延迟执行<br />软中断除了上面的下部分，还包括一些内核自定义的事件，如:内核调度
+                    RCU锁 网络收发 定时等<br />软中断内核线程的名字:ksoftirq&#47;cpu编号<br />4.proc文件系统是一种内核空间和用户空间进行通信的机制，可以同时用来查看内核的数据结构又能用了动态修改内核的配置，如:<br />&#47;proc&#47;softirqs
+                    提供软中断的运行情况<br />&#47;proc&#47;interrupts 提供硬中断的运行情况<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-12-10 07:13</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-12-10 18:14</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/67/0e/2a51a2df.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Eric</span></div>
+                  <div class="bd">
+                    中断不是可以嵌套的吗？在中断处理程序中可以开中断以响应更高优先级的中断，为什么第二次中断会丢失？是指中断隐指令过程吗？？？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-10 00:23</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">ninuxer</span></div>
+                  <div class="bd">打卡，day10<br />用外卖的例子，延伸到网卡的例子，非常形象，👍 <br /></div>
+                  <span class="time">2018-12-10 08:15</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-12-10 18:14</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/35/25/e5aeecc7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">好好学习</span></div>
+                  <div class="bd">
+                    期待第二篇，我有个业务48核心，怎么调整都是只用了前面24核心的软中断，期待更新 <br />
+                  </div>
+                  <span class="time">2018-12-10 19:10</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/7a/8b/2c81a375.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">好说</span></div>
+                  <div class="bd">
+                    老师，生产环境的服务器的磁盘数量一般有很多，每块盘读写都比较高，有某块盘特别高，这个时候想要获取哪个进程使得这块盘IO特别高要怎么分析呢
+                    <br />
+                  </div>
+                  <span class="time">2018-12-10 09:44</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">先留个悬念😊，I&#47;O部分会讲的</p>
+                    <p class="reply-time">2018-12-10 18:10</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/20/9e/3278e1d8.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">胡萝卜</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2018-12-10 09:18</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/1b/ca/9afb89a2.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Days</span></div>
+                  <div class="bd">
+                    而下半部以内核线程的方式执行，并且每个 CPU 都对应一个软中断内核线程，<br />这里我觉得不是所有软中断直接被ksoftirqd处理，只有大量软中断产生，或者处理软终端超时才唤醒ksoftirqd线程
+                    <br />
+                  </div>
+                  <span class="time">2018-12-10 08:27</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/dwehJHP4ycAfDb9MoudXb4QSt7YgmISqwwsa928XZ6aTWqwWh0kx0iatjocSibLa7iajXmbGlJ5svegY3P6LfKJ0w/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">solar</span></div>
+                  <div class="bd">打卡，又学到一些很细节的东西，感动 <br /></div>
+                  <span class="time">2018-12-10 06:23</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊</p>
+                    <p class="reply-time">2018-12-14 08:15</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erJR5Kj0Xm6LykFHLaWqHjQiaroVxgdoGI7uHEGz2D3PfibWNkBYP23QLzFmcuicgKLbqUch0ZJ2ZNOA/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">湖湘志</span></div>
+                  <div class="bd">D9 <br /></div>
+                  <span class="time">2018-12-10 02:22</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/4a/fb/70f14340.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">maoxiajun</span></div>
+                  <div class="bd">lesson9打卡 <br /></div>
+                  <span class="time">2019-01-06 22:24</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKibu8C3CeYGF6JCBribiaEPia5gibaQnj9icryPVwoF6ibosmdicXJIhBEUdn0aDwZQ32oTyJL86DgDswhAg/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">花开蝶自来</span></div>
+                  <div class="bd">D3 <br /></div>
+                  <span class="time">2018-12-29 15:14</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/70/23/972dcd30.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">allan</span></div>
+                  <div class="bd">
+                    老师您好，中断优先级
+                    针对高优先级的中断服务程序先执行，它是在下半部起作用的吗？因为上半部运行在中断禁止模式。这样理解对吗？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-27 19:35</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">上半部也有，中断可以嵌套</p>
+                    <p class="reply-time">2018-12-28 22:10</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83epGMibYc0m7cDHMsNRBUur2NPVnlBZFXoNjWomibfjnHeAO3XRt27VaH3WNtdUX11d3uIT1ZHWCxLeg/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">york</span></div>
+                  <div class="bd">
+                    老师，可否把&#47;proc&#47;softirqs输出信息中的10个类别解释一下含义？网上自行搜索了一下也没查到。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-27 10:42</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/04/8a/ff94bd60.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">涛涛</span></div>
+                  <div class="bd">倪老师是不是总吃外卖。 <br /></div>
+                  <span class="time">2018-12-26 19:55</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">吃外卖露馅了😊</p>
+                    <p class="reply-time">2018-12-26 22:01</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7c/59/26b1e65a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">科学Jia</span></div>
+                  <div class="bd">
+                    老师老师，女童鞋举手问您，软中断既然是内核方式运行，那就没有可能是应用程序引起，那如果软中断很频繁，作为应用程序该怎么考虑解决内核的问题？很忧伤啊。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-24 15:31</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      当然可能了，比如还是以网络软中断为例，同样发送1GB数据包，每次发送1KB跟每次发送32B带来的结果肯定是不同的。<br /><br />具体优化方法不要太着急，先定位出根源，之后一般都不难找出解决方法。
+                    </p>
+                    <p class="reply-time">2018-12-25 07:54</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/13/15/5dabb390.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Geek_fbe6fe</span></div>
+                  <div class="bd">
+                    想问下老师，现在一些的语言中实现协程是不是就是利用中断的系统命令实现的协程操作呢？ <br />
+                  </div>
+                  <span class="time">2018-12-18 14:16</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      协程是用户态的轻量级线程，也就是协程的切换都在用户态完成，用户自己来控制上下文切换
+                    </p>
+                    <p class="reply-time">2018-12-18 22:17</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/02/5b/ce326cfc.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Orcsir</span></div>
+                  <div class="bd">Flag <br /></div>
+                  <span class="time">2018-12-17 20:22</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">+1</p>
+                    <p class="reply-time">2018-12-18 22:45</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/1e/0d/f8ad03fb.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Glen</span></div>
+                  <div class="bd">留言里也有很多资深的同学啊 <br /></div>
+                  <span class="time">2018-12-17 18:53</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊</p>
+                    <p class="reply-time">2018-12-18 22:47</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

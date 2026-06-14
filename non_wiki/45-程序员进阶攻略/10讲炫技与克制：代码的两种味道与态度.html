@@ -1,456 +1,1669 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                10讲炫技与克制：代码的两种味道与态度
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/14/94/14ac2114025272f43cd0825270caec94.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">10讲炫技与克制：代码的两种味道与态度</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/14/94/14ac2114025272f43cd0825270caec94.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>虽然你代码可能已经写得不少了，但要真正提高代码水平，其实还需要多读代码。就像写作，写得再多，不多读书，思维和认知水平其实是很难提高的。</p>
-<p>代码读得多了，慢慢就会感受到好代码中有一种味道和品质：克制。但也会发现另一种代码，它也会散发出一种味道：炫技。</p>
-<h2>炫技</h2>
-<p>什么是炫技的代码？</p>
-<p>我先从一个读代码的故事说起。几年前我因为工作需要，去研究一个开源项目的源代码。这是一个国外知名互联网公司开源的工具项目，据说已在内部孵化了 6 年之久，这才开源出来。从其设计文档与代码结构来看，它高层设计的一致性还是比较好的，但到了源代码实现就显得凌乱了些，而且发现了一些炫技的痕迹。</p>
-<p>代码中炫技的地方，具体来说就是关于状态机的使用。状态机程序本是不符合线性逻辑思维的，有点类似<code>goto</code>语句，程序执行会突然发生跳转，所以理解状态机程序的代码要比一般程序困难些。除此之外，它的状态机程序实现又是通过自定义的内存消息机制来驱动，这又额外添加了一层抽象复杂度。</p>
-<p>而在我看来，状态机程序最适合的场景是一种真实领域状态变迁的映射。那什么叫真实领域状态呢？比如，红绿灯就表达了真实交通领域中的三种状态。而另一种场景，是网络编程领域，广泛应用在网络协议解析上，表达解析器当前的运行状态。</p><!-- [[[read_end]]] -->
-<p>而但凡使用状态机来表达程序设计实现中引入的 “伪” 状态，往往都添加了不必要的复杂性，这就有点炫技的感觉了。但是我还是能常常在一些开源项目中看到一些过度设计和实现的复杂性，而这些项目往往还都是一些行业内头部大公司开源的。</p>
-<p>在程序员的成长路径上，攀登公司的晋升阶梯时，通常会采用同行评审制度，而作为技术人就容易倾向性地关注项目或工程中的技术含量与难点。</p>
-<p>这样的制度倾向性，有可能导致人为制造技术含量，也就是炫技了。就像体操运动中，你完成一个高难度动作，能加的分数有限，而一旦搞砸了，付出的代价则要惨重很多。所以，在比赛中高难度动作都是在关键的合适时刻才会选择。同样，项目中的炫技，未必能加分，还有可能导致减分，比如其维护与理解成本变高了。</p>
-<p>而<strong>除了增加不必要的复杂性外，炫技的代码，也可能更容易出 Bug</strong>。</p>
-<p>刚工作的头一年，我在广东省中国银行写过一个小程序，就是给所有广东省中国银行的信用卡客户发邮件账单。由于当时广东中行信用卡刚起步，第一个月只有不到 10 万客户，所以算是小程序。</p>
-<p>这个小程序就是个单机程序，为了方便业务人员操作，我写了个 GUI 界面。这是我第一次用 Java Swing 库来写 GUI，为了展示发送进度，后台线程每发送成功一封邮件，就通知页面线程更新进度条。</p>
-<p>为什么这么设计呢？因为那时我正在学习 Java 线程编程，感觉这个技术很高端，而当时的 Java JDK 都还没标配线程 concurrent 包。所以，我选择线程间通信的方案来让后台发送线程和前端界面刷新线程通信，这就有了一股浓浓的炫技味道。</p>
-<p>之后，就出现了界面动不动就卡住等一系列问题，因为各种线程提前通知、遗漏通知等情况没考虑到，代码也越改越难懂。其实后来想想，用个共享状态，定时轮询即可满足需要，而且代码实现会简单很多（前面《架构与实现》一文中，关于实现的核心我总结了一个字：简。这都是血泪教训啊），出 Bug 的概率也小了很多。</p>
-<p>回头想想，成长的路上不免见猎心喜，手上拿个锤子看到哪里都是钉子。</p>
-<p>炫技是因为你想表达得不一样，就像平常说话，你要故意说得引经据典去彰显自己有文化，但其实效果不一定佳，因为我们更需要的是平实、易懂的表达。</p>
-<h2>克制</h2>
-<p>在说克制之前，先说说什么叫不克制，写代码的不克制。</p>
-<p>刚工作的第二年，我接手了一个比较大的项目中的一个主要子系统。在熟悉了整个系统后，我开始往里面增加功能时，有点受不了原本系统设计分层中的 DAO（Data Access Object， 数据访问对象）层，那是基于原生的 JDBC 封装的。每次新增一个 DAO 对象都需要复制粘贴一串看起来很类似的代码，难免生出厌烦的感觉。</p>
-<p>当时开源框架 Hibernate 刚兴起，我觉得它的设计理念优雅，代码写出来也简洁，所以就决定用 Hibernate 的方式来取代原本的实现。原来的旧系统里，说多不多，说少也不少，好几百个 DAO 类，而重新实现整个 DAO 层，让我连续加了一周的班。</p>
-<p>这个替换过程，是个纯粹的搬砖体力活，弄完了还没松口气就又有了新问题：Hibernate 在某些场景下出现了性能问题。陆陆续续把这些新问题处理好，着实让我累了一阵子。后来反思这个决策感觉确实不太妥当，替换带来的好处仅仅是每次新增一个 DAO 类时少写几行代码，却带来很多当时未知的风险。</p>
-<p>那时年轻，有激情啊，对新技术充满好奇与冲动。<strong>其实对于新技术，即使从我知道、我了解到我熟悉、我深谙，这时也还需要克制，要等待合适的时机</strong>。这让我想起了电影《勇敢的心》中的一个场景，是战场上华莱士看着对方冲过来，高喊：“Hold！Hold！”新技术的应用，也需要等待一个合适的出击时刻，也许是应用在新的服务上，也许是下一次架构升级。</p>
-<p>不克制的一种形态是容易做出臆想的、通用化的假设，而且我们还会给这种假设安一个非常正当的理由：扩展性。不可否认，扩展性很重要，但扩展性也应当来自真实的需求，而非假设将来的某天可能需要扩展，因为扩展性的反面就是带来设计抽象的复杂性以及代码量的增加。</p>
-<p>那么，如何才是克制的编程方式？我想可能有这样一些方面：</p>
-<ul>
-<li>克制的编码，是每次写完代码，需要去反思和提炼它，代码应当是直观的，可读的，高效的。</li>
-<li>克制的代码，是即使站在远远的地方去看屏幕上的代码，甚至看不清代码的具体内容时，也能感受到它的结构是干净整齐的，而非 “意大利面条” 似的混乱无序。</li>
-<li>克制的重构，是每次看到 “坏” 代码不是立刻就动手去改，而是先标记圈定它，然后通读代码，掌握全局，重新设计，最后再等待一个合适的时机，来一气呵成地完成重构。</li>
-</ul>
-<p>总之，克制是不要留下多余的想象，是不炫技、不追新，且恰到好处地满足需要，是一种平实、清晰、易懂的表达。</p>
-<p>克制与炫技，匹配与适度，代码的技术深度未必体现在技巧上。有句话是这么说的：“看山是山，看水是水；看山不是山，看水不是水；看山还是山，看水还是水。”转了一圈回来，机锋尽敛，大巧若拙，深在深处，浅在浅处。</p>
-<p>最后，亲爱的读者朋友，在你的编码成长过程中，有过想要炫技而不克制的时候吗？欢迎你留言。</p>
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd"><br><br>心得如下：可能理解有误，望老师指点。<br><br>1.炫技俗称装B，有句老话说得好，装B被雷劈<br><br>2.炫技是指，为了展示自己的水平，人为的推高自己代码的复杂度和理解难度。（损人不利己）<br><br>3.克制俗称低调有内涵。<br><br>4.克制是指，为了程序的稳定，以及可读性，人为的降低代码的复杂度和理解难度（损己利人）<br><br>5.符合三个重要特征：<br>   1，直观的，可读的，高效的<br>   2，结构干净整齐<br>   3，具有全局观<br><br>6.B还是要装的，只不过得趁早，因为成本比较低。<br><br>7.最后，每次我想要装B的时候，玩一下《绝地求生》这个游戏，感受一下<br><br>杀人最多的人不一定能取胜，幸存才是最大的胜利，闷声大发财。<br> <br></div>
-                            <span class="time">2018-08-24 15:50</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">哈哈，感谢third同学的总结心得，理解到位！喜欢第3条的阐释😊</p>
-                                <p class="reply-time">2018-08-25 00:43</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/04/8d/575cfabd.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">sprinty</span>
-                            </div>
-                            <div class="bd">只有炫技不克制过，才能克制不炫技。 <br></div>
-                            <span class="time">2018-08-24 13:08</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯嗯，都是泪😂</p>
-                                <p class="reply-time">2018-08-25 00:43</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/59/c9/f44cb7f3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">齐帜</span>
-                            </div>
-                            <div class="bd">不经历这些失败的尝试，可能也掌握不了这些技术 <br></div>
-                            <span class="time">2018-08-24 11:15</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，每次炫技后都是给自己挖了坑</p>
-                                <p class="reply-time">2018-08-25 00:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1d/d6/76fe5259.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Dream.</span>
-                            </div>
-                            <div class="bd">一句话道出真谛“手里拿个锤子，看见什么都是钉子”，真的是学了点新花样，就想立马运用在项目中，幻想着自己多么的牛逼。随意乱锤的结果就是换来各种坑以及加不完的班。真如楼上所说，只有炫技过后才能懂得克制。看见这篇文章，还不算太晚。 <br></div>
-                            <span class="time">2018-08-24 19:19</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊，都是加班换来的经验教训</p>
-                                <p class="reply-time">2018-08-25 00:35</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/3b/65/c00e1c22.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小名叫大明</span>
-                            </div>
-                            <div class="bd">我倒觉得程序员初期可以考虑炫技（装B）代码。 <br><br>个人理解如下: <br><br>1. 程序员历史上确实存在某些祖传代码不易动，不能动，只能某些人维护的情况，某些人确实得到了想要的效果，获得了利益。（这不是我的追求，哈哈哈）<br><br>2. 炫，代表着复杂度，代表着更高程度的抽象，这对自己写代码的水平是一种提高的途径，将读到的东西，学以致用，才能是自己的，即使是个坑，也会有所收获。<br><br>从中学会了，能与不能的界限，拥有了以后能够一眼甄别那些小年轻的想法的&quot;超能力&quot;，哈哈<br><br>3.像您说的，升迁，生存之技。 <br></div>
-                            <span class="time">2018-08-27 00:28</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">就怕炫完了，坑挖完了，人跑了😂<br></p>
-                                <p class="reply-time">2018-08-27 18:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">实现一个功能越简单明了越好，否则真会害人不浅的，现在我们项目组维护的代码最早都有10年的，早一点没什么，关键是代码中的一个功能，代码是一坨一坨的，一个方法接一个方法看都看不完，又是核心代码一直计划重构，但是首先要理清代码业务逻辑，真是件令人头疼的事。 <br></div>
-                            <span class="time">2018-08-26 10:12</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，理清再动手，此处坑多😄</p>
-                                <p class="reply-time">2018-08-27 18:52</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/58/1f/9dc4d475.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">@XP</span>
-                            </div>
-                            <div class="bd">之前一家小公司里做安卓独立开发，看到网上兴起kotlin写安卓，我就整合到项目中，一边学习一边开发，之后大量重写代码，然后就开始出现很多兼容问题，想反悔都没办法，硬着头皮修bug <br></div>
-                            <span class="time">2018-08-24 07:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">冲动了吧……</p>
-                                <p class="reply-time">2018-08-25 00:57</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/e1/5c/86606d9c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">湮汐</span>
-                            </div>
-                            <div class="bd">胡老师，在这里想请教你一个问题。本篇中提到阅读代码，我们很多程序员也提议大家阅读有名的框架源码。<br>可是，自己在阅读源码的过程中，有时候有点无从下手，一个框架的源码量太大了，不知道从哪读起。再就是因为自己基础的原因，很多源码读不懂，看了半天不知道那一块到底是做啥的。<br>这里有没有读源码的方法呢？ <br></div>
-                            <span class="time">2018-09-26 12:28</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">我读源码的方式是，发现这个框架实现了某个能力，我自己想不出怎么做，就会去看看别人怎么实现的。带着问题去读，可能有针对性一些</p>
-                                <p class="reply-time">2018-09-26 21:45</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/4e/38/3faa8377.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">登高</span>
-                            </div>
-                            <div class="bd">毕业时写了一个android app，那时对高层设计很感兴趣。在网上发现了MVP模式和clean架构，于是将它用起来。但是没想到这给开发增加了太多工作量，需要理解掌握的知识超出了预想，结果拖累了app一定的完成度。现在看当时有点冲动了<br>面对新技术，基本态度希望是积极拥抱，但在实际工作中要有克制。 <br></div>
-                            <span class="time">2018-08-27 08:57</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，心态要开放，行动要克制😄</p>
-                                <p class="reply-time">2018-08-27 18:48</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">一针见血。。虽然干了四年多但是感觉有效代码量真的不多，哎。 <br></div>
-                            <span class="time">2018-08-25 01:35</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">如果你能清晰分辨出有效代码，并重构迭代出来，就又前进成长了一大步了</p>
-                                <p class="reply-time">2018-08-25 11:41</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/36/ec/ca162d6b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">edcSam</span>
-                            </div>
-                            <div class="bd">处处戳中我痛点，收获颇多，以后定当谨记克制与时机。 <br></div>
-                            <span class="time">2018-08-24 08:41</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍赞</p>
-                                <p class="reply-time">2018-08-25 00:46</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">这一篇很有道理，但是读起来有点抽象。。不知道实践中怎么落实 <br></div>
-                            <span class="time">2018-08-24 08:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">估计是代码写得还不够多，量到了就能感觉得到</p>
-                                <p class="reply-time">2018-08-25 00:46</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/09/42/b7a406c9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Hurt</span>
-                            </div>
-                            <div class="bd">什么是状态机程序啊。 什么又是goto 语句呢 <br></div>
-                            <span class="time">2018-08-24 08:34</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">哦……🤔</p>
-                                <p class="reply-time">2018-08-25 00:45</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/38/57/a9f9705a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">无聊夫斯基</span>
-                            </div>
-                            <div class="bd">当时做用户模版，需求还是比较简单的，本可以自定义快速实现，但为了炫技直接引入没用过的shiro，大部分功能没用上不说，还增加了其他功能的复杂度，坑嘛是肯定很多的，爬了好一阵子 <br></div>
-                            <span class="time">2018-08-24 08:20</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">哈哈😄</p>
-                                <p class="reply-time">2018-08-25 00:54</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/06/ad/fe79da1d.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">维维</span>
-                            </div>
-                            <div class="bd">过度设计会增加代码的复杂度，增加维护成本。有时候一开始想的很好，让代码有很好的可扩展性，但过了很久，这份代码几乎不会怎么变。<br>我们项目中也有些代码，一个方法两三百行，复杂度很高，谁也不敢动。 <br></div>
-                            <span class="time">2018-08-24 07:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">几百行，还好，啃得动</p>
-                                <p class="reply-time">2018-08-25 00:56</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/65/26/1bdb89c6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">忆灬星辰</span>
-                            </div>
-                            <div class="bd">炫技和追新往往在自己的项目里，平时看看一些新书或是代码整洁方面的，全当练手。公司里比较老顽固。有的用的还是很早的技术。不过能够优化好代码就好，新技术往往要经过很长时间才会放进公司项目 <br></div>
-                            <span class="time">2018-08-24 00:36</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">业务要稳定，技术可以渐变，不要突变</p>
-                                <p class="reply-time">2018-08-25 00:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">绿鲤鱼与驴。</span>
-                            </div>
-                            <div class="bd">使用合适的架构，合适的需要去实现适合的需求，不炫技，不装逼，活的久 <br></div>
-                            <span class="time">2018-11-15 17:41</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">务实</p>
-                                <p class="reply-time">2018-11-18 15:03</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/fe/cf/aa6b25b7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">米斯特粥</span>
-                            </div>
-                            <div class="bd">真正的牛人应该能直接闻出代码的坏味道，有时候代码注释越多可能代码越臭... <br></div>
-                            <span class="time">2018-10-05 13:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">有这种情况存在</p>
-                                <p class="reply-time">2018-10-07 20:26</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/bc/4d/480806c0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">王超</span>
-                            </div>
-                            <div class="bd">有时候自己压根没觉得那是炫技，是大义凛然，最后发现自己挖了一堆坑，看了老师的文章，才知道啥是炫技，啥是克制。。这就是年轻么。。 <br></div>
-                            <span class="time">2018-09-25 07:32</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">年经时都挺大义凛然的，填坑到天明常有的事^_^</p>
-                                <p class="reply-time">2018-09-25 23:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/3e/fb/eb0273a0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">like_jun</span>
-                            </div>
-                            <div class="bd">在过程中成长。中间的磕磕碰碰不重要。重要的是要会总结。这样才能不断攀升到新高度。克制理解为稳重。重剑无锋。 <br></div>
-                            <span class="time">2018-09-12 19:31</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  虽然你代码可能已经写得不少了，但要真正提高代码水平，其实还需要多读代码。就像写作，写得再多，不多读书，思维和认知水平其实是很难提高的。
+                </p>
+                <p>
+                  代码读得多了，慢慢就会感受到好代码中有一种味道和品质：克制。但也会发现另一种代码，它也会散发出一种味道：炫技。
+                </p>
+                <h2>炫技</h2>
+                <p>什么是炫技的代码？</p>
+                <p>
+                  我先从一个读代码的故事说起。几年前我因为工作需要，去研究一个开源项目的源代码。这是一个国外知名互联网公司开源的工具项目，据说已在内部孵化了
+                  6
+                  年之久，这才开源出来。从其设计文档与代码结构来看，它高层设计的一致性还是比较好的，但到了源代码实现就显得凌乱了些，而且发现了一些炫技的痕迹。
+                </p>
+                <p>
+                  代码中炫技的地方，具体来说就是关于状态机的使用。状态机程序本是不符合线性逻辑思维的，有点类似<code>goto</code>语句，程序执行会突然发生跳转，所以理解状态机程序的代码要比一般程序困难些。除此之外，它的状态机程序实现又是通过自定义的内存消息机制来驱动，这又额外添加了一层抽象复杂度。
+                </p>
+                <p>
+                  而在我看来，状态机程序最适合的场景是一种真实领域状态变迁的映射。那什么叫真实领域状态呢？比如，红绿灯就表达了真实交通领域中的三种状态。而另一种场景，是网络编程领域，广泛应用在网络协议解析上，表达解析器当前的运行状态。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  而但凡使用状态机来表达程序设计实现中引入的 “伪”
+                  状态，往往都添加了不必要的复杂性，这就有点炫技的感觉了。但是我还是能常常在一些开源项目中看到一些过度设计和实现的复杂性，而这些项目往往还都是一些行业内头部大公司开源的。
+                </p>
+                <p>
+                  在程序员的成长路径上，攀登公司的晋升阶梯时，通常会采用同行评审制度，而作为技术人就容易倾向性地关注项目或工程中的技术含量与难点。
+                </p>
+                <p>
+                  这样的制度倾向性，有可能导致人为制造技术含量，也就是炫技了。就像体操运动中，你完成一个高难度动作，能加的分数有限，而一旦搞砸了，付出的代价则要惨重很多。所以，在比赛中高难度动作都是在关键的合适时刻才会选择。同样，项目中的炫技，未必能加分，还有可能导致减分，比如其维护与理解成本变高了。
+                </p>
+                <p>而<strong>除了增加不必要的复杂性外，炫技的代码，也可能更容易出 Bug</strong>。</p>
+                <p>
+                  刚工作的头一年，我在广东省中国银行写过一个小程序，就是给所有广东省中国银行的信用卡客户发邮件账单。由于当时广东中行信用卡刚起步，第一个月只有不到
+                  10 万客户，所以算是小程序。
+                </p>
+                <p>
+                  这个小程序就是个单机程序，为了方便业务人员操作，我写了个 GUI 界面。这是我第一次用 Java Swing 库来写
+                  GUI，为了展示发送进度，后台线程每发送成功一封邮件，就通知页面线程更新进度条。
+                </p>
+                <p>
+                  为什么这么设计呢？因为那时我正在学习 Java 线程编程，感觉这个技术很高端，而当时的 Java JDK
+                  都还没标配线程 concurrent
+                  包。所以，我选择线程间通信的方案来让后台发送线程和前端界面刷新线程通信，这就有了一股浓浓的炫技味道。
+                </p>
+                <p>
+                  之后，就出现了界面动不动就卡住等一系列问题，因为各种线程提前通知、遗漏通知等情况没考虑到，代码也越改越难懂。其实后来想想，用个共享状态，定时轮询即可满足需要，而且代码实现会简单很多（前面《架构与实现》一文中，关于实现的核心我总结了一个字：简。这都是血泪教训啊），出
+                  Bug 的概率也小了很多。
+                </p>
+                <p>回头想想，成长的路上不免见猎心喜，手上拿个锤子看到哪里都是钉子。</p>
+                <p>
+                  炫技是因为你想表达得不一样，就像平常说话，你要故意说得引经据典去彰显自己有文化，但其实效果不一定佳，因为我们更需要的是平实、易懂的表达。
+                </p>
+                <h2>克制</h2>
+                <p>在说克制之前，先说说什么叫不克制，写代码的不克制。</p>
+                <p>
+                  刚工作的第二年，我接手了一个比较大的项目中的一个主要子系统。在熟悉了整个系统后，我开始往里面增加功能时，有点受不了原本系统设计分层中的
+                  DAO（Data Access Object， 数据访问对象）层，那是基于原生的 JDBC 封装的。每次新增一个 DAO
+                  对象都需要复制粘贴一串看起来很类似的代码，难免生出厌烦的感觉。
+                </p>
+                <p>
+                  当时开源框架 Hibernate 刚兴起，我觉得它的设计理念优雅，代码写出来也简洁，所以就决定用 Hibernate
+                  的方式来取代原本的实现。原来的旧系统里，说多不多，说少也不少，好几百个 DAO 类，而重新实现整个 DAO
+                  层，让我连续加了一周的班。
+                </p>
+                <p>
+                  这个替换过程，是个纯粹的搬砖体力活，弄完了还没松口气就又有了新问题：Hibernate
+                  在某些场景下出现了性能问题。陆陆续续把这些新问题处理好，着实让我累了一阵子。后来反思这个决策感觉确实不太妥当，替换带来的好处仅仅是每次新增一个
+                  DAO 类时少写几行代码，却带来很多当时未知的风险。
+                </p>
+                <p>
+                  那时年轻，有激情啊，对新技术充满好奇与冲动。<strong>其实对于新技术，即使从我知道、我了解到我熟悉、我深谙，这时也还需要克制，要等待合适的时机</strong>。这让我想起了电影《勇敢的心》中的一个场景，是战场上华莱士看着对方冲过来，高喊：“Hold！Hold！”新技术的应用，也需要等待一个合适的出击时刻，也许是应用在新的服务上，也许是下一次架构升级。
+                </p>
+                <p>
+                  不克制的一种形态是容易做出臆想的、通用化的假设，而且我们还会给这种假设安一个非常正当的理由：扩展性。不可否认，扩展性很重要，但扩展性也应当来自真实的需求，而非假设将来的某天可能需要扩展，因为扩展性的反面就是带来设计抽象的复杂性以及代码量的增加。
+                </p>
+                <p>那么，如何才是克制的编程方式？我想可能有这样一些方面：</p>
+                <ul>
+                  <li>克制的编码，是每次写完代码，需要去反思和提炼它，代码应当是直观的，可读的，高效的。</li>
+                  <li>
+                    克制的代码，是即使站在远远的地方去看屏幕上的代码，甚至看不清代码的具体内容时，也能感受到它的结构是干净整齐的，而非
+                    “意大利面条” 似的混乱无序。
+                  </li>
+                  <li>
+                    克制的重构，是每次看到 “坏”
+                    代码不是立刻就动手去改，而是先标记圈定它，然后通读代码，掌握全局，重新设计，最后再等待一个合适的时机，来一气呵成地完成重构。
+                  </li>
                 </ul>
+                <p>
+                  总之，克制是不要留下多余的想象，是不炫技、不追新，且恰到好处地满足需要，是一种平实、清晰、易懂的表达。
+                </p>
+                <p>
+                  克制与炫技，匹配与适度，代码的技术深度未必体现在技巧上。有句话是这么说的：“看山是山，看水是水；看山不是山，看水不是水；看山还是山，看水还是水。”转了一圈回来，机锋尽敛，大巧若拙，深在深处，浅在浅处。
+                </p>
+                <p>最后，亲爱的读者朋友，在你的编码成长过程中，有过想要炫技而不克制的时候吗？欢迎你留言。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    <br />
+                    <br />心得如下：可能理解有误，望老师指点。
+                    <br />
+                    <br />1.炫技俗称装B，有句老话说得好，装B被雷劈
+                    <br />
+                    <br />2.炫技是指，为了展示自己的水平，人为的推高自己代码的复杂度和理解难度。（损人不利己）
+                    <br />
+                    <br />3.克制俗称低调有内涵。
+                    <br />
+                    <br />4.克制是指，为了程序的稳定，以及可读性，人为的降低代码的复杂度和理解难度（损己利人）
+                    <br />
+                    <br />5.符合三个重要特征： <br />
+                    1，直观的，可读的，高效的 <br />
+                    2，结构干净整齐 <br />
+                    3，具有全局观
+                    <br />
+                    <br />6.B还是要装的，只不过得趁早，因为成本比较低。
+                    <br />
+                    <br />7.最后，每次我想要装B的时候，玩一下《绝地求生》这个游戏，感受一下
+                    <br />
+                    <br />杀人最多的人不一定能取胜，幸存才是最大的胜利，闷声大发财。 <br />
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 15:50</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">哈哈，感谢third同学的总结心得，理解到位！喜欢第3条的阐释😊</p>
+                    <p class="reply-time">2018-08-25 00:43</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/04/8d/575cfabd.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">sprinty</span></div>
+                  <div class="bd">只有炫技不克制过，才能克制不炫技。 <br /></div>
+                  <span class="time">2018-08-24 13:08</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯嗯，都是泪😂</p>
+                    <p class="reply-time">2018-08-25 00:43</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/59/c9/f44cb7f3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">齐帜</span></div>
+                  <div class="bd">不经历这些失败的尝试，可能也掌握不了这些技术 <br /></div>
+                  <span class="time">2018-08-24 11:15</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，每次炫技后都是给自己挖了坑</p>
+                    <p class="reply-time">2018-08-25 00:53</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1d/d6/76fe5259.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Dream.</span></div>
+                  <div class="bd">
+                    一句话道出真谛“手里拿个锤子，看见什么都是钉子”，真的是学了点新花样，就想立马运用在项目中，幻想着自己多么的牛逼。随意乱锤的结果就是换来各种坑以及加不完的班。真如楼上所说，只有炫技过后才能懂得克制。看见这篇文章，还不算太晚。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 19:19</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊，都是加班换来的经验教训</p>
+                    <p class="reply-time">2018-08-25 00:35</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/3b/65/c00e1c22.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小名叫大明</span></div>
+                  <div class="bd">
+                    我倒觉得程序员初期可以考虑炫技（装B）代码。 <br /><br />个人理解如下: <br /><br />1.
+                    程序员历史上确实存在某些祖传代码不易动，不能动，只能某些人维护的情况，某些人确实得到了想要的效果，获得了利益。（这不是我的追求，哈哈哈）<br /><br />2.
+                    炫，代表着复杂度，代表着更高程度的抽象，这对自己写代码的水平是一种提高的途径，将读到的东西，学以致用，才能是自己的，即使是个坑，也会有所收获。<br /><br />从中学会了，能与不能的界限，拥有了以后能够一眼甄别那些小年轻的想法的&quot;超能力&quot;，哈哈<br /><br />3.像您说的，升迁，生存之技。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-27 00:28</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">就怕炫完了，坑挖完了，人跑了😂<br /></p>
+                    <p class="reply-time">2018-08-27 18:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    实现一个功能越简单明了越好，否则真会害人不浅的，现在我们项目组维护的代码最早都有10年的，早一点没什么，关键是代码中的一个功能，代码是一坨一坨的，一个方法接一个方法看都看不完，又是核心代码一直计划重构，但是首先要理清代码业务逻辑，真是件令人头疼的事。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-26 10:12</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，理清再动手，此处坑多😄</p>
+                    <p class="reply-time">2018-08-27 18:52</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/58/1f/9dc4d475.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">@XP</span></div>
+                  <div class="bd">
+                    之前一家小公司里做安卓独立开发，看到网上兴起kotlin写安卓，我就整合到项目中，一边学习一边开发，之后大量重写代码，然后就开始出现很多兼容问题，想反悔都没办法，硬着头皮修bug
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 07:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">冲动了吧……</p>
+                    <p class="reply-time">2018-08-25 00:57</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/e1/5c/86606d9c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">湮汐</span></div>
+                  <div class="bd">
+                    胡老师，在这里想请教你一个问题。本篇中提到阅读代码，我们很多程序员也提议大家阅读有名的框架源码。<br />可是，自己在阅读源码的过程中，有时候有点无从下手，一个框架的源码量太大了，不知道从哪读起。再就是因为自己基础的原因，很多源码读不懂，看了半天不知道那一块到底是做啥的。<br />这里有没有读源码的方法呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-26 12:28</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      我读源码的方式是，发现这个框架实现了某个能力，我自己想不出怎么做，就会去看看别人怎么实现的。带着问题去读，可能有针对性一些
+                    </p>
+                    <p class="reply-time">2018-09-26 21:45</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/4e/38/3faa8377.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">登高</span></div>
+                  <div class="bd">
+                    毕业时写了一个android
+                    app，那时对高层设计很感兴趣。在网上发现了MVP模式和clean架构，于是将它用起来。但是没想到这给开发增加了太多工作量，需要理解掌握的知识超出了预想，结果拖累了app一定的完成度。现在看当时有点冲动了<br />面对新技术，基本态度希望是积极拥抱，但在实际工作中要有克制。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-27 08:57</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，心态要开放，行动要克制😄</p>
+                    <p class="reply-time">2018-08-27 18:48</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">一针见血。。虽然干了四年多但是感觉有效代码量真的不多，哎。 <br /></div>
+                  <span class="time">2018-08-25 01:35</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">如果你能清晰分辨出有效代码，并重构迭代出来，就又前进成长了一大步了</p>
+                    <p class="reply-time">2018-08-25 11:41</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/36/ec/ca162d6b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">edcSam</span></div>
+                  <div class="bd">处处戳中我痛点，收获颇多，以后定当谨记克制与时机。 <br /></div>
+                  <span class="time">2018-08-24 08:41</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍赞</p>
+                    <p class="reply-time">2018-08-25 00:46</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">这一篇很有道理，但是读起来有点抽象。。不知道实践中怎么落实 <br /></div>
+                  <span class="time">2018-08-24 08:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">估计是代码写得还不够多，量到了就能感觉得到</p>
+                    <p class="reply-time">2018-08-25 00:46</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/09/42/b7a406c9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Hurt</span></div>
+                  <div class="bd">什么是状态机程序啊。 什么又是goto 语句呢 <br /></div>
+                  <span class="time">2018-08-24 08:34</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">哦……🤔</p>
+                    <p class="reply-time">2018-08-25 00:45</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/38/57/a9f9705a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">无聊夫斯基</span></div>
+                  <div class="bd">
+                    当时做用户模版，需求还是比较简单的，本可以自定义快速实现，但为了炫技直接引入没用过的shiro，大部分功能没用上不说，还增加了其他功能的复杂度，坑嘛是肯定很多的，爬了好一阵子
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 08:20</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">哈哈😄</p>
+                    <p class="reply-time">2018-08-25 00:54</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/06/ad/fe79da1d.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">维维</span></div>
+                  <div class="bd">
+                    过度设计会增加代码的复杂度，增加维护成本。有时候一开始想的很好，让代码有很好的可扩展性，但过了很久，这份代码几乎不会怎么变。<br />我们项目中也有些代码，一个方法两三百行，复杂度很高，谁也不敢动。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 07:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">几百行，还好，啃得动</p>
+                    <p class="reply-time">2018-08-25 00:56</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/65/26/1bdb89c6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">忆灬星辰</span></div>
+                  <div class="bd">
+                    炫技和追新往往在自己的项目里，平时看看一些新书或是代码整洁方面的，全当练手。公司里比较老顽固。有的用的还是很早的技术。不过能够优化好代码就好，新技术往往要经过很长时间才会放进公司项目
+                    <br />
+                  </div>
+                  <span class="time">2018-08-24 00:36</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">业务要稳定，技术可以渐变，不要突变</p>
+                    <p class="reply-time">2018-08-25 00:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">绿鲤鱼与驴。</span></div>
+                  <div class="bd">使用合适的架构，合适的需要去实现适合的需求，不炫技，不装逼，活的久 <br /></div>
+                  <span class="time">2018-11-15 17:41</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">务实</p>
+                    <p class="reply-time">2018-11-18 15:03</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/fe/cf/aa6b25b7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">米斯特粥</span></div>
+                  <div class="bd">真正的牛人应该能直接闻出代码的坏味道，有时候代码注释越多可能代码越臭... <br /></div>
+                  <span class="time">2018-10-05 13:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">有这种情况存在</p>
+                    <p class="reply-time">2018-10-07 20:26</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/bc/4d/480806c0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">王超</span></div>
+                  <div class="bd">
+                    有时候自己压根没觉得那是炫技，是大义凛然，最后发现自己挖了一堆坑，看了老师的文章，才知道啥是炫技，啥是克制。。这就是年轻么。。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-25 07:32</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">年经时都挺大义凛然的，填坑到天明常有的事^_^</p>
+                    <p class="reply-time">2018-09-25 23:53</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/3e/fb/eb0273a0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">like_jun</span></div>
+                  <div class="bd">
+                    在过程中成长。中间的磕磕碰碰不重要。重要的是要会总结。这样才能不断攀升到新高度。克制理解为稳重。重剑无锋。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-12 19:31</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

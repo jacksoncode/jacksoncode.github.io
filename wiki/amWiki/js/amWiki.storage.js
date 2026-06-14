@@ -3,22 +3,22 @@
  * @author Tevin
  */
 
-;
 (function (win) {
-
     'use strict';
 
     var tools = win.tools;
-    var wikiPath = tools.simString(win.location.pathname.replace('/', '').replace(/\//g, '_')).toUpperCase();
-    var LOCAL_STORAGE_NAME = 'AMWikiDataBase@' + wikiPath;  //本地数据localStorage键名
-    var LOCAL_STATES = 'AMWikiStates@' + wikiPath;  //本地状态集键名
+    var wikiPath = tools
+        .simString(win.location.pathname.replace('/', '').replace(/\//g, '_'))
+        .toUpperCase();
+    var LOCAL_STORAGE_NAME = 'AMWikiDataBase@' + wikiPath; //本地数据localStorage键名
+    var LOCAL_STATES = 'AMWikiStates@' + wikiPath; //本地状态集键名
 
     /**
      * @class 创建一个本地存储管理对象
      */
     var Storage = function () {
-        this._db = null;  //内存中的文库缓存
-        this._states = null;  //内存中的状态集
+        this._db = null; //内存中的文库缓存
+        this._states = null; //内存中的状态集
         this.elm = {
             $win: $(win),
             //更新全部缓存按钮
@@ -28,7 +28,7 @@
             //文档总数
             $cacheDocTotal: $('#cacheDocTotal'),
             //上次全部缓存更新时间
-            $cacheLasttime: $('#cacheLasttime')
+            $cacheLasttime: $('#cacheLasttime'),
         };
         this._bridgeLocalStorage('read');
         this._bindCtrl();
@@ -97,7 +97,7 @@
             id: id,
             uri: uri,
             content: content || '',
-            timestamp: Date.now()
+            timestamp: Date.now(),
         };
         this._changeSummary('sateOnly', 'prepare');
     };
@@ -162,11 +162,15 @@
         }
         //如果是预先，百分数减1
         if (prepare == 'prepare') {
-            this.elm.$cacheState.text(parseInt(libraryiesLong / this._indexing.length * 100 - 1) + '%');
+            this.elm.$cacheState.text(
+                parseInt((libraryiesLong / this._indexing.length) * 100 - 1) + '%'
+            );
         }
         //非预先则正常
         else {
-            this.elm.$cacheState.text(parseInt(libraryiesLong / this._indexing.length * 100) + '%');
+            this.elm.$cacheState.text(
+                parseInt((libraryiesLong / this._indexing.length) * 100) + '%'
+            );
         }
         //如果不只是状态
         if (stateOnly != 'stateOnly') {
@@ -226,6 +230,5 @@
         win.localStorage[LOCAL_STATES] = JSON.stringify(this._states);
     };
 
-    return win.AWStorage = Storage;
-
+    return (win.AWStorage = Storage);
 })(window);

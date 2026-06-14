@@ -5,33 +5,40 @@
 ## 目录
 
 ### 音频处理
+
 - [语音转文本](audio/speech-to-text.md)：将口语内容转换为书面文本
 - [文本转语音](audio/text-to-speech.md)：将文本转换为自然流畅的语音
 - [音乐创作](audio/music-creation.md)：使用AI辅助音乐创作和生成
 
 ### 视频制作
+
 - [视频生成](video/video-generation.md)：使用AI创建视频内容
 - [视频编辑](video/video-editing.md)：利用AI增强视频编辑流程
 
 ### 编程辅助
+
 - [代码生成](coding/code-generation.md)：使用AI创建和完成代码
 - [代码解释](coding/code-explanation.md)：利用AI理解和分析代码
 - [代码优化](coding/code-optimization.md)：通过AI改进代码质量和性能
 
 ### 学习与教育
+
 - [个性化学习](education/personalized-learning.md)：AI如何定制学习体验
 - [知识问答](education/knowledge-qa.md)：利用AI作为智能问答工具
 
 ### 商业应用
+
 - [市场分析](business/market-analysis.md)：利用AI进行市场研究和趋势预测
 - [客户服务](business/customer-service.md)：AI驱动的客户支持和体验优化
 - [投资辅助](business/investment-assistant.md)：AI辅助股票和基金投资决策
 
 ### 日常生活
+
 - [个人助理](daily-life/personal-assistant.md)：AI如何帮助管理日常任务
 - [智能家居](daily-life/smart-home.md)：利用AI创建智能居住环境
 
 ### 创意与艺术
+
 - [图像创作](creative-arts/image-creation.md)：使用AI生成和编辑视觉艺术
 - [创意写作](creative-arts/creative-writing.md)：AI辅助文学和内容创作
 

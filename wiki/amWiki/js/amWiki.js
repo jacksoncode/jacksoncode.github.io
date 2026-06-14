@@ -6,7 +6,6 @@
  */
 
 $(function () {
-
     'use strict';
 
     /*
@@ -35,19 +34,19 @@ $(function () {
     //页面元素
     var $win = $(window),
         $body = $('body'),
-        $menuIcon = $('#menuIcon'),            //顶部折叠显示导航按钮
-        $container = $('#container'),            //页面主容器
-        $nav = $('#nav'),                      //左侧导航
-        $menuBar = $('#menuBar'),              //左侧导航内容
+        $menuIcon = $('#menuIcon'), //顶部折叠显示导航按钮
+        $container = $('#container'), //页面主容器
+        $nav = $('#nav'), //左侧导航
+        $menuBar = $('#menuBar'), //左侧导航内容
         $filter = $('#menuFilter'),
         $filterClean = $filter.next('i'),
         $main = $('#main'),
         $mainInner = $main.children('.main-inner'),
-        $mainSibling = $('#mainSibling'),      //其他文章
-        $contents = $('#contents');            //目录
+        $mainSibling = $('#mainSibling'), //其他文章
+        $contents = $('#contents'); //目录
 
     //是否为移动端
-    var isMobi = window.isMobi = (function () {
+    var isMobi = (window.isMobi = (function () {
         var winW = $win.width();
         var threshold = 720;
         var onResize = function () {
@@ -63,7 +62,7 @@ $(function () {
         return function () {
             return winW <= threshold;
         };
-    })();
+    })());
 
     //页面基本显示与操作
     (function () {
@@ -110,24 +109,24 @@ $(function () {
         $menuIcon.on('click', function () {
             var $this = $(this);
             if ($this.hasClass('close')) {
-                $this.removeClass('close')
-                    .find('use').attr('xlink:href', '#icon:navStart');
+                $this.removeClass('close').find('use').attr('xlink:href', '#icon:navStart');
                 $nav.removeClass('on');
             } else {
-                $this.addClass('close')
-                    .find('use').attr('xlink:href', '#icon:navClose');
+                $this.addClass('close').find('use').attr('xlink:href', '#icon:navClose');
                 $nav.addClass('on');
             }
         });
         $nav.on('navchange searchon searchoff', function (e) {
-            $menuIcon.removeClass('close')
-                .find('use').attr('xlink:href', '#icon:navStart');
+            $menuIcon.removeClass('close').find('use').attr('xlink:href', '#icon:navStart');
             $nav.removeClass('on');
         });
         //筛选操作
         $filter.on('input propertychange input2', function () {
             var value = $filter.val().replace(/([\(\)\[\]\^\$\+])/g, '\\$1');
-            var valReg = new RegExp('(' + $.trim($filter.val()).split(/[ ,]/).join('|') + ')', 'ig');
+            var valReg = new RegExp(
+                '(' + $.trim($filter.val()).split(/[ ,]/).join('|') + ')',
+                'ig'
+            );
             if (value != '' && !/^\s$/g.test(value)) {
                 $filterClean.removeClass('off');
                 $menuBar.find('h5').each(function () {
@@ -151,20 +150,27 @@ $(function () {
         if (sessionStorage['AMWikiIconsSvg']) {
             $('#svgSymbols').append(sessionStorage['AMWikiIconsSvg']);
         } else {
-            $.get('amWiki/images/icons.svg', function (svg) {
-                sessionStorage['AMWikiIconsSvg'] = svg;
-                $('#svgSymbols').append(svg);
-            }, 'text');
+            $.get(
+                'amWiki/images/icons.svg',
+                function (svg) {
+                    sessionStorage['AMWikiIconsSvg'] = svg;
+                    $('#svgSymbols').append(svg);
+                },
+                'text'
+            );
         }
         //目录悬浮窗展开折叠
         $contents.children('.btn').on('click', function (e) {
             $contents.toggleClass('on').removeClass('hover');
         });
-        $contents.hover(function () {
-            $contents.addClass('hover');
-        }, function () {
-            $contents.removeClass('hover');
-        });
+        $contents.hover(
+            function () {
+                $contents.addClass('hover');
+            },
+            function () {
+                $contents.removeClass('hover');
+            }
+        );
         //开启滚动条
         $('.scroller').scrollbar();
         $('#backTop').on('click', function () {
@@ -212,12 +218,14 @@ $(function () {
                 $span.html($span.text().replace(valReg, '<mark>$1</mark>'));
                 $title.addClass('on').removeClass('off');
                 //所属链接全部显示，且显示匹配
-                $ul.show().find('> li > a').each(function () {
-                    var $this = $(this);
-                    var $span2 = $this.find('span');
-                    $span2.html($span2.text().replace(valReg, '<mark>$1</mark>'));
-                    $this.parent().removeClass('off');
-                });
+                $ul.show()
+                    .find('> li > a')
+                    .each(function () {
+                        var $this = $(this);
+                        var $span2 = $this.find('span');
+                        $span2.html($span2.text().replace(valReg, '<mark>$1</mark>'));
+                        $this.parent().removeClass('off');
+                    });
                 //父级显示
                 showNavParents($title);
                 //下一级筛选类型更改，文件和文件夹全部显示，且显示匹配
@@ -236,19 +244,21 @@ $(function () {
                     $title.addClass('off');
                 }
                 //所属链接仅显示匹配的
-                $ul.hide().find('> li > a').each(function () {
-                    var $this = $(this);
-                    var $span2 = $this.find('span');
-                    if (valReg.test($this.text())) {
-                        $span2.html($span2.text().replace(valReg, '<mark>$1</mark>'));
-                        $this.parent().removeClass('off');
-                        //存在匹配时父级才显示
-                        showNavParents($ul.show().prev());
-                    } else {
-                        $span2.text($span2.text());
-                        $this.parent().addClass('off');
-                    }
-                });
+                $ul.hide()
+                    .find('> li > a')
+                    .each(function () {
+                        var $this = $(this);
+                        var $span2 = $this.find('span');
+                        if (valReg.test($this.text())) {
+                            $span2.html($span2.text().replace(valReg, '<mark>$1</mark>'));
+                            $this.parent().removeClass('off');
+                            //存在匹配时父级才显示
+                            showNavParents($ul.show().prev());
+                        } else {
+                            $span2.text($span2.text());
+                            $this.parent().addClass('off');
+                        }
+                    });
                 //下一级继续完全筛选
                 $ul.find('> li > strong').each(function () {
                     filterNav('filter', valReg, $(this));
@@ -267,14 +277,14 @@ $(function () {
             if (!!valReg) {
                 $span.html($span.text().replace(valReg, '<mark>$1</mark>'));
                 if (valReg.test($span.text())) {
-                    $ul.show();  //当文件夹名称命中，展开文件夹
+                    $ul.show(); //当文件夹名称命中，展开文件夹
                 }
                 $ul.find('> li > a').each(function () {
                     var $this = $(this);
                     var $span2 = $this.find('span');
                     $span2.html($span2.text().replace(valReg, '<mark>$1</mark>'));
                     if (valReg.test($this.text())) {
-                        $ul.show();  //当链接名称命中，展开文件夹
+                        $ul.show(); //当链接名称命中，展开文件夹
                     }
                     $this.parent().removeClass('off');
                 });
@@ -292,9 +302,12 @@ $(function () {
                     var $span2 = $(this).find('span');
                     $span2.text($span2.text());
                 });
-                $ul.children('li').removeClass('off').children('strong').each(function () {
-                    filterNav('open', null, $(this));
-                });
+                $ul.children('li')
+                    .removeClass('off')
+                    .children('strong')
+                    .each(function () {
+                        filterNav('open', null, $(this));
+                    });
             }
         }
     };
@@ -330,13 +343,13 @@ $(function () {
         //设置上下篇目导航
         var setSiblingNav = function (num, $other) {
             if ($other) {
-                $mainSibling.find('a').eq(num)
+                $mainSibling
+                    .find('a')
+                    .eq(num)
                     .attr('href', $other.attr('href'))
                     .text($other.text());
             } else {
-                $mainSibling.find('a').eq(num)
-                    .removeAttr('href')
-                    .text('没有了');
+                $mainSibling.find('a').eq(num).removeAttr('href').text('没有了');
             }
         };
         setSiblingNav(0, getDocLink('prev', $item));
@@ -384,10 +397,10 @@ $(function () {
         docs.renderDoc(localDoc);
         testing && testing.crawlContent();
         $main.trigger('scrollbar');
-        $mainInner.scrollTop(0);  //返回顶部
+        $mainInner.scrollTop(0); //返回顶部
         //更新history记录
         if (!withOutPushState && HISTORY_STATE) {
-            history.pushState({path: path}, '', '?file=' + path);
+            history.pushState({ path: path }, '', '?file=' + path);
         }
         //第二步，加载服务器上的文档资源，如果有更新重新渲染
         docs.loadPage(path, function (state, content) {
@@ -403,7 +416,7 @@ $(function () {
                         }
                     });
                     if (HISTORY_STATE) {
-                        history.replaceState({path: '首页'}, '', '?file=首页');
+                        history.replaceState({ path: '首页' }, '', '?file=首页');
                     }
                 }
                 //如果本地缓存不为空，但服务器文档读取失败时
@@ -434,57 +447,68 @@ $(function () {
 
     //读取目录导航
     var loadNav = function (callback) {
-        $.get('library/$navigation.md?t=' + Date.now(), function (data) {
-            $menuBar.find('.scroller-content').html(marked(data));
-            $menuBar
-                .find('h4').prepend('<svg><use xlink:href="#icon:navHome"></use></svg>').end()
-                .find('h5').each(function () {
-                var $this = $(this);
-                $this.html('<svg><use xlink:href="#icon:navArrow"></use></svg><span>' + $this.text() + '</span>')
-            });
-            $menuBar.trigger('scrollbar');
-            var pathList = [];
-            //支持history api时，改变默认事件，导航不再跳转页面
-            $menuBar.find('a').each(function () {
-                var $this = $(this);
-                $this.html('<span>' + $this.text() + '</span>');
-                if (HISTORY_STATE) {
-                    var path = $this.attr('href').split('file=')[1];
-                    pathList.push(path);
-                    $this.on('click', function () {
-                        search.displayBox('off'); //关闭搜索面板
-                        changeNav(path);
-                        changePage(path);
-                        $this.trigger('navchange');
-                        return false;
+        $.get(
+            'library/$navigation.md?t=' + Date.now(),
+            function (data) {
+                $menuBar.find('.scroller-content').html(marked(data));
+                $menuBar
+                    .find('h4')
+                    .prepend('<svg><use xlink:href="#icon:navHome"></use></svg>')
+                    .end()
+                    .find('h5')
+                    .each(function () {
+                        var $this = $(this);
+                        $this.html(
+                            '<svg><use xlink:href="#icon:navArrow"></use></svg><span>' +
+                                $this.text() +
+                                '</span>'
+                        );
                     });
-                }
-            });
-            $mainSibling.find('a').on('click', function () {
-                if (HISTORY_STATE) {
+                $menuBar.trigger('scrollbar');
+                var pathList = [];
+                //支持history api时，改变默认事件，导航不再跳转页面
+                $menuBar.find('a').each(function () {
                     var $this = $(this);
-                    var href = $this.attr('href');
-                    if (typeof href != 'undefined' && href != '') {
-                        var path = href.split('file=')[1];
-                        changeNav(path);
-                        changePage(path);
-                        $this.trigger('navchange');
+                    $this.html('<span>' + $this.text() + '</span>');
+                    if (HISTORY_STATE) {
+                        var path = $this.attr('href').split('file=')[1];
+                        pathList.push(path);
+                        $this.on('click', function () {
+                            search.displayBox('off'); //关闭搜索面板
+                            changeNav(path);
+                            changePage(path);
+                            $this.trigger('navchange');
+                            return false;
+                        });
                     }
-                    return false;
+                });
+                $mainSibling.find('a').on('click', function () {
+                    if (HISTORY_STATE) {
+                        var $this = $(this);
+                        var href = $this.attr('href');
+                        if (typeof href != 'undefined' && href != '') {
+                            var path = href.split('file=')[1];
+                            changeNav(path);
+                            changePage(path);
+                            $this.trigger('navchange');
+                        }
+                        return false;
+                    }
+                });
+                $menuBar.find('strong').each(function () {
+                    var $this = $(this);
+                    $this.html('<span>' + $this.text() + '</span>');
+                });
+                //设置导航筛选初始值
+                var filterVal = storage.getStates('navFilterKey');
+                if (typeof filterVal != 'undefined' && filterVal != '') {
+                    $filter.val(filterVal).trigger('input2');
                 }
-            });
-            $menuBar.find('strong').each(function () {
-                var $this = $(this);
-                $this.html('<span>' + $this.text() + '</span>');
-            });
-            //设置导航筛选初始值
-            var filterVal = storage.getStates('navFilterKey');
-            if (typeof filterVal != 'undefined' && filterVal != '') {
-                $filter.val(filterVal).trigger('input2');
-            }
-            //回调
-            callback && callback(pathList);
-        }, 'text');
+                //回调
+                callback && callback(pathList);
+            },
+            'text'
+        );
     };
 
     //根据hash改变滚动位置
@@ -501,7 +525,7 @@ $(function () {
         //获取hash指向的元素
         var $hash = $('.anchor[name="' + hash + '"]');
         if ($hash.length == 0) {
-            return
+            return;
         }
         //滚动至元素
         $mainInner.scrollTop($hash.position().top + $mainInner.scrollTop() - 10);
@@ -581,11 +605,8 @@ $(function () {
                 });
             }, i * 100);
         };
-        for (var i = 0, item; item = list[i]; i++) {
+        for (var i = 0, item; (item = list[i]); i++) {
             load(item, i);
         }
     };
-
 });
-
-

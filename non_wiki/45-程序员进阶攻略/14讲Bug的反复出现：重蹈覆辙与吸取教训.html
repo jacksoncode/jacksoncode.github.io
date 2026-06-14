@@ -1,387 +1,1627 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                14讲Bug的反复出现：重蹈覆辙与吸取教训
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/92/89/928fd038a320867889b02873450e6a89.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">14讲Bug的反复出现：重蹈覆辙与吸取教训</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/92/89/928fd038a320867889b02873450e6a89.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>Bug 除了时间和空间两种属性，还有一个特点是和程序员直接相关的。在编程的路上，想必你也曾犯过一些形态各异、但本质重复的错误，导致一些 Bug 总是以不同的形态反复出现。在你捶胸顿足懊恼之时，不妨试着反思一下：为什么你总会写出有 Bug 的程序，而且有些同类型的 Bug 还会反复出现？</p>
-<h2>1. 重蹈覆辙</h2>
-<p>重蹈覆辙的错误，老实说曾经我经历过不止一次。</p>
-<p>也许每次具体的形态可能有些差异，但仔细究其本质却是类似的。想要写出没有 Bug 的程序是不可能的，因为所有的程序员都受到自身能力水平的局限。而我所经历的重蹈覆辙型错误，总结下来大概都可以归为以下三类原因。</p>
-<h3>1.1 粗心大意</h3>
-<p>人人都会犯粗心大意的错误，因为这就是 “人” 这个系统的普遍固有缺陷（Bug）之一。所以，作为人的程序员一定会犯一些非常低级的、因为粗心大意而导致的 Bug。</p>
-<p>这就好比写文章、写书都会有错别字，即使经历过三审三校后正式出版的书籍，都无法完全避免错别字的存在。</p>
-<p>而程序中也有这类 “错别字” 类型的低级错误，比如：条件<code>if</code> 后面没有大括号导致的语义变化，<code>==</code>、<code>=</code> 和 <code>===</code> 的数量差别，<code>++</code> 或<code>--</code> 的位置，甚至 <code>;</code>的有无在某些编程语言中带来的语义差别。即使通过反复检查也可能有遗漏，而自己检查自己的代码会更难发现这些缺陷，这和自己不容易发现自己的错别字是一个道理。</p><!-- [[[read_end]]] -->
-<p>心理学家汤姆·斯塔福德（Tom Stafford）曾在英国谢菲尔德大学研究拼写错误，他说：“当你在书写的时候，你试图传达想法，这是非常高级的任务。而在做高级任务时，大脑将简单、零碎的部分（拼词和造句）概化，这样就可以更专注于更复杂的任务，比如将句子变成复杂的观点。”</p>
-<p>而在阅读时，他解释说：“我们不会抓住每个细节，相反，我们吸收感官信息，将感觉和期望融合，并且从中提炼意思。”这样，如果我们读的是他人的作品，就能帮助我们用更少的脑力更快地理解含义。</p>
-<p>但当我们验证自己的文章时，我们知道想表达的东西是什么。因为我们预期这些含义都存在，所以很容易忽略掉某些感官（视觉）表达上的缺失。我们眼睛看到的，在与我们脑子里的印象交战。这，便是我们对自己的错误视而不见的原因。</p>
-<p>写程序时，我们是在进行一项高级的复杂任务：将复杂的需求或产品逻辑翻译为程序逻辑，并且还要补充上程序固有的非业务类控制逻辑。因而，一旦我们完成了程序，再来复审写好的代码，这时我们预期的逻辑含义都预先存在于脑中，同样也就容易忽略掉某些视觉感官表达上的问题。</p>
-<p>从进化角度看，粗心写错别字，还看不出来，不是因为我们太笨，而恰恰还是进化上的权衡优化选择。</p>
-<h3>1.2 认知偏差</h3>
-<p>认知偏差，是重蹈覆辙类错误的最大来源。</p>
-<p>曾经，我就对 Java 类库中的线程 API 产生过认知偏差，导致反复出现问题。Java 自带线程池有三个重要参数：核心线程数（core）、最大线程数（max）和队列长度（queues）。我曾想当然地以为当核心线程数（core）不够了，就会继续创建线程达到最大线程数（max），此时如果还有任务需要处理但已经没有线程了就会放进队列等待。</p>
-<p>但实际却不是这样工作的，类库的实现是核心线程（core）满了就会进队列（queues）等待，直到队列也满了再创建新线程直至达到最大线程数（max）的限制。这类认知偏差曾带来线上系统的偶然性异常故障，然后还怎么都找不到原因。因为这进入了我的认知盲区，我以为的和真正的现象之间的差异一度让我困惑不解。</p>
-<p>还有一个来自生活中的小例子，虽然不是关于程序的，但本质是一个性质。</p>
-<p>有时互联网上，朋友圈中小道消息满天飞，与此类现象有关的一个成语叫 “空穴来风”，现在很多媒体文章有好多是像下面这样用这个成语的：</p>
-<blockquote>
-<p>他俩要离婚了？看来空穴来风，事出有因啊！<br />
-物价上涨的传闻恐怕不是空穴来风。</p>
-</blockquote>
-<p>第一句是用的成语原意：指有根据、有来由，“空”发三声读 kǒng，意同 “孔”。第二句是表达：没有根据和由来，“空”发一声读kōnɡ。第二种的新意很多名作者和普通大众沿用已久，约定俗成，所以又有辞书与时俱进增加了这个新的义项，允许这两种完全相反的解释并存，自然发展，这在语义学史上也不多见。</p>
-<p>而关于程序上有些 API 的定义和实现也犯过 “空穴来风” 的问题，一个 API 可以表达两种完全相反的含义和行为。不过这样的 API 就很容易引发认知偏差导致的 Bug，所以在设计和实现 API 时我们就要避免这种情况的出现，而是要提供单一原子化的设计。</p>
-<h3>1.3 熵增问题</h3>
-<p>熵增，是借用了物理热力学的比喻，表达更复杂混乱的现象；程序规模变大，复杂度变高之后，再去修改程序或添加功能就更容易引发未知的 Bug。</p>
-<p>腾讯曾经分享过 QQ 的架构演进变化，到了 3.5 版本 QQ 的用户在线规模进入亿时代，此时在原有架构下去新增一些功能，比如：</p>
-<blockquote>
-<p>“昵称” 长度增加一半，需要两个月；</p>
-<p>增加 “故乡” 字段，需要两个月；</p>
-<p>最大好友数从 500 变成 1000，需要三个月。</p>
-</blockquote>
-<p>后端系统的高度复杂性和耦合作用导致即使增加一些小功能特性，也可能带来巨大的牵连影响，所以一个小改动才需要数月时间。</p>
-<p>我们不断进行架构升级的本质，就在于随着业务和场景功能的增加，去控制住程序系统整体 “熵” 的增加。而复杂且耦合度高（熵很高）的系统，正是容易滋生 Bug 的温床。</p>
-<h2>2. 吸取教训</h2>
-<p>为了避免重蹈覆辙，我们有什么办法来吸取曾经犯错的教训么？</p>
-<h3>2.1 优化方法</h3>
-<p>粗心大意，可以通过开发规范、代码风格、流程约束，代码评审和工具检查等工程手段来加以避免。甚至相对写错别字，代码更进一步，通过补充单元测试在运行时做一个正确性后验，反过来去发现这类我们视而不见的低级错误。</p>
-<p>认知偏差，一般没什么太好的自我发现机制，但可以依赖团队和技术手段来纠偏。每次掉坑里爬出来后的经验教训总结和团队内部分享，另外就是像一些静态代码扫描工具也提供了内置的优化实践，通过它们的提示来发现与你的认知产生碰撞纠偏。</p>
-<p>熵增问题，业界不断迭代更新流行的架构模式就是在解决这个问题。比如，微服务架构相对曾经的单体应用架构模式，就是通过增加开发协作，部署测试和运维上的复杂度来换取系统开发的敏捷性。在协作方式、部署运维等方面付出的代价都可以通过提升自动化水平来降低成本，但只有编程活动是没法自动化的，依赖程序员来完成，而每个程序员对复杂度的驾驭能力是有不同上限的。</p>
-<p>所以，微服务本质上就是将一个大系统的熵增问题，局部化在一个又一个的小服务中。而每个微服务都有一个熵增的极限值，而这个极限值一般是要低于该服务负责人的驾驭能力上限的。对于一个熵增接近极限附近的微服务，服务负责人就需要及时重构优化，降低熵的水平。而高水平和低水平程序员负责的服务本质差别在于熵的大小。</p>
-<p>而熵增问题若不及时重构优化，最后可能会付出巨大的代价。</p>
-<p>丰田曾陷入的 “刹车门” 事件，就是因为其汽车动力控制系统软件存在缺陷。而为追查其原因，在十八个月中，有 12 位嵌入式系统专家受原告诉讼团所托，被关在马里兰州一间高度保安的房间内对丰田动力控制系统软件（主要是 2005 年的凯美瑞）源代码进行深度审查。最后得到的结论把丰田的软件缺陷分为三类：</p>
-<ul>
-<li>非常业余的结构设计</li>
-<li>不符合软件开发规范</li>
-<li>对关键变量缺乏保护</li>
-</ul>
-<p>第一类属于熵增问题，导致系统规模不断变大、变复杂，结果驾驭不了而失控；第二类属于开发过程的认知与管理问题；第三类才是程序员实现上的水平与粗心大意问题。</p>
-<h3>2.2 塑造环境</h3>
-<p>为了修正真正的错误，而不是头痛医头、脚痛医脚，我们需要更深刻地认识问题的本质，再来开出 “处方单”。</p>
-<p>在亚马逊（Amazon），严重的故障需要写一个 COE（Correction of Errors）的文档，这是一种帮助去总结经验教训，加深印象避免再犯的形式。其目的也是为了帮助认识问题的本质，修正真正的错误。</p>
-<p>但一旦这个东西和 KPI 之类的挂上钩，引起的负面作用是 COE 的数量会变少，但真正的问题并没有减少，只是被隐藏了。而其正面的效应像总结经验、吸取教训、找出真正问题等，就会被大大削弱。</p>
-<p>关于如何构造一个鼓励修正错误的环境，我们可以看看来自《异类》一书讲述的大韩航空的例子，大韩航空曾一度困扰于它的飞机损失率：</p>
-<blockquote>
-<p>美国联合航空 1988 年到 1998 年的飞机损失率为百万分之 0.27，也就是说联合航空每飞行 400 万次，会在一次事故中损失一架飞机；而大韩航空同期的飞机损失率为百万分之 4.79，是前者的 17 倍之多。</p>
-</blockquote>
-<p>事实上大韩航空的飞机也是买自美国，和联合航空并无多大差别。它的飞行员们的飞行时长，经验和训练水平从统计数据看也差别不大，那为什么飞机损失率会如此地高于其他航空公司的平均水平呢？在《异类》这本书中，作者以此为案例做了详细分析，我这里直接引用结论。</p>
-<blockquote>
-<p>现代商业客机，就目前发展水平而言，跟家用烤面包机一样可靠。空难很多时候是一系列人为的小失误、机械的小故障累加的结果，一个典型空难通常包括 7 个人为的错误。</p>
-</blockquote>
-<p>一个飞机上有正副两个机长，副机长的作用是帮助发现、提醒和纠正机长在飞行过程中可能发生的一些人为小错误。大韩航空的问题正在于副机长是否敢于以及如何提醒纠正机长的错误。其背后的理论依据源自荷兰心理学家吉尔特·霍夫斯泰德（Geert Hofstede）对不同族裔之间文化差异的研究，就是今天被社会广泛接受的跨文化心理学经典理论框架：霍夫斯泰德文化纬度（Hofstede’s Dimensions）。</p>
-<blockquote>
-<p>在霍夫斯泰德的几个文化维度中，最引人注目的大概就是 “权力距离指数（Power Distance Index）”。权力距离是指人们对待比自己更高等级阶层的态度，特别是指对权威的重视和尊重程度。</p>
-</blockquote>
-<blockquote>
-<p>而霍夫斯泰德的研究也提出了一个航空界专家从未想到过的问题：让副机长在机长面前维护自己的意见，必须帮助他们克服所处文化的权力距离。</p>
-</blockquote>
-<p>想想我们看过的韩国电影或电视剧中，职场上后辈对前辈、下级对上级的态度，就能感知到韩国文化相比美国所崇尚的自由精神所表现出来的权力距离是特别远的。因而造成了大韩航空未被纠正的人为小错误比例更高，最终的影响是空难率也更高，而空难就是航空界的终极系统故障，而且结果不可挽回。</p>
-<p>吸取大韩航空的教训应用到软件系统开发和维护上，就是：需要<strong>建立和维护有利于程序员及时暴露并修正错误，挑战权威和主动改善系统的低权力距离文化氛围，这其实就是推崇扁平化管理和 “工程师文化” 的关键所在</strong>。</p>
-<p>一旦系统出了故障非技术背景的管理者通常喜欢用流程、制度甚至价值观来应对问题，而技术背景的管理者则喜欢从技术本身的角度去解决当下的问题。我觉着两者需要结合，站在更高的维度去考虑问题：<strong>规则、流程或评价体系的制定所造成的文化氛围，对于错误是否以及何时被暴露，如何被修正有着决定性的影响</strong>。</p>
-<p>我们常与错误相伴，查理·芒格说：</p>
-<blockquote>
-<p>世界上不存在不犯错误的学习或行事方式，只是我们可以通过学习，比其他人少犯一些错误，也能够在犯了错误之后，更快地纠正错误。但既要过上富足的生活又不犯很多错误是不可能的。实际上，生活之所以如此，是为了让你们能够处理错误。</p>
-</blockquote>
-<p>人固有缺陷，程序固有 Bug；吸取教训避免重蹈覆辙，除了不断提升方法，也要创造环境。你觉得呢？欢迎你留言和我分享。</p>
-<hr />
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">心得如下：<br><br>1.bug本质上是无法避免的，最好的办法不是不犯错，而是少犯错误，犯错之后尽快改正。最快的成长方法是不退步<br><br>2.bug的反复出现，有三个重要原因，粗心大意，认知偏差，熵增问题<br><br>3.认知偏差是错误的最大来源，思想错误，行动又怎么会正确呢？<br><br>4.熵增问题，是随着复杂增高，而必然有更高概率发生bug<br><br>5.应对这些问题，我们要从各方面吸取教训，其中最重要的是优化方法和塑造环境。<br><br>6.粗心大意，可以通过流程和工具来减少，建议补充代码单元测试<br><br>7.认知偏差，可以通过团队和技术手段来纠偏<br><br>8.熵增问题，通过业界不断迭代更新流行的框架模式来解决。<br><br>9.塑造环境，塑造一个正视错误，改正错误的环境 <br></div>
-                            <span class="time">2018-09-03 11:51</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍，总结的比我详细😊</p>
-                                <p class="reply-time">2018-09-03 17:56</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">世界是不完美的，人是这个世界的极小部分，人也是不完美的，如果想使人做的事情趋近于完美，那就需要集体的智慧了。之于编程一套好的流程能扼杀许多的Bug，自测、测试（包括：测试环境联调、预发布环境联通等）、代码review，上线前准备、上线中自验、上线后产品及业务验证等如果都做到位了，至少能保证主流程没问题，对于性能有要求的可以加上性能测试。现在我们基本是这么玩的，另外，就是各种监控和日志的加持啦！ <br></div>
-                            <span class="time">2018-09-03 08:32</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">流程本身就是环境的产物，对于软件开发而言，每个公司估计流程都不会完全一样</p>
-                                <p class="reply-time">2018-09-03 18:04</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李正阳Lee</span>
-                            </div>
-                            <div class="bd">看到塑造犯错环境这节，想起了桥水基金创始人达利欧对待犯错的态度。<br><br>他允许员工犯错，强调每个人应反思错误，不容许一错再错。并在公司内部建立了一个“错误日志”，用来记录每人犯过的错误和造成的不良后果，这样可以追根溯源，系统化的解决问题。<br><br>我们技术人也可以建立自己或团队的“错误日志”，在错误中成长。 <br></div>
-                            <span class="time">2018-09-04 10:10</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，不错的主意</p>
-                                <p class="reply-time">2018-09-04 18:17</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/05/97/b83ebf66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">softtwilight</span>
-                            </div>
-                            <div class="bd">胡大看问题的角度真是独特，而且深刻 <br></div>
-                            <span class="time">2018-09-03 09:14</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^，这也是可以培养和训练的</p>
-                                <p class="reply-time">2018-09-03 17:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">线程池那个认知偏差真是一样一样的啊。。。 <br></div>
-                            <span class="time">2018-09-03 08:23</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">听说不少人都掉过这个坑……</p>
-                                <p class="reply-time">2018-09-03 18:00</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/20/39/3168c4ca.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">二木🐶</span>
-                            </div>
-                            <div class="bd">这篇文章写的真好 <br></div>
-                            <span class="time">2018-10-27 21:13</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^</p>
-                                <p class="reply-time">2018-10-29 18:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/e1/5c/86606d9c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">湮汐</span>
-                            </div>
-                            <div class="bd">我和胡老师一样，也被线程池池误导过。我也以为先创建线程到max，然后再进入队列，事实上和我们想的正好相反。而我总结了一下，我们之所以被误导，也是有原因的：数据库连接池就是先创建连接到max，如果没有可用连接时，就等待maxWait时间直到有空闲连接或抛出异常。<br>在学习的时候虽然有“触类旁通”，但是有时候确实会有一些细节不一样，没有去踩过这个坑，自然就会想当然了。<br>出错一直都是正常的，一定要敢于面对自己的错误，并且纠正自己的错误。 <br></div>
-                            <span class="time">2018-09-27 14:11</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯，惯性思维也容易导致犯错</p>
-                                <p class="reply-time">2018-09-28 20:19</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">亚林</span>
-                            </div>
-                            <div class="bd">嗯 站在更高的角度解决问题 <br></div>
-                            <span class="time">2018-09-11 12:04</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/6e/93/6fef7aaa.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">石头</span>
-                            </div>
-                            <div class="bd">首先要有一套流程避免大问题，然后对于个人来说有一个收获就是建立COF，不断总结优化提高。 <br></div>
-                            <span class="time">2018-09-05 21:01</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/ae/e1/78701ecf.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">莫小鹏</span>
-                            </div>
-                            <div class="bd">今天的文章不错 <br></div>
-                            <span class="time">2018-09-04 00:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^</p>
-                                <p class="reply-time">2018-09-04 18:14</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">我最近面试遇到这个问题，我就说错了。后来继续解释的时候发现说不通了，回来一看，发现之前理解的都是错的 <br></div>
-                            <span class="time">2018-09-03 18:28</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">所以要多交流才能发现自己的认知偏差，面试也算一种特殊的交流</p>
-                                <p class="reply-time">2018-09-04 18:31</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/de/ac/f279ac31.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">吴秀華</span>
-                            </div>
-                            <div class="bd">我承认我是个经常出BUG的人。每次都是粗心大意或未完全了解需求造成的。我正在努力的完善自己的思维和工作态度。在工作中得不到认可和改进意见。在这里，非常感谢峰哥的分享，让我在迷茫中，看到曙光。 <br></div>
-                            <span class="time">2018-09-03 16:09</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^，加油💪</p>
-                                <p class="reply-time">2018-09-03 17:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/97/46/fe1f21d8.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">北风一叶</span>
-                            </div>
-                            <div class="bd">终于知道为什么我写的程序总是返工了，就是因为bug没有管理好，也没有吸取经验教训 <br></div>
-                            <span class="time">2018-11-14 06:54</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/4e/8b/964b3b80.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">热勇</span>
-                            </div>
-                            <div class="bd">非常值得反思的文章！！！为自己加油！谢谢老师 <br></div>
-                            <span class="time">2018-09-20 08:23</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">今天刚碰到一个线上事故，反思中……😢</p>
-                                <p class="reply-time">2018-09-20 20:44</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  Bug
+                  除了时间和空间两种属性，还有一个特点是和程序员直接相关的。在编程的路上，想必你也曾犯过一些形态各异、但本质重复的错误，导致一些
+                  Bug 总是以不同的形态反复出现。在你捶胸顿足懊恼之时，不妨试着反思一下：为什么你总会写出有 Bug
+                  的程序，而且有些同类型的 Bug 还会反复出现？
+                </p>
+                <h2>1. 重蹈覆辙</h2>
+                <p>重蹈覆辙的错误，老实说曾经我经历过不止一次。</p>
+                <p>
+                  也许每次具体的形态可能有些差异，但仔细究其本质却是类似的。想要写出没有 Bug
+                  的程序是不可能的，因为所有的程序员都受到自身能力水平的局限。而我所经历的重蹈覆辙型错误，总结下来大概都可以归为以下三类原因。
+                </p>
+                <h3>1.1 粗心大意</h3>
+                <p>
+                  人人都会犯粗心大意的错误，因为这就是 “人”
+                  这个系统的普遍固有缺陷（Bug）之一。所以，作为人的程序员一定会犯一些非常低级的、因为粗心大意而导致的
+                  Bug。
+                </p>
+                <p>
+                  这就好比写文章、写书都会有错别字，即使经历过三审三校后正式出版的书籍，都无法完全避免错别字的存在。
+                </p>
+                <p>
+                  而程序中也有这类 “错别字” 类型的低级错误，比如：条件<code>if</code>
+                  后面没有大括号导致的语义变化，<code>==</code>、<code>=</code> 和 <code>===</code> 的数量差别，<code
+                    >++</code
+                  >
+                  或<code>--</code> 的位置，甚至
+                  <code>;</code
+                  >的有无在某些编程语言中带来的语义差别。即使通过反复检查也可能有遗漏，而自己检查自己的代码会更难发现这些缺陷，这和自己不容易发现自己的错别字是一个道理。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  心理学家汤姆·斯塔福德（Tom
+                  Stafford）曾在英国谢菲尔德大学研究拼写错误，他说：“当你在书写的时候，你试图传达想法，这是非常高级的任务。而在做高级任务时，大脑将简单、零碎的部分（拼词和造句）概化，这样就可以更专注于更复杂的任务，比如将句子变成复杂的观点。”
+                </p>
+                <p>
+                  而在阅读时，他解释说：“我们不会抓住每个细节，相反，我们吸收感官信息，将感觉和期望融合，并且从中提炼意思。”这样，如果我们读的是他人的作品，就能帮助我们用更少的脑力更快地理解含义。
+                </p>
+                <p>
+                  但当我们验证自己的文章时，我们知道想表达的东西是什么。因为我们预期这些含义都存在，所以很容易忽略掉某些感官（视觉）表达上的缺失。我们眼睛看到的，在与我们脑子里的印象交战。这，便是我们对自己的错误视而不见的原因。
+                </p>
+                <p>
+                  写程序时，我们是在进行一项高级的复杂任务：将复杂的需求或产品逻辑翻译为程序逻辑，并且还要补充上程序固有的非业务类控制逻辑。因而，一旦我们完成了程序，再来复审写好的代码，这时我们预期的逻辑含义都预先存在于脑中，同样也就容易忽略掉某些视觉感官表达上的问题。
+                </p>
+                <p>从进化角度看，粗心写错别字，还看不出来，不是因为我们太笨，而恰恰还是进化上的权衡优化选择。</p>
+                <h3>1.2 认知偏差</h3>
+                <p>认知偏差，是重蹈覆辙类错误的最大来源。</p>
+                <p>
+                  曾经，我就对 Java 类库中的线程 API 产生过认知偏差，导致反复出现问题。Java
+                  自带线程池有三个重要参数：核心线程数（core）、最大线程数（max）和队列长度（queues）。我曾想当然地以为当核心线程数（core）不够了，就会继续创建线程达到最大线程数（max），此时如果还有任务需要处理但已经没有线程了就会放进队列等待。
+                </p>
+                <p>
+                  但实际却不是这样工作的，类库的实现是核心线程（core）满了就会进队列（queues）等待，直到队列也满了再创建新线程直至达到最大线程数（max）的限制。这类认知偏差曾带来线上系统的偶然性异常故障，然后还怎么都找不到原因。因为这进入了我的认知盲区，我以为的和真正的现象之间的差异一度让我困惑不解。
+                </p>
+                <p>还有一个来自生活中的小例子，虽然不是关于程序的，但本质是一个性质。</p>
+                <p>
+                  有时互联网上，朋友圈中小道消息满天飞，与此类现象有关的一个成语叫
+                  “空穴来风”，现在很多媒体文章有好多是像下面这样用这个成语的：
+                </p>
+                <blockquote>
+                  <p>
+                    他俩要离婚了？看来空穴来风，事出有因啊！<br />
+                    物价上涨的传闻恐怕不是空穴来风。
+                  </p>
+                </blockquote>
+                <p>
+                  第一句是用的成语原意：指有根据、有来由，“空”发三声读 kǒng，意同
+                  “孔”。第二句是表达：没有根据和由来，“空”发一声读kōnɡ。第二种的新意很多名作者和普通大众沿用已久，约定俗成，所以又有辞书与时俱进增加了这个新的义项，允许这两种完全相反的解释并存，自然发展，这在语义学史上也不多见。
+                </p>
+                <p>
+                  而关于程序上有些 API 的定义和实现也犯过 “空穴来风” 的问题，一个 API
+                  可以表达两种完全相反的含义和行为。不过这样的 API 就很容易引发认知偏差导致的 Bug，所以在设计和实现 API
+                  时我们就要避免这种情况的出现，而是要提供单一原子化的设计。
+                </p>
+                <h3>1.3 熵增问题</h3>
+                <p>
+                  熵增，是借用了物理热力学的比喻，表达更复杂混乱的现象；程序规模变大，复杂度变高之后，再去修改程序或添加功能就更容易引发未知的
+                  Bug。
+                </p>
+                <p>
+                  腾讯曾经分享过 QQ 的架构演进变化，到了 3.5 版本 QQ
+                  的用户在线规模进入亿时代，此时在原有架构下去新增一些功能，比如：
+                </p>
+                <blockquote>
+                  <p>“昵称” 长度增加一半，需要两个月；</p>
+                  <p>增加 “故乡” 字段，需要两个月；</p>
+                  <p>最大好友数从 500 变成 1000，需要三个月。</p>
+                </blockquote>
+                <p>
+                  后端系统的高度复杂性和耦合作用导致即使增加一些小功能特性，也可能带来巨大的牵连影响，所以一个小改动才需要数月时间。
+                </p>
+                <p>
+                  我们不断进行架构升级的本质，就在于随着业务和场景功能的增加，去控制住程序系统整体 “熵”
+                  的增加。而复杂且耦合度高（熵很高）的系统，正是容易滋生 Bug 的温床。
+                </p>
+                <h2>2. 吸取教训</h2>
+                <p>为了避免重蹈覆辙，我们有什么办法来吸取曾经犯错的教训么？</p>
+                <h3>2.1 优化方法</h3>
+                <p>
+                  粗心大意，可以通过开发规范、代码风格、流程约束，代码评审和工具检查等工程手段来加以避免。甚至相对写错别字，代码更进一步，通过补充单元测试在运行时做一个正确性后验，反过来去发现这类我们视而不见的低级错误。
+                </p>
+                <p>
+                  认知偏差，一般没什么太好的自我发现机制，但可以依赖团队和技术手段来纠偏。每次掉坑里爬出来后的经验教训总结和团队内部分享，另外就是像一些静态代码扫描工具也提供了内置的优化实践，通过它们的提示来发现与你的认知产生碰撞纠偏。
+                </p>
+                <p>
+                  熵增问题，业界不断迭代更新流行的架构模式就是在解决这个问题。比如，微服务架构相对曾经的单体应用架构模式，就是通过增加开发协作，部署测试和运维上的复杂度来换取系统开发的敏捷性。在协作方式、部署运维等方面付出的代价都可以通过提升自动化水平来降低成本，但只有编程活动是没法自动化的，依赖程序员来完成，而每个程序员对复杂度的驾驭能力是有不同上限的。
+                </p>
+                <p>
+                  所以，微服务本质上就是将一个大系统的熵增问题，局部化在一个又一个的小服务中。而每个微服务都有一个熵增的极限值，而这个极限值一般是要低于该服务负责人的驾驭能力上限的。对于一个熵增接近极限附近的微服务，服务负责人就需要及时重构优化，降低熵的水平。而高水平和低水平程序员负责的服务本质差别在于熵的大小。
+                </p>
+                <p>而熵增问题若不及时重构优化，最后可能会付出巨大的代价。</p>
+                <p>
+                  丰田曾陷入的 “刹车门” 事件，就是因为其汽车动力控制系统软件存在缺陷。而为追查其原因，在十八个月中，有
+                  12 位嵌入式系统专家受原告诉讼团所托，被关在马里兰州一间高度保安的房间内对丰田动力控制系统软件（主要是
+                  2005 年的凯美瑞）源代码进行深度审查。最后得到的结论把丰田的软件缺陷分为三类：
+                </p>
+                <ul>
+                  <li>非常业余的结构设计</li>
+                  <li>不符合软件开发规范</li>
+                  <li>对关键变量缺乏保护</li>
                 </ul>
+                <p>
+                  第一类属于熵增问题，导致系统规模不断变大、变复杂，结果驾驭不了而失控；第二类属于开发过程的认知与管理问题；第三类才是程序员实现上的水平与粗心大意问题。
+                </p>
+                <h3>2.2 塑造环境</h3>
+                <p>为了修正真正的错误，而不是头痛医头、脚痛医脚，我们需要更深刻地认识问题的本质，再来开出 “处方单”。</p>
+                <p>
+                  在亚马逊（Amazon），严重的故障需要写一个 COE（Correction of
+                  Errors）的文档，这是一种帮助去总结经验教训，加深印象避免再犯的形式。其目的也是为了帮助认识问题的本质，修正真正的错误。
+                </p>
+                <p>
+                  但一旦这个东西和 KPI 之类的挂上钩，引起的负面作用是 COE
+                  的数量会变少，但真正的问题并没有减少，只是被隐藏了。而其正面的效应像总结经验、吸取教训、找出真正问题等，就会被大大削弱。
+                </p>
+                <p>
+                  关于如何构造一个鼓励修正错误的环境，我们可以看看来自《异类》一书讲述的大韩航空的例子，大韩航空曾一度困扰于它的飞机损失率：
+                </p>
+                <blockquote>
+                  <p>
+                    美国联合航空 1988 年到 1998 年的飞机损失率为百万分之 0.27，也就是说联合航空每飞行 400
+                    万次，会在一次事故中损失一架飞机；而大韩航空同期的飞机损失率为百万分之 4.79，是前者的 17 倍之多。
+                  </p>
+                </blockquote>
+                <p>
+                  事实上大韩航空的飞机也是买自美国，和联合航空并无多大差别。它的飞行员们的飞行时长，经验和训练水平从统计数据看也差别不大，那为什么飞机损失率会如此地高于其他航空公司的平均水平呢？在《异类》这本书中，作者以此为案例做了详细分析，我这里直接引用结论。
+                </p>
+                <blockquote>
+                  <p>
+                    现代商业客机，就目前发展水平而言，跟家用烤面包机一样可靠。空难很多时候是一系列人为的小失误、机械的小故障累加的结果，一个典型空难通常包括
+                    7 个人为的错误。
+                  </p>
+                </blockquote>
+                <p>
+                  一个飞机上有正副两个机长，副机长的作用是帮助发现、提醒和纠正机长在飞行过程中可能发生的一些人为小错误。大韩航空的问题正在于副机长是否敢于以及如何提醒纠正机长的错误。其背后的理论依据源自荷兰心理学家吉尔特·霍夫斯泰德（Geert
+                  Hofstede）对不同族裔之间文化差异的研究，就是今天被社会广泛接受的跨文化心理学经典理论框架：霍夫斯泰德文化纬度（Hofstede’s
+                  Dimensions）。
+                </p>
+                <blockquote>
+                  <p>
+                    在霍夫斯泰德的几个文化维度中，最引人注目的大概就是 “权力距离指数（Power Distance
+                    Index）”。权力距离是指人们对待比自己更高等级阶层的态度，特别是指对权威的重视和尊重程度。
+                  </p>
+                </blockquote>
+                <blockquote>
+                  <p>
+                    而霍夫斯泰德的研究也提出了一个航空界专家从未想到过的问题：让副机长在机长面前维护自己的意见，必须帮助他们克服所处文化的权力距离。
+                  </p>
+                </blockquote>
+                <p>
+                  想想我们看过的韩国电影或电视剧中，职场上后辈对前辈、下级对上级的态度，就能感知到韩国文化相比美国所崇尚的自由精神所表现出来的权力距离是特别远的。因而造成了大韩航空未被纠正的人为小错误比例更高，最终的影响是空难率也更高，而空难就是航空界的终极系统故障，而且结果不可挽回。
+                </p>
+                <p>
+                  吸取大韩航空的教训应用到软件系统开发和维护上，就是：需要<strong
+                    >建立和维护有利于程序员及时暴露并修正错误，挑战权威和主动改善系统的低权力距离文化氛围，这其实就是推崇扁平化管理和
+                    “工程师文化” 的关键所在</strong
+                  >。
+                </p>
+                <p>
+                  一旦系统出了故障非技术背景的管理者通常喜欢用流程、制度甚至价值观来应对问题，而技术背景的管理者则喜欢从技术本身的角度去解决当下的问题。我觉着两者需要结合，站在更高的维度去考虑问题：<strong>规则、流程或评价体系的制定所造成的文化氛围，对于错误是否以及何时被暴露，如何被修正有着决定性的影响</strong>。
+                </p>
+                <p>我们常与错误相伴，查理·芒格说：</p>
+                <blockquote>
+                  <p>
+                    世界上不存在不犯错误的学习或行事方式，只是我们可以通过学习，比其他人少犯一些错误，也能够在犯了错误之后，更快地纠正错误。但既要过上富足的生活又不犯很多错误是不可能的。实际上，生活之所以如此，是为了让你们能够处理错误。
+                  </p>
+                </blockquote>
+                <p>
+                  人固有缺陷，程序固有
+                  Bug；吸取教训避免重蹈覆辙，除了不断提升方法，也要创造环境。你觉得呢？欢迎你留言和我分享。
+                </p>
+                <hr />
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    心得如下：<br /><br />1.bug本质上是无法避免的，最好的办法不是不犯错，而是少犯错误，犯错之后尽快改正。最快的成长方法是不退步<br /><br />2.bug的反复出现，有三个重要原因，粗心大意，认知偏差，熵增问题<br /><br />3.认知偏差是错误的最大来源，思想错误，行动又怎么会正确呢？<br /><br />4.熵增问题，是随着复杂增高，而必然有更高概率发生bug<br /><br />5.应对这些问题，我们要从各方面吸取教训，其中最重要的是优化方法和塑造环境。<br /><br />6.粗心大意，可以通过流程和工具来减少，建议补充代码单元测试<br /><br />7.认知偏差，可以通过团队和技术手段来纠偏<br /><br />8.熵增问题，通过业界不断迭代更新流行的框架模式来解决。<br /><br />9.塑造环境，塑造一个正视错误，改正错误的环境
+                    <br />
+                  </div>
+                  <span class="time">2018-09-03 11:51</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍，总结的比我详细😊</p>
+                    <p class="reply-time">2018-09-03 17:56</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    世界是不完美的，人是这个世界的极小部分，人也是不完美的，如果想使人做的事情趋近于完美，那就需要集体的智慧了。之于编程一套好的流程能扼杀许多的Bug，自测、测试（包括：测试环境联调、预发布环境联通等）、代码review，上线前准备、上线中自验、上线后产品及业务验证等如果都做到位了，至少能保证主流程没问题，对于性能有要求的可以加上性能测试。现在我们基本是这么玩的，另外，就是各种监控和日志的加持啦！
+                    <br />
+                  </div>
+                  <span class="time">2018-09-03 08:32</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      流程本身就是环境的产物，对于软件开发而言，每个公司估计流程都不会完全一样
+                    </p>
+                    <p class="reply-time">2018-09-03 18:04</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李正阳Lee</span></div>
+                  <div class="bd">
+                    看到塑造犯错环境这节，想起了桥水基金创始人达利欧对待犯错的态度。<br /><br />他允许员工犯错，强调每个人应反思错误，不容许一错再错。并在公司内部建立了一个“错误日志”，用来记录每人犯过的错误和造成的不良后果，这样可以追根溯源，系统化的解决问题。<br /><br />我们技术人也可以建立自己或团队的“错误日志”，在错误中成长。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-04 10:10</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，不错的主意</p>
+                    <p class="reply-time">2018-09-04 18:17</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/05/97/b83ebf66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">softtwilight</span></div>
+                  <div class="bd">胡大看问题的角度真是独特，而且深刻 <br /></div>
+                  <span class="time">2018-09-03 09:14</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^，这也是可以培养和训练的</p>
+                    <p class="reply-time">2018-09-03 17:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">线程池那个认知偏差真是一样一样的啊。。。 <br /></div>
+                  <span class="time">2018-09-03 08:23</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">听说不少人都掉过这个坑……</p>
+                    <p class="reply-time">2018-09-03 18:00</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/20/39/3168c4ca.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">二木🐶</span></div>
+                  <div class="bd">这篇文章写的真好 <br /></div>
+                  <span class="time">2018-10-27 21:13</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^</p>
+                    <p class="reply-time">2018-10-29 18:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/e1/5c/86606d9c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">湮汐</span></div>
+                  <div class="bd">
+                    我和胡老师一样，也被线程池池误导过。我也以为先创建线程到max，然后再进入队列，事实上和我们想的正好相反。而我总结了一下，我们之所以被误导，也是有原因的：数据库连接池就是先创建连接到max，如果没有可用连接时，就等待maxWait时间直到有空闲连接或抛出异常。<br />在学习的时候虽然有“触类旁通”，但是有时候确实会有一些细节不一样，没有去踩过这个坑，自然就会想当然了。<br />出错一直都是正常的，一定要敢于面对自己的错误，并且纠正自己的错误。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-27 14:11</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯，惯性思维也容易导致犯错</p>
+                    <p class="reply-time">2018-09-28 20:19</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">亚林</span></div>
+                  <div class="bd">嗯 站在更高的角度解决问题 <br /></div>
+                  <span class="time">2018-09-11 12:04</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/6e/93/6fef7aaa.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">石头</span></div>
+                  <div class="bd">
+                    首先要有一套流程避免大问题，然后对于个人来说有一个收获就是建立COF，不断总结优化提高。 <br />
+                  </div>
+                  <span class="time">2018-09-05 21:01</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/ae/e1/78701ecf.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">莫小鹏</span></div>
+                  <div class="bd">今天的文章不错 <br /></div>
+                  <span class="time">2018-09-04 00:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^</p>
+                    <p class="reply-time">2018-09-04 18:14</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">
+                    我最近面试遇到这个问题，我就说错了。后来继续解释的时候发现说不通了，回来一看，发现之前理解的都是错的
+                    <br />
+                  </div>
+                  <span class="time">2018-09-03 18:28</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">所以要多交流才能发现自己的认知偏差，面试也算一种特殊的交流</p>
+                    <p class="reply-time">2018-09-04 18:31</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/de/ac/f279ac31.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">吴秀華</span></div>
+                  <div class="bd">
+                    我承认我是个经常出BUG的人。每次都是粗心大意或未完全了解需求造成的。我正在努力的完善自己的思维和工作态度。在工作中得不到认可和改进意见。在这里，非常感谢峰哥的分享，让我在迷茫中，看到曙光。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-03 16:09</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^，加油💪</p>
+                    <p class="reply-time">2018-09-03 17:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/97/46/fe1f21d8.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">北风一叶</span></div>
+                  <div class="bd">
+                    终于知道为什么我写的程序总是返工了，就是因为bug没有管理好，也没有吸取经验教训 <br />
+                  </div>
+                  <span class="time">2018-11-14 06:54</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/4e/8b/964b3b80.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">热勇</span></div>
+                  <div class="bd">非常值得反思的文章！！！为自己加油！谢谢老师 <br /></div>
+                  <span class="time">2018-09-20 08:23</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">今天刚碰到一个线上事故，反思中……😢</p>
+                    <p class="reply-time">2018-09-20 20:44</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

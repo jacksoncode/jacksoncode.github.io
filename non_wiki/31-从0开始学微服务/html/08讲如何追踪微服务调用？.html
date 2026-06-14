@@ -1,481 +1,1740 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                08讲如何追踪微服务调用？
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/14/b6/14d19d98a1ee9adf51604b2bc4b033b6.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">08讲如何追踪微服务调用？</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/14/b6/14d19d98a1ee9adf51604b2bc4b033b6.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>在微服务架构下，由于进行了服务拆分，一次请求往往需要涉及多个服务，每个服务可能是由不同的团队开发，使用了不同的编程语言，还有可能部署在不同的机器上，分布在不同的数据中心。</p>
-<p>下面这张图描述了用户访问微博首页，一次请求所涉及的服务（这张图仅作为示意，实际上可能远远比这张图还要复杂），你可以想象如果这次请求失败了，要想查清楚到底是哪个应用导致，会是多么复杂的一件事情。</p>
-<p><img src="https://static001.geekbang.org/resource/image/b6/7b/b63bd8abd8e90ff75fb012068d419f7b.png" alt="" /></p>
-<p>如果有一个系统，可以跟踪记录一次用户请求都发起了哪些调用，经过哪些服务处理，并且记录每一次调用所涉及的服务的详细信息，这时候如果发生调用失败，你就可以通过这个日志快速定位是在哪个环节出了问题，<span class="orange">这个系统就是今天我要讲解的服务追踪系统</span>。</p>
-<h2>服务追踪的作用</h2>
-<p>在介绍追踪原理与实现之前，我们先来看看服务追踪的作用。除了刚才说的能够快速定位请求失败的原因以外，我这里再列出四点，它们可以帮你在微服务改造过程中解决不少问题。</p>
-<p><strong>第一，优化系统瓶颈。</strong></p>
-<p>通过记录调用经过的每一条链路上的耗时，我们能快速定位整个系统的瓶颈点在哪里。比如你访问微博首页发现很慢，肯定是由于某种原因造成的，有可能是运营商网络延迟，有可能是网关系统异常，有可能是某个服务异常，还有可能是缓存或者数据库异常。通过服务追踪，可以从全局视角上去观察，找出整个系统的瓶颈点所在，然后做出针对性的优化。</p><!-- [[[read_end]]] -->
-<p><strong>第二，优化链路调用。</strong></p>
-<p>通过服务追踪可以分析调用所经过的路径，然后评估是否合理。比如一个服务调用下游依赖了多个服务，通过调用链分析，可以评估是否每个依赖都是必要的，是否可以通过业务优化来减少服务依赖。</p>
-<p>还有就是，一般业务都会在多个数据中心都部署服务，以实现异地容灾，这个时候经常会出现一种状况就是服务A调用了另外一个数据中心的服务B，而没有调用同处于一个数据中心的服务B。</p>
-<p>根据我的经验，跨数据中心的调用视距离远近都会有一定的网络延迟，像北京和广州这种几千公里距离的网络延迟可能达到30ms以上，这对于有些业务几乎是不可接受的。通过对调用链路进行分析，可以找出跨数据中心的服务调用，从而进行优化，尽量规避这种情况出现。</p>
-<p><strong>第三，生成网络拓扑。</strong></p>
-<p>通过服务追踪系统中记录的链路信息，可以生成一张系统的网络调用拓扑图，它可以反映系统都依赖了哪些服务，以及服务之间的调用关系是什么样的，可以一目了然。除此之外，在网络拓扑图上还可以把服务调用的详细信息也标出来，也能起到服务监控的作用。</p>
-<p><strong>第四，透明传输数据。</strong></p>
-<p>除了服务追踪，业务上经常有一种需求，期望能把一些用户数据，从调用的开始一直往下传递，以便系统中的各个服务都能获取到这个信息。比如业务想做一些A/B测试，这时候就想通过服务追踪系统，把A/B测试的开关逻辑一直往下传递，经过的每一层服务都能获取到这个开关值，就能够统一进行A/B测试。</p>
-<h2>服务追踪系统原理</h2>
-<p>讲到这里，你一定很好奇，服务追踪有这么多好处，那它是怎么做到的呢？</p>
-<p>这就不得不提到服务追踪系统的鼻祖：Google发布的一篇的论文<a href="http://bigbully.github.io/Dapper-translation/"><code>Dapper, a Large-Scale Distributed Systems Tracing Infrastructure</code></a>，里面详细讲解了服务追踪系统的实现原理。它的核心理念就是<strong>调用链</strong>：通过一个全局唯一的ID将分布在各个服务节点上的同一次请求串联起来，从而还原原有的调用关系，可以追踪系统问题、分析调用数据并统计各种系统指标。</p>
-<p>可以说后面的诞生各种服务追踪系统都是基于Dapper衍生出来的，比较有名的有Twitter的<a href="http://zipkin.io">Zipkin</a>、阿里的<a href="http://www.slideshare.net/terryice/eagleeye-with-taobaojavaone">鹰眼</a>、美团的<a href="http://tech.meituan.com/mt_mtrace.html">MTrace</a>等。</p>
-<p>要理解服务追踪的原理，首先必须搞懂一些基本概念：traceId、spanId、annonation等。Dapper这篇论文讲得比较清楚，但对初学者来说理解起来可能有点困难，美团的MTrace的原理介绍理解起来相对容易一些，下面我就以MTrace为例，给你详细讲述服务追踪系统的实现原理。虽然原理有些晦涩，但却是你必须掌握的，只有理解了服务追踪的基本概念，才能更好地将其实现出来。</p>
-<p>首先看下面这张图，我来给你讲解下服务追踪系统中几个最基本概念。</p>
-<p><img src="https://static001.geekbang.org/resource/image/cf/7b/cf4089dce4ab2e2a028159585eb37f7b.png" alt="" /><br />
-（图片来源：<a href="http://tech.meituan.com/img/mt-mtrace/mtrace7.png">http://tech.meituan.com/img/mt-mtrace/mtrace7.png</a> ）</p>
-<ul>
-<li>
-<p>traceId，用于标识某一次具体的请求ID。当用户的请求进入系统后，会在RPC调用网络的第一层生成一个全局唯一的traceId，并且会随着每一层的RPC调用，不断往后传递，这样的话通过traceId就可以把一次用户请求在系统中调用的路径串联起来。</p>
-</li>
-<li>
-<p>spanId，用于标识一次RPC调用在分布式请求中的位置。当用户的请求进入系统后，处在RPC调用网络的第一层A时spanId初始值是0，进入下一层RPC调用B的时候spanId是0.1，继续进入下一层RPC调用C时spanId是0.1.1，而与B处在同一层的RPC调用E的spanId是0.2，这样的话通过spanId就可以定位某一次RPC请求在系统调用中所处的位置，以及它的上下游依赖分别是谁。</p>
-</li>
-<li>
-<p>annotation，用于业务自定义埋点数据，可以是业务感兴趣的想上传到后端的数据，比如一次请求的用户UID。</p>
-</li>
-</ul>
-<p>上面这三段内容我用通俗语言再给你小结一下，traceId是用于串联某一次请求在系统中经过的所有路径，spanId是用于区分系统不同服务之间调用的先后关系，而annotation是用于业务自定义一些自己感兴趣的数据，在上传traceId和spanId这些基本信息之外，添加一些自己感兴趣的信息。</p>
-<h2>服务追踪系统实现</h2>
-<p>讲到这里，你应该已经理解服务追踪系统里最重要的概念和原理了，我们先来看看服务追踪系统的架构，让你了解一下系统全貌。</p>
-<p><img src="https://static001.geekbang.org/resource/image/d7/3e/d792225033bf313c6b8fdccbef189e3e.png" alt="" /><br />
-（图片来源：<a href="https://tech.meituan.com/img/mt-mtrace/mtrace6.png">https://tech.meituan.com/img/mt-mtrace/mtrace6.png</a> ）</p>
-<p>上面是服务追踪系统架构图，你可以看到一个服务追踪系统可以分为三层。</p>
-<ul>
-<li>
-<p>数据采集层，负责数据埋点并上报。</p>
-</li>
-<li>
-<p>数据处理层，负责数据的存储与计算。</p>
-</li>
-<li>
-<p>数据展示层，负责数据的图形化展示。</p>
-</li>
-</ul>
-<p>下面来看看具体每一层的实现方式是什么样的。</p>
-<p><strong>1. 数据采集层</strong></p>
-<p>数据采集层的作用就是在系统的各个不同模块中进行埋点，采集数据并上报给数据处理层进行处理。</p>
-<p>那么该如何进行数据埋点呢？结合下面这张图来了解一下数据埋点的流程。</p>
-<p><img src="https://static001.geekbang.org/resource/image/d1/2f/d1f1ddc7e405dba6687733fbfd34bb2f.png" alt="" /><br />
-（图片来源：<a href="https://tech.meituan.com/img/mt-mtrace/mtrace9.png">https://tech.meituan.com/img/mt-mtrace/mtrace9.png</a> ）</p>
-<p>以红色方框里圈出的A调用B的过程为例，一次RPC请求可以分为四个阶段。</p>
-<ul>
-<li>
-<p>CS（Client Send）阶段 : 客户端发起请求，并生成调用的上下文。</p>
-</li>
-<li>
-<p>SR（Server Recieve）阶段 : 服务端接收请求，并生成上下文。</p>
-</li>
-<li>
-<p>SS（Server  Send）阶段 : 服务端返回请求，这个阶段会将服务端上下文数据上报，下面这张图可以说明上报的数据有：traceId=123456，spanId=0.1，appKey=B，method=B.method，start=103，duration=38。</p>
-</li>
-<li>
-<p>CR（Client Recieve）阶段 : 客户端接收返回结果，这个阶段会将客户端上下文数据上报，上报的数据有：traceid=123456，spanId=0.1，appKey=A，method=B.method，start=103，duration=38。</p>
-</li>
-</ul>
-<p><img src="https://static001.geekbang.org/resource/image/61/c1/6111097a42e4888403d59c910a32f6c1.png" alt="" /><br />
-（图片来源：<a href="https://tech.meituan.com/img/mt-mtrace/mtrace10.png">https://tech.meituan.com/img/mt-mtrace/mtrace10.png</a> ）</p>
-<p><strong>2. 数据处理层</strong></p>
-<p>数据处理层的作用就是把数据采集层上报的数据按需计算，然后落地存储供查询使用。</p>
-<p>据我所知，数据处理的需求一般分为两类，一类是实时计算需求，一类是离线计算需求。</p>
-<p>实时计算需求对计算效率要求比较高，一般要求对收集的链路数据能够在秒级别完成聚合计算，以供实时查询。而离线计算需求对计算效率要求就没那么高了，一般能在小时级别完成链路数据的聚合计算即可，一般用作数据汇总统计。针对这两类不同的数据处理需求，采用的计算方法和存储也不相同。</p>
-<ul>
-<li>实时数据处理</li>
-</ul>
-<p>针对实时数据处理，一般采用Storm或者Spark Streaming来对链路数据进行实时聚合加工，存储一般使用OLTP数据仓库，比如HBase，使用traceId作为RowKey，能天然地把一整条调用链聚合在一起，提高查询效率。</p>
-<ul>
-<li>离线数据处理</li>
-</ul>
-<p>针对离线数据处理，一般通过运行MapReduce或者Spark批处理程序来对链路数据进行离线计算，存储一般使用Hive。</p>
-<p><strong>3. 数据展示层</strong></p>
-<p>数据展示层的作用就是将处理后的链路信息以图形化的方式展示给用户。</p>
-<p>根据我的经验，实际项目中主要用到两种图形展示，一种是调用链路图，一种是调用拓扑图。</p>
-<ul>
-<li>调用链路图</li>
-</ul>
-<p>下面以一张Zipkin的调用链路图为例，通过这张图可以看出下面几个信息。</p>
-<p><strong>服务整体情况</strong>：服务总耗时、服务调用的网络深度、每一层经过的系统，以及多少次调用。下图展示的一次调用，总共耗时209.323ms，经过了5个不同的系统模块，调用深度为7层，共发生了24次系统调用。</p>
-<p><strong>每一层的情况</strong>：每一层发生了几次调用，以及每一层调用的耗时。</p>
-<p><img src="https://static001.geekbang.org/resource/image/13/13/13ea5d45ff39006f14368f44169e5813.png" alt="" /><br />
-（图片来源：<a href="https://zipkin.io/public/img/web-screenshot.png">https://zipkin.io/public/img/web-screenshot.png</a> ）</p>
-<p>根据我的经验，调用链路图在实际项目中，主要是被用来做故障定位，比如某一次用户调用失败了，可以通过调用链路图查询这次用户调用经过了哪些环节，到底是哪一层的调用失败所导致。</p>
-<ul>
-<li>调用拓扑图</li>
-</ul>
-<p>下面是一张Pinpoint的调用拓扑图，通过这张图可以看出系统内都包含哪些应用，它们之间是什么关系，以及依赖调用的QPS、平均耗时情况。</p>
-<p><img src="https://static001.geekbang.org/resource/image/21/ec/213d15b515b8dbff700e170d001f32ec.png" alt="" /><br />
-（图片来源：<a href="https://raw.githubusercontent.com/naver/pinpoint/master/doc/images/ss_server-map.png">https://raw.githubusercontent.com/naver/pinpoint/master/doc/images/ss_server-map.png</a> ）</p>
-<p>调用拓扑图是一种全局视野图，在实际项目中，主要用作全局监控，用于发现系统中异常的点，从而快速做出决策。比如，某一个服务突然出现异常，那么在调用链路拓扑图中可以看出对这个服务的调用耗时都变高了，可以用红色的图样标出来，用作监控报警。</p>
-<h2>总结</h2>
-<p>今天我给你讲解了服务追踪的基本原理以及实现方式，可以说服务追踪是分布式系统中必不可少的功能，它能够帮助我们查询一次用户请求在系统中的具体执行路径，以及每一条路径的上下游的详细情况，对于追查问题十分有用。</p>
-<p>实现一个服务追踪系统，涉及数据采集、数据处理和数据展示这三个流程，有多种实现方式，具体采用哪一种要根据自己的业务情况来选择。关于服务追踪系统的选型我在专栏后面会详细展开介绍，这里你只需要了解它的基本工作原理就可以了。</p>
-<h2>思考题</h2>
-<p>通过这两期的学习，你应该了解到服务追踪系统和服务监控系统的搭建都需要数据采集、处理和展示这三个步骤，你认为它们是否有相同和不同之处呢？</p>
-<p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
-<p><img src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7f/d3/b5896293.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Realm</span>
-                            </div>
-                            <div class="bd">1 监控是若干个局部，单独采集、分析、展示；追踪是全局视角，有链的上下游传递的概念，通过某个id串联相关的监控；<br>2 诊断故障一般从链上分析出现问题的点，然后定位到点上的监控数据，看具体原因； <br></div>
-                            <span class="time">2018-09-08 09:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">嗯</p>
-                                <p class="reply-time">2018-09-08 10:33</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/ac/08/78ca5ec9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">topsion</span>
-                            </div>
-                            <div class="bd">胡老师，微博个人主页刷半天才能出来？为啥现在还没修复？ <br></div>
-                            <span class="time">2018-09-15 19:59</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">郁</span>
-                            </div>
-                            <div class="bd">要是结合docker，不用侵入式的追踪系统就完美了 <br></div>
-                            <span class="time">2018-09-08 19:31</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">mesh思路可以</p>
-                                <p class="reply-time">2018-09-11 19:07</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/e5/f2/32770f81.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">云中漫步</span>
-                            </div>
-                            <div class="bd">一直不太懂，微服务怎么把一个交易组装起来，怎么编排，调用哪些服务。希望能得到这方面的知识。^_^ <br></div>
-                            <span class="time">2018-09-08 11:37</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/b3/c5/7fc124e2.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Liam</span>
-                            </div>
-                            <div class="bd">一般排查bug都是从整体到局部，分布式链路追踪就是从整体把握业务执行的的过程，定位问题的区域后再具体分析，监控系统会收集每个节点的数据，包括日志，性能，资源，异常等，根据这些数据进一步定位问题的原因 <br></div>
-                            <span class="time">2018-09-08 11:21</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/fc/34/c733b116.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">何磊</span>
-                            </div>
-                            <div class="bd">日志上报的阶段是不是在rpc的四个过程中都应该上报？比如在ss阶段，由于服务端挂了，没有响应数据。那么这次rpc调用就无法查询了？ <br></div>
-                            <span class="time">2018-09-09 10:20</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/c1/45/4db31046.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">弥朵</span>
-                            </div>
-                            <div class="bd">请问什么是埋点呀 <br></div>
-                            <span class="time">2018-09-09 01:56</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/82/7d/d213fb2c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">kane</span>
-                            </div>
-                            <div class="bd">我们团队当前也有这个痛点，我们的解决办法是：1.在调用链的源头生成TraceID,每个微服务在处理请求的时候将相关信息打印到日志文件2.通过ELK进行日志收集，可以在elk里进行traceid的检索。这样每次检索就把一次调用处理的所有日志都显示出来，提高问题定位的效率。对于老师讲的内容主要有两个问题，1.日志主动上报，会不会对微服务的资源有比较大的消耗呢？特别是比较频繁的调用处理。2.服务调用的耗时怎么计算的，没太看懂。 <br></div>
-                            <span class="time">2018-10-30 13:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">主动上报采用udp方式对性能影响可以接受，另外服务调用的耗时也可以靠上报调用耗时来统计</p>
-                                <p class="reply-time">2018-11-05 22:19</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/37/9c/4c56ff47.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">丢</span>
-                            </div>
-                            <div class="bd">回复何磊“日志上报的阶段是不是在rpc的四个过程中都应该上报？比如在ss阶段，由于服务端挂了，没有响应数据。那么这次rpc调用就无法查询了？”<br>服务端挂了，客户端会收到异常，还是可以在cr阶段上报 <br></div>
-                            <span class="time">2018-09-10 22:45</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对，客户端等到超时或者异常，就会记录下错误上报</p>
-                                <p class="reply-time">2018-09-11 19:05</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ed/1a/ce7f7d54.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">asdf100</span>
-                            </div>
-                            <div class="bd">1.在每个请求涉及的四个点都要收集数据并上报，这样在原始业务代码里写上报代码是不是耦合性太强了？<br>2.假如其中一个调用超市未返回数据，导致多次调用都无法收到服务端的返回信息，如何处理？ <br></div>
-                            <span class="time">2018-09-10 10:23</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/69/4d/81c44f45.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">拉欧</span>
-                            </div>
-                            <div class="bd">两者的维度不同:服务追踪系统关心的是单次调用的性能，这其中可能跨越多个服务；服务监控系统关心的是单个服务的性能，主要包括服务质量，甚至机器性能等指标；<br>两者是互为补充的关系，服务监控系统可以及时发现服务内部出现的问题，但是所有服务运行正常，不代表跨服务调用一定正常，因为网络本身就是不可靠的，所以需要服务追踪系统发现服务之间可能出现的问题，这样对于系统的监控才算完备<br> <br></div>
-                            <span class="time">2018-09-08 12:08</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/1a/d8/4a051faa.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">🍀 🍀 🍀 🐼</span>
-                            </div>
-                            <div class="bd">微服务之间是否允许或者不允许互相调用呢 <br></div>
-                            <span class="time">2018-12-04 21:22</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/4b/d4/b7719327.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">波波安</span>
-                            </div>
-                            <div class="bd"><br><br>相同之处有系统的搭建都需要数据采集，数据处理，数据存储和数据展示这些步骤<br><br>不同之处是服务监控系统主要监控局部的业务数据和日志，服务状况等。服务追踪系统是全局链路的一个调用跟踪。一般与业务无关<br><br> <br></div>
-                            <span class="time">2018-10-13 17:02</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7a/5d/b2e68df2.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">九斤鱼</span>
-                            </div>
-                            <div class="bd">这么频繁的上报，怎么避免影响性能呢？ <br></div>
-                            <span class="time">2018-09-14 08:30</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">可以设置采样率</p>
-                                <p class="reply-time">2018-09-15 15:15</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/49/e6/4f00fe55.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Mac Kwan</span>
-                            </div>
-                            <div class="bd">胡老师，这些跟踪系统有哪些是能供我们使用的呢？ <br></div>
-                            <span class="time">2018-09-12 08:04</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">专栏后面有个章节会对比选型</p>
-                                <p class="reply-time">2018-09-12 11:07</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/37/9c/4c56ff47.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">丢</span>
-                            </div>
-                            <div class="bd">实时备理生成链路图，离线处理生成拓扑图？ <br></div>
-                            <span class="time">2018-09-10 22:47</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">都可以实时生成</p>
-                                <p class="reply-time">2018-09-11 12:21</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/49/61/abb7bfe3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">平头哥</span>
-                            </div>
-                            <div class="bd">老师为啥没有提及opentracing呢，都已经加入cncf了呀 <br></div>
-                            <span class="time">2018-09-10 18:31</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">专栏会拿使用最广泛的举个例子</p>
-                                <p class="reply-time">2018-09-11 10:37</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7b/98/8f1aecf4.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">andyXu</span>
-                            </div>
-                            <div class="bd">相同：<br>1.整个流程一致。<br><br><br>不同：<br>数据采集维度不一样。监控采集单个服务或整个业务详细业务数据，而追踪系统采集是调用链路过程中调用埋点数据即非业务数据。<br> <br></div>
-                            <span class="time">2018-09-10 17:00</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对的</p>
-                                <p class="reply-time">2018-09-11 19:05</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJR4VRqBhPeQtFkhoRsQdWDn65ibH9k015DuFaBnV5wB3tbSeHozjjx6WD0jRJiasmnBD7YibGul68hg/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">sudden</span>
-                            </div>
-                            <div class="bd">老师，实时计算的存储那里，我听您的音频，应该是OLAP吧。文字版上写是OLTP <br></div>
-                            <span class="time">2018-09-09 00:58</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">读错了，抱歉</p>
-                                <p class="reply-time">2018-09-11 12:31</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/86/a8/427879a9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">vick</span>
-                            </div>
-                            <div class="bd">数据处理的实时和离线在实操中适用哪些业务需求，能否列举个代表性的真实场景？ <br></div>
-                            <span class="time">2018-09-08 16:14</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  在微服务架构下，由于进行了服务拆分，一次请求往往需要涉及多个服务，每个服务可能是由不同的团队开发，使用了不同的编程语言，还有可能部署在不同的机器上，分布在不同的数据中心。
+                </p>
+                <p>
+                  下面这张图描述了用户访问微博首页，一次请求所涉及的服务（这张图仅作为示意，实际上可能远远比这张图还要复杂），你可以想象如果这次请求失败了，要想查清楚到底是哪个应用导致，会是多么复杂的一件事情。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/b6/7b/b63bd8abd8e90ff75fb012068d419f7b.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  如果有一个系统，可以跟踪记录一次用户请求都发起了哪些调用，经过哪些服务处理，并且记录每一次调用所涉及的服务的详细信息，这时候如果发生调用失败，你就可以通过这个日志快速定位是在哪个环节出了问题，<span
+                    class="orange"
+                    >这个系统就是今天我要讲解的服务追踪系统</span
+                  >。
+                </p>
+                <h2>服务追踪的作用</h2>
+                <p>
+                  在介绍追踪原理与实现之前，我们先来看看服务追踪的作用。除了刚才说的能够快速定位请求失败的原因以外，我这里再列出四点，它们可以帮你在微服务改造过程中解决不少问题。
+                </p>
+                <p><strong>第一，优化系统瓶颈。</strong></p>
+                <p>
+                  通过记录调用经过的每一条链路上的耗时，我们能快速定位整个系统的瓶颈点在哪里。比如你访问微博首页发现很慢，肯定是由于某种原因造成的，有可能是运营商网络延迟，有可能是网关系统异常，有可能是某个服务异常，还有可能是缓存或者数据库异常。通过服务追踪，可以从全局视角上去观察，找出整个系统的瓶颈点所在，然后做出针对性的优化。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p><strong>第二，优化链路调用。</strong></p>
+                <p>
+                  通过服务追踪可以分析调用所经过的路径，然后评估是否合理。比如一个服务调用下游依赖了多个服务，通过调用链分析，可以评估是否每个依赖都是必要的，是否可以通过业务优化来减少服务依赖。
+                </p>
+                <p>
+                  还有就是，一般业务都会在多个数据中心都部署服务，以实现异地容灾，这个时候经常会出现一种状况就是服务A调用了另外一个数据中心的服务B，而没有调用同处于一个数据中心的服务B。
+                </p>
+                <p>
+                  根据我的经验，跨数据中心的调用视距离远近都会有一定的网络延迟，像北京和广州这种几千公里距离的网络延迟可能达到30ms以上，这对于有些业务几乎是不可接受的。通过对调用链路进行分析，可以找出跨数据中心的服务调用，从而进行优化，尽量规避这种情况出现。
+                </p>
+                <p><strong>第三，生成网络拓扑。</strong></p>
+                <p>
+                  通过服务追踪系统中记录的链路信息，可以生成一张系统的网络调用拓扑图，它可以反映系统都依赖了哪些服务，以及服务之间的调用关系是什么样的，可以一目了然。除此之外，在网络拓扑图上还可以把服务调用的详细信息也标出来，也能起到服务监控的作用。
+                </p>
+                <p><strong>第四，透明传输数据。</strong></p>
+                <p>
+                  除了服务追踪，业务上经常有一种需求，期望能把一些用户数据，从调用的开始一直往下传递，以便系统中的各个服务都能获取到这个信息。比如业务想做一些A/B测试，这时候就想通过服务追踪系统，把A/B测试的开关逻辑一直往下传递，经过的每一层服务都能获取到这个开关值，就能够统一进行A/B测试。
+                </p>
+                <h2>服务追踪系统原理</h2>
+                <p>讲到这里，你一定很好奇，服务追踪有这么多好处，那它是怎么做到的呢？</p>
+                <p>
+                  这就不得不提到服务追踪系统的鼻祖：Google发布的一篇的论文<a
+                    href="http://bigbully.github.io/Dapper-translation/"
+                    ><code>Dapper, a Large-Scale Distributed Systems Tracing Infrastructure</code></a
+                  >，里面详细讲解了服务追踪系统的实现原理。它的核心理念就是<strong>调用链</strong>：通过一个全局唯一的ID将分布在各个服务节点上的同一次请求串联起来，从而还原原有的调用关系，可以追踪系统问题、分析调用数据并统计各种系统指标。
+                </p>
+                <p>
+                  可以说后面的诞生各种服务追踪系统都是基于Dapper衍生出来的，比较有名的有Twitter的<a
+                    href="http://zipkin.io"
+                    >Zipkin</a
+                  >、阿里的<a href="http://www.slideshare.net/terryice/eagleeye-with-taobaojavaone">鹰眼</a>、美团的<a
+                    href="http://tech.meituan.com/mt_mtrace.html"
+                    >MTrace</a
+                  >等。
+                </p>
+                <p>
+                  要理解服务追踪的原理，首先必须搞懂一些基本概念：traceId、spanId、annonation等。Dapper这篇论文讲得比较清楚，但对初学者来说理解起来可能有点困难，美团的MTrace的原理介绍理解起来相对容易一些，下面我就以MTrace为例，给你详细讲述服务追踪系统的实现原理。虽然原理有些晦涩，但却是你必须掌握的，只有理解了服务追踪的基本概念，才能更好地将其实现出来。
+                </p>
+                <p>首先看下面这张图，我来给你讲解下服务追踪系统中几个最基本概念。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/cf/7b/cf4089dce4ab2e2a028159585eb37f7b.png"
+                    alt=""
+                  /><br />
+                  （图片来源：<a href="http://tech.meituan.com/img/mt-mtrace/mtrace7.png"
+                    >http://tech.meituan.com/img/mt-mtrace/mtrace7.png</a
+                  >
+                  ）
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      traceId，用于标识某一次具体的请求ID。当用户的请求进入系统后，会在RPC调用网络的第一层生成一个全局唯一的traceId，并且会随着每一层的RPC调用，不断往后传递，这样的话通过traceId就可以把一次用户请求在系统中调用的路径串联起来。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      spanId，用于标识一次RPC调用在分布式请求中的位置。当用户的请求进入系统后，处在RPC调用网络的第一层A时spanId初始值是0，进入下一层RPC调用B的时候spanId是0.1，继续进入下一层RPC调用C时spanId是0.1.1，而与B处在同一层的RPC调用E的spanId是0.2，这样的话通过spanId就可以定位某一次RPC请求在系统调用中所处的位置，以及它的上下游依赖分别是谁。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      annotation，用于业务自定义埋点数据，可以是业务感兴趣的想上传到后端的数据，比如一次请求的用户UID。
+                    </p>
+                  </li>
                 </ul>
+                <p>
+                  上面这三段内容我用通俗语言再给你小结一下，traceId是用于串联某一次请求在系统中经过的所有路径，spanId是用于区分系统不同服务之间调用的先后关系，而annotation是用于业务自定义一些自己感兴趣的数据，在上传traceId和spanId这些基本信息之外，添加一些自己感兴趣的信息。
+                </p>
+                <h2>服务追踪系统实现</h2>
+                <p>
+                  讲到这里，你应该已经理解服务追踪系统里最重要的概念和原理了，我们先来看看服务追踪系统的架构，让你了解一下系统全貌。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/d7/3e/d792225033bf313c6b8fdccbef189e3e.png"
+                    alt=""
+                  /><br />
+                  （图片来源：<a href="https://tech.meituan.com/img/mt-mtrace/mtrace6.png"
+                    >https://tech.meituan.com/img/mt-mtrace/mtrace6.png</a
+                  >
+                  ）
+                </p>
+                <p>上面是服务追踪系统架构图，你可以看到一个服务追踪系统可以分为三层。</p>
+                <ul>
+                  <li>
+                    <p>数据采集层，负责数据埋点并上报。</p>
+                  </li>
+                  <li>
+                    <p>数据处理层，负责数据的存储与计算。</p>
+                  </li>
+                  <li>
+                    <p>数据展示层，负责数据的图形化展示。</p>
+                  </li>
+                </ul>
+                <p>下面来看看具体每一层的实现方式是什么样的。</p>
+                <p><strong>1. 数据采集层</strong></p>
+                <p>数据采集层的作用就是在系统的各个不同模块中进行埋点，采集数据并上报给数据处理层进行处理。</p>
+                <p>那么该如何进行数据埋点呢？结合下面这张图来了解一下数据埋点的流程。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/d1/2f/d1f1ddc7e405dba6687733fbfd34bb2f.png"
+                    alt=""
+                  /><br />
+                  （图片来源：<a href="https://tech.meituan.com/img/mt-mtrace/mtrace9.png"
+                    >https://tech.meituan.com/img/mt-mtrace/mtrace9.png</a
+                  >
+                  ）
+                </p>
+                <p>以红色方框里圈出的A调用B的过程为例，一次RPC请求可以分为四个阶段。</p>
+                <ul>
+                  <li>
+                    <p>CS（Client Send）阶段 : 客户端发起请求，并生成调用的上下文。</p>
+                  </li>
+                  <li>
+                    <p>SR（Server Recieve）阶段 : 服务端接收请求，并生成上下文。</p>
+                  </li>
+                  <li>
+                    <p>
+                      SS（Server Send）阶段 :
+                      服务端返回请求，这个阶段会将服务端上下文数据上报，下面这张图可以说明上报的数据有：traceId=123456，spanId=0.1，appKey=B，method=B.method，start=103，duration=38。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      CR（Client Recieve）阶段 :
+                      客户端接收返回结果，这个阶段会将客户端上下文数据上报，上报的数据有：traceid=123456，spanId=0.1，appKey=A，method=B.method，start=103，duration=38。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/61/c1/6111097a42e4888403d59c910a32f6c1.png"
+                    alt=""
+                  /><br />
+                  （图片来源：<a href="https://tech.meituan.com/img/mt-mtrace/mtrace10.png"
+                    >https://tech.meituan.com/img/mt-mtrace/mtrace10.png</a
+                  >
+                  ）
+                </p>
+                <p><strong>2. 数据处理层</strong></p>
+                <p>数据处理层的作用就是把数据采集层上报的数据按需计算，然后落地存储供查询使用。</p>
+                <p>据我所知，数据处理的需求一般分为两类，一类是实时计算需求，一类是离线计算需求。</p>
+                <p>
+                  实时计算需求对计算效率要求比较高，一般要求对收集的链路数据能够在秒级别完成聚合计算，以供实时查询。而离线计算需求对计算效率要求就没那么高了，一般能在小时级别完成链路数据的聚合计算即可，一般用作数据汇总统计。针对这两类不同的数据处理需求，采用的计算方法和存储也不相同。
+                </p>
+                <ul>
+                  <li>实时数据处理</li>
+                </ul>
+                <p>
+                  针对实时数据处理，一般采用Storm或者Spark
+                  Streaming来对链路数据进行实时聚合加工，存储一般使用OLTP数据仓库，比如HBase，使用traceId作为RowKey，能天然地把一整条调用链聚合在一起，提高查询效率。
+                </p>
+                <ul>
+                  <li>离线数据处理</li>
+                </ul>
+                <p>
+                  针对离线数据处理，一般通过运行MapReduce或者Spark批处理程序来对链路数据进行离线计算，存储一般使用Hive。
+                </p>
+                <p><strong>3. 数据展示层</strong></p>
+                <p>数据展示层的作用就是将处理后的链路信息以图形化的方式展示给用户。</p>
+                <p>根据我的经验，实际项目中主要用到两种图形展示，一种是调用链路图，一种是调用拓扑图。</p>
+                <ul>
+                  <li>调用链路图</li>
+                </ul>
+                <p>下面以一张Zipkin的调用链路图为例，通过这张图可以看出下面几个信息。</p>
+                <p>
+                  <strong>服务整体情况</strong
+                  >：服务总耗时、服务调用的网络深度、每一层经过的系统，以及多少次调用。下图展示的一次调用，总共耗时209.323ms，经过了5个不同的系统模块，调用深度为7层，共发生了24次系统调用。
+                </p>
+                <p><strong>每一层的情况</strong>：每一层发生了几次调用，以及每一层调用的耗时。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/13/13/13ea5d45ff39006f14368f44169e5813.png"
+                    alt=""
+                  /><br />
+                  （图片来源：<a href="https://zipkin.io/public/img/web-screenshot.png"
+                    >https://zipkin.io/public/img/web-screenshot.png</a
+                  >
+                  ）
+                </p>
+                <p>
+                  根据我的经验，调用链路图在实际项目中，主要是被用来做故障定位，比如某一次用户调用失败了，可以通过调用链路图查询这次用户调用经过了哪些环节，到底是哪一层的调用失败所导致。
+                </p>
+                <ul>
+                  <li>调用拓扑图</li>
+                </ul>
+                <p>
+                  下面是一张Pinpoint的调用拓扑图，通过这张图可以看出系统内都包含哪些应用，它们之间是什么关系，以及依赖调用的QPS、平均耗时情况。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/21/ec/213d15b515b8dbff700e170d001f32ec.png"
+                    alt=""
+                  /><br />
+                  （图片来源：<a
+                    href="https://raw.githubusercontent.com/naver/pinpoint/master/doc/images/ss_server-map.png"
+                    >https://raw.githubusercontent.com/naver/pinpoint/master/doc/images/ss_server-map.png</a
+                  >
+                  ）
+                </p>
+                <p>
+                  调用拓扑图是一种全局视野图，在实际项目中，主要用作全局监控，用于发现系统中异常的点，从而快速做出决策。比如，某一个服务突然出现异常，那么在调用链路拓扑图中可以看出对这个服务的调用耗时都变高了，可以用红色的图样标出来，用作监控报警。
+                </p>
+                <h2>总结</h2>
+                <p>
+                  今天我给你讲解了服务追踪的基本原理以及实现方式，可以说服务追踪是分布式系统中必不可少的功能，它能够帮助我们查询一次用户请求在系统中的具体执行路径，以及每一条路径的上下游的详细情况，对于追查问题十分有用。
+                </p>
+                <p>
+                  实现一个服务追踪系统，涉及数据采集、数据处理和数据展示这三个流程，有多种实现方式，具体采用哪一种要根据自己的业务情况来选择。关于服务追踪系统的选型我在专栏后面会详细展开介绍，这里你只需要了解它的基本工作原理就可以了。
+                </p>
+                <h2>思考题</h2>
+                <p>
+                  通过这两期的学习，你应该了解到服务追踪系统和服务监控系统的搭建都需要数据采集、处理和展示这三个步骤，你认为它们是否有相同和不同之处呢？
+                </p>
+                <p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7f/d3/b5896293.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Realm</span></div>
+                  <div class="bd">
+                    1
+                    监控是若干个局部，单独采集、分析、展示；追踪是全局视角，有链的上下游传递的概念，通过某个id串联相关的监控；<br />2
+                    诊断故障一般从链上分析出现问题的点，然后定位到点上的监控数据，看具体原因； <br />
+                  </div>
+                  <span class="time">2018-09-08 09:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">嗯</p>
+                    <p class="reply-time">2018-09-08 10:33</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/ac/08/78ca5ec9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">topsion</span></div>
+                  <div class="bd">胡老师，微博个人主页刷半天才能出来？为啥现在还没修复？ <br /></div>
+                  <span class="time">2018-09-15 19:59</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">郁</span></div>
+                  <div class="bd">要是结合docker，不用侵入式的追踪系统就完美了 <br /></div>
+                  <span class="time">2018-09-08 19:31</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">mesh思路可以</p>
+                    <p class="reply-time">2018-09-11 19:07</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/e5/f2/32770f81.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">云中漫步</span></div>
+                  <div class="bd">
+                    一直不太懂，微服务怎么把一个交易组装起来，怎么编排，调用哪些服务。希望能得到这方面的知识。^_^ <br />
+                  </div>
+                  <span class="time">2018-09-08 11:37</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/b3/c5/7fc124e2.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Liam</span></div>
+                  <div class="bd">
+                    一般排查bug都是从整体到局部，分布式链路追踪就是从整体把握业务执行的的过程，定位问题的区域后再具体分析，监控系统会收集每个节点的数据，包括日志，性能，资源，异常等，根据这些数据进一步定位问题的原因
+                    <br />
+                  </div>
+                  <span class="time">2018-09-08 11:21</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/fc/34/c733b116.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">何磊</span></div>
+                  <div class="bd">
+                    日志上报的阶段是不是在rpc的四个过程中都应该上报？比如在ss阶段，由于服务端挂了，没有响应数据。那么这次rpc调用就无法查询了？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-09 10:20</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/c1/45/4db31046.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">弥朵</span></div>
+                  <div class="bd">请问什么是埋点呀 <br /></div>
+                  <span class="time">2018-09-09 01:56</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/82/7d/d213fb2c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">kane</span></div>
+                  <div class="bd">
+                    我们团队当前也有这个痛点，我们的解决办法是：1.在调用链的源头生成TraceID,每个微服务在处理请求的时候将相关信息打印到日志文件2.通过ELK进行日志收集，可以在elk里进行traceid的检索。这样每次检索就把一次调用处理的所有日志都显示出来，提高问题定位的效率。对于老师讲的内容主要有两个问题，1.日志主动上报，会不会对微服务的资源有比较大的消耗呢？特别是比较频繁的调用处理。2.服务调用的耗时怎么计算的，没太看懂。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-30 13:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      主动上报采用udp方式对性能影响可以接受，另外服务调用的耗时也可以靠上报调用耗时来统计
+                    </p>
+                    <p class="reply-time">2018-11-05 22:19</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/37/9c/4c56ff47.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">丢</span></div>
+                  <div class="bd">
+                    回复何磊“日志上报的阶段是不是在rpc的四个过程中都应该上报？比如在ss阶段，由于服务端挂了，没有响应数据。那么这次rpc调用就无法查询了？”<br />服务端挂了，客户端会收到异常，还是可以在cr阶段上报
+                    <br />
+                  </div>
+                  <span class="time">2018-09-10 22:45</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对，客户端等到超时或者异常，就会记录下错误上报</p>
+                    <p class="reply-time">2018-09-11 19:05</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ed/1a/ce7f7d54.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">asdf100</span></div>
+                  <div class="bd">
+                    1.在每个请求涉及的四个点都要收集数据并上报，这样在原始业务代码里写上报代码是不是耦合性太强了？<br />2.假如其中一个调用超市未返回数据，导致多次调用都无法收到服务端的返回信息，如何处理？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-10 10:23</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/69/4d/81c44f45.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">拉欧</span></div>
+                  <div class="bd">
+                    两者的维度不同:服务追踪系统关心的是单次调用的性能，这其中可能跨越多个服务；服务监控系统关心的是单个服务的性能，主要包括服务质量，甚至机器性能等指标；<br />两者是互为补充的关系，服务监控系统可以及时发现服务内部出现的问题，但是所有服务运行正常，不代表跨服务调用一定正常，因为网络本身就是不可靠的，所以需要服务追踪系统发现服务之间可能出现的问题，这样对于系统的监控才算完备<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-09-08 12:08</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/1a/d8/4a051faa.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">🍀 🍀 🍀 🐼</span></div>
+                  <div class="bd">微服务之间是否允许或者不允许互相调用呢 <br /></div>
+                  <span class="time">2018-12-04 21:22</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/4b/d4/b7719327.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">波波安</span></div>
+                  <div class="bd">
+                    <br /><br />相同之处有系统的搭建都需要数据采集，数据处理，数据存储和数据展示这些步骤<br /><br />不同之处是服务监控系统主要监控局部的业务数据和日志，服务状况等。服务追踪系统是全局链路的一个调用跟踪。一般与业务无关<br /><br />
+                    <br />
+                  </div>
+                  <span class="time">2018-10-13 17:02</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7a/5d/b2e68df2.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">九斤鱼</span></div>
+                  <div class="bd">这么频繁的上报，怎么避免影响性能呢？ <br /></div>
+                  <span class="time">2018-09-14 08:30</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">可以设置采样率</p>
+                    <p class="reply-time">2018-09-15 15:15</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/49/e6/4f00fe55.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Mac Kwan</span></div>
+                  <div class="bd">胡老师，这些跟踪系统有哪些是能供我们使用的呢？ <br /></div>
+                  <span class="time">2018-09-12 08:04</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">专栏后面有个章节会对比选型</p>
+                    <p class="reply-time">2018-09-12 11:07</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/37/9c/4c56ff47.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">丢</span></div>
+                  <div class="bd">实时备理生成链路图，离线处理生成拓扑图？ <br /></div>
+                  <span class="time">2018-09-10 22:47</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">都可以实时生成</p>
+                    <p class="reply-time">2018-09-11 12:21</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/49/61/abb7bfe3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">平头哥</span></div>
+                  <div class="bd">老师为啥没有提及opentracing呢，都已经加入cncf了呀 <br /></div>
+                  <span class="time">2018-09-10 18:31</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">专栏会拿使用最广泛的举个例子</p>
+                    <p class="reply-time">2018-09-11 10:37</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7b/98/8f1aecf4.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">andyXu</span></div>
+                  <div class="bd">
+                    相同：<br />1.整个流程一致。<br /><br /><br />不同：<br />数据采集维度不一样。监控采集单个服务或整个业务详细业务数据，而追踪系统采集是调用链路过程中调用埋点数据即非业务数据。<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-09-10 17:00</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对的</p>
+                    <p class="reply-time">2018-09-11 19:05</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJR4VRqBhPeQtFkhoRsQdWDn65ibH9k015DuFaBnV5wB3tbSeHozjjx6WD0jRJiasmnBD7YibGul68hg/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">sudden</span></div>
+                  <div class="bd">老师，实时计算的存储那里，我听您的音频，应该是OLAP吧。文字版上写是OLTP <br /></div>
+                  <span class="time">2018-09-09 00:58</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">读错了，抱歉</p>
+                    <p class="reply-time">2018-09-11 12:31</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/86/a8/427879a9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">vick</span></div>
+                  <div class="bd">
+                    数据处理的实时和离线在实操中适用哪些业务需求，能否列举个代表性的真实场景？ <br />
+                  </div>
+                  <span class="time">2018-09-08 16:14</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

@@ -1,255 +1,1474 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                28讲提问：从技术到人生的习惯
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/c7/21/c73c5d349648c55bcb5834d3c6133321.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">28讲提问：从技术到人生的习惯</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/c7/21/c73c5d349648c55bcb5834d3c6133321.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>无论做什么工作，一路上你总会碰到各种各样的问题，而提问应是你解决问题的一种有效途径。更进一步，如果能把提问固化成为你的一种习惯，那它就不仅仅是一个解决问题的“工具”，甚至还能引导你的人生选择。</p>
-<p>提问这个习惯，我有三个层面的理解：</p>
-<ol>
-<li>如何问？</li>
-<li>问什么？</li>
-<li>为何问？</li>
-</ol>
-<h2>如何问？提问之术</h2>
-<p>大部分情况，我们碰到的都是已经有了问题，但却问不好，从而得不到答案或得不到好的答案。</p>
-<p>比如说吧，我经常碰到的一种情况是：有同学常拿着一个具体的问题跑来，向我发问，他大概会交代一下想解决的场景，然后就会接着描述他的思路，以及解决这个问题的思路的一些其他约束，但这中间会有一个障碍，然后就问我该怎么解决这个障碍。</p>
-<p>这样的发问一般都会让我陷入两种困扰之中：一种是，问题的业务背景交代得太泛化，所以我只好跟着他的思路，感觉解决这个问题似乎只能有这一条路可走；另一种则正好相反，问题的业务背景描述得过于细致，让人最后陷入对复杂业务领域的理解中，迷失在细节的讨论里。</p>
-<p>即使是同一个场景，其实不同人还会产生不同的思路。比如：你想去一个十公里外的地方，对方也许会问你怎么套马鞍的问题，这时你就很困扰，因为你的思路是坐车或开车。这就是一个针对技术人员面对同一场景问题，所选取的不同技术方案可能处在不同的时代背景下的类比。所以，面对这类具体的障碍问题，我经常很难回答。</p><!-- [[[read_end]]] -->
-<p>再看看国内网上技术问答社区的情况，我有时会去看看，发现上面的问题大部分类似下面两种模式：</p>
-<ul>
-<li>某某出错了，怎么办？</li>
-<li>如何针对某某封装一个库？</li>
-</ul>
-<p>某某可以是一种具体的技术或框架，这两种提问模式代表了两个方向，都让人无法回答。第一种太模糊而无法回答，而第二种太庞大则不愿回答。</p>
-<p>如果你能绕过这两个提问的大坑，提出一个具体的问题，那么算是前进了一大步。但具体问题也有一个陷阱，就如前面套马鞍的那个例子，也许有人回答了你怎么正确地套马鞍，但你可能依然走在落后的道路上，因为你的工具本身就是落后的。所以就具体问题提问，除了问及手段，还最好跟上你的目的和你就此目的是怎样提出的手段，然后才走到了这一步的障碍，让你不得不在此提问的。</p>
-<p>一个能够回答的具体问题，一般都是解答题形式，表达清楚你的解答目的，也许你的困扰在高手那里根本就不存在。你只是走了一个弯路而已，这样不仅绕过了障碍，还获得了一条近（先进的）路，这就是有意义的提问。</p>
-<p>至此，就得到了提问的第一个原则：<strong>提供足够的信息，让人能够回答</strong>。</p>
-<p>草率的问题是懒惰的问题，通过搜索引擎就能简单获得；草率的问题是模糊的问题，让人没法回答。而更有意义的提问是把解答题变成选择题，提供你的选项，展现你探索了哪些路径，省去了可能产生的反问。也许你的某条路径已经非常接近答案了，只是卡在了某个点上，知道答案的人一看就明白了，也很容易回答。</p>
-<p>这就是提问的第二个原则：<strong>提供更多的选项，让人方便回答</strong>。</p>
-<p>即使你的问题能够回答，也方便回答，但也可能得不到回答。因为，回答问题需要有驱动力。提问本是一种索取，要让人有更多的回答动力，还需要付出。付出一种态度，表达感谢；付出一份可供交换的视角，建立讨论的基础。</p>
-<p>这就是提问的第三个原则：<strong>提供交换价值，建立讨论基础，表达感谢态度，让人乐于回答</strong>。</p>
-<p>《大教堂与集市》一书的作者埃里克·史蒂文·雷蒙德（Eric Steven Raymond）曾就如何提技术问题写过一篇影响颇大的文章：<a href="http://www.catb.org/esr/faqs/smart-questions.html">How To Ask Questions The Smart Way</a>（中文名是《提问的智慧》），距今已经十多年了，修订了十多次，也被翻译成了十多个国家的文字，很值得一读。</p>
-<p>最后，我归纳下关于提问之术的三个方面：</p>
-<ol>
-<li>提让人能够回答的问题：草率的问题，只能得到一个草率的答案。</li>
-<li>提让人方便回答的问题：你得到的答案的好坏取决于提问的方式和开发答案的难度。</li>
-<li>提让人乐于回答的问题：只索取而不愿思考和付出的提问者，要么什么也得不到，要么只会得到 RTFM（Read The Fucking Manual） 或 STFW（Search The Fucking Web）。</li>
-</ol>
-<h2>问什么？求解之惑</h2>
-<p>有时一个好问题，比如何问更有价值和意义。</p>
-<p>我觉着，前面一节关于如何提问本身也算是一个好问题，因为当你面对这个问题，找到了答案，并严肃地对待后，从此就会改变你提问的习惯。提出好问题比寻找已有问题的答案可能更有意义和价值。寻找答案，通向的是已有的结果；而提出新问题，也许会导向未知的宝藏，它可能是获得新知的起点。</p>
-<p>有时候，你会碰到一个问题不知道该问什么，甚至该如何提问，即使这个问题是一个非常具体的技术问题。而这一类具体的技术问题，我称之为答案藏在问题中，属于无法提问的问题。</p>
-<p>这可能说得比较抽象，下面我举个具体的例子：曾经碰到过一个线上问题，系统间隙性出现超时，只有重启能解决；而且出现的很无规律性，不和什么流量之类成正比，就是莫名其妙偶然出现，还不能恢复，只能重启。这个问题曾经困扰了我很久。这类问题虽然很具体，但你可能会发现，你竟找不到一个好方式来描述这个问题。</p>
-<p>如果我就把上面这段描述的关键现象，偶现超时并结合使用的具体技术，如：JVM、开源框架配置和业务场景一起抛出来问人，你觉得有人能回答吗？这类就属于答案藏在问题中的问题，唯一的办法只能是找和你一起共事的同事从各人不同的思维视角去分析，抽丝剥茧。当你能找出提问的方式，基本上答案也就出来了。</p>
-<p>后来，终于定位到上面现象的根源是服务线程池的配置有误，结合在某些慢业务场景下会引发连锁超时。这时的问题就是怎么配置服务线程池才最合理，这个问题本身就简单到完全无需再问了，自然就有了答案。</p>
-<p>在成长的路上，我碰到过好多问题，但早年还没有形成记录与写作的习惯，所以未能把这些问题记录下来，很多就遗忘散落了。这就是我想说的第二个需要建立的习惯：<strong>当遇到暂时没有答案的问题时，先记录下来</strong>。在成长这条路上，不是碰到了问题，就能立刻或很快找到答案的。</p>
-<p>当我开始写作后，就开始养成了这个习惯。大部分过去写的文章都来自于这些问题记录，定期地回顾下，曾经困扰我的问题，今天能解决了吗？一开始有很多具体的技术性问题，就因此写了很多技术文章。后来又有了更多复杂的问题，也就又写了不少思考性的文章。每写一篇，意味着当下的我对这个问题至少有了答案。无论这个答案如何，从某种意义上说，今天的我相比当时面临问题没有答案的我，就已经成长了。</p>
-<p>先从一个记录问题，积攒 “问什么” 的习惯开始，不断去积累并留下一些东西，将来再定时去回顾这些问题，也许就会得到意外的收获。对于程序员，总会碰到各种技术问题，就从这些最具体的问题开始，把暂时这阶段还没法回答的问题按一种模式记录下来，比如下面这样：</p>
-<ul>
-<li>问题的上、下文；</li>
-<li>问题的具体描述；</li>
-<li>问题的解决思考和思路；</li>
-<li>问题的解决方案和具体技术或办法；</li>
-<li>问题解决后留下的思考或其他延伸的疑问。</li>
-</ul>
-<p>这就是你积累的 “宝藏”，将来如果能回答了，就把答案分享出来。这就是我所认同的积累价值和传递价值的方式，分享你从中学到的一切（Share what you learn），最后自身的价值也就得到了提升。</p>
-<p>保持积累，持续给予，终有所获。</p>
-<h2>为何问？价值之道</h2>
-<p>提问的目标是获得答案，而答案于我们自己而言是一种价值；为何而问，就是发问于我们的价值之道，最终指向的目的是：认清自我。</p>
-<p>值得问 “为何” 的问题不多，但总会遇到，它是一道选择题，有关我们的价值选择。我们最关心的是自己的命运，而关于命运有一句话是这么说的：</p>
-<blockquote>
-<p>选择决定命运，什么来决定选择？价值观。</p>
-</blockquote>
-<p>价值观，是我们对事情做出判断，进行选择取舍的标准。每个人都有价值观，无论你能否清晰地定义与表述它，这些观念都决定了你的行为标准。这么说有些抽象了，下面我通过一个故事来将其具象化。</p>
-<p>这个故事的主角叫比尔（Bill）。21 岁时他成为一名程序员，获得了第一份正式工作，在加拿大多伦多的一家互动营销公司写程序，这家公司的主要客户都是一些大型药企。而在加拿大，法律限制药企直接对普通消费者做处方药的广告。</p>
-<p>所以，药企客户提出了需求，做个网站来展示公司的药品，对于浏览网站的用户，如果能提供处方就会被引导到一个病人的专属页面。在这个专属页面上，提供了一系列的测验问题，然后通过病人的回答来推荐相关的药品。</p>
-<p>这个网站仅仅是展示公司产品，提供通用说明的信息网站，这显然不是任何特定药物的广告。一切显得很合理，比尔收到了需求，它们包含了针对病人的测验问题，每个问题的答案，以及对答案的处理规则。</p>
-<p>比尔完成了开发，在交付给客户之前，他的项目经理决定对网站做个简单的快速验收测试。经理试了这个针对病人的小测验，然后走到了比尔的桌前：</p>
-<p>“测验不管用！” 经理说。</p>
-<p>“哦，出了什么问题？” 比尔问。</p>
-<p>“嗯，看来无论我填什么，测验都给我推荐同一种药物，唯一的例外是我回答过敏或者已经吃过了。”</p>
-<p>“是的，这就是客户要求的处理规则，其他情况都会把病人引导到这种药。”</p>
-<p>“哦，好吧。酷～”</p>
-<p>经理没再说什么，他们一起交付了网站给客户，客户对这个网站很满意。项目结束后，客户的代表还邀请比尔和整个团队一起去吃一顿丰盛的牛排大餐。就在吃大餐的当晚，一位同事给他发了一封电子邮件，链接到网上的一篇新闻报道：是关于一个年轻女孩，服用了他（创建）的网站推荐的药物，然后自杀了。</p>
-<p>网站推荐的药，其目标用户就是年轻女孩。比尔后来想明白了，他们所做的一切，建设这个网站的真正目的就是广告一种特定的药物。那时，作为团队中最年轻的开发人员，他虽然觉得客户需求的规则就是为了 “戏耍” 年轻女孩而设计的，编写的代码是 “错误” 的，但却没有多想，只是觉得这就是他的一份工作，有个开发任务要完成，而且他完成的很好。</p>
-<p>结果后来发现，这种药物的主要副作用之一就是会让人产生严重的抑郁和自杀念头。比尔说，他可以找到无数的方法来使自己在这个事情中的角色自我合理化，但当时他依然觉得自己的代码写“错”了。那顿大餐后不久，比尔辞职了。</p>
-<p>这就是比尔的价值观选择，他一开始是不清晰的，但这个事情让他问了自己为何，就变得越来越清晰了。我能知道这个故事，自然是比尔多年后自己写出来的。他说，“今天的代码（人工智能程序）已经开始接管你的驾驶，帮助医生诊断疾病，不难想象，它们很快也会推荐处方药。”</p>
-<p>比尔现在依然还写代码，但自从牛排大餐那一天起，比尔都会仔细考虑代码的作用，多问一个为何？因为程序已经越来越多地占据着我们生活的方方面面，那代码背后需要价值观吗？</p>
-<p>这就是第三个习惯：<strong>为何而问？获得答案，认清自我，选择自己的价值之道</strong>。</p>
-<p>关于提问，今天就分享到这里，我总结提炼下：</p>
-<ul>
-<li>如何问，是关于提问的 “<strong>术</strong>”，考虑让人能够回答，方便回答和乐于回答；</li>
-<li>问什么，是关于成长的 “<strong>惑</strong>”，去积累问题，寻找答案，并分享出来，从而完成了价值的积累、传递与交换；</li>
-<li>为何问，是关于选择的 “<strong>道</strong>”，价值观的选择决定了不同的道。</li>
-</ul>
-<p>成长的过程，一般都是从提出一个问题开始，找到答案，再融入自身的价值观，完成下一次更好的选择，周而复始，形成习惯，化作天性。</p>
-<p>最后，你也可以想想你最近有哪些问题，是否有了答案，以及该如何提问。请在留言区写下你的思考。</p>
-<hr />
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">提问是门艺术，描述问题与人沟通也是一样。<br><br>我们现在每天都开早会，有项目需求也经常和产品、测试、其他研发同事沟通交流，有时经常说“我的意思是xxx”，或者“你的意思是xxx吗？”<br><br>沟通的关键在于倾听<br>提问的关键在于痛点<br><br>深思熟虑之后再提问，只指问题的本质或描述出自己痛点，也许能比较利于回答者，明白我们卡在哪里？ <br></div>
-                            <span class="time">2018-10-06 16:25</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">沟通在团队中确实是个问题</p>
-                                <p class="reply-time">2018-10-07 20:23</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">提问确实是一种智慧，有些问题，草率的提出来，会让人变懒，而且还不容易得到需要的答案。当你为了这个问题去收集信息的时候，问题问问就解决了。 <br></div>
-                            <span class="time">2018-10-05 16:07</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/fe/cf/aa6b25b7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">米斯特粥</span>
-                            </div>
-                            <div class="bd">还有些人会在一封邮件中问很多的问题，顿时感觉不想回答... <br></div>
-                            <span class="time">2018-10-28 15:49</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是呀，要考虑回答者的成本</p>
-                                <p class="reply-time">2018-10-29 18:45</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">亚林</span>
-                            </div>
-                            <div class="bd">后面“价值观”部分就是程序员用来发杀产品经理的路径。 <br></div>
-                            <span class="time">2018-10-24 18:33</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">1.如何问，问经过自己思考的，节省他人时间的问题，如果可能还要能给别人思考的角度。<br>   1.更多的有效信息<br>   2.更多路径<br>   3.提供交换价值，建立讨论基础<br><br>2.问什么<br>  记录问题，在成长中获得答案<br>  问题的上、下文；<br>	问题的具体描述；<br>	问题的解决思考和思路；<br>	问题的解决方案和具体技术或办法；<br>	问题解决后留下的思考或其他延伸的疑问。<br>3.为何问<br>为什么你不问这个问题，而要问那个问题，因为这个问题对你有价值<br>提问的目标是获得答案，而答案于我们自己而言是一种价值；为何而问，就是发问于我们的价值之道，最终指向的目的是：认清自我。 <br></div>
-                            <span class="time">2018-10-05 20:53</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">helloworld</span>
-                            </div>
-                            <div class="bd">暂时无法解决又无法描述的问题，我也是先记录下来 <br></div>
-                            <span class="time">2018-11-09 08:04</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-11-13 18:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  无论做什么工作，一路上你总会碰到各种各样的问题，而提问应是你解决问题的一种有效途径。更进一步，如果能把提问固化成为你的一种习惯，那它就不仅仅是一个解决问题的“工具”，甚至还能引导你的人生选择。
+                </p>
+                <p>提问这个习惯，我有三个层面的理解：</p>
+                <ol>
+                  <li>如何问？</li>
+                  <li>问什么？</li>
+                  <li>为何问？</li>
+                </ol>
+                <h2>如何问？提问之术</h2>
+                <p>大部分情况，我们碰到的都是已经有了问题，但却问不好，从而得不到答案或得不到好的答案。</p>
+                <p>
+                  比如说吧，我经常碰到的一种情况是：有同学常拿着一个具体的问题跑来，向我发问，他大概会交代一下想解决的场景，然后就会接着描述他的思路，以及解决这个问题的思路的一些其他约束，但这中间会有一个障碍，然后就问我该怎么解决这个障碍。
+                </p>
+                <p>
+                  这样的发问一般都会让我陷入两种困扰之中：一种是，问题的业务背景交代得太泛化，所以我只好跟着他的思路，感觉解决这个问题似乎只能有这一条路可走；另一种则正好相反，问题的业务背景描述得过于细致，让人最后陷入对复杂业务领域的理解中，迷失在细节的讨论里。
+                </p>
+                <p>
+                  即使是同一个场景，其实不同人还会产生不同的思路。比如：你想去一个十公里外的地方，对方也许会问你怎么套马鞍的问题，这时你就很困扰，因为你的思路是坐车或开车。这就是一个针对技术人员面对同一场景问题，所选取的不同技术方案可能处在不同的时代背景下的类比。所以，面对这类具体的障碍问题，我经常很难回答。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>再看看国内网上技术问答社区的情况，我有时会去看看，发现上面的问题大部分类似下面两种模式：</p>
+                <ul>
+                  <li>某某出错了，怎么办？</li>
+                  <li>如何针对某某封装一个库？</li>
                 </ul>
+                <p>
+                  某某可以是一种具体的技术或框架，这两种提问模式代表了两个方向，都让人无法回答。第一种太模糊而无法回答，而第二种太庞大则不愿回答。
+                </p>
+                <p>
+                  如果你能绕过这两个提问的大坑，提出一个具体的问题，那么算是前进了一大步。但具体问题也有一个陷阱，就如前面套马鞍的那个例子，也许有人回答了你怎么正确地套马鞍，但你可能依然走在落后的道路上，因为你的工具本身就是落后的。所以就具体问题提问，除了问及手段，还最好跟上你的目的和你就此目的是怎样提出的手段，然后才走到了这一步的障碍，让你不得不在此提问的。
+                </p>
+                <p>
+                  一个能够回答的具体问题，一般都是解答题形式，表达清楚你的解答目的，也许你的困扰在高手那里根本就不存在。你只是走了一个弯路而已，这样不仅绕过了障碍，还获得了一条近（先进的）路，这就是有意义的提问。
+                </p>
+                <p>至此，就得到了提问的第一个原则：<strong>提供足够的信息，让人能够回答</strong>。</p>
+                <p>
+                  草率的问题是懒惰的问题，通过搜索引擎就能简单获得；草率的问题是模糊的问题，让人没法回答。而更有意义的提问是把解答题变成选择题，提供你的选项，展现你探索了哪些路径，省去了可能产生的反问。也许你的某条路径已经非常接近答案了，只是卡在了某个点上，知道答案的人一看就明白了，也很容易回答。
+                </p>
+                <p>这就是提问的第二个原则：<strong>提供更多的选项，让人方便回答</strong>。</p>
+                <p>
+                  即使你的问题能够回答，也方便回答，但也可能得不到回答。因为，回答问题需要有驱动力。提问本是一种索取，要让人有更多的回答动力，还需要付出。付出一种态度，表达感谢；付出一份可供交换的视角，建立讨论的基础。
+                </p>
+                <p>这就是提问的第三个原则：<strong>提供交换价值，建立讨论基础，表达感谢态度，让人乐于回答</strong>。</p>
+                <p>
+                  《大教堂与集市》一书的作者埃里克·史蒂文·雷蒙德（Eric Steven
+                  Raymond）曾就如何提技术问题写过一篇影响颇大的文章：<a
+                    href="http://www.catb.org/esr/faqs/smart-questions.html"
+                    >How To Ask Questions The Smart Way</a
+                  >（中文名是《提问的智慧》），距今已经十多年了，修订了十多次，也被翻译成了十多个国家的文字，很值得一读。
+                </p>
+                <p>最后，我归纳下关于提问之术的三个方面：</p>
+                <ol>
+                  <li>提让人能够回答的问题：草率的问题，只能得到一个草率的答案。</li>
+                  <li>提让人方便回答的问题：你得到的答案的好坏取决于提问的方式和开发答案的难度。</li>
+                  <li>
+                    提让人乐于回答的问题：只索取而不愿思考和付出的提问者，要么什么也得不到，要么只会得到 RTFM（Read The
+                    Fucking Manual） 或 STFW（Search The Fucking Web）。
+                  </li>
+                </ol>
+                <h2>问什么？求解之惑</h2>
+                <p>有时一个好问题，比如何问更有价值和意义。</p>
+                <p>
+                  我觉着，前面一节关于如何提问本身也算是一个好问题，因为当你面对这个问题，找到了答案，并严肃地对待后，从此就会改变你提问的习惯。提出好问题比寻找已有问题的答案可能更有意义和价值。寻找答案，通向的是已有的结果；而提出新问题，也许会导向未知的宝藏，它可能是获得新知的起点。
+                </p>
+                <p>
+                  有时候，你会碰到一个问题不知道该问什么，甚至该如何提问，即使这个问题是一个非常具体的技术问题。而这一类具体的技术问题，我称之为答案藏在问题中，属于无法提问的问题。
+                </p>
+                <p>
+                  这可能说得比较抽象，下面我举个具体的例子：曾经碰到过一个线上问题，系统间隙性出现超时，只有重启能解决；而且出现的很无规律性，不和什么流量之类成正比，就是莫名其妙偶然出现，还不能恢复，只能重启。这个问题曾经困扰了我很久。这类问题虽然很具体，但你可能会发现，你竟找不到一个好方式来描述这个问题。
+                </p>
+                <p>
+                  如果我就把上面这段描述的关键现象，偶现超时并结合使用的具体技术，如：JVM、开源框架配置和业务场景一起抛出来问人，你觉得有人能回答吗？这类就属于答案藏在问题中的问题，唯一的办法只能是找和你一起共事的同事从各人不同的思维视角去分析，抽丝剥茧。当你能找出提问的方式，基本上答案也就出来了。
+                </p>
+                <p>
+                  后来，终于定位到上面现象的根源是服务线程池的配置有误，结合在某些慢业务场景下会引发连锁超时。这时的问题就是怎么配置服务线程池才最合理，这个问题本身就简单到完全无需再问了，自然就有了答案。
+                </p>
+                <p>
+                  在成长的路上，我碰到过好多问题，但早年还没有形成记录与写作的习惯，所以未能把这些问题记录下来，很多就遗忘散落了。这就是我想说的第二个需要建立的习惯：<strong>当遇到暂时没有答案的问题时，先记录下来</strong>。在成长这条路上，不是碰到了问题，就能立刻或很快找到答案的。
+                </p>
+                <p>
+                  当我开始写作后，就开始养成了这个习惯。大部分过去写的文章都来自于这些问题记录，定期地回顾下，曾经困扰我的问题，今天能解决了吗？一开始有很多具体的技术性问题，就因此写了很多技术文章。后来又有了更多复杂的问题，也就又写了不少思考性的文章。每写一篇，意味着当下的我对这个问题至少有了答案。无论这个答案如何，从某种意义上说，今天的我相比当时面临问题没有答案的我，就已经成长了。
+                </p>
+                <p>
+                  先从一个记录问题，积攒 “问什么”
+                  的习惯开始，不断去积累并留下一些东西，将来再定时去回顾这些问题，也许就会得到意外的收获。对于程序员，总会碰到各种技术问题，就从这些最具体的问题开始，把暂时这阶段还没法回答的问题按一种模式记录下来，比如下面这样：
+                </p>
+                <ul>
+                  <li>问题的上、下文；</li>
+                  <li>问题的具体描述；</li>
+                  <li>问题的解决思考和思路；</li>
+                  <li>问题的解决方案和具体技术或办法；</li>
+                  <li>问题解决后留下的思考或其他延伸的疑问。</li>
+                </ul>
+                <p>
+                  这就是你积累的
+                  “宝藏”，将来如果能回答了，就把答案分享出来。这就是我所认同的积累价值和传递价值的方式，分享你从中学到的一切（Share
+                  what you learn），最后自身的价值也就得到了提升。
+                </p>
+                <p>保持积累，持续给予，终有所获。</p>
+                <h2>为何问？价值之道</h2>
+                <p>
+                  提问的目标是获得答案，而答案于我们自己而言是一种价值；为何而问，就是发问于我们的价值之道，最终指向的目的是：认清自我。
+                </p>
+                <p>
+                  值得问 “为何”
+                  的问题不多，但总会遇到，它是一道选择题，有关我们的价值选择。我们最关心的是自己的命运，而关于命运有一句话是这么说的：
+                </p>
+                <blockquote>
+                  <p>选择决定命运，什么来决定选择？价值观。</p>
+                </blockquote>
+                <p>
+                  价值观，是我们对事情做出判断，进行选择取舍的标准。每个人都有价值观，无论你能否清晰地定义与表述它，这些观念都决定了你的行为标准。这么说有些抽象了，下面我通过一个故事来将其具象化。
+                </p>
+                <p>
+                  这个故事的主角叫比尔（Bill）。21
+                  岁时他成为一名程序员，获得了第一份正式工作，在加拿大多伦多的一家互动营销公司写程序，这家公司的主要客户都是一些大型药企。而在加拿大，法律限制药企直接对普通消费者做处方药的广告。
+                </p>
+                <p>
+                  所以，药企客户提出了需求，做个网站来展示公司的药品，对于浏览网站的用户，如果能提供处方就会被引导到一个病人的专属页面。在这个专属页面上，提供了一系列的测验问题，然后通过病人的回答来推荐相关的药品。
+                </p>
+                <p>
+                  这个网站仅仅是展示公司产品，提供通用说明的信息网站，这显然不是任何特定药物的广告。一切显得很合理，比尔收到了需求，它们包含了针对病人的测验问题，每个问题的答案，以及对答案的处理规则。
+                </p>
+                <p>
+                  比尔完成了开发，在交付给客户之前，他的项目经理决定对网站做个简单的快速验收测试。经理试了这个针对病人的小测验，然后走到了比尔的桌前：
+                </p>
+                <p>“测验不管用！” 经理说。</p>
+                <p>“哦，出了什么问题？” 比尔问。</p>
+                <p>“嗯，看来无论我填什么，测验都给我推荐同一种药物，唯一的例外是我回答过敏或者已经吃过了。”</p>
+                <p>“是的，这就是客户要求的处理规则，其他情况都会把病人引导到这种药。”</p>
+                <p>“哦，好吧。酷～”</p>
+                <p>
+                  经理没再说什么，他们一起交付了网站给客户，客户对这个网站很满意。项目结束后，客户的代表还邀请比尔和整个团队一起去吃一顿丰盛的牛排大餐。就在吃大餐的当晚，一位同事给他发了一封电子邮件，链接到网上的一篇新闻报道：是关于一个年轻女孩，服用了他（创建）的网站推荐的药物，然后自杀了。
+                </p>
+                <p>
+                  网站推荐的药，其目标用户就是年轻女孩。比尔后来想明白了，他们所做的一切，建设这个网站的真正目的就是广告一种特定的药物。那时，作为团队中最年轻的开发人员，他虽然觉得客户需求的规则就是为了
+                  “戏耍” 年轻女孩而设计的，编写的代码是 “错误”
+                  的，但却没有多想，只是觉得这就是他的一份工作，有个开发任务要完成，而且他完成的很好。
+                </p>
+                <p>
+                  结果后来发现，这种药物的主要副作用之一就是会让人产生严重的抑郁和自杀念头。比尔说，他可以找到无数的方法来使自己在这个事情中的角色自我合理化，但当时他依然觉得自己的代码写“错”了。那顿大餐后不久，比尔辞职了。
+                </p>
+                <p>
+                  这就是比尔的价值观选择，他一开始是不清晰的，但这个事情让他问了自己为何，就变得越来越清晰了。我能知道这个故事，自然是比尔多年后自己写出来的。他说，“今天的代码（人工智能程序）已经开始接管你的驾驶，帮助医生诊断疾病，不难想象，它们很快也会推荐处方药。”
+                </p>
+                <p>
+                  比尔现在依然还写代码，但自从牛排大餐那一天起，比尔都会仔细考虑代码的作用，多问一个为何？因为程序已经越来越多地占据着我们生活的方方面面，那代码背后需要价值观吗？
+                </p>
+                <p>这就是第三个习惯：<strong>为何而问？获得答案，认清自我，选择自己的价值之道</strong>。</p>
+                <p>关于提问，今天就分享到这里，我总结提炼下：</p>
+                <ul>
+                  <li>如何问，是关于提问的 “<strong>术</strong>”，考虑让人能够回答，方便回答和乐于回答；</li>
+                  <li>
+                    问什么，是关于成长的
+                    “<strong>惑</strong>”，去积累问题，寻找答案，并分享出来，从而完成了价值的积累、传递与交换；
+                  </li>
+                  <li>为何问，是关于选择的 “<strong>道</strong>”，价值观的选择决定了不同的道。</li>
+                </ul>
+                <p>
+                  成长的过程，一般都是从提出一个问题开始，找到答案，再融入自身的价值观，完成下一次更好的选择，周而复始，形成习惯，化作天性。
+                </p>
+                <p>最后，你也可以想想你最近有哪些问题，是否有了答案，以及该如何提问。请在留言区写下你的思考。</p>
+                <hr />
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    提问是门艺术，描述问题与人沟通也是一样。<br /><br />我们现在每天都开早会，有项目需求也经常和产品、测试、其他研发同事沟通交流，有时经常说“我的意思是xxx”，或者“你的意思是xxx吗？”<br /><br />沟通的关键在于倾听<br />提问的关键在于痛点<br /><br />深思熟虑之后再提问，只指问题的本质或描述出自己痛点，也许能比较利于回答者，明白我们卡在哪里？
+                    <br />
+                  </div>
+                  <span class="time">2018-10-06 16:25</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">沟通在团队中确实是个问题</p>
+                    <p class="reply-time">2018-10-07 20:23</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">
+                    提问确实是一种智慧，有些问题，草率的提出来，会让人变懒，而且还不容易得到需要的答案。当你为了这个问题去收集信息的时候，问题问问就解决了。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-05 16:07</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/fe/cf/aa6b25b7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">米斯特粥</span></div>
+                  <div class="bd">还有些人会在一封邮件中问很多的问题，顿时感觉不想回答... <br /></div>
+                  <span class="time">2018-10-28 15:49</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是呀，要考虑回答者的成本</p>
+                    <p class="reply-time">2018-10-29 18:45</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">亚林</span></div>
+                  <div class="bd">后面“价值观”部分就是程序员用来发杀产品经理的路径。 <br /></div>
+                  <span class="time">2018-10-24 18:33</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    1.如何问，问经过自己思考的，节省他人时间的问题，如果可能还要能给别人思考的角度。<br />
+                    1.更多的有效信息<br />
+                    2.更多路径<br />
+                    3.提供交换价值，建立讨论基础<br /><br />2.问什么<br />
+                    记录问题，在成长中获得答案<br />
+                    问题的上、下文；<br />
+                    问题的具体描述；<br />
+                    问题的解决思考和思路；<br />
+                    问题的解决方案和具体技术或办法；<br />
+                    问题解决后留下的思考或其他延伸的疑问。<br />3.为何问<br />为什么你不问这个问题，而要问那个问题，因为这个问题对你有价值<br />提问的目标是获得答案，而答案于我们自己而言是一种价值；为何而问，就是发问于我们的价值之道，最终指向的目的是：认清自我。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-05 20:53</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">helloworld</span></div>
+                  <div class="bd">暂时无法解决又无法描述的问题，我也是先记录下来 <br /></div>
+                  <span class="time">2018-11-09 08:04</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-11-13 18:49</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

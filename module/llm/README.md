@@ -5,7 +5,7 @@
 ## 🌟 功能特性
 
 - **多平台支持**: 支持20+主流AI平台
-- **统一接口**: 提供一致的数据结构和API接口  
+- **统一接口**: 提供一致的数据结构和API接口
 - **多种输出格式**: 支持JSON、表格、CSV、Markdown、HTML等格式
 - **配置管理**: 灵活的配置文件管理系统
 - **错误处理**: 完善的异常处理和重试机制
@@ -15,9 +15,10 @@
 ## 🎯 支持的平台
 
 ### 国内平台
+
 - **轨迹流动/DeepSeek**: 深度求索AI平台
 - **硅基流动**: SiliconFlow AI推理平台
-- **Kimi**: 月之暗面智能助手  
+- **Kimi**: 月之暗面智能助手
 - **豆包**: 字节跳动AI平台
 - **火山方舟**: 火山引擎AI平台
 - **智谱AI**: 智谱清言GLM系列
@@ -25,18 +26,20 @@
 - **阿里云百炼**: 阿里云大模型服务
 - **百度百川**: 百度智能云文心系列
 
-### 国际平台  
+### 国际平台
+
 - **OpenAI**: GPT系列模型
 - **OpenRouter**: AI模型聚合平台
 - **Github Copilot**: 代码辅助工具
 
 ### 聚合平台
+
 - **AiHubMix**: AI模型聚合服务
 - **魔塔社区**: ModelScope平台
 - **派欧云**: AI服务聚合
 - **henAPI**: API聚合服务
 - **O3**: AI模型平台
-- **阶跃星辰**: Step AI平台  
+- **阶跃星辰**: Step AI平台
 - **腾讯T1**: 腾讯AI服务
 - **天翼云**: 中国电信AI平台
 - **Tavily**: 搜索AI平台
@@ -45,11 +48,13 @@
 ## 📦 安装与依赖
 
 ### 基础依赖
+
 ```bash
 pip install requests configparser
 ```
 
 ### 可选依赖（用于更好的表格显示）
+
 ```bash
 pip install tabulate
 ```
@@ -57,6 +62,7 @@ pip install tabulate
 ## 🚀 快速开始
 
 ### 1. 初始化配置
+
 ```bash
 python get_bill.py --init
 ```
@@ -64,6 +70,7 @@ python get_bill.py --init
 这会创建一个 `ai_billing_config.ini` 配置文件模板。
 
 ### 2. 配置API密钥
+
 编辑 `ai_billing_config.ini` 文件，填入您的API密钥：
 
 ```ini
@@ -73,7 +80,7 @@ base_url = https://api.deepseek.com
 enabled = true
 
 [openai]
-api_key = sk-your-openai-api-key  
+api_key = sk-your-openai-api-key
 base_url = https://api.openai.com
 enabled = true
 
@@ -89,6 +96,7 @@ enabled = true
 ```
 
 ### 3. 查询账单
+
 ```bash
 # 查询所有平台账单
 python get_bill.py --query
@@ -123,7 +131,7 @@ python get_bill.py --query --format [json|table|csv|markdown|html]
 # 查询特定平台
 python get_bill.py --platform <平台名称>
 
-# 显示汇总信息  
+# 显示汇总信息
 python get_bill.py --summary
 
 # 生成详细报告
@@ -136,6 +144,7 @@ python get_bill.py --query --verbose
 ### Python代码调用
 
 #### 基本使用
+
 ```python
 from get_bill import *
 
@@ -143,9 +152,9 @@ from get_bill import *
 config_manager = ConfigManager()
 
 # 设置平台配置
-config_manager.set_platform_config('openai', 
+config_manager.set_platform_config('openai',
     api_key='your-api-key',
-    base_url='https://api.openai.com', 
+    base_url='https://api.openai.com',
     enabled='true')
 
 # 创建账单管理器
@@ -161,6 +170,7 @@ print(formatter.format(billing_data, OutputFormat.TABLE))
 ```
 
 #### 单平台查询
+
 ```python
 # 直接创建平台实例
 platform = OpenAIPlatform('your-api-key')
@@ -171,12 +181,13 @@ print(f"已使用: {billing_info.used_amount}")
 ```
 
 #### 自定义平台
+
 ```python
 class MyPlatform(BasePlatform):
     @property
     def platform_name(self) -> str:
         return "我的平台"
-    
+
     def get_billing_info(self) -> BillingInfo:
         # 实现获取账单逻辑
         return BillingInfo(
@@ -191,6 +202,7 @@ class MyPlatform(BasePlatform):
 ## 📊 输出格式
 
 ### 表格格式（默认）
+
 ```
 ------------------------------------------------------------
 平台            余额          已使用        总额度        ...
@@ -201,6 +213,7 @@ DeepSeek       50.0000      30.0000       80.0000      ...
 ```
 
 ### JSON格式
+
 ```json
 {
   "openai": {
@@ -215,10 +228,11 @@ DeepSeek       50.0000      30.0000       80.0000      ...
 ```
 
 ### 汇总信息
+
 ```json
 {
   "总平台数": 3,
-  "成功查询": 2, 
+  "成功查询": 2,
   "查询失败": 1,
   "总余额": {
     "USD": 125.0,
@@ -234,6 +248,7 @@ DeepSeek       50.0000      30.0000       80.0000      ...
 ## ⚙️ 配置说明
 
 ### 配置文件结构
+
 ```ini
 [general]
 request_timeout = 30
@@ -250,6 +265,7 @@ enabled = true
 ### 平台特定配置
 
 #### DeepSeek
+
 ```ini
 [deepseek]
 api_key = sk-xxx
@@ -258,8 +274,9 @@ enabled = true
 ```
 
 #### 火山方舟（支持AK/SK认证）
+
 ```ini
-[huoshan]  
+[huoshan]
 api_key = your-api-key
 access_key = your-access-key
 secret_key = your-secret-key
@@ -268,6 +285,7 @@ enabled = true
 ```
 
 #### 百度（需要API Key和Secret Key）
+
 ```ini
 [baidu_baichuan]
 api_key = your-api-key
@@ -281,18 +299,19 @@ enabled = true
 ### 添加新平台支持
 
 1. 继承BasePlatform类：
+
 ```python
 class NewPlatform(BasePlatform):
     @property
     def platform_name(self) -> str:
         return "新平台"
-    
+
     def get_billing_info(self) -> BillingInfo:
         # 实现API调用逻辑
         headers = self._get_auth_headers()
         response = self._make_request("GET", f"{self.base_url}/billing", headers=headers)
         data = response.json()
-        
+
         return BillingInfo(
             platform=self.platform_name,
             balance=data.get('balance', 0),
@@ -301,6 +320,7 @@ class NewPlatform(BasePlatform):
 ```
 
 2. 注册到工厂：
+
 ```python
 # 添加到PlatformType枚举
 class PlatformType(Enum):
@@ -315,40 +335,47 @@ PlatformFactory.register_platform(PlatformType.NEW_PLATFORM, NewPlatform)
 ### 常见问题
 
 #### 1. API密钥无效
+
 ```
 错误: 认证失败: 401 Unauthorized
 解决: 检查配置文件中的API密钥是否正确
 ```
 
 #### 2. 请求频率限制
+
 ```
-错误: 请求频率超限: 429 Too Many Requests  
+错误: 请求频率超限: 429 Too Many Requests
 解决: 程序会自动重试，如持续失败请检查API限额
 ```
 
 #### 3. 平台未配置
+
 ```
 错误: 平台 'xxx' 未配置或未启用
 解决: 检查配置文件中enabled是否为true，API密钥是否填写
 ```
 
 #### 4. 网络连接问题
+
 ```
 错误: 请求最终失败: Connection timeout
 解决: 检查网络连接，可能需要代理设置
 ```
 
 ### 调试模式
+
 ```bash
 python get_bill.py --query --verbose
 ```
+
 使用 `--verbose` 参数可以显示详细的调试信息。
 
 ## 📄 数据结构
 
 ### BillingInfo字段说明
+
 - `platform`: 平台名称
-- `balance`: 当前余额  
+- `balance`: 当前余额
 - `used_amount`: 已使用金额
 - `total_quota`: 总额度
 - `free_quota`: 免费额度
@@ -364,6 +391,7 @@ python get_bill.py --query --verbose
 欢迎提交Issue和Pull Request来改进这个项目！
 
 ### 贡献新平台支持
+
 1. Fork项目
 2. 创建新的平台实现类
 3. 添加相应的测试
@@ -377,18 +405,21 @@ python get_bill.py --query --verbose
 ## 🙋 常见用例
 
 ### 监控API使用情况
+
 ```bash
 # 定时执行，监控余额变化
 */30 * * * * /usr/bin/python /path/to/get_bill.py --query --save /var/log/api_usage.json
 ```
 
 ### 批量导出报告
-```bash  
+
+```bash
 # 生成全格式报告
 python get_bill.py --detailed-report ./monthly_reports
 ```
 
 ### CI/CD集成
+
 ```bash
 # 在部署脚本中检查API余额
 python get_bill.py --summary | grep -q "成功查询.*[1-9]" || exit 1

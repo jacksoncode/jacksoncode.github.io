@@ -1,141 +1,291 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CodeClub - OpenClaw Skills">
-    <meta name="author" content="Jackson">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="CodeClub - OpenClaw Skills" />
+    <meta name="author" content="Jackson" />
     <title>OpenClaw Skills - CodeClub</title>
-    <link rel="icon" type="image/x-icon" href="../../img/logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/dark-mode.css">
-    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="icon" type="image/x-icon" href="../../img/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/dark-mode.css" />
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
     <style>
-    .tutorial-page { max-width: 1200px; margin: 70px auto 40px; padding: 0 20px; display: flex; gap: 20px; }
-    .tutorial-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow-y: auto; background: var(--bg-secondary, #fff); border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .tutorial-sidebar h3 { font-size: 15px; margin: 0 0 12px; color: var(--text-primary, #1a1a2e); padding-bottom: 8px; border-bottom: 2px solid var(--primary, #3b82f6); }
-    .tutorial-sidebar a { display: block; padding: 5px 8px; color: var(--text-secondary, #666); text-decoration: none; font-size: 13px; border-radius: 4px; line-height: 1.4; }
-    .tutorial-sidebar a:hover { background: var(--primary, #3b82f6); color: #fff; }
-    .tutorial-sidebar a.active { background: var(--primary, #3b82f6); color: #fff; font-weight: 600; }
-    .tutorial-main { flex: 1; min-width: 0; }
-    .tutorial-article { background: var(--bg-secondary, #fff); border-radius: 8px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .tutorial-article h1 { font-size: 26px; margin-bottom: 16px; color: var(--text-primary, #1a1a2e); border-bottom: 2px solid var(--primary, #3b82f6); padding-bottom: 12px; }
-    .markdown-body { font-size: 15px; line-height: 1.8; color: var(--text-secondary, #333); }
-    .markdown-body h1 { font-size: 24px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 8px; }
-    .markdown-body h2 { font-size: 20px; border-bottom: 1px solid var(--border, #e5e7eb); padding-bottom: 6px; }
-    .markdown-body h3 { font-size: 17px; }
-    .markdown-body pre { background: #1e1e2e; color: #cdd6f4; padding: 16px; border-radius: 8px; overflow-x: auto; }
-    .markdown-body code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; }
-    .markdown-body p code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #e83e8c; }
-    .markdown-body blockquote { border-left: 4px solid var(--primary, #3b82f6); padding: 12px 20px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; }
-    .markdown-body img { max-width: 100%; border-radius: 8px; }
-    .markdown-body table { border-collapse: collapse; width: 100%; margin: 16px 0; }
-    .markdown-body table th, .markdown-body table td { border: 1px solid var(--border, #e5e7eb); padding: 8px 12px; text-align: left; }
-    .markdown-body table th { background: var(--bg-primary, #f8fafc); font-weight: 600; }
-    .markdown-body table tr:nth-child(2n) { background: var(--bg-primary, #f8fafc); }
-    .markdown-body ul, .markdown-body ol { padding-left: 24px; margin: 12px 0; }
-    .markdown-body li { margin: 4px 0; }
-    .markdown-body hr { border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 24px 0; }
-    .markdown-body a { color: var(--primary, #3b82f6); text-decoration: none; }
-    .markdown-body a:hover { text-decoration: underline; }
-    .page-navigation { display: flex; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border, #e5e7eb); }
-    .page-nav-link { color: var(--primary, #3b82f6); text-decoration: none; font-weight: 500; font-size: 14px; }
-    .page-nav-link:hover { text-decoration: underline; }
-    .source-link { margin-top: 16px; font-size: 13px; color: var(--text-secondary, #999); }
-    .source-link a { color: var(--primary, #3b82f6); }
-    @media (max-width: 768px) {
-        .tutorial-page { flex-direction: column; }
-        .tutorial-sidebar { width: 100%; position: static; max-height: 200px; }
-    }
+      .tutorial-page {
+        max-width: 1200px;
+        margin: 70px auto 40px;
+        padding: 0 20px;
+        display: flex;
+        gap: 20px;
+      }
+      .tutorial-sidebar {
+        width: 240px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 70px;
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+        background: var(--bg-secondary, #fff);
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .tutorial-sidebar h3 {
+        font-size: 15px;
+        margin: 0 0 12px;
+        color: var(--text-primary, #1a1a2e);
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--primary, #3b82f6);
+      }
+      .tutorial-sidebar a {
+        display: block;
+        padding: 5px 8px;
+        color: var(--text-secondary, #666);
+        text-decoration: none;
+        font-size: 13px;
+        border-radius: 4px;
+        line-height: 1.4;
+      }
+      .tutorial-sidebar a:hover {
+        background: var(--primary, #3b82f6);
+        color: #fff;
+      }
+      .tutorial-sidebar a.active {
+        background: var(--primary, #3b82f6);
+        color: #fff;
+        font-weight: 600;
+      }
+      .tutorial-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .tutorial-article {
+        background: var(--bg-secondary, #fff);
+        border-radius: 8px;
+        padding: 32px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .tutorial-article h1 {
+        font-size: 26px;
+        margin-bottom: 16px;
+        color: var(--text-primary, #1a1a2e);
+        border-bottom: 2px solid var(--primary, #3b82f6);
+        padding-bottom: 12px;
+      }
+      .markdown-body {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-secondary, #333);
+      }
+      .markdown-body h1 {
+        font-size: 24px;
+        border-bottom: 1px solid var(--border, #e5e7eb);
+        padding-bottom: 8px;
+      }
+      .markdown-body h2 {
+        font-size: 20px;
+        border-bottom: 1px solid var(--border, #e5e7eb);
+        padding-bottom: 6px;
+      }
+      .markdown-body h3 {
+        font-size: 17px;
+      }
+      .markdown-body pre {
+        background: #1e1e2e;
+        color: #cdd6f4;
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      .markdown-body code {
+        font-family: 'Fira Code', 'Cascadia Code', monospace;
+        font-size: 14px;
+      }
+      .markdown-body p code {
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #e83e8c;
+      }
+      .markdown-body blockquote {
+        border-left: 4px solid var(--primary, #3b82f6);
+        padding: 12px 20px;
+        margin: 16px 0;
+        background: #f8fafc;
+        border-radius: 0 8px 8px 0;
+      }
+      .markdown-body img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+      .markdown-body table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 16px 0;
+      }
+      .markdown-body table th,
+      .markdown-body table td {
+        border: 1px solid var(--border, #e5e7eb);
+        padding: 8px 12px;
+        text-align: left;
+      }
+      .markdown-body table th {
+        background: var(--bg-primary, #f8fafc);
+        font-weight: 600;
+      }
+      .markdown-body table tr:nth-child(2n) {
+        background: var(--bg-primary, #f8fafc);
+      }
+      .markdown-body ul,
+      .markdown-body ol {
+        padding-left: 24px;
+        margin: 12px 0;
+      }
+      .markdown-body li {
+        margin: 4px 0;
+      }
+      .markdown-body hr {
+        border: none;
+        border-top: 1px solid var(--border, #e5e7eb);
+        margin: 24px 0;
+      }
+      .markdown-body a {
+        color: var(--primary, #3b82f6);
+        text-decoration: none;
+      }
+      .markdown-body a:hover {
+        text-decoration: underline;
+      }
+      .page-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border, #e5e7eb);
+      }
+      .page-nav-link {
+        color: var(--primary, #3b82f6);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .page-nav-link:hover {
+        text-decoration: underline;
+      }
+      .source-link {
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--text-secondary, #999);
+      }
+      .source-link a {
+        color: var(--primary, #3b82f6);
+      }
+      @media (max-width: 768px) {
+        .tutorial-page {
+          flex-direction: column;
+        }
+        .tutorial-sidebar {
+          width: 100%;
+          position: static;
+          max-height: 200px;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="navbar-container">
-            <a class="navbar-brand" href="../../index.html">
-                <img src="../../img/logo.png" alt="CodeClub" width="32" height="32">
-                <span>CodeClub</span>
-            </a>
-            <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
-            <ul class="navbar-nav">
-                <li><a class="nav-link" href="../../index.html">首页</a></li>
-                <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
-                <li><a class="nav-link" href="../../blog/">博客</a></li>
-                <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
-                <li><a class="nav-link active" href="../index.html">教程</a></li>
-                <li><a class="nav-link" href="../../book.html">图书</a></li>
-                <li><a class="nav-link" href="../../contact.html">联系我</a></li>
-                <li><a class="nav-link" href="../../about.html">关于我</a></li>
-            </ul>
-        </div>
+      <div class="navbar-container">
+        <a class="navbar-brand" href="../../index.html">
+          <img src="../../img/logo.png" alt="CodeClub" width="32" height="32" />
+          <span>CodeClub</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="切换导航菜单"><span></span><span></span><span></span></button>
+        <ul class="navbar-nav">
+          <li><a class="nav-link" href="../../index.html">首页</a></li>
+          <li><a class="nav-link" href="../../nav.html">网址导航</a></li>
+          <li><a class="nav-link" href="../../blog/">博客</a></li>
+          <li><a class="nav-link" href="../../wiki/index.html" target="_blank">WiKi</a></li>
+          <li><a class="nav-link active" href="../index.html">教程</a></li>
+          <li><a class="nav-link" href="../../book.html">图书</a></li>
+          <li><a class="nav-link" href="../../contact.html">联系我</a></li>
+          <li><a class="nav-link" href="../../about.html">关于我</a></li>
+        </ul>
+      </div>
     </nav>
     <div class="tutorial-page">
-        <div class="tutorial-sidebar">
-            <h3>📖 AI Agent</h3>
-            <a href="0.html" >AI Agent(智能体) 教程</a>
-<a href="1.html" >AI Agent 简介</a>
-<a href="2.html" >AI Agent  核心组件</a>
-<a href="3.html" >AI Agent 工作原理</a>
-<a href="4.html" >大语言模型基础</a>
-<a href="5.html" >提示词工程</a>
-<a href="6.html" >Token (词元)</a>
-<a href="7.html" >Harness Engineering</a>
-<a href="8.html" >第一个 AI Agent</a>
-<a href="9.html" >OpenClaw (Clawdbot) 教程</a>
-<a href="10.html" >OpenClaw 快速上手</a>
-<a href="11.html" >QoderWork 教程</a>
-<a href="12.html" >OpenClaw 一键部署</a>
-<a href="13.html" >OpenClaw 配置目录</a>
-<a href="14.html" >OpenClaw 工作原理</a>
-<a href="15.html" >OpenClaw 接入微信</a>
-<a href="16.html" >OpenClaw 接入飞书</a>
-<a href="17.html" class="active">OpenClaw Skills</a>
-<a href="18.html" >OpenClaw 卸载指南</a>
-<a href="19.html" >CrewAI 构建智能体</a>
-<a href="20.html" >LangChain 制作智能体</a>
-<a href="21.html" >LangGraph 入门教程</a>
-<a href="22.html" >Claude Code 入门教程</a>
-<a href="23.html" >OpenCode 入门教程</a>
-<a href="24.html" >OpenCode Coding Plan</a>
-<a href="25.html" >CC Switch</a>
-<a href="26.html" >Skills 教程</a>
-<a href="27.html" >OpenCode skills</a>
-<a href="28.html" >Qoder 教程</a>
-<a href="29.html" >Qoder Quest 模式</a>
-<a href="30.html" >Qoder CLI</a>
-<a href="31.html" >Trae 教程</a>
-<a href="32.html" >Trae Solo</a>
-<a href="33.html" >Python 实现 AI Agent</a>
-<a href="34.html" >工具调用</a>
-<a href="35.html" >记忆系统</a>
-<a href="36.html" >Python 智能体环境配置</a>
-<a href="37.html" >AI Agent 问答实例</a>
-
+      <div class="tutorial-sidebar">
+        <h3>📖 AI Agent</h3>
+        <a href="0.html">AI Agent(智能体) 教程</a>
+        <a href="1.html">AI Agent 简介</a>
+        <a href="2.html">AI Agent 核心组件</a>
+        <a href="3.html">AI Agent 工作原理</a>
+        <a href="4.html">大语言模型基础</a>
+        <a href="5.html">提示词工程</a>
+        <a href="6.html">Token (词元)</a>
+        <a href="7.html">Harness Engineering</a>
+        <a href="8.html">第一个 AI Agent</a>
+        <a href="9.html">OpenClaw (Clawdbot) 教程</a>
+        <a href="10.html">OpenClaw 快速上手</a>
+        <a href="11.html">QoderWork 教程</a>
+        <a href="12.html">OpenClaw 一键部署</a>
+        <a href="13.html">OpenClaw 配置目录</a>
+        <a href="14.html">OpenClaw 工作原理</a>
+        <a href="15.html">OpenClaw 接入微信</a>
+        <a href="16.html">OpenClaw 接入飞书</a>
+        <a href="17.html" class="active">OpenClaw Skills</a>
+        <a href="18.html">OpenClaw 卸载指南</a>
+        <a href="19.html">CrewAI 构建智能体</a>
+        <a href="20.html">LangChain 制作智能体</a>
+        <a href="21.html">LangGraph 入门教程</a>
+        <a href="22.html">Claude Code 入门教程</a>
+        <a href="23.html">OpenCode 入门教程</a>
+        <a href="24.html">OpenCode Coding Plan</a>
+        <a href="25.html">CC Switch</a>
+        <a href="26.html">Skills 教程</a>
+        <a href="27.html">OpenCode skills</a>
+        <a href="28.html">Qoder 教程</a>
+        <a href="29.html">Qoder Quest 模式</a>
+        <a href="30.html">Qoder CLI</a>
+        <a href="31.html">Trae 教程</a>
+        <a href="32.html">Trae Solo</a>
+        <a href="33.html">Python 实现 AI Agent</a>
+        <a href="34.html">工具调用</a>
+        <a href="35.html">记忆系统</a>
+        <a href="36.html">Python 智能体环境配置</a>
+        <a href="37.html">AI Agent 问答实例</a>
+      </div>
+      <div class="tutorial-main">
+        <div class="tutorial-article">
+          <div class="markdown-body" id="md-content"></div>
+          <div class="page-navigation">
+            <a href="16.html" class="page-nav-link">&larr; OpenClaw 接入飞书</a>
+            <a href="18.html" class="page-nav-link">OpenClaw 卸载指南 &rarr;</a>
+          </div>
+          <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
         </div>
-        <div class="tutorial-main">
-            <div class="tutorial-article">
-                <div class="markdown-body" id="md-content"></div>
-                <div class="page-navigation">
-                    <a href="16.html" class="page-nav-link">&larr; OpenClaw 接入飞书</a>
-                    <a href="18.html" class="page-nav-link">OpenClaw 卸载指南 &rarr;</a>
-                </div>
-                <div class="source-link">原文来源：<a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
-            </div>
-        </div>
+      </div>
     </div>
     <footer class="footer">
-        <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
+      <div class="footer-content"><p>&copy; 2024 CodeClub. All rights reserved.</p></div>
     </footer>
     <script src="../../js/dark-mode.js"></script>
     <script src="../../js/mobile-menu.js"></script>
     <script>
-    const md = `# OpenClaw Skills -- ClawHub\n\nOpenClaw Skills 是包含指令代码的 Markdown 文件，用于帮助 Agent 执行特定任务或优化工作流功能。\n\n\n\n\n真正让 OpenClaw 从聊天机器人变成超级助手的，其实是它的 Skills 生态 —— 相当于 AI 的 App Store。\n\n\n\n简单理解：\n\n\n\n\n\`\`\`\nOpenClaw = iPhone 手机\nSkills = App Store\n\`\`\`\n\n\n没有 Skill 的 AI 只能聊天，有 Skill 的 AI 才能 搜索、自动化、操作系统、调用 API、执行脚本。\n\n\n\n一个典型的 Skill 目录结构如下：\n\n\n\n\`\`\`\nmy-skill/\n├── SKILL.md        # 主说明文件（含 YAML frontmatter + Markdown 指令）\n├── script.py       # 可选：Skill 依赖的脚本\n└── config.json     # 可选：配置文件\n\`\`\`\n\n\n更多 skills 内容可以参考：[https://www.runoob.com/ai-agent/skills-agent.html](https://www.runoob.com/ai-agent/skills-agent.html)\n\n\n\n---\n\n\n## \nClawHub -- 安装与使用 Skills\n\nClawHub 是 OpenClaw 的 Skills 市场，可以把它理解成 OpenClaw 的 App Store。\n\n\n\nOpenClaw 的 App Store 叫 ClawHub -- [https://clawhub.ai/](https://clawhub.ai/) ，目前已经汇聚了上万个社区 Skills。\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/openclaw-skills-runoob-1.png)\n\n\n**类比：**\n\n\n\n\`\`\`\nOpenClaw = 操作系统\n\nAgent = 大脑\n\nClawHub = 应用商店\n\`\`\`\n\n\n\nClawHub 是 OpenClaw 的公共技能注册表，用于发现、安装、更新和备份 Skills。\n\n\n	\n\n\n- 官方地址：[https://clawhub.ai/](https://clawhub.ai/)\n	\n- \n国内镜像地址（速度更快）：[https://skillhub.tencent.com/](https://skillhub.tencent.com/)\n\n\n\n\n\nClawHub 提供功能：\n\n\n\n	\n\n\n- 浏览 Skills\n\n	\n- \n搜索 Skills\n	\n- \n\n安装 Skills\n\n	\n- \n更新 Skills\n\n	\n- \n发布 Skills\n\n\n\n\n\n执行过程：\n\n\n\n\`\`\`\n用户提需求 → Agent 做决策 → ClawHub 找工具 → Skill 去执行 → 返回结果\n\`\`\`\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/runoob-clawhub-scaled.png)\n\n\n\n\n\n### \n第一步：安装 ClawHub CLI\n\n\`\`\`\n\nnpm i -g clawhub\nclawhub --version\n\`\`\`\n\n\n### 第二步：搜索并安装 Skill\n\n\n\`\`\`\n# 搜索 Skill（支持自然语言）\nclawhub search "send emails automatically"\n\n# 安装 Skill\nclawhub install\n\`\`\`\n\n默认情况下，CLI 会把 Skill 安装到当前工作目录下的 ./skills 文件夹。\n\n\n如果配置了 OpenClaw workspace，clawhub 会回退到该 workspace，除非你通过 --workdir 参数或 CLAWHUB_WORKDIR 环境变量覆盖路径。\n\n\nOpenClaw 会从 /skills 加载 Skill，并在下一个 Session 中生效。\n\n\n\n### 第三步：重启 OpenClaw Session\n\n\n\`\`\`\nopenclaw chat\n# 新 Session 启动后，Skill 自动加载生效\n\`\`\`\n\n更新 Skill:\n\n\`\`\`\n\nclawhub sync     # 更新当前 workdir 下的所有 Skill\n\`\`\`\n\n\n### 使用国内镜像\n\n\n国内镜像地址 [https://skillhub.tencent.com/](https://skillhub.tencent.com/)，用这个安装速度更快。\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/openclaw-skills-runoob-2.png)\n\n\n在终端中执行以下命令，即可安装 SkillHub CLI，并且优先采用 SkillHub 加速安装技能：\n\n\`\`\`\n\ncurl -fsSL https://skillhub-1388575217.cos.ap-guangzhou.myqcloud.com/install/install.sh | bash\n\`\`\`\n\n比如我们安装搜索功能：\n\n\`\`\`\n\nskillhub install tavily-search\n\`\`\`\n\n安装完成后，我们可以再后台看到该 Skill 已安装：\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/31d4bf49-b6a9-4c71-ac6b-b249c2f8fc5f.png)\n\n\n\n---\n\n\n## 常用 Skills\n\n如果你刚上手OpenClaw，强烈建议的安装顺序是：\n\n\n\n\n\n\n	\n- 先装 Skill Vetter 保底安全\n	\n- \n再装 self-improving-agent 或其变种，让AI开始长记性\n	\n- \n根据需求补 Summarize / Agent Browser / Gog / Github / Multi Search Engine 这几个万金油\n\n\n\n\n安装方式超级简单：\n\n\n\n1、先安装 clawhub CLI\n\n\n\n\`\`\`\n\nnpm i -g clawhub\n\`\`\`\n\n2、然后安装这些 Skills：\n\n\`\`\`\n\nclawhub install self-improving-agent\nclawhub install summarize\n# 批量更新全部\nclawhub update --all\n\`\`\`\n\n常用的 Skills 列表如下：\n\n\n\n\n  \n    \n      #\n      Skill\n      说明\n      适用场景\n      安装\n    \n  \n  \n    1self-improving-agent记录失败与纠正并复盘优化失败复盘 / 多次出错 / 用户纠正\`clawhub install self-improving-agent\`\n    2summarize多格式内容总结（网页/PDF/视频等）长文阅读 / 文档提炼\`clawhub install summarize\`\n    3agent-browser自动浏览器操作（点/输/抓）爬取 / 表单 / 自动化\`clawhub install agent-browser\`\n    4skill-vetter安装前安全检测检测权限 / 风险插件\`clawhub install skill-vetter\`\n    5github通过 gh 操作 GitHubPR / Issue / CI\`clawhub install github\`\n    6gogGoogle Workspace 集成邮件 / 文档 / 表格\`clawhub install gog\`\n    7ontology结构化知识图谱记忆项目 / 多任务管理\`clawhub install ontology\`\n    8proactive-agent主动执行与调度定时任务 / 自动执行\`clawhub install proactive-agent\`\n    9multi-search-engine多引擎搜索聚合调研 / 对比\`clawhub install multi-search-engine\`\n    10humanizer优化文本更自然文案 / 润色\`clawhub install humanizer\`\n    11nano-pdf自然语言编辑 PDF合同 / 文档修改\`clawhub install nano-pdf\`\n    12notion管理页面与数据库笔记 / 知识库\`clawhub install notion\`\n    13obsidianMarkdown 笔记自动化整理 / 沉淀\`clawhub install obsidian\`\n    14api-gateway连接 100+ API系统集成\`clawhub install api-gateway\`\n    15automation-workflows设计执行自动化流程副业 / 自动化\`clawhub install automation-workflows\`\n    16auto-updater自动更新 Skills长期运行\`clawhub install auto-updater\`\n    17openai-whisper本地语音转文字会议记录\`clawhub install openai-whisper\`\n    18nano-banana-pro图像生成与编辑海报 / 图片\`clawhub install nano-banana-pro\`\n    19stock-analysis股票与加密分析趋势 / 分析\`clawhub install stock-analysis\`\n    20weather天气查询与预测日常查询\`clawhub install weather\`\n  \n\n\n---\n\n\n## 制作自己的 Skill\n\n下面是一个最简单的 SKILL.md 示例：\n\n\n\n\`\`\`\n---\nname: my-skill\ndescription: Does a thing with an API.\n---\n\n# My Skill\n\n## Rules\n- Always confirm with the user before making destructive changes.\n- Use the credentials from environment variable MY_API_KEY.\n\n## Usage\nWhen the user asks to "do the thing", call the API endpoint at\nhttps://api.example.com/action with the provided payload.\n\`\`\`\n\n写好后，执行发布命令：\n\n\n\n\`\`\`\nclawhub publish ~/.openclaw/skills/my-skill \\\n  --slug my-skill \\\n  --name "My Skill" \\\n  --version 1.0.0 \\\n  --tags latest\n\`\`\`\n\n发布需要一个至少注册满一周的 GitHub 账号。--slug 是 Skill 在 ClawHub 上的唯一标识符，在整个注册表中必须唯一。\n\n			\n						\n			\n			\n		\n\n		\n		\n			[ OpenClaw 卸载指南](http://www.runoob.com/ai-agent/openclaw-uninstall.html)\n		\n\n		\n		\n				\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n    \n        \n    \n    \n    \n    \n\n\n    \n    \n        \n                \n        \n        \n        \n                \n    \n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
-    document.getElementById('md-content').innerHTML = marked.parse(md);
+      const md = `# OpenClaw Skills -- ClawHub\n\nOpenClaw Skills 是包含指令代码的 Markdown 文件，用于帮助 Agent 执行特定任务或优化工作流功能。\n\n\n\n\n真正让 OpenClaw 从聊天机器人变成超级助手的，其实是它的 Skills 生态 —— 相当于 AI 的 App Store。\n\n\n\n简单理解：\n\n\n\n\n\`\`\`\nOpenClaw = iPhone 手机\nSkills = App Store\n\`\`\`\n\n\n没有 Skill 的 AI 只能聊天，有 Skill 的 AI 才能 搜索、自动化、操作系统、调用 API、执行脚本。\n\n\n\n一个典型的 Skill 目录结构如下：\n\n\n\n\`\`\`\nmy-skill/\n├── SKILL.md        # 主说明文件（含 YAML frontmatter + Markdown 指令）\n├── script.py       # 可选：Skill 依赖的脚本\n└── config.json     # 可选：配置文件\n\`\`\`\n\n\n更多 skills 内容可以参考：[https://www.runoob.com/ai-agent/skills-agent.html](https://www.runoob.com/ai-agent/skills-agent.html)\n\n\n\n---\n\n\n## \nClawHub -- 安装与使用 Skills\n\nClawHub 是 OpenClaw 的 Skills 市场，可以把它理解成 OpenClaw 的 App Store。\n\n\n\nOpenClaw 的 App Store 叫 ClawHub -- [https://clawhub.ai/](https://clawhub.ai/) ，目前已经汇聚了上万个社区 Skills。\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/openclaw-skills-runoob-1.png)\n\n\n**类比：**\n\n\n\n\`\`\`\nOpenClaw = 操作系统\n\nAgent = 大脑\n\nClawHub = 应用商店\n\`\`\`\n\n\n\nClawHub 是 OpenClaw 的公共技能注册表，用于发现、安装、更新和备份 Skills。\n\n\n	\n\n\n- 官方地址：[https://clawhub.ai/](https://clawhub.ai/)\n	\n- \n国内镜像地址（速度更快）：[https://skillhub.tencent.com/](https://skillhub.tencent.com/)\n\n\n\n\n\nClawHub 提供功能：\n\n\n\n	\n\n\n- 浏览 Skills\n\n	\n- \n搜索 Skills\n	\n- \n\n安装 Skills\n\n	\n- \n更新 Skills\n\n	\n- \n发布 Skills\n\n\n\n\n\n执行过程：\n\n\n\n\`\`\`\n用户提需求 → Agent 做决策 → ClawHub 找工具 → Skill 去执行 → 返回结果\n\`\`\`\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/runoob-clawhub-scaled.png)\n\n\n\n\n\n### \n第一步：安装 ClawHub CLI\n\n\`\`\`\n\nnpm i -g clawhub\nclawhub --version\n\`\`\`\n\n\n### 第二步：搜索并安装 Skill\n\n\n\`\`\`\n# 搜索 Skill（支持自然语言）\nclawhub search "send emails automatically"\n\n# 安装 Skill\nclawhub install\n\`\`\`\n\n默认情况下，CLI 会把 Skill 安装到当前工作目录下的 ./skills 文件夹。\n\n\n如果配置了 OpenClaw workspace，clawhub 会回退到该 workspace，除非你通过 --workdir 参数或 CLAWHUB_WORKDIR 环境变量覆盖路径。\n\n\nOpenClaw 会从 /skills 加载 Skill，并在下一个 Session 中生效。\n\n\n\n### 第三步：重启 OpenClaw Session\n\n\n\`\`\`\nopenclaw chat\n# 新 Session 启动后，Skill 自动加载生效\n\`\`\`\n\n更新 Skill:\n\n\`\`\`\n\nclawhub sync     # 更新当前 workdir 下的所有 Skill\n\`\`\`\n\n\n### 使用国内镜像\n\n\n国内镜像地址 [https://skillhub.tencent.com/](https://skillhub.tencent.com/)，用这个安装速度更快。\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/openclaw-skills-runoob-2.png)\n\n\n在终端中执行以下命令，即可安装 SkillHub CLI，并且优先采用 SkillHub 加速安装技能：\n\n\`\`\`\n\ncurl -fsSL https://skillhub-1388575217.cos.ap-guangzhou.myqcloud.com/install/install.sh | bash\n\`\`\`\n\n比如我们安装搜索功能：\n\n\`\`\`\n\nskillhub install tavily-search\n\`\`\`\n\n安装完成后，我们可以再后台看到该 Skill 已安装：\n\n\n\n![](https://www.runoob.com/wp-content/uploads/2026/03/31d4bf49-b6a9-4c71-ac6b-b249c2f8fc5f.png)\n\n\n\n---\n\n\n## 常用 Skills\n\n如果你刚上手OpenClaw，强烈建议的安装顺序是：\n\n\n\n\n\n\n	\n- 先装 Skill Vetter 保底安全\n	\n- \n再装 self-improving-agent 或其变种，让AI开始长记性\n	\n- \n根据需求补 Summarize / Agent Browser / Gog / Github / Multi Search Engine 这几个万金油\n\n\n\n\n安装方式超级简单：\n\n\n\n1、先安装 clawhub CLI\n\n\n\n\`\`\`\n\nnpm i -g clawhub\n\`\`\`\n\n2、然后安装这些 Skills：\n\n\`\`\`\n\nclawhub install self-improving-agent\nclawhub install summarize\n# 批量更新全部\nclawhub update --all\n\`\`\`\n\n常用的 Skills 列表如下：\n\n\n\n\n  \n    \n      #\n      Skill\n      说明\n      适用场景\n      安装\n    \n  \n  \n    1self-improving-agent记录失败与纠正并复盘优化失败复盘 / 多次出错 / 用户纠正\`clawhub install self-improving-agent\`\n    2summarize多格式内容总结（网页/PDF/视频等）长文阅读 / 文档提炼\`clawhub install summarize\`\n    3agent-browser自动浏览器操作（点/输/抓）爬取 / 表单 / 自动化\`clawhub install agent-browser\`\n    4skill-vetter安装前安全检测检测权限 / 风险插件\`clawhub install skill-vetter\`\n    5github通过 gh 操作 GitHubPR / Issue / CI\`clawhub install github\`\n    6gogGoogle Workspace 集成邮件 / 文档 / 表格\`clawhub install gog\`\n    7ontology结构化知识图谱记忆项目 / 多任务管理\`clawhub install ontology\`\n    8proactive-agent主动执行与调度定时任务 / 自动执行\`clawhub install proactive-agent\`\n    9multi-search-engine多引擎搜索聚合调研 / 对比\`clawhub install multi-search-engine\`\n    10humanizer优化文本更自然文案 / 润色\`clawhub install humanizer\`\n    11nano-pdf自然语言编辑 PDF合同 / 文档修改\`clawhub install nano-pdf\`\n    12notion管理页面与数据库笔记 / 知识库\`clawhub install notion\`\n    13obsidianMarkdown 笔记自动化整理 / 沉淀\`clawhub install obsidian\`\n    14api-gateway连接 100+ API系统集成\`clawhub install api-gateway\`\n    15automation-workflows设计执行自动化流程副业 / 自动化\`clawhub install automation-workflows\`\n    16auto-updater自动更新 Skills长期运行\`clawhub install auto-updater\`\n    17openai-whisper本地语音转文字会议记录\`clawhub install openai-whisper\`\n    18nano-banana-pro图像生成与编辑海报 / 图片\`clawhub install nano-banana-pro\`\n    19stock-analysis股票与加密分析趋势 / 分析\`clawhub install stock-analysis\`\n    20weather天气查询与预测日常查询\`clawhub install weather\`\n  \n\n\n---\n\n\n## 制作自己的 Skill\n\n下面是一个最简单的 SKILL.md 示例：\n\n\n\n\`\`\`\n---\nname: my-skill\ndescription: Does a thing with an API.\n---\n\n# My Skill\n\n## Rules\n- Always confirm with the user before making destructive changes.\n- Use the credentials from environment variable MY_API_KEY.\n\n## Usage\nWhen the user asks to "do the thing", call the API endpoint at\nhttps://api.example.com/action with the provided payload.\n\`\`\`\n\n写好后，执行发布命令：\n\n\n\n\`\`\`\nclawhub publish ~/.openclaw/skills/my-skill \\\n  --slug my-skill \\\n  --name "My Skill" \\\n  --version 1.0.0 \\\n  --tags latest\n\`\`\`\n\n发布需要一个至少注册满一周的 GitHub 账号。--slug 是 Skill 在 ClawHub 上的唯一标识符，在整个注册表中必须唯一。\n\n			\n						\n			\n			\n		\n\n		\n		\n			[ OpenClaw 卸载指南](http://www.runoob.com/ai-agent/openclaw-uninstall.html)\n		\n\n		\n		\n				\n		\n		\n\n\n\n\n \n		 \n	\n###  点我分享笔记\n\n	\n	\n		\n	\n		\n			\n								[取消](https://www.runoob.comjavascript:;)\n\n\n			\n			\n			\n			\n				\n					\n\n\n					 分享笔记\n				\n			\n		\n				\n					 \n						\n\n							昵称昵称 (必填)\n							邮箱邮箱 (必填)\n							引用地址引用地址\n						\n\n					\n				\n			\n		\n\n	\n	\n\n\n\n\n\n\n\n\n\n	\n\n	\n\n\n\n\n\n\n    \n        \n    \n    \n    \n    \n\n\n    \n    \n        \n                \n        \n        \n        \n                \n    \n\n\n\n\n\n       在线实例\n\n\n       ·[HTML 实例](https://www.runoob.com/html/html-examples.html)\n\n\n       ·[CSS 实例](https://www.runoob.com/css/css-examples.html)\n\n\n       ·[JavaScript 实例](https://www.runoob.com/js/js-examples.html)\n\n\n       ·[Ajax 实例](https://www.runoob.com/ajx/ajax-examples.html)\n\n\n       ·[jQuery 实例](https://www.runoob.com/jquery/jquery-examples.html)\n\n\n       ·[XML 实例](https://www.runoob.com/xml/xml-examples.html)\n\n\n       ·[Java 实例](https://www.runoob.com/java/java-examples.html)\n\n\n\n\n\n      字符集&工具\n\n\n       · [HTML 字符集设置](https://www.runoob.com/charsets/html-charsets.html)\n\n\n       · [HTML ASCII 字符集](https://www.runoob.com/tags/html-ascii.html)\n\n\n       · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)\n\n\n       · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)\n\n\n       · [HTML 拾色器](https://www.runoob.com/tags/html-colorpicker.html)\n\n\n       · [JSON 格式化工具](https://www.jyshare.com/front-end/53)\n\n\n       · [随机数生成器](https://www.jyshare.com/front-end/6680/)\n\n\n\n\n       最新更新\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-custom-tools.html)\n\n\n              ·\n              [\n                OpenCode Skills              ](http://www.runoob.com/opencode/opencode-skills.html)\n\n\n              ·\n              [\n                OpenCode MCP 服...              ](http://www.runoob.com/opencode/opencode-mcp.html)\n\n\n              ·\n              [\n                OpenCode LSP 服...              ](http://www.runoob.com/opencode/opencode-lsp.html)\n\n\n              ·\n              [\n                OpenCode 权限配置              ](http://www.runoob.com/opencode/opencode-permissions.html)\n\n\n              ·\n              [\n                OpenCode 格式化...              ](http://www.runoob.com/opencode/opencode-formatter.html)\n\n\n              ·\n              [\n                OpenCode 自定义...              ](http://www.runoob.com/opencode/opencode-commands.html)\n\n\n\n\n       站点信息\n\n\n       ·\n       [意见反馈](https://www.runoob.commailto:admin@runoob.com)\n\n\n       ·\n      [免责声明](https://www.runoob.com/disclaimer)\n\n\n       ·\n       [关于我们](https://www.runoob.com/aboutus)\n\n\n       ·\n      [文章归档](https://www.runoob.com/archives)\n\n\n\n\n\n\n\n         **关注微信**\n\n\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)\n\n\n\n\n\n\n     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com//www.runoob.com/)** \n    **[runoob.com](https://www.runoob.com//www.runoob.com/)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)\n\n\n\n    [ ](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n    [](https://www.runoob.comjavascript:void(0))\n\n\n\n#### 微信关注\n\n      ![](/wp-content/themes/runoob/assets/images/qrcode.png)`;
+      document.getElementById('md-content').innerHTML = marked.parse(md);
     </script>
-</body>
+  </body>
 </html>

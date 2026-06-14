@@ -1,405 +1,1703 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                01讲如何学习Linux性能优化
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/d2/67/d2122fd6f8b391fcffb1716563056c67.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">01讲如何学习Linux性能优化</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/d2/67/d2122fd6f8b391fcffb1716563056c67.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>你是否也曾跟我一样，看了很多书、学了很多Linux性能工具，但在面对Linux性能问题时，还是束手无策？实际上，性能分析和优化始终是大多数软件工程师的一个痛点。但是，面对难题，我们真的就无解了吗？</p><p>固然，性能问题的复杂性增加了学习难度，但这并不能成为我们进阶路上的“拦路虎”。在我看来，大多数人对性能问题“投降”，原因可能只有两个。</p><p>一个是你没找到有效的方法学原理，一听到“系统”、“底层”这些词就发怵，觉得东西太难，自己一定学不会，自然也就无法深入学下去，从而不能建立起性能的全局观。</p><p>再一个就是，你看到性能问题的根源太复杂，既不懂怎么去分析，也不能抽丝剥茧找到瓶颈。</p><p>你可能会想，反正程序出了问题，上网查就是了，用别人的方法，囫囵吞枣地多试几次，有可能就解决了。于是，你懒得深究这些方法为啥有效，更不知道为什么，很多方法在别人的环境有效，到你这儿就不行了。</p><p>所以，相同的错误重复在犯，相同的状况也是重复出现。</p><p>其实，性能问题并没有你想像得那么难，<strong>只要你理解了应用程序和系统的少数几个基本原理，再进行大量的实战练习，建立起整体性能的全局观</strong>，大多数性能问题的优化就会水到渠成。</p><p>我见过很多工程师，在分析应用程序所使用的第三方组件的性能时，并不熟悉这些组件所用的编程语言，却依然可以分析出线上问题的根源，并能通过一些方法进行优化，比如修改应用程序对它们的调用逻辑，或者调整组件的配置选项等。</p><!-- [[[read_end]]] --><p>还是那句话，<strong><span class="orange">你不需要了解每个组件的所有实现细节</span></strong>，只要能理解它们最基本的工作原理和协作方式，你也可以做到。</p><h2>性能指标是什么？</h2><p>学习性能优化的第一步，一定是了解“性能指标”这个概念。</p><p>当看到性能指标时，你会首先想到什么呢？我相信“<strong>高并发</strong>”和“<strong>响应快</strong>”一定是最先出现在你脑海里的两个词，而它们也正对应着性能优化的两个核心指标——“<span class="orange">吞吐</span>”和“<span class="orange">延时</span>”。这两个指标是<strong>从应用负载的视角</strong>来考察性能，直接影响了产品终端的用户体验。跟它们对应的，是<strong>从系统资源的视角</strong>出发的指标，比如资源使用率、饱和度等。</p><p><img src="https://static001.geekbang.org/resource/image/92/1d/920601da775da08844d231bc2b4c301d.png" alt=""></p><p>我们知道，随着应用负载的增加，系统资源的使用也会升高，甚至达到极限。而<strong>性能问题的本质</strong>，就是系统资源已经达到瓶颈，但请求的处理却还不够快，无法支撑更多的请求。</p><p>性能分析，其实就是<strong>找出应用或系统的瓶颈，并设法去避免或者缓解它们</strong>，从而更高效地利用系统资源处理更多的请求。这包含了一系列的步骤，比如下面这六个步骤。</p><ul>
-<li>
-<p>选择指标评估应用程序和系统的性能；</p>
-</li>
-<li>
-<p>为应用程序和系统设置性能目标；</p>
-</li>
-<li>
-<p>进行性能基准测试；</p>
-</li>
-<li>
-<p>性能分析定位瓶颈；</p>
-</li>
-<li>
-<p>优化系统和应用程序；</p>
-</li>
-<li>
-<p>性能监控和告警。</p>
-</li>
-</ul><p>了解了这些性能相关的基本指标和核心步骤后，该怎么学呢？接下来，我来说说要学好Linux 性能优化的几个重要问题。</p><h2>学这个专栏需要什么基础</h2><p>首先你要明白，我们这个专栏的核心是<span class="orange">性能的分析和优化</span>，而不是最基本的Linux操作系统的使用方法。</p><p>因而，我希望你最好用过Ubuntu或其他Linux操作系统，然后要具备一些<strong>编程基础</strong>，比如：</p><ul>
-<li>
-<p>了解Linux常用命令的使用方法；</p>
-</li>
-<li>
-<p>知道怎么安装和管理软件包；</p>
-</li>
-<li>
-<p>知道怎么通过编程语言开发应用程序等。</p>
-</li>
-</ul><p>这样，在我讲性能时，你就更容易理解性能背后的原理，特别是在结合专栏里的案例实践后，对性能分析能有更直观的体会。</p><p>这个专栏不会像教科书那样，详细教你操作系统、算法原理、网络协议乃至各种编程语言的全部细节，但一些重要的系统原理还是必不可少的。我还会用实际案例一步步教你，贯穿从应用程序到操作系统的各个组件。</p><h2>学习的重点是什么？</h2><p>想要学习好性能分析和优化，<strong>建立整体系统性能的全局观</strong>是最核心的话题。因而，</p><ul>
-<li>
-<p>理解最基本的几个系统知识原理；</p>
-</li>
-<li>
-<p>掌握必要的性能工具；</p>
-</li>
-<li>
-<p>通过实际的场景演练，贯穿不同的组件。</p>
-</li>
-</ul><p>这三点，就是我们学习的重中之重。我会在专栏的每篇文章中，针对不同场景，把这三个方面给你讲清楚，你也一定要花时间和心思来消化它们。</p><p>其实说到性能工具，就不得不提性能领域的大师布伦丹·格雷格（Brendan Gregg）。他不仅是动态追踪工具DTrace的作者，还开发了许许多多的性能工具。我相信你一定见过他所描绘的Linux性能工具图谱：</p><p><img src="https://static001.geekbang.org/resource/image/9e/7a/9ee6c1c5d88b0468af1a3280865a6b7a.png" alt=""></p><p>（图片来自<a href="http://www.brendangregg.com/Perf/linux_perf_tools_full.png">brendangregg.com</a>）</p><p>这个图是Linux性能分析最重要的参考资料之一，它告诉你，在Linux不同子系统出现性能问题后，应该用什么样的工具来观测和分析。</p><p>比如，当遇到I/O性能问题时，可以参考图片最下方的I/O子系统，使用iostat、iotop、blktrace等工具分析磁盘I/O的瓶颈。你可以把这个图保存下来，在需要的时候参考查询。</p><p>另外，我还要特别强调一点，就是<strong>性能工具的选用</strong>。有句话是这么说的，一个正确的选择胜过千百次的努力。虽然夸张了些，但是选用合适的性能工具，确实可以大大简化整个性能优化过程。在什么场景选用什么样的工具、以及怎么学会选择合适工具，都是我想教给你的东西。</p><p>但是切记，<strong><span class="orange">千万不要把性能工具当成学习的全部</span></strong>。工具只是解决问题的手段，关键在于你的用法。只有真正理解了它们背后的原理，并且结合具体场景，融会贯通系统的不同组件，你才能真正掌握它们。</p><p>最后，为了让你对性能有个全面的认识，我画了一张思维导图，里面涵盖了大部分性能分析和优化都会包含的知识，专栏中也基本都会讲到。你可以<span class="orange">保存或者打印</span>下来，每学会一部分就标记出来，记录并把握自己的学习进度。</p><p><img src="https://static001.geekbang.org/resource/image/0f/ba/0faf56cd9521e665f739b03dd04470ba.png" alt=""></p><h2>怎么学更高效？</h2><p>前面我给你讲了Linux性能优化的学习重点，接下来我再跟你分享一下，我的几个学习技巧。掌握这些技巧，可以让你学得更轻松。</p><p><strong>技巧一：虽然系统的原理很重要，但在刚开始一定不要试图抓住所有的实现细节。</strong></p><p>深陷到系统实现的内部，可能会让你丢掉学习的重点，而且繁杂的实现逻辑，很可能会打退你学习的积极性。所以，我个人观点是一定要适度。</p><p>你可以先学会我给你讲的这些系统工作原理，但不要去深究Linux内核是如何做到的，而是要把你的重点放到如何观察和运用这些原理上，比如：</p><ul>
-<li>
-<p>有哪些指标可以衡量性能？</p>
-</li>
-<li>
-<p>使用什么样的性能工具来观察指标？</p>
-</li>
-<li>
-<p>导致这些指标变化的因素等。</p>
-</li>
-</ul><p><strong>技巧二：边学边实践，通过大量的案例演习掌握Linux性能的分析和优化。</strong></p><p>只有通过在机器上练习，把我讲的知识和案例自己过一遍，这些东西才能转化成你的。我精心设计这些案例，正是为了让你有更好的学习理解和操作体验。</p><p>所以我强烈推荐你去实际运行、分析这些案例，或者用学到的知识去分析你自己的系统，这样你会有更直观的感受，获得更好的学习效果。</p><p><strong>技巧三：勤思考，多反思，善总结，多问为什么。</strong></p><p>想真正学懂一门知识，最好的方法就是<span class="orange">问问题</span>。当你能提出好的问题时，就说明你已经深入了解了它。</p><p>你可以随时在留言区给我留言，写下自己的疑问、思考和总结，和我还有其他的学习者一起讨论切磋。你也可以写下自己经历过的性能问题，记录你的分析步骤和优化思路，我们一起互动探讨。</p><h2>学习之前，你的准备</h2><p>作为一个包含大量案例实践的课程，我会在每篇文章中，使用一到两台Ubuntu 18.04虚拟机，作为案例运行和分析的环境。如果你只是单纯听音频的讲解，却从不动手实践，学习的效果一定会大打折扣。</p><p>所以，你是不是可以准备好一台Linux机器，用于课程案例的实践呢？<span class="orange">任意的虚拟机或物理机都可以，并不局限于Ubuntu系统</span>。</p><h2>思考</h2><p>今天的内容是我们后续学习的热身准备。从下篇文章开始，我们就要正式进入Linux性能分析和优化了。所以，我想请你来聊一聊，你之前在解决Linux性能问题时，有遇到过什么样的困难或者疑惑吗？或者是之前自己学习Linux性能优化时，有哪些问题吗？参考我今天所讲的内容，你又打算怎么来学这个专栏？</p><p>欢迎在留言区和我分享。</p><p><img src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/60/05/3797d774.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">forever</span>
-                            </div>
-                            <div class="bd">我遇到性能瓶颈的排查思路<br><br>有监控的情况下，首先去看看监控大盘，看看有没有异常报警，如果初期还没有监控的情况我会按照下面步骤去看看系统层面有没有异常<br>1、我首先会去看看系统的平均负载，使用top或者htop命令查看,平均负载体现的是系统的一个整体情况，他应该是cpu、内存、磁盘性能的一个综合，一般是平均负载的值大于机器cpu的核数，这时候说明机器资源已经紧张了<br>2、平均负载高了以后，接下来就要看看具体是什么资源导致，我首先会在top中看cpu每个核的使用情况，如果占比很高，那瓶颈应该是cpu,接下来就要看看是什么进程导致的<br>3、如果cpu没有问题，那接下来我会去看内存，首先是用free去查看内存的是用情况，但不直接看他剩余了多少，还要结合看看cache和buffer，然后再看看具体是什么进程占用了过高的内存，我也是是用top去排序<br>4、内存没有问题的话就要去看磁盘了，磁盘我用iostat去查看，我遇到的磁盘问题比较少<br>5、还有就是带宽问题，一般会用iftop去查看流量情况，看看流量是否超过的机器给定的带宽<br>6、涉及到具体应用的话，就要根据具体应用的设定参数来查看，比如连接数是否查过设定值等<br>7、如果系统层各个指标查下来都没有发现异常，那么就要考虑外部系统了，比如数据库、缓存、存储等<br><br>基本上就上面这些步骤，有些不完整，希望跟着老师学习一些更系统的排查思路！ <br></div>
-                            <span class="time">2018-11-21 09:45</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的很好👍</p>
-                                <p class="reply-time">2018-11-21 15:10</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">C家族的铁粉儿</span>
-                            </div>
-                            <div class="bd">D2打卡<br><br>1. 笔记<br>技巧一：虽然系统的原理很重要，但在刚开始一定不要试图抓住所有的实现细节。”<br><br>深陷到系统实现的内部，可能会让你丢掉学习的重点，而且繁杂的实现逻辑，很可能会打退你学习的积极性。所以，我个人观点是一定要适度。<br><br>2. 心得<br>作为一个完美主义者，一学起原理类的东西，真的不要太容易跑偏😂经常是看着某个重要原理，就想着找找看相关内容，然后就各种跳转搜索，以前最开始学数据结构的定义，都能跑到编译原理上，最后开始计算二进制了。<br><br>有时候大半天了，一个原理都没看完，就各种死抠和联想。这么做确实印象深刻，但是真的很低效，心累。<br><br>老师这里说的适度，真的很重要，而且这个度，确实应该是过来人才知道啊。<br><br>我一向喜欢系统化的学习，能有个“升级简化版”的系统知识图谱，不要太开心。可惜不能上传图片，不然可以把每次标记和补充也都打个卡了。<br><br>开始学了，加油！冲着我的四个月后涨工资的目标去了！ <br></div>
-                            <span class="time">2018-11-21 00:16</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的好👍</p>
-                                <p class="reply-time">2018-11-21 14:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/36/d2/c7357723.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">发条橙子 。</span>
-                            </div>
-                            <div class="bd">以前看服务器的资源使用只会简单的使用 top命令 看cpu使用的百分比。，但是却不清楚到底多高才算高危 ，面对持续增长我该怎么预防或处理 ， load指标具体的含义 和 cpu有什么关联 ..这些都没有一个整体的概念  <br></div>
-                            <span class="time">2018-11-21 00:18</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">下一篇就是平均负载😊</p>
-                                <p class="reply-time">2018-11-21 08:27</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/1d/1f/6bc10297.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Allen</span>
-                            </div>
-                            <div class="bd">『day1』<br>这周工作中遇到了一个紧急的问题（用的是arm系列的单板），单板的空间几乎快满了。 使用了top和free命令查看，单板内存的使用情况，仅仅凭借这两个命令，是不可能分析出来原因的。<br><br>查看&#47;proc&#47;&lt;pid&gt;&#47;下的的meminfo、status等文件可以具体才看到虚拟内存和实际物理内存的使用情况。  之前根本不了解&#47;proc&#47;&lt;pid&gt;里面的文件都是干嘛的。<br><br>希望跟着老师的专栏，可以了解下linux系统的基本知识，以后遇到相关问题时，可以有一些思路。 <br></div>
-                            <span class="time">2018-11-21 00:41</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">内存模块会详细介绍</p>
-                                <p class="reply-time">2018-11-21 14:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Geek_60821e</span>
-                            </div>
-                            <div class="bd">希望之后课程能深入的用工具分析原因，不要讲工具怎么用，怎么用工具上网free的实例很多，找出瓶颈的原因是我来听课目的，wish nice <br></div>
-                            <span class="time">2018-11-21 13:23</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/5c/b1/f4bd04ed.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">石壹笑</span>
-                            </div>
-                            <div class="bd">切记，千万不要把性能工具当成学习的全部。<br>应消除干扰，专注于愿问题本身。 <br></div>
-                            <span class="time">2018-11-21 00:35</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/14/00/94ee0daf.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Dragon</span>
-                            </div>
-                            <div class="bd">能否在翻页的左侧或右侧加一个暂停键, 你想如果边听边看文字时候暂停还要返回头顶,多麻烦 <br></div>
-                            <span class="time">2018-11-23 22:28</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/57/ed/d96acbd7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">mj4ever</span>
-                            </div>
-                            <div class="bd">之所以选择学习这个专栏，就是希望能解决实际工作中的一些技术问题，当公司研发的产品在现场运行，出现性能问题的时，不会束手无策，毫无思路，误打误撞的去解决问题。<br>因此，希望通过3个月的学习，自己可以掌握以下几个方面：<br>1、建立整体性能的全局观<br>2、理解最基本的几个系统知识原理<br>3、掌握Linux 性能工具图谱的熟练应用<br>感谢大家，也感谢能不断坚持的自己。 <br></div>
-                            <span class="time">2018-11-21 09:15</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-11-21 15:09</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/57/6e/dd0eee5f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">夜空中最亮的星（华仔）</span>
-                            </div>
-                            <div class="bd">已经在朋友圈转发2次老师的课了。 <br></div>
-                            <span class="time">2018-11-21 11:27</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/51/cd/d6fe851f.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Gopher</span>
-                            </div>
-                            <div class="bd">小哥哥声音好听，语音很清晰 <br></div>
-                            <span class="time">2018-11-22 16:33</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/8c/41/5a66afc8.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">上善若水</span>
-                            </div>
-                            <div class="bd">之前调试网络性能问题，组网比较复杂，测试仪千万级用户拨号，越到后面越是上线速率急速下降，每个点都进行抓包监控丢包率，top也观测进程cpu利用率，就是找不出原因，进程cpu利用率也不高，丢包也不严重，对比抓包，发现上送包处理有很大延迟，后来pstack应用进程发现一处一点，原来应用进程有一处调用函数是阻塞的，光有生产者没有消费者，导致大用户拨号后阻塞超时，而且那个api还是第三方的没有源码，找到维护的组才确认问题，前后加班熬了两个星期才确认问题，所以痛下心来学习下性能定位课程 <br></div>
-                            <span class="time">2018-11-21 13:03</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/5c/c5/1231d633.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">梁中华</span>
-                            </div>
-                            <div class="bd">打卡，希望作者必要的时候能结合虚拟机和docker来讲下，在这两种环境下的性能问题分析有什么要注意的，毕竟现在的应用不是运行在虚拟机就是运行在容器中 <br></div>
-                            <span class="time">2018-11-21 09:46</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">会的，案例也会用到docker</p>
-                                <p class="reply-time">2018-11-21 15:14</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/b9/76/34478b36.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">代码GG陆晓明</span>
-                            </div>
-                            <div class="bd">学习这块，是想应用到手机系统上。安卓的性能一直是个诟病，想通过一些工具进行复测，能够找到一些思路进行优化，然后使用一套测试打分，来评估到底是改善还是没有。<br><br>在了解学习linux的常用性能分析工具，想从本课程琢磨出一套方式，来进行系统的优化，找到一条优化安卓系统的有效方法。<br><br>感谢！ <br></div>
-                            <span class="time">2018-11-21 00:19</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/dd/b9/ce84d577.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Charles.Gast</span>
-                            </div>
-                            <div class="bd">晚上下班，坐着地铁，看着教程。完美的过站。 <br></div>
-                            <span class="time">2018-12-04 21:28</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7d/17/179b24f4.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">燕羽阳</span>
-                            </div>
-                            <div class="bd">性能问题考验的是综合能力和全局观，希望能和大家共同进步 <br></div>
-                            <span class="time">2018-11-21 13:18</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/02/be/bc2ca09d.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李建贵</span>
-                            </div>
-                            <div class="bd">之前对Linux的仅停留在命令行的使用，通过这个专栏从性能视角深入的学习和了解Linux，相信学了这个对我的成长很有帮助! <br></div>
-                            <span class="time">2018-11-21 13:07</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">番茄炒鸡蛋</span>
-                            </div>
-                            <div class="bd">前段时间遇到服务请求过多，导致内存增高，但是过段时间请求下降，但内存还是一直比较高，如果后续再次遇到请求过多，就会导致没有内存，程序崩溃，请问这类问题如何排查？ <br></div>
-                            <span class="time">2018-11-21 12:42</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/4c/0c/abb7bfe3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">潜。</span>
-                            </div>
-                            <div class="bd">性能指标概念：高并发 =&gt; 吞吐   响应快 =&gt; 延时<br>该概念是从应用负载的角度出发：Application ▹Libraries▹System Call▹Linux Kernel ▹Drive<br><br> 与之对应的是系统资源视角出发 ：Drive▹Linux Kernel ▹System Call ▹Libraries ▹Application <br><br>性能指标的评判有以上二种常用的角度<br><br>接着六步<br><br>1.选择性能指标评估应用和系统的性能<br><br>2.为应用和系统设定性能目标<br><br>3.进行性能基准测试<br><br>4.性能分析定位瓶颈<br><br>5.优化系统和应用程序<br><br>6.性能监控和告警<br><br>六步总结，从正确的角度出发，设定目标（性能优化不是漫无目的的），基准测试（了解现有系统应用的运行时情况），根据情况分析瓶颈，优化它，设置监控和告警（其实可以再扩展比如达到一定的负载，采取降级等操作） <br></div>
-                            <span class="time">2018-11-21 10:18</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的很好</p>
-                                <p class="reply-time">2018-11-21 15:30</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/19/ac/d39011f0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">King_stone</span>
-                            </div>
-                            <div class="bd">遇到过的问题：Linux上tomcat性能下降，资源消耗较大，最终判断是JAVA程序一个方法的问题。解决和监控的手段不够智能，写过一个监控但是JAVA本身的监控不稳定，消耗也较大，最终撤掉，希望课程能对这方面优化监控有介绍 <br></div>
-                            <span class="time">2018-11-21 09:54</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/1b/f4/773e7e4b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">java小白</span>
-                            </div>
-                            <div class="bd">D2打卡，做了一段时间的性能优化工作，发现自己工作中只是重复的进行压测，压接口压场景，遇到的最大问题是CPU高，基本就是通过线程栈去分析那些线程有问题然后抛给开发去看代码是不是有问题，一个个的去解决，最后成功降低CPU的也不多，堆栈、磁盘I&#47;O、网络这些基本都没怎么重点用到。现在总结下自己面对的问题：①性能分析没有一个整体的分析思路，在遇到各种各样的问题的时候应该用什么样的方法去分析；②自己没有编程开发的经验，代码方面一直是自己的薄弱环节，也在逐渐学习加强。想问下作者，代码开发基础在性能优化工作中到底能占多少比重有多重要？ <br></div>
-                            <span class="time">2018-11-21 09:50</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">在分析的过程中一般不需要去做大量开发，随后的优化步骤很可能需要代码开发解决。<br><br></p>
-                                <p class="reply-time">2018-11-21 15:26</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  你是否也曾跟我一样，看了很多书、学了很多Linux性能工具，但在面对Linux性能问题时，还是束手无策？实际上，性能分析和优化始终是大多数软件工程师的一个痛点。但是，面对难题，我们真的就无解了吗？
+                </p>
+                <p>
+                  固然，性能问题的复杂性增加了学习难度，但这并不能成为我们进阶路上的“拦路虎”。在我看来，大多数人对性能问题“投降”，原因可能只有两个。
+                </p>
+                <p>
+                  一个是你没找到有效的方法学原理，一听到“系统”、“底层”这些词就发怵，觉得东西太难，自己一定学不会，自然也就无法深入学下去，从而不能建立起性能的全局观。
+                </p>
+                <p>再一个就是，你看到性能问题的根源太复杂，既不懂怎么去分析，也不能抽丝剥茧找到瓶颈。</p>
+                <p>
+                  你可能会想，反正程序出了问题，上网查就是了，用别人的方法，囫囵吞枣地多试几次，有可能就解决了。于是，你懒得深究这些方法为啥有效，更不知道为什么，很多方法在别人的环境有效，到你这儿就不行了。
+                </p>
+                <p>所以，相同的错误重复在犯，相同的状况也是重复出现。</p>
+                <p>
+                  其实，性能问题并没有你想像得那么难，<strong>只要你理解了应用程序和系统的少数几个基本原理，再进行大量的实战练习，建立起整体性能的全局观</strong>，大多数性能问题的优化就会水到渠成。
+                </p>
+                <p>
+                  我见过很多工程师，在分析应用程序所使用的第三方组件的性能时，并不熟悉这些组件所用的编程语言，却依然可以分析出线上问题的根源，并能通过一些方法进行优化，比如修改应用程序对它们的调用逻辑，或者调整组件的配置选项等。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  还是那句话，<strong><span class="orange">你不需要了解每个组件的所有实现细节</span></strong
+                  >，只要能理解它们最基本的工作原理和协作方式，你也可以做到。
+                </p>
+                <h2>性能指标是什么？</h2>
+                <p>学习性能优化的第一步，一定是了解“性能指标”这个概念。</p>
+                <p>
+                  当看到性能指标时，你会首先想到什么呢？我相信“<strong>高并发</strong>”和“<strong>响应快</strong>”一定是最先出现在你脑海里的两个词，而它们也正对应着性能优化的两个核心指标——“<span
+                    class="orange"
+                    >吞吐</span
+                  >”和“<span class="orange">延时</span
+                  >”。这两个指标是<strong>从应用负载的视角</strong>来考察性能，直接影响了产品终端的用户体验。跟它们对应的，是<strong>从系统资源的视角</strong>出发的指标，比如资源使用率、饱和度等。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/92/1d/920601da775da08844d231bc2b4c301d.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  我们知道，随着应用负载的增加，系统资源的使用也会升高，甚至达到极限。而<strong>性能问题的本质</strong>，就是系统资源已经达到瓶颈，但请求的处理却还不够快，无法支撑更多的请求。
+                </p>
+                <p>
+                  性能分析，其实就是<strong>找出应用或系统的瓶颈，并设法去避免或者缓解它们</strong>，从而更高效地利用系统资源处理更多的请求。这包含了一系列的步骤，比如下面这六个步骤。
+                </p>
+                <ul>
+                  <li>
+                    <p>选择指标评估应用程序和系统的性能；</p>
+                  </li>
+                  <li>
+                    <p>为应用程序和系统设置性能目标；</p>
+                  </li>
+                  <li>
+                    <p>进行性能基准测试；</p>
+                  </li>
+                  <li>
+                    <p>性能分析定位瓶颈；</p>
+                  </li>
+                  <li>
+                    <p>优化系统和应用程序；</p>
+                  </li>
+                  <li>
+                    <p>性能监控和告警。</p>
+                  </li>
                 </ul>
+                <p>
+                  了解了这些性能相关的基本指标和核心步骤后，该怎么学呢？接下来，我来说说要学好Linux
+                  性能优化的几个重要问题。
+                </p>
+                <h2>学这个专栏需要什么基础</h2>
+                <p>
+                  首先你要明白，我们这个专栏的核心是<span class="orange">性能的分析和优化</span
+                  >，而不是最基本的Linux操作系统的使用方法。
+                </p>
+                <p>因而，我希望你最好用过Ubuntu或其他Linux操作系统，然后要具备一些<strong>编程基础</strong>，比如：</p>
+                <ul>
+                  <li>
+                    <p>了解Linux常用命令的使用方法；</p>
+                  </li>
+                  <li>
+                    <p>知道怎么安装和管理软件包；</p>
+                  </li>
+                  <li>
+                    <p>知道怎么通过编程语言开发应用程序等。</p>
+                  </li>
+                </ul>
+                <p>
+                  这样，在我讲性能时，你就更容易理解性能背后的原理，特别是在结合专栏里的案例实践后，对性能分析能有更直观的体会。
+                </p>
+                <p>
+                  这个专栏不会像教科书那样，详细教你操作系统、算法原理、网络协议乃至各种编程语言的全部细节，但一些重要的系统原理还是必不可少的。我还会用实际案例一步步教你，贯穿从应用程序到操作系统的各个组件。
+                </p>
+                <h2>学习的重点是什么？</h2>
+                <p>想要学习好性能分析和优化，<strong>建立整体系统性能的全局观</strong>是最核心的话题。因而，</p>
+                <ul>
+                  <li>
+                    <p>理解最基本的几个系统知识原理；</p>
+                  </li>
+                  <li>
+                    <p>掌握必要的性能工具；</p>
+                  </li>
+                  <li>
+                    <p>通过实际的场景演练，贯穿不同的组件。</p>
+                  </li>
+                </ul>
+                <p>
+                  这三点，就是我们学习的重中之重。我会在专栏的每篇文章中，针对不同场景，把这三个方面给你讲清楚，你也一定要花时间和心思来消化它们。
+                </p>
+                <p>
+                  其实说到性能工具，就不得不提性能领域的大师布伦丹·格雷格（Brendan
+                  Gregg）。他不仅是动态追踪工具DTrace的作者，还开发了许许多多的性能工具。我相信你一定见过他所描绘的Linux性能工具图谱：
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/9e/7a/9ee6c1c5d88b0468af1a3280865a6b7a.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  （图片来自<a href="http://www.brendangregg.com/Perf/linux_perf_tools_full.png">brendangregg.com</a>）
+                </p>
+                <p>
+                  这个图是Linux性能分析最重要的参考资料之一，它告诉你，在Linux不同子系统出现性能问题后，应该用什么样的工具来观测和分析。
+                </p>
+                <p>
+                  比如，当遇到I/O性能问题时，可以参考图片最下方的I/O子系统，使用iostat、iotop、blktrace等工具分析磁盘I/O的瓶颈。你可以把这个图保存下来，在需要的时候参考查询。
+                </p>
+                <p>
+                  另外，我还要特别强调一点，就是<strong>性能工具的选用</strong>。有句话是这么说的，一个正确的选择胜过千百次的努力。虽然夸张了些，但是选用合适的性能工具，确实可以大大简化整个性能优化过程。在什么场景选用什么样的工具、以及怎么学会选择合适工具，都是我想教给你的东西。
+                </p>
+                <p>
+                  但是切记，<strong><span class="orange">千万不要把性能工具当成学习的全部</span></strong
+                  >。工具只是解决问题的手段，关键在于你的用法。只有真正理解了它们背后的原理，并且结合具体场景，融会贯通系统的不同组件，你才能真正掌握它们。
+                </p>
+                <p>
+                  最后，为了让你对性能有个全面的认识，我画了一张思维导图，里面涵盖了大部分性能分析和优化都会包含的知识，专栏中也基本都会讲到。你可以<span
+                    class="orange"
+                    >保存或者打印</span
+                  >下来，每学会一部分就标记出来，记录并把握自己的学习进度。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/0f/ba/0faf56cd9521e665f739b03dd04470ba.png"
+                    alt=""
+                  />
+                </p>
+                <h2>怎么学更高效？</h2>
+                <p>
+                  前面我给你讲了Linux性能优化的学习重点，接下来我再跟你分享一下，我的几个学习技巧。掌握这些技巧，可以让你学得更轻松。
+                </p>
+                <p><strong>技巧一：虽然系统的原理很重要，但在刚开始一定不要试图抓住所有的实现细节。</strong></p>
+                <p>
+                  深陷到系统实现的内部，可能会让你丢掉学习的重点，而且繁杂的实现逻辑，很可能会打退你学习的积极性。所以，我个人观点是一定要适度。
+                </p>
+                <p>
+                  你可以先学会我给你讲的这些系统工作原理，但不要去深究Linux内核是如何做到的，而是要把你的重点放到如何观察和运用这些原理上，比如：
+                </p>
+                <ul>
+                  <li>
+                    <p>有哪些指标可以衡量性能？</p>
+                  </li>
+                  <li>
+                    <p>使用什么样的性能工具来观察指标？</p>
+                  </li>
+                  <li>
+                    <p>导致这些指标变化的因素等。</p>
+                  </li>
+                </ul>
+                <p><strong>技巧二：边学边实践，通过大量的案例演习掌握Linux性能的分析和优化。</strong></p>
+                <p>
+                  只有通过在机器上练习，把我讲的知识和案例自己过一遍，这些东西才能转化成你的。我精心设计这些案例，正是为了让你有更好的学习理解和操作体验。
+                </p>
+                <p>
+                  所以我强烈推荐你去实际运行、分析这些案例，或者用学到的知识去分析你自己的系统，这样你会有更直观的感受，获得更好的学习效果。
+                </p>
+                <p><strong>技巧三：勤思考，多反思，善总结，多问为什么。</strong></p>
+                <p>
+                  想真正学懂一门知识，最好的方法就是<span class="orange">问问题</span
+                  >。当你能提出好的问题时，就说明你已经深入了解了它。
+                </p>
+                <p>
+                  你可以随时在留言区给我留言，写下自己的疑问、思考和总结，和我还有其他的学习者一起讨论切磋。你也可以写下自己经历过的性能问题，记录你的分析步骤和优化思路，我们一起互动探讨。
+                </p>
+                <h2>学习之前，你的准备</h2>
+                <p>
+                  作为一个包含大量案例实践的课程，我会在每篇文章中，使用一到两台Ubuntu
+                  18.04虚拟机，作为案例运行和分析的环境。如果你只是单纯听音频的讲解，却从不动手实践，学习的效果一定会大打折扣。
+                </p>
+                <p>
+                  所以，你是不是可以准备好一台Linux机器，用于课程案例的实践呢？<span class="orange"
+                    >任意的虚拟机或物理机都可以，并不局限于Ubuntu系统</span
+                  >。
+                </p>
+                <h2>思考</h2>
+                <p>
+                  今天的内容是我们后续学习的热身准备。从下篇文章开始，我们就要正式进入Linux性能分析和优化了。所以，我想请你来聊一聊，你之前在解决Linux性能问题时，有遇到过什么样的困难或者疑惑吗？或者是之前自己学习Linux性能优化时，有哪些问题吗？参考我今天所讲的内容，你又打算怎么来学这个专栏？
+                </p>
+                <p>欢迎在留言区和我分享。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/56/52/565d66d658ad23b2f4997551db153852.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/60/05/3797d774.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">forever</span></div>
+                  <div class="bd">
+                    我遇到性能瓶颈的排查思路<br /><br />有监控的情况下，首先去看看监控大盘，看看有没有异常报警，如果初期还没有监控的情况我会按照下面步骤去看看系统层面有没有异常<br />1、我首先会去看看系统的平均负载，使用top或者htop命令查看,平均负载体现的是系统的一个整体情况，他应该是cpu、内存、磁盘性能的一个综合，一般是平均负载的值大于机器cpu的核数，这时候说明机器资源已经紧张了<br />2、平均负载高了以后，接下来就要看看具体是什么资源导致，我首先会在top中看cpu每个核的使用情况，如果占比很高，那瓶颈应该是cpu,接下来就要看看是什么进程导致的<br />3、如果cpu没有问题，那接下来我会去看内存，首先是用free去查看内存的是用情况，但不直接看他剩余了多少，还要结合看看cache和buffer，然后再看看具体是什么进程占用了过高的内存，我也是是用top去排序<br />4、内存没有问题的话就要去看磁盘了，磁盘我用iostat去查看，我遇到的磁盘问题比较少<br />5、还有就是带宽问题，一般会用iftop去查看流量情况，看看流量是否超过的机器给定的带宽<br />6、涉及到具体应用的话，就要根据具体应用的设定参数来查看，比如连接数是否查过设定值等<br />7、如果系统层各个指标查下来都没有发现异常，那么就要考虑外部系统了，比如数据库、缓存、存储等<br /><br />基本上就上面这些步骤，有些不完整，希望跟着老师学习一些更系统的排查思路！
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 09:45</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">总结的很好👍</p>
+                    <p class="reply-time">2018-11-21 15:10</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">C家族的铁粉儿</span></div>
+                  <div class="bd">
+                    D2打卡<br /><br />1. 笔记<br />技巧一：虽然系统的原理很重要，但在刚开始一定不要试图抓住所有的实现细节。”<br /><br />深陷到系统实现的内部，可能会让你丢掉学习的重点，而且繁杂的实现逻辑，很可能会打退你学习的积极性。所以，我个人观点是一定要适度。<br /><br />2.
+                    心得<br />作为一个完美主义者，一学起原理类的东西，真的不要太容易跑偏😂经常是看着某个重要原理，就想着找找看相关内容，然后就各种跳转搜索，以前最开始学数据结构的定义，都能跑到编译原理上，最后开始计算二进制了。<br /><br />有时候大半天了，一个原理都没看完，就各种死抠和联想。这么做确实印象深刻，但是真的很低效，心累。<br /><br />老师这里说的适度，真的很重要，而且这个度，确实应该是过来人才知道啊。<br /><br />我一向喜欢系统化的学习，能有个“升级简化版”的系统知识图谱，不要太开心。可惜不能上传图片，不然可以把每次标记和补充也都打个卡了。<br /><br />开始学了，加油！冲着我的四个月后涨工资的目标去了！
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 00:16</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">总结的好👍</p>
+                    <p class="reply-time">2018-11-21 14:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/36/d2/c7357723.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">发条橙子 。</span></div>
+                  <div class="bd">
+                    以前看服务器的资源使用只会简单的使用 top命令 看cpu使用的百分比。，但是却不清楚到底多高才算高危
+                    ，面对持续增长我该怎么预防或处理 ， load指标具体的含义 和 cpu有什么关联 ..这些都没有一个整体的概念
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 00:18</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">下一篇就是平均负载😊</p>
+                    <p class="reply-time">2018-11-21 08:27</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/1d/1f/6bc10297.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Allen</span></div>
+                  <div class="bd">
+                    『day1』<br />这周工作中遇到了一个紧急的问题（用的是arm系列的单板），单板的空间几乎快满了。
+                    使用了top和free命令查看，单板内存的使用情况，仅仅凭借这两个命令，是不可能分析出来原因的。<br /><br />查看&#47;proc&#47;&lt;pid&gt;&#47;下的的meminfo、status等文件可以具体才看到虚拟内存和实际物理内存的使用情况。
+                    之前根本不了解&#47;proc&#47;&lt;pid&gt;里面的文件都是干嘛的。<br /><br />希望跟着老师的专栏，可以了解下linux系统的基本知识，以后遇到相关问题时，可以有一些思路。
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 00:41</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">内存模块会详细介绍</p>
+                    <p class="reply-time">2018-11-21 14:53</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Geek_60821e</span></div>
+                  <div class="bd">
+                    希望之后课程能深入的用工具分析原因，不要讲工具怎么用，怎么用工具上网free的实例很多，找出瓶颈的原因是我来听课目的，wish
+                    nice <br />
+                  </div>
+                  <span class="time">2018-11-21 13:23</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/5c/b1/f4bd04ed.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">石壹笑</span></div>
+                  <div class="bd">
+                    切记，千万不要把性能工具当成学习的全部。<br />应消除干扰，专注于愿问题本身。 <br />
+                  </div>
+                  <span class="time">2018-11-21 00:35</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/14/00/94ee0daf.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Dragon</span></div>
+                  <div class="bd">
+                    能否在翻页的左侧或右侧加一个暂停键, 你想如果边听边看文字时候暂停还要返回头顶,多麻烦 <br />
+                  </div>
+                  <span class="time">2018-11-23 22:28</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/57/ed/d96acbd7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">mj4ever</span></div>
+                  <div class="bd">
+                    之所以选择学习这个专栏，就是希望能解决实际工作中的一些技术问题，当公司研发的产品在现场运行，出现性能问题的时，不会束手无策，毫无思路，误打误撞的去解决问题。<br />因此，希望通过3个月的学习，自己可以掌握以下几个方面：<br />1、建立整体性能的全局观<br />2、理解最基本的几个系统知识原理<br />3、掌握Linux
+                    性能工具图谱的熟练应用<br />感谢大家，也感谢能不断坚持的自己。 <br />
+                  </div>
+                  <span class="time">2018-11-21 09:15</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-11-21 15:09</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/57/6e/dd0eee5f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">夜空中最亮的星（华仔）</span></div>
+                  <div class="bd">已经在朋友圈转发2次老师的课了。 <br /></div>
+                  <span class="time">2018-11-21 11:27</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/51/cd/d6fe851f.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Gopher</span></div>
+                  <div class="bd">小哥哥声音好听，语音很清晰 <br /></div>
+                  <span class="time">2018-11-22 16:33</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/8c/41/5a66afc8.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">上善若水</span></div>
+                  <div class="bd">
+                    之前调试网络性能问题，组网比较复杂，测试仪千万级用户拨号，越到后面越是上线速率急速下降，每个点都进行抓包监控丢包率，top也观测进程cpu利用率，就是找不出原因，进程cpu利用率也不高，丢包也不严重，对比抓包，发现上送包处理有很大延迟，后来pstack应用进程发现一处一点，原来应用进程有一处调用函数是阻塞的，光有生产者没有消费者，导致大用户拨号后阻塞超时，而且那个api还是第三方的没有源码，找到维护的组才确认问题，前后加班熬了两个星期才确认问题，所以痛下心来学习下性能定位课程
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 13:03</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/5c/c5/1231d633.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">梁中华</span></div>
+                  <div class="bd">
+                    打卡，希望作者必要的时候能结合虚拟机和docker来讲下，在这两种环境下的性能问题分析有什么要注意的，毕竟现在的应用不是运行在虚拟机就是运行在容器中
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 09:46</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">会的，案例也会用到docker</p>
+                    <p class="reply-time">2018-11-21 15:14</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/b9/76/34478b36.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">代码GG陆晓明</span></div>
+                  <div class="bd">
+                    学习这块，是想应用到手机系统上。安卓的性能一直是个诟病，想通过一些工具进行复测，能够找到一些思路进行优化，然后使用一套测试打分，来评估到底是改善还是没有。<br /><br />在了解学习linux的常用性能分析工具，想从本课程琢磨出一套方式，来进行系统的优化，找到一条优化安卓系统的有效方法。<br /><br />感谢！
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 00:19</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/dd/b9/ce84d577.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Charles.Gast</span></div>
+                  <div class="bd">晚上下班，坐着地铁，看着教程。完美的过站。 <br /></div>
+                  <span class="time">2018-12-04 21:28</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7d/17/179b24f4.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">燕羽阳</span></div>
+                  <div class="bd">性能问题考验的是综合能力和全局观，希望能和大家共同进步 <br /></div>
+                  <span class="time">2018-11-21 13:18</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/02/be/bc2ca09d.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李建贵</span></div>
+                  <div class="bd">
+                    之前对Linux的仅停留在命令行的使用，通过这个专栏从性能视角深入的学习和了解Linux，相信学了这个对我的成长很有帮助!
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 13:07</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">番茄炒鸡蛋</span></div>
+                  <div class="bd">
+                    前段时间遇到服务请求过多，导致内存增高，但是过段时间请求下降，但内存还是一直比较高，如果后续再次遇到请求过多，就会导致没有内存，程序崩溃，请问这类问题如何排查？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 12:42</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/4c/0c/abb7bfe3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">潜。</span></div>
+                  <div class="bd">
+                    性能指标概念：高并发 =&gt; 吞吐 响应快 =&gt; 延时<br />该概念是从应用负载的角度出发：Application
+                    ▹Libraries▹System Call▹Linux Kernel ▹Drive<br /><br />
+                    与之对应的是系统资源视角出发 ：Drive▹Linux Kernel ▹System Call ▹Libraries ▹Application
+                    <br /><br />性能指标的评判有以上二种常用的角度<br /><br />接着六步<br /><br />1.选择性能指标评估应用和系统的性能<br /><br />2.为应用和系统设定性能目标<br /><br />3.进行性能基准测试<br /><br />4.性能分析定位瓶颈<br /><br />5.优化系统和应用程序<br /><br />6.性能监控和告警<br /><br />六步总结，从正确的角度出发，设定目标（性能优化不是漫无目的的），基准测试（了解现有系统应用的运行时情况），根据情况分析瓶颈，优化它，设置监控和告警（其实可以再扩展比如达到一定的负载，采取降级等操作）
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 10:18</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">总结的很好</p>
+                    <p class="reply-time">2018-11-21 15:30</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/19/ac/d39011f0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">King_stone</span></div>
+                  <div class="bd">
+                    遇到过的问题：Linux上tomcat性能下降，资源消耗较大，最终判断是JAVA程序一个方法的问题。解决和监控的手段不够智能，写过一个监控但是JAVA本身的监控不稳定，消耗也较大，最终撤掉，希望课程能对这方面优化监控有介绍
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 09:54</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/1b/f4/773e7e4b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">java小白</span></div>
+                  <div class="bd">
+                    D2打卡，做了一段时间的性能优化工作，发现自己工作中只是重复的进行压测，压接口压场景，遇到的最大问题是CPU高，基本就是通过线程栈去分析那些线程有问题然后抛给开发去看代码是不是有问题，一个个的去解决，最后成功降低CPU的也不多，堆栈、磁盘I&#47;O、网络这些基本都没怎么重点用到。现在总结下自己面对的问题：①性能分析没有一个整体的分析思路，在遇到各种各样的问题的时候应该用什么样的方法去分析；②自己没有编程开发的经验，代码方面一直是自己的薄弱环节，也在逐渐学习加强。想问下作者，代码开发基础在性能优化工作中到底能占多少比重有多重要？
+                    <br />
+                  </div>
+                  <span class="time">2018-11-21 09:50</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      在分析的过程中一般不需要去做大量开发，随后的优化步骤很可能需要代码开发解决。<br /><br />
+                    </p>
+                    <p class="reply-time">2018-11-21 15:26</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

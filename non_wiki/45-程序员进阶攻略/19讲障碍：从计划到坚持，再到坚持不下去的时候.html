@@ -1,365 +1,1575 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                19讲障碍：从计划到坚持，再到坚持不下去的时候
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/94/1d/9473fa4320dec39615d122c27e2f781d.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">19讲障碍：从计划到坚持，再到坚持不下去的时候</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/94/1d/9473fa4320dec39615d122c27e2f781d.jpg"
+            />
 
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  设定一个计划并不困难，真正的困难在于执行计划。若你能够坚持把计划执行下去，想必就能超越绝大部分人，因为大部分人的计划最终都半途而废了。
+                </p>
+                <p>
+                  为什么那么多计划都半途而废了？在执行计划时，你会碰到怎样的障碍？我想从计划生命周期的各个阶段来分析下。
+                </p>
+                <h2>酝酿</h2>
+                <p>酝酿期，是计划的早期雏形阶段；这阶段最大的障碍来自内心：理性与感性的冲突。</p>
+                <p>
+                  计划的目标是源自内心的，但也是有难度的，若是轻而易举的事情，也就不用计划了。这些需要坚持的事情，通常都
+                  “不好玩”，而人是有惰性的，内心里其实并不愿意去做，这是我们感性的部分。但理性告诉我们，去完成这些计划，对自己是有长远好处的。这，就是冲突的地方。
+                </p>
+                <p>
+                  就以我自己写作的例子来看，我不是一开始就写作的，我是工作了 5
+                  年后，碰到了平台期，撞上了天花板，感觉颇为迷茫。于是就跑到网上到处看看有没有人分享些经验，找找道路。然后，看到了一些
+                  “大神”
+                  们写的博客，分享了他们一路走过的经历，在我迷茫与灰暗的那个阶段的航行中，就像一盏灯塔指引着前进方向。
+                </p>
+                <p>
+                  于是我在想，也许我也可以开始写写东西。那时，内心里出现了两个声音，一个声音说：“你现在能写什么呢？有什么值得写的吗？有人看吗？”而另一个声音反驳说：“写，好过不写，写作是一件正确的事，就算没人看，也是对自己一个时期的思考和总结。”
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>最终，理性占了上风，开启了写作计划，然后注册了一个博客，想了一句签名：“写下、记下、留下”。</p>
+                <h2>启动</h2>
+                <p>启动期，是计划从静止到运动的早期阶段；这阶段的最大障碍是所谓的“最大静摩擦力”。</p>
+                <p>
+                  我们都学过初中物理，知道 “最大静摩擦力” 是大于 “滑动摩擦力”
+                  的，也就是说要让一个物体动起来所需要的推力，比它开始运动后要大一些。这个现象，放在启动一个计划上时，也有类似的感觉，所以才有一句俗语叫：“万事开头难”。
+                </p>
+                <p>
+                  还是回到我开始写作那个例子，我的第 1
+                  篇博客的写作过程，至今还记得很清楚：一个周六的下午，在租的小房间里整整写了一下午。写得很艰苦，总感觉写得不好，不满意。最后一看天都黑了，肚子也饿了，就勉勉强强把它发了出去。
+                </p>
+                <p>
+                  发出去后的前两天，我也会经常去刷新，看看阅读量有多少，有没有人评论啊。让人失望的是，前一个声音的说法变成了事实：的确没什么人看。两天的点击量不到一百，一条评论也没有，而且这一百的阅读计数里，搞不好还有些是搜索引擎的爬虫抓取留下的。
+                </p>
+                <p>
+                  但是，写完了第一篇，我终于克服了写作的 “最大静摩擦力” 开始动了起来，一直写到了今天，这已经过去了 7
+                  年。
+                </p>
+                <h2>执行</h2>
+                <p>执行期，是计划实现过程中最漫长的阶段；这阶段的最大障碍就是容易困倦与乏味。</p>
+                <p>
+                  漫长的坚持过程期，大部分时候都是很无聊、乏味的，因为真实的人生就是这样，并没有那么多戏剧性的故事。所以，我在想这也许就是为什么那么多人爱看小说、电视剧和电影的原因吧，戏中的人物经历，总是更有戏剧性。
+                </p>
+                <p>
+                  美国当代著名作家库尔特·冯内古特在一次谈话中谈及人生，他用了一组形象的类比来描述人生。我翻译过来并演绎了一下，如下面系列图示：
+                </p>
+                <p>
+                  其中，纵坐标表示生活的幸福程度。越往上，代表幸福指数越高；越往下，代表幸福指数越低。中间的横线表示普通大众的平凡人生。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/52/4f/5291d444d35ebe736de08bbb2503d74f.png"
+                    alt=""
+                  />
+                </p>
+                <p>那么先来看一个大家都很熟悉的从 “丑小鸭” 变 “白天鹅”的故事：灰姑娘 。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/79/79/79d7281a2f4adfc6a4a509561f91fb79.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  我们从小就听过这个故事，人们喜欢这样的故事。同样的故事内核，被用在不同的故事里书写了上千次，传诵了上千年。这是一个皆大欢喜的故事，而下面则是一个稍微悲伤点的故事。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/aa/e5/aa7351ed56d7f29fc32cec41c96b4be5.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  故事虽以悲剧开始，但好在以喜剧结束。人们也喜欢这样的故事，生活不就该这样吗？问题是，真实的生活可能是下面这样的。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/36/7e/3684a990e54531a1206f54eda5ee177e.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  没有那么多大起大落，我们大部分人的生活只是在经历一些平平凡凡的琐事。也许其中有些会让你感到高兴与兴奋，有些又让你感到烦躁与郁闷。但这些琐事都不会沉淀进历史中，被人们传诵上千年，它仅仅对你自己有意义。
+                </p>
+                <p>
+                  所以呢，你明白为什么你感觉你的坚持那么无聊、单调与乏味了吧，大多数时候它都缺乏像 “灰姑娘”
+                  故事曲线的戏剧性。而对抗这种过程的无聊，恰恰需要的就是故事。你看人类的历史上为什么要创造这么多戏剧性的故事，让这些戏剧性的故事包围了我们的生活，让人们想象生活充满了戏剧性，这种想象是治疗乏味的良药，也成为了创造更美好生活的动力。
+                </p>
+                <p>万维钢的一篇文章《坚持坚持再坚持》里也提到：</p>
+                <blockquote>
+                  <p>故事的价值不在于真实准确，而在于提供人生的意义。</p>
+                </blockquote>
+                <p>
+                  坚持，特别是长期的坚持，是需要动力的，而动力来自目标和意义。而获得目标与意义的最好方式是讲好一个故事。你看，成功的企业家会把未来的愿景包进一个美好的故事里，让自己深信不疑；然后再把这个故事传播出去，把所有相信这个故事的人聚在一起去追寻这个故事；最后，这个关于未来的故事就这样在现实中发生了。
+                </p>
+                <p>漫长的人生，你需要为自己讲好一个故事。</p>
+                <h2>挫败</h2>
+                <p>挫败，不是一个阶段，而是坚持路上的一些点；正是在这些点上你遭遇了巨大的挫败感。</p>
+                <p>
+                  为什么会产生挫败感？可能的原因有，一开始你就不知道这件事有多难，直到走了一段后才发现这太难了。一开始就评估清楚一个计划的难度，需要投入大量的时间、经历和金钱，甚或有更高的技能与能力要求，这本身就是一件不容易的事。
+                </p>
+                <p>
+                  而如果你计划的是一件从来没做过的事情，这就更难准确评估了。在路上，行至中途遭遇 “低估”
+                  的挫败感就再正常不过了，而不少人，因为挫败过一两次后，就会放弃了计划。有时，遭遇挫败，选择了放弃，这个未必就是不合适的，但这要看这个放弃的决策是在什么情况下做出的。
+                </p>
+                <p>
+                  遭遇挫败，你会进入一种心情与情绪的低谷，这个时候有很高的概率做出放弃的决策。而我的经验是，不要在挫败的情绪低谷期进行任何的选择与决策。可以暂时放下这件事，等待情绪回归到正常，再重新理性地评估计划还是否该坚持。
+                </p>
+                <p>每经历一次挫败之后，你还选择坚持，那么就已经收获了成长。</p>
+                <p>
+                  最后总结来说，就是：你为了做成一件事，定一个计划，在执行计划的过程中，在 “酝酿”“启动” 和 “执行”
+                  的不同阶段都会碰到各种障碍，可能都会让你产生一种快坚持不下去了的感觉。每到此时，你都要想想清楚，哪些是真正客观的障碍？哪些是主观的退却？
+                </p>
+                <p>从坚持到持续，就是试图让现实的生活进入童话的过程，而后童话又变成了现实。</p>
+                <p>
+                  本文分析了计划的执行障碍，最后我也想问问你，在你成长的路上，遭遇过哪些障碍？是什么原因让你坚持不下去了的？
+                </p>
+                <hr />
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    心得如下：<br />1.酝酿期与环境有关，我们总是习惯性模仿我们所认为的优秀的人，找到聪明人，然后向他们学习，加入好的环境<br /><br />2.启动的难度，在于突破惯性，改变原有的生活状态，重要的是一直在做，结果可以慢慢来。<br /><br />3.执行阶段，确实很无聊的。学习和成长的本质也是如此。推荐大家一张图片，金融里的复利曲线，大致上与成长相当。前期的发展很慢，但是越到后面，越加速。<br /><br />4.给自己讲一个故事，我要成为什么样的人，我想要怎么样，我打算怎么写我自己的故事。<br /><br />5.挫折，让我想起了墨菲定律，一件事情的难度总是比看上去的要难得多。<br /><br />6.自我感悟，人生是一场长跑，重要的不是一时一刻的胜利，而是永远跑下去。<br />我们都要跟时间做朋友
+                    <br />
+                  </div>
+                  <span class="time">2018-09-14 17:44</span>
 
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>设定一个计划并不困难，真正的困难在于执行计划。若你能够坚持把计划执行下去，想必就能超越绝大部分人，因为大部分人的计划最终都半途而废了。</p>
-<p>为什么那么多计划都半途而废了？在执行计划时，你会碰到怎样的障碍？我想从计划生命周期的各个阶段来分析下。</p>
-<h2>酝酿</h2>
-<p>酝酿期，是计划的早期雏形阶段；这阶段最大的障碍来自内心：理性与感性的冲突。</p>
-<p>计划的目标是源自内心的，但也是有难度的，若是轻而易举的事情，也就不用计划了。这些需要坚持的事情，通常都 “不好玩”，而人是有惰性的，内心里其实并不愿意去做，这是我们感性的部分。但理性告诉我们，去完成这些计划，对自己是有长远好处的。这，就是冲突的地方。</p>
-<p>就以我自己写作的例子来看，我不是一开始就写作的，我是工作了 5 年后，碰到了平台期，撞上了天花板，感觉颇为迷茫。于是就跑到网上到处看看有没有人分享些经验，找找道路。然后，看到了一些 “大神” 们写的博客，分享了他们一路走过的经历，在我迷茫与灰暗的那个阶段的航行中，就像一盏灯塔指引着前进方向。</p>
-<p>于是我在想，也许我也可以开始写写东西。那时，内心里出现了两个声音，一个声音说：“你现在能写什么呢？有什么值得写的吗？有人看吗？”而另一个声音反驳说：“写，好过不写，写作是一件正确的事，就算没人看，也是对自己一个时期的思考和总结。”</p><!-- [[[read_end]]] -->
-<p>最终，理性占了上风，开启了写作计划，然后注册了一个博客，想了一句签名：“写下、记下、留下”。</p>
-<h2>启动</h2>
-<p>启动期，是计划从静止到运动的早期阶段；这阶段的最大障碍是所谓的“最大静摩擦力”。</p>
-<p>我们都学过初中物理，知道 “最大静摩擦力” 是大于 “滑动摩擦力” 的，也就是说要让一个物体动起来所需要的推力，比它开始运动后要大一些。这个现象，放在启动一个计划上时，也有类似的感觉，所以才有一句俗语叫：“万事开头难”。</p>
-<p>还是回到我开始写作那个例子，我的第 1 篇博客的写作过程，至今还记得很清楚：一个周六的下午，在租的小房间里整整写了一下午。写得很艰苦，总感觉写得不好，不满意。最后一看天都黑了，肚子也饿了，就勉勉强强把它发了出去。</p>
-<p>发出去后的前两天，我也会经常去刷新，看看阅读量有多少，有没有人评论啊。让人失望的是，前一个声音的说法变成了事实：的确没什么人看。两天的点击量不到一百，一条评论也没有，而且这一百的阅读计数里，搞不好还有些是搜索引擎的爬虫抓取留下的。</p>
-<p>但是，写完了第一篇，我终于克服了写作的 “最大静摩擦力” 开始动了起来，一直写到了今天，这已经过去了 7 年。</p>
-<h2>执行</h2>
-<p>执行期，是计划实现过程中最漫长的阶段；这阶段的最大障碍就是容易困倦与乏味。</p>
-<p>漫长的坚持过程期，大部分时候都是很无聊、乏味的，因为真实的人生就是这样，并没有那么多戏剧性的故事。所以，我在想这也许就是为什么那么多人爱看小说、电视剧和电影的原因吧，戏中的人物经历，总是更有戏剧性。</p>
-<p>美国当代著名作家库尔特·冯内古特在一次谈话中谈及人生，他用了一组形象的类比来描述人生。我翻译过来并演绎了一下，如下面系列图示：</p>
-<p>其中，纵坐标表示生活的幸福程度。越往上，代表幸福指数越高；越往下，代表幸福指数越低。中间的横线表示普通大众的平凡人生。</p>
-<p><img src="https://static001.geekbang.org/resource/image/52/4f/5291d444d35ebe736de08bbb2503d74f.png" alt="" /></p>
-<p>那么先来看一个大家都很熟悉的从 “丑小鸭” 变 “白天鹅”的故事：灰姑娘 。</p>
-<p><img src="https://static001.geekbang.org/resource/image/79/79/79d7281a2f4adfc6a4a509561f91fb79.png" alt="" /></p>
-<p>我们从小就听过这个故事，人们喜欢这样的故事。同样的故事内核，被用在不同的故事里书写了上千次，传诵了上千年。这是一个皆大欢喜的故事，而下面则是一个稍微悲伤点的故事。</p>
-<p><img src="https://static001.geekbang.org/resource/image/aa/e5/aa7351ed56d7f29fc32cec41c96b4be5.png" alt="" /></p>
-<p>故事虽以悲剧开始，但好在以喜剧结束。人们也喜欢这样的故事，生活不就该这样吗？问题是，真实的生活可能是下面这样的。</p>
-<p><img src="https://static001.geekbang.org/resource/image/36/7e/3684a990e54531a1206f54eda5ee177e.png" alt="" /></p>
-<p>没有那么多大起大落，我们大部分人的生活只是在经历一些平平凡凡的琐事。也许其中有些会让你感到高兴与兴奋，有些又让你感到烦躁与郁闷。但这些琐事都不会沉淀进历史中，被人们传诵上千年，它仅仅对你自己有意义。</p>
-<p>所以呢，你明白为什么你感觉你的坚持那么无聊、单调与乏味了吧，大多数时候它都缺乏像 “灰姑娘” 故事曲线的戏剧性。而对抗这种过程的无聊，恰恰需要的就是故事。你看人类的历史上为什么要创造这么多戏剧性的故事，让这些戏剧性的故事包围了我们的生活，让人们想象生活充满了戏剧性，这种想象是治疗乏味的良药，也成为了创造更美好生活的动力。</p>
-<p>万维钢的一篇文章《坚持坚持再坚持》里也提到：</p>
-<blockquote>
-<p>故事的价值不在于真实准确，而在于提供人生的意义。</p>
-</blockquote>
-<p>坚持，特别是长期的坚持，是需要动力的，而动力来自目标和意义。而获得目标与意义的最好方式是讲好一个故事。你看，成功的企业家会把未来的愿景包进一个美好的故事里，让自己深信不疑；然后再把这个故事传播出去，把所有相信这个故事的人聚在一起去追寻这个故事；最后，这个关于未来的故事就这样在现实中发生了。</p>
-<p>漫长的人生，你需要为自己讲好一个故事。</p>
-<h2>挫败</h2>
-<p>挫败，不是一个阶段，而是坚持路上的一些点；正是在这些点上你遭遇了巨大的挫败感。</p>
-<p>为什么会产生挫败感？可能的原因有，一开始你就不知道这件事有多难，直到走了一段后才发现这太难了。一开始就评估清楚一个计划的难度，需要投入大量的时间、经历和金钱，甚或有更高的技能与能力要求，这本身就是一件不容易的事。</p>
-<p>而如果你计划的是一件从来没做过的事情，这就更难准确评估了。在路上，行至中途遭遇 “低估” 的挫败感就再正常不过了，而不少人，因为挫败过一两次后，就会放弃了计划。有时，遭遇挫败，选择了放弃，这个未必就是不合适的，但这要看这个放弃的决策是在什么情况下做出的。</p>
-<p>遭遇挫败，你会进入一种心情与情绪的低谷，这个时候有很高的概率做出放弃的决策。而我的经验是，不要在挫败的情绪低谷期进行任何的选择与决策。可以暂时放下这件事，等待情绪回归到正常，再重新理性地评估计划还是否该坚持。</p>
-<p>每经历一次挫败之后，你还选择坚持，那么就已经收获了成长。</p>
-<p>最后总结来说，就是：你为了做成一件事，定一个计划，在执行计划的过程中，在 “酝酿”“启动” 和 “执行” 的不同阶段都会碰到各种障碍，可能都会让你产生一种快坚持不下去了的感觉。每到此时，你都要想想清楚，哪些是真正客观的障碍？哪些是主观的退却？</p>
-<p>从坚持到持续，就是试图让现实的生活进入童话的过程，而后童话又变成了现实。</p>
-<p>本文分析了计划的执行障碍，最后我也想问问你，在你成长的路上，遭遇过哪些障碍？是什么原因让你坚持不下去了的？</p>
-<hr />
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍第5条，做好心理准备</p>
+                    <p class="reply-time">2018-09-15 21:51</p>
+                  </div>
                 </div>
+              </li>
 
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">心得如下：<br>1.酝酿期与环境有关，我们总是习惯性模仿我们所认为的优秀的人，找到聪明人，然后向他们学习，加入好的环境<br><br>2.启动的难度，在于突破惯性，改变原有的生活状态，重要的是一直在做，结果可以慢慢来。<br><br>3.执行阶段，确实很无聊的。学习和成长的本质也是如此。推荐大家一张图片，金融里的复利曲线，大致上与成长相当。前期的发展很慢，但是越到后面，越加速。<br><br>4.给自己讲一个故事，我要成为什么样的人，我想要怎么样，我打算怎么写我自己的故事。<br><br>5.挫折，让我想起了墨菲定律，一件事情的难度总是比看上去的要难得多。<br><br>6.自我感悟，人生是一场长跑，重要的不是一时一刻的胜利，而是永远跑下去。<br>我们都要跟时间做朋友 <br></div>
-                            <span class="time">2018-09-14 17:44</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍第5条，做好心理准备</p>
-                                <p class="reply-time">2018-09-15 21:51</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李正阳Lee</span>
-                            </div>
-                            <div class="bd">很不幸，在写作启动阶段就患病了。患上了常见、难治又易复发的『拖延症』，这病症对生活倒是没有太大影响，但对于写作计划来说是致命的，决定要保卫计划，与拖延症抗争。<br><br>首先分析了一下拖延症发生的场景和当时的心理状态，发现引起拖延症的主要原因竟然是“完美主义”。写作时总想着文章逻辑是否严谨、语句是否通顺、措辞是否合理等等，纠结的东西太多，导致文章一拖再拖，形成了拖延症。<br><br>在结果上追求完美主义是好事，也是工匠精神的表现，但我搞乱了纬度，总是在写作过程中纠结。<br><br>知道病因后，借鉴产品设计中“MVP原则”改善了一下流程。写一篇完整的文章分为几个小的版本逐渐迭代，每个小版本有不同的写作任务。这样避免了“列提纲阶段就要求语句通顺”这类完美主义问题，拖延症也好多了。<br><br>因为人性的弱点，拖延症常见、难治又易复发。为了守护理想，保卫计划，做好了随时战斗的准备。<br><br>滚蛋吧，拖延症。 <br></div>
-                            <span class="time">2018-09-14 11:12</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，后面有一篇专门讲写作技法的主题</p>
-                                <p class="reply-time">2018-09-15 21:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/2d/a8/a7277fb4.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Leven</span>
-                            </div>
-                            <div class="bd">尝试总结下<br>计划到执行的生命周期几个阶段的障碍和处理方法有<br><br>酝酿期<br>        障碍：感性（不好玩，惰性）与理性（计划是有收益的）的冲突。<br>        方法：明确计划的收益，理性战胜感性。<br>启动期<br>         障碍：最大静摩檫力，万事开头难。<br>         方法：从简单开始行动起来。<br>执行期<br>         障碍：困倦和乏味。<br>         方法：给自己讲个好故事，从而获得目标和意义<br>挫败。<br>        原因：低估计划的难度。<br>        方法：不在挫败低谷期做决定，情绪回归后理性选择。 <br></div>
-                            <span class="time">2018-09-14 09:23</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍</p>
-                                <p class="reply-time">2018-09-15 21:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/de/ac/f279ac31.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">吴秀華</span>
-                            </div>
-                            <div class="bd">终于看到了网页能进行留言了！！！<br>自认为现在没有目标、没有计划的人。但我知道我需要做个有目标有计划的人。<br>因此，我开了个博客，时不时的记录下做的事情。现在虽然还是没有目标，但我找到了做事情的方向。<br>为自己的每一点进步，而高兴。<br>之前太执着于与他们对比，迷失了自己。 <br></div>
-                            <span class="time">2018-09-14 10:13</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，和过去的自己对比</p>
-                                <p class="reply-time">2018-09-15 21:54</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/60/85/f72f1d94.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">与路同飞</span>
-                            </div>
-                            <div class="bd">多的都不知道改怎么写。大部分自身原因。。 <br></div>
-                            <span class="time">2018-09-14 08:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">后面会分享我的一些方法^_^</p>
-                                <p class="reply-time">2018-09-15 21:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ea/37/3e889db9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">当红辣椒炒肉</span>
-                            </div>
-                            <div class="bd">博客总是坚持不下来 写了几篇 又断了 <br></div>
-                            <span class="time">2018-09-14 07:35</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/3d/0f/a553837d.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Allen_Go</span>
-                            </div>
-                            <div class="bd">如果计划实行不下去，可以尝试把计划切割再小一些，如把登山的计划切割成登台阶。 <br></div>
-                            <span class="time">2018-11-23 13:14</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">我也用这种方法</p>
-                                <p class="reply-time">2018-11-23 20:46</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">绿鲤鱼与驴。</span>
-                            </div>
-                            <div class="bd">一直都在坚持，回味过去的五年，幸好我还没有放弃任何一件事情 <br></div>
-                            <span class="time">2018-11-22 19:24</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">为你的坚持👍，有时放弃也不见得错，拥抱变化。</p>
-                                <p class="reply-time">2018-11-23 20:43</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">helloworld</span>
-                            </div>
-                            <div class="bd">遭遇挫败，你会进入一种心情与情绪的低谷，这个时候有很高的概率做出放弃的决策。而我的经验是，不要在挫败的情绪低谷期进行任何的选择与决策。可以暂时放下这件事，等待情绪回归到正常，再重新理性地评估计划还是否该坚持。这句话说的非常好 <br></div>
-                            <span class="time">2018-11-02 07:51</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^</p>
-                                <p class="reply-time">2018-11-03 12:00</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/b8/2c/2b4e8378.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Change</span>
-                            </div>
-                            <div class="bd">做计划总要往完美的方向去做做事情也是一样，在实践的过程中越拉越长也就越失去信心，计划也就再次被搁置。不只如何去改善这个过程。 <br></div>
-                            <span class="time">2018-10-09 22:17</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">计划拉长的原因？计划确定一个结束标准</p>
-                                <p class="reply-time">2018-10-10 18:45</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">事事岂能尽如人意，计划赶不上变化是经常的。<br>反思了一下，我没有完成计划的情况如下：<br><br>1:有更重要的事情需要处理紧急处理<br><br>2:发现计划做的不好，难以坚持<br><br>3:发现成效甚微，没有什么收益<br><br>现在是工作人员了，出卖技术和时间给公司，公司内加班成风，做自己的事情需要偷偷的来！ <br></div>
-                            <span class="time">2018-09-17 07:41</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">学习和成长不需要偷偷来💪</p>
-                                <p class="reply-time">2018-09-17 18:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/d7/5d2bfaa7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Aliliin</span>
-                            </div>
-                            <div class="bd">现在有时候产品出的新需求，实现上如果让我思考很久才能写出来的，我都记录下了核心实现的代码。 <br></div>
-                            <span class="time">2018-09-16 22:56</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">很好的办法，也是科学的方法</p>
-                                <p class="reply-time">2018-09-17 18:50</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">。。懒是唯一的原因，因为最大静摩擦力没有突破。。 <br></div>
-                            <span class="time">2018-09-15 13:27</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😂哈</p>
-                                <p class="reply-time">2018-09-15 21:45</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a8/8c/1f84793c.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">master</span>
-                            </div>
-                            <div class="bd">制定计划时的想法和执行计划在的想法是有差异的。 <br></div>
-                            <span class="time">2018-09-14 18:52</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">所以过程中可以去调整</p>
-                                <p class="reply-time">2018-09-15 21:47</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李正阳Lee</span></div>
+                  <div class="bd">
+                    很不幸，在写作启动阶段就患病了。患上了常见、难治又易复发的『拖延症』，这病症对生活倒是没有太大影响，但对于写作计划来说是致命的，决定要保卫计划，与拖延症抗争。<br /><br />首先分析了一下拖延症发生的场景和当时的心理状态，发现引起拖延症的主要原因竟然是“完美主义”。写作时总想着文章逻辑是否严谨、语句是否通顺、措辞是否合理等等，纠结的东西太多，导致文章一拖再拖，形成了拖延症。<br /><br />在结果上追求完美主义是好事，也是工匠精神的表现，但我搞乱了纬度，总是在写作过程中纠结。<br /><br />知道病因后，借鉴产品设计中“MVP原则”改善了一下流程。写一篇完整的文章分为几个小的版本逐渐迭代，每个小版本有不同的写作任务。这样避免了“列提纲阶段就要求语句通顺”这类完美主义问题，拖延症也好多了。<br /><br />因为人性的弱点，拖延症常见、难治又易复发。为了守护理想，保卫计划，做好了随时战斗的准备。<br /><br />滚蛋吧，拖延症。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-14 11:12</span>
 
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，后面有一篇专门讲写作技法的主题</p>
+                    <p class="reply-time">2018-09-15 21:53</p>
+                  </div>
+                </div>
+              </li>
 
-                </ul>
-            </div>
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/2d/a8/a7277fb4.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Leven</span></div>
+                  <div class="bd">
+                    尝试总结下<br />计划到执行的生命周期几个阶段的障碍和处理方法有<br /><br />酝酿期<br />
+                    障碍：感性（不好玩，惰性）与理性（计划是有收益的）的冲突。<br />
+                    方法：明确计划的收益，理性战胜感性。<br />启动期<br />
+                    障碍：最大静摩檫力，万事开头难。<br />
+                    方法：从简单开始行动起来。<br />执行期<br />
+                    障碍：困倦和乏味。<br />
+                    方法：给自己讲个好故事，从而获得目标和意义<br />挫败。<br />
+                    原因：低估计划的难度。<br />
+                    方法：不在挫败低谷期做决定，情绪回归后理性选择。 <br />
+                  </div>
+                  <span class="time">2018-09-14 09:23</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-09-15 21:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/de/ac/f279ac31.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">吴秀華</span></div>
+                  <div class="bd">
+                    终于看到了网页能进行留言了！！！<br />自认为现在没有目标、没有计划的人。但我知道我需要做个有目标有计划的人。<br />因此，我开了个博客，时不时的记录下做的事情。现在虽然还是没有目标，但我找到了做事情的方向。<br />为自己的每一点进步，而高兴。<br />之前太执着于与他们对比，迷失了自己。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-14 10:13</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，和过去的自己对比</p>
+                    <p class="reply-time">2018-09-15 21:54</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/60/85/f72f1d94.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">与路同飞</span></div>
+                  <div class="bd">多的都不知道改怎么写。大部分自身原因。。 <br /></div>
+                  <span class="time">2018-09-14 08:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">后面会分享我的一些方法^_^</p>
+                    <p class="reply-time">2018-09-15 21:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ea/37/3e889db9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">当红辣椒炒肉</span></div>
+                  <div class="bd">博客总是坚持不下来 写了几篇 又断了 <br /></div>
+                  <span class="time">2018-09-14 07:35</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/3d/0f/a553837d.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Allen_Go</span></div>
+                  <div class="bd">
+                    如果计划实行不下去，可以尝试把计划切割再小一些，如把登山的计划切割成登台阶。 <br />
+                  </div>
+                  <span class="time">2018-11-23 13:14</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">我也用这种方法</p>
+                    <p class="reply-time">2018-11-23 20:46</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">绿鲤鱼与驴。</span></div>
+                  <div class="bd">一直都在坚持，回味过去的五年，幸好我还没有放弃任何一件事情 <br /></div>
+                  <span class="time">2018-11-22 19:24</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">为你的坚持👍，有时放弃也不见得错，拥抱变化。</p>
+                    <p class="reply-time">2018-11-23 20:43</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">helloworld</span></div>
+                  <div class="bd">
+                    遭遇挫败，你会进入一种心情与情绪的低谷，这个时候有很高的概率做出放弃的决策。而我的经验是，不要在挫败的情绪低谷期进行任何的选择与决策。可以暂时放下这件事，等待情绪回归到正常，再重新理性地评估计划还是否该坚持。这句话说的非常好
+                    <br />
+                  </div>
+                  <span class="time">2018-11-02 07:51</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^</p>
+                    <p class="reply-time">2018-11-03 12:00</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/b8/2c/2b4e8378.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Change</span></div>
+                  <div class="bd">
+                    做计划总要往完美的方向去做做事情也是一样，在实践的过程中越拉越长也就越失去信心，计划也就再次被搁置。不只如何去改善这个过程。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-09 22:17</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">计划拉长的原因？计划确定一个结束标准</p>
+                    <p class="reply-time">2018-10-10 18:45</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    事事岂能尽如人意，计划赶不上变化是经常的。<br />反思了一下，我没有完成计划的情况如下：<br /><br />1:有更重要的事情需要处理紧急处理<br /><br />2:发现计划做的不好，难以坚持<br /><br />3:发现成效甚微，没有什么收益<br /><br />现在是工作人员了，出卖技术和时间给公司，公司内加班成风，做自己的事情需要偷偷的来！
+                    <br />
+                  </div>
+                  <span class="time">2018-09-17 07:41</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">学习和成长不需要偷偷来💪</p>
+                    <p class="reply-time">2018-09-17 18:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/d7/5d2bfaa7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Aliliin</span></div>
+                  <div class="bd">
+                    现在有时候产品出的新需求，实现上如果让我思考很久才能写出来的，我都记录下了核心实现的代码。 <br />
+                  </div>
+                  <span class="time">2018-09-16 22:56</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">很好的办法，也是科学的方法</p>
+                    <p class="reply-time">2018-09-17 18:50</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">。。懒是唯一的原因，因为最大静摩擦力没有突破。。 <br /></div>
+                  <span class="time">2018-09-15 13:27</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😂哈</p>
+                    <p class="reply-time">2018-09-15 21:45</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a8/8c/1f84793c.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">master</span></div>
+                  <div class="bd">制定计划时的想法和执行计划在的想法是有差异的。 <br /></div>
+                  <span class="time">2018-09-14 18:52</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">所以过程中可以去调整</p>
+                    <p class="reply-time">2018-09-15 21:47</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

@@ -1,35 +1,31 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-<script>
-function A()
-{
-	this.abc=12;
-}
+  <head>
+    <meta charset="utf-8" />
+    <title>无标题文档</title>
+    <script>
+      function A() {
+        this.abc = 12;
+      }
 
-A.prototype.show=function ()
-{
-	alert(this.abc);
-};
+      A.prototype.show = function () {
+        alert(this.abc);
+      };
 
-//继承A
+      //继承A
 
-function B()
-{
-	//this->new B()
-	A.call(this);
-}
+      function B() {
+        //this->new B()
+        A.call(this);
+      }
 
-B.prototype=A.prototype;
+      B.prototype = A.prototype;
 
-var obj=new B();
+      var obj = new B();
 
-obj.show();
-</script>
-</head>
+      obj.show();
+    </script>
+  </head>
 
-<body>
-</body>
+  <body></body>
 </html>

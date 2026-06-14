@@ -3,9 +3,7 @@
  * @author Tevin
  */
 
-;
 (function (win) {
-
     'use strict';
 
     /**
@@ -29,7 +27,7 @@
             //搜索按钮
             $search: $('#search'),
             //搜索文本
-            $searchText: $('#searchText')
+            $searchText: $('#searchText'),
         };
         this._data = {
             //搜素结果
@@ -39,7 +37,7 @@
             //每页结果数
             pageSize: 15,
             //当前页码
-            pagination: 0
+            pagination: 0,
         };
         this._bindCtrl();
         //用户执行重建缓存的回调
@@ -115,29 +113,36 @@
         var that = this;
         var $box = this.elm.$searchBox;
         if (type == 'on' && !$box.hasClass('on')) {
-            $box
-                .addClass('on')
+            $box.addClass('on')
                 .css({
-                    'display': 'block',
-                    'width': '0',
-                    'opacity': 0
+                    display: 'block',
+                    width: '0',
+                    opacity: 0,
                 })
-                .animate({
-                    'width': '100%',
-                    'opacity': 1
-                }, 300, 'swing', function () {
-                    callback && callback();
-                });
+                .animate(
+                    {
+                        width: '100%',
+                        opacity: 1,
+                    },
+                    300,
+                    'swing',
+                    function () {
+                        callback && callback();
+                    }
+                );
         } else if (type == 'off' && $box.hasClass('on')) {
-            $box
-                .removeClass('on')
-                .animate({
-                    'width': '30%',
-                    'opacity': 0
-                }, 200, 'swing', function () {
+            $box.removeClass('on').animate(
+                {
+                    width: '30%',
+                    opacity: 0,
+                },
+                200,
+                'swing',
+                function () {
                     $box.removeAttr('style');
                     callback && callback();
-                });
+                }
+            );
         }
     };
 
@@ -149,7 +154,7 @@
             return;
         }
         var words = this.elm.$searchText.val();
-        if (typeof win.Worker !== "undefined") {
+        if (typeof win.Worker !== 'undefined') {
             //开启一次新搜索时，如果存在搜索子进程，则干掉子进程
             if (this._worker) {
                 this._worker.terminate();
@@ -164,12 +169,12 @@
                 var data = event.data;
                 //加载成功后发送文档数据
                 if (data.type == 'loaded') {
-                    that._worker.postMessage({type: 'docs', docs: that._storage.getAllDocs()});
+                    that._worker.postMessage({ type: 'docs', docs: that._storage.getAllDocs() });
                 }
                 //文档预处理完成后开始搜索
                 else if (data.type == 'ready') {
                     that.elm.$resultMsg.show().html('正在搜索，请稍后...');
-                    that._worker.postMessage({type: 'search', words: words});
+                    that._worker.postMessage({ type: 'search', words: words });
                 }
                 //搜索结果排行
                 else if (data.type == 'result') {
@@ -189,7 +194,6 @@
             this.elm.$resultMsg.show().text('Sorry，您的浏览器不支持搜索！');
             this.elm.$search.prop('disabled', true);
         }
-
     };
 
     //显示结果列表
@@ -204,7 +208,11 @@
     Search.prototype._nextResultPage = function () {
         var html = '';
         var count = 0;
-        for (var i = this._data.pagination * this._data.pageSize, item; item = this._data.result[i]; i++) {
+        for (
+            var i = this._data.pagination * this._data.pageSize, item;
+            (item = this._data.result[i]);
+            i++
+        ) {
             html += this._renderRankItem(this._data.template, item);
             //超过页码跳出
             if (++count >= this._data.pageSize) {
@@ -234,6 +242,5 @@
         return tmpl;
     };
 
-    return win.AWSearch = Search;
-
+    return (win.AWSearch = Search);
 })(window);

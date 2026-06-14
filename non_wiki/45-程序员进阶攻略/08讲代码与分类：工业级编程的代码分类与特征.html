@@ -1,355 +1,1550 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                08讲代码与分类：工业级编程的代码分类与特征
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/fd/e9/fdd50fef0b2c726b2728d6fe7e88c8e9.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">08讲代码与分类：工业级编程的代码分类与特征</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/fd/e9/fdd50fef0b2c726b2728d6fe7e88c8e9.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>编程，就是写代码，那么在真实的行业项目中你编写的这些代码可以如何分类呢？回顾我曾经写过的各种系统代码，按代码的作用，大概都可以分为如下三类：</p>
-<ul>
-<li>功能</li>
-<li>控制</li>
-<li>运维</li>
-</ul>
-<p>如果你想提高编程水平，写出优雅的代码，那么就必须要清晰地认识清楚这三类代码。</p>
-<h2>一、功能</h2>
-<p>功能代码，是实现需求的业务逻辑代码，反映真实业务场景，包含大量领域知识。</p>
-<p>一个程序软件系统，拥有完备的功能性代码仅是基本要求。因为业务逻辑的复杂度决定了功能性代码的复杂度，所以要把功能代码写好，最难的不是编码本身，而是搞清楚功能背后的需求并得到正确的理解。之后的编码活动，就仅是一个“翻译”工作了：把需求“翻译”为代码。</p>
-<p>当然，“翻译” 也有自己独有的技术和积累，并不简单。而且 “翻译” 的第一步要求是 “忠于原文”，也即真正地理解并满足用户的原始需求。可这个第一步的要求实现起来就很困难。</p>
-<p>为什么搞清楚用户需求很困难？因为从用户心里想要的，到他最后得到的之间有一条长长的链条，如下所示：</p>
-<blockquote>
-<p>用户心理诉求 -&gt; 用户表达需求 -&gt; 产品定义需求 -&gt; 开发实现 -&gt; 测试验证 -&gt; 上线发布 -&gt; 用户验收</p>
-</blockquote>
-<p>需求信息源自用户的内心，然后通过表达显性地在这个链条上传递，最终固化成了代码，以程序系统的形态反馈给了用户。</p><!-- [[[read_end]]] -->
-<p>但信息在这个链条中的每个环节都可能会出现偏差与丢失，即使最终整个链条上的各个角色都貌似达成了一致，完成了系统开发、测试和发布，但最终也可能发现用户的心理诉求要么表达错了，要么被理解错了。</p>
-<p>因为我近些年一直在做即时通讯产品（IM），所以在这儿我就以微信这样一个国民级的大家都熟悉的即时通讯产品为样本，举个例子。</p>
-<p>微信里有个功能叫：消息删除。你该如何理解这个功能背后的用户心理诉求呢？用户进行删除操作的期待和反馈又是什么呢？从用户发消息的角度，我理解其删除消息可能的诉求有如下几种：</p>
-<ol>
-<li>消息发错了，不想对方收到。</li>
-<li>消息发了后，不想留下发过的痕迹，但期望对方收到。</li>
-<li>消息已发了，对于已经收到的用户就算了，未收到的最好就别收到了，控制其传播范围。</li>
-</ol>
-<p>对于第一点，微信提供了两分钟内撤回的功能；而第二点，微信提供的删除功能正好满足；第三点，微信并没有满足。我觉着第三点其实是一个伪需求，它其实是第一点不能被满足情况下用户的一种妥协。</p>
-<p>用户经常会把他们的需要，表达成对你的行为的要求，也就是说不真正告诉你要什么，而是告诉你要做什么。所以你才需要对被要求开发的功能进行更深入的思考。有时，即使是日常高频使用的产品背后的需求，你也未必能很好地理解清楚，而更多的业务系统其实离你的生活更远，努力去理解业务及其背后用户的真实需求，才是写好功能代码的基本能力。</p>
-<p>程序存在的意义就在于实现功能，满足需求。而一直以来我们习惯于把完成客户需求作为程序开发的主要任务，当功能实现了便感觉已经完成了开发，但这仅仅是第一步。</p>
-<h2>二、控制</h2>
-<p>控制代码，是控制业务功能逻辑代码执行的代码，即业务逻辑的执行策略。</p>
-<p>编程领域熟悉的各类设计模式，都是在讲关于控制代码的逻辑。而如今，很多这些常用的设计模式基本都被各类开源框架固化了进去。比如，在 Java 中，Spring 框架提供的控制反转（IoC）、依赖注入（DI）就固化了工厂模式。</p>
-<p>通用控制型代码由各种开源框架来提供，程序员就被解放出来专注写好功能业务逻辑。而现今分布式领域流行的微服务架构，各种架构模式和最佳实践也开始出现在各类开源组件中。比如微服务架构模式下关注的控制领域，包括：通信、负载、限流、隔离、熔断、异步、并行、重试、降级。</p>
-<p>以上每个领域都有相应的开源组件代码解决方案，而进一步将控制和功能分离的 “服务网格（Service Mesh）” 架构模式则做到了极致，控制和功能代码甚至运行在了不同的进程中。</p>
-<p>控制代码，都是与业务功能逻辑不直接相关的，但它们和程序运行的性能、稳定性、可用性直接相关。提供一项服务，功能代码满足了服务的功能需求，而控制代码则保障了服务的稳定可靠。</p>
-<p>有了控制和功能代码，程序系统终于能正常且稳定可靠地运行了，但难保不出现异常，这时最后一类 “运维” 型代码便要登场了。</p>
-<h2>三、运维</h2>
-<p>运维代码，就是方便程序检测、诊断和运行时处理的代码。它们的存在，才让系统具备了真正工业级的可运维性。</p>
-<p>最常见的检测诊断性代码，应该就是日志了，打日志太过简单，因此我们通常也就疏于考虑。其实即使是打日志也需要有意识的设计，评估到底应该输出多少日志，在什么位置输出日志，以及输出什么级别的日志。</p>
-<p>检测诊断代码有一个终极目标，就是让程序系统完成运行时的自检诊断。这是完美的理想状态，却很难在现实中完全做到。</p>
-<p>因为它不仅仅受限于技术实现水平，也与实现的成本和效益比有关。所以，我们可以退而求其次，至少在系统异常时可以具备主动运行状态汇报能力，由开发和运维人员来完成诊断分析，这也是我们常见的各类系统或终端软件提供的机制。</p>
-<p>在现实中，检测诊断类代码经常不是一开始就主动设计的。但生产环境上的程序系统可能会偶然出现异常或故障，而因为一开始缺乏检测诊断代码输出，所以很难找到真实的故障原因。现实就这样一步一步逼着你去找到真实原因，于是检测诊断代码就这么被一次又一次地追问为什么而逐渐完善起来了。</p>
-<p>但如果一开始你就进行有意识地检测诊断设计，后面就会得到更优雅的实现。有一种编程模式：面向切面编程（AOP），通过早期的有意设计，可以把相当范围的检测诊断代码放入切面之中，和功能、控制代码分离，保持优雅的边界与距离。</p>
-<p>而对于特定的编程语言平台，比如 Java 平台，有字节码增强相关的技术，可以完全干净地把这类检测诊断代码和功能、控制代码彻底分离。</p>
-<p>运维类代码的另一种类，是方便在运行时，对系统行为进行改变的代码。通常这一类代码提供方便运维操作的 API 服务，甚至还会有专门针对运维提供的服务和应用，例如：备份与恢复数据、实时流量调度等。</p>
-<p>功能、控制、运维，三类代码，在现实的开发场景中优先级这样依次排序。有时你可能仅仅完成了第一类功能代码就迫于各种压力上线发布了，但你要在内心谨记，少了后两类代码，将来都会是负债，甚至是灾难。而一个满足工业级强度的程序系统，这三类代码，一个也不能少。</p>
-<p>而对三类代码的设计和实现，越是优雅的程序，这三类代码在程序实现中就越是能看出明显的边界。为什么需要边界？因为，“码以类聚，人以群分”。功能代码易变化，控制代码固复杂，运维代码偏繁琐，这三类不同的代码，不仅特征不同，而且编写它们的人（程序员）也可能分属不同群组，有足够的边界与距离才能避免耦合与混乱。</p>
-<p>而在程序这个理性世界中，优雅有时就是边界与距离。</p>
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">艾尔欧唯伊</span>
-                            </div>
-                            <div class="bd">感觉运维代码是最复杂，但是前期是最看不到收益的的。。。<br>但是却很重要，特别是项目规模上去之后。。。 <br></div>
-                            <span class="time">2018-08-20 00:11</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">很多时候，运维类代码都成了技术债</p>
-                                <p class="reply-time">2018-08-21 18:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/d7/df/fc0a6709.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">WolvesLeader</span>
-                            </div>
-                            <div class="bd">怎么判断一个代码的好坏，我总是不知道自己写的代码是不好还是好 <br></div>
-                            <span class="time">2018-08-23 00:53</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">那就看看一些标准库或开源代码，找找好的感觉</p>
-                                <p class="reply-time">2018-08-23 18:37</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">突然想起了，福特曾经说过的一句话，如果我们去问顾客想要什么，他们会告诉我们想要一辆更好的马车，而不是汽车。 <br></div>
-                            <span class="time">2018-08-22 15:14</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😄，哈哈，经典的福特之问</p>
-                                <p class="reply-time">2018-08-22 18:27</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ee/64/2646f6ef.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">胖</span>
-                            </div>
-                            <div class="bd">项目时间太紧的一个后遗症就是deadline 只能保证功能代码调通。运维代码缺失，大量fixme：有空时再补日志，有空时再补错误码，有空时再补国际化，有空时…… <br></div>
-                            <span class="time">2018-08-20 13:20</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">有空时，就忘了……😂</p>
-                                <p class="reply-time">2018-08-21 18:57</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">恩，讲的很好！一门语言学会后，编程的困难在于对业务逻辑的理解，尤其对于业务背景和整体流程的理解，决定了业务抽象的层次的高低，和看问题的深浅程度！<br>大厂应该都有基础架构平台，各种维护性代码应该比较容易加，让业务工程师专注于业务。 <br></div>
-                            <span class="time">2018-08-20 22:47</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩；业务大了后，都会工具化和平台化，才会有规模效应</p>
-                                <p class="reply-time">2018-08-21 18:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/1b/e4/d5e021f9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">CrystalSuenny</span>
-                            </div>
-                            <div class="bd">&quot;因为从用户心里想要的，到他最后得到的之间有一条长长的链条<br>极客时间版权所有: https:&#47;&#47;time.geekbang.org&#47;column&#47;article&#47;13626<br>&quot;,看到这一点，您遇到过用户具备甲方攻城狮的情形么；是不是若产品经理不打算偷懒的话，甲方攻城狮那边其实没有技术职责？从技术上来讲，形同虚设是不是噢。。 <br></div>
-                            <span class="time">2018-09-05 16:20</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7d/b6/abdebdeb.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Michael</span>
-                            </div>
-                            <div class="bd">于现阶段的我而言 我觉得更难的是针对业务逻辑的抽象和实现 把业务逻辑的实现和业务相对应 和PM脑子里的概念相对应 让后来的人能看代码就能知道业务的所有规则 清晰明确的掌握业务 这个是最难的 <br></div>
-                            <span class="time">2018-08-21 12:54</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">所有的代码都需要一定程度的抽象思维</p>
-                                <p class="reply-time">2018-08-21 18:41</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/4e/38/3faa8377.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">登高</span>
-                            </div>
-                            <div class="bd">最近的编程中这三个方面都体验到，如何分离不太懂 <br></div>
-                            <span class="time">2018-08-21 09:02</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/40/bd/acb9d02a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">monkeyking</span>
-                            </div>
-                            <div class="bd">如何让开发正确理解产品的需求有哪些好的方式呢 <br></div>
-                            <span class="time">2018-08-20 22:23</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">绿鲤鱼与驴。</span>
-                            </div>
-                            <div class="bd">优雅就是边界与距离，最后一句话说的真好<br> <br></div>
-                            <span class="time">2018-11-14 14:54</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">🤝</p>
-                                <p class="reply-time">2018-11-15 17:36</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">helloworld</span>
-                            </div>
-                            <div class="bd">大部分的程序员都停留在了功能代码上，迫于时间压力忽略了控制代码的重要性，时间长了，就出现分水岭了。 <br></div>
-                            <span class="time">2018-10-19 07:59</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">分水岭不是一日形成的</p>
-                                <p class="reply-time">2018-10-19 20:18</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/34/53/cb70eeb9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">杨城</span>
-                            </div>
-                            <div class="bd">老师对代码分类的很清晰👍<br>接触到的大部分程序员都希望更多的编写高技术含量的控制代码，会觉得写业务代码比较枯燥没啥技术含量，而且每个公司业务并不通用，请问老师我们平时学习中应该怎么平衡在学习两者上投入的时间精力呢？ <br></div>
-                            <span class="time">2018-09-11 09:11</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">不用太刻意去平衡，哪里的需求更强烈就投入到哪。业务和技术是价值链上的两个环节，两个环比一个环更有价值</p>
-                                <p class="reply-time">2018-09-11 18:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">liangjf</span>
-                            </div>
-                            <div class="bd">刚出来工作的我只想尽快熟悉各个业务功能，然后串起来，理清整个框架 <br></div>
-                            <span class="time">2018-09-06 21:15</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，刚开始都是这样的</p>
-                                <p class="reply-time">2018-09-08 21:56</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/3e/fb/eb0273a0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">like_jun</span>
-                            </div>
-                            <div class="bd">一直纠结这个。终于看到了答案。 <br></div>
-                            <span class="time">2018-08-29 19:22</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">^_^</p>
-                                <p class="reply-time">2018-08-30 16:29</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  编程，就是写代码，那么在真实的行业项目中你编写的这些代码可以如何分类呢？回顾我曾经写过的各种系统代码，按代码的作用，大概都可以分为如下三类：
+                </p>
+                <ul>
+                  <li>功能</li>
+                  <li>控制</li>
+                  <li>运维</li>
                 </ul>
+                <p>如果你想提高编程水平，写出优雅的代码，那么就必须要清晰地认识清楚这三类代码。</p>
+                <h2>一、功能</h2>
+                <p>功能代码，是实现需求的业务逻辑代码，反映真实业务场景，包含大量领域知识。</p>
+                <p>
+                  一个程序软件系统，拥有完备的功能性代码仅是基本要求。因为业务逻辑的复杂度决定了功能性代码的复杂度，所以要把功能代码写好，最难的不是编码本身，而是搞清楚功能背后的需求并得到正确的理解。之后的编码活动，就仅是一个“翻译”工作了：把需求“翻译”为代码。
+                </p>
+                <p>
+                  当然，“翻译” 也有自己独有的技术和积累，并不简单。而且 “翻译” 的第一步要求是
+                  “忠于原文”，也即真正地理解并满足用户的原始需求。可这个第一步的要求实现起来就很困难。
+                </p>
+                <p>为什么搞清楚用户需求很困难？因为从用户心里想要的，到他最后得到的之间有一条长长的链条，如下所示：</p>
+                <blockquote>
+                  <p>
+                    用户心理诉求 -&gt; 用户表达需求 -&gt; 产品定义需求 -&gt; 开发实现 -&gt; 测试验证 -&gt; 上线发布
+                    -&gt; 用户验收
+                  </p>
+                </blockquote>
+                <p>
+                  需求信息源自用户的内心，然后通过表达显性地在这个链条上传递，最终固化成了代码，以程序系统的形态反馈给了用户。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>
+                  但信息在这个链条中的每个环节都可能会出现偏差与丢失，即使最终整个链条上的各个角色都貌似达成了一致，完成了系统开发、测试和发布，但最终也可能发现用户的心理诉求要么表达错了，要么被理解错了。
+                </p>
+                <p>
+                  因为我近些年一直在做即时通讯产品（IM），所以在这儿我就以微信这样一个国民级的大家都熟悉的即时通讯产品为样本，举个例子。
+                </p>
+                <p>
+                  微信里有个功能叫：消息删除。你该如何理解这个功能背后的用户心理诉求呢？用户进行删除操作的期待和反馈又是什么呢？从用户发消息的角度，我理解其删除消息可能的诉求有如下几种：
+                </p>
+                <ol>
+                  <li>消息发错了，不想对方收到。</li>
+                  <li>消息发了后，不想留下发过的痕迹，但期望对方收到。</li>
+                  <li>消息已发了，对于已经收到的用户就算了，未收到的最好就别收到了，控制其传播范围。</li>
+                </ol>
+                <p>
+                  对于第一点，微信提供了两分钟内撤回的功能；而第二点，微信提供的删除功能正好满足；第三点，微信并没有满足。我觉着第三点其实是一个伪需求，它其实是第一点不能被满足情况下用户的一种妥协。
+                </p>
+                <p>
+                  用户经常会把他们的需要，表达成对你的行为的要求，也就是说不真正告诉你要什么，而是告诉你要做什么。所以你才需要对被要求开发的功能进行更深入的思考。有时，即使是日常高频使用的产品背后的需求，你也未必能很好地理解清楚，而更多的业务系统其实离你的生活更远，努力去理解业务及其背后用户的真实需求，才是写好功能代码的基本能力。
+                </p>
+                <p>
+                  程序存在的意义就在于实现功能，满足需求。而一直以来我们习惯于把完成客户需求作为程序开发的主要任务，当功能实现了便感觉已经完成了开发，但这仅仅是第一步。
+                </p>
+                <h2>二、控制</h2>
+                <p>控制代码，是控制业务功能逻辑代码执行的代码，即业务逻辑的执行策略。</p>
+                <p>
+                  编程领域熟悉的各类设计模式，都是在讲关于控制代码的逻辑。而如今，很多这些常用的设计模式基本都被各类开源框架固化了进去。比如，在
+                  Java 中，Spring 框架提供的控制反转（IoC）、依赖注入（DI）就固化了工厂模式。
+                </p>
+                <p>
+                  通用控制型代码由各种开源框架来提供，程序员就被解放出来专注写好功能业务逻辑。而现今分布式领域流行的微服务架构，各种架构模式和最佳实践也开始出现在各类开源组件中。比如微服务架构模式下关注的控制领域，包括：通信、负载、限流、隔离、熔断、异步、并行、重试、降级。
+                </p>
+                <p>
+                  以上每个领域都有相应的开源组件代码解决方案，而进一步将控制和功能分离的 “服务网格（Service Mesh）”
+                  架构模式则做到了极致，控制和功能代码甚至运行在了不同的进程中。
+                </p>
+                <p>
+                  控制代码，都是与业务功能逻辑不直接相关的，但它们和程序运行的性能、稳定性、可用性直接相关。提供一项服务，功能代码满足了服务的功能需求，而控制代码则保障了服务的稳定可靠。
+                </p>
+                <p>
+                  有了控制和功能代码，程序系统终于能正常且稳定可靠地运行了，但难保不出现异常，这时最后一类 “运维”
+                  型代码便要登场了。
+                </p>
+                <h2>三、运维</h2>
+                <p>
+                  运维代码，就是方便程序检测、诊断和运行时处理的代码。它们的存在，才让系统具备了真正工业级的可运维性。
+                </p>
+                <p>
+                  最常见的检测诊断性代码，应该就是日志了，打日志太过简单，因此我们通常也就疏于考虑。其实即使是打日志也需要有意识的设计，评估到底应该输出多少日志，在什么位置输出日志，以及输出什么级别的日志。
+                </p>
+                <p>
+                  检测诊断代码有一个终极目标，就是让程序系统完成运行时的自检诊断。这是完美的理想状态，却很难在现实中完全做到。
+                </p>
+                <p>
+                  因为它不仅仅受限于技术实现水平，也与实现的成本和效益比有关。所以，我们可以退而求其次，至少在系统异常时可以具备主动运行状态汇报能力，由开发和运维人员来完成诊断分析，这也是我们常见的各类系统或终端软件提供的机制。
+                </p>
+                <p>
+                  在现实中，检测诊断类代码经常不是一开始就主动设计的。但生产环境上的程序系统可能会偶然出现异常或故障，而因为一开始缺乏检测诊断代码输出，所以很难找到真实的故障原因。现实就这样一步一步逼着你去找到真实原因，于是检测诊断代码就这么被一次又一次地追问为什么而逐渐完善起来了。
+                </p>
+                <p>
+                  但如果一开始你就进行有意识地检测诊断设计，后面就会得到更优雅的实现。有一种编程模式：面向切面编程（AOP），通过早期的有意设计，可以把相当范围的检测诊断代码放入切面之中，和功能、控制代码分离，保持优雅的边界与距离。
+                </p>
+                <p>
+                  而对于特定的编程语言平台，比如 Java
+                  平台，有字节码增强相关的技术，可以完全干净地把这类检测诊断代码和功能、控制代码彻底分离。
+                </p>
+                <p>
+                  运维类代码的另一种类，是方便在运行时，对系统行为进行改变的代码。通常这一类代码提供方便运维操作的 API
+                  服务，甚至还会有专门针对运维提供的服务和应用，例如：备份与恢复数据、实时流量调度等。
+                </p>
+                <p>
+                  功能、控制、运维，三类代码，在现实的开发场景中优先级这样依次排序。有时你可能仅仅完成了第一类功能代码就迫于各种压力上线发布了，但你要在内心谨记，少了后两类代码，将来都会是负债，甚至是灾难。而一个满足工业级强度的程序系统，这三类代码，一个也不能少。
+                </p>
+                <p>
+                  而对三类代码的设计和实现，越是优雅的程序，这三类代码在程序实现中就越是能看出明显的边界。为什么需要边界？因为，“码以类聚，人以群分”。功能代码易变化，控制代码固复杂，运维代码偏繁琐，这三类不同的代码，不仅特征不同，而且编写它们的人（程序员）也可能分属不同群组，有足够的边界与距离才能避免耦合与混乱。
+                </p>
+                <p>而在程序这个理性世界中，优雅有时就是边界与距离。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/64/04/18875529.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">艾尔欧唯伊</span></div>
+                  <div class="bd">
+                    感觉运维代码是最复杂，但是前期是最看不到收益的的。。。<br />但是却很重要，特别是项目规模上去之后。。。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-20 00:11</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">很多时候，运维类代码都成了技术债</p>
+                    <p class="reply-time">2018-08-21 18:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/d7/df/fc0a6709.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">WolvesLeader</span></div>
+                  <div class="bd">怎么判断一个代码的好坏，我总是不知道自己写的代码是不好还是好 <br /></div>
+                  <span class="time">2018-08-23 00:53</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">那就看看一些标准库或开源代码，找找好的感觉</p>
+                    <p class="reply-time">2018-08-23 18:37</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    突然想起了，福特曾经说过的一句话，如果我们去问顾客想要什么，他们会告诉我们想要一辆更好的马车，而不是汽车。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-22 15:14</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😄，哈哈，经典的福特之问</p>
+                    <p class="reply-time">2018-08-22 18:27</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ee/64/2646f6ef.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">胖</span></div>
+                  <div class="bd">
+                    项目时间太紧的一个后遗症就是deadline
+                    只能保证功能代码调通。运维代码缺失，大量fixme：有空时再补日志，有空时再补错误码，有空时再补国际化，有空时……
+                    <br />
+                  </div>
+                  <span class="time">2018-08-20 13:20</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">有空时，就忘了……😂</p>
+                    <p class="reply-time">2018-08-21 18:57</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    恩，讲的很好！一门语言学会后，编程的困难在于对业务逻辑的理解，尤其对于业务背景和整体流程的理解，决定了业务抽象的层次的高低，和看问题的深浅程度！<br />大厂应该都有基础架构平台，各种维护性代码应该比较容易加，让业务工程师专注于业务。
+                    <br />
+                  </div>
+                  <span class="time">2018-08-20 22:47</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩；业务大了后，都会工具化和平台化，才会有规模效应</p>
+                    <p class="reply-time">2018-08-21 18:53</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/1b/e4/d5e021f9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">CrystalSuenny</span></div>
+                  <div class="bd">
+                    &quot;因为从用户心里想要的，到他最后得到的之间有一条长长的链条<br />极客时间版权所有:
+                    https:&#47;&#47;time.geekbang.org&#47;column&#47;article&#47;13626<br />&quot;,看到这一点，您遇到过用户具备甲方攻城狮的情形么；是不是若产品经理不打算偷懒的话，甲方攻城狮那边其实没有技术职责？从技术上来讲，形同虚设是不是噢。。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-05 16:20</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7d/b6/abdebdeb.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Michael</span></div>
+                  <div class="bd">
+                    于现阶段的我而言 我觉得更难的是针对业务逻辑的抽象和实现 把业务逻辑的实现和业务相对应
+                    和PM脑子里的概念相对应 让后来的人能看代码就能知道业务的所有规则 清晰明确的掌握业务 这个是最难的
+                    <br />
+                  </div>
+                  <span class="time">2018-08-21 12:54</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">所有的代码都需要一定程度的抽象思维</p>
+                    <p class="reply-time">2018-08-21 18:41</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/4e/38/3faa8377.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">登高</span></div>
+                  <div class="bd">最近的编程中这三个方面都体验到，如何分离不太懂 <br /></div>
+                  <span class="time">2018-08-21 09:02</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/40/bd/acb9d02a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">monkeyking</span></div>
+                  <div class="bd">如何让开发正确理解产品的需求有哪些好的方式呢 <br /></div>
+                  <span class="time">2018-08-20 22:23</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">绿鲤鱼与驴。</span></div>
+                  <div class="bd">
+                    优雅就是边界与距离，最后一句话说的真好<br />
+                    <br />
+                  </div>
+                  <span class="time">2018-11-14 14:54</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">🤝</p>
+                    <p class="reply-time">2018-11-15 17:36</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7f/ca/ea85bfdd.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">helloworld</span></div>
+                  <div class="bd">
+                    大部分的程序员都停留在了功能代码上，迫于时间压力忽略了控制代码的重要性，时间长了，就出现分水岭了。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-19 07:59</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">分水岭不是一日形成的</p>
+                    <p class="reply-time">2018-10-19 20:18</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/34/53/cb70eeb9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">杨城</span></div>
+                  <div class="bd">
+                    老师对代码分类的很清晰👍<br />接触到的大部分程序员都希望更多的编写高技术含量的控制代码，会觉得写业务代码比较枯燥没啥技术含量，而且每个公司业务并不通用，请问老师我们平时学习中应该怎么平衡在学习两者上投入的时间精力呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-11 09:11</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      不用太刻意去平衡，哪里的需求更强烈就投入到哪。业务和技术是价值链上的两个环节，两个环比一个环更有价值
+                    </p>
+                    <p class="reply-time">2018-09-11 18:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">liangjf</span></div>
+                  <div class="bd">刚出来工作的我只想尽快熟悉各个业务功能，然后串起来，理清整个框架 <br /></div>
+                  <span class="time">2018-09-06 21:15</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，刚开始都是这样的</p>
+                    <p class="reply-time">2018-09-08 21:56</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/3e/fb/eb0273a0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">like_jun</span></div>
+                  <div class="bd">一直纠结这个。终于看到了答案。 <br /></div>
+                  <span class="time">2018-08-29 19:22</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">^_^</p>
+                    <p class="reply-time">2018-08-30 16:29</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

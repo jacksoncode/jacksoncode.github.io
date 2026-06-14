@@ -3,14 +3,11 @@
  * @author Tevin
  */
 
-
 (function (self) {
-
     'use strict';
 
     //计算器
     var searcher = (function () {
-
         var Searcher = function () {
             //文档存储
             this._documents = null;
@@ -23,8 +20,8 @@
                 //接口地址命中得分
                 apiScore: 50,
                 //单次内容命中得分
-                textScore: 5
-            }
+                textScore: 5,
+            };
         };
 
         //初始文档
@@ -47,11 +44,13 @@
                     return '';
                 })
                 //分离测试文档请求地址
-                .replace(/([^#]#{3} *请求地址[\n\r]{1,4})([-\w:\/\.]+?)[\n\r]{1,}(#{3} *请求类型[\s\S]+?#{3} *请求参数)/,
-                function (match, s1, s2, s3) {
-                    doc.api = s2;
-                    return s1 + s3;
-                })
+                .replace(
+                    /([^#]#{3} *请求地址[\n\r]{1,4})([-\w:\/\.]+?)[\n\r]{1,}(#{3} *请求类型[\s\S]+?#{3} *请求参数)/,
+                    function (match, s1, s2, s3) {
+                        doc.api = s2;
+                        return s1 + s3;
+                    }
+                )
                 //清除 Markdown 标题标记
                 .replace(/#{1,6}(.*?)#{0,6}\s*[\r\n]/g, '$1')
                 //清除 Markdown 强调斜体删除线标记
@@ -115,9 +114,12 @@
                     if (this._documents[id].title) {
                         var titleMatch = this._documents[id].title.match(wordsReg);
                         if (titleMatch && titleMatch.length > 0) {
-                            var title = this._documents[id].title.replace(wordsReg, function (match) {
-                                return '<mark>' + match + '</mark>';
-                            });
+                            var title = this._documents[id].title.replace(
+                                wordsReg,
+                                function (match) {
+                                    return '<mark>' + match + '</mark>';
+                                }
+                            );
                             this._addPorcessing(id, 'title', title);
                             this._addPorcessing(id, 'score', this._data.titleScore);
                         }
@@ -126,28 +128,37 @@
                     if (this._documents[id].api) {
                         var apiMatch = this._documents[id].api.match(wordsReg);
                         if (titleMatch && titleMatch.length > 0) {
-                            var api = '<p class="p1"><em>接口</em>' +
+                            var api =
+                                '<p class="p1"><em>接口</em>' +
                                 this._documents[id].api.replace(wordsReg, function (match) {
                                     return '<mark>' + match + '</mark>';
-                                }) + '</p>';
+                                }) +
+                                '</p>';
                             this._addPorcessing(id, 'api', api);
                             this._addPorcessing(id, 'score', this._data.apiScore);
                         }
                     }
                     //内容命中
-                    var contentMatch = this._documents[id].content.match(new RegExp('.{0,15}' + words + '.{0,30}', 'gi'));
+                    var contentMatch = this._documents[id].content.match(
+                        new RegExp('.{0,15}' + words + '.{0,30}', 'gi')
+                    );
                     if (contentMatch) {
                         var content = '<p>';
-                        for (var i = 0, item; item = contentMatch[i]; i++) {
+                        for (var i = 0, item; (item = contentMatch[i]); i++) {
                             if (i < 2) {
-                                content += item.replace(wordsReg, function (match) {
+                                content +=
+                                    item.replace(wordsReg, function (match) {
                                         return '<mark>' + match + '</mark>';
                                     }) + '... ';
                             }
                         }
                         content += '</p>';
                         this._addPorcessing(id, 'content', content);
-                        this._addPorcessing(id, 'score', contentMatch.length * this._data.textScore);
+                        this._addPorcessing(
+                            id,
+                            'score',
+                            contentMatch.length * this._data.textScore
+                        );
                     }
                 }
             }
@@ -155,8 +166,7 @@
         };
 
         //辅助得分
-        Searcher.prototype._auxiliary = function () {
-        };
+        Searcher.prototype._auxiliary = function () {};
 
         //排序与属性补齐
         Searcher.prototype._sortByScore = function () {
@@ -164,13 +174,16 @@
             for (var id in this._processing) {
                 if (this._processing.hasOwnProperty(id)) {
                     if (typeof this._processing[id].title == 'undefined') {
-                        this._processing[id].title = this._documents[id].title ? this._documents[id].title : '';
+                        this._processing[id].title = this._documents[id].title
+                            ? this._documents[id].title
+                            : '';
                     }
                     if (typeof this._processing[id].api == 'undefined') {
                         this._processing[id].api = '';
                     }
                     if (typeof this._processing[id].content == 'undefined') {
-                        this._processing[id].content = '<p>' + this._documents[id].content.substr(0, 45) + '...</p>';
+                        this._processing[id].content =
+                            '<p>' + this._documents[id].content.substr(0, 45) + '...</p>';
                     }
                     this._processing[id].path = this._documents[id].uri;
                     this._processing[id].timestamp = this._documents[id].timestamp;
@@ -189,20 +202,18 @@
         };
 
         return new Searcher();
-
     })();
 
     self.onmessage = function (event) {
         var data = event.data;
         if (data.type == 'docs') {
             searcher.initDocs(data.docs);
-            self.postMessage({type: 'ready'});
+            self.postMessage({ type: 'ready' });
         } else if (data.type == 'search') {
             searcher.matchWords(data.words);
-            self.postMessage({type: 'result', result: searcher.getResult()});
+            self.postMessage({ type: 'result', result: searcher.getResult() });
         }
     };
 
-    self.postMessage({type: 'loaded'});
-
+    self.postMessage({ type: 'loaded' });
 })(self);

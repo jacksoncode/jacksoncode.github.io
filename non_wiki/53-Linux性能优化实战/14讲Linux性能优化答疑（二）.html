@@ -1,92 +1,1384 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                14讲Linux性能优化答疑（二）
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/20/bb/205728ffe6e9b8bdc28f802d9f608cbb.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">14讲Linux性能优化答疑（二）</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/20/bb/205728ffe6e9b8bdc28f802d9f608cbb.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>今天是我们第二期答疑，这期答疑的主题是我们多次用到的perf工具，内容主要包括前面案例中， perf 使用方法的各种疑问。</p><p>perf 在性能分析中非常有效，是我们每个人都需要掌握的核心工具。perf 的使用方法也很丰富，不过不用担心，目前你只要会用 perf record 和 perf report 就够了。而对于 perf 显示的调用栈中的某些内核符号，如果你不理解也没有关系，可以暂时跳过，并不影响我们的分析。</p><p>同样的，为了便于你学习理解，它们并不是严格按照文章顺序排列的，如果你需要回顾内容原文，可以扫描每个问题右下方的二维码查看。</p><h2>问题 1： 使用 perf 工具时，看到的是16进制地址而不是函数名</h2><p><img src="https://static001.geekbang.org/resource/image/94/69/94f67501d5be157a25a26d852b8c2869.png" alt=""></p><p>这也是留言比较多的一个问题，在 CentOS 系统中，使用 perf 工具看不到函数名，只能看到一些16进制格式的函数地址。</p><p>其实，只要你观察一下perf界面最下面的那一行，就会发现一个警告信息：</p><pre><code>Failed to open /opt/bitnami/php/lib/php/extensions/opcache.so, continuing without symbols
-</code></pre><p>这说明，perf 找不到待分析进程依赖的库。当然，实际上这个案例中有很多依赖库都找不到，只不过，perf工具本身只在最后一行显示警告信息，所以你只能看到这一条警告。</p><p>这个问题，其实也是在分析Docker容器应用时，我们经常碰到的一个问题，因为容器应用依赖的库都在镜像里面。</p><!-- [[[read_end]]] --><p>针对这种情况，我总结了下面<strong>四个解决方法</strong>。</p><p><strong>第一个方法，在容器外面构建相同路径的依赖库</strong>。这种方法从原理上可行，但是我并不推荐，一方面是因为找出这些依赖库比较麻烦，更重要的是，构建这些路径，会污染容器主机的环境。</p><p><strong>第二个方法，在容器内部运行 perf</strong>。不过，这需要容器运行在特权模式下，但实际的应用程序往往只以普通容器的方式运行。所以，容器内部一般没有权限执行 perf 分析。</p><p>比方说，如果你在普通容器内部运行 perf record ，你将会看到下面这个错误提示：</p><pre><code>$ perf_4.9 record -a -g
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  今天是我们第二期答疑，这期答疑的主题是我们多次用到的perf工具，内容主要包括前面案例中， perf
+                  使用方法的各种疑问。
+                </p>
+                <p>
+                  perf 在性能分析中非常有效，是我们每个人都需要掌握的核心工具。perf
+                  的使用方法也很丰富，不过不用担心，目前你只要会用 perf record 和 perf report 就够了。而对于 perf
+                  显示的调用栈中的某些内核符号，如果你不理解也没有关系，可以暂时跳过，并不影响我们的分析。
+                </p>
+                <p>
+                  同样的，为了便于你学习理解，它们并不是严格按照文章顺序排列的，如果你需要回顾内容原文，可以扫描每个问题右下方的二维码查看。
+                </p>
+                <h2>问题 1： 使用 perf 工具时，看到的是16进制地址而不是函数名</h2>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/94/69/94f67501d5be157a25a26d852b8c2869.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  这也是留言比较多的一个问题，在 CentOS 系统中，使用 perf
+                  工具看不到函数名，只能看到一些16进制格式的函数地址。
+                </p>
+                <p>其实，只要你观察一下perf界面最下面的那一行，就会发现一个警告信息：</p>
+                <pre><code>Failed to open /opt/bitnami/php/lib/php/extensions/opcache.so, continuing without symbols
+</code></pre>
+                <p>
+                  这说明，perf
+                  找不到待分析进程依赖的库。当然，实际上这个案例中有很多依赖库都找不到，只不过，perf工具本身只在最后一行显示警告信息，所以你只能看到这一条警告。
+                </p>
+                <p>
+                  这个问题，其实也是在分析Docker容器应用时，我们经常碰到的一个问题，因为容器应用依赖的库都在镜像里面。
+                </p>
+                <!-- [[[read_end]]] -->
+                <p>针对这种情况，我总结了下面<strong>四个解决方法</strong>。</p>
+                <p>
+                  <strong>第一个方法，在容器外面构建相同路径的依赖库</strong
+                  >。这种方法从原理上可行，但是我并不推荐，一方面是因为找出这些依赖库比较麻烦，更重要的是，构建这些路径，会污染容器主机的环境。
+                </p>
+                <p>
+                  <strong>第二个方法，在容器内部运行 perf</strong
+                  >。不过，这需要容器运行在特权模式下，但实际的应用程序往往只以普通容器的方式运行。所以，容器内部一般没有权限执行
+                  perf 分析。
+                </p>
+                <p>比方说，如果你在普通容器内部运行 perf record ，你将会看到下面这个错误提示：</p>
+                <pre><code>$ perf_4.9 record -a -g
 perf_event_open(..., PERF_FLAG_FD_CLOEXEC) failed with unexpected error 1 (Operation not permitted)
 perf_event_open(..., 0) failed unexpectedly with error 1 (Operation not permitted)
-</code></pre><p>当然，其实你还可以通过配置 /proc/sys/kernel/perf_event_paranoid （比如改成-1），来允许非特权用户执行 perf 事件分析。</p><p>不过还是那句话，为了安全起见，这种方法我也不推荐。</p><p><strong>第三个方法，指定符号路径为容器文件系统的路径</strong>。比如对于第05讲的应用，你可以执行下面这个命令：</p><pre><code>$ mkdir /tmp/foo
+</code></pre>
+                <p>
+                  当然，其实你还可以通过配置 /proc/sys/kernel/perf_event_paranoid （比如改成-1），来允许非特权用户执行
+                  perf 事件分析。
+                </p>
+                <p>不过还是那句话，为了安全起见，这种方法我也不推荐。</p>
+                <p>
+                  <strong>第三个方法，指定符号路径为容器文件系统的路径</strong
+                  >。比如对于第05讲的应用，你可以执行下面这个命令：
+                </p>
+                <pre><code>$ mkdir /tmp/foo
 $ PID=$(docker inspect --format {{.State.Pid}} phpfpm)
 $ bindfs /proc/$PID/root /tmp/foo
 $ perf report --symfs /tmp/foo
 
 # 使用完成后不要忘记解除绑定
 $ umount /tmp/foo/
-</code></pre><p>不过这里要注意，bindfs 这个工具需要你额外安装。bindfs 的基本功能是实现目录绑定（类似于 mount --bind），这里需要你安装的是 1.13.10 版本（这也是它的最新发布版）。</p><p>如果你安装的是旧版本，你可以到 <a href="https://github.com/mpartel/bindfs">GitHub</a>上面下载源码，然后编译安装。</p><p><strong>第四个方法，在容器外面把分析纪录保存下来，再去容器里查看结果</strong>。这样，库和符号的路径也就都对了。</p><p>比如，你可以这么做。先运行 perf record -g -p &lt; pid&gt;，执行一会儿（比如15秒）后，按Ctrl+C停止。</p><p>然后，把生成的 perf.data 文件，拷贝到容器里面来分析：</p><pre><code>$ docker cp perf.data phpfpm:/tmp 
+</code></pre>
+                <p>
+                  不过这里要注意，bindfs 这个工具需要你额外安装。bindfs 的基本功能是实现目录绑定（类似于 mount
+                  --bind），这里需要你安装的是 1.13.10 版本（这也是它的最新发布版）。
+                </p>
+                <p>
+                  如果你安装的是旧版本，你可以到
+                  <a href="https://github.com/mpartel/bindfs">GitHub</a>上面下载源码，然后编译安装。
+                </p>
+                <p>
+                  <strong>第四个方法，在容器外面把分析纪录保存下来，再去容器里查看结果</strong
+                  >。这样，库和符号的路径也就都对了。
+                </p>
+                <p>
+                  比如，你可以这么做。先运行 perf record -g -p &lt; pid&gt;，执行一会儿（比如15秒）后，按Ctrl+C停止。
+                </p>
+                <p>然后，把生成的 perf.data 文件，拷贝到容器里面来分析：</p>
+                <pre><code>$ docker cp perf.data phpfpm:/tmp 
 $ docker exec -i -t phpfpm bash
-</code></pre><p>接下来，在容器的 bash 中继续运行下面的命令，安装 perf 并使用 perf report 查看报告：</p><pre><code>$ cd /tmp/ 
+</code></pre>
+                <p>接下来，在容器的 bash 中继续运行下面的命令，安装 perf 并使用 perf report 查看报告：</p>
+                <pre><code>$ cd /tmp/ 
 $ apt-get update &amp;&amp; apt-get install -y linux-tools linux-perf procps
 $ perf_4.9 report
-</code></pre><p>不过，这里也有两点需要你注意。</p><p>首先是perf工具的版本问题。在最后一步中，我们运行的工具是容器内部安装的版本 perf_4.9，而不是普通的 perf 命令。这是因为， perf 命令实际上是一个软连接，会跟内核的版本进行匹配，但镜像里安装的perf版本跟虚拟机的内核版本有可能并不一致。</p><p>另外，php-fpm 镜像是基于 Debian 系统的，所以安装 perf 工具的命令，跟 Ubuntu 也并不完全一样。比如， Ubuntu 上的安装方法是下面这样：</p><pre><code>$ apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)）
-</code></pre><p>而在 php-fpm 容器里，你应该执行下面的命令来安装 perf：</p><pre><code>$ apt-get install -y linux-perf
-</code></pre><p>当你按照前面这几种方法操作后，你就可以在容器内部看到 sqrt 的堆栈：</p><p><img src="https://static001.geekbang.org/resource/image/76/af/76f8d0f36210001e750b0a82026dedaf.png" alt=""></p><p>事实上，抛开我们的案例来说，即使是在非容器化的应用中，你也可能会碰到这个问题。假如你的应用程序在编译时，使用 strip 删除了ELF二进制文件的符号表，那么你同样也只能看到函数的地址。</p><p>现在的磁盘空间，其实已经足够大了。保留这些符号，虽然会导致编译后的文件变大，但对整个磁盘空间来说已经不是什么大问题。所以为了调试的方便，建议你还是把它们保留着。</p><p>顺便提一下，案例中各种工具的安装方法，可以算是我们专栏学习的基本功，这一点希望你能够熟悉并掌握。还是那句话，不会安装先查文档，还是不行就上网搜索或者在文章里留言提问。</p><p>在这里也要表扬一下，很多同学已经把摸索到的方法分享到了留言中。记录并分享，是一个很好的习惯。</p><h2>问题 2：如何用perf工具分析Java程序</h2><p><img src="https://static001.geekbang.org/resource/image/1e/dc/1eb200e2a68da9a00b2ee009f3de94dc.png" alt=""><img src="https://static001.geekbang.org/resource/image/97/6d/97f609aae409bd9840f606c1d9bc7e6d.jpg" alt=""></p><p>这两个问题，其实是上一个 perf 问题的延伸。 像是Java这种通过 JVM 来运行的应用程序，运行堆栈用的都是 JVM 内置的函数和堆栈管理。所以，从系统层面你只能看到JVM的函数堆栈，而不能直接得到Java应用程序的堆栈。</p><p>perf_events 实际上已经支持了 JIT，但还需要一个 /tmp/perf-PID.map文件，来进行符号翻译。当然，开源项目 <a href="https://github.com/jvm-profiling-tools/perf-map-agent">perf-map-agent </a>可以帮你生成这个符号表。</p><p>此外，为了生成全部调用栈，你还需要开启JDK的选项 -XX:+PreserveFramePointer。因为这里涉及到大量的 Java 知识，我就不再详细展开了。如果你的应用刚好基于 Java ，那么你可以参考 NETFLIX 的技术博客 <a href="https://medium.com/netflix-techblog/java-in-flames-e763b3d32166">Java in Flames</a> （链接为https://medium.com/netflix-techblog/java-in-flames-e763b3d32166），来查看详细的使用步骤。</p><p>说到这里，我也想强调一个问题，那就是学习性能优化时，不要一开始就把自己限定在具体的某个编程语言或者性能工具中，纠结于语言或工具的细节出不来。</p><p>掌握整体的分析思路，才是我们首先要做的。因为，性能优化的原理和思路，在任何编程语言中都是相通的。</p><h2>问题 3：为什么 perf 的报告中，很多符号都不显示调用栈</h2><p><img src="https://static001.geekbang.org/resource/image/49/05/4902af1ff4d710aa7cb150f44e3e3c05.png" alt=""></p><p>perf report 是一个可视化展示 perf.data 的工具。在第 08 讲的案例中，我直接给出了最终结果，并没有详细介绍它的参数。估计很多同学的机器在运行时，都碰到了跟路过同学一样的问题，看到的是下面这个界面。</p><p><img src="https://static001.geekbang.org/resource/image/33/e9/335d41ccf24d93aafe0e4d511218b6e9.png" alt=""></p><p>这个界面可以清楚看到，perf report 的输出中，只有 swapper 显示了调用栈，其他所有符号都不能查看堆栈情况，包括我们案例中的 app 应用。</p><p>这种情况我们以前也遇到过，当你发现性能工具的输出无法理解时，应该怎么办呢？当然还是查工具的手册。比如，你可以执行 man perf-report 命令，找到 -g 参数的说明：</p><pre><code>-g, --call-graph=&lt;print_type,threshold[,print_limit],order,sort_key[,branch],value&gt; 
+</code></pre>
+                <p>不过，这里也有两点需要你注意。</p>
+                <p>
+                  首先是perf工具的版本问题。在最后一步中，我们运行的工具是容器内部安装的版本 perf_4.9，而不是普通的 perf
+                  命令。这是因为， perf
+                  命令实际上是一个软连接，会跟内核的版本进行匹配，但镜像里安装的perf版本跟虚拟机的内核版本有可能并不一致。
+                </p>
+                <p>
+                  另外，php-fpm 镜像是基于 Debian 系统的，所以安装 perf 工具的命令，跟 Ubuntu 也并不完全一样。比如，
+                  Ubuntu 上的安装方法是下面这样：
+                </p>
+                <pre><code>$ apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)）
+</code></pre>
+                <p>而在 php-fpm 容器里，你应该执行下面的命令来安装 perf：</p>
+                <pre><code>$ apt-get install -y linux-perf
+</code></pre>
+                <p>当你按照前面这几种方法操作后，你就可以在容器内部看到 sqrt 的堆栈：</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/76/af/76f8d0f36210001e750b0a82026dedaf.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  事实上，抛开我们的案例来说，即使是在非容器化的应用中，你也可能会碰到这个问题。假如你的应用程序在编译时，使用
+                  strip 删除了ELF二进制文件的符号表，那么你同样也只能看到函数的地址。
+                </p>
+                <p>
+                  现在的磁盘空间，其实已经足够大了。保留这些符号，虽然会导致编译后的文件变大，但对整个磁盘空间来说已经不是什么大问题。所以为了调试的方便，建议你还是把它们保留着。
+                </p>
+                <p>
+                  顺便提一下，案例中各种工具的安装方法，可以算是我们专栏学习的基本功，这一点希望你能够熟悉并掌握。还是那句话，不会安装先查文档，还是不行就上网搜索或者在文章里留言提问。
+                </p>
+                <p>在这里也要表扬一下，很多同学已经把摸索到的方法分享到了留言中。记录并分享，是一个很好的习惯。</p>
+                <h2>问题 2：如何用perf工具分析Java程序</h2>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/1e/dc/1eb200e2a68da9a00b2ee009f3de94dc.png"
+                    alt=""
+                  /><img
+                    src="https://static001.geekbang.org/resource/image/97/6d/97f609aae409bd9840f606c1d9bc7e6d.jpg"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  这两个问题，其实是上一个 perf 问题的延伸。 像是Java这种通过 JVM 来运行的应用程序，运行堆栈用的都是 JVM
+                  内置的函数和堆栈管理。所以，从系统层面你只能看到JVM的函数堆栈，而不能直接得到Java应用程序的堆栈。
+                </p>
+                <p>
+                  perf_events 实际上已经支持了 JIT，但还需要一个 /tmp/perf-PID.map文件，来进行符号翻译。当然，开源项目
+                  <a href="https://github.com/jvm-profiling-tools/perf-map-agent">perf-map-agent </a
+                  >可以帮你生成这个符号表。
+                </p>
+                <p>
+                  此外，为了生成全部调用栈，你还需要开启JDK的选项 -XX:+PreserveFramePointer。因为这里涉及到大量的 Java
+                  知识，我就不再详细展开了。如果你的应用刚好基于 Java ，那么你可以参考 NETFLIX 的技术博客
+                  <a href="https://medium.com/netflix-techblog/java-in-flames-e763b3d32166">Java in Flames</a>
+                  （链接为https://medium.com/netflix-techblog/java-in-flames-e763b3d32166），来查看详细的使用步骤。
+                </p>
+                <p>
+                  说到这里，我也想强调一个问题，那就是学习性能优化时，不要一开始就把自己限定在具体的某个编程语言或者性能工具中，纠结于语言或工具的细节出不来。
+                </p>
+                <p>掌握整体的分析思路，才是我们首先要做的。因为，性能优化的原理和思路，在任何编程语言中都是相通的。</p>
+                <h2>问题 3：为什么 perf 的报告中，很多符号都不显示调用栈</h2>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/49/05/4902af1ff4d710aa7cb150f44e3e3c05.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  perf report 是一个可视化展示 perf.data 的工具。在第 08
+                  讲的案例中，我直接给出了最终结果，并没有详细介绍它的参数。估计很多同学的机器在运行时，都碰到了跟路过同学一样的问题，看到的是下面这个界面。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/33/e9/335d41ccf24d93aafe0e4d511218b6e9.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  这个界面可以清楚看到，perf report 的输出中，只有 swapper
+                  显示了调用栈，其他所有符号都不能查看堆栈情况，包括我们案例中的 app 应用。
+                </p>
+                <p>
+                  这种情况我们以前也遇到过，当你发现性能工具的输出无法理解时，应该怎么办呢？当然还是查工具的手册。比如，你可以执行
+                  man perf-report 命令，找到 -g 参数的说明：
+                </p>
+                <pre><code>-g, --call-graph=&lt;print_type,threshold[,print_limit],order,sort_key[,branch],value&gt; 
            Display call chains using type, min percent threshold, print limit, call order, sort key, optional branch and value. Note that 
            ordering is not fixed so any parameter can be given in an arbitrary order. One exception is the print_limit which should be 
            preceded by threshold. 
@@ -125,314 +1417,457 @@ $ perf_4.9 report
                - percent: diplay overhead percent (default) 
                - period: display event period 
                - count: display event count
-</code></pre><p>通过这个说明可以看到，-g 选项等同于 --call-graph，它的参数是后面那些被逗号隔开的选项，意思分别是输出类型、最小阈值、输出限制、排序方法、排序关键词、分支以及值的类型。</p><p>我们可以看到，这里默认的参数是 graph,0.5,caller,function,percent，具体含义文档中都有详细讲解，这里我就不再重复了。</p><p>现在再回过头来看我们的问题，堆栈显示不全，相关的参数当然就是最小阈值 threshold。通过手册中对threshold的说明，我们知道，当一个事件发生比例高于这个阈值时，它的调用栈才会显示出来。</p><p>threshold 的默认值为 0.5%，也就是说，事件比例超过 0.5%时，调用栈才能被显示。再观察我们案例应用 app 的事件比例，只有 0.34%，低于 0.5%，所以看不到 app 的调用栈就很正常了。</p><p>这种情况下，你只需要给 perf report 设置一个小于 0.34% 的阈值，就可以显示我们想看到的调用图了。比如执行下面的命令：</p><pre><code>$ perf report -g graph,0.3
-</code></pre><p>你就可以得到下面这个新的输出界面，展开 app 后，就可以看到它的调用栈了。</p><p><img src="https://static001.geekbang.org/resource/image/b3/93/b34f95617d13088671f4d9c2b9134693.png" alt=""></p><h2>问题 4：怎么理解 perf report 报告</h2><p><img src="https://static001.geekbang.org/resource/image/42/d8/42bf6b82da73656d6c3dad20074f57d8.png" alt=""><img src="https://static001.geekbang.org/resource/image/b9/8b/b90140f7d41790f74982d431f7e0238b.png" alt=""></p><p>看到这里，我估计你也曾嘀咕过，为啥不一上来就用 perf 工具解决，还要执行那么多其他工具呢？ 这个问题其实就给出了很好的解释。</p><p>在问题4的perf report 界面中，你也一定注意到了， swapper 高达 99% 的比例。直觉来说，我们应该直接观察它才对，为什么没那么做呢？</p><p>其实，当你清楚了 swapper 的原理后，就很容易理解我们为什么可以忽略它了。</p><p>看到swapper，你可能首先想到的是SWAP分区。实际上， swapper 跟 SWAP 没有任何关系，它只在系统初始化时创建 init 进程，之后，它就成了一个最低优先级的空闲任务。也就是说，当 CPU 上没有其他任务运行时，就会执行swapper 。所以，你可以称它为“空闲任务”。</p><p>回到我们的问题，在 perf report 的界面中，展开它的调用栈，你会看到， swapper 时钟事件都耗费在了 do_idle 上，也就是在执行空闲任务。</p><p><img src="https://static001.geekbang.org/resource/image/12/bd/121dcefacba1b554accd0a90ef349fbd.png" alt=""></p><p>所以，分析案例时，我们直接忽略了前面这个 99% 的符号，转而分析后面只有 0.3% 的 app。其实从这里你也能理解，为什么我们一开始不先用 perf 分析。</p><p>因为在多任务系统中，次数多的事件，不一定就是性能瓶颈。所以，只观察到一个大数值，并不能说明什么问题。具体有没有瓶颈，还需要你观测多个方面的多个指标，来交叉验证。这也是我在套路篇中不断强调的一点。</p><p>另外，关于 Children 和 Self 的含义，手册里其实有详细说明，还很友好地举了一个例子，来说明它们的百分比的计算方法。简单来说，</p><ul>
-<li>
-<p>Self 是最后一列的符号（可以理解为函数）本身所占比例；</p>
-</li>
-<li>
-<p>Children 是这个符号调用的其他符号（可以理解为子函数，包括直接和间接调用）占用的比例之和。</p>
-</li>
-</ul><p>正如同学留言问到的，很多性能工具确实会对系统性能有一定影响。就拿 perf 来说，它需要在内核中跟踪内核栈的各种事件，那么不可避免就会带来一定的性能损失。这一点，虽然对大部分应用来说，没有太大影响，但对特定的某些应用（比如那些对时钟周期特别敏感的应用），可能就是灾难了。</p><p>所以，使用性能工具时，确实应该考虑工具本身对系统性能的影响。而这种情况，就需要你了解这些工具的原理。比如，</p><ul>
-<li>
-<p>perf 这种动态追踪工具，会给系统带来一定的性能损失。</p>
-</li>
-<li>
-<p>vmstat、pidstat 这些直接读取 proc 文件系统来获取指标的工具，不会带来性能损失。</p>
-</li>
-</ul><h2>问题 5：性能优化书籍和参考资料推荐</h2><p><img src="https://static001.geekbang.org/resource/image/a0/ba/a0be73a43e756da48bdbdd01d71598ba.png" alt=""></p><p>我很高兴看到留言有这么高的学习热情，其实好多文章后面都有大量留言，希望我能推荐书籍和学习资料。这一点也是我乐意看到的。专栏学习一定不是你性能优化之旅的全部，能够带你入门、帮你解决实际问题、甚至是激发你的学习热情，已经让我非常开心。</p><p>在 <a href="https://time.geekbang.org/column/article/69346">如何学习Linux性能优化</a> 的文章中，我曾经介绍过 Brendan Gregg，他是当之无愧的性能优化大师，你在各种 Linux 性能优化的文章中，基本都能看到他的那张性能工具图谱。</p><p>所以，关于性能优化的书籍，我最喜欢的其实正是他写的那本 《Systems Performance: Enterprise and the Cloud》。这本书也出了中文版，名字是《性能之巅：洞悉系统、企业与云计算》。</p><p>从出版时间来看，这本书确实算一本老书了，英文版的是 2013 年出版的。但是经典之所以成为经典，正是因为不会过时。这本书里的性能分析思路以及很多的性能工具，到今天依然适用。</p><p>另外，我也推荐你去关注他的个人网站 <a href="http://www.brendangregg.com/">http://www.brendangregg.com/</a>，特别是 <a href="http://www.brendangregg.com/linuxperf.html">Linux Performance </a>这个页面，包含了很多 Linux 性能优化的资料，比如：</p><ul>
-<li>
-<p>Linux性能工具图谱 ；</p>
-</li>
-<li>
-<p>性能分析参考资料；</p>
-</li>
-<li>
-<p>性能优化的演讲视频 。</p>
-</li>
-</ul><p>不过，这里很多内容会涉及到大量的内核知识，对初学者来说并不友好。但是，如果你想成为高手，辛苦和坚持都是不可避免的。所以，希望你在查看这些资料时，不要一遇到不懂的就打退堂鼓。任何东西的第一遍学习有不懂的地方很正常，忍住恐惧别放弃，继续往后走，前面很多问题可能会一并解决掉，再看第二遍、第三遍就更轻松了。</p><p>还是那句话，抓住主线不动摇，先从最基本的原理开始，掌握性能分析的思路，然后再逐步深入，探究细节，不要试图一口吃成个大胖子。</p><p>最后，欢迎继续在留言区写下你的疑问，我会持续不断地解答。我的目的仍然不变，希望可以和你一起，把文章的知识变成你的能力，我们不仅仅在实战中演练，也要在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">我来也</span>
-                            </div>
-                            <div class="bd">[D14打卡]<br>很赞同老师的观点:<br>&quot;任何东西的第一遍学习有不懂的地方很正常，忍住恐惧别放弃，继续往后走，前面很多问题可能会一并解决掉 ，再看第二遍、第三遍就更轻松了。&quot;<br>我好像很早就这样实践了: 第一遍不管看不看得懂,先尽量细看. 再特意过一段时间回头重新学一遍,除了能掌握更多的东西,还能体会到&quot;温故而知新&quot;的感觉.<br>----------------------------<br>现在就是&quot;师傅领进门,修行看个人.&quot;<br>&quot;先从最基本的原理开始，掌握性能分析的思路，然后再逐步深入，探究细节&quot;<br>----------------------------<br>自从学了专栏,越来越觉得自己的&lt;英语&gt;该好好补补了,深感能力不足啊.<br>那么多好的资源,一手资料几乎都是英文的,看不懂真是可惜了! <br></div>
-                            <span class="time">2018-12-21 11:55</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">英语也是基本要求，多读多看就熟悉了😊</p>
-                                <p class="reply-time">2018-12-21 17:58</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ninuxer</span>
-                            </div>
-                            <div class="bd">打卡day15<br>perf report中关于swapper的内容，后面我也去查了，才发现是自己理解有误，感谢老师指出，这里的swapper不是内存概念的swap，而是cpu空闲时执行的一个默认调用<br>要啃啃《性能之巅：洞悉系统、企业与云计算》了，作者博客http:&#47;&#47;www.brendangregg.com&#47;<br>请教老师，理解内核这块，有合适的书推荐么？我查了下，看了下目录，感觉《Linux内核设计与实现》可能比较适合，其他的如《Linux内核情景分析》，《深入理解Linux内核》怎么样？ <br></div>
-                            <span class="time">2018-12-21 08:44</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">《深入Linux内核架构》挺不错，不过是本大块头，啃下应该要花不少时间</p>
-                                <p class="reply-time">2018-12-21 18:02</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/4c/c8/bed1e08a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">辣椒</span>
-                            </div>
-                            <div class="bd">老师，我把perf.data拷贝进容器，然后在容器中按照提示安装了perf, 再执行perf_4.9 report时报以下信息：<br>Kernel address maps (&#47;proc&#47;{kallsyms,modules}) were restricted.   <br>Check &#47;proc&#47;sys&#47;kernel&#47;kptr_restrict before running &#39;perf record&#39;<br>As no suitable kallsyms nor vmlinux was found, kernel samples     <br>can&#39;t be resolved.                                             <br>Samples in kernel modules can&#39;t be resolved as well.              <br>  xPress any key...  <br><br>我本身的机器是centos7.2. 请老师提示一下解决的思路，谢谢！<br><br>                                                 <br></div>
-                            <span class="time">2019-01-07 16:47</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/0f/61/dc7cc89a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">training</span>
-                            </div>
-                            <div class="bd">在macbook上用docker上运行phpfpm实例，是不是没有办法跑通perf那些测试,学习用。 <br></div>
-                            <span class="time">2019-01-04 22:50</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/0f/61/dc7cc89a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">training</span>
-                            </div>
-                            <div class="bd">在macbook上docker运行phpfpm 那个实例，有什么办法运行perfn <br></div>
-                            <span class="time">2019-01-04 22:49</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/07/8c/51401220.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">小美</span>
-                            </div>
-                            <div class="bd">我们的内核版本是3.10，安装go，然后再安装pcstat也不太方便。<br>于是我用perf观察cache，次方案是否有缺陷？<br>我的命令如下，观察60s<br>perf stat -e cache-misses -p [PID] -a sleep 60 <br></div>
-                            <span class="time">2019-01-02 15:06</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKibu8C3CeYGF6JCBribiaEPia5gibaQnj9icryPVwoF6ibosmdicXJIhBEUdn0aDwZQ32oTyJL86DgDswhAg/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">花开蝶自来</span>
-                            </div>
-                            <div class="bd">d5 <br></div>
-                            <span class="time">2019-01-01 13:01</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/4f/7d/dd852b04.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">chon</span>
-                            </div>
-                            <div class="bd">linux内核相关知识，有啥书推荐没？谢谢 <br></div>
-                            <span class="time">2018-12-31 16:19</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">大飞</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2018-12-31 15:04</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">如果</span>
-                            </div>
-                            <div class="bd">DAY14，打卡 <br></div>
-                            <span class="time">2018-12-29 14:48</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/d8/ee/6e7c2264.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Only now</span>
-                            </div>
-                            <div class="bd">mark  <br></div>
-                            <span class="time">2018-12-27 22:58</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/f4/b8/43a4c2c0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">子轩Zixuan</span>
-                            </div>
-                            <div class="bd">感谢老师耐心回复，接着线上定位问题想问下，如果要事先做好监控系统，一般需要做到什么程度？目前只有阿里云的监控感觉不够用 <br></div>
-                            <span class="time">2018-12-25 08:29</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对的，至少要从系统和应用两个层面监控。系统层面就是我们专栏里提到的系统资源使用情况；应用层面除了进程的资源监控之外，还有应用对外的接口、与其他服务间调用、数据库、应用内部功能模块等一系列的metrics（可以参考APM）</p>
-                                <p class="reply-time">2018-12-25 17:37</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">腾达</span>
-                            </div>
-                            <div class="bd">docker符号找不到的问题，文章里已经给了几个方法，我想问的是，是不是可以直接把docker的符号下载下来？从宿主直接看函数调用栈？ docker不会像java一样，在java代码层面后，从系统层面(c语言层面)很难查问题？ <br></div>
-                            <span class="time">2018-12-24 15:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">看应用的类型，有些静态编译的可以下载下来，但也有很多应用依赖大量的动态库，放到容器外面就是这儿提到的方法一了</p>
-                                <p class="reply-time">2018-12-25 07:42</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">风飘，吾独思</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2018-12-24 08:42</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/f4/b8/43a4c2c0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">子轩Zixuan</span>
-                            </div>
-                            <div class="bd">趁周末跟上了老师的脚步，老师讲解的很好，感谢！另外我注意到老师在专栏里的实例都是现场调试，但是我遇到过实际情况需要尽快恢复服务，先把代码还原重新发布保证服务可用，只留下一台保留问题现场的机器，但是已经不接受请求了，像这种情况除了事先监控以外，还有别的方案能定位问题吗？ <br></div>
-                            <span class="time">2018-12-23 22:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的，线上问题要优先恢复，排查不能花过多时间，所以很多情况下都要靠监控系统了解当时的状况。除此之外，原来服务还在的话，可以试试能否重现问题，比如模拟当时的请求；或者也可以从日志中寻找线索。</p>
-                                <p class="reply-time">2018-12-25 08:17</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/f2/2b/7d9751bb.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">许山山</span>
-                            </div>
-                            <div class="bd">这两期的答疑帮助很大，谢谢老师了。 <br></div>
-                            <span class="time">2018-12-23 22:17</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/97/61/34a0da09.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Griffin</span>
-                            </div>
-                            <div class="bd">终于赶上了，倪老师能不能讲讲网络问题应该怎么排查呀，最近老是被docker，docker swarm的container寻址困扰。 <br></div>
-                            <span class="time">2018-12-23 20:27</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">不要急，我们有网络模块的</p>
-                                <p class="reply-time">2018-12-25 08:18</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">无名老卒</span>
-                            </div>
-                            <div class="bd">全部刷完了，把各个CPU容易出现问题的情况基本上都写清楚了，而且都有详细的测试用例，除了软中断那个需要SYN攻击之外，其他的测试用例都一五一十的都做过了，受益良多。我有以下疑问，希望老师可以解答下：<br>1、软中断老师是用SYN攻击的方式来讲解这部分的实例的，那还有没有其他典型的软中断的案例呢？<br>2、硬中断的实例老师没有讲，可以补一篇吗？<br>3、老师所讲的实例，都是单一模式的，在实际的生产环境下，情况要复杂很多，老师能再讲一下印象最深刻的实际情况吗？<br><br>另外，我有一个小建议，老师的案例都是用docker来搭建环境的，在一个用例要多次下载不同的image，但其实这些image只是里面的测试用例变了，所以可以先下载file文件，使用docker -v挂载的方式进行测试。这样可以大大减少下载镜像的时间。如下，就是使用docker run -v &#47;usr&#47;local&#47;src&#47;app-fix2:&#47;app --privileged --name app-fix -d feisky&#47;app:iowait 来运行的镜像。<br>```<br>[root@linjx src]# docker ps -a<br>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                        PORTS               NAMES<br>0ecb229f87e4        feisky&#47;app:iowait   &quot;&#47;app&quot;              3 minutes ago       Up 3 minutes                                      app-fix<br>a251996e0d60        feisky&#47;app:iowait   &quot;&#47;app&quot;              5 hours ago         Exited (137) 20 minutes ago                       app<br>``` <br></div>
-                            <span class="time">2018-12-23 10:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">1. 网络后面还会讲<br>2. 硬中断的原理其实差不太多，所以没有单独拎出来<br>3. 现在单个模块的案例的确不太复杂，这也是为了让大家都能更直观理解这些问题<br><br>关于image下载，其实可以使用国内的镜像加速，网络搜索找到。并且基础镜像一样的话，也只需要下载新的layer即可。<br><br>最后，你的容器推退出了，请参考github设置启动参数解决。</p>
-                                <p class="reply-time">2018-12-25 08:28</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/bd/b5/b8dfa30a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">双</span>
-                            </div>
-                            <div class="bd">请教个问题，我们线上有台机器a上部署了一个java应用，通过java来调用外网的一个http服务，但是速度特别慢，但是在机器上通过curl访问就特别快，我们怀疑是在sockey层面可能存在什么问题，请问如何排查呢？ <br></div>
-                            <span class="time">2018-12-22 22:10</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">可以抓包对比一下，看看Java应用跟curl有什么不同。网络问题后面还会讲的</p>
-                                <p class="reply-time">2018-12-23 11:49</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/53/3d/370f0b05.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">W.T</span>
-                            </div>
-                            <div class="bd">给老师点赞👍 <br></div>
-                            <span class="time">2018-12-22 20:28</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+</code></pre>
+                <p>
+                  通过这个说明可以看到，-g 选项等同于
+                  --call-graph，它的参数是后面那些被逗号隔开的选项，意思分别是输出类型、最小阈值、输出限制、排序方法、排序关键词、分支以及值的类型。
+                </p>
+                <p>
+                  我们可以看到，这里默认的参数是
+                  graph,0.5,caller,function,percent，具体含义文档中都有详细讲解，这里我就不再重复了。
+                </p>
+                <p>
+                  现在再回过头来看我们的问题，堆栈显示不全，相关的参数当然就是最小阈值
+                  threshold。通过手册中对threshold的说明，我们知道，当一个事件发生比例高于这个阈值时，它的调用栈才会显示出来。
+                </p>
+                <p>
+                  threshold 的默认值为 0.5%，也就是说，事件比例超过 0.5%时，调用栈才能被显示。再观察我们案例应用 app
+                  的事件比例，只有 0.34%，低于 0.5%，所以看不到 app 的调用栈就很正常了。
+                </p>
+                <p>
+                  这种情况下，你只需要给 perf report 设置一个小于 0.34%
+                  的阈值，就可以显示我们想看到的调用图了。比如执行下面的命令：
+                </p>
+                <pre><code>$ perf report -g graph,0.3
+</code></pre>
+                <p>你就可以得到下面这个新的输出界面，展开 app 后，就可以看到它的调用栈了。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/b3/93/b34f95617d13088671f4d9c2b9134693.png"
+                    alt=""
+                  />
+                </p>
+                <h2>问题 4：怎么理解 perf report 报告</h2>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/42/d8/42bf6b82da73656d6c3dad20074f57d8.png"
+                    alt=""
+                  /><img
+                    src="https://static001.geekbang.org/resource/image/b9/8b/b90140f7d41790f74982d431f7e0238b.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  看到这里，我估计你也曾嘀咕过，为啥不一上来就用 perf 工具解决，还要执行那么多其他工具呢？
+                  这个问题其实就给出了很好的解释。
+                </p>
+                <p>
+                  在问题4的perf report 界面中，你也一定注意到了， swapper 高达 99%
+                  的比例。直觉来说，我们应该直接观察它才对，为什么没那么做呢？
+                </p>
+                <p>其实，当你清楚了 swapper 的原理后，就很容易理解我们为什么可以忽略它了。</p>
+                <p>
+                  看到swapper，你可能首先想到的是SWAP分区。实际上， swapper 跟 SWAP 没有任何关系，它只在系统初始化时创建
+                  init 进程，之后，它就成了一个最低优先级的空闲任务。也就是说，当 CPU
+                  上没有其他任务运行时，就会执行swapper 。所以，你可以称它为“空闲任务”。
+                </p>
+                <p>
+                  回到我们的问题，在 perf report 的界面中，展开它的调用栈，你会看到， swapper 时钟事件都耗费在了 do_idle
+                  上，也就是在执行空闲任务。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/12/bd/121dcefacba1b554accd0a90ef349fbd.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  所以，分析案例时，我们直接忽略了前面这个 99% 的符号，转而分析后面只有 0.3% 的
+                  app。其实从这里你也能理解，为什么我们一开始不先用 perf 分析。
+                </p>
+                <p>
+                  因为在多任务系统中，次数多的事件，不一定就是性能瓶颈。所以，只观察到一个大数值，并不能说明什么问题。具体有没有瓶颈，还需要你观测多个方面的多个指标，来交叉验证。这也是我在套路篇中不断强调的一点。
+                </p>
+                <p>
+                  另外，关于 Children 和 Self
+                  的含义，手册里其实有详细说明，还很友好地举了一个例子，来说明它们的百分比的计算方法。简单来说，
+                </p>
+                <ul>
+                  <li>
+                    <p>Self 是最后一列的符号（可以理解为函数）本身所占比例；</p>
+                  </li>
+                  <li>
+                    <p>Children 是这个符号调用的其他符号（可以理解为子函数，包括直接和间接调用）占用的比例之和。</p>
+                  </li>
                 </ul>
+                <p>
+                  正如同学留言问到的，很多性能工具确实会对系统性能有一定影响。就拿 perf
+                  来说，它需要在内核中跟踪内核栈的各种事件，那么不可避免就会带来一定的性能损失。这一点，虽然对大部分应用来说，没有太大影响，但对特定的某些应用（比如那些对时钟周期特别敏感的应用），可能就是灾难了。
+                </p>
+                <p>
+                  所以，使用性能工具时，确实应该考虑工具本身对系统性能的影响。而这种情况，就需要你了解这些工具的原理。比如，
+                </p>
+                <ul>
+                  <li>
+                    <p>perf 这种动态追踪工具，会给系统带来一定的性能损失。</p>
+                  </li>
+                  <li>
+                    <p>vmstat、pidstat 这些直接读取 proc 文件系统来获取指标的工具，不会带来性能损失。</p>
+                  </li>
+                </ul>
+                <h2>问题 5：性能优化书籍和参考资料推荐</h2>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/a0/ba/a0be73a43e756da48bdbdd01d71598ba.png"
+                    alt=""
+                  />
+                </p>
+                <p>
+                  我很高兴看到留言有这么高的学习热情，其实好多文章后面都有大量留言，希望我能推荐书籍和学习资料。这一点也是我乐意看到的。专栏学习一定不是你性能优化之旅的全部，能够带你入门、帮你解决实际问题、甚至是激发你的学习热情，已经让我非常开心。
+                </p>
+                <p>
+                  在
+                  <a href="https://time.geekbang.org/column/article/69346">如何学习Linux性能优化</a>
+                  的文章中，我曾经介绍过 Brendan Gregg，他是当之无愧的性能优化大师，你在各种 Linux
+                  性能优化的文章中，基本都能看到他的那张性能工具图谱。
+                </p>
+                <p>
+                  所以，关于性能优化的书籍，我最喜欢的其实正是他写的那本 《Systems Performance: Enterprise and the
+                  Cloud》。这本书也出了中文版，名字是《性能之巅：洞悉系统、企业与云计算》。
+                </p>
+                <p>
+                  从出版时间来看，这本书确实算一本老书了，英文版的是 2013
+                  年出版的。但是经典之所以成为经典，正是因为不会过时。这本书里的性能分析思路以及很多的性能工具，到今天依然适用。
+                </p>
+                <p>
+                  另外，我也推荐你去关注他的个人网站
+                  <a href="http://www.brendangregg.com/">http://www.brendangregg.com/</a>，特别是
+                  <a href="http://www.brendangregg.com/linuxperf.html">Linux Performance </a>这个页面，包含了很多 Linux
+                  性能优化的资料，比如：
+                </p>
+                <ul>
+                  <li>
+                    <p>Linux性能工具图谱 ；</p>
+                  </li>
+                  <li>
+                    <p>性能分析参考资料；</p>
+                  </li>
+                  <li>
+                    <p>性能优化的演讲视频 。</p>
+                  </li>
+                </ul>
+                <p>
+                  不过，这里很多内容会涉及到大量的内核知识，对初学者来说并不友好。但是，如果你想成为高手，辛苦和坚持都是不可避免的。所以，希望你在查看这些资料时，不要一遇到不懂的就打退堂鼓。任何东西的第一遍学习有不懂的地方很正常，忍住恐惧别放弃，继续往后走，前面很多问题可能会一并解决掉，再看第二遍、第三遍就更轻松了。
+                </p>
+                <p>
+                  还是那句话，抓住主线不动摇，先从最基本的原理开始，掌握性能分析的思路，然后再逐步深入，探究细节，不要试图一口吃成个大胖子。
+                </p>
+                <p>
+                  最后，欢迎继续在留言区写下你的疑问，我会持续不断地解答。我的目的仍然不变，希望可以和你一起，把文章的知识变成你的能力，我们不仅仅在实战中演练，也要在交流中进步。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">我来也</span></div>
+                  <div class="bd">
+                    [D14打卡]<br />很赞同老师的观点:<br />&quot;任何东西的第一遍学习有不懂的地方很正常，忍住恐惧别放弃，继续往后走，前面很多问题可能会一并解决掉
+                    ，再看第二遍、第三遍就更轻松了。&quot;<br />我好像很早就这样实践了: 第一遍不管看不看得懂,先尽量细看.
+                    再特意过一段时间回头重新学一遍,除了能掌握更多的东西,还能体会到&quot;温故而知新&quot;的感觉.<br />----------------------------<br />现在就是&quot;师傅领进门,修行看个人.&quot;<br />&quot;先从最基本的原理开始，掌握性能分析的思路，然后再逐步深入，探究细节&quot;<br />----------------------------<br />自从学了专栏,越来越觉得自己的&lt;英语&gt;该好好补补了,深感能力不足啊.<br />那么多好的资源,一手资料几乎都是英文的,看不懂真是可惜了!
+                    <br />
+                  </div>
+                  <span class="time">2018-12-21 11:55</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">英语也是基本要求，多读多看就熟悉了😊</p>
+                    <p class="reply-time">2018-12-21 17:58</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKQMM4m7NHuicr55aRiblTSEWIYe0QqbpyHweaoAbG7j2v7UUElqqeP3Ihrm3UfDPDRb1Hv8LvPwXqA/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">ninuxer</span></div>
+                  <div class="bd">
+                    打卡day15<br />perf
+                    report中关于swapper的内容，后面我也去查了，才发现是自己理解有误，感谢老师指出，这里的swapper不是内存概念的swap，而是cpu空闲时执行的一个默认调用<br />要啃啃《性能之巅：洞悉系统、企业与云计算》了，作者博客http:&#47;&#47;www.brendangregg.com&#47;<br />请教老师，理解内核这块，有合适的书推荐么？我查了下，看了下目录，感觉《Linux内核设计与实现》可能比较适合，其他的如《Linux内核情景分析》，《深入理解Linux内核》怎么样？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-21 08:44</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">《深入Linux内核架构》挺不错，不过是本大块头，啃下应该要花不少时间</p>
+                    <p class="reply-time">2018-12-21 18:02</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/4c/c8/bed1e08a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">辣椒</span></div>
+                  <div class="bd">
+                    老师，我把perf.data拷贝进容器，然后在容器中按照提示安装了perf, 再执行perf_4.9
+                    report时报以下信息：<br />Kernel address maps (&#47;proc&#47;{kallsyms,modules}) were restricted.
+                    <br />Check &#47;proc&#47;sys&#47;kernel&#47;kptr_restrict before running &#39;perf record&#39;<br />As
+                    no suitable kallsyms nor vmlinux was found, kernel samples <br />can&#39;t be resolved.
+                    <br />Samples in kernel modules can&#39;t be resolved as well. <br />
+                    xPress any key... <br /><br />我本身的机器是centos7.2. 请老师提示一下解决的思路，谢谢！<br /><br />
+                    <br />
+                  </div>
+                  <span class="time">2019-01-07 16:47</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/0f/61/dc7cc89a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">training</span></div>
+                  <div class="bd">
+                    在macbook上用docker上运行phpfpm实例，是不是没有办法跑通perf那些测试,学习用。 <br />
+                  </div>
+                  <span class="time">2019-01-04 22:50</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/0f/61/dc7cc89a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">training</span></div>
+                  <div class="bd">在macbook上docker运行phpfpm 那个实例，有什么办法运行perfn <br /></div>
+                  <span class="time">2019-01-04 22:49</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/07/8c/51401220.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">小美</span></div>
+                  <div class="bd">
+                    我们的内核版本是3.10，安装go，然后再安装pcstat也不太方便。<br />于是我用perf观察cache，次方案是否有缺陷？<br />我的命令如下，观察60s<br />perf
+                    stat -e cache-misses -p [PID] -a sleep 60 <br />
+                  </div>
+                  <span class="time">2019-01-02 15:06</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKibu8C3CeYGF6JCBribiaEPia5gibaQnj9icryPVwoF6ibosmdicXJIhBEUdn0aDwZQ32oTyJL86DgDswhAg/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">花开蝶自来</span></div>
+                  <div class="bd">d5 <br /></div>
+                  <span class="time">2019-01-01 13:01</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/4f/7d/dd852b04.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">chon</span></div>
+                  <div class="bd">linux内核相关知识，有啥书推荐没？谢谢 <br /></div>
+                  <span class="time">2018-12-31 16:19</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">大飞</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2018-12-31 15:04</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">如果</span></div>
+                  <div class="bd">DAY14，打卡 <br /></div>
+                  <span class="time">2018-12-29 14:48</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/d8/ee/6e7c2264.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Only now</span></div>
+                  <div class="bd">mark <br /></div>
+                  <span class="time">2018-12-27 22:58</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/f4/b8/43a4c2c0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">子轩Zixuan</span></div>
+                  <div class="bd">
+                    感谢老师耐心回复，接着线上定位问题想问下，如果要事先做好监控系统，一般需要做到什么程度？目前只有阿里云的监控感觉不够用
+                    <br />
+                  </div>
+                  <span class="time">2018-12-25 08:29</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      对的，至少要从系统和应用两个层面监控。系统层面就是我们专栏里提到的系统资源使用情况；应用层面除了进程的资源监控之外，还有应用对外的接口、与其他服务间调用、数据库、应用内部功能模块等一系列的metrics（可以参考APM）
+                    </p>
+                    <p class="reply-time">2018-12-25 17:37</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">腾达</span></div>
+                  <div class="bd">
+                    docker符号找不到的问题，文章里已经给了几个方法，我想问的是，是不是可以直接把docker的符号下载下来？从宿主直接看函数调用栈？
+                    docker不会像java一样，在java代码层面后，从系统层面(c语言层面)很难查问题？ <br />
+                  </div>
+                  <span class="time">2018-12-24 15:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      看应用的类型，有些静态编译的可以下载下来，但也有很多应用依赖大量的动态库，放到容器外面就是这儿提到的方法一了
+                    </p>
+                    <p class="reply-time">2018-12-25 07:42</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/42/18/edc1b373.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">风飘，吾独思</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2018-12-24 08:42</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/f4/b8/43a4c2c0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">子轩Zixuan</span></div>
+                  <div class="bd">
+                    趁周末跟上了老师的脚步，老师讲解的很好，感谢！另外我注意到老师在专栏里的实例都是现场调试，但是我遇到过实际情况需要尽快恢复服务，先把代码还原重新发布保证服务可用，只留下一台保留问题现场的机器，但是已经不接受请求了，像这种情况除了事先监控以外，还有别的方案能定位问题吗？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-23 22:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      是的，线上问题要优先恢复，排查不能花过多时间，所以很多情况下都要靠监控系统了解当时的状况。除此之外，原来服务还在的话，可以试试能否重现问题，比如模拟当时的请求；或者也可以从日志中寻找线索。
+                    </p>
+                    <p class="reply-time">2018-12-25 08:17</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/f2/2b/7d9751bb.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">许山山</span></div>
+                  <div class="bd">这两期的答疑帮助很大，谢谢老师了。 <br /></div>
+                  <span class="time">2018-12-23 22:17</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/97/61/34a0da09.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Griffin</span></div>
+                  <div class="bd">
+                    终于赶上了，倪老师能不能讲讲网络问题应该怎么排查呀，最近老是被docker，docker
+                    swarm的container寻址困扰。 <br />
+                  </div>
+                  <span class="time">2018-12-23 20:27</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">不要急，我们有网络模块的</p>
+                    <p class="reply-time">2018-12-25 08:18</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">无名老卒</span></div>
+                  <div class="bd">
+                    全部刷完了，把各个CPU容易出现问题的情况基本上都写清楚了，而且都有详细的测试用例，除了软中断那个需要SYN攻击之外，其他的测试用例都一五一十的都做过了，受益良多。我有以下疑问，希望老师可以解答下：<br />1、软中断老师是用SYN攻击的方式来讲解这部分的实例的，那还有没有其他典型的软中断的案例呢？<br />2、硬中断的实例老师没有讲，可以补一篇吗？<br />3、老师所讲的实例，都是单一模式的，在实际的生产环境下，情况要复杂很多，老师能再讲一下印象最深刻的实际情况吗？<br /><br />另外，我有一个小建议，老师的案例都是用docker来搭建环境的，在一个用例要多次下载不同的image，但其实这些image只是里面的测试用例变了，所以可以先下载file文件，使用docker
+                    -v挂载的方式进行测试。这样可以大大减少下载镜像的时间。如下，就是使用docker run -v
+                    &#47;usr&#47;local&#47;src&#47;app-fix2:&#47;app --privileged --name app-fix -d
+                    feisky&#47;app:iowait 来运行的镜像。<br />```<br />[root@linjx src]# docker ps -a<br />CONTAINER ID
+                    IMAGE COMMAND CREATED STATUS PORTS NAMES<br />0ecb229f87e4 feisky&#47;app:iowait
+                    &quot;&#47;app&quot; 3 minutes ago Up 3 minutes app-fix<br />a251996e0d60 feisky&#47;app:iowait
+                    &quot;&#47;app&quot; 5 hours ago Exited (137) 20 minutes ago app<br />``` <br />
+                  </div>
+                  <span class="time">2018-12-23 10:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      1. 网络后面还会讲<br />2. 硬中断的原理其实差不太多，所以没有单独拎出来<br />3.
+                      现在单个模块的案例的确不太复杂，这也是为了让大家都能更直观理解这些问题<br /><br />关于image下载，其实可以使用国内的镜像加速，网络搜索找到。并且基础镜像一样的话，也只需要下载新的layer即可。<br /><br />最后，你的容器推退出了，请参考github设置启动参数解决。
+                    </p>
+                    <p class="reply-time">2018-12-25 08:28</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/bd/b5/b8dfa30a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">双</span></div>
+                  <div class="bd">
+                    请教个问题，我们线上有台机器a上部署了一个java应用，通过java来调用外网的一个http服务，但是速度特别慢，但是在机器上通过curl访问就特别快，我们怀疑是在sockey层面可能存在什么问题，请问如何排查呢？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-22 22:10</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">可以抓包对比一下，看看Java应用跟curl有什么不同。网络问题后面还会讲的</p>
+                    <p class="reply-time">2018-12-23 11:49</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/53/3d/370f0b05.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">W.T</span></div>
+                  <div class="bd">给老师点赞👍 <br /></div>
+                  <span class="time">2018-12-22 20:28</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

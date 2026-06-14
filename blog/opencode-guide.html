@@ -1,401 +1,408 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="opencode 详细介绍与使用技巧 - 一款现代化的 AI 编程助手工具">
-    <meta name="keywords" content="opencode,AI编程,编程助手,开发工具,使用教程">
-    <meta name="author" content="Jackson">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="opencode 详细介绍与使用技巧 - 一款现代化的 AI 编程助手工具" />
+    <meta name="keywords" content="opencode,AI编程,编程助手,开发工具,使用教程" />
+    <meta name="author" content="Jackson" />
     <title>opencode 详细介绍与使用技巧 - CodeClub</title>
-    <link rel="icon" type="image/x-icon" href="../img/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="../lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../img/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <style>
-        :root {
-            --primary-color: #3b82f6;
-            --primary-hover: #2563eb;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            --code-bg: #f1f5f9;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+      :root {
+        --primary-color: #3b82f6;
+        --primary-hover: #2563eb;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border-color: #e2e8f0;
+        --code-bg: #f1f5f9;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
-        }
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+      }
 
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+      /* Navigation */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
 
-        .navbar-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
-        }
+      .navbar-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
 
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
 
-        .navbar-brand img {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-        }
+      .navbar-brand img {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+      }
 
-        .navbar-nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            list-style: none;
-        }
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        list-style: none;
+      }
 
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
+      .nav-link {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        border-radius: var(--radius-sm);
+        transition: var(--transition);
+      }
 
-        .nav-link:hover {
-            color: var(--primary-color);
-            background: rgba(59, 130, 246, 0.1);
-        }
+      .nav-link:hover {
+        color: var(--primary-color);
+        background: rgba(59, 130, 246, 0.1);
+      }
 
-        /* Article Header */
-        .article-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 80px 24px 60px;
-            text-align: center;
-            color: white;
-        }
+      /* Article Header */
+      .article-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 24px 60px;
+        text-align: center;
+        color: white;
+      }
 
-        .article-meta {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+      .article-meta {
+        max-width: 800px;
+        margin: 0 auto;
+      }
 
-        .article-category {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
+      .article-category {
+        display: inline-block;
+        padding: 6px 16px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
 
+      .article-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        line-height: 1.3;
+      }
+
+      .article-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        font-size: 0.9375rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .article-info span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Article Content */
+      .article-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 60px 24px;
+      }
+
+      .article-content {
+        background: var(--card-bg);
+        border-radius: var(--radius-md);
+        padding: 48px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .article-content h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 48px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .article-content h3 {
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 32px;
+        margin-bottom: 16px;
+      }
+
+      .article-content p {
+        margin-bottom: 20px;
+        color: var(--text-secondary);
+        font-size: 1.0625rem;
+      }
+
+      .article-content ul,
+      .article-content ol {
+        margin-bottom: 20px;
+        padding-left: 28px;
+      }
+
+      .article-content li {
+        margin-bottom: 12px;
+        color: var(--text-secondary);
+      }
+
+      .article-content strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .article-content code {
+        background: var(--code-bg);
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 0.9em;
+        color: #e83e8c;
+      }
+
+      .article-content pre {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 20px;
+        border-radius: var(--radius-md);
+        overflow-x: auto;
+        margin: 24px 0;
+      }
+
+      .article-content pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+      }
+
+      .article-content blockquote {
+        border-left: 4px solid var(--primary-color);
+        padding-left: 24px;
+        margin: 24px 0;
+        color: var(--text-secondary);
+        font-style: italic;
+        background: var(--bg-color);
+        padding: 20px 20px 20px 24px;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .tip-box {
+        background: #f0f9ff;
+        border-left: 4px solid var(--primary-color);
+        padding: 20px 24px;
+        margin: 24px 0;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .tip-box-title {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Footer */
+      .footer {
+        background: white;
+        border-top: 1px solid var(--border-color);
+        padding: 48px 24px 24px;
+        margin-top: 64px;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .social-link {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-color);
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .social-link:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      .footer-text {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
         .article-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.3;
-        }
-
-        .article-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
-            font-size: 0.9375rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .article-info span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Article Content */
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 24px;
+          font-size: 1.75rem;
         }
 
         .article-content {
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            padding: 48px;
-            box-shadow: var(--shadow-sm);
+          padding: 28px;
         }
 
-        .article-content h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-top: 48px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border-color);
+        .navbar-nav {
+          display: none;
         }
-
-        .article-content h3 {
-            font-size: 1.375rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-top: 32px;
-            margin-bottom: 16px;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            font-size: 1.0625rem;
-        }
-
-        .article-content ul, .article-content ol {
-            margin-bottom: 20px;
-            padding-left: 28px;
-        }
-
-        .article-content li {
-            margin-bottom: 12px;
-            color: var(--text-secondary);
-        }
-
-        .article-content strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .article-content code {
-            background: var(--code-bg);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.9em;
-            color: #e83e8c;
-        }
-
-        .article-content pre {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: var(--radius-md);
-            overflow-x: auto;
-            margin: 24px 0;
-        }
-
-        .article-content pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-        }
-
-        .article-content blockquote {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 24px;
-            margin: 24px 0;
-            color: var(--text-secondary);
-            font-style: italic;
-            background: var(--bg-color);
-            padding: 20px 20px 20px 24px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-        }
-
-        .tip-box {
-            background: #f0f9ff;
-            border-left: 4px solid var(--primary-color);
-            padding: 20px 24px;
-            margin: 24px 0;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-        }
-
-        .tip-box-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Footer */
-        .footer {
-            background: white;
-            border-top: 1px solid var(--border-color);
-            padding: 48px 24px 24px;
-            margin-top: 64px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .social-link {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-color);
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .footer-text {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .article-title {
-                font-size: 1.75rem;
-            }
-
-            .article-content {
-                padding: 28px;
-            }
-
-            .navbar-nav {
-                display: none;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="navbar-container">
-            <a class="navbar-brand" href="../index.html">
-                <img src="../img/logo.png" alt="CodeClub">
-                <span>CodeClub</span>
-            </a>
-            <ul class="navbar-nav">
-                <li><a class="nav-link" href="../index.html">首页</a></li>
-                <li><a class="nav-link" href="../nav.html">网址导航</a></li>
-                <li><a class="nav-link" href="./">博客</a></li>
-                <li><a class="nav-link" href="../wiki/index.html" target="_blank">WiKi</a></li>
-                <li><a class="nav-link" href="../book.html">图书</a></li>
-                <li><a class="nav-link" href="../contact.html">联系我</a></li>
-                <li><a class="nav-link" href="../about.html">关于我</a></li>
-            </ul>
-        </div>
+      <div class="navbar-container">
+        <a class="navbar-brand" href="../index.html">
+          <img src="../img/logo.png" alt="CodeClub" />
+          <span>CodeClub</span>
+        </a>
+        <ul class="navbar-nav">
+          <li><a class="nav-link" href="../index.html">首页</a></li>
+          <li><a class="nav-link" href="../nav.html">网址导航</a></li>
+          <li><a class="nav-link" href="./">博客</a></li>
+          <li><a class="nav-link" href="../wiki/index.html" target="_blank">WiKi</a></li>
+          <li><a class="nav-link" href="../book.html">图书</a></li>
+          <li><a class="nav-link" href="../contact.html">联系我</a></li>
+          <li><a class="nav-link" href="../about.html">关于我</a></li>
+        </ul>
+      </div>
     </nav>
 
     <!-- Article Header -->
     <header class="article-header">
-        <div class="article-meta">
-            <span class="article-category">工具推荐</span>
-            <h1 class="article-title">opencode 详细介绍与使用技巧</h1>
-            <div class="article-info">
-                <span><i class="fas fa-user"></i> Jackson</span>
-                <span><i class="fas fa-calendar"></i> 2026年2月16日</span>
-                <span><i class="fas fa-clock"></i> 10 分钟阅读</span>
-            </div>
+      <div class="article-meta">
+        <span class="article-category">工具推荐</span>
+        <h1 class="article-title">opencode 详细介绍与使用技巧</h1>
+        <div class="article-info">
+          <span><i class="fas fa-user"></i> Jackson</span>
+          <span><i class="fas fa-calendar"></i> 2026年2月16日</span>
+          <span><i class="fas fa-clock"></i> 10 分钟阅读</span>
         </div>
+      </div>
     </header>
 
     <!-- Article Content -->
     <article class="article-container">
-        <div class="article-content">
-            <p>
-                在 AI 技术飞速发展的今天，程序员的工作方式也在发生巨大变化。<strong>opencode</strong> 作为一款现代化的 AI 编程助手工具，
-                正在帮助越来越多的开发者提升编码效率。本文将详细介绍 opencode 的功能特性，并分享一些实用的使用技巧。
-            </p>
+      <div class="article-content">
+        <p>
+          在 AI 技术飞速发展的今天，程序员的工作方式也在发生巨大变化。<strong>opencode</strong> 作为一款现代化的 AI
+          编程助手工具， 正在帮助越来越多的开发者提升编码效率。本文将详细介绍 opencode
+          的功能特性，并分享一些实用的使用技巧。
+        </p>
 
-            <h2>什么是 opencode？</h2>
-            <p>
-                opencode 是一款基于大语言模型的智能编程助手，它深度集成在开发环境中，能够实时理解代码上下文，
-                提供智能代码补全、代码解释、Bug 修复建议等功能。与传统的代码补全工具不同，opencode 不仅能补全代码，
-                还能理解开发者的意图，提供更智能的编程辅助。
-            </p>
+        <h2>什么是 opencode？</h2>
+        <p>
+          opencode 是一款基于大语言模型的智能编程助手，它深度集成在开发环境中，能够实时理解代码上下文，
+          提供智能代码补全、代码解释、Bug 修复建议等功能。与传统的代码补全工具不同，opencode 不仅能补全代码，
+          还能理解开发者的意图，提供更智能的编程辅助。
+        </p>
 
-            <h2>安装与配置</h2>
+        <h2>安装与配置</h2>
 
-            <h3>1. 系统要求</h3>
-            <p>
-                在安装 opencode 之前，请确保你的系统满足以下要求：
-            </p>
-            <ul>
-                <li><strong>操作系统</strong>：Windows 10/11、macOS 10.15+、Linux (Ubuntu 18.04+)</li>
-                <li><strong>内存</strong>：至少 8GB RAM（推荐 16GB）</li>
-                <li><strong>网络</strong>：需要稳定的互联网连接</li>
-                <li><strong>编辑器</strong>：VS Code 1.70+ 或 JetBrains IDE 2022.1+</li>
-            </ul>
+        <h3>1. 系统要求</h3>
+        <p>在安装 opencode 之前，请确保你的系统满足以下要求：</p>
+        <ul>
+          <li><strong>操作系统</strong>：Windows 10/11、macOS 10.15+、Linux (Ubuntu 18.04+)</li>
+          <li><strong>内存</strong>：至少 8GB RAM（推荐 16GB）</li>
+          <li><strong>网络</strong>：需要稳定的互联网连接</li>
+          <li><strong>编辑器</strong>：VS Code 1.70+ 或 JetBrains IDE 2022.1+</li>
+        </ul>
 
-            <h3>2. 下载安装</h3>
-            <p><strong>方式一：通过 VS Code 安装（推荐）</strong></p>
-            <ol>
-                <li>打开 VS Code</li>
-                <li>点击左侧活动栏的 Extensions（扩展）图标</li>
-                <li>在搜索框输入 "opencode"</li>
-                <li>找到 opencode 官方扩展，点击 Install</li>
-                <li>安装完成后重启 VS Code</li>
-            </ol>
+        <h3>2. 下载安装</h3>
+        <p><strong>方式一：通过 VS Code 安装（推荐）</strong></p>
+        <ol>
+          <li>打开 VS Code</li>
+          <li>点击左侧活动栏的 Extensions（扩展）图标</li>
+          <li>在搜索框输入 "opencode"</li>
+          <li>找到 opencode 官方扩展，点击 Install</li>
+          <li>安装完成后重启 VS Code</li>
+        </ol>
 
-            <p><strong>方式二：JetBrains IDE 安装</strong></p>
-            <ol>
-                <li>打开 JetBrains IDE（IntelliJ IDEA、PyCharm 等）</li>
-                <li>进入 Settings/Preferences → Plugins</li>
-                <li>切换到 Marketplace 标签</li>
-                <li>搜索 "opencode" 并安装</li>
-                <li>重启 IDE 完成安装</li>
-            </ol>
+        <p><strong>方式二：JetBrains IDE 安装</strong></p>
+        <ol>
+          <li>打开 JetBrains IDE（IntelliJ IDEA、PyCharm 等）</li>
+          <li>进入 Settings/Preferences → Plugins</li>
+          <li>切换到 Marketplace 标签</li>
+          <li>搜索 "opencode" 并安装</li>
+          <li>重启 IDE 完成安装</li>
+        </ol>
 
-            <p><strong>方式三：命令行安装（CLI）</strong></p>
-            <p>
-                对于喜欢命令行的开发者，可以使用 npm 或 pip 直接安装 opencode CLI：
-            </p>
-            <p><strong>使用 npm 安装（适用于 Node.js 环境）：</strong></p>
-            <pre><code># 全局安装 opencode CLI
+        <p><strong>方式三：命令行安装（CLI）</strong></p>
+        <p>对于喜欢命令行的开发者，可以使用 npm 或 pip 直接安装 opencode CLI：</p>
+        <p><strong>使用 npm 安装（适用于 Node.js 环境）：</strong></p>
+        <pre><code># 全局安装 opencode CLI
 npm install -g @opencode/cli
 
 # 验证安装
@@ -403,8 +410,8 @@ opencode --version
 
 # 初始化配置
 opencode init</code></pre>
-            <p><strong>使用 pip 安装（适用于 Python 环境）：</strong></p>
-            <pre><code># 安装 opencode CLI
+        <p><strong>使用 pip 安装（适用于 Python 环境）：</strong></p>
+        <pre><code># 安装 opencode CLI
 pip install opencode-cli
 
 # 验证安装
@@ -412,80 +419,68 @@ opencode --version
 
 # 查看帮助信息
 opencode --help</code></pre>
-            <p><strong>CLI 常用命令：</strong></p>
-            <ul>
-                <li><code>opencode login</code> - 登录账户</li>
-                <li><code>opencode config</code> - 配置设置</li>
-                <li><code>opencode status</code> - 查看服务状态</li>
-                <li><code>opencode update</code> - 更新到最新版本</li>
-            </ul>
+        <p><strong>CLI 常用命令：</strong></p>
+        <ul>
+          <li><code>opencode login</code> - 登录账户</li>
+          <li><code>opencode config</code> - 配置设置</li>
+          <li><code>opencode status</code> - 查看服务状态</li>
+          <li><code>opencode update</code> - 更新到最新版本</li>
+        </ul>
 
-            <h3>3. 初始配置</h3>
-            <p>
-                安装完成后，需要进行简单的配置：
-            </p>
-            <ol>
-                <li><strong>登录账户</strong>：点击编辑器右侧的 opencode 图标，使用邮箱或 GitHub 账号登录</li>
-                <li><strong>选择计划</strong>：选择适合的计划（免费版或 Pro 版）</li>
-                <li><strong>配置快捷键</strong>：在设置中自定义快捷键，如接受建议、打开聊天等</li>
-                <li><strong>隐私设置</strong>：根据需求配置代码分享和隐私选项</li>
-            </ol>
+        <h3>3. 初始配置</h3>
+        <p>安装完成后，需要进行简单的配置：</p>
+        <ol>
+          <li><strong>登录账户</strong>：点击编辑器右侧的 opencode 图标，使用邮箱或 GitHub 账号登录</li>
+          <li><strong>选择计划</strong>：选择适合的计划（免费版或 Pro 版）</li>
+          <li><strong>配置快捷键</strong>：在设置中自定义快捷键，如接受建议、打开聊天等</li>
+          <li><strong>隐私设置</strong>：根据需求配置代码分享和隐私选项</li>
+        </ol>
 
-            <div class="tip-box">
-                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 配置建议</div>
-                <p>首次使用时建议开启"自动补全"和"代码解释"功能，这是 opencode 最核心的能力。</p>
-            </div>
+        <div class="tip-box">
+          <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 配置建议</div>
+          <p>首次使用时建议开启"自动补全"和"代码解释"功能，这是 opencode 最核心的能力。</p>
+        </div>
 
-            <h2>核心功能特性</h2>
+        <h2>核心功能特性</h2>
 
-            <h3>1. 智能代码补全</h3>
-            <p>
-                opencode 的核心功能是其强大的代码补全能力。它能够：
-            </p>
-            <ul>
-                <li><strong>理解上下文</strong>：不仅根据当前行，还能理解整个函数、类的上下文来提供补全建议</li>
-                <li><strong>自然语言生成</strong>：通过注释描述，自动生成对应的代码实现</li>
-                <li><strong>多语言支持</strong>：支持 Python、JavaScript、Java、Go 等主流编程语言</li>
-                <li><strong>智能预测</strong>：预测开发者接下来可能要写的代码</li>
-            </ul>
+        <h3>1. 智能代码补全</h3>
+        <p>opencode 的核心功能是其强大的代码补全能力。它能够：</p>
+        <ul>
+          <li><strong>理解上下文</strong>：不仅根据当前行，还能理解整个函数、类的上下文来提供补全建议</li>
+          <li><strong>自然语言生成</strong>：通过注释描述，自动生成对应的代码实现</li>
+          <li><strong>多语言支持</strong>：支持 Python、JavaScript、Java、Go 等主流编程语言</li>
+          <li><strong>智能预测</strong>：预测开发者接下来可能要写的代码</li>
+        </ul>
 
-            <h3>2. 代码解释与文档</h3>
-            <p>
-                遇到看不懂的代码？opencode 可以帮你：
-            </p>
-            <ul>
-                <li>选中代码，自动生成详细的注释说明</li>
-                <li>解释复杂算法和逻辑的实现原理</li>
-                <li>将代码转换为自然语言描述</li>
-            </ul>
+        <h3>2. 代码解释与文档</h3>
+        <p>遇到看不懂的代码？opencode 可以帮你：</p>
+        <ul>
+          <li>选中代码，自动生成详细的注释说明</li>
+          <li>解释复杂算法和逻辑的实现原理</li>
+          <li>将代码转换为自然语言描述</li>
+        </ul>
 
-            <h3>3. Bug 检测与修复</h3>
-            <p>
-                opencode 能够识别代码中的潜在问题：
-            </p>
-            <ul>
-                <li>实时检测代码中的错误和异常</li>
-                <li>提供修复建议和代码示例</li>
-                <li>识别性能瓶颈并提出优化方案</li>
-            </ul>
+        <h3>3. Bug 检测与修复</h3>
+        <p>opencode 能够识别代码中的潜在问题：</p>
+        <ul>
+          <li>实时检测代码中的错误和异常</li>
+          <li>提供修复建议和代码示例</li>
+          <li>识别性能瓶颈并提出优化方案</li>
+        </ul>
 
-            <h3>4. 代码重构建议</h3>
-            <p>
-                帮助改善代码质量：
-            </p>
-            <ul>
-                <li>识别代码坏味道（Code Smell）</li>
-                <li>提供重构建议和最佳实践</li>
-                <li>自动优化代码结构</li>
-            </ul>
+        <h3>4. 代码重构建议</h3>
+        <p>帮助改善代码质量：</p>
+        <ul>
+          <li>识别代码坏味道（Code Smell）</li>
+          <li>提供重构建议和最佳实践</li>
+          <li>自动优化代码结构</li>
+        </ul>
 
-            <h2>使用技巧</h2>
+        <h2>使用技巧</h2>
 
-            <h3>技巧一：善用注释驱动开发</h3>
-            <p>
-                opencode 特别擅长理解自然语言描述。在写代码之前，先用注释写下你想要实现的功能：
-            </p>
-            <pre><code># 读取 CSV 文件并计算平均值
+        <h3>技巧一：善用注释驱动开发</h3>
+        <p>opencode 特别擅长理解自然语言描述。在写代码之前，先用注释写下你想要实现的功能：</p>
+        <pre><code># 读取 CSV 文件并计算平均值
 import pandas as pd
 
 def calculate_average(filename):
@@ -493,138 +488,132 @@ def calculate_average(filename):
     df = pd.read_csv(filename)
     return df.mean()</code></pre>
 
-            <div class="tip-box">
-                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 小贴士</div>
-                <p>注释越详细，opencode 生成的代码就越符合你的预期。</p>
-            </div>
+        <div class="tip-box">
+          <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 小贴士</div>
+          <p>注释越详细，opencode 生成的代码就越符合你的预期。</p>
+        </div>
 
-            <h3>技巧二：逐步引导补全</h3>
-            <p>
-                不要期望一次生成完美代码。可以采用逐步引导的方式：
-            </p>
-            <ol>
-                <li>先写函数签名和基本框架</li>
-                <li>让 opencode 补全函数体</li>
-                <li>检查并调整生成的代码</li>
-                <li>继续下一步逻辑</li>
-            </ol>
+        <h3>技巧二：逐步引导补全</h3>
+        <p>不要期望一次生成完美代码。可以采用逐步引导的方式：</p>
+        <ol>
+          <li>先写函数签名和基本框架</li>
+          <li>让 opencode 补全函数体</li>
+          <li>检查并调整生成的代码</li>
+          <li>继续下一步逻辑</li>
+        </ol>
 
-            <h3>技巧三：利用 Tab 键快速接受建议</h3>
-            <p>
-                当 opencode 给出灰色提示时，按 <strong>Tab</strong> 键即可快速接受建议。
-                如果建议过长，可以只接受一部分，然后继续写，它会根据新的上下文重新生成建议。
-            </p>
+        <h3>技巧三：利用 Tab 键快速接受建议</h3>
+        <p>
+          当 opencode 给出灰色提示时，按 <strong>Tab</strong> 键即可快速接受建议。
+          如果建议过长，可以只接受一部分，然后继续写，它会根据新的上下文重新生成建议。
+        </p>
 
-            <h3>技巧四：多方案对比</h3>
-            <p>
-                有时候 opencode 会提供多个补全方案（通常用 <code>Ctrl + →</code> 或 <code>Option + ]</code> 切换）。
-                多尝试几个方案，选择最适合当前场景的实现方式。
-            </p>
+        <h3>技巧四：多方案对比</h3>
+        <p>
+          有时候 opencode 会提供多个补全方案（通常用 <code>Ctrl + →</code> 或 <code>Option + ]</code> 切换）。
+          多尝试几个方案，选择最适合当前场景的实现方式。
+        </p>
 
-            <h3>技巧五：让 AI 解释复杂代码</h3>
-            <p>
-                对于理解困难的代码段，可以选中后使用 opencode 的解释功能：
-            </p>
-            <pre><code># 选中以下代码，然后右键选择"解释代码"
+        <h3>技巧五：让 AI 解释复杂代码</h3>
+        <p>对于理解困难的代码段，可以选中后使用 opencode 的解释功能：</p>
+        <pre><code># 选中以下代码，然后右键选择"解释代码"
 result = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, numbers)))</code></pre>
-            <p>
-                opencode 会解释这段代码使用了函数式编程，先过滤出偶数，然后计算平方。
-            </p>
+        <p>opencode 会解释这段代码使用了函数式编程，先过滤出偶数，然后计算平方。</p>
 
-            <h2>Skills 和 Agent 使用说明</h2>
+        <h2>Skills 和 Agent 使用说明</h2>
 
-            <h3>什么是 Skills？</h3>
-            <p>
-                <strong>Skills</strong> 是 opencode 的专项能力模块，每个 Skill 都针对特定场景进行了优化。通过启用不同的 Skills，你可以让 opencode 在特定领域表现更出色。
-            </p>
+        <h3>什么是 Skills？</h3>
+        <p>
+          <strong>Skills</strong> 是 opencode 的专项能力模块，每个 Skill 都针对特定场景进行了优化。通过启用不同的
+          Skills，你可以让 opencode 在特定领域表现更出色。
+        </p>
 
-            <h3>常用 Skills 介绍</h3>
-            
-            <p><strong>1. Code Review Skill</strong></p>
+        <h3>常用 Skills 介绍</h3>
+
+        <p><strong>1. Code Review Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：自动审查代码，发现潜在问题</li>
+          <li><strong>使用场景</strong>：提交代码前进行自查、Code Review 辅助</li>
+          <li><strong>启用方法</strong>：输入 <code>/review</code> 或选择 Code Review Skill</li>
+          <li><strong>输出</strong>：详细的代码审查报告，包括问题描述、严重程度和修复建议</li>
+        </ul>
+
+        <p><strong>2. Docstring Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：自动生成函数和类的文档字符串</li>
+          <li><strong>使用场景</strong>：为项目添加文档、理解他人代码</li>
+          <li><strong>启用方法</strong>：输入 <code>/doc</code> 或选择 Docstring Skill</li>
+          <li><strong>支持格式</strong>：Google Style、NumPy Style、reStructuredText 等</li>
+        </ul>
+
+        <p><strong>3. Test Case Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：自动生成单元测试用例</li>
+          <li><strong>使用场景</strong>：提高代码覆盖率、TDD 开发</li>
+          <li><strong>启用方法</strong>：输入 <code>/test</code> 或选择 Test Case Skill</li>
+          <li><strong>支持框架</strong>：pytest、unittest、Jest 等主流测试框架</li>
+        </ul>
+
+        <p><strong>4. Git Commit Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：根据代码变更自动生成规范的提交信息</li>
+          <li><strong>使用场景</strong>：保持提交历史清晰、遵循 Conventional Commits 规范</li>
+          <li><strong>启用方法</strong>：输入 <code>/commit</code> 或选择 Git Commit Skill</li>
+          <li><strong>输出示例</strong>：<code>feat: add user authentication module with JWT support</code></li>
+        </ul>
+
+        <p><strong>5. Refactor Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：识别代码坏味道并提供重构建议</li>
+          <li><strong>使用场景</strong>：技术债务清理、代码优化</li>
+          <li><strong>启用方法</strong>：输入 <code>/refactor</code> 或选择 Refactor Skill</li>
+          <li><strong>识别问题</strong>：重复代码、过长函数、魔法数字等</li>
+        </ul>
+
+        <p><strong>6. Explain Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：深度解释代码逻辑、算法原理和设计思路</li>
+          <li><strong>使用场景</strong>：理解复杂代码、学习新技术、Code Review</li>
+          <li><strong>启用方法</strong>：选中代码后输入 <code>/explain</code> 或右键选择 Explain</li>
+          <li><strong>特点</strong>：提供多层级解释，从高层设计到具体实现细节</li>
+        </ul>
+
+        <p><strong>7. Fix Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：自动检测并修复代码中的错误</li>
+          <li><strong>使用场景</strong>：快速修复编译错误、运行时异常、逻辑错误</li>
+          <li><strong>启用方法</strong>：输入 <code>/fix</code> 或将光标放在错误行使用快捷键</li>
+          <li><strong>支持</strong>：语法错误、类型错误、空指针异常等常见问题</li>
+        </ul>
+
+        <p><strong>8. Optimize Skill</strong></p>
+        <ul>
+          <li><strong>功能</strong>：性能优化建议，提升代码执行效率</li>
+          <li><strong>使用场景</strong>：性能瓶颈分析、算法优化、资源管理</li>
+          <li><strong>启用方法</strong>：输入 <code>/optimize</code> 或选择 Optimize Skill</li>
+          <li><strong>优化范围</strong>：时间复杂度、空间复杂度、数据库查询、缓存策略</li>
+        </ul>
+
+        <h3>Skills 使用详解</h3>
+
+        <p><strong>如何调用 Skills</strong></p>
+        <p>opencode 提供多种方式调用 Skills：</p>
+        <ol>
+          <li><strong>斜杠命令</strong>：在编辑器中输入 <code>/</code> 后跟随 Skill 名称，如 <code>/review</code></li>
+          <li>
+            <strong>快捷键</strong>：
             <ul>
-                <li><strong>功能</strong>：自动审查代码，发现潜在问题</li>
-                <li><strong>使用场景</strong>：提交代码前进行自查、Code Review 辅助</li>
-                <li><strong>启用方法</strong>：输入 <code>/review</code> 或选择 Code Review Skill</li>
-                <li><strong>输出</strong>：详细的代码审查报告，包括问题描述、严重程度和修复建议</li>
+              <li><code>Ctrl/Cmd + Shift + P</code> 打开命令面板，搜索 opencode Skills</li>
+              <li><code>Ctrl/Cmd + K Ctrl/Cmd + S</code> 查看所有可用的 Skills 快捷键</li>
             </ul>
+          </li>
+          <li><strong>右键菜单</strong>：选中代码后右键，在 opencode 菜单中选择对应的 Skill</li>
+          <li><strong>聊天窗口</strong>：在 opencode 侧边栏聊天窗口中输入 Skill 命令</li>
+        </ol>
 
-            <p><strong>2. Docstring Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：自动生成函数和类的文档字符串</li>
-                <li><strong>使用场景</strong>：为项目添加文档、理解他人代码</li>
-                <li><strong>启用方法</strong>：输入 <code>/doc</code> 或选择 Docstring Skill</li>
-                <li><strong>支持格式</strong>：Google Style、NumPy Style、reStructuredText 等</li>
-            </ul>
-
-            <p><strong>3. Test Case Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：自动生成单元测试用例</li>
-                <li><strong>使用场景</strong>：提高代码覆盖率、TDD 开发</li>
-                <li><strong>启用方法</strong>：输入 <code>/test</code> 或选择 Test Case Skill</li>
-                <li><strong>支持框架</strong>：pytest、unittest、Jest 等主流测试框架</li>
-            </ul>
-
-            <p><strong>4. Git Commit Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：根据代码变更自动生成规范的提交信息</li>
-                <li><strong>使用场景</strong>：保持提交历史清晰、遵循 Conventional Commits 规范</li>
-                <li><strong>启用方法</strong>：输入 <code>/commit</code> 或选择 Git Commit Skill</li>
-                <li><strong>输出示例</strong>：<code>feat: add user authentication module with JWT support</code></li>
-            </ul>
-
-            <p><strong>5. Refactor Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：识别代码坏味道并提供重构建议</li>
-                <li><strong>使用场景</strong>：技术债务清理、代码优化</li>
-                <li><strong>启用方法</strong>：输入 <code>/refactor</code> 或选择 Refactor Skill</li>
-                <li><strong>识别问题</strong>：重复代码、过长函数、魔法数字等</li>
-            </ul>
-
-            <p><strong>6. Explain Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：深度解释代码逻辑、算法原理和设计思路</li>
-                <li><strong>使用场景</strong>：理解复杂代码、学习新技术、Code Review</li>
-                <li><strong>启用方法</strong>：选中代码后输入 <code>/explain</code> 或右键选择 Explain</li>
-                <li><strong>特点</strong>：提供多层级解释，从高层设计到具体实现细节</li>
-            </ul>
-
-            <p><strong>7. Fix Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：自动检测并修复代码中的错误</li>
-                <li><strong>使用场景</strong>：快速修复编译错误、运行时异常、逻辑错误</li>
-                <li><strong>启用方法</strong>：输入 <code>/fix</code> 或将光标放在错误行使用快捷键</li>
-                <li><strong>支持</strong>：语法错误、类型错误、空指针异常等常见问题</li>
-            </ul>
-
-            <p><strong>8. Optimize Skill</strong></p>
-            <ul>
-                <li><strong>功能</strong>：性能优化建议，提升代码执行效率</li>
-                <li><strong>使用场景</strong>：性能瓶颈分析、算法优化、资源管理</li>
-                <li><strong>启用方法</strong>：输入 <code>/optimize</code> 或选择 Optimize Skill</li>
-                <li><strong>优化范围</strong>：时间复杂度、空间复杂度、数据库查询、缓存策略</li>
-            </ul>
-
-            <h3>Skills 使用详解</h3>
-
-            <p><strong>如何调用 Skills</strong></p>
-            <p>
-                opencode 提供多种方式调用 Skills：
-            </p>
-            <ol>
-                <li><strong>斜杠命令</strong>：在编辑器中输入 <code>/</code> 后跟随 Skill 名称，如 <code>/review</code></li>
-                <li><strong>快捷键</strong>：
-                    <ul>
-                        <li><code>Ctrl/Cmd + Shift + P</code> 打开命令面板，搜索 opencode Skills</li>
-                        <li><code>Ctrl/Cmd + K Ctrl/Cmd + S</code> 查看所有可用的 Skills 快捷键</li>
-                    </ul>
-                </li>
-                <li><strong>右键菜单</strong>：选中代码后右键，在 opencode 菜单中选择对应的 Skill</li>
-                <li><strong>聊天窗口</strong>：在 opencode 侧边栏聊天窗口中输入 Skill 命令</li>
-            </ol>
-
-            <p><strong>Skill 使用示例</strong></p>
-            <p>以下是 Code Review Skill 的实际使用示例：</p>
-            <pre><code># 原始代码
+        <p><strong>Skill 使用示例</strong></p>
+        <p>以下是 Code Review Skill 的实际使用示例：</p>
+        <pre><code># 原始代码
 @agent
 class UserService:
     def get_user(self, id):
@@ -654,11 +643,9 @@ class UserService:
 3. **添加错误处理**
    - 建议添加 try-except 块处理数据库异常</code></pre>
 
-            <p><strong>Skills 组合使用</strong></p>
-            <p>
-                多个 Skills 可以组合使用，形成完整的工作流：
-            </p>
-            <pre><code># 示例：完整的代码优化流程
+        <p><strong>Skills 组合使用</strong></p>
+        <p>多个 Skills 可以组合使用，形成完整的工作流：</p>
+        <pre><code># 示例：完整的代码优化流程
 
 # 1. 使用 /explain 理解代码
 /explain
@@ -680,61 +667,58 @@ class UserService:
 /doc
 "为这个函数添加详细的 Google Style 文档字符串"</code></pre>
 
-            <div class="tip-box">
-                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> Skill 使用技巧</div>
-                <p>在使用 Skills 时，提供越详细的上下文信息，得到的结果就越准确。可以在 Skill 命令后添加具体的要求或约束条件。</p>
-            </div>
+        <div class="tip-box">
+          <div class="tip-box-title"><i class="fas fa-lightbulb"></i> Skill 使用技巧</div>
+          <p>
+            在使用 Skills 时，提供越详细的上下文信息，得到的结果就越准确。可以在 Skill 命令后添加具体的要求或约束条件。
+          </p>
+        </div>
 
-            <h3>什么是 Agent？</h3>
-            <p>
-                <strong>Agent</strong> 是 opencode 的智能代理功能，它能够理解复杂的多步骤任务，并自主规划执行路径。与简单的代码补全不同，Agent 可以：
-            </p>
-            <ul>
-                <li>理解自然语言描述的任务目标</li>
-                <li>自主规划执行步骤</li>
-                <li>在多个文件间进行操作</li>
-                <li>执行命令行操作</li>
-            </ul>
+        <h3>什么是 Agent？</h3>
+        <p>
+          <strong>Agent</strong> 是 opencode
+          的智能代理功能，它能够理解复杂的多步骤任务，并自主规划执行路径。与简单的代码补全不同，Agent 可以：
+        </p>
+        <ul>
+          <li>理解自然语言描述的任务目标</li>
+          <li>自主规划执行步骤</li>
+          <li>在多个文件间进行操作</li>
+          <li>执行命令行操作</li>
+        </ul>
 
-            <h3>Agent 使用场景</h3>
+        <h3>Agent 使用场景</h3>
 
-            <p><strong>场景一：功能开发</strong></p>
-            <p>
-                告诉 Agent 你要实现的功能，它会：
-            </p>
-            <ol>
-                <li>分析项目结构和现有代码</li>
-                <li>创建或修改必要的文件</li>
-                <li>编写代码实现功能</li>
-                <li>生成测试用例</li>
-            </ol>
-            <pre><code># 示例指令
+        <p><strong>场景一：功能开发</strong></p>
+        <p>告诉 Agent 你要实现的功能，它会：</p>
+        <ol>
+          <li>分析项目结构和现有代码</li>
+          <li>创建或修改必要的文件</li>
+          <li>编写代码实现功能</li>
+          <li>生成测试用例</li>
+        </ol>
+        <pre><code># 示例指令
 @agent 帮我添加一个用户注册功能，需要包含邮箱验证和密码加密</code></pre>
 
-            <p><strong>场景二：Bug 修复</strong></p>
-            <p>
-                描述 Bug 现象，Agent 会：
-            </p>
-            <ol>
-                <li>定位问题所在</li>
-                <li>分析根因</li>
-                <li>提供修复方案</li>
-                <li>验证修复结果</li>
-            </ol>
+        <p><strong>场景二：Bug 修复</strong></p>
+        <p>描述 Bug 现象，Agent 会：</p>
+        <ol>
+          <li>定位问题所在</li>
+          <li>分析根因</li>
+          <li>提供修复方案</li>
+          <li>验证修复结果</li>
+        </ol>
 
-            <p><strong>场景三：项目重构</strong></p>
-            <p>
-                让 Agent 帮你进行大规模重构：
-            </p>
-            <pre><code># 示例指令
+        <p><strong>场景三：项目重构</strong></p>
+        <p>让 Agent 帮你进行大规模重构：</p>
+        <pre><code># 示例指令
 @agent 将项目中的所有回调函数改为 async/await 形式</code></pre>
 
-            <h3>Agent 实际使用案例</h3>
+        <h3>Agent 实际使用案例</h3>
 
-            <p><strong>案例一：搭建完整的 RESTful API</strong></p>
-            <p><strong>背景</strong>：需要为一个博客系统快速搭建后端 API。</p>
-            <p><strong>Agent 指令</strong>：</p>
-            <pre><code>@agent 
+        <p><strong>案例一：搭建完整的 RESTful API</strong></p>
+        <p><strong>背景</strong>：需要为一个博客系统快速搭建后端 API。</p>
+        <p><strong>Agent 指令</strong>：</p>
+        <pre><code>@agent 
 请帮我创建一个完整的博客系统 RESTful API，使用 Python + FastAPI + SQLAlchemy。
 
 需求：
@@ -755,29 +739,30 @@ class UserService:
   - tests/      # 测试文件
 - requirements.txt
 - alembic/      # 数据库迁移</code></pre>
-            <p><strong>Agent 执行过程</strong>：</p>
-            <ol>
-                <li><strong>需求分析</strong>：分析项目需求，确认技术栈选择</li>
-                <li><strong>创建项目结构</strong>：创建完整的目录结构和基础文件</li>
-                <li><strong>配置环境</strong>：生成 requirements.txt、Dockerfile、docker-compose.yml</li>
-                <li><strong>实现核心模块</strong>：
-                    <ul>
-                        <li>数据库模型（User、Post、Comment、Tag）</li>
-                        <li>Pydantic schemas（请求/响应模型）</li>
-                        <li>JWT 认证中间件</li>
-                        <li>API 路由（包含完整的 CRUD）</li>
-                        <li>业务逻辑层（Services）</li>
-                    </ul>
-                </li>
-                <li><strong>添加测试</strong>：为每个 API 端点生成 pytest 测试用例</li>
-                <li><strong>生成文档</strong>：配置 Swagger/OpenAPI 自动文档</li>
-            </ol>
-            <p><strong>执行时间</strong>：约 3-5 分钟完成整个项目骨架。</p>
+        <p><strong>Agent 执行过程</strong>：</p>
+        <ol>
+          <li><strong>需求分析</strong>：分析项目需求，确认技术栈选择</li>
+          <li><strong>创建项目结构</strong>：创建完整的目录结构和基础文件</li>
+          <li><strong>配置环境</strong>：生成 requirements.txt、Dockerfile、docker-compose.yml</li>
+          <li>
+            <strong>实现核心模块</strong>：
+            <ul>
+              <li>数据库模型（User、Post、Comment、Tag）</li>
+              <li>Pydantic schemas（请求/响应模型）</li>
+              <li>JWT 认证中间件</li>
+              <li>API 路由（包含完整的 CRUD）</li>
+              <li>业务逻辑层（Services）</li>
+            </ul>
+          </li>
+          <li><strong>添加测试</strong>：为每个 API 端点生成 pytest 测试用例</li>
+          <li><strong>生成文档</strong>：配置 Swagger/OpenAPI 自动文档</li>
+        </ol>
+        <p><strong>执行时间</strong>：约 3-5 分钟完成整个项目骨架。</p>
 
-            <p><strong>案例二：排查生产环境 Bug</strong></p>
-            <p><strong>背景</strong>：线上服务出现内存泄漏，需要快速定位和修复。</p>
-            <p><strong>Agent 指令</strong>：</p>
-            <pre><code>@agent
+        <p><strong>案例二：排查生产环境 Bug</strong></p>
+        <p><strong>背景</strong>：线上服务出现内存泄漏，需要快速定位和修复。</p>
+        <p><strong>Agent 指令</strong>：</p>
+        <pre><code>@agent
 生产环境出现内存泄漏问题，请帮我分析和修复。
 
 现象：
@@ -797,20 +782,22 @@ class UserService:
 2. 检查代码中未关闭的资源
 3. 提供修复方案
 4. 添加内存监控和告警</code></pre>
-            <p><strong>Agent 诊断过程</strong>：</p>
-            <ol>
-                <li><strong>代码扫描</strong>：分析图片处理相关的代码路径</li>
-                <li><strong>问题定位</strong>：发现 Sharp 实例未正确销毁，流对象未关闭</li>
-                <li><strong>根因分析</strong>：
-                    <ul>
-                        <li>每个请求创建新的 Sharp 实例但没有调用 destroy()</li>
-                        <li>文件流未监听 'end' 事件及时清理</li>
-                        <li>临时文件未删除</li>
-                        <li>EventEmitter 监听器未移除</li>
-                    </ul>
-                </li>
-                <li><strong>生成修复代码</strong>：
-                    <pre><code>// 修复后的代码示例
+        <p><strong>Agent 诊断过程</strong>：</p>
+        <ol>
+          <li><strong>代码扫描</strong>：分析图片处理相关的代码路径</li>
+          <li><strong>问题定位</strong>：发现 Sharp 实例未正确销毁，流对象未关闭</li>
+          <li>
+            <strong>根因分析</strong>：
+            <ul>
+              <li>每个请求创建新的 Sharp 实例但没有调用 destroy()</li>
+              <li>文件流未监听 'end' 事件及时清理</li>
+              <li>临时文件未删除</li>
+              <li>EventEmitter 监听器未移除</li>
+            </ul>
+          </li>
+          <li>
+            <strong>生成修复代码</strong>：
+            <pre><code>// 修复后的代码示例
 async function processImage(file) {
     const sharpInstance = sharp(file.path);
     try {
@@ -825,14 +812,14 @@ async function processImage(file) {
         fs.unlinkSync(file.path);
     }
 }</code></pre>
-                </li>
-                <li><strong>添加监控</strong>：集成 node-memwatch 和 Prometheus 监控</li>
-            </ol>
+          </li>
+          <li><strong>添加监控</strong>：集成 node-memwatch 和 Prometheus 监控</li>
+        </ol>
 
-            <p><strong>案例三：遗留系统现代化改造</strong></p>
-            <p><strong>背景</strong>：将旧的 Python 2 + Django 1.8 项目升级到现代技术栈。</p>
-            <p><strong>Agent 指令</strong>：</p>
-            <pre><code>@agent
+        <p><strong>案例三：遗留系统现代化改造</strong></p>
+        <p><strong>背景</strong>：将旧的 Python 2 + Django 1.8 项目升级到现代技术栈。</p>
+        <p><strong>Agent 指令</strong>：</p>
+        <pre><code>@agent
 请帮我将遗留的 Django 项目升级到现代技术栈。
 
 当前状况：
@@ -856,50 +843,56 @@ async function processImage(file) {
 4. 添加类型注解
 5. 补充测试用例</code></pre>
 
-            <h3>Agent Teams - 团队协作模式</h3>
+        <h3>Agent Teams - 团队协作模式</h3>
 
-            <p><strong>什么是 Agent Teams？</strong></p>
-            <p>
-                Agent Teams 是 opencode 的多 Agent 协作功能，允许同时启用多个 Specialized Agent，每个负责特定领域，通过协作完成复杂任务。就像真实的开发团队一样，有前端专家、后端专家、测试专家等角色。
-            </p>
+        <p><strong>什么是 Agent Teams？</strong></p>
+        <p>
+          Agent Teams 是 opencode 的多 Agent 协作功能，允许同时启用多个 Specialized
+          Agent，每个负责特定领域，通过协作完成复杂任务。就像真实的开发团队一样，有前端专家、后端专家、测试专家等角色。
+        </p>
 
-            <p><strong>内置的 Team 角色</strong></p>
+        <p><strong>内置的 Team 角色</strong></p>
+        <ul>
+          <li>
+            <strong>@architect</strong> - 架构师 Agent
             <ul>
-                <li><strong>@architect</strong> - 架构师 Agent
-                    <ul>
-                        <li>职责：系统架构设计、技术选型、方案评估</li>
-                        <li>适用：项目初始规划、重大技术决策</li>
-                    </ul>
-                </li>
-                <li><strong>@backend</strong> - 后端开发 Agent
-                    <ul>
-                        <li>职责：API 设计、数据库建模、业务逻辑实现</li>
-                        <li>适用：后端功能开发、性能优化</li>
-                    </ul>
-                </li>
-                <li><strong>@frontend</strong> - 前端开发 Agent
-                    <ul>
-                        <li>职责：UI 组件开发、状态管理、交互逻辑</li>
-                        <li>适用：页面开发、组件库建设</li>
-                    </ul>
-                </li>
-                <li><strong>@qa</strong> - 测试工程师 Agent
-                    <ul>
-                        <li>职责：测试用例设计、自动化测试、Bug 报告</li>
-                        <li>适用：测试策略制定、覆盖率提升</li>
-                    </ul>
-                </li>
-                <li><strong>@devops</strong> - DevOps 工程师 Agent
-                    <ul>
-                        <li>职责：CI/CD 配置、容器化、部署脚本</li>
-                        <li>适用：流水线搭建、环境配置</li>
-                    </ul>
-                </li>
+              <li>职责：系统架构设计、技术选型、方案评估</li>
+              <li>适用：项目初始规划、重大技术决策</li>
             </ul>
+          </li>
+          <li>
+            <strong>@backend</strong> - 后端开发 Agent
+            <ul>
+              <li>职责：API 设计、数据库建模、业务逻辑实现</li>
+              <li>适用：后端功能开发、性能优化</li>
+            </ul>
+          </li>
+          <li>
+            <strong>@frontend</strong> - 前端开发 Agent
+            <ul>
+              <li>职责：UI 组件开发、状态管理、交互逻辑</li>
+              <li>适用：页面开发、组件库建设</li>
+            </ul>
+          </li>
+          <li>
+            <strong>@qa</strong> - 测试工程师 Agent
+            <ul>
+              <li>职责：测试用例设计、自动化测试、Bug 报告</li>
+              <li>适用：测试策略制定、覆盖率提升</li>
+            </ul>
+          </li>
+          <li>
+            <strong>@devops</strong> - DevOps 工程师 Agent
+            <ul>
+              <li>职责：CI/CD 配置、容器化、部署脚本</li>
+              <li>适用：流水线搭建、环境配置</li>
+            </ul>
+          </li>
+        </ul>
 
-            <p><strong>Agent Teams 使用示例</strong></p>
-            <p>以下是如何使用 Team 完成一个完整功能的开发：</p>
-            <pre><code># 启动一个新的功能开发任务
+        <p><strong>Agent Teams 使用示例</strong></p>
+        <p>以下是如何使用 Team 完成一个完整功能的开发：</p>
+        <pre><code># 启动一个新的功能开发任务
 # 首先让架构师进行设计
 
 @architect
@@ -959,21 +952,19 @@ async function processImage(file) {
 4. 配置 Nginx 反向代理
 5. 添加监控和日志收集</code></pre>
 
-            <p><strong>Agent Teams 工作流程</strong></p>
-            <ol>
-                <li><strong>任务分解</strong>：Team Leader（通常是 Architect）将大任务分解为子任务</li>
-                <li><strong>角色分配</strong>：根据专业领域，分配给不同的 Agent 角色</li>
-                <li><strong>并行开发</strong>：多个 Agent 同时工作，提高开发效率</li>
-                <li><strong>协作沟通</strong>：Agent 之间自动协调接口定义、数据格式等</li>
-                <li><strong>集成测试</strong>：各 Agent 完成后，自动进行集成测试</li>
-                <li><strong>代码审查</strong>：相互审查代码，确保质量</li>
-            </ol>
+        <p><strong>Agent Teams 工作流程</strong></p>
+        <ol>
+          <li><strong>任务分解</strong>：Team Leader（通常是 Architect）将大任务分解为子任务</li>
+          <li><strong>角色分配</strong>：根据专业领域，分配给不同的 Agent 角色</li>
+          <li><strong>并行开发</strong>：多个 Agent 同时工作，提高开发效率</li>
+          <li><strong>协作沟通</strong>：Agent 之间自动协调接口定义、数据格式等</li>
+          <li><strong>集成测试</strong>：各 Agent 完成后，自动进行集成测试</li>
+          <li><strong>代码审查</strong>：相互审查代码，确保质量</li>
+        </ol>
 
-            <p><strong>创建自定义 Agent</strong></p>
-            <p>
-                除了内置角色，你还可以创建自定义 Agent：
-            </p>
-            <pre><code># 创建专门的 React 专家 Agent
+        <p><strong>创建自定义 Agent</strong></p>
+        <p>除了内置角色，你还可以创建自定义 Agent：</p>
+        <pre><code># 创建专门的 React 专家 Agent
 @create-agent ReactExpert
 
 描述：React 开发专家，精通 Hooks、状态管理、性能优化
@@ -995,687 +986,715 @@ async function processImage(file) {
 @ReactExpert
 帮我优化这个 React 组件的性能，目前渲染很慢...</code></pre>
 
-            <h3>如何启用 Agent</h3>
-            <ol>
-                <li><strong>触发方式</strong>：在聊天框输入 <code>@agent</code> 或点击 Agent 模式按钮</li>
-                <li><strong>描述任务</strong>：用自然语言清晰描述你想要完成的任务</li>
-                <li><strong>确认步骤</strong>：Agent 会展示执行计划，你可以确认或修改</li>
-                <li><strong>执行操作</strong>：Agent 会逐步执行，每个关键步骤都会征求你的确认</li>
-            </ol>
+        <h3>如何启用 Agent</h3>
+        <ol>
+          <li><strong>触发方式</strong>：在聊天框输入 <code>@agent</code> 或点击 Agent 模式按钮</li>
+          <li><strong>描述任务</strong>：用自然语言清晰描述你想要完成的任务</li>
+          <li><strong>确认步骤</strong>：Agent 会展示执行计划，你可以确认或修改</li>
+          <li><strong>执行操作</strong>：Agent 会逐步执行，每个关键步骤都会征求你的确认</li>
+        </ol>
 
-            <div class="tip-box">
-                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> Agent 使用建议</div>
-                <p>Agent 功能强大但消耗较多资源，建议用于复杂任务。简单任务使用普通的 Skills 或代码补全更高效。</p>
-            </div>
-
-            <h3>Skills 和 Agent 的组合使用</h3>
-            <p>
-                在实际开发中，你可以组合使用 Skills 和 Agent：
-            </p>
-            <ol>
-                <li>先用 <strong>Agent</strong> 开发新功能或重构代码</li>
-                <li>使用 <strong>Code Review Skill</strong> 审查生成的代码</li>
-                <li>用 <strong>Docstring Skill</strong> 为新函数添加文档</li>
-                <li>使用 <strong>Test Case Skill</strong> 生成单元测试</li>
-                <li>最后用 <strong>Git Commit Skill</strong> 生成规范的提交信息</li>
-            </ol>
-
-            <h2>最佳实践建议</h2>
-
-            <h3>1. 保持代码风格一致性</h3>
-            <p>
-                opencode 会学习你现有的代码风格。因此，保持项目内代码风格的一致性很重要，
-                这样 AI 生成的代码才能更好地融入项目。
-            </p>
-
-            <h3>2. 验证 AI 生成的代码</h3>
-            <p>
-                虽然 opencode 很智能，但它生成的代码不一定总是正确的。务必：
-            </p>
-            <ul>
-                <li>检查生成的代码逻辑是否正确</li>
-                <li>运行测试确保没有 Bug</li>
-                <li>理解代码后再使用，不要 blindly copy</li>
-            </ul>
-
-            <h3>3. 结合版本控制使用</h3>
-            <p>
-                在使用 opencode 进行大规模重构或生成代码时，建议：
-            </p>
-            <ul>
-                <li>先生成分支进行尝试</li>
-                <li>小步提交，便于回滚</li>
-                <li>Code Review 时重点关注 AI 生成的部分</li>
-            </ul>
-
-            <h3>4. 持续学习和调整</h3>
-            <p>
-                opencode 的能力在不断进化，定期查看更新日志，学习新功能。
-                同时，根据使用经验调整自己的工作流，找到最适合自己的使用方式。
-            </p>
-
-            <h2>支持的 AI 模型</h2>
-
-            <h3>模型厂商与合作伙伴</h3>
-            <p>
-                opencode 采用多模型架构，支持接入市面上主流的大语言模型，目前已经集成 30+ 个模型，覆盖全球顶尖 AI 厂商：
-            </p>
-
-            <h4>国际主流厂商</h4>
-            <ul>
-                <li><strong>OpenAI</strong> - 最知名的 AI 研究机构
-                    <ul>
-                        <li>GPT-4o (全能旗舰模型，支持文本/图像/音频)</li>
-                        <li>GPT-4 Turbo (高智能模型，128K 上下文)</li>
-                        <li>o1 / o1-mini (推理专用模型，适合复杂逻辑)</li>
-                        <li>GPT-3.5 Turbo (快速经济模型)</li>
-                    </ul>
-                </li>
-                <li><strong>Anthropic</strong> - 专注安全性和可靠性的 AI 公司
-                    <ul>
-                        <li>Claude 3.5 Sonnet (最佳编程助手，工具调用能力强)</li>
-                        <li>Claude 3 Opus (最高智能，适合复杂任务)</li>
-                        <li>Claude 3 Haiku (极速响应，成本最低)</li>
-                    </ul>
-                </li>
-                <li><strong>Google</strong> - 多模态和长上下文专家
-                    <ul>
-                        <li>Gemini 1.5 Pro (200万 token 超长上下文)</li>
-                        <li>Gemini 1.5 Flash (速度与成本平衡)</li>
-                        <li>Gemini Ultra (Google 最强模型)</li>
-                    </ul>
-                </li>
-                <li><strong>Meta</strong> - 开源大模型领导者
-                    <ul>
-                        <li>Llama 3.1 405B (开源最强模型)</li>
-                        <li>Llama 3.1 70B (性能与效率平衡)</li>
-                        <li>Llama 3.1 8B (轻量级快速推理)</li>
-                        <li>Code Llama 70B/34B/7B (代码专用)</li>
-                    </ul>
-                </li>
-                <li><strong>Mistral AI</strong> - 欧洲领先的 AI 公司
-                    <ul>
-                        <li>Mistral Large 2 (顶级性能)</li>
-                        <li>Mistral Medium (高性价比)</li>
-                        <li>Codestral (代码生成专家)</li>
-                        <li>Mixtral 8x22B (稀疏专家模型)</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>专用代码模型</h4>
-            <ul>
-                <li><strong>DeepSeek</strong> - 代码能力突出的国产模型
-                    <ul>
-                        <li>DeepSeek Coder V2 (33B，多种编程语言精通)</li>
-                        <li>DeepSeek Chat (67B，通用对话+代码)</li>
-                    </ul>
-                </li>
-                <li><strong>Hugging Face</strong> - 开源模型社区
-                    <ul>
-                        <li>StarCoder 2 (15B，The Stack 数据集训练)</li>
-                        <li>WizardCoder (33B，指令微调版)</li>
-                        <li>Phind CodeLlama (34B，开发者优化版)</li>
-                    </ul>
-                </li>
-                <li><strong>Replit</strong> - 在线 IDE 厂商
-                    <ul>
-                        <li>replit-code-v1-3b (轻量级代码补全)</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>国内厂商模型</h4>
-            <ul>
-                <li><strong>百度</strong> - 文心一言 (ERNIE Bot)
-                    <ul>
-                        <li>文心一言 4.0 (中文理解能力最强)</li>
-                        <li>文心一言 Turbo (快速响应版)</li>
-                        <li>文心 Speed (轻量版)</li>
-                    </ul>
-                </li>
-                <li><strong>阿里</strong> - 通义千问
-                    <ul>
-                        <li>Qwen2.5-72B (开源最强中文模型)</li>
-                        <li>Qwen2.5-Coder (32B，代码专用)</li>
-                        <li>通义千问 Max (闭源旗舰版)</li>
-                    </ul>
-                </li>
-                <li><strong>智谱 AI</strong> - ChatGLM 系列
-                    <ul>
-                        <li>GLM-4 (9B，国产最强代码模型)</li>
-                        <li>GLM-4-Plus (旗舰对话模型)</li>
-                        <li>CodeGeeX4 (代码生成专用)</li>
-                    </ul>
-                </li>
-                <li><strong>科大讯飞</strong> - 星火大模型
-                    <ul>
-                        <li>星火 V4.0 (最新版，中文理解优秀)</li>
-                        <li>星火 Pro (专业版)</li>
-                    </ul>
-                </li>
-                <li><strong>腾讯</strong> - 混元大模型
-                    <ul>
-                        <li>混元 Large (千亿参数)</li>
-                        <li>混元 Pro (专业版)</li>
-                    </ul>
-                </li>
-                <li><strong>MiniMax</strong> - abab 系列
-                    <ul>
-                        <li>abab 6.5s (万亿参数 MoE 模型)</li>
-                    </ul>
-                </li>
-                <li><strong>月之暗面</strong> - Kimi
-                    <ul>
-                        <li>Kimi k1.5 (200万字符长文本)</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h3>模型类别与适用场景</h3>
-
-            <h4>1. 旗舰代码模型（Tier 1 - 最强性能）</h4>
-            <p>适合复杂任务、关键代码审查、架构设计，响应质量最高</p>
-            <ul>
-                <li><strong>GPT-4o</strong> (OpenAI) - 全能旗舰
-                    <ul>
-                        <li>支持：文本、图像、代码多模态理解</li>
-                        <li>上下文：128K tokens</li>
-                        <li>速度：比 GPT-4 Turbo 快 2 倍</li>
-                        <li>适用：复杂架构设计、跨文件重构、Bug 诊断</li>
-                        <li>评分：代码能力 95/100</li>
-                    </ul>
-                </li>
-                <li><strong>Claude 3.5 Sonnet</strong> (Anthropic) - 最佳编程助手
-                    <ul>
-                        <li>支持：200K 上下文，工具调用能力最强</li>
-                        <li>特点：代码解释最清晰，推理能力出色</li>
-                        <li>适用：代码审查、学习新技术、Agent 任务</li>
-                        <li>评分：代码能力 94/100</li>
-                    </ul>
-                </li>
-                <li><strong>GPT-4o mini</strong> (OpenAI) - 高性价比旗舰
-                    <ul>
-                        <li>特点：GPT-4o 的轻量版，速度更快</li>
-                        <li>成本：比 GPT-4o 便宜 60%</li>
-                        <li>适用：日常开发、快速原型</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>2. 推理专用模型（Tier 1.5 - 深度思考）</h4>
-            <p>适合需要多步推理的复杂问题，如算法设计、数学计算</p>
-            <ul>
-                <li><strong>o1 / o1-preview</strong> (OpenAI)
-                    <ul>
-                        <li>特点：链式思维推理，适合复杂逻辑</li>
-                        <li>适用：算法优化、复杂 Bug 分析、架构决策</li>
-                        <li>注意：响应较慢（10-30秒），适合非实时任务</li>
-                    </ul>
-                </li>
-                <li><strong>o1-mini</strong> (OpenAI)
-                    <ul>
-                        <li>特点：o1 的快速版，80% 性能，50% 成本</li>
-                        <li>适用：日常推理任务</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>3. 代码专项模型（Tier 2 - 专业优化）</h4>
-            <p>针对代码生成优化，补全速度快，成本低</p>
-            <ul>
-                <li><strong>Codestral</strong> (Mistral) - 32K 上下文代码专家
-                    <ul>
-                        <li>训练：80+ 编程语言</li>
-                        <li>特点：Fill-in-the-Middle (FIM) 能力最强</li>
-                        <li>速度：比 GPT-4 快 3 倍</li>
-                    </ul>
-                </li>
-                <li><strong>DeepSeek Coder V2</strong> - 国产代码之光
-                    <ul>
-                        <li>支持：338 种编程语言</li>
-                        <li>特点：中文代码理解能力突出</li>
-                        <li>评分：HumanEval 90.2%</li>
-                    </ul>
-                </li>
-                <li><strong>CodeLlama 70B</strong> (Meta)
-                    <ul>
-                        <li>训练：500B tokens 代码数据</li>
-                        <li>特点：开源可商用，本地部署友好</li>
-                    </ul>
-                </li>
-                <li><strong>StarCoder 2</strong> (Hugging Face)
-                    <ul>
-                        <li>训练：The Stack v2 数据集（600+ 语言）</li>
-                        <li>特点：完全开源，透明可审计</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>4. 长上下文模型（Tier 2 - 大代码库）</h4>
-            <p>适合分析整个项目、多文件重构</p>
-            <ul>
-                <li><strong>Gemini 1.5 Pro</strong> - 200万 token 超长上下文
-                    <ul>
-                        <li>适用：分析整个代码库、大型项目重构</li>
-                        <li>特点：可一次性处理整个项目的代码</li>
-                        <li>局限：代码质量略低于 GPT-4</li>
-                    </ul>
-                </li>
-                <li><strong>Kimi k1.5</strong> (月之暗面) - 200万字符中文长文本
-                    <ul>
-                        <li>适用：中文技术文档、大型中文项目</li>
-                        <li>特点：中文长文本理解能力强</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>5. 经济实用模型（Tier 3 - 日常使用）</h4>
-            <p>成本低、速度快，适合日常开发任务</p>
-            <ul>
-                <li><strong>GPT-3.5 Turbo</strong> - 性价比之王
-                    <ul>
-                        <li>成本：比 GPT-4 便宜 10 倍</li>
-                        <li>速度：响应极快</li>
-                        <li>适用：简单代码生成、代码解释、日常问答</li>
-                    </ul>
-                </li>
-                <li><strong>Claude 3 Haiku</strong> - 极速响应
-                    <ul>
-                        <li>速度：比 Claude 3.5 快 5 倍</li>
-                        <li>成本：最低价格档位</li>
-                        <li>适用：实时补全、简单任务</li>
-                    </ul>
-                </li>
-                <li><strong>Gemini 1.5 Flash</strong> - Google 快版
-                    <ul>
-                        <li>特点：速度快，成本低于 Gemini Pro</li>
-                        <li>适用：高并发场景</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>6. 中文优化模型（国内首选）</h4>
-            <p>针对中文语境和中文代码优化</p>
-            <ul>
-                <li><strong>Qwen2.5-72B</strong> (阿里) - 开源中文最强
-                    <ul>
-                        <li>评分：MMLU 83.5，中文理解优秀</li>
-                        <li>特点：代码能力接近 GPT-4</li>
-                    </ul>
-                </li>
-                <li><strong>GLM-4</strong> (智谱) - 国产代码专家
-                    <ul>
-                        <li>特点：代码补全速度快</li>
-                        <li>适用：国内开发者首选</li>
-                    </ul>
-                </li>
-                <li><strong>文心一言 4.0</strong> (百度)
-                    <ul>
-                        <li>特点：中文理解细腻，知识丰富</li>
-                        <li>适用：中文技术问答</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h3>免费模型选项</h3>
-            <p>
-                opencode 提供丰富的免费模型选择，覆盖从日常开发到学习探索的各种场景：
-            </p>
-
-            <h4>🆓 免费版 - $0/月</h4>
-            <p><strong>基础额度（每月重置）：</strong></p>
-            <ul>
-                <li><strong>GPT-3.5 Turbo</strong> - 500 次/月
-                    <ul>
-                        <li>适合：日常代码生成、学习使用</li>
-                        <li>速度：快（1-3秒）</li>
-                    </ul>
-                </li>
-                <li><strong>GPT-4o mini</strong> - 100 次/月（新增）</li>
-                <li><strong>Claude 3 Haiku</strong> - 100 次/天
-                    <ul>
-                        <li>适合：实时补全、快速问答</li>
-                        <li>特点：响应最快</li>
-                    </ul>
-                </li>
-                <li><strong>Gemini 1.5 Flash</strong> - 150 次/天</li>
-                <li><strong>DeepSeek Chat</strong> - 100 次/天（国产）</li>
-            </ul>
-
-            <p><strong>开源模型（无限制免费）：</strong></p>
-            <ul>
-                <li><strong>Llama 3.1 70B</strong> - 无限制
-                    <ul>
-                        <li>特点：Meta 开源，可商用</li>
-                        <li>速度：较慢（5-10秒）</li>
-                        <li>适用：学习探索、离线环境</li>
-                    </ul>
-                </li>
-                <li><strong>Llama 3.1 8B</strong> - 无限制
-                    <ul>
-                        <li>特点：轻量级，速度较快</li>
-                        <li>适用：简单代码补全</li>
-                    </ul>
-                </li>
-                <li><strong>CodeLlama 34B</strong> - 代码补全无限制</li>
-                <li><strong>CodeLlama 7B</strong> - 极速响应版</li>
-                <li><strong>Qwen2.5-7B</strong> (阿里) - 中文无限制</li>
-                <li><strong>StarCoder 2 15B</strong> - 完全开源</li>
-            </ul>
-
-            <p><strong>免费版限制：</strong></p>
-            <ul>
-                <li>高峰期可能需要排队（等待 10-60 秒）</li>
-                <li>不支持多模态（图片、音频分析）</li>
-                <li>Agent Teams 功能受限</li>
-                <li>无法使用 GPT-4、Claude 3.5 Sonnet 等高级模型</li>
-                <li>单次对话长度限制（4K tokens）</li>
-            </ul>
-
-            <div class="tip-box">
-                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 免费版使用建议</div>
-                <p>日常开发使用 Llama 3.1 70B（无限制）+ GPT-3.5 Turbo（500次/月）组合，基本能满足个人开发者需求。复杂任务可以积累起来，每月用 GPT-3.5 额度处理。</p>
-            </div>
-
-            <h3>付费订阅计划</h3>
-
-            <h4>💎 Pro 版 - $10/月（个人开发者推荐）</h4>
-            <p><strong>基础模型（无限使用）：</strong></p>
-            <ul>
-                <li>GPT-3.5 Turbo - 无限</li>
-                <li>GPT-4o mini - 无限</li>
-                <li>Claude 3 Haiku - 无限</li>
-                <li>Gemini 1.5 Flash - 无限</li>
-                <li>所有开源模型（Llama、CodeLlama、Qwen 等）- 无限</li>
-            </ul>
-            <p><strong>高级模型额度：</strong></p>
-            <ul>
-                <li>GPT-4 / GPT-4o - 500 次/月</li>
-                <li>Claude 3.5 Sonnet - 500 次/月</li>
-                <li>Claude 3 Opus - 100 次/月</li>
-                <li>Gemini 1.5 Pro - 300 次/月</li>
-                <li>DeepSeek Coder V2 - 300 次/月</li>
-                <li>Codestral - 500 次/月</li>
-                <li>国内模型（文心、通义、GLM）- 各 200 次/月</li>
-            </ul>
-            <p><strong>Pro 版特权：</strong></p>
-            <ul>
-                <li>✅ 优先响应队列（无需等待）</li>
-                <li>✅ 多模态支持（图片、PDF 分析）</li>
-                <li>✅ 超长上下文（128K-200K tokens）</li>
-                <li>✅ Agent Teams 完整权限</li>
-                <li>✅ 自定义 Agent 创建</li>
-                <li>✅ 代码库索引（Codebase Indexing）</li>
-                <li>✅ 高级 Skills 全部解锁</li>
-                <li>✅ 7×24 小时技术支持</li>
-            </ul>
-
-            <h4>👥 Team 版 - $20/用户/月（小团队首选）</h4>
-            <p><strong>包含 Pro 版所有功能，额外增加：</strong></p>
-            <ul>
-                <li><strong>更多高级模型额度：</strong>
-                    <ul>
-                        <li>GPT-4 / GPT-4o - 2000 次/月</li>
-                        <li>Claude 3.5 Sonnet - 2000 次/月</li>
-                        <li>Claude 3 Opus - 500 次/月</li>
-                        <li>o1 / o1-preview - 300 次/月（新增推理模型）</li>
-                        <li>其他高级模型额度 ×4</li>
-                    </ul>
-                </li>
-                <li><strong>团队协作功能：</strong>
-                    <ul>
-                        <li>共享 Prompts 库</li>
-                        <li>团队代码库知识共享</li>
-                        <li>协作编辑和代码审查</li>
-                        <li>团队用量统计和报告</li>
-                    </ul>
-                </li>
-                <li><strong>管理功能：</strong>
-                    <ul>
-                        <li>管理员控制台</li>
-                        <li>成员权限管理</li>
-                        <li>用量限额设置</li>
-                        <li>审计日志</li>
-                    </ul>
-                </li>
-                <li><strong>API 访问：</strong>
-                    <ul>
-                        <li>RESTful API 访问权限</li>
-                        <li>SDK 支持（Python、JavaScript、Go）</li>
-                        <li>每月 100,000 API 调用额度</li>
-                    </ul>
-                </li>
-                <li><strong>优先支持：</strong>
-                    <ul>
-                        <li>4 小时内响应</li>
-                        <li>专属技术支持渠道</li>
-                        <li>月度使用培训</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>🏢 Enterprise 版 - 联系销售定制（企业级）</h4>
-            <p><strong>私有化部署选项：</strong></p>
-            <ul>
-                <li>本地部署（On-Premise）- 数据不出境</li>
-                <li>私有云部署（AWS/Azure/阿里云）</li>
-                <li>VPC 隔离部署</li>
-                <li>混合云架构支持</li>
-            </ul>
-            <p><strong>模型定制服务：</strong></p>
-            <ul>
-                <li>专属模型微调（Fine-tuning）</li>
-                <li>领域知识注入（RAG）</li>
-                <li>私有代码库训练</li>
-                <li>自定义模型评估</li>
-            </ul>
-            <p><strong>企业级安全：</strong></p>
-            <ul>
-                <li>SAML 2.0 / SSO 单点登录</li>
-                <li>RBAC 细粒度权限控制</li>
-                <li>代码审计日志</li>
-                <li>SOC 2 Type II 合规</li>
-                <li>GDPR / 等保三级合规</li>
-            </ul>
-            <p><strong>服务保障：</strong></p>
-            <ul>
-                <li>99.9% SLA 可用性保障</li>
-                <li>专属客户成功经理（CSM）</li>
-                <li>定制化培训方案</li>
-                <li>月度业务回顾会议</li>
-                <li>无限 API 调用额度</li>
-            </ul>
-
-            <h4>📊 付费计划对比表</h4>
-            <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem;">
-                <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
-                    <th style="padding: 12px; text-align: left; font-weight: 600;">功能</th>
-                    <th style="padding: 12px; text-align: center; font-weight: 600;">免费版</th>
-                    <th style="padding: 12px; text-align: center; font-weight: 600;">Pro ($10)</th>
-                    <th style="padding: 12px; text-align: center; font-weight: 600;">Team ($20)</th>
-                    <th style="padding: 12px; text-align: center; font-weight: 600;">Enterprise</th>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">GPT-3.5 Turbo</td>
-                    <td style="padding: 12px; text-align: center;">500/月</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">GPT-4 / Claude 3.5</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">500/月</td>
-                    <td style="padding: 12px; text-align: center;">2000/月</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">o1 推理模型</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">300/月</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">开源模型</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">多模态支持</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">Agent Teams</td>
-                    <td style="padding: 12px; text-align: center;">受限</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">API 访问</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">10万/月</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓ 无限</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">私有化部署</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center;">✗</td>
-                    <td style="padding: 12px; text-align: center; color: #10b981;">✓</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px;">技术支持</td>
-                    <td style="padding: 12px; text-align: center;">社区</td>
-                    <td style="padding: 12px; text-align: center;">标准</td>
-                    <td style="padding: 12px; text-align: center;">优先</td>
-                    <td style="padding: 12px; text-align: center;">专属</td>
-                </tr>
-            </table>
-
-            <h3>如何选择合适的模型</h3>
-            <p>
-                根据不同场景选择最适合的模型：
-            </p>
-            <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
-                <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
-                    <th style="padding: 12px; text-align: left; font-weight: 600;">使用场景</th>
-                    <th style="padding: 12px; text-align: left; font-weight: 600;">推荐模型</th>
-                    <th style="padding: 12px; text-align: left; font-weight: 600;">理由</th>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">日常代码补全</td>
-                    <td style="padding: 12px;">Codestral / GPT-3.5</td>
-                    <td style="padding: 12px;">速度快、成本低</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">复杂算法设计</td>
-                    <td style="padding: 12px;">GPT-4 / Claude 3.5 Sonnet</td>
-                    <td style="padding: 12px;">推理能力强</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">大型项目重构</td>
-                    <td style="padding: 12px;">Gemini 1.5 Pro</td>
-                    <td style="padding: 12px;">超长上下文支持</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 12px;">中文项目开发</td>
-                    <td style="padding: 12px;">GLM-4 / 文心一言</td>
-                    <td style="padding: 12px;">中文理解更准确</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px;">Agent 复杂任务</td>
-                    <td style="padding: 12px;">Claude 3.5 Sonnet</td>
-                    <td style="padding: 12px;">工具调用能力强</td>
-                </tr>
-            </table>
-
-            <div class="tip-box">
-                <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 模型选择建议</div>
-                <p>初学者建议先使用 GPT-3.5 Turbo 熟悉操作，等有复杂需求时再升级到 GPT-4 或 Claude 3.5。日常简单任务使用免费模型即可，复杂架构设计等关键场景再使用高级模型。</p>
-            </div>
-
-            <h3>模型配置与切换</h3>
-            <p>
-                在 opencode 中切换模型非常简单：
-            </p>
-            <ol>
-                <li><strong>全局设置</strong>：在设置面板中选择默认模型</li>
-                <li><strong>临时切换</strong>：在聊天框输入 <code>@gpt4</code>、<code>@claude</code> 等快速切换</li>
-                <li><strong>自动选择</strong>：开启"智能模型选择"，让系统根据任务复杂度自动选择模型</li>
-                <li><strong>成本限制</strong>：设置每日/每月预算上限，避免意外超支</li>
-            </ol>
-
-            <h2>常见问题解答</h2>
-
-            <h3>Q: opencode 会取代程序员吗？</h3>
-            <p>
-                <strong>不会。</strong>opencode 是辅助工具，它能提高编码效率，但不能替代程序员的创造力、
-                架构设计能力和业务理解。最好的使用方式是将 AI 作为"副驾驶"，而不是完全依赖。
-            </p>
-
-            <h3>Q: 使用 opencode 会影响编程能力的提升吗？</h3>
-            <p>
-                这取决于使用方式。如果只是无脑接受 AI 建议，确实可能影响学习。但如果利用 AI 解释代码、
-                学习新的实现方式、对比不同方案，反而能加速学习。关键是要<em>理解</em> AI 生成的代码。
-            </p>
-
-            <h3>Q: opencode 支持哪些编辑器？</h3>
-            <p>
-                opencode 目前支持 VS Code、JetBrains 系列（IntelliJ IDEA、PyCharm、WebStorm 等）、
-                Vim/Neovim 等主流编辑器。可以根据自己的习惯选择合适的版本。
-            </p>
-
-            <h2>总结</h2>
-            <p>
-                opencode 是一款强大的 AI 编程助手，合理使用可以显著提升开发效率。记住以下要点：
-            </p>
-            <ul>
-                <li>善用注释描述，让 AI 理解你的意图</li>
-                <li>逐步引导，不要期望一次性完美生成</li>
-                <li>始终验证 AI 生成的代码</li>
-                <li>将 AI 作为学习工具，而不仅仅是代码生成器</li>
-                <li>保持批判性思维，理解代码背后的逻辑</li>
-            </ul>
-
-            <blockquote>
-                AI 不会取代程序员，但使用 AI 的程序员会取代不使用 AI 的程序员。
-                —— 适应新技术，提升自身竞争力。
-            </blockquote>
-
-            <p>
-                希望本文能帮助你更好地使用 opencode。如果你有任何使用心得或问题，欢迎在评论区留言交流！
-            </p>
+        <div class="tip-box">
+          <div class="tip-box-title"><i class="fas fa-lightbulb"></i> Agent 使用建议</div>
+          <p>Agent 功能强大但消耗较多资源，建议用于复杂任务。简单任务使用普通的 Skills 或代码补全更高效。</p>
         </div>
+
+        <h3>Skills 和 Agent 的组合使用</h3>
+        <p>在实际开发中，你可以组合使用 Skills 和 Agent：</p>
+        <ol>
+          <li>先用 <strong>Agent</strong> 开发新功能或重构代码</li>
+          <li>使用 <strong>Code Review Skill</strong> 审查生成的代码</li>
+          <li>用 <strong>Docstring Skill</strong> 为新函数添加文档</li>
+          <li>使用 <strong>Test Case Skill</strong> 生成单元测试</li>
+          <li>最后用 <strong>Git Commit Skill</strong> 生成规范的提交信息</li>
+        </ol>
+
+        <h2>最佳实践建议</h2>
+
+        <h3>1. 保持代码风格一致性</h3>
+        <p>
+          opencode 会学习你现有的代码风格。因此，保持项目内代码风格的一致性很重要， 这样 AI
+          生成的代码才能更好地融入项目。
+        </p>
+
+        <h3>2. 验证 AI 生成的代码</h3>
+        <p>虽然 opencode 很智能，但它生成的代码不一定总是正确的。务必：</p>
+        <ul>
+          <li>检查生成的代码逻辑是否正确</li>
+          <li>运行测试确保没有 Bug</li>
+          <li>理解代码后再使用，不要 blindly copy</li>
+        </ul>
+
+        <h3>3. 结合版本控制使用</h3>
+        <p>在使用 opencode 进行大规模重构或生成代码时，建议：</p>
+        <ul>
+          <li>先生成分支进行尝试</li>
+          <li>小步提交，便于回滚</li>
+          <li>Code Review 时重点关注 AI 生成的部分</li>
+        </ul>
+
+        <h3>4. 持续学习和调整</h3>
+        <p>
+          opencode 的能力在不断进化，定期查看更新日志，学习新功能。
+          同时，根据使用经验调整自己的工作流，找到最适合自己的使用方式。
+        </p>
+
+        <h2>支持的 AI 模型</h2>
+
+        <h3>模型厂商与合作伙伴</h3>
+        <p>opencode 采用多模型架构，支持接入市面上主流的大语言模型，目前已经集成 30+ 个模型，覆盖全球顶尖 AI 厂商：</p>
+
+        <h4>国际主流厂商</h4>
+        <ul>
+          <li>
+            <strong>OpenAI</strong> - 最知名的 AI 研究机构
+            <ul>
+              <li>GPT-4o (全能旗舰模型，支持文本/图像/音频)</li>
+              <li>GPT-4 Turbo (高智能模型，128K 上下文)</li>
+              <li>o1 / o1-mini (推理专用模型，适合复杂逻辑)</li>
+              <li>GPT-3.5 Turbo (快速经济模型)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Anthropic</strong> - 专注安全性和可靠性的 AI 公司
+            <ul>
+              <li>Claude 3.5 Sonnet (最佳编程助手，工具调用能力强)</li>
+              <li>Claude 3 Opus (最高智能，适合复杂任务)</li>
+              <li>Claude 3 Haiku (极速响应，成本最低)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Google</strong> - 多模态和长上下文专家
+            <ul>
+              <li>Gemini 1.5 Pro (200万 token 超长上下文)</li>
+              <li>Gemini 1.5 Flash (速度与成本平衡)</li>
+              <li>Gemini Ultra (Google 最强模型)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Meta</strong> - 开源大模型领导者
+            <ul>
+              <li>Llama 3.1 405B (开源最强模型)</li>
+              <li>Llama 3.1 70B (性能与效率平衡)</li>
+              <li>Llama 3.1 8B (轻量级快速推理)</li>
+              <li>Code Llama 70B/34B/7B (代码专用)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Mistral AI</strong> - 欧洲领先的 AI 公司
+            <ul>
+              <li>Mistral Large 2 (顶级性能)</li>
+              <li>Mistral Medium (高性价比)</li>
+              <li>Codestral (代码生成专家)</li>
+              <li>Mixtral 8x22B (稀疏专家模型)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>专用代码模型</h4>
+        <ul>
+          <li>
+            <strong>DeepSeek</strong> - 代码能力突出的国产模型
+            <ul>
+              <li>DeepSeek Coder V2 (33B，多种编程语言精通)</li>
+              <li>DeepSeek Chat (67B，通用对话+代码)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Hugging Face</strong> - 开源模型社区
+            <ul>
+              <li>StarCoder 2 (15B，The Stack 数据集训练)</li>
+              <li>WizardCoder (33B，指令微调版)</li>
+              <li>Phind CodeLlama (34B，开发者优化版)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Replit</strong> - 在线 IDE 厂商
+            <ul>
+              <li>replit-code-v1-3b (轻量级代码补全)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>国内厂商模型</h4>
+        <ul>
+          <li>
+            <strong>百度</strong> - 文心一言 (ERNIE Bot)
+            <ul>
+              <li>文心一言 4.0 (中文理解能力最强)</li>
+              <li>文心一言 Turbo (快速响应版)</li>
+              <li>文心 Speed (轻量版)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>阿里</strong> - 通义千问
+            <ul>
+              <li>Qwen2.5-72B (开源最强中文模型)</li>
+              <li>Qwen2.5-Coder (32B，代码专用)</li>
+              <li>通义千问 Max (闭源旗舰版)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>智谱 AI</strong> - ChatGLM 系列
+            <ul>
+              <li>GLM-4 (9B，国产最强代码模型)</li>
+              <li>GLM-4-Plus (旗舰对话模型)</li>
+              <li>CodeGeeX4 (代码生成专用)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>科大讯飞</strong> - 星火大模型
+            <ul>
+              <li>星火 V4.0 (最新版，中文理解优秀)</li>
+              <li>星火 Pro (专业版)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>腾讯</strong> - 混元大模型
+            <ul>
+              <li>混元 Large (千亿参数)</li>
+              <li>混元 Pro (专业版)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>MiniMax</strong> - abab 系列
+            <ul>
+              <li>abab 6.5s (万亿参数 MoE 模型)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>月之暗面</strong> - Kimi
+            <ul>
+              <li>Kimi k1.5 (200万字符长文本)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>模型类别与适用场景</h3>
+
+        <h4>1. 旗舰代码模型（Tier 1 - 最强性能）</h4>
+        <p>适合复杂任务、关键代码审查、架构设计，响应质量最高</p>
+        <ul>
+          <li>
+            <strong>GPT-4o</strong> (OpenAI) - 全能旗舰
+            <ul>
+              <li>支持：文本、图像、代码多模态理解</li>
+              <li>上下文：128K tokens</li>
+              <li>速度：比 GPT-4 Turbo 快 2 倍</li>
+              <li>适用：复杂架构设计、跨文件重构、Bug 诊断</li>
+              <li>评分：代码能力 95/100</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Claude 3.5 Sonnet</strong> (Anthropic) - 最佳编程助手
+            <ul>
+              <li>支持：200K 上下文，工具调用能力最强</li>
+              <li>特点：代码解释最清晰，推理能力出色</li>
+              <li>适用：代码审查、学习新技术、Agent 任务</li>
+              <li>评分：代码能力 94/100</li>
+            </ul>
+          </li>
+          <li>
+            <strong>GPT-4o mini</strong> (OpenAI) - 高性价比旗舰
+            <ul>
+              <li>特点：GPT-4o 的轻量版，速度更快</li>
+              <li>成本：比 GPT-4o 便宜 60%</li>
+              <li>适用：日常开发、快速原型</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2. 推理专用模型（Tier 1.5 - 深度思考）</h4>
+        <p>适合需要多步推理的复杂问题，如算法设计、数学计算</p>
+        <ul>
+          <li>
+            <strong>o1 / o1-preview</strong> (OpenAI)
+            <ul>
+              <li>特点：链式思维推理，适合复杂逻辑</li>
+              <li>适用：算法优化、复杂 Bug 分析、架构决策</li>
+              <li>注意：响应较慢（10-30秒），适合非实时任务</li>
+            </ul>
+          </li>
+          <li>
+            <strong>o1-mini</strong> (OpenAI)
+            <ul>
+              <li>特点：o1 的快速版，80% 性能，50% 成本</li>
+              <li>适用：日常推理任务</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3. 代码专项模型（Tier 2 - 专业优化）</h4>
+        <p>针对代码生成优化，补全速度快，成本低</p>
+        <ul>
+          <li>
+            <strong>Codestral</strong> (Mistral) - 32K 上下文代码专家
+            <ul>
+              <li>训练：80+ 编程语言</li>
+              <li>特点：Fill-in-the-Middle (FIM) 能力最强</li>
+              <li>速度：比 GPT-4 快 3 倍</li>
+            </ul>
+          </li>
+          <li>
+            <strong>DeepSeek Coder V2</strong> - 国产代码之光
+            <ul>
+              <li>支持：338 种编程语言</li>
+              <li>特点：中文代码理解能力突出</li>
+              <li>评分：HumanEval 90.2%</li>
+            </ul>
+          </li>
+          <li>
+            <strong>CodeLlama 70B</strong> (Meta)
+            <ul>
+              <li>训练：500B tokens 代码数据</li>
+              <li>特点：开源可商用，本地部署友好</li>
+            </ul>
+          </li>
+          <li>
+            <strong>StarCoder 2</strong> (Hugging Face)
+            <ul>
+              <li>训练：The Stack v2 数据集（600+ 语言）</li>
+              <li>特点：完全开源，透明可审计</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4. 长上下文模型（Tier 2 - 大代码库）</h4>
+        <p>适合分析整个项目、多文件重构</p>
+        <ul>
+          <li>
+            <strong>Gemini 1.5 Pro</strong> - 200万 token 超长上下文
+            <ul>
+              <li>适用：分析整个代码库、大型项目重构</li>
+              <li>特点：可一次性处理整个项目的代码</li>
+              <li>局限：代码质量略低于 GPT-4</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Kimi k1.5</strong> (月之暗面) - 200万字符中文长文本
+            <ul>
+              <li>适用：中文技术文档、大型中文项目</li>
+              <li>特点：中文长文本理解能力强</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5. 经济实用模型（Tier 3 - 日常使用）</h4>
+        <p>成本低、速度快，适合日常开发任务</p>
+        <ul>
+          <li>
+            <strong>GPT-3.5 Turbo</strong> - 性价比之王
+            <ul>
+              <li>成本：比 GPT-4 便宜 10 倍</li>
+              <li>速度：响应极快</li>
+              <li>适用：简单代码生成、代码解释、日常问答</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Claude 3 Haiku</strong> - 极速响应
+            <ul>
+              <li>速度：比 Claude 3.5 快 5 倍</li>
+              <li>成本：最低价格档位</li>
+              <li>适用：实时补全、简单任务</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Gemini 1.5 Flash</strong> - Google 快版
+            <ul>
+              <li>特点：速度快，成本低于 Gemini Pro</li>
+              <li>适用：高并发场景</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>6. 中文优化模型（国内首选）</h4>
+        <p>针对中文语境和中文代码优化</p>
+        <ul>
+          <li>
+            <strong>Qwen2.5-72B</strong> (阿里) - 开源中文最强
+            <ul>
+              <li>评分：MMLU 83.5，中文理解优秀</li>
+              <li>特点：代码能力接近 GPT-4</li>
+            </ul>
+          </li>
+          <li>
+            <strong>GLM-4</strong> (智谱) - 国产代码专家
+            <ul>
+              <li>特点：代码补全速度快</li>
+              <li>适用：国内开发者首选</li>
+            </ul>
+          </li>
+          <li>
+            <strong>文心一言 4.0</strong> (百度)
+            <ul>
+              <li>特点：中文理解细腻，知识丰富</li>
+              <li>适用：中文技术问答</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>免费模型选项</h3>
+        <p>opencode 提供丰富的免费模型选择，覆盖从日常开发到学习探索的各种场景：</p>
+
+        <h4>🆓 免费版 - $0/月</h4>
+        <p><strong>基础额度（每月重置）：</strong></p>
+        <ul>
+          <li>
+            <strong>GPT-3.5 Turbo</strong> - 500 次/月
+            <ul>
+              <li>适合：日常代码生成、学习使用</li>
+              <li>速度：快（1-3秒）</li>
+            </ul>
+          </li>
+          <li><strong>GPT-4o mini</strong> - 100 次/月（新增）</li>
+          <li>
+            <strong>Claude 3 Haiku</strong> - 100 次/天
+            <ul>
+              <li>适合：实时补全、快速问答</li>
+              <li>特点：响应最快</li>
+            </ul>
+          </li>
+          <li><strong>Gemini 1.5 Flash</strong> - 150 次/天</li>
+          <li><strong>DeepSeek Chat</strong> - 100 次/天（国产）</li>
+        </ul>
+
+        <p><strong>开源模型（无限制免费）：</strong></p>
+        <ul>
+          <li>
+            <strong>Llama 3.1 70B</strong> - 无限制
+            <ul>
+              <li>特点：Meta 开源，可商用</li>
+              <li>速度：较慢（5-10秒）</li>
+              <li>适用：学习探索、离线环境</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Llama 3.1 8B</strong> - 无限制
+            <ul>
+              <li>特点：轻量级，速度较快</li>
+              <li>适用：简单代码补全</li>
+            </ul>
+          </li>
+          <li><strong>CodeLlama 34B</strong> - 代码补全无限制</li>
+          <li><strong>CodeLlama 7B</strong> - 极速响应版</li>
+          <li><strong>Qwen2.5-7B</strong> (阿里) - 中文无限制</li>
+          <li><strong>StarCoder 2 15B</strong> - 完全开源</li>
+        </ul>
+
+        <p><strong>免费版限制：</strong></p>
+        <ul>
+          <li>高峰期可能需要排队（等待 10-60 秒）</li>
+          <li>不支持多模态（图片、音频分析）</li>
+          <li>Agent Teams 功能受限</li>
+          <li>无法使用 GPT-4、Claude 3.5 Sonnet 等高级模型</li>
+          <li>单次对话长度限制（4K tokens）</li>
+        </ul>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 免费版使用建议</div>
+          <p>
+            日常开发使用 Llama 3.1 70B（无限制）+ GPT-3.5
+            Turbo（500次/月）组合，基本能满足个人开发者需求。复杂任务可以积累起来，每月用 GPT-3.5 额度处理。
+          </p>
+        </div>
+
+        <h3>付费订阅计划</h3>
+
+        <h4>💎 Pro 版 - $10/月（个人开发者推荐）</h4>
+        <p><strong>基础模型（无限使用）：</strong></p>
+        <ul>
+          <li>GPT-3.5 Turbo - 无限</li>
+          <li>GPT-4o mini - 无限</li>
+          <li>Claude 3 Haiku - 无限</li>
+          <li>Gemini 1.5 Flash - 无限</li>
+          <li>所有开源模型（Llama、CodeLlama、Qwen 等）- 无限</li>
+        </ul>
+        <p><strong>高级模型额度：</strong></p>
+        <ul>
+          <li>GPT-4 / GPT-4o - 500 次/月</li>
+          <li>Claude 3.5 Sonnet - 500 次/月</li>
+          <li>Claude 3 Opus - 100 次/月</li>
+          <li>Gemini 1.5 Pro - 300 次/月</li>
+          <li>DeepSeek Coder V2 - 300 次/月</li>
+          <li>Codestral - 500 次/月</li>
+          <li>国内模型（文心、通义、GLM）- 各 200 次/月</li>
+        </ul>
+        <p><strong>Pro 版特权：</strong></p>
+        <ul>
+          <li>✅ 优先响应队列（无需等待）</li>
+          <li>✅ 多模态支持（图片、PDF 分析）</li>
+          <li>✅ 超长上下文（128K-200K tokens）</li>
+          <li>✅ Agent Teams 完整权限</li>
+          <li>✅ 自定义 Agent 创建</li>
+          <li>✅ 代码库索引（Codebase Indexing）</li>
+          <li>✅ 高级 Skills 全部解锁</li>
+          <li>✅ 7×24 小时技术支持</li>
+        </ul>
+
+        <h4>👥 Team 版 - $20/用户/月（小团队首选）</h4>
+        <p><strong>包含 Pro 版所有功能，额外增加：</strong></p>
+        <ul>
+          <li>
+            <strong>更多高级模型额度：</strong>
+            <ul>
+              <li>GPT-4 / GPT-4o - 2000 次/月</li>
+              <li>Claude 3.5 Sonnet - 2000 次/月</li>
+              <li>Claude 3 Opus - 500 次/月</li>
+              <li>o1 / o1-preview - 300 次/月（新增推理模型）</li>
+              <li>其他高级模型额度 ×4</li>
+            </ul>
+          </li>
+          <li>
+            <strong>团队协作功能：</strong>
+            <ul>
+              <li>共享 Prompts 库</li>
+              <li>团队代码库知识共享</li>
+              <li>协作编辑和代码审查</li>
+              <li>团队用量统计和报告</li>
+            </ul>
+          </li>
+          <li>
+            <strong>管理功能：</strong>
+            <ul>
+              <li>管理员控制台</li>
+              <li>成员权限管理</li>
+              <li>用量限额设置</li>
+              <li>审计日志</li>
+            </ul>
+          </li>
+          <li>
+            <strong>API 访问：</strong>
+            <ul>
+              <li>RESTful API 访问权限</li>
+              <li>SDK 支持（Python、JavaScript、Go）</li>
+              <li>每月 100,000 API 调用额度</li>
+            </ul>
+          </li>
+          <li>
+            <strong>优先支持：</strong>
+            <ul>
+              <li>4 小时内响应</li>
+              <li>专属技术支持渠道</li>
+              <li>月度使用培训</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>🏢 Enterprise 版 - 联系销售定制（企业级）</h4>
+        <p><strong>私有化部署选项：</strong></p>
+        <ul>
+          <li>本地部署（On-Premise）- 数据不出境</li>
+          <li>私有云部署（AWS/Azure/阿里云）</li>
+          <li>VPC 隔离部署</li>
+          <li>混合云架构支持</li>
+        </ul>
+        <p><strong>模型定制服务：</strong></p>
+        <ul>
+          <li>专属模型微调（Fine-tuning）</li>
+          <li>领域知识注入（RAG）</li>
+          <li>私有代码库训练</li>
+          <li>自定义模型评估</li>
+        </ul>
+        <p><strong>企业级安全：</strong></p>
+        <ul>
+          <li>SAML 2.0 / SSO 单点登录</li>
+          <li>RBAC 细粒度权限控制</li>
+          <li>代码审计日志</li>
+          <li>SOC 2 Type II 合规</li>
+          <li>GDPR / 等保三级合规</li>
+        </ul>
+        <p><strong>服务保障：</strong></p>
+        <ul>
+          <li>99.9% SLA 可用性保障</li>
+          <li>专属客户成功经理（CSM）</li>
+          <li>定制化培训方案</li>
+          <li>月度业务回顾会议</li>
+          <li>无限 API 调用额度</li>
+        </ul>
+
+        <h4>📊 付费计划对比表</h4>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem">
+          <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0">
+            <th style="padding: 12px; text-align: left; font-weight: 600">功能</th>
+            <th style="padding: 12px; text-align: center; font-weight: 600">免费版</th>
+            <th style="padding: 12px; text-align: center; font-weight: 600">Pro ($10)</th>
+            <th style="padding: 12px; text-align: center; font-weight: 600">Team ($20)</th>
+            <th style="padding: 12px; text-align: center; font-weight: 600">Enterprise</th>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">GPT-3.5 Turbo</td>
+            <td style="padding: 12px; text-align: center">500/月</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">GPT-4 / Claude 3.5</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">500/月</td>
+            <td style="padding: 12px; text-align: center">2000/月</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">o1 推理模型</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">300/月</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">开源模型</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">多模态支持</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">Agent Teams</td>
+            <td style="padding: 12px; text-align: center">受限</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">API 访问</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">10万/月</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓ 无限</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">私有化部署</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center">✗</td>
+            <td style="padding: 12px; text-align: center; color: #10b981">✓</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px">技术支持</td>
+            <td style="padding: 12px; text-align: center">社区</td>
+            <td style="padding: 12px; text-align: center">标准</td>
+            <td style="padding: 12px; text-align: center">优先</td>
+            <td style="padding: 12px; text-align: center">专属</td>
+          </tr>
+        </table>
+
+        <h3>如何选择合适的模型</h3>
+        <p>根据不同场景选择最适合的模型：</p>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0">
+          <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0">
+            <th style="padding: 12px; text-align: left; font-weight: 600">使用场景</th>
+            <th style="padding: 12px; text-align: left; font-weight: 600">推荐模型</th>
+            <th style="padding: 12px; text-align: left; font-weight: 600">理由</th>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">日常代码补全</td>
+            <td style="padding: 12px">Codestral / GPT-3.5</td>
+            <td style="padding: 12px">速度快、成本低</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">复杂算法设计</td>
+            <td style="padding: 12px">GPT-4 / Claude 3.5 Sonnet</td>
+            <td style="padding: 12px">推理能力强</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">大型项目重构</td>
+            <td style="padding: 12px">Gemini 1.5 Pro</td>
+            <td style="padding: 12px">超长上下文支持</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0">
+            <td style="padding: 12px">中文项目开发</td>
+            <td style="padding: 12px">GLM-4 / 文心一言</td>
+            <td style="padding: 12px">中文理解更准确</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px">Agent 复杂任务</td>
+            <td style="padding: 12px">Claude 3.5 Sonnet</td>
+            <td style="padding: 12px">工具调用能力强</td>
+          </tr>
+        </table>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><i class="fas fa-lightbulb"></i> 模型选择建议</div>
+          <p>
+            初学者建议先使用 GPT-3.5 Turbo 熟悉操作，等有复杂需求时再升级到 GPT-4 或 Claude
+            3.5。日常简单任务使用免费模型即可，复杂架构设计等关键场景再使用高级模型。
+          </p>
+        </div>
+
+        <h3>模型配置与切换</h3>
+        <p>在 opencode 中切换模型非常简单：</p>
+        <ol>
+          <li><strong>全局设置</strong>：在设置面板中选择默认模型</li>
+          <li><strong>临时切换</strong>：在聊天框输入 <code>@gpt4</code>、<code>@claude</code> 等快速切换</li>
+          <li><strong>自动选择</strong>：开启"智能模型选择"，让系统根据任务复杂度自动选择模型</li>
+          <li><strong>成本限制</strong>：设置每日/每月预算上限，避免意外超支</li>
+        </ol>
+
+        <h2>常见问题解答</h2>
+
+        <h3>Q: opencode 会取代程序员吗？</h3>
+        <p>
+          <strong>不会。</strong>opencode 是辅助工具，它能提高编码效率，但不能替代程序员的创造力、
+          架构设计能力和业务理解。最好的使用方式是将 AI 作为"副驾驶"，而不是完全依赖。
+        </p>
+
+        <h3>Q: 使用 opencode 会影响编程能力的提升吗？</h3>
+        <p>
+          这取决于使用方式。如果只是无脑接受 AI 建议，确实可能影响学习。但如果利用 AI 解释代码、
+          学习新的实现方式、对比不同方案，反而能加速学习。关键是要<em>理解</em> AI 生成的代码。
+        </p>
+
+        <h3>Q: opencode 支持哪些编辑器？</h3>
+        <p>
+          opencode 目前支持 VS Code、JetBrains 系列（IntelliJ IDEA、PyCharm、WebStorm 等）、 Vim/Neovim
+          等主流编辑器。可以根据自己的习惯选择合适的版本。
+        </p>
+
+        <h2>总结</h2>
+        <p>opencode 是一款强大的 AI 编程助手，合理使用可以显著提升开发效率。记住以下要点：</p>
+        <ul>
+          <li>善用注释描述，让 AI 理解你的意图</li>
+          <li>逐步引导，不要期望一次性完美生成</li>
+          <li>始终验证 AI 生成的代码</li>
+          <li>将 AI 作为学习工具，而不仅仅是代码生成器</li>
+          <li>保持批判性思维，理解代码背后的逻辑</li>
+        </ul>
+
+        <blockquote>
+          AI 不会取代程序员，但使用 AI 的程序员会取代不使用 AI 的程序员。 —— 适应新技术，提升自身竞争力。
+        </blockquote>
+
+        <p>希望本文能帮助你更好地使用 opencode。如果你有任何使用心得或问题，欢迎在评论区留言交流！</p>
+      </div>
     </article>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#" class="social-link" title="微信">
-                    <i class="fab fa-weixin"></i>
-                </a>
-                <a href="#" class="social-link" title="微博">
-                    <i class="fab fa-weibo"></i>
-                </a>
-                <a href="https://github.com/jacksoncode" target="_blank" class="social-link" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-            <p class="footer-text">
-                Copyright &copy; Jackson 2026. Free Hosted at 
-                <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank">GitHub</a>
-            </p>
+      <div class="footer-content">
+        <div class="social-links">
+          <a href="#" class="social-link" title="微信">
+            <i class="fab fa-weixin"></i>
+          </a>
+          <a href="#" class="social-link" title="微博">
+            <i class="fab fa-weibo"></i>
+          </a>
+          <a href="https://github.com/jacksoncode" target="_blank" class="social-link" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
         </div>
+        <p class="footer-text">
+          Copyright &copy; Jackson 2026. Free Hosted at
+          <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank">GitHub</a>
+        </p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

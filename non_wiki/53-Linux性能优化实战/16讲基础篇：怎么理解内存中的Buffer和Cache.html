@@ -1,93 +1,1289 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.3;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.3;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">更多课程请加QQ群170701297</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                16讲基础篇：怎么理解内存中的Buffer和Cache
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/00/ed/0085e81690064724422d7d184be6e4ed.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">16讲基础篇：怎么理解内存中的Buffer和Cache</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/00/ed/0085e81690064724422d7d184be6e4ed.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>你好，我是倪朋飞。</p><p>上一节，我们梳理了 Linux 内存管理的基本原理，并学会了用 free 和 top 等工具，来查看系统和进程的内存使用情况。</p><p>内存和  CPU  的关系非常紧密，而内存管理本身也是很复杂的机制，所以感觉知识很硬核、很难啃，都是正常的。但还是那句话，初学时不用非得理解所有内容，继续往后学，多理解相关的概念并配合一定的实践之后，再回头复习往往会容易不少。当然，基本功不容放弃。</p><p>在今天的内容开始之前，我们先来回顾一下系统的内存使用情况，比如下面这个 free 输出界面：</p><pre><code># 注意不同版本的free输出可能会有所不同
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>你好，我是倪朋飞。</p>
+                <p>
+                  上一节，我们梳理了 Linux 内存管理的基本原理，并学会了用 free 和 top
+                  等工具，来查看系统和进程的内存使用情况。
+                </p>
+                <p>
+                  内存和 CPU
+                  的关系非常紧密，而内存管理本身也是很复杂的机制，所以感觉知识很硬核、很难啃，都是正常的。但还是那句话，初学时不用非得理解所有内容，继续往后学，多理解相关的概念并配合一定的实践之后，再回头复习往往会容易不少。当然，基本功不容放弃。
+                </p>
+                <p>在今天的内容开始之前，我们先来回顾一下系统的内存使用情况，比如下面这个 free 输出界面：</p>
+                <pre><code># 注意不同版本的free输出可能会有所不同
 $ free
               total        used        free      shared  buff/cache   available
 Mem:        8169348      263524     6875352         668     1030472     7611064
 Swap:             0           0           0
-</code></pre><p>显然，这个界面包含了物理内存Mem和交换分区Swap的具体使用情况，比如总内存、已用内存、缓存、可用内存等。其中缓存是 Buffer和Cache两部分的总和 。</p><p>这里的大部分指标都比较容易理解，但 Buffer和 Cache可能不太好区分。从字面上来说，Buffer是缓冲区，而Cache是缓存，两者都是数据在内存中的临时存储。那么，你知道这两种“临时存储”有什么区别吗？</p><p>注：今天内容接下来的部分，Buffer和Cache我会都用英文来表示，避免跟文中的“缓存”一词混淆。而文中的“缓存”，则通指内存中的临时存储。</p><h2>free数据的来源</h2><!-- [[[read_end]]] --><p>在我正式讲解两个概念前，你可以先想想，你有没有什么途径来进一步了解它们？除了中文翻译直接得到概念，别忘了，Buffer和Cache还是我们用free获得的指标。</p><p>还记得我之前讲过的，碰到看不明白的指标时该怎么办吗？</p><p>估计你想起来了，不懂就去查手册。用 man 命令查询 free 的文档，就可以找到对应指标的详细说明。比如，我们执行 man free  ，就可以看到下面这个界面。</p><pre><code>buffers
+</code></pre>
+                <p>
+                  显然，这个界面包含了物理内存Mem和交换分区Swap的具体使用情况，比如总内存、已用内存、缓存、可用内存等。其中缓存是
+                  Buffer和Cache两部分的总和 。
+                </p>
+                <p>
+                  这里的大部分指标都比较容易理解，但 Buffer和
+                  Cache可能不太好区分。从字面上来说，Buffer是缓冲区，而Cache是缓存，两者都是数据在内存中的临时存储。那么，你知道这两种“临时存储”有什么区别吗？
+                </p>
+                <p>
+                  注：今天内容接下来的部分，Buffer和Cache我会都用英文来表示，避免跟文中的“缓存”一词混淆。而文中的“缓存”，则通指内存中的临时存储。
+                </p>
+                <h2>free数据的来源</h2>
+                <!-- [[[read_end]]] -->
+                <p>
+                  在我正式讲解两个概念前，你可以先想想，你有没有什么途径来进一步了解它们？除了中文翻译直接得到概念，别忘了，Buffer和Cache还是我们用free获得的指标。
+                </p>
+                <p>还记得我之前讲过的，碰到看不明白的指标时该怎么办吗？</p>
+                <p>
+                  估计你想起来了，不懂就去查手册。用 man 命令查询 free
+                  的文档，就可以找到对应指标的详细说明。比如，我们执行 man free ，就可以看到下面这个界面。
+                </p>
+                <pre><code>buffers
               Memory used by kernel buffers (Buffers in /proc/meminfo)
 
        cache  Memory used by the page cache and slabs (Cached and SReclaimable in /proc/meminfo)
 
        buff/cache
               Sum of buffers and cache
-</code></pre><p>从free的手册中，你可以看到 buffer 和 cache 的说明。</p><ul>
-<li>
-<p>Buffers 是内核缓冲区用到的内存，对应的是  /proc/meminfo 中的 Buffers 值。</p>
-</li>
-<li>
-<p>Cache 是内核页缓存和Slab用到的内存，对应的是  /proc/meminfo 中的 Cached 与 SReclaimable 之和。</p>
-</li>
-</ul><p>这里的说明告诉我们，这些数值都来自 /proc/meminfo，但更具体的 Buffers、Cached和SReclaimable 的含义，还是没有说清楚。</p><p>要弄明白它们到底是什么，我估计你第一反应就是去百度或者 Google一下。虽然大部分情况下，网络搜索能给出一个答案。但是，且不说筛选信息花费的时间精力，对你来说，这个答案的准确性也是很难保证的。</p><p>要注意，网上的结论可能是对的，但是很可能跟你的环境并不匹配。最简单来说，同一个指标的具体含义，就可能因为内核版本、性能工具版本的不同而有挺大差别。这也是为什么，我总在专栏中强调通用思路和方法，而不是让你死记结论。对于案例实践来说，机器环境就是我们的最大限制。</p><p>那么，有没有更简单、更准确的方法，来查询它们的含义呢？</p><h2>proc文件系统</h2><p>我在前面 CPU 性能模块就曾经提到过，/proc 是 Linux 内核提供的一种特殊文件系统，是用户跟内核交互的接口。比方说，用户可以从 /proc 中查询内核的运行状态和配置选项，查询进程的运行状态、统计数据等，当然，你也可以通过 /proc  来修改内核的配置。</p><p>proc 文件系统同时也是很多性能工具的最终数据来源。比如我们刚才看到的 free ，就是通过读取 /proc/meminfo  ，得到内存的使用情况。</p><p>继续说回 /proc/meminfo，既然 Buffers、Cached、SReclaimable 这几个指标不容易理解，那我们还得继续查 proc 文件系统，获取它们的详细定义。</p><p>执行 man proc  ，你就可以得到 proc 文件系统的详细文档。</p><p>注意这个文档比较长，你最好搜索一下（比如搜索 meminfo），以便更快定位到内存部分。</p><pre><code>Buffers %lu
+</code></pre>
+                <p>从free的手册中，你可以看到 buffer 和 cache 的说明。</p>
+                <ul>
+                  <li>
+                    <p>Buffers 是内核缓冲区用到的内存，对应的是 /proc/meminfo 中的 Buffers 值。</p>
+                  </li>
+                  <li>
+                    <p>Cache 是内核页缓存和Slab用到的内存，对应的是 /proc/meminfo 中的 Cached 与 SReclaimable 之和。</p>
+                  </li>
+                </ul>
+                <p>
+                  这里的说明告诉我们，这些数值都来自 /proc/meminfo，但更具体的 Buffers、Cached和SReclaimable
+                  的含义，还是没有说清楚。
+                </p>
+                <p>
+                  要弄明白它们到底是什么，我估计你第一反应就是去百度或者
+                  Google一下。虽然大部分情况下，网络搜索能给出一个答案。但是，且不说筛选信息花费的时间精力，对你来说，这个答案的准确性也是很难保证的。
+                </p>
+                <p>
+                  要注意，网上的结论可能是对的，但是很可能跟你的环境并不匹配。最简单来说，同一个指标的具体含义，就可能因为内核版本、性能工具版本的不同而有挺大差别。这也是为什么，我总在专栏中强调通用思路和方法，而不是让你死记结论。对于案例实践来说，机器环境就是我们的最大限制。
+                </p>
+                <p>那么，有没有更简单、更准确的方法，来查询它们的含义呢？</p>
+                <h2>proc文件系统</h2>
+                <p>
+                  我在前面 CPU 性能模块就曾经提到过，/proc 是 Linux
+                  内核提供的一种特殊文件系统，是用户跟内核交互的接口。比方说，用户可以从 /proc
+                  中查询内核的运行状态和配置选项，查询进程的运行状态、统计数据等，当然，你也可以通过 /proc
+                  来修改内核的配置。
+                </p>
+                <p>
+                  proc 文件系统同时也是很多性能工具的最终数据来源。比如我们刚才看到的 free ，就是通过读取 /proc/meminfo
+                  ，得到内存的使用情况。
+                </p>
+                <p>
+                  继续说回 /proc/meminfo，既然 Buffers、Cached、SReclaimable 这几个指标不容易理解，那我们还得继续查 proc
+                  文件系统，获取它们的详细定义。
+                </p>
+                <p>执行 man proc ，你就可以得到 proc 文件系统的详细文档。</p>
+                <p>注意这个文档比较长，你最好搜索一下（比如搜索 meminfo），以便更快定位到内存部分。</p>
+                <pre><code>Buffers %lu
     Relatively temporary storage for raw disk blocks that shouldn't get tremendously large (20MB or so).
 
 Cached %lu
@@ -98,40 +1294,92 @@ SReclaimable %lu (since Linux 2.6.19)
     
 SUnreclaim %lu (since Linux 2.6.19)
     Part of Slab, that cannot be reclaimed on memory pressure.
-</code></pre><p>通过这个文档，我们可以看到：</p><ul>
-<li>
-<p>Buffers 是对原始磁盘块的临时存储，也就是用来<strong>缓存磁盘的数据</strong>，通常不会特别大（20MB左右）。这样，内核就可以把分散的写集中起来，统一优化磁盘的写入，比如可以把多次小的写合并成单次大的写等等。</p>
-</li>
-<li>
-<p>Cached 是从磁盘读取文件的页缓存，也就是用来<strong>缓存从文件读取的数据</strong>。这样，下次访问这些文件数据时，就可以直接从内存中快速获取，而不需要再次访问缓慢的磁盘。</p>
-</li>
-<li>
-<p>SReclaimable 是 Slab 的一部分。Slab包括两部分，其中的可回收部分，用 SReclaimable 记录；而不可回收部分，用 SUnreclaim 记录。</p>
-</li>
-</ul><p>好了，我们终于找到了这三个指标的详细定义。到这里，你是不是长舒一口气，满意地想着，总算弄明白Buffer 和 Cache了。不过，知道这个定义就真的理解了吗？这里我给你提了两个问题，你先想想能不能回答出来。</p><p>第一个问题，Buffer 的文档没有提到这是磁盘读数据还是写数据的缓存，而在很多网络搜索的结果中都会提到 Buffer 只是对<strong>将要写入磁盘数据</strong>的缓存。那反过来说，它会不会也缓存从磁盘中读取的数据呢？</p><p>第二个问题，文档中提到，Cache 是对从文件读取数据的缓存，那么它是不是也会缓存写文件的数据呢？</p><p>为了解答这两个问题，接下来，我将用几个案例来展示， Buffer 和 Cache 在不同场景下的使用情况。</p><h2>案例</h2><h3>你的准备</h3><p>跟前面实验一样，今天的案例也是基于 Ubuntu 18.04，当然，其他 Linux 系统也适用。我的案例环境是这样的。</p><ul>
-<li>
-<p>机器配置：2 CPU，8GB 内存。</p>
-</li>
-<li>
-<p>预先安装 sysstat 包，如 apt install sysstat。</p>
-</li>
-</ul><p>之所以要安装 sysstat  ，是因为我们要用到 vmstat  ，来观察 Buffer 和 Cache 的变化情况。虽然从 /proc/meminfo 里也可以读到相同的结果，但毕竟还是  vmstat  的结果更加直观。</p><p>另外，这几个案例使用了 dd 来模拟磁盘和文件的 I/O，所以我们也需要观测 I/O 的变化情况。</p><p>上面的工具安装完成后，你可以打开两个终端，连接到 Ubuntu 机器上。</p><p>准备环节的最后一步，为了减少缓存的影响，记得在第一个终端中，运行下面的命令来清理系统缓存：</p><pre><code># 清理文件页、目录项、Inodes等各种缓存
+</code></pre>
+                <p>通过这个文档，我们可以看到：</p>
+                <ul>
+                  <li>
+                    <p>
+                      Buffers
+                      是对原始磁盘块的临时存储，也就是用来<strong>缓存磁盘的数据</strong>，通常不会特别大（20MB左右）。这样，内核就可以把分散的写集中起来，统一优化磁盘的写入，比如可以把多次小的写合并成单次大的写等等。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Cached
+                      是从磁盘读取文件的页缓存，也就是用来<strong>缓存从文件读取的数据</strong>。这样，下次访问这些文件数据时，就可以直接从内存中快速获取，而不需要再次访问缓慢的磁盘。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      SReclaimable 是 Slab 的一部分。Slab包括两部分，其中的可回收部分，用 SReclaimable
+                      记录；而不可回收部分，用 SUnreclaim 记录。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  好了，我们终于找到了这三个指标的详细定义。到这里，你是不是长舒一口气，满意地想着，总算弄明白Buffer 和
+                  Cache了。不过，知道这个定义就真的理解了吗？这里我给你提了两个问题，你先想想能不能回答出来。
+                </p>
+                <p>
+                  第一个问题，Buffer 的文档没有提到这是磁盘读数据还是写数据的缓存，而在很多网络搜索的结果中都会提到
+                  Buffer 只是对<strong>将要写入磁盘数据</strong>的缓存。那反过来说，它会不会也缓存从磁盘中读取的数据呢？
+                </p>
+                <p>第二个问题，文档中提到，Cache 是对从文件读取数据的缓存，那么它是不是也会缓存写文件的数据呢？</p>
+                <p>为了解答这两个问题，接下来，我将用几个案例来展示， Buffer 和 Cache 在不同场景下的使用情况。</p>
+                <h2>案例</h2>
+                <h3>你的准备</h3>
+                <p>
+                  跟前面实验一样，今天的案例也是基于 Ubuntu 18.04，当然，其他 Linux 系统也适用。我的案例环境是这样的。
+                </p>
+                <ul>
+                  <li>
+                    <p>机器配置：2 CPU，8GB 内存。</p>
+                  </li>
+                  <li>
+                    <p>预先安装 sysstat 包，如 apt install sysstat。</p>
+                  </li>
+                </ul>
+                <p>
+                  之所以要安装 sysstat ，是因为我们要用到 vmstat ，来观察 Buffer 和 Cache 的变化情况。虽然从
+                  /proc/meminfo 里也可以读到相同的结果，但毕竟还是 vmstat 的结果更加直观。
+                </p>
+                <p>另外，这几个案例使用了 dd 来模拟磁盘和文件的 I/O，所以我们也需要观测 I/O 的变化情况。</p>
+                <p>上面的工具安装完成后，你可以打开两个终端，连接到 Ubuntu 机器上。</p>
+                <p>准备环节的最后一步，为了减少缓存的影响，记得在第一个终端中，运行下面的命令来清理系统缓存：</p>
+                <pre><code># 清理文件页、目录项、Inodes等各种缓存
 $ echo 3 &gt; /proc/sys/vm/drop_caches
-</code></pre><p>这里的 /proc/sys/vm/drop_caches ，就是通过 proc 文件系统修改内核行为的一个示例，写入 3 表示清理文件页、目录项、Inodes等各种缓存。这几种缓存的区别你暂时不用管，后面我们都会讲到。</p><h3>场景1：磁盘和文件写案例</h3><p>我们先来模拟第一个场景。首先，在第一个终端，运行下面这个vmstat 命令：</p><pre><code># 每隔1秒输出1组数据
+</code></pre>
+                <p>
+                  这里的 /proc/sys/vm/drop_caches ，就是通过 proc 文件系统修改内核行为的一个示例，写入 3
+                  表示清理文件页、目录项、Inodes等各种缓存。这几种缓存的区别你暂时不用管，后面我们都会讲到。
+                </p>
+                <h3>场景1：磁盘和文件写案例</h3>
+                <p>我们先来模拟第一个场景。首先，在第一个终端，运行下面这个vmstat 命令：</p>
+                <pre><code># 每隔1秒输出1组数据
 $ vmstat 1
 procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 0  0      0 7743608   1112  92168    0    0     0     0   52  152  0  1 100  0  0
  0  0      0 7743608   1112  92168    0    0     0     0   36   92  0  0 100  0  0
-</code></pre><p>输出界面里， 内存部分的 buff 和 cache ，以及 io 部分的 bi 和 bo 就是我们要关注的重点。</p><ul>
-<li>
-<p>buff 和 cache 就是我们前面看到的 Buffers 和 Cache，单位是 KB。</p>
-</li>
-<li>
-<p>bi 和 bo 则分别表示块设备读取和写入的大小，单位为块/秒。因为 Linux 中块的大小是 1KB，所以这个单位也就等价于 KB/s。</p>
-</li>
-</ul><p>正常情况下，空闲系统中，你应该看到的是，这几个值在多次结果中一直保持不变。</p><p>接下来，到第二个终端执行 dd 命令，通过读取随机设备，生成一个500MB大小的文件：</p><pre><code>$ dd if=/dev/urandom of=/tmp/file bs=1M count=500
-</code></pre><p>然后再回到第一个终端，观察Buffer和Cache的变化情况：</p><pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+</code></pre>
+                <p>输出界面里， 内存部分的 buff 和 cache ，以及 io 部分的 bi 和 bo 就是我们要关注的重点。</p>
+                <ul>
+                  <li>
+                    <p>buff 和 cache 就是我们前面看到的 Buffers 和 Cache，单位是 KB。</p>
+                  </li>
+                  <li>
+                    <p>
+                      bi 和 bo 则分别表示块设备读取和写入的大小，单位为块/秒。因为 Linux 中块的大小是
+                      1KB，所以这个单位也就等价于 KB/s。
+                    </p>
+                  </li>
+                </ul>
+                <p>正常情况下，空闲系统中，你应该看到的是，这几个值在多次结果中一直保持不变。</p>
+                <p>接下来，到第二个终端执行 dd 命令，通过读取随机设备，生成一个500MB大小的文件：</p>
+                <pre><code>$ dd if=/dev/urandom of=/tmp/file bs=1M count=500
+</code></pre>
+                <p>然后再回到第一个终端，观察Buffer和Cache的变化情况：</p>
+                <pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 0  0      0 7499460   1344 230484    0    0     0     0   29  145  0  0 100  0  0
  1  0      0 7338088   1752 390512    0    0   488     0   39  558  0 47 53  0  0
@@ -142,18 +1390,44 @@ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 ...
  0  1      0 6977216   1768 752104    0    0     4 122880   33  234  0  1 51 49  0
  0  1      0 6977440   1768 752108    0    0     0 10240   38  196  0  0 50 50  0
-</code></pre><p>通过观察 vmstat 的输出，我们发现，在dd命令运行时， Cache在不停地增长，而Buffer基本保持不变。</p><p>再进一步观察I/O的情况，你会看到，</p><ul>
-<li>
-<p>在 Cache 刚开始增长时，块设备 I/O 很少，bi 只出现了一次 488 KB/s，bo 则只有一次 4KB。而过一段时间后，才会出现大量的块设备写，比如 bo 变成了122880。</p>
-</li>
-<li>
-<p>当 dd 命令结束后，Cache 不再增长，但块设备写还会持续一段时间，并且，多次 I/O 写的结果加起来，才是 dd 要写的 500M 的数据。</p>
-</li>
-</ul><p>把这个结果，跟我们刚刚了解到的Cache的定义做个对比，你可能会有点晕乎。为什么前面文档上说 Cache 是文件读的页缓存，怎么现在写文件也有它的份？</p><p>这个疑问，我们暂且先记下来，接着再来看另一个磁盘写的案例。两个案例结束后，我们再统一进行分析。</p><p>不过，对于接下来的案例，我必须强调一点：</p><p>下面的命令对环境要求很高，需要你的系统配置多块磁盘，并且磁盘分区 /dev/sdb1 还要处于未使用状态。如果你只有一块磁盘，千万不要尝试，否则将会对你的磁盘分区造成损坏。</p><p>如果你的系统符合标准，就可以继续在第二个终端中，运行下面的命令。清理缓存后，向磁盘分区/dev/sdb1  写入2GB的随机数据：</p><pre><code># 首先清理缓存
+</code></pre>
+                <p>通过观察 vmstat 的输出，我们发现，在dd命令运行时， Cache在不停地增长，而Buffer基本保持不变。</p>
+                <p>再进一步观察I/O的情况，你会看到，</p>
+                <ul>
+                  <li>
+                    <p>
+                      在 Cache 刚开始增长时，块设备 I/O 很少，bi 只出现了一次 488 KB/s，bo 则只有一次
+                      4KB。而过一段时间后，才会出现大量的块设备写，比如 bo 变成了122880。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      当 dd 命令结束后，Cache 不再增长，但块设备写还会持续一段时间，并且，多次 I/O 写的结果加起来，才是
+                      dd 要写的 500M 的数据。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  把这个结果，跟我们刚刚了解到的Cache的定义做个对比，你可能会有点晕乎。为什么前面文档上说 Cache
+                  是文件读的页缓存，怎么现在写文件也有它的份？
+                </p>
+                <p>这个疑问，我们暂且先记下来，接着再来看另一个磁盘写的案例。两个案例结束后，我们再统一进行分析。</p>
+                <p>不过，对于接下来的案例，我必须强调一点：</p>
+                <p>
+                  下面的命令对环境要求很高，需要你的系统配置多块磁盘，并且磁盘分区 /dev/sdb1
+                  还要处于未使用状态。如果你只有一块磁盘，千万不要尝试，否则将会对你的磁盘分区造成损坏。
+                </p>
+                <p>
+                  如果你的系统符合标准，就可以继续在第二个终端中，运行下面的命令。清理缓存后，向磁盘分区/dev/sdb1
+                  写入2GB的随机数据：
+                </p>
+                <pre><code># 首先清理缓存
 $ echo 3 &gt; /proc/sys/vm/drop_caches
 # 然后运行dd命令向磁盘分区/dev/sdb1写入2G数据
 $ dd if=/dev/urandom of=/dev/sdb1 bs=1M count=2048
-</code></pre><p>然后，再回到终端一，观察内存和I/O的变化情况：</p><pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+</code></pre>
+                <p>然后，再回到终端一，观察内存和I/O的变化情况：</p>
+                <pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
  r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 1  0      0 7584780 153592  97436    0    0   684     0   31  423  1 48 50  2  0
  1  0      0 7418580 315384 101668    0    0     0     0   32  144  0 50 50  0  0
@@ -162,348 +1436,476 @@ $ dd if=/dev/urandom of=/dev/sdb1 bs=1M count=2048
  1  1      0 6930056 790520 114980    0    0     0 12804   23  168  0 50 42  9  0
  1  0      0 6757204 949240 119396    0    0     0 183804   24  191  0 53 26 21  0
  1  1      0 6591516 1107960 123840    0    0     0 77316   22  232  0 52 16 33  0
-</code></pre><p>从这里你会看到，虽然同是写数据，写磁盘跟写文件的现象还是不同的。写磁盘时（也就是bo大于  0 时），Buffer和Cache都在增长，但显然Buffer的增长快得多。</p><p>这说明，写磁盘用到了大量的Buffer，这跟我们在文档中查到的定义是一样的。</p><p>对比两个案例，我们发现，写文件时会用到 Cache 缓存数据，而写磁盘则会用到 Buffer 来缓存数据。所以，回到刚刚的问题，虽然文档上只提到，Cache是文件读的缓存，但实际上，Cache也会缓存写文件时的数据。</p><h3>场景2：磁盘和文件读案例</h3><p>了解了磁盘和文件写的情况，我们再反过来想，磁盘和文件读的时候，又是怎样的呢？</p><p>我们回到第二个终端，运行下面的命令。清理缓存后，从文件/tmp/file中，读取数据写入空设备：</p><pre><code># 首先清理缓存
+</code></pre>
+                <p>
+                  从这里你会看到，虽然同是写数据，写磁盘跟写文件的现象还是不同的。写磁盘时（也就是bo大于 0
+                  时），Buffer和Cache都在增长，但显然Buffer的增长快得多。
+                </p>
+                <p>这说明，写磁盘用到了大量的Buffer，这跟我们在文档中查到的定义是一样的。</p>
+                <p>
+                  对比两个案例，我们发现，写文件时会用到 Cache 缓存数据，而写磁盘则会用到 Buffer
+                  来缓存数据。所以，回到刚刚的问题，虽然文档上只提到，Cache是文件读的缓存，但实际上，Cache也会缓存写文件时的数据。
+                </p>
+                <h3>场景2：磁盘和文件读案例</h3>
+                <p>了解了磁盘和文件写的情况，我们再反过来想，磁盘和文件读的时候，又是怎样的呢？</p>
+                <p>我们回到第二个终端，运行下面的命令。清理缓存后，从文件/tmp/file中，读取数据写入空设备：</p>
+                <pre><code># 首先清理缓存
 $ echo 3 &gt; /proc/sys/vm/drop_caches
 # 运行dd命令读取文件数据
 $ dd if=/tmp/file of=/dev/null
-</code></pre><p>然后，再回到终端一，观察内存和I/O的变化情况：</p><pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+</code></pre>
+                <p>然后，再回到终端一，观察内存和I/O的变化情况：</p>
+                <pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
  r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
  0  1      0 7724164   2380 110844    0    0 16576     0   62  360  2  2 76 21  0
  0  1      0 7691544   2380 143472    0    0 32640     0   46  439  1  3 50 46  0
  0  1      0 7658736   2380 176204    0    0 32640     0   54  407  1  4 50 46  0
  0  1      0 7626052   2380 208908    0    0 32640    40   44  422  2  2 50 46  0
-</code></pre><p>观察 vmstat 的输出，你会发现读取文件时（也就是bi大于0时），Buffer保持不变，而Cache则在不停增长。这跟我们查到的定义“Cache是对文件读的页缓存”是一致的。</p><p>那么，磁盘读又是什么情况呢？我们再运行第二个案例来看看。</p><p>首先，回到第二个终端，运行下面的命令。清理缓存后，从磁盘分区 /dev/sda1中读取数据，写入空设备：</p><pre><code># 首先清理缓存
+</code></pre>
+                <p>
+                  观察 vmstat
+                  的输出，你会发现读取文件时（也就是bi大于0时），Buffer保持不变，而Cache则在不停增长。这跟我们查到的定义“Cache是对文件读的页缓存”是一致的。
+                </p>
+                <p>那么，磁盘读又是什么情况呢？我们再运行第二个案例来看看。</p>
+                <p>首先，回到第二个终端，运行下面的命令。清理缓存后，从磁盘分区 /dev/sda1中读取数据，写入空设备：</p>
+                <pre><code># 首先清理缓存
 $ echo 3 &gt; /proc/sys/vm/drop_caches
 # 运行dd命令读取文件
 $ dd if=/dev/sda1 of=/dev/null bs=1M count=1024
-</code></pre><p>然后，再回到终端一，观察内存和I/O的变化情况：</p><pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+</code></pre>
+                <p>然后，再回到终端一，观察内存和I/O的变化情况：</p>
+                <pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
  r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 0  0      0 7225880   2716 608184    0    0     0     0   48  159  0  0 100  0  0
  0  1      0 7199420  28644 608228    0    0 25928     0   60  252  0  1 65 35  0
  0  1      0 7167092  60900 608312    0    0 32256     0   54  269  0  1 50 49  0
  0  1      0 7134416  93572 608376    0    0 32672     0   53  253  0  0 51 49  0
  0  1      0 7101484 126320 608480    0    0 32748     0   80  414  0  1 50 49  0
-</code></pre><p>观察 vmstat 的输出，你会发现读磁盘时（也就是bi大于0时），Buffer和Cache都在增长，但显然Buffer的增长快很多。这说明读磁盘时，数据缓存到了 Buffer 中。</p><p>当然，我想，经过上一个场景中两个案例的分析，你自己也可以对比得出这个结论：读文件时数据会缓存到 Cache 中，而读磁盘时数据会缓存到 Buffer 中。</p><p>到这里你应该发现了，虽然文档提供了对Buffer和Cache的说明，但是仍不能覆盖到所有的细节。比如说，今天我们了解到的这两点：</p><ul>
-<li>
-<p>Buffer既可以用作“将要写入磁盘数据的缓存”，也可以用作“从磁盘读取数据的缓存”。</p>
-</li>
-<li>
-<p>Cache既可以用作“从文件读取数据的页缓存”，也可以用作“写文件的页缓存”。</p>
-</li>
-</ul><p>这样，我们就回答了案例开始前的两个问题。</p><p>简单来说，<strong>Buffer是对磁盘数据的缓存，而Cache是文件数据的缓存，它们既会用在读请求中，也会用在写请求中</strong>。</p><h2>小结</h2><p>今天，我们一起探索了内存性能中 Buffer 和 Cache 的详细含义。Buffer和Cache分别缓存磁盘和文件系统的读写数据。</p><ul>
-<li>
-<p>从写的角度来说，不仅可以优化磁盘和文件的写入，对应用程序也有好处，应用程序可以在数据真正落盘前，就返回去做其他工作。</p>
-</li>
-<li>
-<p>从读的角度来说，既可以加速读取那些需要频繁访问的数据，也降低了频繁I/O对磁盘的压力。</p>
-</li>
-</ul><p>除了探索的内容本身，这个探索过程对你应该也有所启发。在排查性能问题时，由于各种资源的性能指标太多，我们不可能记住所有指标的详细含义。那么，准确高效的手段——查文档，就非常重要了。</p><p>你一定要养成查文档的习惯，并学会解读这些性能指标的详细含义。此外，proc 文件系统也是我们的好帮手。它为我们呈现了系统内部的运行状态，同时也是很多性能工具的数据来源，是辅助排查性能问题的好方法。</p><h2>思考</h2><p>最后，我想给你留一个思考题。</p><p>我们已经知道，可以使用 ps、top 或者 proc 文件系统，来获取进程的内存使用情况。那么，如何统计出所有进程的物理内存使用量呢？</p><p>提示：要避免重复计算多个进程同时占用的内存，像是页缓存、共享内存这类。如果你把 ps、top 得到的数据直接相加，就会出现重复计算的问题。</p><p>这里，我推荐从 /proc/&lt; pid &gt;/smaps  入手。前面内容里，我并没有直接讲过/proc/&lt; pid &gt;smaps 文件中各个指标含义，所以，需要你自己动手查 proc 文件系统的文档，解读并回答这个问题。</p><p>欢迎在留言区和我讨论，也欢迎你把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p><p><img src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg" alt=""></p>
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/47/42/1d7db2f6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">倪朋飞</span>
-                            </div>
-                            <div class="bd">关于磁盘和文件的区别，本来以为大家都懂了，所以没有细讲。磁盘是一个块设备，可以划分为不同的分区；在分区之上再创建文件系统，挂载到某个目录，之后才可以在这个目录中读写文件。<br><br>其实 Linux 中“一切皆文件”，而文章中提到的“文件”是普通文件，磁盘是块设备文件，这些大家可以执行 &quot;ls -l &lt;路径&gt;&quot; 查看它们的区别（输出的含义如果不懂请 man ls 查询）。<br><br>在读写普通文件时，会经过文件系统，由文件系统负责与磁盘交互；而读写磁盘或者分区时，就会跳过文件系统，也就是所谓的“裸I&#47;O“。这两种读写方式所使用的缓存是不同的，也就是文中所讲的 Cache 和 Buffer 区别。<br><br>关于文件系统、磁盘以及 I&#47;O 的原理，大家不要着急，后面 I&#47;O 模块还会讲的。 <br></div>
-                            <span class="time">2018-12-26 09:27</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIbas4S4X5W15njMeoEPPSyBZRX37nrTXbMFFeHghXl4Slk6WXE7oq5yxoNnukYfcOQs00RAvUmEA/132" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Geek_5258f8</span>
-                            </div>
-                            <div class="bd">理论上，一个文件读首先到Block Buffer, 然后到Page Cache。有了文件系统才有了Page Cache.<br>在老的Linux上这两个Cache是分开的。那这样对于文件数据，会被Cache两次。这种方案虽然简单，<br>但低效。后期Linux把这两个Cache统一了。对于文件，Page Cache指向Block Buffer，对于非文件<br>则是Block Buffer。这样就如文件实验的结果，文件操作，只影响Page Cache，Raw操作，则只影响Buffer. 比如一此VM虚拟机，则会越过File System，只接操作 Disk, 常说的Direct IO. <br></div>
-                            <span class="time">2018-12-26 20:30</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">👍 </p>
-                                <p class="reply-time">2018-12-26 22:01</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/22/9a/989a3d8e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">JJ</span>
-                            </div>
-                            <div class="bd">还是有点困惑，感觉读写磁盘上的数据不就是读写磁盘上的文件里的数据嘛，难道读磁盘上的数据可以不经过文件系统吗，可以直接读裸磁盘？有点没理解buffer是磁盘上的数据缓存，cache是文件数据缓存，求大神解答下。。 <br></div>
-                            <span class="time">2018-12-26 00:44</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">请参考置顶回复</p>
-                                <p class="reply-time">2018-12-26 09:30</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/de/d4/b83c4185.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">David.cui</span>
-                            </div>
-                            <div class="bd">数据库使用裸设备是明显的磁盘读写；如果数据库的数据文件在文件系统上就是文件读写。这样理解对么 <br></div>
-                            <span class="time">2018-12-26 11:56</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对的</p>
-                                <p class="reply-time">2018-12-26 23:00</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">我来也</span>
-                            </div>
-                            <div class="bd">[D16打卡]<br>只有一块磁盘,就没轻易的试第二个案例.<br>---------------------------------------------------<br>以前应该只接触到了文件数据的缓存cache,没接触到磁盘数据的缓存buffer.<br>1.vim一个大文件,在第一次加载时较慢,之后再次打开时,会明显感觉到加载速度更快,应该就是cache的功劳.<br>2.在linux下写c程序时,打印日志printf后面习惯加fflush(stdout);<br>可以强制刷新缓冲区的内容到物理设备.在程序宕掉时可以定位到最后的输出日志.<br>如果不加fflush,可能会丢失掉部分缓冲区内的日志.<br>不知道这里的缓冲区跟系统的cache是不是一个概念.<br>---------------------------------------------------<br>ls -l 磁盘与普通文件的区别:<br># ls -l &#47;dev&#47;sda1<br>brw-rw---- 1 root disk 8, 1 12月 12 10:17 &#47;dev&#47;sda1<br># ls -ld &#47;root&#47;<br>drwx------ 12 root root 4096 12月 26 11:48 &#47;root&#47;<br>第一个字符b应该表示是磁盘类型 d就是目录类型了<br>有一列一个显示的第几块磁盘的第几个分区[8,1],一个是占用的空间大小[4096].<br>疑问:man ls 了也没看到各列具体的含义啊,这个去哪查呢?<br>---------------------------------------------------<br>老师最后的问题深入探索又是一篇长文了.哈哈! <br></div>
-                            <span class="time">2018-12-26 12:39</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">前面2是C库的缓存，跟系统的缓存没关系<br><br>ls的文档参考 info coreutils &#39;ls invocation&#39;</p>
-                                <p class="reply-time">2018-12-26 22:53</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/94/47/75875257.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">虎虎❤️</span>
-                            </div>
-                            <div class="bd"><br>通过读csapp，又复习了下虚拟内存。其概念为 “虚拟内存组织为一个由存放在磁盘上的N个连续的字节大小的单元组成的数组。” 访问虚拟内存时，MMU通过访问页表，来索引到实际的存储地址。如果在物理内存中有缓存，直接从物理内存中读取数据。否则，从磁盘中读取，并选择牺牲一个物理页，并替换为新读取的页（当然，我觉得这种应该是在内存没有free的情况下）。如果被牺牲的页发生改变，则写回磁盘。最后更新页表。<br><br>我的问题是：<br>1. 上一节讲了虚拟内存的空间分布，那么物理内存有没有空间分布的概念？从vmstat的输出来看，物理内存是不是只包括buffer cache 和 free呢？<br>2. 这里的cache是不是等同于虚拟内存在物理内存中的缓存？<br>3. 上一节课所说的内存回收。使用LRU算法“回收缓存”，是否是我上面描述的概念？那么所谓的“回收不常访问的内存，把不常用的内存通过交换分区直接写到磁盘中”，指的是交换出哪种内存？cache？buffer？或者其他的种类？<br><br>希望得到老师回复，也欢迎各位大佬共同探讨。 <br></div>
-                            <span class="time">2018-12-26 12:10</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">1. 物理内存的分布由系统管理，没有类似于虚拟内存这样的分布<br>2. 不是<br>3. LRU回收的是缓存，Swap换出的是不可回收的内存，比如进程的堆内存</p>
-                                <p class="reply-time">2018-12-26 22:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/e6/3b/cb2db23b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Dr. ZZZ</span>
-                            </div>
-                            <div class="bd">老师，关于buffer是对直接写磁盘的缓存，我想问下。现实中有哪些是直接写磁盘的场景。写读写文件不也最终是写到磁盘上吗？谢谢 <br></div>
-                            <span class="time">2019-01-01 00:02</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">腾达</span>
-                            </div>
-                            <div class="bd">$ dd if=&#47;tmp&#47;file of=&#47;dev&#47;null  为什么很快就结束了？导致vmstat值变化不大 <br></div>
-                            <span class="time">2018-12-26 21:06</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">清缓存了吗？</p>
-                                <p class="reply-time">2018-12-26 21:55</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/f8/70/f3a33a14.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">某、人</span>
-                            </div>
-                            <div class="bd">老师,是否绕开文件系统,直接对磁盘进行读写会更快呢？ <br></div>
-                            <span class="time">2018-12-26 20:52</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">去掉缓存的话，文件系统比磁盘又多了一层，所以有可能比直接磁盘读写慢。但文件系统也有缓存，所以大部分情况下不绕开会更快</p>
-                                <p class="reply-time">2018-12-26 22:00</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/da/ec/779c1a78.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">往事随风，顺其自然</span>
-                            </div>
-                            <div class="bd"># 首先清理缓存<br>$ echo 3 &gt; &#47;proc&#47;sys&#47;vm&#47;drop_caches<br># 然后运行 dd 命令向磁盘分区 &#47;dev&#47;sdb1 写入 2G 数据<br>$ dd if=&#47;dev&#47;urandom of=&#47;dev&#47;sdb1 bs=1M count=2048<br>、<br>这个测试，在centos下是cache比buffer增长的快，和你说ub下正好相反，这是为什么？<br>procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----<br> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st<br> 2  0  34840 213268    172 193516    0    0     0     0  952   94  0 23 77  0  0	<br> 1  0  34840 209176    172 197624    0    0     0     0 1044   92  0 24 76  0  0	<br> 1  0  34840 204092    172 202740    0    0     0     0 1042   97  0 24 76  0  0	<br> 1  0  34840 200000    180 206848    0    0     0    32 1056   97  0 25 75  0  0	<br> 1  0  34840 194792    180 211836    0    0     0     0 1060   87  0 25 75  0  0	<br> 1  0  34840 190700    180 216068    0    0     0     0 1006   96  0 24 76  0  0	<br> 1  0  34840 188716    180 218092    0    0     0     0  933   93  0 23 77  0  0	<br> 1  0  34840 184624    180 222212    0    0     0     0 1057   94  0 25 75  0  0	<br> 1  0  34840 179540    180 227196    0    0     0     0 1082  100  0 25 75  0  0	<br> 1  0  34840 175448    180 231428    0    0     0     0 1053   94  0 25 75  0  0	<br> 1  0  34840 170240    180 236412    0    0     0     0 1066   92  0 25 75  0  0	<br> 1  0  34840 166148    180 240644    0    0     0     0 1055   92  0 25 75  0  0	<br> 1  0  34840 164164    180 242668    0    0     0     0 1021  110  0 24 76  0  0	<br> 1  0  34840 158956    180 247812    0    0     0     0 1041   86  0 25 75  0  0	<br> 1  0  34840 154864    180 251908    0    0     0     0 1071   94  0 25 75  0  0 <br></div>
-                            <span class="time">2018-12-26 12:24</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">系统什么版本？是不是比较老？</p>
-                                <p class="reply-time">2018-12-26 22:54</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7c/59/26b1e65a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">科学Jia</span>
-                            </div>
-                            <div class="bd">老师，女同学我今天上班时间终于追到这里了。写的真真清楚，想知道您花了多少时间学这些? <br></div>
-                            <span class="time">2018-12-26 11:26</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">也花了挺多时间，有些基础的原理在学校就学过了，也有很多是实践中学到的经验</p>
-                                <p class="reply-time">2018-12-26 23:21</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">C家族的铁粉儿</span>
-                            </div>
-                            <div class="bd">另外，Linux里的块设备，可以直接访问(比如数据库应用程序)，也可以存储文件系统然后被访问吧。 <br></div>
-                            <span class="time">2018-12-26 08:45</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是的👍</p>
-                                <p class="reply-time">2018-12-26 23:59</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/14/14/2e/400913b1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">金波</span>
-                            </div>
-                            <div class="bd">请问&#47;tmp&#47;file 是磁盘下的一个文件吗？ 没详细说明，可能是内存文件系统。磁盘下和tmpfs的读对Cache是否一样？ <br></div>
-                            <span class="time">2018-12-26 05:29</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">&#47;tmp&#47;file 是一个普通文件，确切的说是文件系统管理的文件，而没有磁盘下的哪个文件这一说。略过文件系统之后到了磁盘就都是Block了</p>
-                                <p class="reply-time">2018-12-27 00:10</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/ae/95/d1b13c9e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">f</span>
-                            </div>
-                            <div class="bd">打卡 <br></div>
-                            <span class="time">2019-01-10 09:57</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">dexter</span>
-                            </div>
-                            <div class="bd">我是6.10的centos （3.10.5-3.el6.x86_64），但是man proc里面查找meminfo，只显示以下内容：<br> &#47;proc&#47;meminfo<br>              This file reports statistics about memory usage on the system.  It is used by free(1) to report the amount of free and used memory  (both<br>              physical and swap) on the system as well as the shared memory and buffers used by the kernel.<br><br>       &#47;proc&#47;modules<br> <br></div>
-                            <span class="time">2019-01-06 14:21</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">如果</span>
-                            </div>
-                            <div class="bd">DAY16,打卡 <br></div>
-                            <span class="time">2019-01-06 12:29</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/da/6a/91bd13de.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">张挺</span>
-                            </div>
-                            <div class="bd">您好，思考题里的计算所有进程的物理内存使用量，是把&#47;proc&#47;1&#47;smaps下的Rss值相加吗？ <br></div>
-                            <span class="time">2019-01-05 22:52</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/35/25/e5aeecc7.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">好好学习</span>
-                            </div>
-                            <div class="bd"># 首先清理缓存<br>$ echo 3 &gt; &#47;proc&#47;sys&#47;vm&#47;drop_caches<br># 然后运行 dd 命令向磁盘分区 &#47;dev&#47;sdb1 写入 2G 数据<br>$ dd if=&#47;dev&#47;urandom of=&#47;dev&#47;sdb1 bs=1M count=2048<br>没注意磁盘写坏了 <br></div>
-                            <span class="time">2019-01-04 23:51</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/5a/56/115c6433.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">jssfy</span>
-                            </div>
-                            <div class="bd">文中提到linux块的大小是1KB，请问这个如何查证？ <br></div>
-                            <span class="time">2019-01-04 09:37</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">这是vmstat文档中的</p>
-                                <p class="reply-time">2019-01-12 10:11</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/b7/00/12149f4e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">郭刚</span>
-                            </div>
-                            <div class="bd">文中因为 Linux 中块的大小是 1KB。老师，块不是默认是4K吗？ <br></div>
-                            <span class="time">2018-12-29 09:08</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+</code></pre>
+                <p>
+                  观察 vmstat
+                  的输出，你会发现读磁盘时（也就是bi大于0时），Buffer和Cache都在增长，但显然Buffer的增长快很多。这说明读磁盘时，数据缓存到了
+                  Buffer 中。
+                </p>
+                <p>
+                  当然，我想，经过上一个场景中两个案例的分析，你自己也可以对比得出这个结论：读文件时数据会缓存到 Cache
+                  中，而读磁盘时数据会缓存到 Buffer 中。
+                </p>
+                <p>
+                  到这里你应该发现了，虽然文档提供了对Buffer和Cache的说明，但是仍不能覆盖到所有的细节。比如说，今天我们了解到的这两点：
+                </p>
+                <ul>
+                  <li>
+                    <p>Buffer既可以用作“将要写入磁盘数据的缓存”，也可以用作“从磁盘读取数据的缓存”。</p>
+                  </li>
+                  <li>
+                    <p>Cache既可以用作“从文件读取数据的页缓存”，也可以用作“写文件的页缓存”。</p>
+                  </li>
                 </ul>
+                <p>这样，我们就回答了案例开始前的两个问题。</p>
+                <p>
+                  简单来说，<strong>Buffer是对磁盘数据的缓存，而Cache是文件数据的缓存，它们既会用在读请求中，也会用在写请求中</strong>。
+                </p>
+                <h2>小结</h2>
+                <p>
+                  今天，我们一起探索了内存性能中 Buffer 和 Cache
+                  的详细含义。Buffer和Cache分别缓存磁盘和文件系统的读写数据。
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      从写的角度来说，不仅可以优化磁盘和文件的写入，对应用程序也有好处，应用程序可以在数据真正落盘前，就返回去做其他工作。
+                    </p>
+                  </li>
+                  <li>
+                    <p>从读的角度来说，既可以加速读取那些需要频繁访问的数据，也降低了频繁I/O对磁盘的压力。</p>
+                  </li>
+                </ul>
+                <p>
+                  除了探索的内容本身，这个探索过程对你应该也有所启发。在排查性能问题时，由于各种资源的性能指标太多，我们不可能记住所有指标的详细含义。那么，准确高效的手段——查文档，就非常重要了。
+                </p>
+                <p>
+                  你一定要养成查文档的习惯，并学会解读这些性能指标的详细含义。此外，proc
+                  文件系统也是我们的好帮手。它为我们呈现了系统内部的运行状态，同时也是很多性能工具的数据来源，是辅助排查性能问题的好方法。
+                </p>
+                <h2>思考</h2>
+                <p>最后，我想给你留一个思考题。</p>
+                <p>
+                  我们已经知道，可以使用 ps、top 或者 proc
+                  文件系统，来获取进程的内存使用情况。那么，如何统计出所有进程的物理内存使用量呢？
+                </p>
+                <p>
+                  提示：要避免重复计算多个进程同时占用的内存，像是页缓存、共享内存这类。如果你把 ps、top
+                  得到的数据直接相加，就会出现重复计算的问题。
+                </p>
+                <p>
+                  这里，我推荐从 /proc/&lt; pid &gt;/smaps 入手。前面内容里，我并没有直接讲过/proc/&lt; pid &gt;smaps
+                  文件中各个指标含义，所以，需要你自己动手查 proc 文件系统的文档，解读并回答这个问题。
+                </p>
+                <p>
+                  欢迎在留言区和我讨论，也欢迎你把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/a3/e9/a396aed4116c2c989771c1295736abe9.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/47/42/1d7db2f6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">倪朋飞</span></div>
+                  <div class="bd">
+                    关于磁盘和文件的区别，本来以为大家都懂了，所以没有细讲。磁盘是一个块设备，可以划分为不同的分区；在分区之上再创建文件系统，挂载到某个目录，之后才可以在这个目录中读写文件。<br /><br />其实
+                    Linux 中“一切皆文件”，而文章中提到的“文件”是普通文件，磁盘是块设备文件，这些大家可以执行 &quot;ls -l
+                    &lt;路径&gt;&quot; 查看它们的区别（输出的含义如果不懂请 man ls 查询）。<br /><br />在读写普通文件时，会经过文件系统，由文件系统负责与磁盘交互；而读写磁盘或者分区时，就会跳过文件系统，也就是所谓的“裸I&#47;O“。这两种读写方式所使用的缓存是不同的，也就是文中所讲的
+                    Cache 和 Buffer 区别。<br /><br />关于文件系统、磁盘以及 I&#47;O 的原理，大家不要着急，后面 I&#47;O
+                    模块还会讲的。 <br />
+                  </div>
+                  <span class="time">2018-12-26 09:27</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img
+                  src="http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIbas4S4X5W15njMeoEPPSyBZRX37nrTXbMFFeHghXl4Slk6WXE7oq5yxoNnukYfcOQs00RAvUmEA/132"
+                  class="avatar"
+                />
+                <div class="info">
+                  <div class="hd"><span class="username">Geek_5258f8</span></div>
+                  <div class="bd">
+                    理论上，一个文件读首先到Block Buffer, 然后到Page Cache。有了文件系统才有了Page Cache.<br />在老的Linux上这两个Cache是分开的。那这样对于文件数据，会被Cache两次。这种方案虽然简单，<br />但低效。后期Linux把这两个Cache统一了。对于文件，Page
+                    Cache指向Block Buffer，对于非文件<br />则是Block
+                    Buffer。这样就如文件实验的结果，文件操作，只影响Page Cache，Raw操作，则只影响Buffer.
+                    比如一此VM虚拟机，则会越过File System，只接操作 Disk, 常说的Direct IO. <br />
+                  </div>
+                  <span class="time">2018-12-26 20:30</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">👍</p>
+                    <p class="reply-time">2018-12-26 22:01</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/22/9a/989a3d8e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">JJ</span></div>
+                  <div class="bd">
+                    还是有点困惑，感觉读写磁盘上的数据不就是读写磁盘上的文件里的数据嘛，难道读磁盘上的数据可以不经过文件系统吗，可以直接读裸磁盘？有点没理解buffer是磁盘上的数据缓存，cache是文件数据缓存，求大神解答下。。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-26 00:44</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">请参考置顶回复</p>
+                    <p class="reply-time">2018-12-26 09:30</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/de/d4/b83c4185.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">David.cui</span></div>
+                  <div class="bd">
+                    数据库使用裸设备是明显的磁盘读写；如果数据库的数据文件在文件系统上就是文件读写。这样理解对么 <br />
+                  </div>
+                  <span class="time">2018-12-26 11:56</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对的</p>
+                    <p class="reply-time">2018-12-26 23:00</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/64/05/6989dce6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">我来也</span></div>
+                  <div class="bd">
+                    [D16打卡]<br />只有一块磁盘,就没轻易的试第二个案例.<br />---------------------------------------------------<br />以前应该只接触到了文件数据的缓存cache,没接触到磁盘数据的缓存buffer.<br />1.vim一个大文件,在第一次加载时较慢,之后再次打开时,会明显感觉到加载速度更快,应该就是cache的功劳.<br />2.在linux下写c程序时,打印日志printf后面习惯加fflush(stdout);<br />可以强制刷新缓冲区的内容到物理设备.在程序宕掉时可以定位到最后的输出日志.<br />如果不加fflush,可能会丢失掉部分缓冲区内的日志.<br />不知道这里的缓冲区跟系统的cache是不是一个概念.<br />---------------------------------------------------<br />ls
+                    -l 磁盘与普通文件的区别:<br /># ls -l &#47;dev&#47;sda1<br />brw-rw---- 1 root disk 8, 1 12月 12
+                    10:17 &#47;dev&#47;sda1<br /># ls -ld &#47;root&#47;<br />drwx------ 12 root root 4096 12月 26 11:48
+                    &#47;root&#47;<br />第一个字符b应该表示是磁盘类型 d就是目录类型了<br />有一列一个显示的第几块磁盘的第几个分区[8,1],一个是占用的空间大小[4096].<br />疑问:man
+                    ls 了也没看到各列具体的含义啊,这个去哪查呢?<br />---------------------------------------------------<br />老师最后的问题深入探索又是一篇长文了.哈哈!
+                    <br />
+                  </div>
+                  <span class="time">2018-12-26 12:39</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      前面2是C库的缓存，跟系统的缓存没关系<br /><br />ls的文档参考 info coreutils &#39;ls
+                      invocation&#39;
+                    </p>
+                    <p class="reply-time">2018-12-26 22:53</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/94/47/75875257.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">虎虎❤️</span></div>
+                  <div class="bd">
+                    <br />通过读csapp，又复习了下虚拟内存。其概念为
+                    “虚拟内存组织为一个由存放在磁盘上的N个连续的字节大小的单元组成的数组。”
+                    访问虚拟内存时，MMU通过访问页表，来索引到实际的存储地址。如果在物理内存中有缓存，直接从物理内存中读取数据。否则，从磁盘中读取，并选择牺牲一个物理页，并替换为新读取的页（当然，我觉得这种应该是在内存没有free的情况下）。如果被牺牲的页发生改变，则写回磁盘。最后更新页表。<br /><br />我的问题是：<br />1.
+                    上一节讲了虚拟内存的空间分布，那么物理内存有没有空间分布的概念？从vmstat的输出来看，物理内存是不是只包括buffer
+                    cache 和 free呢？<br />2. 这里的cache是不是等同于虚拟内存在物理内存中的缓存？<br />3.
+                    上一节课所说的内存回收。使用LRU算法“回收缓存”，是否是我上面描述的概念？那么所谓的“回收不常访问的内存，把不常用的内存通过交换分区直接写到磁盘中”，指的是交换出哪种内存？cache？buffer？或者其他的种类？<br /><br />希望得到老师回复，也欢迎各位大佬共同探讨。
+                    <br />
+                  </div>
+                  <span class="time">2018-12-26 12:10</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      1. 物理内存的分布由系统管理，没有类似于虚拟内存这样的分布<br />2. 不是<br />3.
+                      LRU回收的是缓存，Swap换出的是不可回收的内存，比如进程的堆内存
+                    </p>
+                    <p class="reply-time">2018-12-26 22:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/e6/3b/cb2db23b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Dr. ZZZ</span></div>
+                  <div class="bd">
+                    老师，关于buffer是对直接写磁盘的缓存，我想问下。现实中有哪些是直接写磁盘的场景。写读写文件不也最终是写到磁盘上吗？谢谢
+                    <br />
+                  </div>
+                  <span class="time">2019-01-01 00:02</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">腾达</span></div>
+                  <div class="bd">
+                    $ dd if=&#47;tmp&#47;file of=&#47;dev&#47;null 为什么很快就结束了？导致vmstat值变化不大 <br />
+                  </div>
+                  <span class="time">2018-12-26 21:06</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">清缓存了吗？</p>
+                    <p class="reply-time">2018-12-26 21:55</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/f8/70/f3a33a14.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">某、人</span></div>
+                  <div class="bd">老师,是否绕开文件系统,直接对磁盘进行读写会更快呢？ <br /></div>
+                  <span class="time">2018-12-26 20:52</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      去掉缓存的话，文件系统比磁盘又多了一层，所以有可能比直接磁盘读写慢。但文件系统也有缓存，所以大部分情况下不绕开会更快
+                    </p>
+                    <p class="reply-time">2018-12-26 22:00</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/da/ec/779c1a78.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">往事随风，顺其自然</span></div>
+                  <div class="bd">
+                    # 首先清理缓存<br />$ echo 3 &gt; &#47;proc&#47;sys&#47;vm&#47;drop_caches<br /># 然后运行 dd
+                    命令向磁盘分区 &#47;dev&#47;sdb1 写入 2G 数据<br />$ dd if=&#47;dev&#47;urandom of=&#47;dev&#47;sdb1
+                    bs=1M count=2048<br />、<br />这个测试，在centos下是cache比buffer增长的快，和你说ub下正好相反，这是为什么？<br />procs
+                    -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----<br />
+                    r b swpd free buff cache si so bi bo in cs us sy id wa st<br />
+                    2 0 34840 213268 172 193516 0 0 0 0 952 94 0 23 77 0 0 <br />
+                    1 0 34840 209176 172 197624 0 0 0 0 1044 92 0 24 76 0 0 <br />
+                    1 0 34840 204092 172 202740 0 0 0 0 1042 97 0 24 76 0 0 <br />
+                    1 0 34840 200000 180 206848 0 0 0 32 1056 97 0 25 75 0 0 <br />
+                    1 0 34840 194792 180 211836 0 0 0 0 1060 87 0 25 75 0 0 <br />
+                    1 0 34840 190700 180 216068 0 0 0 0 1006 96 0 24 76 0 0 <br />
+                    1 0 34840 188716 180 218092 0 0 0 0 933 93 0 23 77 0 0 <br />
+                    1 0 34840 184624 180 222212 0 0 0 0 1057 94 0 25 75 0 0 <br />
+                    1 0 34840 179540 180 227196 0 0 0 0 1082 100 0 25 75 0 0 <br />
+                    1 0 34840 175448 180 231428 0 0 0 0 1053 94 0 25 75 0 0 <br />
+                    1 0 34840 170240 180 236412 0 0 0 0 1066 92 0 25 75 0 0 <br />
+                    1 0 34840 166148 180 240644 0 0 0 0 1055 92 0 25 75 0 0 <br />
+                    1 0 34840 164164 180 242668 0 0 0 0 1021 110 0 24 76 0 0 <br />
+                    1 0 34840 158956 180 247812 0 0 0 0 1041 86 0 25 75 0 0 <br />
+                    1 0 34840 154864 180 251908 0 0 0 0 1071 94 0 25 75 0 0 <br />
+                  </div>
+                  <span class="time">2018-12-26 12:24</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">系统什么版本？是不是比较老？</p>
+                    <p class="reply-time">2018-12-26 22:54</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7c/59/26b1e65a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">科学Jia</span></div>
+                  <div class="bd">
+                    老师，女同学我今天上班时间终于追到这里了。写的真真清楚，想知道您花了多少时间学这些? <br />
+                  </div>
+                  <span class="time">2018-12-26 11:26</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      也花了挺多时间，有些基础的原理在学校就学过了，也有很多是实践中学到的经验
+                    </p>
+                    <p class="reply-time">2018-12-26 23:21</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/42/f7/45fd5e3b.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">C家族的铁粉儿</span></div>
+                  <div class="bd">
+                    另外，Linux里的块设备，可以直接访问(比如数据库应用程序)，也可以存储文件系统然后被访问吧。 <br />
+                  </div>
+                  <span class="time">2018-12-26 08:45</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是的👍</p>
+                    <p class="reply-time">2018-12-26 23:59</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/14/14/2e/400913b1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">金波</span></div>
+                  <div class="bd">
+                    请问&#47;tmp&#47;file 是磁盘下的一个文件吗？
+                    没详细说明，可能是内存文件系统。磁盘下和tmpfs的读对Cache是否一样？ <br />
+                  </div>
+                  <span class="time">2018-12-26 05:29</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      &#47;tmp&#47;file
+                      是一个普通文件，确切的说是文件系统管理的文件，而没有磁盘下的哪个文件这一说。略过文件系统之后到了磁盘就都是Block了
+                    </p>
+                    <p class="reply-time">2018-12-27 00:10</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/ae/95/d1b13c9e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">f</span></div>
+                  <div class="bd">打卡 <br /></div>
+                  <span class="time">2019-01-10 09:57</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">dexter</span></div>
+                  <div class="bd">
+                    我是6.10的centos （3.10.5-3.el6.x86_64），但是man proc里面查找meminfo，只显示以下内容：<br />
+                    &#47;proc&#47;meminfo<br />
+                    This file reports statistics about memory usage on the system. It is used by free(1) to report the
+                    amount of free and used memory (both<br />
+                    physical and swap) on the system as well as the shared memory and buffers used by the kernel.<br /><br />
+                    &#47;proc&#47;modules<br />
+                    <br />
+                  </div>
+                  <span class="time">2019-01-06 14:21</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">如果</span></div>
+                  <div class="bd">DAY16,打卡 <br /></div>
+                  <span class="time">2019-01-06 12:29</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/da/6a/91bd13de.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">张挺</span></div>
+                  <div class="bd">
+                    您好，思考题里的计算所有进程的物理内存使用量，是把&#47;proc&#47;1&#47;smaps下的Rss值相加吗？ <br />
+                  </div>
+                  <span class="time">2019-01-05 22:52</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/35/25/e5aeecc7.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">好好学习</span></div>
+                  <div class="bd">
+                    # 首先清理缓存<br />$ echo 3 &gt; &#47;proc&#47;sys&#47;vm&#47;drop_caches<br /># 然后运行 dd
+                    命令向磁盘分区 &#47;dev&#47;sdb1 写入 2G 数据<br />$ dd if=&#47;dev&#47;urandom of=&#47;dev&#47;sdb1
+                    bs=1M count=2048<br />没注意磁盘写坏了 <br />
+                  </div>
+                  <span class="time">2019-01-04 23:51</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/5a/56/115c6433.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">jssfy</span></div>
+                  <div class="bd">文中提到linux块的大小是1KB，请问这个如何查证？ <br /></div>
+                  <span class="time">2019-01-04 09:37</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">这是vmstat文档中的</p>
+                    <p class="reply-time">2019-01-12 10:11</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/b7/00/12149f4e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">郭刚</span></div>
+                  <div class="bd">文中因为 Linux 中块的大小是 1KB。老师，块不是默认是4K吗？ <br /></div>
+                  <span class="time">2018-12-29 09:08</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

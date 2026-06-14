@@ -2,7 +2,6 @@
 
 官网：https://wakatime.com/dashboard
 
-
 ## eclipse
 
 #### **Install**
@@ -18,16 +17,16 @@
 #### **Uninstalling**
 
 1. Inside Eclipse, select `Help → About`.
-1. Click `Installation Details` button. 
-1. Select WakaTime from the list and press `Uninstall…` button and confirm the uninstalling by click `Finish`. 
+1. Click `Installation Details` button.
+1. Select WakaTime from the list and press `Uninstall…` button and confirm the uninstalling by click `Finish`.
 1. Re-launch Eclipse.
-
 
 ## Notepad++
 
 #### **Installing**
 
-1. Download the latest plugin dll from [GitHub](https://github.com/wakatime/notepadpp-wakatime/releases/latest "GitHub").
+1. Download the latest plugin dll from
+   [GitHub](https://github.com/wakatime/notepadpp-wakatime/releases/latest 'GitHub').
 1. Save the downloaded .dll to `C:\Program Files\Notepad++\plugins`
 1. Create an empty `allowAppDataPlugins.xml` file in your `C:\Program Files\Notepad++` directory.
 1. Restart Notepad++.
@@ -36,25 +35,27 @@
 1. Visit https://wakatime.com/dashboard to see your coding activity.
 
 #### **Upgrading**
-1. Download the latest plugin dll from [GitHub](https://github.com/wakatime/notepadpp-wakatime/releases/latest "GitHub").
+
+1. Download the latest plugin dll from
+   [GitHub](https://github.com/wakatime/notepadpp-wakatime/releases/latest 'GitHub').
 1. Save the downloaded .dll to `C:\Program Files\Notepad++\plugins` on overwrite the old one.
 1. Relaunch Notepad++.
 
 #### **Uninstalling**
+
 1. Go to `C:\Program Files\Notepad++\plugins`
 1. Delete the `WakaTime.dll`.
 1. Re-launch Notepad++.
 
 ## Atom
 
-1. Inside Atom, navigate to `Preferences` (or `Settings`) → Install and search for `wakatime`.
-1. Click the `Install` button.
-1. Click the `Settings` button inside the wakatime package.
-1. Enter your API key.
-1. Use Atom like you normally do and your coding activity will be displayed on your WakaTime Dashboard.
->> Note: The leet way to install WakaTime is with this Terminal command:
-    `apm install wakatime`
-
+1.  Inside Atom, navigate to `Preferences` (or `Settings`) → Install and search for `wakatime`.
+1.  Click the `Install` button.
+1.  Click the `Settings` button inside the wakatime package.
+1.  Enter your API key.
+1.  Use Atom like you normally do and your coding activity will be displayed on your WakaTime Dashboard.
+    > > Note: The leet way to install WakaTime is with this Terminal command:
+        `apm install wakatime`
 
 ## Sublime
 
@@ -76,7 +77,7 @@
 
 > 上面的方法貌似错了。
 
-1. `file > Settings`，然后找到``Plugins``，搜索**waka**。
+1. `file > Settings`，然后找到`Plugins`，搜索**waka**。
 2. 然后点在线搜索。
 3. 重启工具。
 4. `Tools > waka time setting`，输入API Key。
@@ -113,8 +114,7 @@
 
 理论上应该和eclipse一样，但实际安装失败。
 
-选择手动安装，输入下面地址。
-http://update.dcloud.net.cn/test/plugin_for_test
+选择手动安装，输入下面地址。 http://update.dcloud.net.cn/test/plugin_for_test
 
 但貌似里面也没哟waka time？如何破？继续寻找方法。
 
@@ -126,13 +126,13 @@ http://marketplace.eclipse.org/content/wakatime
 
 ## 安装记录
 
-- eclipse-js		done
-- eclipse-java		done
+- eclipse-js done
+- eclipse-java done
 - Hbuilder
-- Notepad++			done
-- Atom				done
-- VSCode			done
-- WebStorm			done
-- IntelliJ IDEA		done
-- PyCharm			done
-- Sublime			done
+- Notepad++ done
+- Atom done
+- VSCode done
+- WebStorm done
+- IntelliJ IDEA done
+- PyCharm done
+- Sublime done

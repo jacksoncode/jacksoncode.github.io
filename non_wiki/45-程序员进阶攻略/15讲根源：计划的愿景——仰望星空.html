@@ -1,362 +1,1588 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                15讲根源：计划的愿景——仰望星空
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/c9/65/c9d5c20e2acd5c065dd729e4c262ac65.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">15讲根源：计划的愿景——仰望星空</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/c9/65/c9d5c20e2acd5c065dd729e4c262ac65.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>在前面第 2 章节 “程序之术” 中，我已把对“设计”“编程”和“Bug”的思考与理解都分享给你了。今天开始进入第 3 章节，是关于成长修行中 “由术入道” 的部分，而“道”的维度众多，我就先从和个人成长最直接相关的 “计划体系” 讲起。它会有助于你一步一步走向你“理想的自己”，所以可别小看它的重要性。</p>
-<p>我想你肯定做过计划，我也不例外。一般在开始一件中长期的活动前，我都会做计划，但更重要的是反问为什么要做这个计划，因为计划是抵达愿望的途径。如果不能清晰地看见计划之路前方的愿景，计划半途而废的概率就很大了。</p>
-<p>古希腊哲学家苏格拉底有一句名言：“未经检视的人生不值得活。”那么我们为什么要检视自己的人生呢？正是因为我们有成长的愿望，那么愿望的根源又到底是什么呢？</p>
-<h2>需求模型</h2>
-<p>上世纪四十年代（1943 年）美国心理学家亚伯拉罕·马斯洛在《人类激励理论》中提出了需求层次理论模型，它是行为科学的理论之一。</p>
-<p>该理论认为个体成长发展的内在力量是动机，而动机是由多种不同性质的需要所组成，各种需要之间，有先后顺序与高低层次之分，每一层次的需要与满足，将决定个体人格发展的境界或程度。 其层次模型的经典金字塔图示如下：</p>
-<p><img src="https://static001.geekbang.org/resource/image/36/90/363a67db781786a5f0aca5417d6e0090.png" alt="" /></p>
-<center><span class="reference">马斯洛的经典金字塔图：需求层次模型</span></center><!-- [[[read_end]]] -->
-<p>在人生的不同阶段，会产生不同层次的目标需求。</p>
-<p>在人生的早期，我们努力学习，考一个好大学，拥有一技之长，找一份好工作，带来更高薪的收入，这很大程度都是为了满足图中最底层的生存需求，让生活变得更舒适美好。</p>
-<p>成长拼搏数年，事业小成，工作稳定，有房，有车，有娃后，第二层次，也就是安全的需求开始凸显。有人在这阶段开始给自己、父母、老婆、孩子都买人寿保险，开始考虑理财，投资甚至强身健体。然而处在这个阶段时，我却有一种强烈的不安全感，这也许和长年的程序员职业经历养成的习惯也有关系。</p>
-<p>我们做系统应用服务时总是需要考虑各种意外和异常事件发生，一般至少提供主备方案。于人生而言，保持持续学习，与时俱进，追求成长，这其实也是一种主备方案：主，指当前支撑生活的工作；备，是通过持续学习，同步成长，保持核心能力的不断积累与时间的付出来获得一份备份保障，以避免 “主” 出现意外时，“备” 的能力已被时代淘汰。</p>
-<p>需求金字塔底部两层属于物质层次的 “经济基础”，而再往上则进入了更高精神层次的 “上层建筑”。就个体而言，高层次需求要比低层次需求具有更大的价值。在 “生存” 和 “安全” 基本满足的保障基础之上，我们才会更从容地向内求，更多地探求内心，进而向外索，对外去探索、发现和建立不同的圈层关系，以满足上层的社交 “归属”、获得 “尊重” 与 “自我实现” 的需求。</p>
-<p>马斯洛把底层的四类需求：生存、安全、归属、尊重归类为 “缺失性” 需求，它们的满足需要从外部环境去获得。而最顶层的“自我实现” 则属于 “成长性” 需求。成长就是自我实现的过程，成长的动机也来自于 “自我实现” 的吸引。就像很多植物具有天生的向阳性，而对于人，我感觉也有天生的 “自我实现” 趋向性。</p>
-<p>人生最激荡人心的时刻，就在于自我实现的创造性过程中，产生出的一种 “高峰体验” 感。正因为人所固有的需求层次模型，我们才有了愿望，愿望产生目标，目标则引发计划。</p>
-<h2>生涯发展</h2>
-<p>在攀登需求金字塔的过程中，我们创造了关于人生的 “生涯”。而 “生涯” 一词最早来自庄子语：</p>
-<blockquote>
-<p>吾生也有涯，而知也无涯。以有涯随无涯，殆已。</p>
-</blockquote>
-<p>“涯” 字的原意是水边，隐喻人生道路的尽头，尽头已经没了路，是终点，是边界。正因如此，人生有限，才需要计划。著名生涯规划师古典有一篇文章《你的生命有什么可能？》对生涯提出了四个维度：高度、宽度、深度和温度。这里就借他山之玉，来谈谈我的理解。</p>
-<ul>
-<li>高度：背后的价值观是影响与权力。代表性关键词有：追逐竞争、改变世界。</li>
-<li>深度：背后的价值观是卓越与智慧。代表性关键词有：专业主义、工匠精神。</li>
-<li>宽度：背后的价值观是博爱与和谐。代表性关键词有：多种角色、丰富平衡。</li>
-<li>温度：背后的价值观是自由与快乐。代表性关键词有：自我认同、精彩程度。</li>
-</ul>
-<p>每个人的人生发展路线都会有这四个维度，只是不同人的偏好、愿望和阶段不同导致了在四个维度分布重心的差异。在不同维度的选择，都代表了不一样的 “生涯”，每一种 “生涯” 都需要一定程度的计划与努力。</p>
-<p>虽有四种维度，四个方向，但不代表只能选其一。虽然我们不太可能同时去追求这四个维度，但可以在特定的人生不同阶段，在其中一个维度上，给自己一个去尝试和探索的周期。所以，这就有了选择，有了计划。而计划会有开始，也会有结束，我们需要计划在人生的不同阶段，重点开始哪个维度的追求，以及大概需要持续的周期。</p>
-<p>人生本是多维的，你会有多努力、多投入来设计并实现自己的生涯规划呢？不计划和努力一下，也许你永远无法知道自己的边界和所能达到的程度。</p>
-<p>上世纪七十年代初，一个文学专业成绩很一般的学生毕业了。他虽然喜欢读文学作品却没写出过什么东西，毕业后就结了婚，和老婆开了个酒吧，生意不错，生活无忧。到了七十年代末，他似乎感受到某种 “召唤”，觉得应该写点什么东西了，于是每天酒吧打烊后，他就在餐桌上写两小时的小说，这一写就写了三十多年。熟悉的人想必已经知道他是谁了？对，就是村上春树。</p>
-<p>所以，总要开始计划做点啥，你才能知道自己的 “涯” 到底有多远；而计划就是在系统地探索生涯，甚至人生的无限可能性。</p>
-<h2>回首无悔</h2>
-<p>关于后悔，有研究说：“我们最后悔的是没做什么，而不是做过什么。”回味一下，这个结论也确实符合我们的感觉。</p>
-<p>万维钢写过一篇文章《决策理性批判》，里面引用了一个最新（2018）的关于后悔的研究，这个研究从 “理想的自己” 与 “义务的自己” 两个角度来说明：</p>
-<blockquote>
-<p>“理想的自己” 就是你想要成为什么人。</p>
-<p>“义务的自己” 就是你应该干什么。</p>
-</blockquote>
-<p>若放到前面马斯洛需求金字塔中，“理想的自己” 就是站在顶端 “自我实现” 位置的那个自己；而 “义务的自己” 正在金字塔下面四层，挣扎于现实的处境。如果你从来没有去向 “理想的自己” 望上一眼，走上一步，将来终究会后悔的。事实上，研究结论也证明了这点：70% 以上的人都会后悔没有成为 “理想的自己”。</p>
-<p>当我把自己进入大学以后的这十八年分作几个阶段来回顾时，有那么一段的好多时间我就是那样浑浑噩噩地混过去了，以至于现在回忆那段日子发现记忆是如此的粘连与模糊。后悔么？当然。</p>
-<p>如果我能好好计划一下那段日子，也许会得到一个更 “理想的自己”。而在最近的这一段，我也感谢好些年前 “曾经的我”，幸运兼有意地做了一些计划。虽然一路走来，有些辛苦，但感觉会充实很多，而且如今再去回首，就没有太多后悔没做的事了。</p>
-<p>计划，就是做选择，你在为未来的你做出选择，你在选择未来变成 “谁”。如果你还在为今天的自己而后悔，那就该为明天的自己做出计划了。</p>
-<p>人生的征程中，先是恐惧驱动，地狱震颤了你，想要逃离黑暗深渊；后来才是愿望驱动，星空吸引了你，想要征服星辰大海。</p>
-<p>逃离与征服的路，是一条计划的路，也是一条更困难的路，而 “你内心肯定有着某种火焰，能把你和其他人区别开来” 才让你选择了它。</p>
-<p>最后，你想去到哪片星空？你为它点燃了内心的火焰了吗？</p>
-<hr />
-<p><img src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Kaito</span>
-                            </div>
-                            <div class="bd">人生的征程中，先是恐惧驱动，地狱震颤了你，想要逃离黑暗深渊；后来才是愿望驱动，星空吸引了你，想要征服星辰大海。<br><br>这句话写的太棒了，只为这一句话，这钱花的太值了！ <br></div>
-                            <span class="time">2018-09-06 08:52</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😊</p>
-                                <p class="reply-time">2018-09-08 19:32</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">godtrue</span>
-                            </div>
-                            <div class="bd">感觉自己还在最低层次，路还很长，需要努力追逐事情还很多。一直想好好的看看JDK的源码，试过几次没坚持下来，昨天又开始了，这次一定要坚持到底！ <br></div>
-                            <span class="time">2018-09-05 08:29</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">看源码也得有个目的和终点，源码那么多又不像小说那么好看，坚持不下来很正常。</p>
-                                <p class="reply-time">2018-09-05 19:02</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李正阳Lee</span>
-                            </div>
-                            <div class="bd">国学大师王国维在《人间词话》中说，古今成大事业者毕经三重境界:<br><br>“ 昨夜西风凋碧树，独上高楼，望断天涯路，此第一境也，衣带渐宽终不悔，为伊消得人憔悴，此第二境也，众里寻他千百度，蓦然回首，那人却在灯火阑珊处，此第三境也。 ”<br><br>第一境界就是计划，若想实现更高层次的需求，计划就是第一步。<br><br>仰望星空，脚踏实地。 <br></div>
-                            <span class="time">2018-09-05 09:28</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">至今还在第二境界，灯火阑珊在哪里🧐</p>
-                                <p class="reply-time">2018-09-05 18:27</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">独钓寒江雪</span>
-                            </div>
-                            <div class="bd">23岁，入了江湖4年。智能制造领域。薪资也说的过去。时而迷茫，一系列自己的修行计划总觉得明天做也行。总被一些什么现在薪资可以了（一年到手32万）何必再去自行修炼创业。。。大佬有什么建议么。让自己坚持本心。。。 <br></div>
-                            <span class="time">2018-09-05 09:13</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">钱多买不了喜欢，但创业也需要挣钱，得有个基本面支撑。剩下的就是你的选择取舍了</p>
-                                <p class="reply-time">2018-09-05 19:00</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">liangjf</span>
-                            </div>
-                            <div class="bd">老师的文笔怎么锻炼的呢？而且好多适当经典引用，赞 <br></div>
-                            <span class="time">2018-09-07 21:49</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">和练习编程一样的方式，多读，遇到有启发的文字就记录下笔记；然后就是多写了</p>
-                                <p class="reply-time">2018-09-08 19:27</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">亚林</span>
-                            </div>
-                            <div class="bd">应该所以能够，能够所以应该。我现在认为这两边都不能偏废。 <br></div>
-                            <span class="time">2018-09-11 12:18</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">亚林</span>
-                            </div>
-                            <div class="bd">任何事情都有目标，有愿就有力 <br></div>
-                            <span class="time">2018-09-11 12:00</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">恩，愿是力之源</p>
-                                <p class="reply-time">2018-09-11 19:05</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/05/97/b83ebf66.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">softtwilight</span>
-                            </div>
-                            <div class="bd">看术，需要学习能力。而道，只能靠悟性了 <br></div>
-                            <span class="time">2018-09-06 08:54</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">道，也可以靠不断思考，大脑的潜力很大</p>
-                                <p class="reply-time">2018-09-08 19:33</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">third</span>
-                            </div>
-                            <div class="bd">心得如下：<br><br>1，马斯洛心理需求，在人的一生会有多种层次需求，在不同阶段，最主要的目标需求不一样<br><br>个人体会，我可能对安全的需求比较重吧。我现在大三，已经开始了购买保险，学一点理财和每天坚持锻炼身体了。感觉这些东西都是越早开始，越好。<br><br>2，生涯发展四维度：高度、宽度、深度和温度。<br><br>个人体会，比较喜欢高度这个维度，内心渴望着的影响别人<br><br>3，人们最后悔的是没做什么，而不是做过什么。因为做过，就能找到理由不后悔。<br><br>4，关于计划，人的时间和精力是有限，计划的前提是放弃，把重要的时间放在重要的事情上<br><br>5，关于坚持，我比较喜欢的一句话是，如果一件事需要坚持，多半是做不下去的。也许习惯做一件事，比坚持做一件事，成功的概率要高得多 <br></div>
-                            <span class="time">2018-09-05 20:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">锻炼身体可以一直保持下去😄</p>
-                                <p class="reply-time">2018-09-06 09:12</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/67/29/b0ec5430.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">greatcl</span>
-                            </div>
-                            <div class="bd">需要这样的鸡汤（褒义），一直看“干货”，都忘了为什么看了。 <br></div>
-                            <span class="time">2018-09-05 09:31</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">哈^_^</p>
-                                <p class="reply-time">2018-09-05 18:25</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">绿鲤鱼与驴。</span>
-                            </div>
-                            <div class="bd">这碗心灵鸡汤我喝了 <br></div>
-                            <span class="time">2018-11-19 17:37</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">😂</p>
-                                <p class="reply-time">2018-11-19 18:51</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ywengirl</span>
-                            </div>
-                            <div class="bd">关于后悔，有研究说：“我们最后悔的是没做什么，而不是做过什么。 <br></div>
-                            <span class="time">2018-11-07 08:32</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/20/39/3168c4ca.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">二木🐶</span>
-                            </div>
-                            <div class="bd">真的写的非常好，感慨万千，昨天接到一个QQ音乐的面试感觉自己表现特别差，面试官问的所有问题我都有了解，面试别人的时候基本也都会问，但是当要自己表达的时候就感觉原来自己理解的还不清楚，表达描述不出来。 <br></div>
-                            <span class="time">2018-10-27 21:25</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">能清晰表达是掌握的第二阶段要求</p>
-                                <p class="reply-time">2018-10-29 18:52</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/11/30/91/75a69d33.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">focus　根</span>
-                            </div>
-                            <div class="bd">1.我自己以前有太多半途而废的行动<br>好在我养成了做日计划总结和周计划总结<br>看到自己做了什么，以后要往哪个方向走<br><br>2.以前我很愧疚是因为我总是定的目标太高 感觉有种焦虑的感觉在<br>现在就是一周一拱 先每天做点要求不太高的事情 然后再做想着改进  逐步迭代 <br></div>
-                            <span class="time">2018-09-17 12:46</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">大事业，都是一点一点拱出来的😄</p>
-                                <p class="reply-time">2018-09-17 18:35</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  在前面第 2 章节 “程序之术” 中，我已把对“设计”“编程”和“Bug”的思考与理解都分享给你了。今天开始进入第 3
+                  章节，是关于成长修行中 “由术入道” 的部分，而“道”的维度众多，我就先从和个人成长最直接相关的 “计划体系”
+                  讲起。它会有助于你一步一步走向你“理想的自己”，所以可别小看它的重要性。
+                </p>
+                <p>
+                  我想你肯定做过计划，我也不例外。一般在开始一件中长期的活动前，我都会做计划，但更重要的是反问为什么要做这个计划，因为计划是抵达愿望的途径。如果不能清晰地看见计划之路前方的愿景，计划半途而废的概率就很大了。
+                </p>
+                <p>
+                  古希腊哲学家苏格拉底有一句名言：“未经检视的人生不值得活。”那么我们为什么要检视自己的人生呢？正是因为我们有成长的愿望，那么愿望的根源又到底是什么呢？
+                </p>
+                <h2>需求模型</h2>
+                <p>
+                  上世纪四十年代（1943
+                  年）美国心理学家亚伯拉罕·马斯洛在《人类激励理论》中提出了需求层次理论模型，它是行为科学的理论之一。
+                </p>
+                <p>
+                  该理论认为个体成长发展的内在力量是动机，而动机是由多种不同性质的需要所组成，各种需要之间，有先后顺序与高低层次之分，每一层次的需要与满足，将决定个体人格发展的境界或程度。
+                  其层次模型的经典金字塔图示如下：
+                </p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/36/90/363a67db781786a5f0aca5417d6e0090.png"
+                    alt=""
+                  />
+                </p>
+                <center><span class="reference">马斯洛的经典金字塔图：需求层次模型</span></center>
+                <!-- [[[read_end]]] -->
+                <p>在人生的不同阶段，会产生不同层次的目标需求。</p>
+                <p>
+                  在人生的早期，我们努力学习，考一个好大学，拥有一技之长，找一份好工作，带来更高薪的收入，这很大程度都是为了满足图中最底层的生存需求，让生活变得更舒适美好。
+                </p>
+                <p>
+                  成长拼搏数年，事业小成，工作稳定，有房，有车，有娃后，第二层次，也就是安全的需求开始凸显。有人在这阶段开始给自己、父母、老婆、孩子都买人寿保险，开始考虑理财，投资甚至强身健体。然而处在这个阶段时，我却有一种强烈的不安全感，这也许和长年的程序员职业经历养成的习惯也有关系。
+                </p>
+                <p>
+                  我们做系统应用服务时总是需要考虑各种意外和异常事件发生，一般至少提供主备方案。于人生而言，保持持续学习，与时俱进，追求成长，这其实也是一种主备方案：主，指当前支撑生活的工作；备，是通过持续学习，同步成长，保持核心能力的不断积累与时间的付出来获得一份备份保障，以避免
+                  “主” 出现意外时，“备” 的能力已被时代淘汰。
+                </p>
+                <p>
+                  需求金字塔底部两层属于物质层次的 “经济基础”，而再往上则进入了更高精神层次的
+                  “上层建筑”。就个体而言，高层次需求要比低层次需求具有更大的价值。在 “生存” 和 “安全”
+                  基本满足的保障基础之上，我们才会更从容地向内求，更多地探求内心，进而向外索，对外去探索、发现和建立不同的圈层关系，以满足上层的社交
+                  “归属”、获得 “尊重” 与 “自我实现” 的需求。
+                </p>
+                <p>
+                  马斯洛把底层的四类需求：生存、安全、归属、尊重归类为 “缺失性”
+                  需求，它们的满足需要从外部环境去获得。而最顶层的“自我实现” 则属于 “成长性”
+                  需求。成长就是自我实现的过程，成长的动机也来自于 “自我实现”
+                  的吸引。就像很多植物具有天生的向阳性，而对于人，我感觉也有天生的 “自我实现” 趋向性。
+                </p>
+                <p>
+                  人生最激荡人心的时刻，就在于自我实现的创造性过程中，产生出的一种 “高峰体验”
+                  感。正因为人所固有的需求层次模型，我们才有了愿望，愿望产生目标，目标则引发计划。
+                </p>
+                <h2>生涯发展</h2>
+                <p>在攀登需求金字塔的过程中，我们创造了关于人生的 “生涯”。而 “生涯” 一词最早来自庄子语：</p>
+                <blockquote>
+                  <p>吾生也有涯，而知也无涯。以有涯随无涯，殆已。</p>
+                </blockquote>
+                <p>
+                  “涯”
+                  字的原意是水边，隐喻人生道路的尽头，尽头已经没了路，是终点，是边界。正因如此，人生有限，才需要计划。著名生涯规划师古典有一篇文章《你的生命有什么可能？》对生涯提出了四个维度：高度、宽度、深度和温度。这里就借他山之玉，来谈谈我的理解。
+                </p>
+                <ul>
+                  <li>高度：背后的价值观是影响与权力。代表性关键词有：追逐竞争、改变世界。</li>
+                  <li>深度：背后的价值观是卓越与智慧。代表性关键词有：专业主义、工匠精神。</li>
+                  <li>宽度：背后的价值观是博爱与和谐。代表性关键词有：多种角色、丰富平衡。</li>
+                  <li>温度：背后的价值观是自由与快乐。代表性关键词有：自我认同、精彩程度。</li>
                 </ul>
+                <p>
+                  每个人的人生发展路线都会有这四个维度，只是不同人的偏好、愿望和阶段不同导致了在四个维度分布重心的差异。在不同维度的选择，都代表了不一样的
+                  “生涯”，每一种 “生涯” 都需要一定程度的计划与努力。
+                </p>
+                <p>
+                  虽有四种维度，四个方向，但不代表只能选其一。虽然我们不太可能同时去追求这四个维度，但可以在特定的人生不同阶段，在其中一个维度上，给自己一个去尝试和探索的周期。所以，这就有了选择，有了计划。而计划会有开始，也会有结束，我们需要计划在人生的不同阶段，重点开始哪个维度的追求，以及大概需要持续的周期。
+                </p>
+                <p>
+                  人生本是多维的，你会有多努力、多投入来设计并实现自己的生涯规划呢？不计划和努力一下，也许你永远无法知道自己的边界和所能达到的程度。
+                </p>
+                <p>
+                  上世纪七十年代初，一个文学专业成绩很一般的学生毕业了。他虽然喜欢读文学作品却没写出过什么东西，毕业后就结了婚，和老婆开了个酒吧，生意不错，生活无忧。到了七十年代末，他似乎感受到某种
+                  “召唤”，觉得应该写点什么东西了，于是每天酒吧打烊后，他就在餐桌上写两小时的小说，这一写就写了三十多年。熟悉的人想必已经知道他是谁了？对，就是村上春树。
+                </p>
+                <p>
+                  所以，总要开始计划做点啥，你才能知道自己的 “涯”
+                  到底有多远；而计划就是在系统地探索生涯，甚至人生的无限可能性。
+                </p>
+                <h2>回首无悔</h2>
+                <p>
+                  关于后悔，有研究说：“我们最后悔的是没做什么，而不是做过什么。”回味一下，这个结论也确实符合我们的感觉。
+                </p>
+                <p>
+                  万维钢写过一篇文章《决策理性批判》，里面引用了一个最新（2018）的关于后悔的研究，这个研究从
+                  “理想的自己” 与 “义务的自己” 两个角度来说明：
+                </p>
+                <blockquote>
+                  <p>“理想的自己” 就是你想要成为什么人。</p>
+                  <p>“义务的自己” 就是你应该干什么。</p>
+                </blockquote>
+                <p>
+                  若放到前面马斯洛需求金字塔中，“理想的自己” 就是站在顶端 “自我实现” 位置的那个自己；而 “义务的自己”
+                  正在金字塔下面四层，挣扎于现实的处境。如果你从来没有去向 “理想的自己”
+                  望上一眼，走上一步，将来终究会后悔的。事实上，研究结论也证明了这点：70% 以上的人都会后悔没有成为
+                  “理想的自己”。
+                </p>
+                <p>
+                  当我把自己进入大学以后的这十八年分作几个阶段来回顾时，有那么一段的好多时间我就是那样浑浑噩噩地混过去了，以至于现在回忆那段日子发现记忆是如此的粘连与模糊。后悔么？当然。
+                </p>
+                <p>
+                  如果我能好好计划一下那段日子，也许会得到一个更 “理想的自己”。而在最近的这一段，我也感谢好些年前
+                  “曾经的我”，幸运兼有意地做了一些计划。虽然一路走来，有些辛苦，但感觉会充实很多，而且如今再去回首，就没有太多后悔没做的事了。
+                </p>
+                <p>
+                  计划，就是做选择，你在为未来的你做出选择，你在选择未来变成
+                  “谁”。如果你还在为今天的自己而后悔，那就该为明天的自己做出计划了。
+                </p>
+                <p>
+                  人生的征程中，先是恐惧驱动，地狱震颤了你，想要逃离黑暗深渊；后来才是愿望驱动，星空吸引了你，想要征服星辰大海。
+                </p>
+                <p>
+                  逃离与征服的路，是一条计划的路，也是一条更困难的路，而
+                  “你内心肯定有着某种火焰，能把你和其他人区别开来” 才让你选择了它。
+                </p>
+                <p>最后，你想去到哪片星空？你为它点燃了内心的火焰了吗？</p>
+                <hr />
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/45/b8/456def9c2e16edaec6543cfa03376cb8.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Kaito</span></div>
+                  <div class="bd">
+                    人生的征程中，先是恐惧驱动，地狱震颤了你，想要逃离黑暗深渊；后来才是愿望驱动，星空吸引了你，想要征服星辰大海。<br /><br />这句话写的太棒了，只为这一句话，这钱花的太值了！
+                    <br />
+                  </div>
+                  <span class="time">2018-09-06 08:52</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😊</p>
+                    <p class="reply-time">2018-09-08 19:32</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/f4/9a1feb59.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">godtrue</span></div>
+                  <div class="bd">
+                    感觉自己还在最低层次，路还很长，需要努力追逐事情还很多。一直想好好的看看JDK的源码，试过几次没坚持下来，昨天又开始了，这次一定要坚持到底！
+                    <br />
+                  </div>
+                  <span class="time">2018-09-05 08:29</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      看源码也得有个目的和终点，源码那么多又不像小说那么好看，坚持不下来很正常。
+                    </p>
+                    <p class="reply-time">2018-09-05 19:02</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/1e/81/0b56097a.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李正阳Lee</span></div>
+                  <div class="bd">
+                    国学大师王国维在《人间词话》中说，古今成大事业者毕经三重境界:<br /><br />“
+                    昨夜西风凋碧树，独上高楼，望断天涯路，此第一境也，衣带渐宽终不悔，为伊消得人憔悴，此第二境也，众里寻他千百度，蓦然回首，那人却在灯火阑珊处，此第三境也。
+                    ”<br /><br />第一境界就是计划，若想实现更高层次的需求，计划就是第一步。<br /><br />仰望星空，脚踏实地。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-05 09:28</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">至今还在第二境界，灯火阑珊在哪里🧐</p>
+                    <p class="reply-time">2018-09-05 18:27</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">独钓寒江雪</span></div>
+                  <div class="bd">
+                    23岁，入了江湖4年。智能制造领域。薪资也说的过去。时而迷茫，一系列自己的修行计划总觉得明天做也行。总被一些什么现在薪资可以了（一年到手32万）何必再去自行修炼创业。。。大佬有什么建议么。让自己坚持本心。。。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-05 09:13</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      钱多买不了喜欢，但创业也需要挣钱，得有个基本面支撑。剩下的就是你的选择取舍了
+                    </p>
+                    <p class="reply-time">2018-09-05 19:00</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/27/fc/b8d83d56.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">liangjf</span></div>
+                  <div class="bd">老师的文笔怎么锻炼的呢？而且好多适当经典引用，赞 <br /></div>
+                  <span class="time">2018-09-07 21:49</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      和练习编程一样的方式，多读，遇到有启发的文字就记录下笔记；然后就是多写了
+                    </p>
+                    <p class="reply-time">2018-09-08 19:27</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">亚林</span></div>
+                  <div class="bd">应该所以能够，能够所以应该。我现在认为这两边都不能偏废。 <br /></div>
+                  <span class="time">2018-09-11 12:18</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/5c/3f164f66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">亚林</span></div>
+                  <div class="bd">任何事情都有目标，有愿就有力 <br /></div>
+                  <span class="time">2018-09-11 12:00</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">恩，愿是力之源</p>
+                    <p class="reply-time">2018-09-11 19:05</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/05/97/b83ebf66.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">softtwilight</span></div>
+                  <div class="bd">看术，需要学习能力。而道，只能靠悟性了 <br /></div>
+                  <span class="time">2018-09-06 08:54</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">道，也可以靠不断思考，大脑的潜力很大</p>
+                    <p class="reply-time">2018-09-08 19:33</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/a4/5a/e708e423.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">third</span></div>
+                  <div class="bd">
+                    心得如下：
+                    <br />
+                    <br />1，马斯洛心理需求，在人的一生会有多种层次需求，在不同阶段，最主要的目标需求不一样
+                    <br />
+                    <br />个人体会，我可能对安全的需求比较重吧。我现在大三，已经开始了购买保险，学一点理财和每天坚持锻炼身体了。感觉这些东西都是越早开始，越好。
+                    <br />
+                    <br />2，生涯发展四维度：高度、宽度、深度和温度。
+                    <br />
+                    <br />个人体会，比较喜欢高度这个维度，内心渴望着的影响别人
+                    <br />
+                    <br />3，人们最后悔的是没做什么，而不是做过什么。因为做过，就能找到理由不后悔。
+                    <br />
+                    <br />4，关于计划，人的时间和精力是有限，计划的前提是放弃，把重要的时间放在重要的事情上
+                    <br />
+                    <br />5，关于坚持，我比较喜欢的一句话是，如果一件事需要坚持，多半是做不下去的。也许习惯做一件事，比坚持做一件事，成功的概率要高得多
+                    <br />
+                  </div>
+                  <span class="time">2018-09-05 20:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">锻炼身体可以一直保持下去😄</p>
+                    <p class="reply-time">2018-09-06 09:12</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/67/29/b0ec5430.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">greatcl</span></div>
+                  <div class="bd">需要这样的鸡汤（褒义），一直看“干货”，都忘了为什么看了。 <br /></div>
+                  <span class="time">2018-09-05 09:31</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">哈^_^</p>
+                    <p class="reply-time">2018-09-05 18:25</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/7f/75/6139e2b9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">绿鲤鱼与驴。</span></div>
+                  <div class="bd">这碗心灵鸡汤我喝了 <br /></div>
+                  <span class="time">2018-11-19 17:37</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">😂</p>
+                    <p class="reply-time">2018-11-19 18:51</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ywengirl</span></div>
+                  <div class="bd">关于后悔，有研究说：“我们最后悔的是没做什么，而不是做过什么。 <br /></div>
+                  <span class="time">2018-11-07 08:32</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/20/39/3168c4ca.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">二木🐶</span></div>
+                  <div class="bd">
+                    真的写的非常好，感慨万千，昨天接到一个QQ音乐的面试感觉自己表现特别差，面试官问的所有问题我都有了解，面试别人的时候基本也都会问，但是当要自己表达的时候就感觉原来自己理解的还不清楚，表达描述不出来。
+                    <br />
+                  </div>
+                  <span class="time">2018-10-27 21:25</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">能清晰表达是掌握的第二阶段要求</p>
+                    <p class="reply-time">2018-10-29 18:52</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/11/30/91/75a69d33.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">focus　根</span></div>
+                  <div class="bd">
+                    1.我自己以前有太多半途而废的行动<br />好在我养成了做日计划总结和周计划总结<br />看到自己做了什么，以后要往哪个方向走<br /><br />2.以前我很愧疚是因为我总是定的目标太高
+                    感觉有种焦虑的感觉在<br />现在就是一周一拱 先每天做点要求不太高的事情 然后再做想着改进 逐步迭代
+                    <br />
+                  </div>
+                  <span class="time">2018-09-17 12:46</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">大事业，都是一点一点拱出来的😄</p>
+                    <p class="reply-time">2018-09-17 18:35</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

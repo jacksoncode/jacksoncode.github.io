@@ -1,458 +1,1679 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
+      #watermark {
+        position: relative;
+        overflow: hidden;
+      }
 
-#watermark {
-
-  position: relative;
-  overflow: hidden;
-}
-
-#watermark .x {
-  position: absolute;
-  top: 800;
-  left: 400;
-  color: #3300ff;
-  font-size: 50px;
-  pointer-events: none;
-  opacity:0.5;
-  filter:Alpha(opacity=50);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-    </style>
-
-
-    <style type="text/css">
- html{color:#333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;font-family:Helvetica Neue,PingFang SC,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif}html.borderbox *,html.borderbox :after,html.borderbox :before{box-sizing:border-box}article,aside,blockquote,body,button,code,dd,details,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,menu,nav,section{display:block}audio,canvas,video{display:inline-block}body,button,input,select,textarea{font:300 1em/1.8 PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,Helvetica,sans-serif}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}blockquote{position:relative;color:#999;font-weight:400;border-left:1px solid #1abc9c;padding-left:1em;margin:1em 3em 1em 2em}@media only screen and (max-width:640px){blockquote{margin:1em 0}}abbr,acronym{border-bottom:1px dotted;font-variant:normal}abbr{cursor:help}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}ol,ul{list-style:none}caption,th{text-align:left}q:after,q:before{content:""}sub,sup{font-size:75%;line-height:0;position:relative}:root sub,:root sup{vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a{color:#1abc9c}a:hover{text-decoration:underline}.typo a{border-bottom:1px solid #1abc9c}.typo a:hover{border-bottom-color:#555;color:#555}.typo a:hover,a,ins{text-decoration:none}.typo-u,u{text-decoration:underline}mark{background:#fffdd1;border-bottom:1px solid #ffedce;padding:2px;margin:0 5px}code,pre,pre tt{font-family:Courier,Courier New,monospace}pre{background:hsla(0,0%,97%,.7);border:1px solid #ddd;padding:1em 1.5em;display:block;-webkit-overflow-scrolling:touch}hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:.8em;height:10px}.typo-small,figcaption,small{font-size:.9em;color:#888}b,strong{font-weight:700;color:#000}[draggable]{cursor:move}.clearfix:after,.clearfix:before{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.textwrap,.textwrap td,.textwrap th{word-wrap:break-word;word-break:break-all}.textwrap-table{table-layout:fixed}.serif{font-family:Palatino,Optima,Georgia,serif}.typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{margin-bottom:1rem}h1,h2,h3,h4,h5,h6{font-family:PingFang SC,Helvetica Neue,Verdana,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;color:#000;line-height:1.35}.typo-h1,.typo-h2,.typo-h3,.typo-h4,.typo-h5,.typo-h6,.typo h1,.typo h2,.typo h3,.typo h4,.typo h5,.typo h6{margin-top:1.2em;margin-bottom:.6em;line-height:1.35}.typo-h1,.typo h1{font-size:2em}.typo-h2,.typo h2{font-size:1.8em}.typo-h3,.typo h3{font-size:1.6em}.typo-h4,.typo h4{font-size:1.4em}.typo-h5,.typo-h6,.typo h5,.typo h6{font-size:1.2em}.typo-ul,.typo ul{margin-left:1.3em;list-style:disc}.typo-ol,.typo ol{list-style:decimal;margin-left:1.9em}.typo-ol ol,.typo-ol ul,.typo-ul ol,.typo-ul ul,.typo li ol,.typo li ul{margin-bottom:.8em;margin-left:2em}.typo-ol ul,.typo-ul ul,.typo li ul{list-style:circle}.typo-table td,.typo-table th,.typo table caption,.typo table td,.typo table th{border:1px solid #ddd;padding:.5em 1em;color:#666}.typo-table th,.typo table th{background:#fbfbfb}.typo-table thead th,.typo table thead th{background:hsla(0,0%,95%,.7)}.typo table caption{border-bottom:none}.typo-input,.typo-textarea{-webkit-appearance:none;border-radius:0}.typo-em,.typo em,caption,legend{color:#000;font-weight:inherit}.typo-em{position:relative}.typo-em:after{position:absolute;top:.65em;left:0;width:100%;overflow:hidden;white-space:nowrap;content:"\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"}.typo img{max-width:100%}.common-content{font-weight:400;color:#353535;line-height:1.75rem;white-space:normal;word-break:normal;font-size:1rem}.common-content img{display:block;max-width:100%;background-color:#eee}.common-content audio,.common-content video{width:100%;background-color:#eee}.common-content center,.common-content font{margin-top:1rem;display:inline-block}.common-content center{width:100%}.common-content pre{margin-top:1rem;padding-left:0;padding-right:0;position:relative;overflow:hidden}.common-content pre code{font-size:.8rem;font-family:Consolas,Liberation Mono,Menlo,monospace,Courier;display:block;width:100%;box-sizing:border-box;padding-left:1rem;padding-right:1rem;overflow-x:auto}.common-content hr{border:none;margin-top:1.5rem;margin-bottom:1.5rem;border-top:1px solid #f5f5f5;height:1px;background:none}.common-content b,.common-content h1,.common-content h2,.common-content h3,.common-content h4,.common-content h5,.common-content strong{font-weight:700}.common-content h1,.common-content h2{font-size:1.125rem;margin-bottom:.45rem}.common-content h3,.common-content h4,.common-content h5{font-size:1rem;margin-bottom:.45rem}.common-content p{font-weight:400;color:#353535;margin-top:.15rem}.common-content .orange{color:#ff5a05}.common-content .reference{font-size:1rem;color:#888}.custom-rich-content h1{margin-top:0;font-weight:400;font-size:15.25px;border-bottom:1px solid #eee;line-height:2.8}.custom-rich-content li,.custom-rich-content p{font-size:14px;color:#888;line-height:1.6}table.hljs-ln{margin-bottom:0;border-spacing:0;border-collapse:collapse}table.hljs-ln,table.hljs-ln tbody,table.hljs-ln td,table.hljs-ln tr{box-sizing:border-box}table.hljs-ln td{padding:0;border:0}table.hljs-ln td.hljs-ln-numbers{min-width:15px;color:rgba(27,31,35,.3);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}table.hljs-ln td.hljs-ln-code,table.hljs-ln td.hljs-ln-numbers{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;vertical-align:top}table.hljs-ln td.hljs-ln-code{position:relative;padding-right:10px;padding-left:10px;overflow:visible;color:#24292e;word-wrap:normal;white-space:pre}video::-webkit-media-controls{overflow:hidden!important}video::-webkit-media-controls-enclosure{width:calc(100% + 32px);margin-left:auto}.button-cancel{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel,.button-primary{-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary{color:#fff;background-color:#ff5a05;border-radius:3px}@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);src:url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format("woff"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format("truetype"),url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format("svg")}@font-face{font-family:player-font;src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);src:url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format("embedded-opentype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format("woff"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format("truetype"),url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format("svg")}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}html{background:#fff;min-height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{width:100%}body.fixed{overflow:hidden;position:fixed;width:100vw;height:100vh}i{font-style:normal}a{word-wrap:break-word;-webkit-tap-highlight-color:rgba(0,0,0,0)}a:hover{text-decoration:none}.fade-enter-active,.fade-leave-active{transition:opacity .3s}.fade-enter,.fade-leave-to{opacity:0}.MathJax,.MathJax_CHTML,.MathJax_MathContainer,.MathJax_MathML,.MathJax_PHTML,.MathJax_PlainSource,.MathJax_SVG{outline:0}.ios-app-switch .js-audit{display:none}._loading_wrap_{position:fixed;width:100vw;height:100vh;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999}._loading_div_class_,._loading_wrap_{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center}._loading_div_class_{word-wrap:break-word;padding:.5rem .75rem;text-align:center;z-index:9999;font-size:.6rem;max-width:60%;color:#fff;border-radius:.25rem;-ms-flex-direction:column;flex-direction:column}._loading_div_class_ .message{color:#353535;font-size:16px;line-height:3}.spinner{animation:circle-rotator 1.4s linear infinite}.spinner *{line-height:0;box-sizing:border-box}@keyframes circle-rotator{0%{transform:rotate(0deg)}to{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:circle-dash 1.4s ease-in-out infinite,circle-colors 5.6s ease-in-out infinite}@keyframes circle-colors{0%{stroke:#ff5a05}to{stroke:#ff5a05}}@keyframes circle-dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;transform:rotate(135deg)}to{stroke-dashoffset:187;transform:rotate(450deg)}}.confirm-box-wrapper,.confirm-box-wrapper .mask{position:absolute;top:0;left:0;right:0;bottom:0}.confirm-box-wrapper .mask{background:rgba(0,0,0,.6)}.confirm-box-wrapper .confirm-box{position:fixed;top:50%;left:50%;width:267px;background:#fff;transform:translate(-50%,-50%);border-radius:7px}.confirm-box-wrapper .confirm-box .head{margin:0 18px;font-size:18px;text-align:center;line-height:65px;border-bottom:1px solid #d9d9d9}.confirm-box-wrapper .confirm-box .body{padding:18px;padding-bottom:0;color:#353535;font-size:12.5px;max-height:150px;overflow:auto}.confirm-box-wrapper .confirm-box .foot{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;padding:18px}.confirm-box-wrapper .confirm-box .foot .button-cancel{border:1px solid #d9d9d9}.hljs{display:block;overflow-x:auto;padding:.5em;color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
-
-
-
-
-    </style>
-    <style type="text/css">
-        .button-cancel[data-v-87ffcada]{color:#888;border:1px solid #888;border-radius:3px;margin-right:12px}.button-cancel[data-v-87ffcada],.button-primary[data-v-87ffcada]{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:35px;display:inline-block;font-size:15px;text-align:center;line-height:36px}.button-primary[data-v-87ffcada]{color:#fff;background-color:#ff5a05;border-radius:3px}.pd[data-v-87ffcada]{padding-left:1.375rem;padding-right:1.375rem}.article[data-v-87ffcada]{max-width:70rem;margin:0 auto}.article .article-unavailable[data-v-87ffcada]{color:#fa8919;font-size:15px;font-weight:600;line-height:24px;border-radius:5px;padding:12px;background-color:#f6f7fb;margin-top:20px}.article .article-unavailable .iconfont[data-v-87ffcada]{font-size:12px}.article .main[data-v-87ffcada]{padding:1.25rem 0;margin-bottom:52px}.article-title[data-v-87ffcada]{color:#353535;font-weight:400;line-height:1.65rem;font-size:1.34375rem}.article-info[data-v-87ffcada]{color:#888;font-size:.9375rem;margin-top:1.0625rem}.article-content[data-v-87ffcada]{margin-top:1.0625rem}.article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button{display:none}.copyright[data-v-87ffcada]{color:#b2b2b2;padding-bottom:20px;margin-top:20px;font-size:13px}.audio-player[data-v-87ffcada]{width:100%;margin:20px 0}.to-comment[data-v-87ffcada]{overflow:hidden;padding-top:10px;margin-bottom:-30px}.to-comment a.button-primary[data-v-87ffcada]{float:right;height:20px;font-size:12px;line-height:20px;padding:4px 8px;cursor:pointer}.article-comments[data-v-87ffcada]{margin-top:2rem}.article-comments h2[data-v-87ffcada]{text-align:center;color:#888;position:relative;z-index:1;margin-bottom:1rem}.article-comments h2[data-v-87ffcada]:before{border-top:1px dotted #888;content:"";position:absolute;top:56%;left:0;width:100%;z-index:-1}.article-comments h2 span[data-v-87ffcada]{font-size:15.25px;font-weight:400;padding:0 1rem;background:#fff;display:inline-block}.article-sub-bottom[data-v-87ffcada]{z-index:10;cursor:pointer}.switch-btns[data-v-87ffcada]{height:76px;cursor:pointer;padding-top:24px;padding-bottom:24px;border-bottom:10px solid #f6f7fb;position:relative}.switch-btns[data-v-87ffcada]:before{content:" ";height:1px;background:#e8e8e8;position:absolute;top:0;left:0;-webkit-box-sizing:border-box;box-sizing:border-box;left:1.375rem;right:1.375rem}.switch-btns .btn[data-v-87ffcada]{height:38px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.switch-btns .btn .tag[data-v-87ffcada]{-webkit-box-flex:0;-ms-flex:0 0 62px;flex:0 0 62px;text-align:center;color:#888;font-size:14px;border-radius:10px;height:22px;line-height:22px;background:#f6f7fb;font-weight:400}.switch-btns .btn .txt[data-v-87ffcada]{margin-left:10px;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;color:#888;font-size:15px;height:22px;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}@media (max-width:769px){.article .breadcrumb[data-v-87ffcada]{padding-top:10px;padding-bottom:10px}}
-
-
-
-
-
+      #watermark .x {
+        position: absolute;
+        top: 800;
+        left: 400;
+        color: #3300ff;
+        font-size: 50px;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: Alpha(opacity=50);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+      }
     </style>
 
     <style type="text/css">
-        .comment-item{list-style-position:inside;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-bottom:1rem}.comment-item a{border-bottom:none}.comment-item .avatar{width:2.625rem;height:2.625rem;-ms-flex-negative:0;flex-shrink:0;border-radius:50%}.comment-item .info{margin-left:.5rem;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.comment-item .info .hd{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .username{color:#888;font-size:15.25px;font-weight:400;line-height:1.2}.comment-item .info .hd .control{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.comment-item .info .hd .control .btn-share{color:#888;font-size:.75rem;margin-right:1rem}.comment-item .info .hd .control .btn-praise{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:15.25px;text-decoration:none}.comment-item .info .hd .control .btn-praise i{color:#888;display:inline-block;font-size:.75rem;margin-right:.3rem;margin-top:-.01rem}.comment-item .info .hd .control .btn-praise i.on,.comment-item .info .hd .control .btn-praise span{color:#ff5a05}.comment-item .info .bd{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6}.comment-item .info .time{color:#888;font-size:9px;line-height:1}.comment-item .info .reply .reply-hd{font-size:15.25px}.comment-item .info .reply .reply-hd span{margin-left:-12px;color:#888;font-weight:400}.comment-item .info .reply .reply-hd i{color:#ff5a05;font-size:15.25px}.comment-item .info .reply .reply-content{color:#353535;font-size:15.25px;font-weight:400;white-space:normal;word-break:break-all}.comment-item .info .reply .reply-time{color:#888;font-size:9px}
-
-
-
-
+      html {
+        color: #333;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+        font-family:
+          Helvetica Neue,
+          PingFang SC,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+      }
+      html.borderbox *,
+      html.borderbox :after,
+      html.borderbox :before {
+        box-sizing: border-box;
+      }
+      article,
+      aside,
+      blockquote,
+      body,
+      button,
+      code,
+      dd,
+      details,
+      dl,
+      dt,
+      fieldset,
+      figcaption,
+      figure,
+      footer,
+      form,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      header,
+      hr,
+      input,
+      legend,
+      li,
+      menu,
+      nav,
+      ol,
+      p,
+      pre,
+      section,
+      td,
+      textarea,
+      th,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      audio,
+      canvas,
+      video {
+        display: inline-block;
+      }
+      body,
+      button,
+      input,
+      select,
+      textarea {
+        font:
+          300 1em/1.8 PingFang SC,
+          Lantinghei SC,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          Helvetica,
+          sans-serif;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      fieldset,
+      img {
+        border: 0;
+      }
+      blockquote {
+        position: relative;
+        color: #999;
+        font-weight: 400;
+        border-left: 1px solid #1abc9c;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+      }
+      @media only screen and (max-width: 640px) {
+        blockquote {
+          margin: 1em 0;
+        }
+      }
+      abbr,
+      acronym {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+      }
+      abbr {
+        cursor: help;
+      }
+      del {
+        text-decoration: line-through;
+      }
+      address,
+      caption,
+      cite,
+      code,
+      dfn,
+      em,
+      th,
+      var {
+        font-style: normal;
+        font-weight: 400;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      caption,
+      th {
+        text-align: left;
+      }
+      q:after,
+      q:before {
+        content: '';
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      :root sub,
+      :root sup {
+        vertical-align: baseline;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      a {
+        color: #1abc9c;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .typo a {
+        border-bottom: 1px solid #1abc9c;
+      }
+      .typo a:hover {
+        border-bottom-color: #555;
+        color: #555;
+      }
+      .typo a:hover,
+      a,
+      ins {
+        text-decoration: none;
+      }
+      .typo-u,
+      u {
+        text-decoration: underline;
+      }
+      mark {
+        background: #fffdd1;
+        border-bottom: 1px solid #ffedce;
+        padding: 2px;
+        margin: 0 5px;
+      }
+      code,
+      pre,
+      pre tt {
+        font-family:
+          Courier,
+          Courier New,
+          monospace;
+      }
+      pre {
+        background: hsla(0, 0%, 97%, 0.7);
+        border: 1px solid #ddd;
+        padding: 1em 1.5em;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 0.8em;
+        height: 10px;
+      }
+      .typo-small,
+      figcaption,
+      small {
+        font-size: 0.9em;
+        color: #888;
+      }
+      b,
+      strong {
+        font-weight: 700;
+        color: #000;
+      }
+      [draggable] {
+        cursor: move;
+      }
+      .clearfix:after,
+      .clearfix:before {
+        content: '';
+        display: table;
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .clearfix {
+        zoom: 1;
+      }
+      .textwrap,
+      .textwrap td,
+      .textwrap th {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .textwrap-table {
+        table-layout: fixed;
+      }
+      .serif {
+        font-family: Palatino, Optima, Georgia, serif;
+      }
+      .typo-dl,
+      .typo-form,
+      .typo-hr,
+      .typo-ol,
+      .typo-p,
+      .typo-pre,
+      .typo-table,
+      .typo-ul,
+      .typo dl,
+      .typo form,
+      .typo hr,
+      .typo ol,
+      .typo p,
+      .typo pre,
+      .typo table,
+      .typo ul,
+      blockquote {
+        margin-bottom: 1rem;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          PingFang SC,
+          Helvetica Neue,
+          Verdana,
+          Microsoft Yahei,
+          Hiragino Sans GB,
+          Microsoft Sans Serif,
+          WenQuanYi Micro Hei,
+          sans-serif;
+        color: #000;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo-h2,
+      .typo-h3,
+      .typo-h4,
+      .typo-h5,
+      .typo-h6,
+      .typo h1,
+      .typo h2,
+      .typo h3,
+      .typo h4,
+      .typo h5,
+      .typo h6 {
+        margin-top: 1.2em;
+        margin-bottom: 0.6em;
+        line-height: 1.35;
+      }
+      .typo-h1,
+      .typo h1 {
+        font-size: 2em;
+      }
+      .typo-h2,
+      .typo h2 {
+        font-size: 1.8em;
+      }
+      .typo-h3,
+      .typo h3 {
+        font-size: 1.6em;
+      }
+      .typo-h4,
+      .typo h4 {
+        font-size: 1.4em;
+      }
+      .typo-h5,
+      .typo-h6,
+      .typo h5,
+      .typo h6 {
+        font-size: 1.2em;
+      }
+      .typo-ul,
+      .typo ul {
+        margin-left: 1.3em;
+        list-style: disc;
+      }
+      .typo-ol,
+      .typo ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+      }
+      .typo-ol ol,
+      .typo-ol ul,
+      .typo-ul ol,
+      .typo-ul ul,
+      .typo li ol,
+      .typo li ul {
+        margin-bottom: 0.8em;
+        margin-left: 2em;
+      }
+      .typo-ol ul,
+      .typo-ul ul,
+      .typo li ul {
+        list-style: circle;
+      }
+      .typo-table td,
+      .typo-table th,
+      .typo table caption,
+      .typo table td,
+      .typo table th {
+        border: 1px solid #ddd;
+        padding: 0.5em 1em;
+        color: #666;
+      }
+      .typo-table th,
+      .typo table th {
+        background: #fbfbfb;
+      }
+      .typo-table thead th,
+      .typo table thead th {
+        background: hsla(0, 0%, 95%, 0.7);
+      }
+      .typo table caption {
+        border-bottom: none;
+      }
+      .typo-input,
+      .typo-textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+      .typo-em,
+      .typo em,
+      caption,
+      legend {
+        color: #000;
+        font-weight: inherit;
+      }
+      .typo-em {
+        position: relative;
+      }
+      .typo-em:after {
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        content: '\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB';
+      }
+      .typo img {
+        max-width: 100%;
+      }
+      .common-content {
+        font-weight: 400;
+        color: #353535;
+        line-height: 1.75rem;
+        white-space: normal;
+        word-break: normal;
+        font-size: 1rem;
+      }
+      .common-content img {
+        display: block;
+        max-width: 100%;
+        background-color: #eee;
+      }
+      .common-content audio,
+      .common-content video {
+        width: 100%;
+        background-color: #eee;
+      }
+      .common-content center,
+      .common-content font {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+      .common-content center {
+        width: 100%;
+      }
+      .common-content pre {
+        margin-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .common-content pre code {
+        font-size: 0.8rem;
+        font-family:
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          monospace,
+          Courier;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        overflow-x: auto;
+      }
+      .common-content hr {
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid #f5f5f5;
+        height: 1px;
+        background: none;
+      }
+      .common-content b,
+      .common-content h1,
+      .common-content h2,
+      .common-content h3,
+      .common-content h4,
+      .common-content h5,
+      .common-content strong {
+        font-weight: 700;
+      }
+      .common-content h1,
+      .common-content h2 {
+        font-size: 1.125rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content h3,
+      .common-content h4,
+      .common-content h5 {
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
+      }
+      .common-content p {
+        font-weight: 400;
+        color: #353535;
+        margin-top: 0.15rem;
+      }
+      .common-content .orange {
+        color: #ff5a05;
+      }
+      .common-content .reference {
+        font-size: 1rem;
+        color: #888;
+      }
+      .custom-rich-content h1 {
+        margin-top: 0;
+        font-weight: 400;
+        font-size: 15.25px;
+        border-bottom: 1px solid #eee;
+        line-height: 2.8;
+      }
+      .custom-rich-content li,
+      .custom-rich-content p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.6;
+      }
+      table.hljs-ln {
+        margin-bottom: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      table.hljs-ln,
+      table.hljs-ln tbody,
+      table.hljs-ln td,
+      table.hljs-ln tr {
+        box-sizing: border-box;
+      }
+      table.hljs-ln td {
+        padding: 0;
+        border: 0;
+      }
+      table.hljs-ln td.hljs-ln-numbers {
+        min-width: 15px;
+        color: rgba(27, 31, 35, 0.3);
+        text-align: right;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      table.hljs-ln td.hljs-ln-code,
+      table.hljs-ln td.hljs-ln-numbers {
+        font-family:
+          SFMono-Regular,
+          Consolas,
+          Liberation Mono,
+          Menlo,
+          Courier,
+          monospace;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+      }
+      table.hljs-ln td.hljs-ln-code {
+        position: relative;
+        padding-right: 10px;
+        padding-left: 10px;
+        overflow: visible;
+        color: #24292e;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      video::-webkit-media-controls {
+        overflow: hidden !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        width: calc(100% + 32px);
+        margin-left: auto;
+      }
+      .button-cancel {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel,
+      .button-primary {
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      @font-face {
+        font-family: iconfont;
+        src: url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot);
+        src:
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.woff) format('woff'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_372689_bwwwtosxtzp.svg#iconfont) format('svg');
+      }
+      @font-face {
+        font-family: player-font;
+        src: url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot);
+        src:
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.eot#iefix) format('embedded-opentype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.woff) format('woff'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.ttf) format('truetype'),
+          url(//at.alicdn.com/t/font_509397_1cyjv4o90qiod2t9.svg#player-font) format('svg');
+      }
+      .iconfont {
+        font-family: iconfont !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        background: #fff;
+        min-height: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      body {
+        width: 100%;
+      }
+      body.fixed {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+      i {
+        font-style: normal;
+      }
+      a {
+        word-wrap: break-word;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.3s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .MathJax,
+      .MathJax_CHTML,
+      .MathJax_MathContainer,
+      .MathJax_MathML,
+      .MathJax_PHTML,
+      .MathJax_PlainSource,
+      .MathJax_SVG {
+        outline: 0;
+      }
+      .ios-app-switch .js-audit {
+        display: none;
+      }
+      ._loading_wrap_ {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      ._loading_div_class_,
+      ._loading_wrap_ {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      ._loading_div_class_ {
+        word-wrap: break-word;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        z-index: 9999;
+        font-size: 0.6rem;
+        max-width: 60%;
+        color: #fff;
+        border-radius: 0.25rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      ._loading_div_class_ .message {
+        color: #353535;
+        font-size: 16px;
+        line-height: 3;
+      }
+      .spinner {
+        animation: circle-rotator 1.4s linear infinite;
+      }
+      .spinner * {
+        line-height: 0;
+        box-sizing: border-box;
+      }
+      @keyframes circle-rotator {
+        0% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(270deg);
+        }
+      }
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation:
+          circle-dash 1.4s ease-in-out infinite,
+          circle-colors 5.6s ease-in-out infinite;
+      }
+      @keyframes circle-colors {
+        0% {
+          stroke: #ff5a05;
+        }
+        to {
+          stroke: #ff5a05;
+        }
+      }
+      @keyframes circle-dash {
+        0% {
+          stroke-dashoffset: 187;
+        }
+        50% {
+          stroke-dashoffset: 46.75;
+          transform: rotate(135deg);
+        }
+        to {
+          stroke-dashoffset: 187;
+          transform: rotate(450deg);
+        }
+      }
+      .confirm-box-wrapper,
+      .confirm-box-wrapper .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .confirm-box-wrapper .mask {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .confirm-box-wrapper .confirm-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 267px;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        border-radius: 7px;
+      }
+      .confirm-box-wrapper .confirm-box .head {
+        margin: 0 18px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 65px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .confirm-box-wrapper .confirm-box .body {
+        padding: 18px;
+        padding-bottom: 0;
+        color: #353535;
+        font-size: 12.5px;
+        max-height: 150px;
+        overflow: auto;
+      }
+      .confirm-box-wrapper .confirm-box .foot {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 18px;
+      }
+      .confirm-box-wrapper .confirm-box .foot .button-cancel {
+        border: 1px solid #d9d9d9;
+      }
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+      }
+      .hljs-comment,
+      .hljs-quote {
+        color: #998;
+        font-style: italic;
+      }
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #333;
+        font-weight: 700;
+      }
+      .hljs-literal,
+      .hljs-number,
+      .hljs-tag .hljs-attr,
+      .hljs-template-variable,
+      .hljs-variable {
+        color: teal;
+      }
+      .hljs-doctag,
+      .hljs-string {
+        color: #d14;
+      }
+      .hljs-section,
+      .hljs-selector-id,
+      .hljs-title {
+        color: #900;
+        font-weight: 700;
+      }
+      .hljs-subst {
+        font-weight: 400;
+      }
+      .hljs-class .hljs-title,
+      .hljs-type {
+        color: #458;
+        font-weight: 700;
+      }
+      .hljs-attribute,
+      .hljs-name,
+      .hljs-tag {
+        color: navy;
+        font-weight: 400;
+      }
+      .hljs-link,
+      .hljs-regexp {
+        color: #009926;
+      }
+      .hljs-bullet,
+      .hljs-symbol {
+        color: #990073;
+      }
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+      .hljs-meta {
+        color: #999;
+        font-weight: 700;
+      }
+      .hljs-deletion {
+        background: #fdd;
+      }
+      .hljs-addition {
+        background: #dfd;
+      }
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: 700;
+      }
     </style>
-</head>
-<body>
-<div id="app">
+    <style type="text/css">
+      .button-cancel[data-v-87ffcada] {
+        color: #888;
+        border: 1px solid #888;
+        border-radius: 3px;
+        margin-right: 12px;
+      }
+      .button-cancel[data-v-87ffcada],
+      .button-primary[data-v-87ffcada] {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        height: 35px;
+        display: inline-block;
+        font-size: 15px;
+        text-align: center;
+        line-height: 36px;
+      }
+      .button-primary[data-v-87ffcada] {
+        color: #fff;
+        background-color: #ff5a05;
+        border-radius: 3px;
+      }
+      .pd[data-v-87ffcada] {
+        padding-left: 1.375rem;
+        padding-right: 1.375rem;
+      }
+      .article[data-v-87ffcada] {
+        max-width: 70rem;
+        margin: 0 auto;
+      }
+      .article .article-unavailable[data-v-87ffcada] {
+        color: #fa8919;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px;
+        border-radius: 5px;
+        padding: 12px;
+        background-color: #f6f7fb;
+        margin-top: 20px;
+      }
+      .article .article-unavailable .iconfont[data-v-87ffcada] {
+        font-size: 12px;
+      }
+      .article .main[data-v-87ffcada] {
+        padding: 1.25rem 0;
+        margin-bottom: 52px;
+      }
+      .article-title[data-v-87ffcada] {
+        color: #353535;
+        font-weight: 400;
+        line-height: 1.65rem;
+        font-size: 1.34375rem;
+      }
+      .article-info[data-v-87ffcada] {
+        color: #888;
+        font-size: 0.9375rem;
+        margin-top: 1.0625rem;
+      }
+      .article-content[data-v-87ffcada] {
+        margin-top: 1.0625rem;
+      }
+      .article-content.android video[data-v-87ffcada]::-webkit-media-controls-fullscreen-button {
+        display: none;
+      }
+      .copyright[data-v-87ffcada] {
+        color: #b2b2b2;
+        padding-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .audio-player[data-v-87ffcada] {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .to-comment[data-v-87ffcada] {
+        overflow: hidden;
+        padding-top: 10px;
+        margin-bottom: -30px;
+      }
+      .to-comment a.button-primary[data-v-87ffcada] {
+        float: right;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 4px 8px;
+        cursor: pointer;
+      }
+      .article-comments[data-v-87ffcada] {
+        margin-top: 2rem;
+      }
+      .article-comments h2[data-v-87ffcada] {
+        text-align: center;
+        color: #888;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1rem;
+      }
+      .article-comments h2[data-v-87ffcada]:before {
+        border-top: 1px dotted #888;
+        content: '';
+        position: absolute;
+        top: 56%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+      }
+      .article-comments h2 span[data-v-87ffcada] {
+        font-size: 15.25px;
+        font-weight: 400;
+        padding: 0 1rem;
+        background: #fff;
+        display: inline-block;
+      }
+      .article-sub-bottom[data-v-87ffcada] {
+        z-index: 10;
+        cursor: pointer;
+      }
+      .switch-btns[data-v-87ffcada] {
+        height: 76px;
+        cursor: pointer;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 10px solid #f6f7fb;
+        position: relative;
+      }
+      .switch-btns[data-v-87ffcada]:before {
+        content: ' ';
+        height: 1px;
+        background: #e8e8e8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        left: 1.375rem;
+        right: 1.375rem;
+      }
+      .switch-btns .btn[data-v-87ffcada] {
+        height: 38px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .switch-btns .btn .tag[data-v-87ffcada] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 62px;
+        flex: 0 0 62px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-radius: 10px;
+        height: 22px;
+        line-height: 22px;
+        background: #f6f7fb;
+        font-weight: 400;
+      }
+      .switch-btns .btn .txt[data-v-87ffcada] {
+        margin-left: 10px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        color: #888;
+        font-size: 15px;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+      }
+      @media (max-width: 769px) {
+        .article .breadcrumb[data-v-87ffcada] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    </style>
 
-
-    <div data-v-87ffcada="" class="article" id="watermark">
+    <style type="text/css">
+      .comment-item {
+        list-style-position: inside;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+      .comment-item a {
+        border-bottom: none;
+      }
+      .comment-item .avatar {
+        width: 2.625rem;
+        height: 2.625rem;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
+      .comment-item .info {
+        margin-left: 0.5rem;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      .comment-item .info .hd {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .username {
+        color: #888;
+        font-size: 15.25px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      .comment-item .info .hd .control {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .comment-item .info .hd .control .btn-share {
+        color: #888;
+        font-size: 0.75rem;
+        margin-right: 1rem;
+      }
+      .comment-item .info .hd .control .btn-praise {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: 15.25px;
+        text-decoration: none;
+      }
+      .comment-item .info .hd .control .btn-praise i {
+        color: #888;
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 0.3rem;
+        margin-top: -0.01rem;
+      }
+      .comment-item .info .hd .control .btn-praise i.on,
+      .comment-item .info .hd .control .btn-praise span {
+        color: #ff5a05;
+      }
+      .comment-item .info .bd {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+      .comment-item .info .time {
+        color: #888;
+        font-size: 9px;
+        line-height: 1;
+      }
+      .comment-item .info .reply .reply-hd {
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-hd span {
+        margin-left: -12px;
+        color: #888;
+        font-weight: 400;
+      }
+      .comment-item .info .reply .reply-hd i {
+        color: #ff5a05;
+        font-size: 15.25px;
+      }
+      .comment-item .info .reply .reply-content {
+        color: #353535;
+        font-size: 15.25px;
+        font-weight: 400;
+        white-space: normal;
+        word-break: break-all;
+      }
+      .comment-item .info .reply .reply-time {
+        color: #888;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div data-v-87ffcada="" class="article" id="watermark">
         <p class="x">所有最新极客时间课程请加QQ1046877154</p>
         <div data-v-87ffcada="" class="main main-app">
-            <h1 data-v-87ffcada="" class="article-title pd">
-                05讲如何注册和发现服务？
-            </h1>
-            <div data-v-87ffcada="" class="article-content typo common-content pd"><img data-v-87ffcada=""
-                                                                                        src="https://static001.geekbang.org/resource/image/6b/37/6be0624295bbcc707f9c9e771f50c937.jpg">
+          <h1 data-v-87ffcada="" class="article-title pd">05讲如何注册和发现服务？</h1>
+          <div data-v-87ffcada="" class="article-content typo common-content pd">
+            <img
+              data-v-87ffcada=""
+              src="https://static001.geekbang.org/resource/image/6b/37/6be0624295bbcc707f9c9e771f50c937.jpg"
+            />
 
-
-                <div data-v-87ffcada="" id="article-content" class="">
-                    <div class="text">
-                        <p>专栏上一期，我给你介绍了服务发布和引用常用的三种方式：RESTful API、XML配置以及IDL文件。假设你已经使用其中一种方式发布了一个服务，并且已经在一台机器上部署了服务，那我想问你个问题，如果我想调用这个服务，我该如何知道你部署的这台机器的地址呢？</p>
-<p>这个问题就跟我想去吃肯德基一样，我可以去谷歌地图上搜索肯德基，然后谷歌地图会返回所有的肯德基店面的地址，于是我选择距离最近的一家去吃。这里面谷歌地图就扮演了一个类似注册中心的角色，收录了所有肯德基店面的地址。</p>
-<p>同理，我想知道这台服务器的地址，那是不是可以去一个类似“谷歌地图”的地方去查呢？是的，在分布式系统里，就有一个类似的概念，不过它的名字可不是叫什么地图，而是叫注册中心。但原理和地图其实差不多，就是将部署服务的机器地址记录到注册中心，服务消费者在有需求的时候，只需要查询注册中心，输入提供的服务名，就可以得到地址，从而发起调用。</p>
-<p>下面我来给你详细讲解下<span class="orange">注册中心的原理和实现方式</span>。</p>
-<h2>注册中心原理</h2>
-<p>在微服务架构下，主要有三种角色：服务提供者（RPC Server）、服务消费者（RPC Client）和服务注册中心（Registry），三者的交互关系请看下面这张图，我来简单解释一下。</p><!-- [[[read_end]]] -->
-<ul>
-<li>
-<p>RPC Server提供服务，在启动时，根据服务发布文件server.xml中的配置的信息，向Registry注册自身服务，并向Registry定期发送心跳汇报存活状态。</p>
-</li>
-<li>
-<p>RPC Client调用服务，在启动时，根据服务引用文件client.xml中配置的信息，向Registry订阅服务，把Registry返回的服务节点列表缓存在本地内存中，并与RPC Sever建立连接。</p>
-</li>
-<li>
-<p>当RPC Server节点发生变更时，Registry会同步变更，RPC Client感知后会刷新本地内存中缓存的服务节点列表。</p>
-</li>
-<li>
-<p>RPC Client从本地缓存的服务节点列表中，基于负载均衡算法选择一台RPC Sever发起调用。</p>
-</li>
-</ul>
-<p><img src="https://static001.geekbang.org/resource/image/75/d9/757231c3cde3d1e2fb805c861ea7a1d9.jpg" alt="" /></p>
-<p></p>
-<h2>注册中心实现方式</h2>
-<p>注册中心的实现主要涉及几个问题：注册中心需要提供哪些接口，该如何部署；如何存储服务信息；如何监控服务提供者节点的存活；如果服务提供者节点有变化如何通知服务消费者，以及如何控制注册中心的访问权限。下面我来一一给你讲解。</p>
-<p><strong>1. 注册中心API</strong></p>
-<p>根据注册中心原理的描述，注册中心必须提供以下最基本的API，例如：</p>
-<ul>
-<li>
-<p>服务注册接口：服务提供者通过调用服务注册接口来完成服务注册。</p>
-</li>
-<li>
-<p>服务反注册接口：服务提供者通过调用服务反注册接口来完成服务注销。</p>
-</li>
-<li>
-<p>心跳汇报接口：服务提供者通过调用心跳汇报接口完成节点存活状态上报。</p>
-</li>
-<li>
-<p>服务订阅接口：服务消费者通过调用服务订阅接口完成服务订阅，获取可用的服务提供者节点列表。</p>
-</li>
-<li>
-<p>服务变更查询接口：服务消费者通过调用服务变更查询接口，获取最新的可用服务节点列表。</p>
-</li>
-</ul>
-<p>除此之外，为了便于管理，注册中心还必须提供一些后台管理的API，例如：</p>
-<ul>
-<li>
-<p>服务查询接口：查询注册中心当前注册了哪些服务信息。</p>
-</li>
-<li>
-<p>服务修改接口：修改注册中心中某一服务的信息。</p>
-</li>
-</ul>
-<p><strong>2. 集群部署</strong></p>
-<p>注册中心作为服务提供者和服务消费者之间沟通的桥梁，它的重要性不言而喻。所以注册中心一般都是采用集群部署来保证高可用性，并通过分布式一致性协议来确保集群中不同节点之间的数据保持一致。</p>
-<p>以开源注册中心ZooKeeper为例，ZooKeeper集群中包含多个节点，服务提供者和服务消费者可以同任意一个节点通信，因为它们的数据一定是相同的，这是为什么呢？这就要从ZooKeeper的工作原理说起：</p>
-<ul>
-<li>
-<p>每个Server在内存中存储了一份数据，Client的读请求可以请求任意一个Server。</p>
-</li>
-<li>
-<p>ZooKeeper启动时，将从实例中选举一个leader（Paxos协议）。</p>
-</li>
-<li>
-<p>Leader负责处理数据更新等操作（ZAB协议）。</p>
-</li>
-<li>
-<p>一个更新操作成功，当且仅当大多数Server在内存中成功修改 。</p>
-</li>
-</ul>
-<p>通过上面这种方式，ZooKeeper保证了高可用性以及数据一致性。</p>
-<p><img src="https://static001.geekbang.org/resource/image/0c/6f/0c3e56272b08e58461e38bbbfd6c796f.jpg" alt="" /></p>
-<p><strong>3. 目录存储</strong></p>
-<p>还是以ZooKeeper为例，注册中心存储服务信息一般采用层次化的目录结构：</p>
-<ul>
-<li>
-<p>每个目录在ZooKeeper中叫作znode，并且其有一个唯一的路径标识。</p>
-</li>
-<li>
-<p>znode可以包含数据和子znode。</p>
-</li>
-<li>
-<p>znode中的数据可以有多个版本，比如某一个znode下存有多个数据版本，那么查询这个路径下的数据需带上版本信息。</p>
-</li>
-</ul>
-<p><img src="https://static001.geekbang.org/resource/image/8f/1e/8f28fca07e7455229763a0a214f5db1e.jpeg" alt="" /></p>
-<p><strong>4. 服务健康状态检测</strong></p>
-<p>注册中心除了要支持最基本的服务注册和服务订阅功能以外，还必须具备对服务提供者节点的健康状态检测功能，这样才能保证注册中心里保存的服务节点都是可用的。</p>
-<p>还是以ZooKeeper为例，它是基于ZooKeeper客户端和服务端的长连接和会话超时控制机制，来实现服务健康状态检测的。</p>
-<p>在ZooKeeper中，客户端和服务端建立连接后，会话也随之建立，并生成一个全局唯一的Session ID。服务端和客户端维持的是一个长连接，在SESSION_TIMEOUT周期内，服务端会检测与客户端的链路是否正常，具体方式是通过客户端定时向服务端发送心跳消息（ping消息），服务器重置下次SESSION_TIMEOUT时间。如果超过SESSION_TIMEOUT后服务端都没有收到客户端的心跳消息，则服务端认为这个Session就已经结束了，ZooKeeper就会认为这个服务节点已经不可用，将会从注册中心中删除其信息。</p>
-<p><strong>5. 服务状态变更通知</strong></p>
-<p>一旦注册中心探测到有服务提供者节点新加入或者被剔除，就必须立刻通知所有订阅该服务的服务消费者，刷新本地缓存的服务节点信息，确保服务调用不会请求不可用的服务提供者节点。</p>
-<p>继续以ZooKeeper为例，基于ZooKeeper的Watcher机制，来实现服务状态变更通知给服务消费者的。服务消费者在调用ZooKeeper的getData方法订阅服务时，还可以通过监听器Watcher的process方法获取服务的变更，然后调用getData方法来获取变更后的数据，刷新本地缓存的服务节点信息。</p>
-<p><strong>6. 白名单机制</strong></p>
-<p>在实际的微服务测试和部署时，通常包含多套环境，比如生产环境一套、测试环境一套。开发在进行业务自测、测试在进行回归测试时，一般都是用测试环境，部署的RPC Server节点注册到测试的注册中心集群。但经常会出现开发或者测试在部署时，错误的把测试环境下的服务节点注册到了线上注册中心集群，这样的话线上流量就会调用到测试环境下的RPC Server节点，可能会造成意想不到的后果。</p>
-<p>为了防止这种情况发生，注册中心需要提供一个保护机制，你可以把注册中心想象成一个带有门禁的房间，只有拥有门禁卡的RPC Server才能进入。在实际应用中，注册中心可以提供一个白名单机制，只有添加到注册中心白名单内的RPC Server，才能够调用注册中心的注册接口，这样的话可以避免测试环境中的节点意外跑到线上环境中去。</p>
-<h2>总结</h2>
-<p>注册中心可以说是实现服务化的关键，因为服务化之后，服务提供者和服务消费者不在同一个进程中运行，实现了解耦，这就需要一个纽带去连接服务提供者和服务消费者，而注册中心就正好承担了这一角色。此外，服务提供者可以任意伸缩即增加节点或者减少节点，通过服务健康状态检测，注册中心可以保持最新的服务节点信息，并将变化通知给订阅服务的服务消费者。</p>
-<p>注册中心一般采用分布式集群部署，来保证高可用性，并且为了实现异地多活，有的注册中心还采用多IDC部署，这就对数据一致性产生了很高的要求，这些都是注册中心在实现时必须要解决的问题。</p>
-<h2>思考题</h2>
-<p>最后请你思考一下，你觉得采用注册中心来实现服务发现与传统的DNS实现服务发现有什么不同吗？</p>
-<p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
-<p><img src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg" alt="" /></p>
-
-                    </div>
-                </div>
-
-            </div>
-            <div data-v-87ffcada="" class="article-comments pd"><h2 data-v-87ffcada=""><span
-                    data-v-87ffcada="">精选留言</span></h2>
-                <ul data-v-87ffcada="">
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/d4/c2/910d231e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">oddrock</span>
-                            </div>
-                            <div class="bd">1. 注册中心的服务注册和发现都是基于API的，可以自动化注册与发现，dns则是人工注册。这样也导致前者实时性、容错性好于后者。<br>2. 注册中心可以注册http、rpc等各种服务，dns只能注册http服务<br>3. 注册中心对已注册的服务会有主动的、自动化的健康检查机制，dns没有。<br>4. 注册中心一般是一级分布式的，dns则是多级架构，例如根域名服务器、权威域名服务器等<br>5. 注册中心的安全机制相对dns弱一些，毕竟是内部使用。 <br></div>
-                            <span class="time">2018-09-01 12:41</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">总结的不错</p>
-                                <p class="reply-time">2018-09-03 11:44</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/3f/b7/0d8b5431.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">snakorse</span>
-                            </div>
-                            <div class="bd">不同意某楼的观念，dns同样也可以用于非http服务的，我觉得dns相较于zk这样的注册中心，劣势在于1. dns的维护管理比较麻烦，甚至需要手工配置 2.dns更新后生效有延迟 3. 客户端一般只能同时连接到一个server ip，无法做请求的负载均衡，而注册中心的方式通常客户端会与所有server建立连接形成连接池，从而在调用端实现请求的负载均衡 <br></div>
-                            <span class="time">2018-09-01 20:01</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">理解很深刻👍</p>
-                                <p class="reply-time">2018-09-03 11:43</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">null</span>
-                            </div>
-                            <div class="bd">问题一：<br><br>注册中心原理提到：向 Registry 订阅服务，把 Registry 返回的服务节点列表缓存在本地内存中，并与 RPC Server 建立连接。<br><br>疑问：<br>请问老师，client 与 server 这时候就建立连接了么？不是需要调用服务时才真正建立连接么？<br><br>--------<br><br>问题二：<br><br>服务提供者和服务消费者可以同任意一个 zk 节点通信，因为集群中 zk 的数据一定是相同的，这是为什么呢？这就要从 zk 的工作原理说起：Leader 负责处理数据更新等操作；一个更新操作成功，当且仅当大多数 zk server 在内存中成功修改。<br><br>疑问：<br>大多数 zk server 内存数据修改成功，则认为此次更新操作是成功的。但是 zk client 请求到未更新数据的 zk server，这时仍是旧数据，怎么说明“集群中 zk 的数据一定是相同的”呢？ <br></div>
-                            <span class="time">2018-09-29 10:45</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">郁</span>
-                            </div>
-                            <div class="bd">注册中心采用consul，注册通过docker registrator自动注册反注册、健康检查，服务发现采用consul_template nginx的grpc代理，业务代码不需要关注注册中心，这种模式业务耦合行就非常小了，只需要给业务知晓nginx即可。 <br></div>
-                            <span class="time">2018-09-01 08:48</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">专栏有一讲开源注册中心选型里会提到你说的这种应用外注册的方式，特别是适合容器化的应用，业务不需要引入注册中心SDK</p>
-                                <p class="reply-time">2018-09-01 23:09</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/0d/5c/ef42b1c1.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">包子</span>
-                            </div>
-                            <div class="bd">其实我想说，zk并不合适做注册中心，注册中心应该是一个AP的系统 <br></div>
-                            <span class="time">2018-09-12 09:39</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对 专栏后面会详细分析</p>
-                                <p class="reply-time">2018-09-12 11:06</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/8a/cb/667ba2b2.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">hekaiEscape</span>
-                            </div>
-                            <div class="bd">消费者是怎么知道服务变更的，是通过与注册中心建立长链接，然后监听吗？ <br></div>
-                            <span class="time">2018-09-04 09:27</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/88/cd/2c3808ce.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Yangjing</span>
-                            </div>
-                            <div class="bd">DNS 不会主动将变更的服务信息通知服务消费者客户端；<br>服务消费者查询服务的方式也不一样 <br></div>
-                            <span class="time">2018-09-02 12:10</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/8c/9c/d48473ab.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">dancer</span>
-                            </div>
-                            <div class="bd">DNS发布变更慢，数据一致性较差；DNS基于域名解析，注册中心基于服务名进行解析；注册中心是自己开发维护的，方便功能迭代以及与其他组件进行扩展。 <br></div>
-                            <span class="time">2018-09-01 08:22</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/24/34/50cba2a6.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Magine</span>
-                            </div>
-                            <div class="bd">其实dns最大的劣势是不能实现端口级别的服务发现 <br></div>
-                            <span class="time">2018-11-06 22:04</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">是，只能做到ip级别</p>
-                                <p class="reply-time">2018-11-08 10:17</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/87/80/44bb93b3.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">飞天的科技猪</span>
-                            </div>
-                            <div class="bd">很棒的文章，我想如果用rabbitMQ，topic 加上binding 实现consumer的注册而且web的管理也提供了存活的查询，service routing也有rabbitMQ负责了，这个架构有什么缺陷吗？ <br></div>
-                            <span class="time">2018-09-06 10:40</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">主要是rabbitMQ主要用作消息队列，不适合用来持久化存储服务信息吧，数据一致性的问题怎么解决的</p>
-                                <p class="reply-time">2018-09-06 11:09</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/75/9b/e226f023.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">日拱一卒</span>
-                            </div>
-                            <div class="bd">可以列举一下业界常用的服务发现组件吗？它们之间有什么优劣？ <br></div>
-                            <span class="time">2018-09-01 19:22</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">后面有一节专门讲zk、eureka、consul</p>
-                                <p class="reply-time">2018-09-03 11:34</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/09/42/b7a406c9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Hurt</span>
-                            </div>
-                            <div class="bd">都是用zookeeper 吗 <br></div>
-                            <span class="time">2018-09-01 09:25</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/13/53/ca/44088dd0.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">花生</span>
-                            </div>
-                            <div class="bd">如果网络不稳，服务提供者频繁掉线，重新上线，注册中心频繁向服务消费者通知服务列表变更，这样会否导致系统崩溃？ <br></div>
-                            <span class="time">2018-12-12 08:06</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/be/a5/df917d18.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">ward-wolf</span>
-                            </div>
-                            <div class="bd">1.注册中心具有检查功能，可以计算剔除不可用的服务，传统dns没有这个功能<br>2.传统dns服务对外暴露的一般是不变的，服务节点如果宕机。客户端不能及时感知<br>3.dns需要人工维护，注册中心可以实现自动注册 <br></div>
-                            <span class="time">2018-11-15 09:01</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/3c/15/71a2aca9.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">李沛霖-程序猿</span>
-                            </div>
-                            <div class="bd">完全就是一回事，百度内部就用bns名字系统做服务注册和发现。注册就叫做添加别名，发现就是用别名。你说它是dns还是注册中心啊？ <br></div>
-                            <span class="time">2018-10-19 19:36</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/4b/d4/b7719327.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">波波安</span>
-                            </div>
-                            <div class="bd">dns服务发现主要通过人工配置，没有自动发现功能。服务端有变化也没办法及时通知到所有的客户端。 <br></div>
-                            <span class="time">2018-10-07 20:51</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/7f/43/eb59e264.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">hoxis</span>
-                            </div>
-                            <div class="bd">【在 ZooKeeper 中，客户端和服务端建立连接后，会话也随之建立，并生成一个全局唯一的 Session ID。服务端和客户端维持的是一个长连接，在 SESSION_TIMEOUT 周期内，服务端会检测与客户端的链路是否正常，具体方式是通过客户端定时向服务端发送心跳消息（ping 消息），服务器重置下次 SESSION_TIMEOUT 时间。如果超过 SESSION_TIMEOUT 后服务端都没有收到客户端的心跳消息，则服务端认为这个 Session 就已经结束了，ZooKeeper 就会认为这个服务节点已经不可用，将会从注册中心中删除其信息。】<br>----------------<br>这段看得有点懵。<br>这里说的服务端和客户端是指服务提供者和服务消费者嘛？<br>还是要理解成服务端是指注册中心，客户端是指服务提供者，注册中心来检查服务提供者的状态？ <br></div>
-                            <span class="time">2018-09-27 11:34</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/0f/7e/df/145a51e5.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">威</span>
-                            </div>
-                            <div class="bd">一个更新操作成功，当且仅当大多数 Server 在内存中成功修改。<br><br>没看懂这句是什么意思 <br></div>
-                            <span class="time">2018-09-19 18:15</span>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/10/ad/00/cb678c2e.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">Icbcsjy</span>
-                            </div>
-                            <div class="bd">“如果超过 SESSION_TIMEOUT 后服务端都没有收到客户端的心跳消息，则服务端认为这个 Session 就已经结束了，ZooKeeper 就会认为这个服务节点已经不可用，将会从注册中心中删除其信息。”  <br> 老师您好，关于这段文字，我有一个疑问。如果客户端Session结束后，zookeeper就会删掉一个服务节点，那就是说zookeeper下，服务节点的管理是动态的？根据session来产生、分配、销毁的吗？ <br></div>
-                            <span class="time">2018-09-11 16:23</span>
-                            
-                            <div class="reply">
-                                <div class="reply-hd"><span>作者回复</span></div>
-                                <p class="reply-content">对，zookeeper可以作为动态服务发现</p>
-                                <p class="reply-time">2018-09-11 19:04</p>
-                            </div>
-                            
-                        </div>
-                    </li>
-                    
-                    <li data-v-87ffcada="" class="comment-item"><img
-                            src="https://static001.geekbang.org/account/avatar/00/12/44/e0/a6a51198.jpg" class="avatar">
-                        <div class="info">
-                            <div class="hd"><span class="username">皓好号</span>
-                            </div>
-                            <div class="bd">注册中心白名单还是不太懂，白名单的内容是什么呢？ <br></div>
-                            <span class="time">2018-09-04 07:34</span>
-                            
-                        </div>
-                    </li>
-                    
-
-
+            <div data-v-87ffcada="" id="article-content" class="">
+              <div class="text">
+                <p>
+                  专栏上一期，我给你介绍了服务发布和引用常用的三种方式：RESTful
+                  API、XML配置以及IDL文件。假设你已经使用其中一种方式发布了一个服务，并且已经在一台机器上部署了服务，那我想问你个问题，如果我想调用这个服务，我该如何知道你部署的这台机器的地址呢？
+                </p>
+                <p>
+                  这个问题就跟我想去吃肯德基一样，我可以去谷歌地图上搜索肯德基，然后谷歌地图会返回所有的肯德基店面的地址，于是我选择距离最近的一家去吃。这里面谷歌地图就扮演了一个类似注册中心的角色，收录了所有肯德基店面的地址。
+                </p>
+                <p>
+                  同理，我想知道这台服务器的地址，那是不是可以去一个类似“谷歌地图”的地方去查呢？是的，在分布式系统里，就有一个类似的概念，不过它的名字可不是叫什么地图，而是叫注册中心。但原理和地图其实差不多，就是将部署服务的机器地址记录到注册中心，服务消费者在有需求的时候，只需要查询注册中心，输入提供的服务名，就可以得到地址，从而发起调用。
+                </p>
+                <p>下面我来给你详细讲解下<span class="orange">注册中心的原理和实现方式</span>。</p>
+                <h2>注册中心原理</h2>
+                <p>
+                  在微服务架构下，主要有三种角色：服务提供者（RPC Server）、服务消费者（RPC
+                  Client）和服务注册中心（Registry），三者的交互关系请看下面这张图，我来简单解释一下。
+                </p>
+                <!-- [[[read_end]]] -->
+                <ul>
+                  <li>
+                    <p>
+                      RPC
+                      Server提供服务，在启动时，根据服务发布文件server.xml中的配置的信息，向Registry注册自身服务，并向Registry定期发送心跳汇报存活状态。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      RPC
+                      Client调用服务，在启动时，根据服务引用文件client.xml中配置的信息，向Registry订阅服务，把Registry返回的服务节点列表缓存在本地内存中，并与RPC
+                      Sever建立连接。
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      当RPC Server节点发生变更时，Registry会同步变更，RPC
+                      Client感知后会刷新本地内存中缓存的服务节点列表。
+                    </p>
+                  </li>
+                  <li>
+                    <p>RPC Client从本地缓存的服务节点列表中，基于负载均衡算法选择一台RPC Sever发起调用。</p>
+                  </li>
                 </ul>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/75/d9/757231c3cde3d1e2fb805c861ea7a1d9.jpg"
+                    alt=""
+                  />
+                </p>
+                <p></p>
+                <h2>注册中心实现方式</h2>
+                <p>
+                  注册中心的实现主要涉及几个问题：注册中心需要提供哪些接口，该如何部署；如何存储服务信息；如何监控服务提供者节点的存活；如果服务提供者节点有变化如何通知服务消费者，以及如何控制注册中心的访问权限。下面我来一一给你讲解。
+                </p>
+                <p><strong>1. 注册中心API</strong></p>
+                <p>根据注册中心原理的描述，注册中心必须提供以下最基本的API，例如：</p>
+                <ul>
+                  <li>
+                    <p>服务注册接口：服务提供者通过调用服务注册接口来完成服务注册。</p>
+                  </li>
+                  <li>
+                    <p>服务反注册接口：服务提供者通过调用服务反注册接口来完成服务注销。</p>
+                  </li>
+                  <li>
+                    <p>心跳汇报接口：服务提供者通过调用心跳汇报接口完成节点存活状态上报。</p>
+                  </li>
+                  <li>
+                    <p>服务订阅接口：服务消费者通过调用服务订阅接口完成服务订阅，获取可用的服务提供者节点列表。</p>
+                  </li>
+                  <li>
+                    <p>服务变更查询接口：服务消费者通过调用服务变更查询接口，获取最新的可用服务节点列表。</p>
+                  </li>
+                </ul>
+                <p>除此之外，为了便于管理，注册中心还必须提供一些后台管理的API，例如：</p>
+                <ul>
+                  <li>
+                    <p>服务查询接口：查询注册中心当前注册了哪些服务信息。</p>
+                  </li>
+                  <li>
+                    <p>服务修改接口：修改注册中心中某一服务的信息。</p>
+                  </li>
+                </ul>
+                <p><strong>2. 集群部署</strong></p>
+                <p>
+                  注册中心作为服务提供者和服务消费者之间沟通的桥梁，它的重要性不言而喻。所以注册中心一般都是采用集群部署来保证高可用性，并通过分布式一致性协议来确保集群中不同节点之间的数据保持一致。
+                </p>
+                <p>
+                  以开源注册中心ZooKeeper为例，ZooKeeper集群中包含多个节点，服务提供者和服务消费者可以同任意一个节点通信，因为它们的数据一定是相同的，这是为什么呢？这就要从ZooKeeper的工作原理说起：
+                </p>
+                <ul>
+                  <li>
+                    <p>每个Server在内存中存储了一份数据，Client的读请求可以请求任意一个Server。</p>
+                  </li>
+                  <li>
+                    <p>ZooKeeper启动时，将从实例中选举一个leader（Paxos协议）。</p>
+                  </li>
+                  <li>
+                    <p>Leader负责处理数据更新等操作（ZAB协议）。</p>
+                  </li>
+                  <li>
+                    <p>一个更新操作成功，当且仅当大多数Server在内存中成功修改 。</p>
+                  </li>
+                </ul>
+                <p>通过上面这种方式，ZooKeeper保证了高可用性以及数据一致性。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/0c/6f/0c3e56272b08e58461e38bbbfd6c796f.jpg"
+                    alt=""
+                  />
+                </p>
+                <p><strong>3. 目录存储</strong></p>
+                <p>还是以ZooKeeper为例，注册中心存储服务信息一般采用层次化的目录结构：</p>
+                <ul>
+                  <li>
+                    <p>每个目录在ZooKeeper中叫作znode，并且其有一个唯一的路径标识。</p>
+                  </li>
+                  <li>
+                    <p>znode可以包含数据和子znode。</p>
+                  </li>
+                  <li>
+                    <p>
+                      znode中的数据可以有多个版本，比如某一个znode下存有多个数据版本，那么查询这个路径下的数据需带上版本信息。
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/8f/1e/8f28fca07e7455229763a0a214f5db1e.jpeg"
+                    alt=""
+                  />
+                </p>
+                <p><strong>4. 服务健康状态检测</strong></p>
+                <p>
+                  注册中心除了要支持最基本的服务注册和服务订阅功能以外，还必须具备对服务提供者节点的健康状态检测功能，这样才能保证注册中心里保存的服务节点都是可用的。
+                </p>
+                <p>
+                  还是以ZooKeeper为例，它是基于ZooKeeper客户端和服务端的长连接和会话超时控制机制，来实现服务健康状态检测的。
+                </p>
+                <p>
+                  在ZooKeeper中，客户端和服务端建立连接后，会话也随之建立，并生成一个全局唯一的Session
+                  ID。服务端和客户端维持的是一个长连接，在SESSION_TIMEOUT周期内，服务端会检测与客户端的链路是否正常，具体方式是通过客户端定时向服务端发送心跳消息（ping消息），服务器重置下次SESSION_TIMEOUT时间。如果超过SESSION_TIMEOUT后服务端都没有收到客户端的心跳消息，则服务端认为这个Session就已经结束了，ZooKeeper就会认为这个服务节点已经不可用，将会从注册中心中删除其信息。
+                </p>
+                <p><strong>5. 服务状态变更通知</strong></p>
+                <p>
+                  一旦注册中心探测到有服务提供者节点新加入或者被剔除，就必须立刻通知所有订阅该服务的服务消费者，刷新本地缓存的服务节点信息，确保服务调用不会请求不可用的服务提供者节点。
+                </p>
+                <p>
+                  继续以ZooKeeper为例，基于ZooKeeper的Watcher机制，来实现服务状态变更通知给服务消费者的。服务消费者在调用ZooKeeper的getData方法订阅服务时，还可以通过监听器Watcher的process方法获取服务的变更，然后调用getData方法来获取变更后的数据，刷新本地缓存的服务节点信息。
+                </p>
+                <p><strong>6. 白名单机制</strong></p>
+                <p>
+                  在实际的微服务测试和部署时，通常包含多套环境，比如生产环境一套、测试环境一套。开发在进行业务自测、测试在进行回归测试时，一般都是用测试环境，部署的RPC
+                  Server节点注册到测试的注册中心集群。但经常会出现开发或者测试在部署时，错误的把测试环境下的服务节点注册到了线上注册中心集群，这样的话线上流量就会调用到测试环境下的RPC
+                  Server节点，可能会造成意想不到的后果。
+                </p>
+                <p>
+                  为了防止这种情况发生，注册中心需要提供一个保护机制，你可以把注册中心想象成一个带有门禁的房间，只有拥有门禁卡的RPC
+                  Server才能进入。在实际应用中，注册中心可以提供一个白名单机制，只有添加到注册中心白名单内的RPC
+                  Server，才能够调用注册中心的注册接口，这样的话可以避免测试环境中的节点意外跑到线上环境中去。
+                </p>
+                <h2>总结</h2>
+                <p>
+                  注册中心可以说是实现服务化的关键，因为服务化之后，服务提供者和服务消费者不在同一个进程中运行，实现了解耦，这就需要一个纽带去连接服务提供者和服务消费者，而注册中心就正好承担了这一角色。此外，服务提供者可以任意伸缩即增加节点或者减少节点，通过服务健康状态检测，注册中心可以保持最新的服务节点信息，并将变化通知给订阅服务的服务消费者。
+                </p>
+                <p>
+                  注册中心一般采用分布式集群部署，来保证高可用性，并且为了实现异地多活，有的注册中心还采用多IDC部署，这就对数据一致性产生了很高的要求，这些都是注册中心在实现时必须要解决的问题。
+                </p>
+                <h2>思考题</h2>
+                <p>最后请你思考一下，你觉得采用注册中心来实现服务发现与传统的DNS实现服务发现有什么不同吗？</p>
+                <p>欢迎你在留言区写下自己的思考，与我一起讨论。</p>
+                <p>
+                  <img
+                    src="https://static001.geekbang.org/resource/image/9c/be/9ca973ad0a032832bc5d90c377ffe7be.jpg"
+                    alt=""
+                  />
+                </p>
+              </div>
             </div>
+          </div>
+          <div data-v-87ffcada="" class="article-comments pd">
+            <h2 data-v-87ffcada=""><span data-v-87ffcada="">精选留言</span></h2>
+            <ul data-v-87ffcada="">
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/d4/c2/910d231e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">oddrock</span></div>
+                  <div class="bd">
+                    1.
+                    注册中心的服务注册和发现都是基于API的，可以自动化注册与发现，dns则是人工注册。这样也导致前者实时性、容错性好于后者。<br />2.
+                    注册中心可以注册http、rpc等各种服务，dns只能注册http服务<br />3.
+                    注册中心对已注册的服务会有主动的、自动化的健康检查机制，dns没有。<br />4.
+                    注册中心一般是一级分布式的，dns则是多级架构，例如根域名服务器、权威域名服务器等<br />5.
+                    注册中心的安全机制相对dns弱一些，毕竟是内部使用。 <br />
+                  </div>
+                  <span class="time">2018-09-01 12:41</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">总结的不错</p>
+                    <p class="reply-time">2018-09-03 11:44</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/3f/b7/0d8b5431.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">snakorse</span></div>
+                  <div class="bd">
+                    不同意某楼的观念，dns同样也可以用于非http服务的，我觉得dns相较于zk这样的注册中心，劣势在于1.
+                    dns的维护管理比较麻烦，甚至需要手工配置 2.dns更新后生效有延迟 3. 客户端一般只能同时连接到一个server
+                    ip，无法做请求的负载均衡，而注册中心的方式通常客户端会与所有server建立连接形成连接池，从而在调用端实现请求的负载均衡
+                    <br />
+                  </div>
+                  <span class="time">2018-09-01 20:01</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">理解很深刻👍</p>
+                    <p class="reply-time">2018-09-03 11:43</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">null</span></div>
+                  <div class="bd">
+                    问题一：<br /><br />注册中心原理提到：向 Registry 订阅服务，把 Registry
+                    返回的服务节点列表缓存在本地内存中，并与 RPC Server 建立连接。<br /><br />疑问：<br />请问老师，client
+                    与 server 这时候就建立连接了么？不是需要调用服务时才真正建立连接么？<br /><br />--------<br /><br />问题二：<br /><br />服务提供者和服务消费者可以同任意一个
+                    zk 节点通信，因为集群中 zk 的数据一定是相同的，这是为什么呢？这就要从 zk 的工作原理说起：Leader
+                    负责处理数据更新等操作；一个更新操作成功，当且仅当大多数 zk server 在内存中成功修改。<br /><br />疑问：<br />大多数
+                    zk server 内存数据修改成功，则认为此次更新操作是成功的。但是 zk client 请求到未更新数据的 zk
+                    server，这时仍是旧数据，怎么说明“集群中 zk 的数据一定是相同的”呢？ <br />
+                  </div>
+                  <span class="time">2018-09-29 10:45</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">郁</span></div>
+                  <div class="bd">
+                    注册中心采用consul，注册通过docker registrator自动注册反注册、健康检查，服务发现采用consul_template
+                    nginx的grpc代理，业务代码不需要关注注册中心，这种模式业务耦合行就非常小了，只需要给业务知晓nginx即可。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-01 08:48</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      专栏有一讲开源注册中心选型里会提到你说的这种应用外注册的方式，特别是适合容器化的应用，业务不需要引入注册中心SDK
+                    </p>
+                    <p class="reply-time">2018-09-01 23:09</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/0d/5c/ef42b1c1.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">包子</span></div>
+                  <div class="bd">其实我想说，zk并不合适做注册中心，注册中心应该是一个AP的系统 <br /></div>
+                  <span class="time">2018-09-12 09:39</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对 专栏后面会详细分析</p>
+                    <p class="reply-time">2018-09-12 11:06</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/8a/cb/667ba2b2.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">hekaiEscape</span></div>
+                  <div class="bd">消费者是怎么知道服务变更的，是通过与注册中心建立长链接，然后监听吗？ <br /></div>
+                  <span class="time">2018-09-04 09:27</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/88/cd/2c3808ce.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Yangjing</span></div>
+                  <div class="bd">
+                    DNS 不会主动将变更的服务信息通知服务消费者客户端；<br />服务消费者查询服务的方式也不一样 <br />
+                  </div>
+                  <span class="time">2018-09-02 12:10</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/8c/9c/d48473ab.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">dancer</span></div>
+                  <div class="bd">
+                    DNS发布变更慢，数据一致性较差；DNS基于域名解析，注册中心基于服务名进行解析；注册中心是自己开发维护的，方便功能迭代以及与其他组件进行扩展。
+                    <br />
+                  </div>
+                  <span class="time">2018-09-01 08:22</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/24/34/50cba2a6.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Magine</span></div>
+                  <div class="bd">其实dns最大的劣势是不能实现端口级别的服务发现 <br /></div>
+                  <span class="time">2018-11-06 22:04</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">是，只能做到ip级别</p>
+                    <p class="reply-time">2018-11-08 10:17</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/87/80/44bb93b3.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">飞天的科技猪</span></div>
+                  <div class="bd">
+                    很棒的文章，我想如果用rabbitMQ，topic 加上binding
+                    实现consumer的注册而且web的管理也提供了存活的查询，service
+                    routing也有rabbitMQ负责了，这个架构有什么缺陷吗？ <br />
+                  </div>
+                  <span class="time">2018-09-06 10:40</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">
+                      主要是rabbitMQ主要用作消息队列，不适合用来持久化存储服务信息吧，数据一致性的问题怎么解决的
+                    </p>
+                    <p class="reply-time">2018-09-06 11:09</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/75/9b/e226f023.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">日拱一卒</span></div>
+                  <div class="bd">可以列举一下业界常用的服务发现组件吗？它们之间有什么优劣？ <br /></div>
+                  <span class="time">2018-09-01 19:22</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">后面有一节专门讲zk、eureka、consul</p>
+                    <p class="reply-time">2018-09-03 11:34</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/09/42/b7a406c9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Hurt</span></div>
+                  <div class="bd">都是用zookeeper 吗 <br /></div>
+                  <span class="time">2018-09-01 09:25</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/13/53/ca/44088dd0.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">花生</span></div>
+                  <div class="bd">
+                    如果网络不稳，服务提供者频繁掉线，重新上线，注册中心频繁向服务消费者通知服务列表变更，这样会否导致系统崩溃？
+                    <br />
+                  </div>
+                  <span class="time">2018-12-12 08:06</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/be/a5/df917d18.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">ward-wolf</span></div>
+                  <div class="bd">
+                    1.注册中心具有检查功能，可以计算剔除不可用的服务，传统dns没有这个功能<br />2.传统dns服务对外暴露的一般是不变的，服务节点如果宕机。客户端不能及时感知<br />3.dns需要人工维护，注册中心可以实现自动注册
+                    <br />
+                  </div>
+                  <span class="time">2018-11-15 09:01</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/3c/15/71a2aca9.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">李沛霖-程序猿</span></div>
+                  <div class="bd">
+                    完全就是一回事，百度内部就用bns名字系统做服务注册和发现。注册就叫做添加别名，发现就是用别名。你说它是dns还是注册中心啊？
+                    <br />
+                  </div>
+                  <span class="time">2018-10-19 19:36</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/4b/d4/b7719327.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">波波安</span></div>
+                  <div class="bd">
+                    dns服务发现主要通过人工配置，没有自动发现功能。服务端有变化也没办法及时通知到所有的客户端。 <br />
+                  </div>
+                  <span class="time">2018-10-07 20:51</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/7f/43/eb59e264.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">hoxis</span></div>
+                  <div class="bd">
+                    【在 ZooKeeper 中，客户端和服务端建立连接后，会话也随之建立，并生成一个全局唯一的 Session
+                    ID。服务端和客户端维持的是一个长连接，在 SESSION_TIMEOUT
+                    周期内，服务端会检测与客户端的链路是否正常，具体方式是通过客户端定时向服务端发送心跳消息（ping
+                    消息），服务器重置下次 SESSION_TIMEOUT 时间。如果超过 SESSION_TIMEOUT
+                    后服务端都没有收到客户端的心跳消息，则服务端认为这个 Session 就已经结束了，ZooKeeper
+                    就会认为这个服务节点已经不可用，将会从注册中心中删除其信息。】<br />----------------<br />这段看得有点懵。<br />这里说的服务端和客户端是指服务提供者和服务消费者嘛？<br />还是要理解成服务端是指注册中心，客户端是指服务提供者，注册中心来检查服务提供者的状态？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-27 11:34</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/0f/7e/df/145a51e5.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">威</span></div>
+                  <div class="bd">
+                    一个更新操作成功，当且仅当大多数 Server 在内存中成功修改。<br /><br />没看懂这句是什么意思 <br />
+                  </div>
+                  <span class="time">2018-09-19 18:15</span>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/10/ad/00/cb678c2e.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">Icbcsjy</span></div>
+                  <div class="bd">
+                    “如果超过 SESSION_TIMEOUT 后服务端都没有收到客户端的心跳消息，则服务端认为这个 Session
+                    就已经结束了，ZooKeeper 就会认为这个服务节点已经不可用，将会从注册中心中删除其信息。” <br />
+                    老师您好，关于这段文字，我有一个疑问。如果客户端Session结束后，zookeeper就会删掉一个服务节点，那就是说zookeeper下，服务节点的管理是动态的？根据session来产生、分配、销毁的吗？
+                    <br />
+                  </div>
+                  <span class="time">2018-09-11 16:23</span>
+
+                  <div class="reply">
+                    <div class="reply-hd"><span>作者回复</span></div>
+                    <p class="reply-content">对，zookeeper可以作为动态服务发现</p>
+                    <p class="reply-time">2018-09-11 19:04</p>
+                  </div>
+                </div>
+              </li>
+
+              <li data-v-87ffcada="" class="comment-item">
+                <img src="https://static001.geekbang.org/account/avatar/00/12/44/e0/a6a51198.jpg" class="avatar" />
+                <div class="info">
+                  <div class="hd"><span class="username">皓好号</span></div>
+                  <div class="bd">注册中心白名单还是不太懂，白名单的内容是什么呢？ <br /></div>
+                  <span class="time">2018-09-04 07:34</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

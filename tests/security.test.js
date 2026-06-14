@@ -16,7 +16,7 @@ class TestRunner {
 
     async run() {
         console.log('🧪 开始运行安全性测试...\n');
-        
+
         for (const test of this.tests) {
             try {
                 await test.fn();
@@ -27,24 +27,26 @@ class TestRunner {
                 console.log(`❌ ${test.name}: ${error.message}`);
             }
         }
-        
+
         this.printSummary();
     }
 
     printSummary() {
-        const passed = this.results.filter(r => r.status === '✅ 通过').length;
-        const failed = this.results.filter(r => r.status === '❌ 失败').length;
-        
+        const passed = this.results.filter((r) => r.status === '✅ 通过').length;
+        const failed = this.results.filter((r) => r.status === '❌ 失败').length;
+
         console.log('\n📊 测试总结:');
         console.log(`总计: ${this.results.length} 个测试`);
         console.log(`通过: ${passed} 个`);
         console.log(`失败: ${failed} 个`);
-        
+
         if (failed > 0) {
             console.log('\n❌ 失败的测试:');
-            this.results.filter(r => r.status === '❌ 失败').forEach(r => {
-                console.log(`  - ${r.name}: ${r.error}`);
-            });
+            this.results
+                .filter((r) => r.status === '❌ 失败')
+                .forEach((r) => {
+                    console.log(`  - ${r.name}: ${r.error}`);
+                });
         }
     }
 }
@@ -68,7 +70,7 @@ class DOMPurify {
         if (typeof dirty !== 'string') {
             return '';
         }
-        
+
         // 移除危险的 HTML 标签和属性
         let clean = dirty
             .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
@@ -77,7 +79,7 @@ class DOMPurify {
             .replace(/<embed\b[^>]*>/gi, '')
             .replace(/javascript:/gi, '')
             .replace(/on\w+\s*=/gi, '');
-        
+
         // 只允许配置的标签和属性
         if (config.ALLOWED_TAGS) {
             const tagRegex = /<\/?([a-z][a-z0-9]*)[^>]*>/gi;
@@ -88,7 +90,7 @@ class DOMPurify {
                 return '';
             });
         }
-        
+
         return clean;
     }
 }
@@ -99,11 +101,11 @@ function escapeHtml(unsafe) {
         return '';
     }
     return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }
 
 function sanitizeUrl(url) {
@@ -189,15 +191,15 @@ runner.test('DOMPurify.sanitize 应该只允许配置的标签', () => {
 runner.test('完整的 URL 渲染应该是安全的', () => {
     const linkData = {
         name: '<script>alert("XSS")</script>测试链接',
-        url: 'javascript:alert(1)'
+        url: 'javascript:alert(1)',
     };
-    
+
     const safeUrl = sanitizeUrl(linkData.url);
     const safeName = escapeHtml(linkData.name);
-    
+
     const html = `<a href="${safeUrl}">${safeName}</a>`;
     const cleanHtml = DOMPurify.sanitize(html, { ALLOWED_TAGS: ['a'], ALLOWED_ATTR: ['href'] });
-    
+
     assert(!cleanHtml.includes('<script>'), '最终 HTML 不应该包含 script 标签');
     assert(!cleanHtml.includes('javascript:'), '最终 HTML 不应该包含 javascript: 协议');
     assert(cleanHtml.includes('#'), '危险 URL 应该被替换为 #');
@@ -208,10 +210,10 @@ runner.test('搜索功能应该是安全的', () => {
         '<script>alert("XSS")</script>',
         'javascript:alert(1)',
         '<img src=x onerror=alert(1)>',
-        '"><script>alert("XSS")</script>'
+        '"><script>alert("XSS")</script>',
     ];
-    
-    searchTerms.forEach(term => {
+
+    searchTerms.forEach((term) => {
         const safeTerm = escapeHtml(term);
         assert(!safeTerm.includes('<script>'), `搜索词 "${term}" 应该被安全转义`);
         assert(!safeTerm.includes('javascript:'), `搜索词 "${term}" 应该移除 javascript: 协议`);
@@ -221,17 +223,17 @@ runner.test('搜索功能应该是安全的', () => {
 // 性能测试
 runner.test('安全函数应该在合理时间内完成', () => {
     const start = performance.now();
-    
+
     // 测试大量数据处理
     for (let i = 0; i < 1000; i++) {
         escapeHtml('<script>alert("XSS")</script>');
         sanitizeUrl('javascript:alert(1)');
         DOMPurify.sanitize('<div><script>alert(1)</script></div>');
     }
-    
+
     const end = performance.now();
     const duration = end - start;
-    
+
     assert(duration < 100, `1000次处理应该在100ms内完成，实际用了 ${duration}ms`);
 });
 

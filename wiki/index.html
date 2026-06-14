@@ -1,14 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Wiki - CodeClub</title>
-    <link rel="icon" type="image/x-icon" href="../img/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="../lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../img/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
@@ -19,860 +25,914 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/html.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
     <style>
-        :root {
-            --primary-color: #3b82f6;
-            --primary-hover: #2563eb;
-            --bg-color: #f8fafc;
-            --sidebar-bg: #ffffff;
-            --content-bg: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            --code-bg: #f1f5f9;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --radius-sm: 6px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --transition: all 0.2s ease;
-        }
+      :root {
+        --primary-color: #3b82f6;
+        --primary-hover: #2563eb;
+        --bg-color: #f8fafc;
+        --sidebar-bg: #ffffff;
+        --content-bg: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border-color: #e2e8f0;
+        --code-bg: #f1f5f9;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --radius-sm: 6px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --transition: all 0.2s ease;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
 
-        /* Layout */
-        .wiki-container {
-            display: flex;
-            min-height: 100vh;
-        }
+      /* Layout */
+      .wiki-container {
+        display: flex;
+        min-height: 100vh;
+      }
 
-        /* Sidebar */
+      /* Sidebar */
+      .sidebar {
+        width: 300px;
+        background: var(--sidebar-bg);
+        border-right: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .sidebar-header img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+      }
+
+      .sidebar-header a {
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
+      .sidebar-search {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .search-input-wrapper {
+        position: relative;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 10px 12px 10px 36px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        background: var(--bg-color);
+        transition: var(--transition);
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background: white;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px 0;
+      }
+
+      .sidebar-nav::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .sidebar-nav::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 3px;
+      }
+
+      /* Tree Menu */
+      .tree-item {
+        list-style: none;
+      }
+
+      .tree-toggle {
+        display: flex;
+        align-items: center;
+        padding: 8px 20px;
+        cursor: pointer;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: var(--transition);
+        user-select: none;
+      }
+
+      /* Indentation levels for tree toggles */
+      .tree-toggle.level-0 {
+        padding-left: 16px;
+      }
+      .tree-toggle.level-1 {
+        padding-left: 40px;
+      }
+      .tree-toggle.level-2 {
+        padding-left: 64px;
+      }
+      .tree-toggle.level-3 {
+        padding-left: 88px;
+      }
+
+      .tree-toggle:hover {
+        color: var(--primary-color);
+        background: rgba(59, 130, 246, 0.05);
+      }
+
+      .tree-toggle i {
+        margin-right: 8px;
+        font-size: 0.75rem;
+        transition: transform 0.2s;
+        width: 16px;
+      }
+
+      .tree-toggle.expanded i {
+        transform: rotate(90deg);
+      }
+
+      .tree-toggle .folder-icon {
+        margin-left: 4px;
+        color: #f59e0b;
+        width: 16px;
+        text-align: center;
+      }
+
+      .tree-children {
+        display: none;
+        padding-left: 0;
+      }
+
+      .tree-children.expanded {
+        display: block;
+      }
+
+      /* Visual guide line for tree structure */
+      .tree-children .tree-item {
+        position: relative;
+      }
+
+      .tree-children .tree-item::before {
+        content: '';
+        position: absolute;
+        left: 24px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--border-color);
+      }
+
+      .tree-link {
+        display: block;
+        padding: 6px 20px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.8125rem;
+        transition: var(--transition);
+        border-left: 2px solid transparent;
+      }
+
+      /* Indentation levels for tree links */
+      .tree-link.level-0 {
+        padding-left: 40px;
+      }
+      .tree-link.level-1 {
+        padding-left: 64px;
+      }
+      .tree-link.level-2 {
+        padding-left: 88px;
+      }
+      .tree-link.level-3 {
+        padding-left: 112px;
+      }
+
+      .tree-link:hover {
+        color: var(--primary-color);
+        background: rgba(59, 130, 246, 0.05);
+      }
+
+      .tree-link.active {
+        color: var(--primary-color);
+        background: rgba(59, 130, 246, 0.1);
+        border-left-color: var(--primary-color);
+        font-weight: 500;
+      }
+
+      .tree-link .file-icon {
+        margin-right: 6px;
+        color: var(--text-muted);
+      }
+
+      /* Mobile Toggle */
+      .mobile-toggle {
+        display: none;
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 200;
+        width: 44px;
+        height: 44px;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        margin-left: 300px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .content-header {
+        background: white;
+        border-bottom: 1px solid var(--border-color);
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.875rem;
+        color: var(--text-muted);
+      }
+
+      .breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+      }
+
+      .breadcrumb a:hover {
+        color: var(--primary-color);
+      }
+
+      .content-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-icon {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border-color);
+        background: white;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        color: var(--text-secondary);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-icon:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+
+      /* Article Content */
+      .article-container {
+        flex: 1;
+        padding: 40px 48px;
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .article-content {
+        background: var(--content-bg);
+        border-radius: var(--radius-lg);
+        padding: 48px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Markdown Styles */
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .markdown-body h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-top: 40px;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .markdown-body h3 {
+        font-size: 1.375rem;
+        font-weight: 600;
+        margin-top: 32px;
+        margin-bottom: 12px;
+      }
+
+      .markdown-body p {
+        margin-bottom: 16px;
+        line-height: 1.8;
+      }
+
+      .markdown-body ul,
+      .markdown-body ol {
+        margin-bottom: 16px;
+        padding-left: 24px;
+      }
+
+      .markdown-body li {
+        margin-bottom: 8px;
+      }
+
+      /* Inline code */
+      .markdown-body code {
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+        font-size: 0.85em;
+        color: #ec4899;
+        border: 1px solid #e2e8f0;
+      }
+
+      /* Code blocks */
+      .markdown-body pre {
+        background: #0d1117;
+        color: #e6edf3;
+        padding: 0;
+        border-radius: var(--radius-md);
+        overflow-x: auto;
+        margin-bottom: 24px;
+        border: 1px solid #30363d;
+        position: relative;
+      }
+
+      .markdown-body pre code {
+        background: transparent;
+        color: inherit;
+        padding: 20px;
+        display: block;
+        overflow-x: auto;
+        font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        border: none;
+      }
+
+      /* Code block header with language label */
+      .code-block-wrapper {
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        border: 1px solid #30363d;
+      }
+
+      .code-block-header {
+        background: #161b22;
+        padding: 8px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #30363d;
+      }
+
+      .code-language {
+        font-size: 0.75rem;
+        color: #8b949e;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .copy-code-btn {
+        background: transparent;
+        border: 1px solid #30363d;
+        color: #8b949e;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .copy-code-btn:hover {
+        background: #30363d;
+        color: #e6edf3;
+      }
+
+      .copy-code-btn.copied {
+        background: #238636;
+        border-color: #238636;
+        color: white;
+      }
+
+      .code-block-wrapper pre {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+      }
+
+      /* Syntax highlighting overrides */
+      .hljs {
+        background: #0d1117 !important;
+        color: #e6edf3 !important;
+      }
+
+      .hljs-keyword {
+        color: #ff7b72;
+      }
+      .hljs-string {
+        color: #a5d6ff;
+      }
+      .hljs-number {
+        color: #79c0ff;
+      }
+      .hljs-function {
+        color: #d2a8ff;
+      }
+      .hljs-comment {
+        color: #8b949e;
+        font-style: italic;
+      }
+      .hljs-operator {
+        color: #ff7b72;
+      }
+      .hljs-punctuation {
+        color: #c9d1d9;
+      }
+      .hljs-variable {
+        color: #ffa657;
+      }
+      .hljs-class {
+        color: #d2a8ff;
+      }
+      .hljs-built_in {
+        color: #79c0ff;
+      }
+
+      .markdown-body blockquote {
+        border-left: 4px solid var(--primary-color);
+        padding-left: 20px;
+        margin: 20px 0;
+        color: var(--text-secondary);
+        font-style: italic;
+      }
+
+      .markdown-body a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .markdown-body a:hover {
+        text-decoration: underline;
+      }
+
+      .markdown-body img {
+        max-width: 100%;
+        border-radius: var(--radius-md);
+        margin: 20px 0;
+      }
+
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .markdown-body th,
+      .markdown-body td {
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        text-align: left;
+      }
+
+      .markdown-body th {
+        background: var(--bg-color);
+        font-weight: 600;
+      }
+
+      /* Loading & Error States */
+      .loading-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px;
+        color: var(--text-muted);
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border-color);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 16px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .error-state {
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .error-state i {
+        font-size: 48px;
+        color: #ef4444;
+        margin-bottom: 16px;
+      }
+
+      /* Welcome State */
+      .welcome-state {
+        text-align: center;
+        padding: 100px 40px;
+      }
+
+      .welcome-state i {
+        font-size: 64px;
+        color: var(--primary-color);
+        margin-bottom: 24px;
+      }
+
+      .welcome-state h2 {
+        font-size: 1.75rem;
+        margin-bottom: 12px;
+        color: var(--text-primary);
+      }
+
+      .welcome-state p {
+        color: var(--text-secondary);
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* Footer */
+      .content-footer {
+        border-top: 1px solid var(--border-color);
+        padding: 24px 48px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
         .sidebar {
-            width: 300px;
-            background: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-            top: 0;
-            z-index: 100;
-            transition: transform 0.3s ease;
+          transform: translateX(-100%);
         }
 
-        .sidebar-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .sidebar.open {
+          transform: translateX(0);
         }
 
-        .sidebar-header img {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-        }
-
-        .sidebar-header a {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .sidebar-search {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .search-input-wrapper {
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 10px 12px 10px 36px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            font-size: 0.875rem;
-            background: var(--bg-color);
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            background: white;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        .sidebar-nav {
-            flex: 1;
-            overflow-y: auto;
-            padding: 12px 0;
-        }
-
-        .sidebar-nav::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .sidebar-nav::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 3px;
-        }
-
-        /* Tree Menu */
-        .tree-item {
-            list-style: none;
-        }
-
-        .tree-toggle {
-            display: flex;
-            align-items: center;
-            padding: 8px 20px;
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: var(--transition);
-            user-select: none;
-        }
-
-        /* Indentation levels for tree toggles */
-        .tree-toggle.level-0 { padding-left: 16px; }
-        .tree-toggle.level-1 { padding-left: 40px; }
-        .tree-toggle.level-2 { padding-left: 64px; }
-        .tree-toggle.level-3 { padding-left: 88px; }
-
-        .tree-toggle:hover {
-            color: var(--primary-color);
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .tree-toggle i {
-            margin-right: 8px;
-            font-size: 0.75rem;
-            transition: transform 0.2s;
-            width: 16px;
-        }
-
-        .tree-toggle.expanded i {
-            transform: rotate(90deg);
-        }
-
-        .tree-toggle .folder-icon {
-            margin-left: 4px;
-            color: #f59e0b;
-            width: 16px;
-            text-align: center;
-        }
-
-        .tree-children {
-            display: none;
-            padding-left: 0;
-        }
-
-        .tree-children.expanded {
-            display: block;
-        }
-
-        /* Visual guide line for tree structure */
-        .tree-children .tree-item {
-            position: relative;
-        }
-
-        .tree-children .tree-item::before {
-            content: '';
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: var(--border-color);
-        }
-
-        .tree-link {
-            display: block;
-            padding: 6px 20px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.8125rem;
-            transition: var(--transition);
-            border-left: 2px solid transparent;
-        }
-
-        /* Indentation levels for tree links */
-        .tree-link.level-0 { padding-left: 40px; }
-        .tree-link.level-1 { padding-left: 64px; }
-        .tree-link.level-2 { padding-left: 88px; }
-        .tree-link.level-3 { padding-left: 112px; }
-
-        .tree-link:hover {
-            color: var(--primary-color);
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .tree-link.active {
-            color: var(--primary-color);
-            background: rgba(59, 130, 246, 0.1);
-            border-left-color: var(--primary-color);
-            font-weight: 500;
-        }
-
-        .tree-link .file-icon {
-            margin-right: 6px;
-            color: var(--text-muted);
-        }
-
-        /* Mobile Toggle */
         .mobile-toggle {
-            display: none;
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 200;
-            width: 44px;
-            height: 44px;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
+          display: flex;
         }
 
-        /* Main Content */
         .main-content {
-            flex: 1;
-            margin-left: 300px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+          margin-left: 0;
         }
 
-        .content-header {
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            padding: 16px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        .breadcrumb a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--primary-color);
-        }
-
-        .content-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border: 1px solid var(--border-color);
-            background: white;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-icon:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        /* Article Content */
         .article-container {
-            flex: 1;
-            padding: 40px 48px;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
+          padding: 24px;
         }
 
         .article-content {
-            background: var(--content-bg);
-            border-radius: var(--radius-lg);
-            padding: 48px;
-            box-shadow: var(--shadow-sm);
+          padding: 32px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .article-content {
+          padding: 24px;
         }
 
-        /* Markdown Styles */
+        .content-header {
+          padding: 12px 20px;
+        }
+
         .markdown-body h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--border-color);
+          font-size: 1.75rem;
         }
 
         .markdown-body h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-top: 40px;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
+          font-size: 1.375rem;
         }
+      }
 
-        .markdown-body h3 {
-            font-size: 1.375rem;
-            font-weight: 600;
-            margin-top: 32px;
-            margin-bottom: 12px;
-        }
+      /* Overlay for mobile */
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+      }
 
-        .markdown-body p {
-            margin-bottom: 16px;
-            line-height: 1.8;
-        }
-
-        .markdown-body ul, .markdown-body ol {
-            margin-bottom: 16px;
-            padding-left: 24px;
-        }
-
-        .markdown-body li {
-            margin-bottom: 8px;
-        }
-
-        /* Inline code */
-        .markdown-body code {
-            background: #f1f5f9;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
-            font-size: 0.85em;
-            color: #ec4899;
-            border: 1px solid #e2e8f0;
-        }
-
-        /* Code blocks */
-        .markdown-body pre {
-            background: #0d1117;
-            color: #e6edf3;
-            padding: 0;
-            border-radius: var(--radius-md);
-            overflow-x: auto;
-            margin-bottom: 24px;
-            border: 1px solid #30363d;
-            position: relative;
-        }
-
-        .markdown-body pre code {
-            background: transparent;
-            color: inherit;
-            padding: 20px;
-            display: block;
-            overflow-x: auto;
-            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
-            font-size: 0.875rem;
-            line-height: 1.6;
-            border: none;
-        }
-
-        /* Code block header with language label */
-        .code-block-wrapper {
-            position: relative;
-            margin-bottom: 24px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid #30363d;
-        }
-
-        .code-block-header {
-            background: #161b22;
-            padding: 8px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #30363d;
-        }
-
-        .code-language {
-            font-size: 0.75rem;
-            color: #8b949e;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .copy-code-btn {
-            background: transparent;
-            border: 1px solid #30363d;
-            color: #8b949e;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .copy-code-btn:hover {
-            background: #30363d;
-            color: #e6edf3;
-        }
-
-        .copy-code-btn.copied {
-            background: #238636;
-            border-color: #238636;
-            color: white;
-        }
-
-        .code-block-wrapper pre {
-            margin: 0;
-            border: none;
-            border-radius: 0;
-        }
-
-        /* Syntax highlighting overrides */
-        .hljs {
-            background: #0d1117 !important;
-            color: #e6edf3 !important;
-        }
-
-        .hljs-keyword { color: #ff7b72; }
-        .hljs-string { color: #a5d6ff; }
-        .hljs-number { color: #79c0ff; }
-        .hljs-function { color: #d2a8ff; }
-        .hljs-comment { color: #8b949e; font-style: italic; }
-        .hljs-operator { color: #ff7b72; }
-        .hljs-punctuation { color: #c9d1d9; }
-        .hljs-variable { color: #ffa657; }
-        .hljs-class { color: #d2a8ff; }
-        .hljs-built_in { color: #79c0ff; }
-
-        .markdown-body blockquote {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 20px;
-            margin: 20px 0;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        .markdown-body a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .markdown-body a:hover {
-            text-decoration: underline;
-        }
-
-        .markdown-body img {
-            max-width: 100%;
-            border-radius: var(--radius-md);
-            margin: 20px 0;
-        }
-
-        .markdown-body table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .markdown-body th, .markdown-body td {
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            text-align: left;
-        }
-
-        .markdown-body th {
-            background: var(--bg-color);
-            font-weight: 600;
-        }
-
-        /* Loading & Error States */
-        .loading-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px;
-            color: var(--text-muted);
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border-color);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 16px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .error-state {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .error-state i {
-            font-size: 48px;
-            color: #ef4444;
-            margin-bottom: 16px;
-        }
-
-        /* Welcome State */
-        .welcome-state {
-            text-align: center;
-            padding: 100px 40px;
-        }
-
-        .welcome-state i {
-            font-size: 64px;
-            color: var(--primary-color);
-            margin-bottom: 24px;
-        }
-
-        .welcome-state h2 {
-            font-size: 1.75rem;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .welcome-state p {
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Footer */
-        .content-footer {
-            border-top: 1px solid var(--border-color);
-            padding: 24px 48px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .article-container {
-                padding: 24px;
-            }
-
-            .article-content {
-                padding: 32px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .article-content {
-                padding: 24px;
-            }
-
-            .content-header {
-                padding: 12px 20px;
-            }
-
-            .markdown-body h1 {
-                font-size: 1.75rem;
-            }
-
-            .markdown-body h2 {
-                font-size: 1.375rem;
-            }
-        }
-
-        /* Overlay for mobile */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 99;
-        }
-
-        .sidebar-overlay.show {
-            display: block;
-        }
+      .sidebar-overlay.show {
+        display: block;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <button class="mobile-toggle" id="mobileToggle">
-        <i class="fas fa-bars"></i>
+      <i class="fas fa-bars"></i>
     </button>
 
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="wiki-container">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <img src="../img/logo.png" alt="Logo">
-                <a href="../index.html">CodeClub Wiki</a>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <img src="../img/logo.png" alt="Logo" />
+          <a href="../index.html">CodeClub Wiki</a>
+        </div>
+
+        <div class="sidebar-search">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="sidebarSearch" placeholder="搜索文档..." />
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" id="sidebarNav">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <span>加载目录...</span>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="content-header">
+          <div class="breadcrumb" id="breadcrumb">
+            <a href="./">Wiki</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem"></i>
+            <span>首页</span>
+          </div>
+          <div class="content-actions">
+            <button class="btn-icon" id="refreshBtn" title="刷新">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+            <button class="btn-icon" id="githubBtn" title="在 GitHub 中查看">
+              <i class="fab fa-github"></i>
+            </button>
+          </div>
+        </header>
+
+        <div class="article-container">
+          <article class="article-content markdown-body" id="articleContent">
+            <div class="welcome-state">
+              <i class="fas fa-book-open"></i>
+              <h2>欢迎使用 CodeClub Wiki</h2>
+              <p>点击左侧目录浏览文档，或使用搜索功能快速查找内容。所有文档均存储在 GitHub 上，实时动态加载。</p>
             </div>
-            
-            <div class="sidebar-search">
-                <div class="search-input-wrapper">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="sidebarSearch" placeholder="搜索文档...">
-                </div>
-            </div>
+          </article>
+        </div>
 
-            <nav class="sidebar-nav" id="sidebarNav">
-                <div class="loading-state">
-                    <div class="spinner"></div>
-                    <span>加载目录...</span>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="content-header">
-                <div class="breadcrumb" id="breadcrumb">
-                    <a href="./">Wiki</a>
-                    <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
-                    <span>首页</span>
-                </div>
-                <div class="content-actions">
-                    <button class="btn-icon" id="refreshBtn" title="刷新">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                    <button class="btn-icon" id="githubBtn" title="在 GitHub 中查看">
-                        <i class="fab fa-github"></i>
-                    </button>
-                </div>
-            </header>
-
-            <div class="article-container">
-                <article class="article-content markdown-body" id="articleContent">
-                    <div class="welcome-state">
-                        <i class="fas fa-book-open"></i>
-                        <h2>欢迎使用 CodeClub Wiki</h2>
-                        <p>点击左侧目录浏览文档，或使用搜索功能快速查找内容。所有文档均存储在 GitHub 上，实时动态加载。</p>
-                    </div>
-                </article>
-            </div>
-
-            <footer class="content-footer">
-                <p>Content hosted on <a href="https://github.com/jacksoncode/jacksoncode.github.io" target="_blank" style="color: var(--primary-color);">GitHub</a> • Built with ❤️</p>
-            </footer>
-        </main>
+        <footer class="content-footer">
+          <p>
+            Content hosted on
+            <a
+              href="https://github.com/jacksoncode/jacksoncode.github.io"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >GitHub</a
+            >
+            • Built with ❤️
+          </p>
+        </footer>
+      </main>
     </div>
 
     <script>
-        // Configure marked.js for better code highlighting
-        marked.setOptions({
-            highlight: function(code, lang) {
-                if (lang && hljs.getLanguage(lang)) {
-                    return hljs.highlight(code, { language: lang }).value;
-                }
-                return hljs.highlightAuto(code).value;
-            },
-            langPrefix: 'hljs language-'
-        });
+      // Configure marked.js for better code highlighting
+      marked.setOptions({
+        highlight: function (code, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(code, { language: lang }).value;
+          }
+          return hljs.highlightAuto(code).value;
+        },
+        langPrefix: 'hljs language-',
+      });
 
-        // Wiki configuration
-        const WIKI_CONFIG = {
-            basePath: './library',
-            githubUrl: 'https://github.com/jacksoncode/jacksoncode.github.io/tree/master/wiki/library'
-        };
+      // Wiki configuration
+      const WIKI_CONFIG = {
+        basePath: './library',
+        githubUrl: 'https://github.com/jacksoncode/jacksoncode.github.io/tree/master/wiki/library',
+      };
 
-        // File system structure - loaded from JSON
-        let wikiStructure = [];
+      // File system structure - loaded from JSON
+      let wikiStructure = [];
 
-        // State management
-        let currentPath = '';
-        let expandedFolders = new Set();
+      // State management
+      let currentPath = '';
+      let expandedFolders = new Set();
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load wiki structure from JSON
-            fetch('data/wiki-structure.json')
-                .then(response => response.json())
-                .then(data => {
-                    wikiStructure = data;
-                    renderSidebar(wikiStructure);
-                    setupEventListeners();
-                    
-                    // Check URL for direct link
-                    const hash = window.location.hash.slice(1);
-                    if (hash) {
-                        loadDocument(hash);
-                    }
-                })
-                .catch(error => {
-                    console.error('加载目录结构失败:', error);
-                    document.getElementById('sidebarNav').innerHTML = `
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function () {
+        // Load wiki structure from JSON
+        fetch('data/wiki-structure.json')
+          .then((response) => response.json())
+          .then((data) => {
+            wikiStructure = data;
+            renderSidebar(wikiStructure);
+            setupEventListeners();
+
+            // Check URL for direct link
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+              loadDocument(hash);
+            }
+          })
+          .catch((error) => {
+            console.error('加载目录结构失败:', error);
+            document.getElementById('sidebarNav').innerHTML = `
                         <div style="padding: 20px; color: #ef4444;">
                             <i class="fas fa-exclamation-circle"></i> 加载目录失败
                         </div>
                     `;
-                });
-        });
+          });
+      });
 
-        function renderSidebar(structure, parentElement = null, level = 0) {
-            const container = parentElement || document.getElementById('sidebarNav');
-            if (!parentElement) {
-                container.innerHTML = '';
-            }
+      function renderSidebar(structure, parentElement = null, level = 0) {
+        const container = parentElement || document.getElementById('sidebarNav');
+        if (!parentElement) {
+          container.innerHTML = '';
+        }
 
-            const ul = document.createElement('ul');
-            ul.style.listStyle = 'none';
+        const ul = document.createElement('ul');
+        ul.style.listStyle = 'none';
 
-            structure.forEach(item => {
-                const li = document.createElement('li');
-                li.className = 'tree-item';
+        structure.forEach((item) => {
+          const li = document.createElement('li');
+          li.className = 'tree-item';
 
-                if (item.type === 'folder') {
-                    const toggle = document.createElement('div');
-                    toggle.className = 'tree-toggle level-' + level + (expandedFolders.has(item.id) ? ' expanded' : '');
-                    toggle.innerHTML = `
+          if (item.type === 'folder') {
+            const toggle = document.createElement('div');
+            toggle.className = 'tree-toggle level-' + level + (expandedFolders.has(item.id) ? ' expanded' : '');
+            toggle.innerHTML = `
                         <i class="fas fa-chevron-right"></i>
                         <i class="fas fa-folder folder-icon"></i>
                         <span>${escapeHtml(item.name)}</span>
                     `;
-                    toggle.onclick = () => toggleFolder(item.id, toggle, children);
-                    li.appendChild(toggle);
+            toggle.onclick = () => toggleFolder(item.id, toggle, children);
+            li.appendChild(toggle);
 
-                    const children = document.createElement('ul');
-                    children.className = 'tree-children' + (expandedFolders.has(item.id) ? ' expanded' : '');
-                    if (item.children) {
-                        renderSidebar(item.children, children, level + 1);
-                    }
-                    li.appendChild(children);
-                } else {
-                    const link = document.createElement('a');
-                    link.className = 'tree-link level-' + level + (currentPath === item.id ? ' active' : '');
-                    link.href = '#' + item.id;
-                    link.innerHTML = `<i class="fas fa-file-alt file-icon"></i>${escapeHtml(item.name)}`;
-                    link.onclick = (e) => {
-                        e.preventDefault();
-                        loadDocument(item.id);
-                    };
-                    li.appendChild(link);
-                }
-
-                ul.appendChild(li);
-            });
-
-            container.appendChild(ul);
-        }
-
-        function toggleFolder(folderId, toggle, children) {
-            if (expandedFolders.has(folderId)) {
-                expandedFolders.delete(folderId);
-                toggle.classList.remove('expanded');
-                children.classList.remove('expanded');
-            } else {
-                expandedFolders.add(folderId);
-                toggle.classList.add('expanded');
-                children.classList.add('expanded');
+            const children = document.createElement('ul');
+            children.className = 'tree-children' + (expandedFolders.has(item.id) ? ' expanded' : '');
+            if (item.children) {
+              renderSidebar(item.children, children, level + 1);
             }
-        }
+            li.appendChild(children);
+          } else {
+            const link = document.createElement('a');
+            link.className = 'tree-link level-' + level + (currentPath === item.id ? ' active' : '');
+            link.href = '#' + item.id;
+            link.innerHTML = `<i class="fas fa-file-alt file-icon"></i>${escapeHtml(item.name)}`;
+            link.onclick = (e) => {
+              e.preventDefault();
+              loadDocument(item.id);
+            };
+            li.appendChild(link);
+          }
 
-        function loadDocument(docPath) {
-            currentPath = docPath;
-            updateActiveLink(docPath);
-            updateBreadcrumb(docPath);
-            
-            const articleContent = document.getElementById('articleContent');
-            articleContent.innerHTML = `
+          ul.appendChild(li);
+        });
+
+        container.appendChild(ul);
+      }
+
+      function toggleFolder(folderId, toggle, children) {
+        if (expandedFolders.has(folderId)) {
+          expandedFolders.delete(folderId);
+          toggle.classList.remove('expanded');
+          children.classList.remove('expanded');
+        } else {
+          expandedFolders.add(folderId);
+          toggle.classList.add('expanded');
+          children.classList.add('expanded');
+        }
+      }
+
+      function loadDocument(docPath) {
+        currentPath = docPath;
+        updateActiveLink(docPath);
+        updateBreadcrumb(docPath);
+
+        const articleContent = document.getElementById('articleContent');
+        articleContent.innerHTML = `
                 <div class="loading-state">
                     <div class="spinner"></div>
                     <span>加载文档...</span>
                 </div>
             `;
 
-            // Close mobile sidebar
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('show');
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('show');
 
-            // Try to load the markdown file
-            const mdPath = `${WIKI_CONFIG.basePath}/${docPath}.md`;
-            
-            fetch(mdPath)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('文档不存在');
-                    }
-                    return response.text();
-                })
-                .then(markdown => {
-                    const html = marked.parse(markdown);
-                    articleContent.innerHTML = `<div class="markdown-body">${html}</div>`;
-                    
-                    // Enhance code blocks with syntax highlighting and copy buttons
-                    enhanceCodeBlocks();
-                    
-                    window.location.hash = docPath;
-                })
-                .catch(error => {
-                    articleContent.innerHTML = `
+        // Try to load the markdown file
+        const mdPath = `${WIKI_CONFIG.basePath}/${docPath}.md`;
+
+        fetch(mdPath)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('文档不存在');
+            }
+            return response.text();
+          })
+          .then((markdown) => {
+            const html = marked.parse(markdown);
+            articleContent.innerHTML = `<div class="markdown-body">${html}</div>`;
+
+            // Enhance code blocks with syntax highlighting and copy buttons
+            enhanceCodeBlocks();
+
+            window.location.hash = docPath;
+          })
+          .catch((error) => {
+            articleContent.innerHTML = `
                         <div class="error-state">
                             <i class="fas fa-exclamation-circle"></i>
                             <h3>无法加载文档</h3>
@@ -882,157 +942,157 @@
                             </p>
                         </div>
                     `;
-                });
-        }
+          });
+      }
 
-        function updateActiveLink(docPath) {
-            document.querySelectorAll('.tree-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + docPath) {
-                    link.classList.add('active');
-                }
-            });
-        }
+      function updateActiveLink(docPath) {
+        document.querySelectorAll('.tree-link').forEach((link) => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + docPath) {
+            link.classList.add('active');
+          }
+        });
+      }
 
-        function updateBreadcrumb(docPath) {
-            const breadcrumb = document.getElementById('breadcrumb');
-            const parts = docPath.split('/');
-            const fileName = parts[parts.length - 1];
-            
-            let html = '<a href="./">Wiki</a>';
-            if (parts.length > 1) {
-                html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(parts[0].split('-').slice(1).join('-'))}</span>`;
+      function updateBreadcrumb(docPath) {
+        const breadcrumb = document.getElementById('breadcrumb');
+        const parts = docPath.split('/');
+        const fileName = parts[parts.length - 1];
+
+        let html = '<a href="./">Wiki</a>';
+        if (parts.length > 1) {
+          html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(parts[0].split('-').slice(1).join('-'))}</span>`;
+        }
+        html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(fileName)}</span>`;
+
+        breadcrumb.innerHTML = html;
+      }
+
+      function enhanceCodeBlocks() {
+        // Find all pre elements containing code
+        const preElements = document.querySelectorAll('.markdown-body pre');
+
+        preElements.forEach((pre) => {
+          const code = pre.querySelector('code');
+          if (!code) return;
+
+          // Detect language from class
+          let language = '';
+          code.classList.forEach((cls) => {
+            if (cls.startsWith('language-')) {
+              language = cls.replace('language-', '');
             }
-            html += `<i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i><span>${escapeHtml(fileName)}</span>`;
-            
-            breadcrumb.innerHTML = html;
-        }
+          });
 
-        function enhanceCodeBlocks() {
-            // Find all pre elements containing code
-            const preElements = document.querySelectorAll('.markdown-body pre');
-            
-            preElements.forEach(pre => {
-                const code = pre.querySelector('code');
-                if (!code) return;
-                
-                // Detect language from class
-                let language = '';
-                code.classList.forEach(cls => {
-                    if (cls.startsWith('language-')) {
-                        language = cls.replace('language-', '');
-                    }
-                });
-                
-                // Create wrapper
-                const wrapper = document.createElement('div');
-                wrapper.className = 'code-block-wrapper';
-                
-                // Create header
-                const header = document.createElement('div');
-                header.className = 'code-block-header';
-                header.innerHTML = `
+          // Create wrapper
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+
+          // Create header
+          const header = document.createElement('div');
+          header.className = 'code-block-header';
+          header.innerHTML = `
                     <span class="code-language">${language || 'code'}</span>
                     <button class="copy-code-btn" title="复制代码">
                         <i class="fas fa-copy"></i>
                         <span>复制</span>
                     </button>
                 `;
-                
-                // Move pre into wrapper
-                pre.parentNode.insertBefore(wrapper, pre);
-                wrapper.appendChild(header);
-                wrapper.appendChild(pre);
-                
-                // Add copy functionality
-                const copyBtn = header.querySelector('.copy-code-btn');
-                copyBtn.addEventListener('click', () => {
-                    const codeText = code.textContent;
-                    navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.classList.add('copied');
-                        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>已复制</span>';
-                        
-                        setTimeout(() => {
-                            copyBtn.classList.remove('copied');
-                            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>复制</span>';
-                        }, 2000);
-                    });
-                });
-                
-                // Apply syntax highlighting
-                if (window.hljs) {
-                    hljs.highlightElement(code);
-                }
+
+          // Move pre into wrapper
+          pre.parentNode.insertBefore(wrapper, pre);
+          wrapper.appendChild(header);
+          wrapper.appendChild(pre);
+
+          // Add copy functionality
+          const copyBtn = header.querySelector('.copy-code-btn');
+          copyBtn.addEventListener('click', () => {
+            const codeText = code.textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+              copyBtn.classList.add('copied');
+              copyBtn.innerHTML = '<i class="fas fa-check"></i><span>已复制</span>';
+
+              setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>复制</span>';
+              }, 2000);
             });
+          });
+
+          // Apply syntax highlighting
+          if (window.hljs) {
+            hljs.highlightElement(code);
+          }
+        });
+      }
+
+      function setupEventListeners() {
+        // Mobile toggle
+        document.getElementById('mobileToggle').addEventListener('click', () => {
+          document.getElementById('sidebar').classList.toggle('open');
+          document.getElementById('sidebarOverlay').classList.toggle('show');
+        });
+
+        document.getElementById('sidebarOverlay').addEventListener('click', () => {
+          document.getElementById('sidebar').classList.remove('open');
+          document.getElementById('sidebarOverlay').classList.remove('show');
+        });
+
+        // Search
+        document.getElementById('sidebarSearch').addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          filterSidebar(searchTerm);
+        });
+
+        // Refresh button
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+          if (currentPath) {
+            loadDocument(currentPath);
+          }
+        });
+
+        // GitHub button
+        document.getElementById('githubBtn').addEventListener('click', () => {
+          let githubPath = WIKI_CONFIG.githubUrl;
+          if (currentPath) {
+            githubPath += '/' + currentPath.split('/')[0];
+          }
+          window.open(githubPath, '_blank');
+        });
+
+        // Handle hash change
+        window.addEventListener('hashchange', () => {
+          const hash = window.location.hash.slice(1);
+          if (hash && hash !== currentPath) {
+            loadDocument(hash);
+          }
+        });
+      }
+
+      function filterSidebar(searchTerm) {
+        const links = document.querySelectorAll('.tree-link');
+        const folders = document.querySelectorAll('.tree-toggle');
+
+        if (!searchTerm) {
+          links.forEach((link) => (link.style.display = 'block'));
+          folders.forEach((folder) => (folder.style.display = 'flex'));
+          return;
         }
 
-        function setupEventListeners() {
-            // Mobile toggle
-            document.getElementById('mobileToggle').addEventListener('click', () => {
-                document.getElementById('sidebar').classList.toggle('open');
-                document.getElementById('sidebarOverlay').classList.toggle('show');
-            });
+        links.forEach((link) => {
+          const text = link.textContent.toLowerCase();
+          link.style.display = text.includes(searchTerm) ? 'block' : 'none';
+        });
 
-            document.getElementById('sidebarOverlay').addEventListener('click', () => {
-                document.getElementById('sidebar').classList.remove('open');
-                document.getElementById('sidebarOverlay').classList.remove('show');
-            });
+        // Show all folders when searching
+        folders.forEach((folder) => (folder.style.display = 'flex'));
+      }
 
-            // Search
-            document.getElementById('sidebarSearch').addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filterSidebar(searchTerm);
-            });
-
-            // Refresh button
-            document.getElementById('refreshBtn').addEventListener('click', () => {
-                if (currentPath) {
-                    loadDocument(currentPath);
-                }
-            });
-
-            // GitHub button
-            document.getElementById('githubBtn').addEventListener('click', () => {
-                let githubPath = WIKI_CONFIG.githubUrl;
-                if (currentPath) {
-                    githubPath += '/' + currentPath.split('/')[0];
-                }
-                window.open(githubPath, '_blank');
-            });
-
-            // Handle hash change
-            window.addEventListener('hashchange', () => {
-                const hash = window.location.hash.slice(1);
-                if (hash && hash !== currentPath) {
-                    loadDocument(hash);
-                }
-            });
-        }
-
-        function filterSidebar(searchTerm) {
-            const links = document.querySelectorAll('.tree-link');
-            const folders = document.querySelectorAll('.tree-toggle');
-            
-            if (!searchTerm) {
-                links.forEach(link => link.style.display = 'block');
-                folders.forEach(folder => folder.style.display = 'flex');
-                return;
-            }
-
-            links.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                link.style.display = text.includes(searchTerm) ? 'block' : 'none';
-            });
-
-            // Show all folders when searching
-            folders.forEach(folder => folder.style.display = 'flex');
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
     </script>
-</body>
+  </body>
 </html>
