@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="第六章：模型 - AI学习笔记">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习">
+    <meta name="author" content="AI Learner">
+    <title>第六章：模型 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== 章节导航样式 ========== */
+        .chapter-nav {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            margin-top: 64px;
+        }
+
+        .chapter-nav-bottom {
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chapter-nav-bottom a:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h3, .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h3, .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h3, .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h3, .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        .keyword-highlight {
+            background: linear-gradient(120deg, #ebf8ff 0%, #e6fffa 100%);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        /* ========== 页脚样式 ========== */
+        .footer {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav .breadcrumb,
+            .chapter-nav .chapter-links {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch06.html"><i class="fas fa-box"></i> 模型</a></li>
+            <li><a href="ch07.html"><i class="fas fa-dumbbell"></i> 训练</a></li>
+            <li><a href="ch08.html"><i class="fas fa-chart-bar"></i> 评估调优</a></li>
+            <li><a href="ch09.html"><i class="fas fa-th"></i> CNN</a></li>
+            <li><a href="ch10.html"><i class="fas fa-random"></i> Transformer</a></li>
+            <li><a href="ch11.html"><i class="fas fa-language"></i> LLM</a></li>
+            <li><a href="ch12.html"><i class="fas fa-rocket"></i> 推理部署</a></li>
+            <li><a href="ch13.html"><i class="fas fa-search"></i> RAG</a></li>
+            <li><a href="ch14.html"><i class="fas fa-arrows-alt"></i> 向量Embedding</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+
+    <!-- ==================== 章节导航 ==================== -->
+    <nav class="chapter-nav" style="background: #f7fafc; border-bottom: 1px solid #e2e8f0; padding: 1rem 2rem; margin-top: 64px;">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div class="breadcrumb" style="font-size: 0.9rem; color: #718096;">
+                <a href="../../index.html" style="color: #4299e1;"><i class="fas fa-home"></i> 首页</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <a href="index.html" style="color: #4299e1;">AI学习笔记</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <span style="color: #2d3748; font-weight: 600;">第六章：模型</span>
+            </div>
+            <div class="chapter-links" style="display: flex; gap: 1rem;">
+                <a href="ch05.html" class="prev-chapter" style="color: #4299e1; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> 上一章</a>
+                <a href="ch07.html" class="next-chapter" style="color: #4299e1; font-size: 0.9rem;">下一章 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第六章：模型 -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-box"></i> 第六章：模型</h2>
+
+<div class="learning-objectives">
+  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+  <ul>
+    <li>理解模型（Model）的概念与本质</li>
+    <li>掌握大语言模型（LLM）的工作原理</li>
+    <li>理解参数量的意义及其与效果的关系</li>
+    <li>学会根据任务类型、计算资源、成本和隐私需求选择合适的模型</li>
+    <li>区分开源模型与闭源模型的优劣</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h3><i class="fas fa-book"></i> 前置要求</h3>
+  <p>第五章：深度学习概述（理解神经网络的基本结构和深度学习架构）。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-cube"></i> 什么是模型？</h2>
+  <p><span class="keyword-highlight">模型（Model）</span>是机器学习的核心产出，是一个数学函数或算法，能将输入数据转换为预测输出。</p>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-lightbulb"></i> 通俗理解</h4>
+    <p>模型就像一个"黑盒子"：<br/>输入 → [模型] → 输出<br/>比如输入一张图片，模型输出"这是猫"</p>
+  </div>
+
+  <h3>模型的本质</h3>
+  <p>模型内部是大量的<strong>参数（Parameters）</strong>——就是数字。这些参数决定了模型如何处理输入。</p>
+  <ul>
+    <li>一个简单模型可能有几百个参数</li>
+    <li>GPT-3有1750亿个参数</li>
+    <li>GPT-4参数量更大（具体数字未公开）</li>
+  </ul>
+
+  <h3>常见模型类型</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+      <th>例子</th>
+    </tr>
+    <tr>
+      <td><strong>判别式模型</strong></td>
+      <td>直接学习输入→输出的映射</td>
+      <td>分类器、回归模型</td>
+    </tr>
+    <tr>
+      <td><strong>生成式模型</strong></td>
+      <td>学习数据分布，能生成新数据</td>
+      <td>GPT、Stable Diffusion</td>
+    </tr>
+    <tr>
+      <td><strong>大语言模型（LLM）</strong></td>
+      <td>大规模文本生成模型</td>
+      <td>ChatGPT、Claude、Gemini</td>
+    </tr>
+  </table>
+
+  <h3>大语言模型（LLM）详解</h3>
+  <p><span class="keyword-highlight">大语言模型（Large Language Model）</span>是基于Transformer架构的生成式模型，能理解和生成人类语言。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-language"></i> LLM的工作原理</h4>
+    <p>1. 接收文本输入<br/>2. 将文本切分为token（词元）<br/>3. 通过多层Transformer处理<br/>4. 预测下一个token的概率<br/>5. 输出最可能的文本序列</p>
+  </div>
+
+  <p><strong>Token是什么？</strong></p>
+  <p>Token是文本的最小处理单位。可以是：</p>
+  <ul>
+    <li>一个词（如"apple"）</li>
+    <li>一个字（如"你"）</li>
+    <li>一个词的一部分（如"ing"）</li>
+  </ul>
+  <p>例如："我爱学习AI" 可能被切分为：["我", "爱", "学习", "AI"] 共4个tokens。</p>
+
+  <h3>使用transformers库调用LLM</h3>
+  <p>下面展示如何使用Hugging Face的transformers库快速调用一个预训练模型：</p>
+  <pre><code class="language-python">from transformers import pipeline
+
+# 创建文本生成pipeline（自动下载并加载模型）
+generator = pipeline("text-generation", model="gpt2")
+
+# 生成文本
+result = generator(
+    "Artificial intelligence is",
+    max_new_tokens=20,
+    temperature=0.7,
+    do_sample=True
+)
+
+print(result[0]['generated_text'])
+# 输出示例: "Artificial intelligence is transforming the way we live and work..."
+
+# 也可以用于其他任务
+classifier = pipeline("sentiment-analysis")
+result = classifier("I love learning about AI!")
+print(result)
+# 输出示例: [{'label': 'POSITIVE', 'score': 0.9998}]</code></pre>
+
+  <h3>模型大小与参数量</h3>
+  <p><span class="keyword-highlight">参数量</span>是衡量模型规模的指标，参数越多，模型容量越大，通常效果更好，但成本也越高。</p>
+
+  <h4>主流LLM的参数量对比</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>模型</th>
+      <th>参数量</th>
+      <th>显存需求（FP16）</th>
+      <th>特点</th>
+    </tr>
+    <tr>
+      <td><strong>GPT-2 Small</strong></td>
+      <td>117M（1.17亿）</td>
+      <td>~0.5GB</td>
+      <td>早期模型，适合入门学习</td>
+    </tr>
+    <tr>
+      <td><strong>GPT-2 Large</strong></td>
+      <td>1.5B（15亿）</td>
+      <td>~3GB</td>
+      <td>可在消费级显卡运行</td>
+    </tr>
+    <tr>
+      <td><strong>Llama-2-7B</strong></td>
+      <td>7B（70亿）</td>
+      <td>~14GB</td>
+      <td>开源主流，RTX 4090可运行</td>
+    </tr>
+    <tr>
+      <td><strong>Llama-2-13B</strong></td>
+      <td>13B（130亿）</td>
+      <td>~26GB</td>
+      <td>效果更好，需要高端显卡</td>
+    </tr>
+    <tr>
+      <td><strong>Mistral-7B</strong></td>
+      <td>7B</td>
+      <td>~14GB</td>
+      <td>效率高，小模型中的佼佼者</td>
+    </tr>
+    <tr>
+      <td><strong>Qwen-7B</strong></td>
+      <td>7B</td>
+      <td>~14GB</td>
+      <td>中文能力强，国产开源</td>
+    </tr>
+    <tr>
+      <td><strong>Llama-2-70B</strong></td>
+      <td>70B</td>
+      <td>~140GB</td>
+      <td>顶级开源，需要专业GPU</td>
+    </tr>
+    <tr>
+      <td><strong>GPT-3</strong></td>
+      <td>175B</td>
+      <td>~350GB</td>
+      <td>早期大模型标杆</td>
+    </tr>
+    <tr>
+      <td><strong>GPT-4</strong></td>
+      <td>未公开（推测万亿级）</td>
+      <td>需要集群</td>
+      <td>当前最强闭源模型之一</td>
+    </tr>
+  </table>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-chart-line"></i> 参数量与效果的关系</h4>
+    <p><strong>参数越多 → 效果越好</strong>（但不是线性关系）：<br/>
+    • 7B模型：适合简单任务，日常对话<br/>
+    • 13B模型：效果明显提升，复杂任务<br/>
+    • 70B模型：接近GPT-3水平，专业任务<br/><br/>
+    <strong>效果提升趋势</strong>：参数量与模型效果之间呈现对数增长关系——从小模型到大模型时效果提升显著，但继续增大时边际收益递减。就像考试从50分提升到80分容易，从90分提升到95分很难。<br/><br/>
+    <strong>但代价也随之增加</strong>：<br/>
+    • 更大显存需求<br/>
+    • 更慢的推理速度<br/>
+    • 更高的训练成本<br/><br/>
+    实践中需要平衡效果与成本。</p>
+  </div>
+
+  <h3>如何选择合适的模型？</h3>
+  <p>选择模型需要考虑多个因素：</p>
+
+  <h4>1. 任务类型</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>任务类型</th>
+      <th>推荐模型</th>
+      <th>原因</th>
+    </tr>
+    <tr>
+      <td><strong>简单对话</strong></td>
+      <td>7B-13B模型</td>
+      <td>成本低，效果足够</td>
+    </tr>
+    <tr>
+      <td><strong>代码生成</strong></td>
+      <td>Claude、GPT-4、DeepSeek-Coder</td>
+      <td>编程能力是核心竞争力</td>
+    </tr>
+    <tr>
+      <td><strong>长文档处理</strong></td>
+      <td>Claude（200K上下文）</td>
+      <td>超长上下文窗口</td>
+    </tr>
+    <tr>
+      <td><strong>中文任务</strong></td>
+      <td>Qwen、DeepSeek</td>
+      <td>中文训练数据多，效果好</td>
+    </tr>
+    <tr>
+      <td><strong>实时应用</strong></td>
+      <td>小模型+量化</td>
+      <td>速度优先，牺牲精度</td>
+    </tr>
+    <tr>
+      <td><strong>私有部署</strong></td>
+      <td>Llama、Qwen等开源模型</td>
+      <td>数据安全，成本可控</td>
+    </tr>
+  </table>
+
+  <h4>2. 计算资源</h4>
+  <ul>
+    <li><strong>消费级显卡（如RTX 4090 24GB）</strong>：7B INT4量化、13B INT4量化</li>
+    <li><strong>专业显卡（如A100 40-80GB）</strong>：70B INT4量化、13B FP16</li>
+    <li><strong>无GPU（纯CPU）</strong>：小模型（7B以下）+ INT4量化</li>
+    <li><strong>云端API</strong>：使用闭源模型（GPT-4、Claude），无需本地GPU</li>
+  </ul>
+
+  <h4>3. 成本考量</h4>
+  <div class="concept-box warning">
+    <h4><i class="fas fa-money-bill"></i> 成本对比</h4>
+    <p><strong>闭源模型API</strong>：<br/>
+    • GPT-4：约$0.03/1K tokens输入，$0.06/1K tokens输出<br/>
+    • Claude：约$0.008/1K tokens（Haiku），$0.03/1K tokens（Sonnet）<br/><br/>
+    <strong>开源模型自部署</strong>：<br/>
+    • GPU租赁：$1-3/小时（RTX 4090），$3-5/小时（A100）<br/>
+    • 适合高频使用、固定成本<br/><br/>
+    <strong>选择建议</strong>：<br/>
+    • 低频使用 → API更划算<br/>
+    • 高频使用 → 自部署更经济</p>
+  </div>
+
+  <h4>4. 数据隐私</h4>
+  <ul>
+    <li><strong>数据敏感</strong>：选择开源模型本地部署，数据不出本地</li>
+    <li><strong>数据不敏感</strong>：可以使用闭源API，效果更好</li>
+    <li><strong>企业数据</strong>：推荐私有部署或企业版API</li>
+  </ul>
+
+  <h3>开源 vs 闭源模型对比</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>维度</th>
+      <th>开源模型</th>
+      <th>闭源模型</th>
+    </tr>
+    <tr>
+      <td><strong>效果</strong></td>
+      <td>接近但略逊于闭源</td>
+      <td>通常最佳</td>
+    </tr>
+    <tr>
+      <td><strong>成本</strong></td>
+      <td>部署成本（GPU租赁）</td>
+      <td>API调用费用</td>
+    </tr>
+    <tr>
+      <td><strong>隐私</strong></td>
+      <td>完全可控，本地运行</td>
+      <td>数据上传到服务器</td>
+    </tr>
+    <tr>
+      <td><strong>定制</strong></td>
+      <td>可微调、可修改</td>
+      <td>无法修改，只能调用</td>
+    </tr>
+    <tr>
+      <td><strong>易用性</strong></td>
+      <td>需要技术能力部署</td>
+      <td>直接API调用，简单</td>
+    </tr>
+    <tr>
+      <td><strong>更新</strong></td>
+      <td>自己负责升级</td>
+      <td>厂商持续优化更新</td>
+    </tr>
+  </table>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-lightbulb"></i> 实用建议</h4>
+    <p><strong>新手入门</strong>：先用API（ChatGPT、Claude）体验，了解AI能力<br/>
+    <strong>进阶用户</strong>：部署开源模型（Llama-2-7B），学习模型调优<br/>
+    <strong>企业应用</strong>：根据数据敏感度选择API或私有部署<br/>
+    <strong>成本优化</strong>：高频任务用开源自部署，低频任务用API</p>
+  </div>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>模型是机器学习的核心产出，本质是包含大量参数的数学函数，将输入转换为预测输出。</li>
+    <li>大语言模型（LLM）基于Transformer架构，通过Token处理文本，逐个预测下一个Token来生成内容。</li>
+    <li>参数量是衡量模型规模的关键指标，参数越多效果越好但成本越高，呈现对数增长关系。</li>
+    <li>选型需要综合考虑任务类型、计算资源、成本和数据隐私四个维度。</li>
+    <li>开源模型提供隐私可控和可定制的优势，闭源模型在效果和易用性上更优，需根据场景选择。</li>
+  </ol>
+</div>
+
+<div class="exercise-box">
+  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+  <ol>
+    <li>
+      <p><strong>以下关于模型参数量的描述，哪个是正确的？</strong></p>
+      <p>A. 参数量与效果呈线性关系，参数翻倍效果翻倍<br/>B. 参数量越多效果越好，但边际收益递减<br/>C. 参数量对模型效果没有影响<br/>D. 参数量越少效果越好，因为更精简</p>
+      <p><strong>答案：B</strong>。参数量与效果呈对数增长关系，从小模型增大时效果提升显著，继续增大时边际收益递减。</p>
+    </li>
+    <li>
+      <p><strong>如果你的公司需要处理敏感数据且高频使用AI，应该选择哪种方案？</strong></p>
+      <p>A. 使用GPT-4 API<br/>B. 使用Claude API<br/>C. 本地部署开源模型（如Llama、Qwen）<br/>D. 使用免费在线AI工具</p>
+      <p><strong>答案：C</strong>。数据敏感需要本地部署保证隐私，高频使用自部署比API更经济，因此开源模型本地部署是最佳选择。</p>
+    </li>
+    <li>
+      <p><strong>Token是什么？以下哪个描述最准确？</strong></p>
+      <p>A. Token就是汉字<br/>B. Token就是英文单词<br/>C. Token是文本的最小处理单位，可以是词、字或词的一部分<br/>D. Token是模型的参数</p>
+      <p><strong>答案：C</strong>。Token是模型处理文本的最小单位，根据分词算法不同，可以是词、字或子词。</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+
+        </main>
+
+    </div>
+
+
+    <!-- ==================== 章节底部导航 ==================== -->
+    <nav class="chapter-nav-bottom" style="background: #f7fafc; border-top: 1px solid #e2e8f0; padding: 2rem; margin-top: 3rem;">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="ch05.html" class="prev-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                <i class="fas fa-arrow-left"></i> 上一章
+            </a>
+            <span style="color: #718096; font-size: 0.9rem;">第六章：模型</span>
+            <a href="ch07.html" class="next-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                下一章 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p><a href="ch06.html" style="color: rgba(255,255,255,0.9);">第六章：模型</a></p>
+                <p><a href="ch07.html" style="color: rgba(255,255,255,0.9);">第七章：训练</a></p>
+                <p><a href="ch08.html" style="color: rgba(255,255,255,0.9);">第八章：模型评估与调优</a></p>
+                <p><a href="ch09.html" style="color: rgba(255,255,255,0.9);">第九章：CNN</a></p>
+                <p><a href="ch10.html" style="color: rgba(255,255,255,0.9);">第十章：Transformer</a></p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+</body>
+</html>

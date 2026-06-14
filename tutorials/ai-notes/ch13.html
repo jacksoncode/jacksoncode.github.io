@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="第十三章：RAG（检索增强生成） - AI学习笔记">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习">
+    <meta name="author" content="AI Learner">
+    <title>第十三章：RAG（检索增强生成） - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== 章节导航样式 ========== */
+        .chapter-nav {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            margin-top: 64px;
+        }
+
+        .chapter-nav-bottom {
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chapter-nav-bottom a:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h3, .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h3, .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h3, .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h3, .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        .keyword-highlight {
+            background: linear-gradient(120deg, #ebf8ff 0%, #e6fffa 100%);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        /* ========== 页脚样式 ========== */
+        .footer {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav .breadcrumb,
+            .chapter-nav .chapter-links {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch06.html"><i class="fas fa-box"></i> 模型</a></li>
+            <li><a href="ch07.html"><i class="fas fa-dumbbell"></i> 训练</a></li>
+            <li><a href="ch08.html"><i class="fas fa-chart-bar"></i> 评估调优</a></li>
+            <li><a href="ch09.html"><i class="fas fa-th"></i> CNN</a></li>
+            <li><a href="ch10.html"><i class="fas fa-random"></i> Transformer</a></li>
+            <li><a href="ch11.html"><i class="fas fa-language"></i> LLM</a></li>
+            <li><a href="ch12.html"><i class="fas fa-rocket"></i> 推理部署</a></li>
+            <li><a href="ch13.html"><i class="fas fa-search"></i> RAG</a></li>
+            <li><a href="ch14.html"><i class="fas fa-arrows-alt"></i> 向量Embedding</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+
+    <!-- ==================== 章节导航 ==================== -->
+    <nav class="chapter-nav" style="background: #f7fafc; border-bottom: 1px solid #e2e8f0; padding: 1rem 2rem; margin-top: 64px;">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div class="breadcrumb" style="font-size: 0.9rem; color: #718096;">
+                <a href="../../index.html" style="color: #4299e1;"><i class="fas fa-home"></i> 首页</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <a href="index.html" style="color: #4299e1;">AI学习笔记</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <span style="color: #2d3748; font-weight: 600;">第十三章：RAG（检索增强生成）</span>
+            </div>
+            <div class="chapter-links" style="display: flex; gap: 1rem;">
+                <a href="ch12.html" class="prev-chapter" style="color: #4299e1; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> 上一章</a>
+                <a href="ch14.html" class="next-chapter" style="color: #4299e1; font-size: 0.9rem;">下一章 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第十三章：RAG（检索增强生成） -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-search"></i> 第十三章：RAG（检索增强生成）</h2>
+
+<div class="learning-objectives">
+  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+  <ul>
+    <li>理解RAG（Retrieval-Augmented Generation）的核心原理与价值</li>
+    <li>掌握RAG系统的核心组件和工作流程</li>
+    <li>了解文档切分策略、Embedding模型选择和向量数据库对比</li>
+    <li>能够使用LangChain构建简单的RAG应用</li>
+    <li>了解RAG系统的评估方法</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h3><i class="fas fa-book"></i> 前置要求</h3>
+  <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理和使用方法，以便理解RAG如何增强LLM的能力。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-puzzle-piece"></i> 什么是RAG？</h2>
+  <p><span class="keyword-highlight">RAG（Retrieval-Augmented Generation，检索增强生成）</span>是一种将信息检索与大语言模型生成相结合的技术。它先从外部知识库中检索相关信息，再将检索到的信息作为上下文提供给LLM，从而生成更准确、更有依据的回答。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-question-circle"></i> 为什么需要RAG？</h4>
+    <p>LLM存在以下局限性，RAG可以有效解决：</p>
+    <ul>
+      <li><strong>知识过时</strong>：LLM的训练数据有截止日期，无法获取最新信息</li>
+      <li><strong>幻觉问题</strong>：LLM可能"编造"不存在的信息，RAG通过提供真实文档来减少幻觉</li>
+      <li><strong>缺乏私有知识</strong>：LLM不了解企业内部文档、个人笔记等私有数据</li>
+      <li><strong>可追溯性差</strong>：纯LLM回答无法引用信息来源，RAG可以标注出处</li>
+    </ul>
+  </div>
+
+  <h3>RAG工作流程</h3>
+  <div class="flow-diagram">
+    <div class="flow-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>文档导入</h4>
+        <p>将PDF、网页、数据库等外部知识导入系统</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>文档切分</h4>
+        <p>将长文档切分为较小的文本块（Chunk）</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>向量化</h4>
+        <p>使用Embedding模型将文本块转换为向量表示</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>存储索引</h4>
+        <p>将向量存入向量数据库，建立索引</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>检索</h4>
+        <p>用户提问时，将问题向量化并在数据库中检索相关文档</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h4>生成</h4>
+        <p>将检索到的文档作为上下文，交给LLM生成回答</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>RAG的核心组件</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>组件</th>
+      <th>功能</th>
+      <th>常见选择</th>
+    </tr>
+    <tr>
+      <td><strong>文档加载器</strong></td>
+      <td>读取各种格式的文档（PDF、Word、网页等）</td>
+      <td>LangChain Loaders、LlamaIndex</td>
+    </tr>
+    <tr>
+      <td><strong>文本切分器</strong></td>
+      <td>将长文档切分为适合检索的文本块</td>
+      <td>RecursiveCharacterTextSplitter</td>
+    </tr>
+    <tr>
+      <td><strong>Embedding模型</strong></td>
+      <td>将文本转换为向量表示</td>
+      <td>OpenAI、Sentence-BERT、BGE</td>
+    </tr>
+    <tr>
+      <td><strong>向量数据库</strong></td>
+      <td>存储和检索向量</td>
+      <td>Chroma、Milvus、Pinecone</td>
+    </tr>
+  </table>
+
+  <h3>RAG的优势</h3>
+  <ul>
+    <li><strong>减少幻觉</strong>：基于真实文档生成回答，提高准确性</li>
+    <li><strong>知识可更新</strong>：只需更新向量数据库中的文档，无需重新训练模型</li>
+    <li><strong>支持私有数据</strong>：可以整合企业内部知识库</li>
+    <li><strong>可追溯来源</strong>：回答可以标注引用的文档来源</li>
+    <li><strong>成本更低</strong>：相比微调，RAG的实现成本更低、速度更快</li>
+  </ul>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-cut"></i> 文档切分策略</h2>
+  <p>文档切分（Chunking）是RAG系统中至关重要的一步，切分策略直接影响检索质量。</p>
+
+  <table class="comparison-table">
+    <tr>
+      <th>切分策略</th>
+      <th>原理</th>
+      <th>优点</th>
+      <th>缺点</th>
+      <th>适用场景</th>
+    </tr>
+    <tr>
+      <td><strong>按段落切分</strong></td>
+      <td>以段落分隔符（换行、空行）为边界切分</td>
+      <td>保持语义完整性</td>
+      <td>段落长度不一，可能过长或过短</td>
+      <td>结构化文档（文章、报告）</td>
+    </tr>
+    <tr>
+      <td><strong>按Token切分</strong></td>
+      <td>按固定Token数量切分</td>
+      <td>长度均匀，便于管理</td>
+      <td>可能切断语义完整的句子</td>
+      <td>需要精确控制上下文长度</td>
+    </tr>
+    <tr>
+      <td><strong>重叠窗口切分</strong></td>
+      <td>固定长度切分，相邻块之间保留重叠部分</td>
+      <td>兼顾长度控制和语义完整性</td>
+      <td>存储冗余，检索结果可能重复</td>
+      <td>通用场景（推荐）</td>
+    </tr>
+  </table>
+
+  <p>推荐使用<strong>重叠窗口切分</strong>，通常设置块大小为500-1000个Token，重叠比例为10%-20%。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-brain"></i> Embedding模型选择</h2>
+
+  <table class="comparison-table">
+    <tr>
+      <th>模型</th>
+      <th>开发者</th>
+      <th>维度</th>
+      <th>最大长度</th>
+      <th>多语言支持</th>
+      <th>特点</th>
+    </tr>
+    <tr>
+      <td><strong>text-embedding-3-small</strong></td>
+      <td>OpenAI</td>
+      <td>1536</td>
+      <td>8191</td>
+      <td>较好</td>
+      <td>效果好、API调用简单、需付费</td>
+    </tr>
+    <tr>
+      <td><strong>all-MiniLM-L6-v2</strong></td>
+      <td>Sentence-BERT</td>
+      <td>384</td>
+      <td>256</td>
+      <td>一般</td>
+      <td>轻量快速、适合英文</td>
+    </tr>
+    <tr>
+      <td><strong>bge-large-zh-v1.5</strong></td>
+      <td>BAAI (BGE)</td>
+      <td>1024</td>
+      <td>512</td>
+      <td>优秀（中文）</td>
+      <td>中文效果出色、开源免费</td>
+    </tr>
+    <tr>
+      <td><strong>m3e-base</strong></td>
+      <td>Moka (M3E)</td>
+      <td>768</td>
+      <td>512</td>
+      <td>良好（中文）</td>
+      <td>中文场景常用、开源免费</td>
+    </tr>
+  </table>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-database"></i> 向量数据库详细对比</h2>
+
+  <table class="comparison-table">
+    <tr>
+      <th>数据库</th>
+      <th>特点</th>
+      <th>适用场景</th>
+      <th>是否开源</th>
+    </tr>
+    <tr>
+      <td><strong>Pinecone</strong></td>
+      <td>全托管云服务、无需运维、自动扩展</td>
+      <td>快速上线、不想管理基础设施的团队</td>
+      <td>否（商业服务）</td>
+    </tr>
+    <tr>
+      <td><strong>Weaviate</strong></td>
+      <td>支持混合搜索（向量+关键词）、GraphQL API</td>
+      <td>需要同时支持向量和关键词搜索的场景</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td><strong>Milvus</strong></td>
+      <td>分布式架构、支持十亿级向量、性能极高</td>
+      <td>大规模生产环境、海量数据检索</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td><strong>Chroma</strong></td>
+      <td>轻量级、嵌入式、Python友好、上手极简</td>
+      <td>开发测试、小规模应用、快速原型</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td><strong>Qdrant</strong></td>
+      <td>Rust编写、高性能、支持过滤、API丰富</td>
+      <td>高性能需求、需要复杂过滤条件</td>
+      <td>是</td>
+    </tr>
+  </table>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-code"></i> 使用LangChain构建简单RAG</h2>
+
+  <pre><code class="language-python">from langchain_community.document_loaders import TextLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_community.llms import Ollama
+from langchain.chains import RetrievalQA
+
+# 1. 加载文档
+loader = TextLoader("knowledge_base.txt", encoding="utf-8")
+documents = loader.load()
+
+# 2. 切分文档
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,       # 每块最大500个字符
+    chunk_overlap=50,    # 块之间重叠50个字符
+    separators=["\n\n", "\n", "。", "！", "？", " ", ""]
+)
+chunks = text_splitter.split_documents(documents)
+print(f"文档被切分为 {len(chunks)} 个文本块")
+
+# 3. 初始化Embedding模型
+embeddings = HuggingFaceEmbeddings(
+    model_name="BAAI/bge-large-zh-v1.5"  # 中文Embedding模型
+)
+
+# 4. 创建向量数据库
+vectorstore = Chroma.from_documents(
+    documents=chunks,
+    embedding=embeddings,
+    persist_directory="./chroma_db"  # 持久化存储目录
+)
+
+# 5. 创建检索器
+retriever = vectorstore.as_retriever(
+    search_kwargs={"k": 3}  # 检索最相关的3个文本块
+)
+
+# 6. 初始化LLM
+llm = Ollama(model="qwen2.5:7b")  # 使用本地Ollama运行
+
+# 7. 构建RAG链
+qa_chain = RetrievalQA.from_chain_type(
+    llm=llm,
+    chain_type="stuff",     # 将所有检索结果拼接到一起
+    retriever=retriever,
+    return_source_documents=True
+)
+
+# 8. 提问
+question = "什么是机器学习？"
+result = qa_chain({"query": question})
+
+print(f"问题：{question}")
+print(f"回答：{result['result']}")
+print(f"引用来源：{[doc.metadata for doc in result['source_documents']]}")</code></pre>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-chart-line"></i> RAG评估方法</h2>
+  <p>评估RAG系统的质量需要从检索和生成两个维度进行：</p>
+
+  <table class="comparison-table">
+    <tr>
+      <th>评估维度</th>
+      <th>指标</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td><strong>检索质量</strong></td>
+      <td>检索准确率（Precision@K）</td>
+      <td>检索返回的K个文档中，有多少是真正相关的</td>
+    </tr>
+    <tr>
+      <td><strong>检索质量</strong></td>
+      <td>检索召回率（Recall@K）</td>
+      <td>所有相关文档中，有多少被成功检索到</td>
+    </tr>
+    <tr>
+      <td><strong>生成质量</strong></td>
+      <td>回答相关性</td>
+      <td>生成的回答是否与问题相关</td>
+    </tr>
+    <tr>
+      <td><strong>生成质量</strong></td>
+      <td>回答忠实度（Faithfulness）</td>
+      <td>回答是否基于检索到的文档，而非编造</td>
+    </tr>
+    <tr>
+      <td><strong>整体质量</strong></td>
+      <td>端到端准确率</td>
+      <td>最终回答的正确性和完整性</td>
+    </tr>
+  </table>
+
+  <p>常用评估框架：<strong>RAGAS</strong>（RAG Assessment）是一个专门用于评估RAG系统的开源框架，提供上述指标的自动化计算。</p>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>RAG通过"检索+生成"的范式，将外部知识库与大语言模型结合，有效解决了LLM的知识过时、幻觉和私有数据缺失等问题。</li>
+    <li>RAG的核心流程包括：文档导入→切分→向量化→存储索引→检索→生成，每个环节都有多种策略和工具可选。</li>
+    <li>文档切分推荐使用重叠窗口策略（500-1000 Token，10%-20%重叠），Embedding模型中文场景推荐BGE或M3E。</li>
+    <li>向量数据库选择需考虑规模和场景：Chroma适合开发测试，Milvus适合大规模生产，Pinecone适合不想运维的团队。</li>
+    <li>RAG评估需从检索质量（准确率、召回率）和生成质量（相关性、忠实度）两个维度综合考量。</li>
+  </ol>
+</div>
+
+<div class="exercise-box">
+  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+  <ol>
+    <li>
+      <p><strong>RAG系统的主要目的是什么？</strong></p>
+      <p>A. 训练更大的语言模型<br/>B. 让LLM能够利用外部知识库来增强回答<br/>C. 替代LLM进行文本生成<br/>D. 加速模型的训练过程</p>
+      <p><strong>答案：B</strong>。RAG的核心目的是通过检索外部知识来增强LLM的生成能力，使回答更加准确、有依据。</p>
+    </li>
+    <li>
+      <p><strong>在RAG系统中，文档切分时使用"重叠窗口"策略的主要好处是什么？</strong></p>
+      <p>A. 减少存储空间<br/>B. 避免在切分边界处丢失上下文信息<br/>C. 加快检索速度<br/>D. 减少Embedding的计算量</p>
+      <p><strong>答案：B</strong>。重叠窗口策略让相邻文本块之间保留部分重叠内容，确保即使关键信息恰好位于切分边界处，也不会被遗漏。</p>
+    </li>
+    <li>
+      <p><strong>以下哪个向量数据库最适合快速原型开发和小规模应用？</strong></p>
+      <p>A. Milvus<br/>B. Pinecone<br/>C. Chroma<br/>D. Qdrant</p>
+      <p><strong>答案：C</strong>。Chroma是轻量级、嵌入式、Python友好的向量数据库，非常适合开发测试和小规模应用场景。</p>
+    </li>
+  </ol>
+</div>
+<!-- ============================================================ -->
+
+        </main>
+
+    </div>
+
+
+    <!-- ==================== 章节底部导航 ==================== -->
+    <nav class="chapter-nav-bottom" style="background: #f7fafc; border-top: 1px solid #e2e8f0; padding: 2rem; margin-top: 3rem;">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="ch12.html" class="prev-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                <i class="fas fa-arrow-left"></i> 上一章
+            </a>
+            <span style="color: #718096; font-size: 0.9rem;">第十三章：RAG（检索增强生成）</span>
+            <a href="ch14.html" class="next-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                下一章 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p><a href="ch06.html" style="color: rgba(255,255,255,0.9);">第六章：模型</a></p>
+                <p><a href="ch07.html" style="color: rgba(255,255,255,0.9);">第七章：训练</a></p>
+                <p><a href="ch08.html" style="color: rgba(255,255,255,0.9);">第八章：模型评估与调优</a></p>
+                <p><a href="ch09.html" style="color: rgba(255,255,255,0.9);">第九章：CNN</a></p>
+                <p><a href="ch10.html" style="color: rgba(255,255,255,0.9);">第十章：Transformer</a></p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+</body>
+</html>

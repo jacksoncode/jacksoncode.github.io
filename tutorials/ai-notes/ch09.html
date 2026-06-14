@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="第九章：卷积神经网络（CNN） - AI学习笔记">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习">
+    <meta name="author" content="AI Learner">
+    <title>第九章：卷积神经网络（CNN） - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== 章节导航样式 ========== */
+        .chapter-nav {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            margin-top: 64px;
+        }
+
+        .chapter-nav-bottom {
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chapter-nav-bottom a:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h3, .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h3, .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h3, .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h3, .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        .keyword-highlight {
+            background: linear-gradient(120deg, #ebf8ff 0%, #e6fffa 100%);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        /* ========== 页脚样式 ========== */
+        .footer {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav .breadcrumb,
+            .chapter-nav .chapter-links {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch06.html"><i class="fas fa-box"></i> 模型</a></li>
+            <li><a href="ch07.html"><i class="fas fa-dumbbell"></i> 训练</a></li>
+            <li><a href="ch08.html"><i class="fas fa-chart-bar"></i> 评估调优</a></li>
+            <li><a href="ch09.html"><i class="fas fa-th"></i> CNN</a></li>
+            <li><a href="ch10.html"><i class="fas fa-random"></i> Transformer</a></li>
+            <li><a href="ch11.html"><i class="fas fa-language"></i> LLM</a></li>
+            <li><a href="ch12.html"><i class="fas fa-rocket"></i> 推理部署</a></li>
+            <li><a href="ch13.html"><i class="fas fa-search"></i> RAG</a></li>
+            <li><a href="ch14.html"><i class="fas fa-arrows-alt"></i> 向量Embedding</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+
+    <!-- ==================== 章节导航 ==================== -->
+    <nav class="chapter-nav" style="background: #f7fafc; border-bottom: 1px solid #e2e8f0; padding: 1rem 2rem; margin-top: 64px;">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div class="breadcrumb" style="font-size: 0.9rem; color: #718096;">
+                <a href="../../index.html" style="color: #4299e1;"><i class="fas fa-home"></i> 首页</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <a href="index.html" style="color: #4299e1;">AI学习笔记</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <span style="color: #2d3748; font-weight: 600;">第九章：卷积神经网络（CNN）</span>
+            </div>
+            <div class="chapter-links" style="display: flex; gap: 1rem;">
+                <a href="ch08.html" class="prev-chapter" style="color: #4299e1; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> 上一章</a>
+                <a href="ch10.html" class="next-chapter" style="color: #4299e1; font-size: 0.9rem;">下一章 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第九章：卷积神经网络（CNN） -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-th"></i> 第九章：卷积神经网络（CNN）</h2>
+
+<div class="learning-objectives">
+  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+  <ul>
+    <li>理解CNN的定义及其为什么适合处理图像</li>
+    <li>掌握卷积操作的原理和特征提取的层次性</li>
+    <li>理解池化层和全连接层的作用</li>
+    <li>了解经典CNN架构（AlexNet、VGG、ResNet等）</li>
+    <li>能够使用PyTorch构建简单的CNN模型</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h3><i class="fas fa-book"></i> 前置要求</h3>
+  <p>第五章：深度学习概述（理解神经网络的基本结构和激活函数）。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-image"></i> CNN概述</h2>
+  <p><span class="keyword-highlight">CNN（Convolutional Neural Network，卷积神经网络）</span>专门处理图像数据，能自动识别图像中的特征。它是图像识别、目标检测、人脸识别等视觉任务的核心技术。</p>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-lightbulb"></i> 为什么CNN适合处理图像？</h4>
+    <p>图像是由像素组成的网格，相邻像素之间有关系（比如边缘是一条连续的线）。CNN能<strong>保留空间关系</strong>，不像传统方法把图像变成一串数字。它用"小窗口"扫描图像，就像人用眼睛逐区域观察一样。</p>
+  </div>
+
+  <h3>CNN核心组件详解</h3>
+
+  <h4>1. 卷积层——特征提取的核心</h4>
+  <p><span class="keyword-highlight">卷积层</span>是CNN最重要的部分。它使用<span class="keyword-highlight">滤波器（Filter/Kernel）</span>在图像上滑动扫描，提取各种特征。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-search"></i> 滤波器是什么？</h4>
+    <p>滤波器是一个小矩阵（比如3×3），里面放着不同的数字权重。<br/>
+    • <strong>边缘滤波器</strong>：能检测图像中的线条和边缘<br/>
+    • <strong>纹理滤波器</strong>：能识别特定的纹理模式<br/>
+    • <strong>颜色滤波器</strong>：能检测特定的颜色分布<br/><br/>
+    一个卷积层可能有几十到几百个不同的滤波器，每个学习识别一种特征。</p>
+  </div>
+
+  <h4>卷积操作的原理</h4>
+  <p>想象你有一个小窗口（3×3像素），在图像上从左到右、从上到下滑动：</p>
+  <ol>
+    <li><strong>定位</strong>：窗口放在图像的某个位置</li>
+    <li><strong>计算</strong>：窗口内的像素值与滤波器权重相乘，然后求和</li>
+    <li><strong>输出</strong>：得到一个新的数值（特征值）</li>
+    <li><strong>移动</strong>：窗口向右移动一格，重复上述过程</li>
+    <li><strong>完成</strong>：扫描完整个图像，生成一张"特征图"</li>
+  </ol>
+
+  <div class="flow-diagram">
+    <div class="flow-item">输入图像<br/>（224×224像素）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">卷积层<br/>（多个滤波器扫描）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">特征图<br/>（每张对应一种特征）</div>
+  </div>
+
+  <h4>卷积操作的Python/NumPy代码示例</h4>
+  <pre><code class="language-python">import numpy as np
+
+# 简单的5x5输入图像（灰度）
+image = np.array([
+    [10, 10, 10,  0,  0],
+    [10, 10, 10,  0,  0],
+    [10, 10, 10,  0,  0],
+    [ 0,  0,  0, 10, 10],
+    [ 0,  0,  0, 10, 10]
+], dtype=float)
+
+# 3x3边缘检测滤波器（水平边缘）
+kernel = np.array([
+    [-1, -1, -1],
+    [ 0,  0,  0],
+    [ 1,  1,  1]
+], dtype=float)
+
+# 手动实现2D卷积
+def conv2d(image, kernel):
+    ih, iw = image.shape
+    kh, kw = kernel.shape
+    oh, ow = ih - kh + 1, iw - kw + 1
+    output = np.zeros((oh, ow))
+    for i in range(oh):
+        for j in range(ow):
+            region = image[i:i+kh, j:j+kw]
+            output[i, j] = np.sum(region * kernel)
+    return output
+
+result = conv2d(image, kernel)
+print("卷积结果（特征图）：")
+print(result)
+# 输出: 检测到水平边缘的位置会有较大数值</code></pre>
+
+  <h4>特征提取的层次性</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>层数</th>
+      <th>提取的特征</th>
+      <th>例子</th>
+    </tr>
+    <tr>
+      <td><strong>浅层（第1-2层）</strong></td>
+      <td>基础视觉元素</td>
+      <td>边缘、线条、简单颜色块</td>
+    </tr>
+    <tr>
+      <td><strong>中层（第3-5层）</strong></td>
+      <td>形状和部件</td>
+      <td>圆形、方形、眼睛形状、轮子形状</td>
+    </tr>
+    <tr>
+      <td><strong>深层（第6-N层）</strong></td>
+      <td>完整物体</td>
+      <td>人脸、汽车、猫、狗的整体形态</td>
+    </tr>
+  </table>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-cat"></i> 实例：CNN如何识别一张猫的照片</h4>
+    <p><strong>第1层卷积</strong>：检测到边缘线条 → 发现猫轮廓的边界<br/>
+    <strong>第2层卷积</strong>：检测到形状 → 发现圆形的眼睛、三角形的耳朵<br/>
+    <strong>第3层卷积</strong>：检测到部件 → 眼睛+耳朵+胡须的组合<br/>
+    <strong>第4层卷积</strong>：检测到整体 → "这像是猫的脸"<br/>
+    <strong>全连接层</strong>：综合判断 → 输出"这是猫（概率98%）"</p>
+  </div>
+
+  <h4>2. 池化层——降维与关键特征保留</h4>
+  <p><span class="keyword-highlight">池化层</span>的作用是缩小特征图的尺寸，同时保留最重要的特征信息。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-compress-arrows-alt"></i> 为什么需要池化？</h4>
+    <p>• <strong>减少计算量</strong>：特征图太大，计算成本高<br/>
+    • <strong>防止过拟合</strong>：去除过多细节，保留核心特征<br/>
+    • <strong>增强鲁棒性</strong>：即使图像稍微移动、缩放，关键特征仍能被识别</p>
+  </div>
+
+  <h4>常见池化方式</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>池化类型</th>
+      <th>原理</th>
+      <th>特点</th>
+    </tr>
+    <tr>
+      <td><strong>最大池化（Max Pooling）</strong></td>
+      <td>在区域内取最大值</td>
+      <td>保留最强特征，最常用</td>
+    </tr>
+    <tr>
+      <td><strong>平均池化（Average Pooling）</strong></td>
+      <td>在区域内取平均值</td>
+      <td>保留整体趋势，较平滑</td>
+    </tr>
+  </table>
+
+  <h4>3. 全连接层——最终分类决策</h4>
+  <p><span class="keyword-highlight">全连接层</span>将前面提取的所有特征综合起来，做出最终判断。</p>
+  <ul>
+    <li><strong>接收输入</strong>：来自最后一层卷积/池化的特征</li>
+    <li><strong>综合判断</strong>：将所有特征"投票"决定类别</li>
+    <li><strong>输出结果</strong>：每个类别的概率值（如：猫90%、狗5%、鸟5%）</li>
+  </ul>
+
+  <div class="flow-diagram">
+    <div class="flow-item">输入图像</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">卷积层<br/>（多次）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">池化层<br/>（穿插）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">全连接层</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">输出分类</div>
+  </div>
+
+  <h3>著名CNN架构</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>架构</th>
+      <th>年份</th>
+      <th>特点</th>
+      <th>贡献</th>
+    </tr>
+    <tr>
+      <td><strong>AlexNet</strong></td>
+      <td>2012</td>
+      <td>8层，首次使用ReLU</td>
+      <td>开启深度学习时代</td>
+    </tr>
+    <tr>
+      <td><strong>VGG</strong></td>
+      <td>2014</td>
+      <td>16-19层，结构简洁</td>
+      <td>证明层数深效果好</td>
+    </tr>
+    <tr>
+      <td><strong>ResNet</strong></td>
+      <td>2015</td>
+      <td>残差连接，突破100层</td>
+      <td>解决深层网络训练难问题</td>
+    </tr>
+    <tr>
+      <td><strong>YOLO</strong></td>
+      <td>2016</td>
+      <td>实时目标检测</td>
+      <td>速度与精度平衡</td>
+    </tr>
+  </table>
+
+  <div class="concept-box warning">
+    <h4><i class="fas fa-exclamation-triangle"></i> CNN的局限</h4>
+    <p>• 主要处理图像，不适合序列数据（文本、语音）<br/>
+    • 对图像旋转、翻转敏感（需要数据增强）<br/>
+    • 需要大量标注数据训练<br/>
+    • 计算资源需求较大</p>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-code"></i> 使用PyTorch构建简单CNN</h2>
+  <p>下面展示如何用PyTorch构建一个用于图像分类的简单CNN：</p>
+  <pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class SimpleCNN(nn.Module):
+    """简单的CNN模型，用于手写数字识别（MNIST）"""
+
+    def __init__(self):
+        super(SimpleCNN, self).__init__()
+        # 第一个卷积层：1通道输入，32个滤波器，3x3窗口
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
+        # 第二个卷积层：32通道输入，64个滤波器
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        # 全连接层
+        self.fc1 = nn.Linear(64 * 7 * 7, 128)  # 28x28图像经过两次池化后为7x7
+        self.fc2 = nn.Linear(128, 10)             # 10个类别（数字0-9）
+        # Dropout层防止过拟合
+        self.dropout = nn.Dropout(0.25)
+
+    def forward(self, x):
+        # 第一层：卷积 → ReLU → 最大池化
+        x = F.relu(self.conv1(x))      # 输出: 32 x 28 x 28
+        x = F.max_pool2d(x, 2)         # 输出: 32 x 14 x 14
+
+        # 第二层：卷积 → ReLU → 最大池化
+        x = F.relu(self.conv2(x))      # 输出: 64 x 14 x 14
+        x = F.max_pool2d(x, 2)         # 输出: 64 x 7 x 7
+
+        # 展平为一维向量
+        x = x.view(-1, 64 * 7 * 7)     # 输出: 3136
+
+        # 全连接层 + Dropout
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.fc2(x)                # 输出: 10（各类别得分）
+
+        return x
+
+# 创建模型实例
+model = SimpleCNN()
+print(f"模型参数总量: {sum(p.numel() for p in model.parameters()):,}")
+# 输出: 模型参数总量: 540,850
+
+# 模拟前向传播
+dummy_input = torch.randn(1, 1, 28, 28)  # 批量大小1，1通道，28x28图像
+output = model(dummy_input)
+print(f"输出形状: {output.shape}")  # 输出: torch.Size([1, 10])</code></pre>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>CNN是专为图像处理设计的深度学习架构，通过卷积操作保留空间关系，逐层提取从简单到复杂的特征。</li>
+    <li>卷积层使用滤波器在图像上滑动扫描，提取边缘、形状、物体等层次化特征。</li>
+    <li>池化层缩小特征图尺寸，减少计算量并增强鲁棒性；全连接层综合所有特征做出分类决策。</li>
+    <li>经典CNN架构包括AlexNet（开启深度学习时代）、VGG（证明深层有效）、ResNet（残差连接突破深度限制）。</li>
+    <li>CNN的局限包括：主要处理图像、对旋转敏感、需要大量标注数据和计算资源。</li>
+  </ol>
+</div>
+
+<div class="exercise-box">
+  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+  <ol>
+    <li>
+      <p><strong>CNN中卷积层的主要作用是什么？</strong></p>
+      <p>A. 将图像展平为一维向量<br/>B. 使用滤波器在图像上滑动扫描，提取特征<br/>C. 将特征图缩小到固定尺寸<br/>D. 计算各类别的概率</p>
+      <p><strong>答案：B</strong>。卷积层使用滤波器在图像上滑动扫描，通过加权求和提取各种特征。</p>
+    </li>
+    <li>
+      <p><strong>以下哪种池化方式最常用于CNN中？</strong></p>
+      <p>A. 最小池化（Min Pooling）<br/>B. 中值池化（Median Pooling）<br/>C. 最大池化（Max Pooling）<br/>D. 随机池化（Random Pooling）</p>
+      <p><strong>答案：C</strong>。最大池化在区域内取最大值，保留最强特征，是CNN中最常用的池化方式。</p>
+    </li>
+    <li>
+      <p><strong>ResNet的核心创新是什么？</strong></p>
+      <p>A. 使用更大的滤波器<br/>B. 引入残差连接（跳跃连接）<br/>C. 去掉全连接层<br/>D. 使用循环结构</p>
+      <p><strong>答案：B</strong>。ResNet通过残差连接（跳跃连接）让梯度可以直接流过浅层，解决了深层网络训练困难的问题。</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+
+        </main>
+
+    </div>
+
+
+    <!-- ==================== 章节底部导航 ==================== -->
+    <nav class="chapter-nav-bottom" style="background: #f7fafc; border-top: 1px solid #e2e8f0; padding: 2rem; margin-top: 3rem;">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="ch08.html" class="prev-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                <i class="fas fa-arrow-left"></i> 上一章
+            </a>
+            <span style="color: #718096; font-size: 0.9rem;">第九章：卷积神经网络（CNN）</span>
+            <a href="ch10.html" class="next-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                下一章 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p><a href="ch06.html" style="color: rgba(255,255,255,0.9);">第六章：模型</a></p>
+                <p><a href="ch07.html" style="color: rgba(255,255,255,0.9);">第七章：训练</a></p>
+                <p><a href="ch08.html" style="color: rgba(255,255,255,0.9);">第八章：模型评估与调优</a></p>
+                <p><a href="ch09.html" style="color: rgba(255,255,255,0.9);">第九章：CNN</a></p>
+                <p><a href="ch10.html" style="color: rgba(255,255,255,0.9);">第十章：Transformer</a></p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+</body>
+</html>

@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI学习笔记 - 从零开始系统学习人工智能，涵盖前置基础、核心原理、工程实践、应用工具、进阶展望">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习, Python, 数学基础">
+    <meta name="author" content="AI Learner">
+    <title>第十五章：AI智能体（Agent） - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section 样式 ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-toggle {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .math-block .math-toggle:hover {
+            color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block-header .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c5c8c6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .code-block-header .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 知识点标记 ========== */
+        .knowledge-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+        }
+
+        .knowledge-point i {
+            font-size: 0.75rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
+            <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
+            <li><a href="ch17.html"><i class="fas fa-book-open"></i> 知识库</a></li>
+            <li><a href="ch18.html"><i class="fas fa-layer-group"></i> 记忆</a></li>
+            <li><a href="ch19.html"><i class="fas fa-comment-dots"></i> 提示</a></li>
+            <li><a href="ch20.html"><i class="fas fa-database"></i> 数据</a></li>
+            <li><a href="ch21.html"><i class="fas fa-exclamation-circle"></i> 局限</a></li>
+            <li><a href="ch22.html"><i class="fas fa-toolbox"></i> 平台</a></li>
+            <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
+            <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ==================== Hero Section ==================== -->
+    <section class="hero-section">
+        <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
+        <p>第十五章：AI智能体（Agent）</p>
+        <div class="hero-badges">
+            <span class="hero-badge"><i class="fas fa-book"></i> 系统学习</span>
+            <span class="hero-badge"><i class="fas fa-code"></i> 实践导向</span>
+        </div>
+    </section>
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+<nav class="chapter-nav">
+  <div class="breadcrumb">
+    <a href="../../index.html"><i class="fas fa-home"></i> 首页</a>
+    <span class="separator">/</span>
+    <span class="current">第十五章：AI智能体（Agent）</span>
+  </div>
+  <div class="chapter-nav-links">
+    <a href="ch14.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+    <a href="ch16.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+  </div>
+</nav>
+<!-- 第十五章：AI智能体（Agent） -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-robot"></i> 第十五章：AI智能体（Agent）</h2>
+
+<div class="learning-objectives">
+  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+  <ul>
+    <li>理解AI智能体（Agent）的概念和核心能力</li>
+    <li>掌握Agent的工作流程和关键组件</li>
+    <li>理解ReAct模式和Function Calling机制</li>
+    <li>能够使用LangChain构建简单的Agent</li>
+    <li>了解Agent的评估维度</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h3><i class="fas fa-book"></i> 前置要求</h3>
+  <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理，因为Agent的核心"大脑"通常就是一个LLM。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-robot"></i> 什么是AI智能体（Agent）？</h2>
+  <p><span class="keyword-highlight">AI智能体（AI Agent）</span>是一种能够自主感知环境、做出决策并执行动作的AI系统。与普通LLM只能"对话"不同，Agent可以主动使用工具、调用API、规划任务，像一个"数字员工"一样完成复杂工作。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 简单理解</h4>
+    <p>普通LLM就像一个"被关在房间里只能说话的专家"，而Agent就像一个"可以走出门、使用工具、与人协作的全能助手"。Agent = LLM + 工具 + 记忆 + 规划能力。</p>
+  </div>
+
+  <h3>Agent的核心能力</h3>
+  <div class="diagram-section">
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-brain"></i></div>
+      <h4>感知</h4>
+      <p>理解用户意图和环境状态</p>
+    </div>
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-sitemap"></i></div>
+      <h4>规划</h4>
+      <p>将复杂任务分解为子任务</p>
+    </div>
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-tools"></i></div>
+      <h4>执行</h4>
+      <p>调用工具和API完成任务</p>
+    </div>
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-memory"></i></div>
+      <h4>记忆</h4>
+      <p>存储和回忆历史信息</p>
+    </div>
+  </div>
+
+  <h3>Agent工作流程</h3>
+  <div class="flow-diagram">
+    <div class="flow-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>接收任务</h4>
+        <p>用户输入任务描述</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>理解与规划</h4>
+        <p>LLM理解任务，制定执行计划</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>选择工具</h4>
+        <p>根据任务需要选择合适的工具</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>执行动作</h4>
+        <p>调用工具执行具体操作</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>观察结果</h4>
+        <p>获取执行结果，判断是否完成</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h4>返回结果</h4>
+        <p>向用户返回最终结果或继续下一步</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Agent的关键组件</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>组件</th>
+      <th>功能</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td><strong>LLM（大脑）</strong></td>
+      <td>理解、推理、决策</td>
+      <td>Agent的核心，负责理解任务和制定计划</td>
+    </tr>
+    <tr>
+      <td><strong>工具（Tools）</strong></td>
+      <td>执行具体操作</td>
+      <td>如搜索、计算、API调用、文件操作等</td>
+    </tr>
+    <tr>
+      <td><strong>记忆（Memory）</strong></td>
+      <td>存储信息</td>
+      <td>短期记忆（对话历史）和长期记忆（知识库）</td>
+    </tr>
+    <tr>
+      <td><strong>规划（Planning）</strong></td>
+      <td>任务分解与调度</td>
+      <td>将复杂任务拆解为可执行的子任务序列</td>
+    </tr>
+  </table>
+
+  <h3>常见的Agent类型</h3>
+  <ul>
+    <li><strong>ReAct Agent</strong>：基于推理（Reasoning）和行动（Acting）交替的Agent模式</li>
+    <li><strong>Plan-and-Execute Agent</strong>：先制定完整计划，再逐步执行</li>
+    <li><strong>Multi-Agent</strong>：多个Agent协作完成复杂任务</li>
+    <li><strong>AutoGPT</strong>：高度自主的Agent，可以自行设定目标和子任务</li>
+  </ul>
+
+  <p>常见Agent框架：<strong>LangChain Agents</strong>、<strong>AutoGen</strong>、<strong>CrewAI</strong>、<strong>MetaGPT</strong></p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-sync-alt"></i> ReAct模式详解</h2>
+  <p><span class="keyword-highlight">ReAct（Reasoning + Acting）</span>是一种让LLM交替进行"思考"和"行动"的Agent模式。LLM先推理下一步该做什么（Thought），然后执行具体操作（Action），再观察结果（Observation），如此循环直到任务完成。</p>
+
+  <h3>ReAct循环流程</h3>
+  <div class="flow-diagram">
+    <div class="flow-step">
+      <div class="step-number">T</div>
+      <div class="step-content">
+        <h4>Thought（思考）</h4>
+        <p>分析当前状态，决定下一步操作</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+    <div class="flow-step">
+      <div class="step-number">A</div>
+      <div class="step-content">
+        <h4>Action（行动）</h4>
+        <p>调用工具执行具体操作</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+    <div class="flow-step">
+      <div class="step-number">O</div>
+      <div class="step-content">
+        <h4>Observation（观察）</h4>
+        <p>获取工具返回的结果</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-left"></i></div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-comment-dots"></i> ReAct示例</h4>
+    <p><strong>用户</strong>：北京今天天气怎么样？需要带伞吗？</p>
+    <p><strong>Thought 1</strong>：用户想知道北京今天的天气和是否需要带伞。我需要先查询北京的天气信息。</p>
+    <p><strong>Action 1</strong>：调用天气查询工具，参数：城市="北京"</p>
+    <p><strong>Observation 1</strong>：北京今天：多云转小雨，气温18-25°C，降水概率70%</p>
+    <p><strong>Thought 2</strong>：天气显示有小雨，降水概率70%，建议带伞。</p>
+    <p><strong>Action 2</strong>：返回最终答案</p>
+    <p><strong>Final Answer</strong>：北京今天多云转小雨，气温18-25°C，降水概率较高（70%），建议出门带伞。</p>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-phone-alt"></i> Function Calling机制详解</h2>
+  <p><span class="keyword-highlight">Function Calling</span>是让LLM能够调用外部函数（工具）的机制。LLM本身只能生成文本，但通过Function Calling，它可以输出结构化的函数调用指令，由外部系统执行后返回结果。</p>
+
+  <h3>Function Calling流程</h3>
+  <div class="flow-diagram">
+    <div class="flow-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>定义工具</h4>
+        <p>向LLM描述可用工具的名称、参数和功能</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>用户提问</h4>
+        <p>用户输入问题</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>LLM决策</h4>
+        <p>LLM判断是否需要调用工具，输出函数名和参数</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>执行函数</h4>
+        <p>外部系统执行函数，返回结果给LLM</p>
+      </div>
+    </div>
+    <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+    <div class="flow-step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>生成回答</h4>
+        <p>LLM根据函数结果生成最终回答</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-cloud-sun"></i> Function Calling示例：天气查询</h4>
+    <p><strong>工具定义</strong>：</p>
+    <p>函数名：<code>get_weather</code>，参数：<code>city</code>（字符串，城市名称），返回：天气信息JSON</p>
+    <p><strong>用户</strong>：上海今天天气如何？</p>
+    <p><strong>LLM输出</strong>：调用 <code>get_weather(city="上海")</code></p>
+    <p><strong>系统执行</strong>：返回 <code>{"temp": 28, "condition": "晴", "humidity": 65}</code></p>
+    <p><strong>LLM回答</strong>：上海今天天气晴朗，气温28°C，湿度65%，适合外出活动。</p>
+  </div>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-code"></i> 使用LangChain构建简单Agent</h2>
+
+  <pre><code class="language-python">from langchain_community.llms import Ollama
+from langchain.agents import create_react_agent, AgentExecutor
+from langchain.tools import tool
+
+# 1. 定义工具
+@tool
+def search(query: str) -> str:
+    """搜索互联网获取信息。输入：搜索关键词。"""
+    return f"搜索'{query}'的结果：这是模拟的搜索结果。"
+
+@tool
+def calculator(expression: str) -> str:
+    """计算数学表达式。输入：数学表达式字符串。"""
+    try:
+        result = eval(expression)
+        return f"计算结果：{result}"
+    except Exception as e:
+        return f"计算错误：{e}"
+
+tools = [search, calculator]
+
+# 2. 定义Agent提示词模板
+prompt = """回答以下问题，你可以使用以下工具：
+
+{tools}
+
+工具名称：{tool_names}
+
+请按照以下格式回答：
+Thought: 我需要思考下一步做什么
+Action: 工具名称
+Action Input: 工具输入参数
+Observation: 工具返回的结果（系统自动填充）
+... (Thought/Action/Observation可以重复多次)
+Thought: 我现在知道最终答案了
+Final Answer: 最终答案
+
+开始！
+Question: {input}
+Thought:{agent_scratchpad}"""
+
+# 3. 创建Agent
+llm = Ollama(model="qwen2.5:7b")
+agent = create_react_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+# 4. 运行Agent
+result = agent_executor.invoke({
+    "input": "2024年有多少天？请先搜索2024年是否是闰年，再计算。"
+})
+print(result["output"])</code></pre>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-tachometer-alt"></i> Agent评估维度</h2>
+  <p>评估Agent的质量需要从多个维度综合考量：</p>
+
+  <table class="comparison-table">
+    <tr>
+      <th>评估维度</th>
+      <th>指标</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td><strong>任务完成率</strong></td>
+      <td>成功率</td>
+      <td>Agent正确完成任务的比例，是最核心的指标</td>
+    </tr>
+    <tr>
+      <td><strong>工具调用准确率</strong></td>
+      <td>正确调用次数/总调用次数</td>
+      <td>Agent选择正确工具和参数的能力</td>
+    </tr>
+    <tr>
+      <td><strong>响应时间</strong></td>
+      <td>平均耗时</td>
+      <td>从接收任务到返回结果的时间，影响用户体验</td>
+    </tr>
+    <tr>
+      <td><strong>步骤效率</strong></td>
+      <td>实际步骤数/最优步骤数</td>
+      <td>Agent是否用最少的步骤完成任务</td>
+    </tr>
+    <tr>
+      <td><strong>错误恢复能力</strong></td>
+      <td>从错误中恢复的比例</td>
+      <td>工具调用失败时，Agent能否调整策略继续执行</td>
+    </tr>
+  </table>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>AI Agent是能够自主感知、规划、执行和记忆的AI系统，核心公式为 Agent = LLM + 工具 + 记忆 + 规划。</li>
+    <li>ReAct模式通过Thought→Action→Observation的循环，让LLM能够交替推理和行动，是Agent最基础的工作模式。</li>
+    <li>Function Calling是LLM调用外部工具的标准机制，通过结构化的函数定义和调用，让LLM能够获取实时信息和执行操作。</li>
+    <li>LangChain提供了便捷的Agent构建框架，通过定义工具和提示词模板，可以快速搭建功能完整的Agent。</li>
+    <li>Agent评估需关注任务完成率、工具调用准确率、响应时间、步骤效率和错误恢复能力等多个维度。</li>
+  </ol>
+</div>
+
+<div class="exercise-box">
+  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+  <ol>
+    <li>
+      <p><strong>ReAct模式中的三个核心步骤是什么？</strong></p>
+      <p>A. Input → Process → Output<br/>B. Thought → Action → Observation<br/>C. Plan → Execute → Evaluate<br/>D. Encode → Decode → Translate</p>
+      <p><strong>答案：B</strong>。ReAct（Reasoning + Acting）的核心循环是：Thought（思考下一步）→ Action（执行操作）→ Observation（观察结果），如此反复直到任务完成。</p>
+    </li>
+    <li>
+      <p><strong>Function Calling的主要作用是什么？</strong></p>
+      <p>A. 让LLM生成更长的文本<br/>B. 让LLM能够调用外部函数获取信息或执行操作<br/>C. 让LLM的训练速度更快<br/>D. 让LLM支持更多语言</p>
+      <p><strong>答案：B</strong>。Function Calling让LLM能够输出结构化的函数调用指令，由外部系统执行后返回结果，使LLM能够获取实时信息、执行计算等操作。</p>
+    </li>
+    <li>
+      <p><strong>以下哪个不是Agent的核心组件？</strong></p>
+      <p>A. LLM（大脑）<br/>B. 工具（Tools）<br/>C. 数据标注平台<br/>D. 记忆（Memory）</p>
+      <p><strong>答案：C</strong>。Agent的核心组件包括LLM（大脑）、工具（执行操作）、记忆（存储信息）和规划（任务分解）。数据标注平台是训练阶段的工具，不是Agent的运行时组件。</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+
+        </main>
+    </div>
+
+<!-- 页脚 -->
+<!-- ============================================================ -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+      <p>从零开始系统学习人工智能</p>
+      <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+      <p>第1-11章：基础与核心（见 ai-notes-core.html）</p>
+      <p>第12-23章：工程实践与进阶（本文件）</p>
+      <p>附录A：GPU与算力指南</p>
+      <p>附录B：术语表</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-info-circle"></i> 说明</h3>
+      <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+      <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+  </div>
+</footer>
+    </div><!-- /ai-notes-container -->
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+    <script>
+    // 目录滚动高亮
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-sidebar a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const el = document.querySelector(id);
+          if (el) sections.push({ link, el });
+        }
+      });
+      function updateActive() {
+        const scrollY = window.scrollY + 100;
+        let current = sections[0];
+        for (const s of sections) {
+          if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+      }
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+    </script>
+  </body>
+</html>

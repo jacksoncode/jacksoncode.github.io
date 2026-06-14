@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="数学基础，包括线性代数、微积分、概率论与统计">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习, Python, 数学基础">
+    <meta name="author" content="AI Learner">
+    <title>第二章：数学基础 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section 样式 ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-toggle {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .math-block .math-toggle:hover {
+            color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block-header .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c5c8c6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .code-block-header .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 知识点标记 ========== */
+        .knowledge-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+        }
+
+        .knowledge-point i {
+            font-size: 0.75rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="#chapter0"><i class="fas fa-map"></i> 学习路线</a></li>
+            <li><a href="#chapter1"><i class="fab fa-python"></i> Python基础</a></li>
+            <li><a href="#chapter2"><i class="fas fa-square-root-variable"></i> 数学基础</a></li>
+            <li><a href="#chapter3"><i class="fas fa-robot"></i> 机器学习</a></li>
+            <li><a href="#chapter4"><i class="fas fa-network-wired"></i> 深度学习</a></li>
+            <li><a href="#chapter5"><i class="fas fa-tools"></i> 工程实践</a></li>
+            <li><a href="#chapter6"><i class="fas fa-rocket"></i> 进阶展望</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- 章节导航 -->
+    <div class="chapter-nav">
+        <a href="ch01.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch02b.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="chapter-content">
+<!-- ========================================== -->
+            <!-- 第二章：数学基础                             -->
+            <!-- ========================================== -->
+            <section id="chapter2">
+                <h2 class="section-title">
+                    <i class="fas fa-square-root-variable"></i>
+                    第二章：数学基础
+                </h2>
+
+                <div class="learning-objectives">
+                    <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                    <ul>
+                        <li>掌握线性代数核心概念：向量、矩阵、矩阵乘法及其几何意义</li>
+                        <li>理解微积分基本概念：导数、偏导数、链式法则、梯度</li>
+                        <li>熟悉概率统计基础：概率分布、期望、方差、贝叶斯定理</li>
+                        <li>了解信息论基本概念：熵、交叉熵及其在AI中的应用</li>
+                        <li>理解每个数学概念在AI中的具体应用场景</li>
+                    </ul>
+                </div>
+
+                <div class="prerequisite-box">
+                    <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                    <ul>
+                        <li>高中数学基础（函数、方程、基本概率）</li>
+                        <li>了解Python和NumPy基本操作（第一章内容）</li>
+                        <li>对抽象数学概念有一定的接受能力</li>
+                    </ul>
+                </div>
+
+                <!-- 线性代数 -->
+                <h3 class="section-subtitle">线性代数</h3>
+                <p>线性代数是AI的数学基石。神经网络的前向传播本质上是矩阵乘法，反向传播需要计算梯度，这些操作都建立在线性代数之上。</p>
+
+                <div class="concept-section">
+                    <div class="concept-box">
+                        <h4><i class="fas fa-arrows-alt-h"></i> 向量 (Vector)</h4>
+                        <p>向量是具有大小和方向的量。在AI中，向量用于表示数据点、特征、词嵌入等。</p>
+
+                        <div class="math-block">
+                            <button class="math-toggle" onclick="toggleMath(this)"><i class="fas fa-chevron-up"></i></button>
+                            <div class="math-content">
+                                \[ \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n \]
+                            </div>
+                            <div class="math-description">n维列向量，表示一个具有n个特征的数据点</div>
+                        </div>
+
+                        <p><strong>数值示例：</strong>假设一个学生的成绩用向量表示：</p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \mathbf{s} = \begin{bmatrix} 90 \\ 85 \\ 78 \\ 92 \end{bmatrix} \]
+                            </div>
+                            <div class="math-description">分别对应：数学、英语、物理、化学成绩</div>
+                        </div>
+
+                        <p><strong>向量运算：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n \]
+                            </div>
+                            <div class="math-description">点积（内积）：衡量两个向量的相似度</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>词向量（Word Embedding）将词语映射为高维向量；特征向量表示数据样本；注意力机制中的Query、Key、Value都是向量。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-th"></i> 矩阵 (Matrix)</h4>
+                        <p>矩阵是按照矩形排列的数字阵列。在AI中，矩阵用于表示数据集、权重矩阵、变换等。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix} \in \mathbb{R}^{m \times n} \]
+                            </div>
+                            <div class="math-description">m行n列的矩阵</div>
+                        </div>
+
+                        <p><strong>数值示例：</strong>一个3个样本、4个特征的数据集：</p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ X = \begin{bmatrix} 1.0 & 2.3 & 0.5 & 3.1 \\ 0.8 & 1.9 & 0.7 & 2.8 \\ 1.2 & 2.1 & 0.3 & 3.5 \end{bmatrix} \]
+                            </div>
+                            <div class="math-description">3行（样本）x 4列（特征）</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>数据集通常组织为矩阵形式（样本数 x 特征数）；神经网络每一层的权重都是一个矩阵；图像可以看作像素矩阵。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-times"></i> 矩阵乘法 (Matrix Multiplication)</h4>
+                        <p>矩阵乘法是神经网络前向传播的核心运算。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ C = A \times B, \quad c_{ij} = \sum_{k=1}^{K} a_{ik} \cdot b_{kj} \]
+                            </div>
+                            <div class="math-description">A(m x K) 乘以 B(K x n) 得到 C(m x n)</div>
+                        </div>
+
+                        <p><strong>数值示例：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \times \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 1 \times 5 + 2 \times 7 & 1 \times 6 + 2 \times 8 \\ 3 \times 5 + 4 \times 7 & 3 \times 6 + 4 \times 8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix} \]
+                            </div>
+                            <div class="math-description">逐步计算矩阵乘法</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>神经网络层的计算 \( \mathbf{h} = \sigma(W\mathbf{x} + \mathbf{b}) \)，其中 \( W \) 是权重矩阵，\( \mathbf{x} \) 是输入向量，\( \mathbf{b} \) 是偏置向量，\( \sigma \) 是激活函数。整个深度网络就是一系列矩阵乘法的组合。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 微积分 -->
+                <h3 class="section-subtitle">微积分</h3>
+                <p>微积分是理解AI优化过程的关键。神经网络的训练本质上就是通过微积分中的梯度下降来最小化损失函数。</p>
+
+                <div class="concept-section">
+                    <div class="concept-box">
+                        <h4><i class="fas fa-chart-line"></i> 导数 (Derivative)</h4>
+                        <p>导数描述函数在某一点处的变化率，即"瞬时速度"。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ f'(x) = \frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \]
+                            </div>
+                            <div class="math-description">导数的定义</div>
+                        </div>
+
+                        <p><strong>常用导数公式：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \frac{d}{dx}x^n = nx^{n-1}, \quad \frac{d}{dx}e^x = e^x, \quad \frac{d}{dx}\ln(x) = \frac{1}{x}, \quad \frac{d}{dx}\sin(x) = \cos(x) \]
+                            </div>
+                            <div class="math-description">基本函数的导数</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>导数告诉我们损失函数在某个参数值处的变化方向，是梯度下降法的基础。激活函数的导数决定了反向传播中梯度的流动。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-project-diagram"></i> 偏导数 (Partial Derivative)</h4>
+                        <p>当函数有多个变量时，偏导数是固定其他变量，对某一个变量求导。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ f(x, y) = x^2 + 3xy + y^2 \]
+                                \[ \frac{\partial f}{\partial x} = 2x + 3y, \quad \frac{\partial f}{\partial y} = 3x + 2y \]
+                            </div>
+                            <div class="math-description">多变量函数的偏导数</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>损失函数通常有大量参数（可能数百万个），我们需要分别对每个参数求偏导数，以确定每个参数应该如何调整来减小损失。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-link"></i> 链式法则 (Chain Rule)</h4>
+                        <p>链式法则是微积分中最重要的法则之一，用于求复合函数的导数。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x) \]
+                            </div>
+                            <div class="math-description">链式法则基本形式</div>
+                        </div>
+
+                        <p><strong>多变量链式法则：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \frac{\partial L}{\partial w} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w} \]
+                            </div>
+                            <div class="math-description">多层复合函数的链式求导</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong><strong>反向传播算法（Backpropagation）的核心就是链式法则。</strong>神经网络由多层组成，损失函数对第一层参数的梯度需要逐层传递，每一层都通过链式法则将梯度向后传递。这是深度学习能够高效训练的关键。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-mountain"></i> 梯度 (Gradient)</h4>
+                        <p>梯度是一个向量，由函数对所有变量的偏导数组成，指向函数值增长最快的方向。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \nabla f = \begin{bmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \vdots \\ \frac{\partial f}{\partial x_n} \end{bmatrix} \]
+                            </div>
+                            <div class="math-description">梯度向量（n个变量的函数）</div>
+                        </div>
+
+                        <p><strong>梯度下降更新公式：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \theta_{t+1} = \theta_t - \alpha \cdot \nabla_\theta L(\theta_t) \]
+                            </div>
+                            <div class="math-description">梯度下降：沿梯度的反方向更新参数，\(\alpha\) 为学习率</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong><strong>梯度下降是几乎所有机器学习模型的训练方法。</strong>SGD、Adam、RMSprop等优化器都是基于梯度下降的变体。理解梯度是理解模型训练过程的关键。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 概率统计 -->
+                <h3 class="section-subtitle">概率统计</h3>
+                <p>概率论为AI提供了处理不确定性的数学框架。从朴素贝叶斯分类器到贝叶斯神经网络，概率统计无处不在。</p>
+
+                <div class="concept-section">
+                    <div class="concept-box">
+                        <h4><i class="fas fa-chart-bar"></i> 概率分布 (Probability Distribution)</h4>
+                        <p>概率分布描述了随机变量取各个值的可能性。</p>
+
+                        <p><strong>常见分布：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \text{正态分布: } f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \]
+                            </div>
+                            <div class="math-description">高斯分布，\(\mu\)为均值，\(\sigma\)为标准差</div>
+                        </div>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \text{伯努利分布: } P(X=k) = p^k(1-p)^{1-k}, \quad k \in \{0, 1\} \]
+                            </div>
+                            <div class="math-description">二值分布，如抛硬币</div>
+                        </div>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \text{Softmax分布: } P(y_i) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}} \]
+                            </div>
+                            <div class="math-description">多分类中常用的概率分布</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>正态分布用于权重初始化和数据假设；Softmax将网络输出转化为概率分布，用于多分类任务（如ImageNet的1000类分类）。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-balance-scale"></i> 期望与方差 (Expectation & Variance)</h4>
+                        <p>期望是随机变量的"平均值"，方差衡量数据的离散程度。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \mathbb{E}[X] = \sum_{i} x_i \cdot P(x_i) \quad \text{(离散)} \]
+                                \[ \mathbb{E}[X] = \int_{-\infty}^{\infty} x \cdot f(x) \, dx \quad \text{(连续)} \]
+                            </div>
+                            <div class="math-description">期望（数学期望）</div>
+                        </div>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \]
+                            </div>
+                            <div class="math-description">方差：衡量随机变量偏离均值的程度</div>
+                        </div>
+
+                        <p><strong>数值示例：</strong>掷骰子的期望和方差：</p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \mathbb{E}[X] = \frac{1+2+3+4+5+6}{6} = 3.5 \]
+                                \[ \text{Var}(X) = \frac{(1-3.5)^2 + (2-3.5)^2 + \cdots + (6-3.5)^2}{6} \approx 2.92 \]
+                            </div>
+                            <div class="math-description">公平骰子的期望和方差</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>期望用于计算预测值；方差用于衡量模型的不确定性；Batch Normalization利用批次的均值和方差来稳定训练。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-random"></i> 贝叶斯定理 (Bayes' Theorem)</h4>
+                        <p>贝叶斯定理描述了在获得新证据后如何更新我们的信念。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]
+                            </div>
+                            <div class="math-description">贝叶斯定理：后验概率 = 似然 x 先验概率 / 证据</div>
+                        </div>
+
+                        <p><strong>数值示例：</strong>疾病检测</p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \text{假设：疾病发病率} P(D) = 0.01, \text{检测灵敏度} P(+|D) = 0.99, \text{误报率} P(+|\neg D) = 0.05 \]
+                                \[ P(D|+) = \frac{P(+|D) \cdot P(D)}{P(+|D) \cdot P(D) + P(+|\neg D) \cdot P(\neg D)} = \frac{0.99 \times 0.01}{0.99 \times 0.01 + 0.05 \times 0.99} \approx 0.167 \]
+                            </div>
+                            <div class="math-description">即使检测为阳性，实际患病的概率也仅有约16.7%（贝叶斯定理的经典应用）</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>朴素贝叶斯分类器（垃圾邮件过滤）；贝叶斯优化（超参数调优）；贝叶斯神经网络（量化模型不确定性）；最大后验估计（MAP）。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 信息论 -->
+                <h3 class="section-subtitle">信息论</h3>
+                <p>信息论为AI提供了衡量"信息量"和"不确定性"的工具，是理解损失函数设计的基础。</p>
+
+                <div class="concept-section">
+                    <div class="concept-box">
+                        <h4><i class="fas fa-question-circle"></i> 熵 (Entropy)</h4>
+                        <p>熵衡量一个随机变量的不确定性，熵越大表示不确定性越高。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i) \]
+                            </div>
+                            <div class="math-description">信息熵（单位：比特）</div>
+                        </div>
+
+                        <p><strong>直观理解：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \text{公平硬币: } H = -(0.5 \log_2 0.5 + 0.5 \log_2 0.5) = 1 \text{ bit} \]
+                                \[ \text{作弊硬币(总是正面): } H = -(1 \log_2 1 + 0 \log_2 0) = 0 \text{ bit} \]
+                            </div>
+                            <div class="math-description">越确定的事物，熵越低；越不确定的事物，熵越高</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong>决策树使用信息增益（基于熵）来选择最优分裂特征；信息熵用于衡量数据集的纯度。
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4><i class="fas fa-exchange-alt"></i> 交叉熵 (Cross-Entropy)</h4>
+                        <p>交叉熵衡量两个概率分布之间的"距离"，是分类任务中最常用的损失函数。</p>
+
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ H(p, q) = -\sum_{i=1}^{n} p(x_i) \log q(x_i) \]
+                            </div>
+                            <div class="math-description">交叉熵：p为真实分布，q为预测分布</div>
+                        </div>
+
+                        <p><strong>二分类交叉熵损失：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N} \left[ y_i \log \hat{y}_i + (1 - y_i) \log(1 - \hat{y}_i) \right] \]
+                            </div>
+                            <div class="math-description">Binary Cross-Entropy Loss，\(\hat{y}\)为预测概率，\(y\)为真实标签</div>
+                        </div>
+
+                        <p><strong>多分类交叉熵损失：</strong></p>
+                        <div class="math-block">
+                            <div class="math-content">
+                                \[ \mathcal{L} = -\sum_{i=1}^{C} y_i \log \hat{y}_i \]
+                            </div>
+                            <div class="math-description">Categorical Cross-Entropy Loss，C为类别数</div>
+                        </div>
+
+                        <div class="ai-usage">
+                            <strong><i class="fas fa-robot"></i> AI中哪里用到：</strong><strong>交叉熵是深度学习中最常用的损失函数。</strong>几乎所有的分类任务（图像分类、文本分类、机器翻译等）都使用交叉熵作为损失函数。它衡量的是模型预测分布与真实分布之间的差异，模型训练的目标就是最小化这个差异。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数学概念汇总表 -->
+                <h3 class="section-subtitle">数学概念与AI应用对照表</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-book"></i> 数学概念</th>
+                            <th><i class="fas fa-cog"></i> AI应用</th>
+                            <th><i class="fas fa-layer-group"></i> 涉及章节</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>向量/矩阵</td>
+                            <td>数据表示、权重矩阵、特征提取</td>
+                            <td>全部章节</td>
+                        </tr>
+                        <tr>
+                            <td>矩阵乘法</td>
+                            <td>神经网络前向传播</td>
+                            <td>深度学习</td>
+                        </tr>
+                        <tr>
+                            <td>导数/梯度</td>
+                            <td>梯度下降、反向传播</td>
+                            <td>机器学习、深度学习</td>
+                        </tr>
+                        <tr>
+                            <td>链式法则</td>
+                            <td>反向传播算法</td>
+                            <td>深度学习</td>
+                        </tr>
+                        <tr>
+                            <td>概率分布</td>
+                            <td>Softmax输出、数据建模</td>
+                            <td>机器学习、深度学习</td>
+                        </tr>
+                        <tr>
+                            <td>贝叶斯定理</td>
+                            <td>朴素贝叶斯、贝叶斯优化</td>
+                            <td>机器学习</td>
+                        </tr>
+                        <tr>
+                            <td>交叉熵</td>
+                            <td>分类损失函数</td>
+                            <td>机器学习、深度学习</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- 练习题 -->
+                <div class="exercise-box">
+                    <h4><i class="fas fa-pen-fancy"></i> 练习题</h4>
+                    <div class="exercise-item">
+                        <span class="exercise-number">[1]</span>
+                        给定矩阵 \( A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \) 和向量 \( \mathbf{x} = \begin{bmatrix} 5 \\ 6 \end{bmatrix} \)，手动计算 \( A\mathbf{x} \)，然后用NumPy验证结果。
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-number">[2]</span>
+                        对函数 \( f(x, y) = x^2 y + y^3 \)，分别求 \( \frac{\partial f}{\partial x} \) 和 \( \frac{\partial f}{\partial y} \)，并计算在点 \( (2, 1) \) 处的梯度 \( \nabla f \)。
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-number">[3]</span>
+                        一个二分类问题中，真实标签为 \( y = 1 \)，模型预测概率为 \( \hat{y} = 0.8 \)。计算该样本的交叉熵损失 \( \mathcal{L} = -[y \log \hat{y} + (1-y)\log(1-\hat{y})] \)。如果预测概率提高到 \( \hat{y} = 0.95 \)，损失如何变化？
+                    </div>
+                </div>
+
+                <!-- 章节小结 -->
+                <div class="chapter-summary">
+                    <h4><i class="fas fa-lightbulb"></i> 章节小结</h4>
+                    <ul>
+                        <li>线性代数是AI计算的基础，矩阵乘法是神经网络的核心运算</li>
+                        <li>微积分中的梯度和链式法则是反向传播算法的数学基础</li>
+                        <li>概率论为处理不确定性提供了框架，贝叶斯定理在多个AI领域有重要应用</li>
+                        <li>交叉熵是最常用的分类损失函数，理解其含义对模型训练至关重要</li>
+                        <li>不必一开始就精通所有数学，随着后续章节的学习，这些概念会越来越清晰</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========== 右侧粘性目录导航 ========== -->
+        <aside class="toc-sidebar">
+            <h3><i class="fas fa-list"></i> 目录导航</h3>
+            <ul>
+                <li>
+                    <a href="#chapter0">
+                        <i class="fas fa-map-signs"></i> 第零章：学习路线图
+                    </a>
+                </li>
+                <li class="toc-divider"></li>
+                <li>
+                    <a href="#chapter1">
+                        <i class="fab fa-python"></i> 第一章：Python编程基础
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#python-env">环境安装</a></li>
+                        <li><a href="#python-syntax">基础语法</a></li>
+                        <li><a href="#python-numpy">NumPy基础</a></li>
+                        <li><a href="#python-matplotlib">Matplotlib基础</a></li>
+                    </ul>
+                </li>
+                <li class="toc-divider"></li>
+                <li>
+                    <a href="#chapter2">
+                        <i class="fas fa-square-root-variable"></i> 第二章：数学基础
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#math-linear">线性代数</a></li>
+                        <li><a href="#math-calculus">微积分</a></li>
+                        <li><a href="#math-probability">概率统计</a></li>
+                        <li><a href="#math-information">信息论</a></li>
+                    </ul>
+                </li>
+                <li class="toc-divider"></li>
+                <li>
+                    <a href="#chapter3">
+                        <i class="fas fa-robot"></i> 第三章：机器学习基础
+                    </a>
+                </li>
+                <li>
+                    <a href="#chapter4">
+                        <i class="fas fa-network-wired"></i> 第四章：深度学习基础
+                    </a>
+                </li>
+                <li>
+                    <a href="#chapter5">
+                        <i class="fas fa-tools"></i> 第五章：工程实践与工具
+                    </a>
+                </li>
+                <li>
+                    <a href="#chapter6">
+                        <i class="fas fa-rocket"></i> 第六章：进阶展望
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+    </div><!-- /.content-wrapper -->
+
+    <!-- 导航栏切换脚本 -->
+    <script>
+        // 移动端导航栏切换
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // 代码复制功能
+        function copyCode(button) {
+            var codeBlock = button.closest('.code-block');
+            var code = codeBlock.querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(function() {
+                var originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                button.style.color = '#48bb78';
+                setTimeout(function() {
+                    button.innerHTML = originalHTML;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+
+        // 数学公式块展开/收起
+        function toggleMath(button) {
+            var content = button.parentElement.querySelector('.math-content');
+            var description = button.parentElement.querySelector('.math-description');
+            var icon = button.querySelector('i');
+            if (content.style.display === 'none') {
+                content.style.display = '';
+                if (description) description.style.display = '';
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                content.style.display = 'none';
+                if (description) description.style.display = 'none';
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        // 目录导航高亮当前章节
+        (function() {
+            var sections = document.querySelectorAll('section[id]');
+            var tocLinks = document.querySelectorAll('.toc-sidebar a');
+
+            function updateActiveLink() {
+                var scrollPos = window.scrollY + 100;
+                sections.forEach(function(section) {
+                    var top = section.offsetTop;
+                    var height = section.offsetHeight;
+                    var id = section.getAttribute('id');
+                    var link = document.querySelector('.toc-sidebar a[href="#' + id + '"]');
+                    if (link) {
+                        if (scrollPos >= top && scrollPos < top + height) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        })();
+    </script>
+
+    </main>
+
+    <!-- 底部导航 -->
+    <div class="chapter-nav bottom">
+        <a href="ch01.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch02b.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+      <p>从零开始系统学习人工智能</p>
+      <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+      <p>第1-11章：基础与核心（见 ai-notes-core.html）</p>
+      <p>第12-23章：工程实践与进阶（本文件）</p>
+      <p>附录A：GPU与算力指南</p>
+      <p>附录B：术语表</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-info-circle"></i> 说明</h3>
+      <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+      <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+  </div>
+</footer>
+    </div><!-- /ai-notes-container -->
+
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+</body>
+</html>

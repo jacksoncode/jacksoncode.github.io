@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="第七章：训练 - AI学习笔记">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习">
+    <meta name="author" content="AI Learner">
+    <title>第七章：训练 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== 章节导航样式 ========== */
+        .chapter-nav {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            margin-top: 64px;
+        }
+
+        .chapter-nav-bottom {
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chapter-nav-bottom a:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h3, .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h3, .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h3, .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h3, .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        .keyword-highlight {
+            background: linear-gradient(120deg, #ebf8ff 0%, #e6fffa 100%);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        /* ========== 页脚样式 ========== */
+        .footer {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav .breadcrumb,
+            .chapter-nav .chapter-links {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch06.html"><i class="fas fa-box"></i> 模型</a></li>
+            <li><a href="ch07.html"><i class="fas fa-dumbbell"></i> 训练</a></li>
+            <li><a href="ch08.html"><i class="fas fa-chart-bar"></i> 评估调优</a></li>
+            <li><a href="ch09.html"><i class="fas fa-th"></i> CNN</a></li>
+            <li><a href="ch10.html"><i class="fas fa-random"></i> Transformer</a></li>
+            <li><a href="ch11.html"><i class="fas fa-language"></i> LLM</a></li>
+            <li><a href="ch12.html"><i class="fas fa-rocket"></i> 推理部署</a></li>
+            <li><a href="ch13.html"><i class="fas fa-search"></i> RAG</a></li>
+            <li><a href="ch14.html"><i class="fas fa-arrows-alt"></i> 向量Embedding</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+
+    <!-- ==================== 章节导航 ==================== -->
+    <nav class="chapter-nav" style="background: #f7fafc; border-bottom: 1px solid #e2e8f0; padding: 1rem 2rem; margin-top: 64px;">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div class="breadcrumb" style="font-size: 0.9rem; color: #718096;">
+                <a href="../../index.html" style="color: #4299e1;"><i class="fas fa-home"></i> 首页</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <a href="index.html" style="color: #4299e1;">AI学习笔记</a>
+                <span style="margin: 0 0.5rem;">/</span>
+                <span style="color: #2d3748; font-weight: 600;">第七章：训练</span>
+            </div>
+            <div class="chapter-links" style="display: flex; gap: 1rem;">
+                <a href="ch06.html" class="prev-chapter" style="color: #4299e1; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> 上一章</a>
+                <a href="ch08.html" class="next-chapter" style="color: #4299e1; font-size: 0.9rem;">下一章 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第七章：训练 -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-dumbbell"></i> 第七章：训练</h2>
+
+<div class="learning-objectives">
+  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+  <ul>
+    <li>理解训练的定义与核心流程</li>
+    <li>掌握损失函数的概念与常见类型</li>
+    <li>理解梯度下降算法的原理与三种变体</li>
+    <li>理解反向传播的作用与机制</li>
+    <li>了解学习率、Batch Size、Epoch等关键超参数</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h3><i class="fas fa-book"></i> 前置要求</h3>
+  <p>第五章：深度学习概述（理解神经网络结构）、第二章：数学基础（理解导数和梯度概念）。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-cogs"></i> 什么是训练？</h2>
+  <p><span class="keyword-highlight">训练（Training）</span>是让模型从数据中学习的过程。通过反复调整模型参数，使其能准确完成任务。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-running"></i> 类比理解</h4>
+    <p>训练就像学生做练习题：<br/>做题 → 对照答案 → 发现错误 → 调整方法 → 再做题 → ...<br/>循环直到正确率足够高</p>
+  </div>
+
+  <h3>训练的核心流程</h3>
+  <div class="flow-diagram">
+    <div class="flow-item">准备数据</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">初始化模型</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">前向传播</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">计算损失</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">反向传播</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">更新参数</div>
+  </div>
+
+  <h3>关键概念详解</h3>
+
+  <h4>1. 损失函数（Loss Function）</h4>
+  <p><span class="keyword-highlight">损失函数</span>衡量模型预测与真实答案的差距。损失越小，模型越好。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-calculator"></i> 损失函数的数学公式</h4>
+    <p><strong>均方误差（MSE）</strong>——用于回归任务：<br/><br/>
+    \[ \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \]<br/><br/>
+    其中 \(y_i\) 是真实值，\(\hat{y}_i\) 是预测值，\(n\) 是样本数量。<br/><br/>
+    <strong>交叉熵损失（Cross-Entropy）</strong>——用于分类任务：<br/><br/>
+    \[ H(p, q) = -\sum_{i=1}^{C} p_i \log(q_i) \]<br/><br/>
+    其中 \(p_i\) 是真实标签的概率分布（one-hot编码），\(q_i\) 是模型预测的概率，\(C\) 是类别数。</p>
+  </div>
+
+  <h4>2. 优化器（Optimizer）</h4>
+  <p><span class="keyword-highlight">优化器</span>决定如何更新模型参数来降低损失。</p>
+  <ul>
+    <li><strong>SGD</strong>：随机梯度下降，最基础</li>
+    <li><strong>Adam</strong>：自适应学习率，效果稳定，最常用</li>
+  </ul>
+
+  <h4>3. 学习率（Learning Rate）</h4>
+  <p><span class="keyword-highlight">学习率</span>控制每次参数更新的幅度。</p>
+  <ul>
+    <li>太大：不稳定，可能跳过最优解</li>
+    <li>太小：训练太慢</li>
+    <li>需要调优找到合适值</li>
+  </ul>
+
+  <div class="concept-box warning">
+    <h4><i class="fas fa-balance-scale"></i> 批量大小（Batch Size）</h4>
+    <p>一次训练使用多少样本：<br/>• 小批量：更频繁更新，内存占用小<br/>• 大批量：更新更稳定，但内存占用大</p>
+  </div>
+
+  <h4>4. Epoch、Batch、Iteration</h4>
+  <p>这三个概念描述训练的循环过程，新手容易混淆，务必理解清楚：</p>
+
+  <table class="comparison-table">
+    <tr>
+      <th>概念</th>
+      <th>定义</th>
+      <th>例子</th>
+    </tr>
+    <tr>
+      <td><strong>Epoch（轮次）</strong></td>
+      <td>整个数据集被完整学习一遍</td>
+      <td>1000个样本全部训练完=1个Epoch</td>
+    </tr>
+    <tr>
+      <td><strong>Batch（批次）</strong></td>
+      <td>一次训练使用的样本数量</td>
+      <td>每次用32个样本训练=Batch Size=32</td>
+    </tr>
+    <tr>
+      <td><strong>Iteration（迭代）</strong></td>
+      <td>训练一个Batch需要的步骤</td>
+      <td>1000样本÷32=31.25≈32次迭代</td>
+    </tr>
+  </table>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-calculator"></i> 具体计算示例</h4>
+    <p>假设：<br/>
+    • 数据集有1000张图片<br/>
+    • Batch Size = 32（每次训练32张）<br/>
+    • 要训练10个Epoch<br/><br/>
+    计算：<br/>
+    • 每个Epoch需要：1000 ÷ 32 = 31.25 ≈ 32次迭代<br/>
+    • 10个Epoch总共需要：32 × 10 = 320次迭代<br/>
+    • 模型参数更新320次<br/><br/>
+    训练时通常会看到进度条显示："Epoch 3/10, Batch 15/32"</p>
+  </div>
+
+  <h4>为什么需要多个Epoch？</h4>
+  <p>一次学习（1个Epoch）不足以让模型掌握知识，就像学生不能只看一遍课本就学会。需要多次重复学习，逐渐提高准确率。</p>
+  <ul>
+    <li><strong>Epoch太少</strong>：模型没学好，欠拟合</li>
+    <li><strong>Epoch太多</strong>：模型"背熟了"，过拟合（记住训练数据，不能泛化）</li>
+    <li><strong>合适Epoch</strong>：观察训练曲线，找到损失不再明显下降的点</li>
+  </ul>
+
+  <h4>5. 梯度下降（Gradient Descent）详解</h4>
+  <p><span class="keyword-highlight">梯度下降</span>是训练模型的核心算法，用于找到让损失最小的参数值。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-mountain"></i> 山坡类比</h4>
+    <p>想象你站在山坡上，目标是到达最低点（山谷）：<br/>
+    • 你看脚下，判断哪个方向最陡（梯度）<br/>
+    • 沿最陡方向往下走一步（参数更新）<br/>
+    • 重复：判断方向→走一步→判断方向→走一步<br/>
+    • 最终到达山谷（最优参数）<br/><br/>
+    <strong>梯度</strong>就是山坡最陡的方向（函数变化最快的方向）<br/>
+    <strong>下降</strong>就是沿着这个方向往下走</p>
+  </div>
+
+  <h4>梯度下降的三种方式</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>方式</th>
+      <th>每次使用的数据</th>
+      <th>特点</th>
+      <th>适用场景</th>
+    </tr>
+    <tr>
+      <td><strong>批量梯度下降（BGD）</strong></td>
+      <td>全部数据</td>
+      <td>方向准确，但计算慢</td>
+      <td>数据量小时使用</td>
+    </tr>
+    <tr>
+      <td><strong>随机梯度下降（SGD）</strong></td>
+      <td>单个样本</td>
+      <td>快但方向不稳定，易震荡</td>
+      <td>数据量大时使用</td>
+    </tr>
+    <tr>
+      <td><strong>小批量梯度下降（Mini-batch SGD）</strong></td>
+      <td>一小批样本（如32个）</td>
+      <td>平衡速度和稳定性，最常用</td>
+      <td>实际训练的主流方法</td>
+    </tr>
+  </table>
+
+  <div class="flow-diagram">
+    <div class="flow-item">计算梯度<br/>（损失函数对参数的导数）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">确定方向<br/>（梯度负方向）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">更新参数<br/>（参数 -= 学习率 × 梯度）</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-item">重复直到<br/>损失足够小</div>
+  </div>
+
+  <div class="concept-box warning">
+    <h4><i class="fas fa-lightbulb"></i> 梯度下降的关键公式</h4>
+    <p>参数更新公式：<br/><br/>
+    \[ \theta_{\text{new}} = \theta_{\text{old}} - \eta \cdot \nabla L(\theta) \]<br/><br/>
+    其中：<br/>
+    • \(\theta\) 是模型参数<br/>
+    • \(\eta\) 是学习率<br/>
+    • \(\nabla L(\theta)\) 是损失函数对参数的梯度<br/><br/>
+    简单理解：<strong>新参数 = 旧参数 - 学习率 × 梯度</strong><br/>
+    梯度告诉我们"往哪里走能降低损失"，学习率告诉我们"走多远"。</p>
+  </div>
+
+  <h4>梯度下降的Python代码示例</h4>
+  <p>下面用一维函数演示梯度下降的基本过程：</p>
+  <pre><code class="language-python">import numpy as np
+
+# 定义损失函数: f(x) = x^2 + 2x + 1 = (x+1)^2
+# 最小值在 x = -1 处，最小值为 0
+def loss_function(x):
+    return x**2 + 2*x + 1
+
+# 损失函数的导数（梯度）
+def gradient(x):
+    return 2*x + 2
+
+# 梯度下降参数
+learning_rate = 0.1   # 学习率
+x = 3.0               # 初始值（随机初始化）
+epochs = 30           # 迭代次数
+
+print("梯度下降过程：")
+for epoch in range(epochs):
+    grad = gradient(x)          # 计算梯度
+    x = x - learning_rate * grad  # 更新参数
+    loss = loss_function(x)
+    if epoch % 5 == 0 or epoch == epochs - 1:
+        print(f"  Epoch {epoch:2d}: x = {x:.6f}, loss = {loss:.6f}")
+
+print(f"\n最终结果: x = {x:.6f}, loss = {loss_function(x):.6f}")
+# 输出: 最终结果: x = -1.000000, loss = 0.000000</code></pre>
+
+  <h4>为什么学习率很重要？</h4>
+  <p>学习率决定每一步走多远：</p>
+  <ul>
+    <li><strong>学习率太大</strong>：一步跨太大，可能跳过最低点，来回震荡，无法收敛</li>
+    <li><strong>学习率太小</strong>：一步太小，下山太慢，训练时间很长</li>
+    <li><strong>合适的学习率</strong>：稳定下降，较快到达最优</li>
+  </ul>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-chart-line"></i> 学习率调优技巧</h4>
+    <p>• 初始值通常：0.001（Adam默认）、0.01（SGD默认）<br/>
+    • 观察训练曲线：损失震荡→学习率太大；损失下降慢→学习率太小<br/>
+    • 可以动态调整：训练前期大学习率（快速下降），后期小学习率（精细调整）<br/>
+    • 常用策略：学习率衰减、余弦退火</p>
+  </div>
+
+  <h4>6. 反向传播（Backpropagation）补充</h4>
+  <p><span class="keyword-highlight">反向传播</span>是计算梯度的核心技术。它从输出层向输入层逐层计算每个参数对损失的影响。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-undo"></i> 为什么叫"反向"？</h4>
+    <p><strong>前向传播</strong>：数据从输入→隐藏层→输出（计算预测值）<br/>
+    <strong>反向传播</strong>：误差从输出→隐藏层→输入（计算梯度）<br/><br/>
+    因为梯度计算是从输出层开始的，沿着网络结构"反向"传播误差信息，告诉每层"你哪里做错了，该怎么调整"。这就是神经网络的"自我纠错"过程。</p>
+  </div>
+
+  <h3>训练的常见问题</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>问题</th>
+      <th>现象</th>
+      <th>原因</th>
+      <th>解决方法</th>
+    </tr>
+    <tr>
+      <td><strong>过拟合（Overfitting）</strong></td>
+      <td>训练数据表现好，新数据表现差</td>
+      <td>模型太复杂，"背熟"了训练数据</td>
+      <td>更多数据、正则化、Dropout、早停</td>
+    </tr>
+    <tr>
+      <td><strong>欠拟合（Underfitting）</strong></td>
+      <td>训练数据和新数据都表现差</td>
+      <td>模型太简单，无法学习数据规律</td>
+      <td>增加模型复杂度、更多训练时间</td>
+    </tr>
+    <tr>
+      <td><strong>梯度消失</strong></td>
+      <td>深层网络底层参数几乎不更新</td>
+      <td>多层网络中梯度逐层衰减</td>
+      <td>ReLU激活函数、Batch Normalization、残差连接</td>
+    </tr>
+    <tr>
+      <td><strong>梯度爆炸</strong></td>
+      <td>梯度值变得极大，参数更新不稳定</td>
+      <td>梯度在反向传播中逐层放大</td>
+      <td>梯度裁剪、合适的初始化方法</td>
+    </tr>
+  </table>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>训练是通过反复前向传播和反向传播来调整模型参数，使损失函数最小化的过程。</li>
+    <li>损失函数衡量预测与真实的差距：回归任务用MSE，分类任务用交叉熵。</li>
+    <li>梯度下降是参数更新的核心算法，公式为 \(\theta_{\text{new}} = \theta_{\text{old}} - \eta \cdot \nabla L(\theta)\)。</li>
+    <li>学习率、Batch Size和Epoch是影响训练效果的关键超参数，需要根据具体任务调优。</li>
+    <li>常见训练问题包括过拟合（模型太复杂）、欠拟合（模型太简单）和梯度消失/爆炸（深层网络问题）。</li>
+  </ol>
+</div>
+
+<div class="exercise-box">
+  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+  <ol>
+    <li>
+      <p><strong>在梯度下降中，如果学习率设置过大，最可能出现什么问题？</strong></p>
+      <p>A. 训练速度太慢<br/>B. 损失函数来回震荡，无法收敛<br/>C. 模型欠拟合<br/>D. 梯度消失</p>
+      <p><strong>答案：B</strong>。学习率太大会导致每步跨距过大，在最优点附近来回震荡，无法收敛到最小值。</p>
+    </li>
+    <li>
+      <p><strong>以下哪个公式正确表达了梯度下降的参数更新规则？</strong></p>
+      <p>A. \(\theta_{\text{new}} = \theta_{\text{old}} + \eta \cdot \nabla L\)<br/>B. \(\theta_{\text{new}} = \theta_{\text{old}} - \eta \cdot \nabla L\)<br/>C. \(\theta_{\text{new}} = \theta_{\text{old}} \times \eta \cdot \nabla L\)<br/>D. \(\theta_{\text{new}} = \eta \cdot \nabla L\)</p>
+      <p><strong>答案：B</strong>。梯度下降沿梯度的负方向更新参数，即减去学习率乘以梯度。</p>
+    </li>
+    <li>
+      <p><strong>模型在训练集上准确率99%，但在测试集上只有60%，这属于什么问题？</strong></p>
+      <p>A. 欠拟合<br/>B. 过拟合<br/>C. 梯度消失<br/>D. 学习率太大</p>
+      <p><strong>答案：B</strong>。训练集表现好但测试集表现差是典型的过拟合现象，模型"背熟"了训练数据但无法泛化到新数据。</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+
+        </main>
+
+    </div>
+
+
+    <!-- ==================== 章节底部导航 ==================== -->
+    <nav class="chapter-nav-bottom" style="background: #f7fafc; border-top: 1px solid #e2e8f0; padding: 2rem; margin-top: 3rem;">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="ch06.html" class="prev-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                <i class="fas fa-arrow-left"></i> 上一章
+            </a>
+            <span style="color: #718096; font-size: 0.9rem;">第七章：训练</span>
+            <a href="ch08.html" class="next-chapter" style="color: #4299e1; font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid #4299e1; border-radius: 8px; transition: all 0.3s;">
+                下一章 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p><a href="ch06.html" style="color: rgba(255,255,255,0.9);">第六章：模型</a></p>
+                <p><a href="ch07.html" style="color: rgba(255,255,255,0.9);">第七章：训练</a></p>
+                <p><a href="ch08.html" style="color: rgba(255,255,255,0.9);">第八章：模型评估与调优</a></p>
+                <p><a href="ch09.html" style="color: rgba(255,255,255,0.9);">第九章：CNN</a></p>
+                <p><a href="ch10.html" style="color: rgba(255,255,255,0.9);">第十章：Transformer</a></p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+</body>
+</html>

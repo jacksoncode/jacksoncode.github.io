@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI基础概念，包括人工智能定义、分类、发展历程和应用领域">
+    <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习, Python, 数学基础">
+    <meta name="author" content="AI Learner">
+    <title>第三章：AI基础概念 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section 样式 ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 数学公式块 ========== */
+        .math-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .math-block .math-toggle {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .math-block .math-toggle:hover {
+            color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .math-block .math-content {
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .math-block .math-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ========== 代码块样式 ========== */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block-header {
+            background: #1d1f21;
+            color: #c5c8c6;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .code-block-header .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block-header .lang-label i {
+            color: #4299e1;
+        }
+
+        .code-block-header .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c5c8c6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .code-block-header .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .code-block pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 知识点标记 ========== */
+        .knowledge-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+        }
+
+        .knowledge-point i {
+            font-size: 0.75rem;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 流程图/图表卡片 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin: 0.5rem;
+            display: inline-block;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="#chapter0"><i class="fas fa-map"></i> 学习路线</a></li>
+            <li><a href="#chapter1"><i class="fab fa-python"></i> Python基础</a></li>
+            <li><a href="#chapter2"><i class="fas fa-square-root-variable"></i> 数学基础</a></li>
+            <li><a href="#chapter3"><i class="fas fa-robot"></i> 机器学习</a></li>
+            <li><a href="#chapter4"><i class="fas fa-network-wired"></i> 深度学习</a></li>
+            <li><a href="#chapter5"><i class="fas fa-tools"></i> 工程实践</a></li>
+            <li><a href="#chapter6"><i class="fas fa-rocket"></i> 进阶展望</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- 章节导航 -->
+    <div class="chapter-nav">
+        <a href="ch02b.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch04.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="chapter-content">
+<!-- ============================================================ -->
+<!-- 第三章：AI基础概念 -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-lightbulb"></i> 第三章：AI基础概念</h2>
+
+<div class="learning-objectives">
+  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+  <ul>
+    <li>理解人工智能（AI）的定义与核心能力</li>
+    <li>掌握AI的三个层次：弱人工智能、强人工智能、超人工智能</li>
+    <li>了解AI在日常生活中的典型应用场景</li>
+    <li>认识AI vs ML vs DL之间的层级关系</li>
+    <li>了解图灵测试和AI发展中的关键历史节点</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h3><i class="fas fa-book"></i> 前置要求</h3>
+  <p>无特殊前置要求，具备基本的计算机使用经验即可。</p>
+</div>
+
+<div class="concept-section">
+  <h2><i class="fas fa-robot"></i> 什么是人工智能（AI）？</h2>
+  <p><span class="keyword-highlight">人工智能（Artificial Intelligence，AI）</span>是指让计算机模拟人类智能行为的技术。简单来说，就是让机器能够像人一样"思考"、"学习"和"解决问题"。</p>
+
+  <div class="diagram-section">
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-eye"></i></div>
+      <h4>感知</h4>
+      <p>识别图像、语音、文字</p>
+    </div>
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-cogs"></i></div>
+      <h4>推理</h4>
+      <p>逻辑分析、决策判断</p>
+    </div>
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+      <h4>学习</h4>
+      <p>从数据中获取知识</p>
+    </div>
+    <div class="diagram-card">
+      <div class="icon"><i class="fas fa-comments"></i></div>
+      <h4>交互</h4>
+      <p>理解语言、对话交流</p>
+    </div>
+  </div>
+
+  <h3>AI的三个层次</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>层次</th>
+      <th>定义</th>
+      <th>当前状态</th>
+      <th>例子</th>
+    </tr>
+    <tr>
+      <td><strong>弱人工智能（Weak AI / Narrow AI）</strong></td>
+      <td>专注于特定任务的AI，在单一领域表现出色</td>
+      <td>已实现，广泛应用</td>
+      <td>人脸识别、语音助手、推荐系统</td>
+    </tr>
+    <tr>
+      <td><strong>强人工智能（Strong AI / AGI）</strong></td>
+      <td>具备与人类同等智能水平，能处理各种复杂任务</td>
+      <td>仍在研究中</td>
+      <td>科幻电影中的Jarvis、HAL 9000</td>
+    </tr>
+    <tr>
+      <td><strong>超人工智能（Super AI / ASI）</strong></td>
+      <td>超越人类智能的AI，在所有领域远超人类</td>
+      <td>理论概念</td>
+      <td>目前仅存在于科幻想象中</td>
+    </tr>
+  </table>
+
+  <div class="concept-box warning">
+    <h4><i class="fas fa-exclamation-triangle"></i> 常见误区</h4>
+    <p>AI ≠ 机器人。AI是软件层面的智能算法，机器人是硬件载体。AI可以存在于任何设备中（手机、电脑、云端服务器），不一定需要物理形态。</p>
+  </div>
+
+  <h3>AI vs ML vs DL 的关系</h3>
+  <p>这三个概念经常被混用，但它们之间是包含关系：</p>
+  <table class="comparison-table">
+    <tr>
+      <th>概念</th>
+      <th>全称</th>
+      <th>范围</th>
+      <th>核心方法</th>
+    </tr>
+    <tr>
+      <td><strong>AI</strong></td>
+      <td>Artificial Intelligence</td>
+      <td>最广：所有让机器模拟智能的技术</td>
+      <td>规则系统、搜索算法、机器学习等</td>
+    </tr>
+    <tr>
+      <td><strong>ML</strong></td>
+      <td>Machine Learning</td>
+      <td>AI的子集：从数据中学习规律</td>
+      <td>监督学习、无监督学习、强化学习</td>
+    </tr>
+    <tr>
+      <td><strong>DL</strong></td>
+      <td>Deep Learning</td>
+      <td>ML的子集：使用多层神经网络</td>
+      <td>CNN、RNN、Transformer</td>
+    </tr>
+  </table>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-sitemap"></i> 层级关系</h4>
+    <p>人工智能 ⊃ 机器学习 ⊃ 深度学习<br/>（AI包含ML，ML包含DL，DL是最内层的核心技术）</p>
+  </div>
+
+  <h3>AI在日常生活中的应用</h3>
+  <p>你可能每天都在使用AI，却不自知。以下是常见的AI应用场景：</p>
+
+  <h4>手机里的AI</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>功能</th>
+      <th>AI应用</th>
+      <th>你每天怎么用</th>
+    </tr>
+    <tr>
+      <td><strong>人脸解锁</strong></td>
+      <td>人脸识别+比对算法</td>
+      <td>拿起手机自动解锁</td>
+    </tr>
+    <tr>
+      <td><strong>拍照美颜</strong></td>
+      <td>人脸检测+图像处理</td>
+      <td>自拍自动磨皮、瘦脸</td>
+    </tr>
+    <tr>
+      <td><strong>语音助手</strong></td>
+      <td>语音识别+自然语言理解</td>
+      <td>"Hey Siri，明天天气怎样"</td>
+    </tr>
+    <tr>
+      <td><strong>输入法联想</strong></td>
+      <td>语言模型预测下一个词</td>
+      <td>打字自动补全"你好"→"吗"</td>
+    </tr>
+    <tr>
+      <td><strong>相册分类</strong></td>
+      <td>图像识别+自动分类</td>
+      <td>照片自动分成"人物"、"风景"</td>
+    </tr>
+  </table>
+
+  <h4>网络服务中的AI</h4>
+  <ul>
+    <li><strong>推荐系统</strong>：抖音、淘宝、Netflix的推荐都是AI分析你的喜好，推送你可能感兴趣的内容</li>
+    <li><strong>搜索引擎</strong>：Google/百度的搜索结果排序是AI判断哪些内容最相关</li>
+    <li><strong>垃圾邮件过滤</strong>：邮箱自动识别垃圾邮件，让你不用手动筛选</li>
+    <li><strong>翻译服务</strong>：Google翻译、DeepL使用AI翻译，质量远超传统方法</li>
+    <li><strong>客服聊天</strong>：很多客服是AI自动回答常见问题，节省人力</li>
+  </ul>
+
+  <div class="concept-box success">
+    <h4><i class="fas fa-mobile-alt"></i> 你可能不知道的AI</h4>
+    <p>• <strong>地图导航</strong>：预测路况、选择最优路线<br/>• <strong>外卖配送</strong>：估算送达时间、派单优化<br/>• <strong>打车软件</strong>：匹配司机、预测等待时间<br/>• <strong>健康码</strong>：行程分析、风险判断<br/>• <strong>股票交易</strong>：算法自动交易、量化分析</p>
+  </div>
+
+  <h3>AI在各行业的应用</h3>
+
+  <h4>医疗健康</h4>
+  <ul>
+    <li><strong>辅助诊断</strong>：AI分析X光、CT，帮助医生发现病灶</li>
+    <li><strong>药物研发</strong>：AI预测分子结构，加速新药开发</li>
+    <li><strong>基因分析</strong>：AI解读基因数据，预测疾病风险</li>
+    <li><strong>智能问诊</strong>：AI聊天机器人初步了解症状，分流患者</li>
+  </ul>
+
+  <h4>金融行业</h4>
+  <ul>
+    <li><strong>风控审核</strong>：AI判断贷款申请风险，秒级审批</li>
+    <li><strong>欺诈检测</strong>：AI识别异常交易，防止信用卡盗刷</li>
+    <li><strong>量化交易</strong>：AI分析市场数据，自动执行交易策略</li>
+    <li><strong>智能客服</strong>：银行APP的AI客服解答常见问题</li>
+  </ul>
+
+  <h4>教育领域</h4>
+  <ul>
+    <li><strong>个性化学习</strong>：AI分析学生水平，推荐适合的学习内容</li>
+    <li><strong>自动批改</strong>：AI批改作业、考试，节省教师时间</li>
+    <li><strong>口语练习</strong>：AI评测发音，帮助学生练口语</li>
+    <li><strong>智能题库</strong>：AI根据知识点自动生成题目</li>
+  </ul>
+
+  <h4>交通出行</h4>
+  <ul>
+    <li><strong>自动驾驶</strong>：AI控制车辆，正在逐步商业化</li>
+    <li><strong>交通调度</strong>：AI优化红绿灯时间，减少拥堵</li>
+    <li><strong>网约车匹配</strong>：AI匹配乘客和司机，提高效率</li>
+    <li><strong>事故预防</strong>：AI分析路况，预警潜在危险</li>
+  </ul>
+
+  <h4>制造业</h4>
+  <ul>
+    <li><strong>质量检测</strong>：AI视觉识别产品缺陷</li>
+    <li><strong>预测维护</strong>：AI预测设备故障，提前维护</li>
+    <li><strong>生产优化</strong>：AI优化生产流程，提高效率</li>
+    <li><strong>供应链管理</strong>：AI预测需求，优化库存</li>
+  </ul>
+
+  <h3>AI技术的分类</h3>
+  <table class="comparison-table">
+    <tr>
+      <th>类型</th>
+      <th>能力</th>
+      <th>典型应用</th>
+    </tr>
+    <tr>
+      <td><strong>视觉AI</strong></td>
+      <td>看：识别图像、视频</td>
+      <td>人脸识别、自动驾驶视觉、医学影像分析</td>
+    </tr>
+    <tr>
+      <td><strong>语音AI</strong></td>
+      <td>听：识别和处理语音</td>
+      <td>语音助手、电话客服、语音翻译</td>
+    </tr>
+    <tr>
+      <td><strong>语言AI</strong></td>
+      <td>理解：阅读和生成文本</td>
+      <td>ChatGPT、翻译、写作辅助、代码生成</td>
+    </tr>
+    <tr>
+      <td><strong>决策AI</strong></td>
+      <td>思考：分析和决策</td>
+      <td>推荐系统、风控系统、游戏AI</td>
+    </tr>
+    <tr>
+      <td><strong>创造AI</strong></td>
+      <td>创作：生成新内容</td>
+      <td>AI绘画、AI音乐、AI写作</td>
+    </tr>
+  </table>
+
+  <h3>图灵测试</h3>
+  <p><span class="keyword-highlight">图灵测试（Turing Test）</span>由英国数学家艾伦·图灵（Alan Turing）在1950年提出，是判断机器是否具备智能的经典标准。测试方法很简单：一个人类裁判通过文字与一个机器和一个真人分别对话，如果裁判无法分辨哪个是机器、哪个是人，那么这台机器就通过了图灵测试，被认为具有"智能"。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-question-circle"></i> 图灵测试的意义与局限</h4>
+    <p>图灵测试开创了"机器能否思考"这一哲学讨论的先河，但它也有局限性：一台机器可以通过巧妙的话术"骗过"裁判，却不一定真正理解语言。现代AI研究更多关注具体任务的性能指标，而非单纯通过图灵测试。</p>
+  </div>
+
+  <h3>AI寒冬</h3>
+  <p>AI的发展并非一帆风顺。历史上出现过多次<span class="keyword-highlight">AI寒冬（AI Winter）</span>——由于技术未能达到过高的期望，导致研究经费大幅削减、公众兴趣骤降的时期。第一次AI寒冬发生在1970年代，第二次在1980年代末至1990年代初。这些寒冬提醒我们：技术发展需要理性预期，既不能过度悲观，也不能盲目乐观。</p>
+
+  <h3>当前AI的边界</h3>
+  <div class="concept-box warning">
+    <h4><i class="fas fa-exclamation-circle"></i> AI能做什么 vs 不能做什么</h4>
+    <p><strong>AI目前能做的：</strong><br/>
+    • 图像识别与分类<br/>
+    • 自然语言理解与生成<br/>
+    • 数据分析与模式发现<br/>
+    • 自动驾驶（限定场景）<br/>
+    • 游戏博弈与策略决策<br/>
+    • 代码生成与辅助编程<br/><br/>
+    <strong>AI目前不能做的：</strong><br/>
+    • 真正理解世界（仅有统计模式匹配）<br/>
+    • 拥有自我意识和情感<br/>
+    • 在没有训练过的全新领域泛化<br/>
+    • 保证100%准确（可能产生幻觉）<br/>
+    • 替代人类的创造力和道德判断</p>
+  </div>
+
+  <h3>为什么AI现在这么火？</h3>
+  <p>AI技术爆发的原因：</p>
+  <ul>
+    <li><strong>数据爆炸</strong>：互联网产生海量数据，供AI学习</li>
+    <li><strong>算力提升</strong>：GPU等硬件让大规模计算成为可能</li>
+    <li><strong>算法突破</strong>：深度学习、Transformer等技术成熟</li>
+    <li><strong>开源生态</strong>：Hugging Face等平台让AI技术共享</li>
+    <li><strong>应用落地</strong>：ChatGPT等产品让普通人也能用AI</li>
+  </ul>
+</div>
+
+<div class="chapter-summary">
+  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+  <ol>
+    <li>人工智能（AI）是让计算机模拟人类智能行为的技术，核心能力包括感知、推理、学习和交互。</li>
+    <li>AI分为三个层次：弱AI（当前已实现）、强AI/AGI（研究中）、超AI（理论概念）。</li>
+    <li>AI、ML、DL是包含关系：AI ⊃ ML ⊃ DL，深度学习是当前最核心的技术手段。</li>
+    <li>AI已广泛应用于手机、网络服务、医疗、金融、教育、交通、制造等各行各业。</li>
+    <li>当前AI有明确的边界：擅长模式识别和数据分析，但缺乏真正的理解力、自我意识和道德判断能力。</li>
+  </ol>
+</div>
+
+<div class="exercise-box">
+  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+  <ol>
+    <li>
+      <p><strong>以下哪项不属于AI的三个层次？</strong></p>
+      <p>A. 弱人工智能（Narrow AI）<br/>B. 强人工智能（AGI）<br/>C. 超人工智能（ASI）<br/>D. 量子人工智能（QAI）</p>
+      <p><strong>答案：D</strong>。AI的三个层次是弱AI、强AI和超AI，量子人工智能不是标准的AI分类。</p>
+    </li>
+    <li>
+      <p><strong>图灵测试的核心思想是什么？</strong></p>
+      <p>A. 测试机器的计算速度<br/>B. 通过对话判断机器是否能模仿人类智能<br/>C. 测试机器的存储容量<br/>D. 测试机器的视觉识别能力</p>
+      <p><strong>答案：B</strong>。图灵测试通过人机对话的不可区分性来判断机器是否具备智能。</p>
+    </li>
+    <li>
+      <p><strong>以下关于AI、ML、DL的关系，哪个描述是正确的？</strong></p>
+      <p>A. DL包含ML，ML包含AI<br/>B. AI包含ML，ML包含DL<br/>C. AI、ML、DL是三个独立的技术<br/>D. DL和ML是同一概念的不同名称</p>
+      <p><strong>答案：B</strong>。AI是最广的概念，ML是AI的子集，DL是ML的子集，三者是层层包含的关系。</p>
+    </li>
+  </ol>
+</div>
+
+
+    </main>
+
+    <!-- 底部导航 -->
+    <div class="chapter-nav bottom">
+        <a href="ch02b.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch04.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+      <p>从零开始系统学习人工智能</p>
+      <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+      <p>第1-11章：基础与核心（见 ai-notes-core.html）</p>
+      <p>第12-23章：工程实践与进阶（本文件）</p>
+      <p>附录A：GPU与算力指南</p>
+      <p>附录B：术语表</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-info-circle"></i> 说明</h3>
+      <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+      <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+  </div>
+</footer>
+    </div><!-- /ai-notes-container -->
+
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+</body>
+</html>
