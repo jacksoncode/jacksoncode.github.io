@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>附录G：AI评估与基准测试 - AI学习笔记</title>
+    <meta name="description" content="AI评估与基准测试指南：掌握评估理由、评估规范、评估工具、基准测试、评估维度、自定义评估、评估流水线与结果分析">
+    <meta name="keywords" content="AI评估, 基准测试, lm-eval-harness, 评估流水线, 大模型评测">
+    <meta name="author" content="AI学习笔记">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- KaTeX for math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <style>
+        /* ========== 全局样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+
+        /* ========== 导航栏 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a365d;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .navbar-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.75rem;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .navbar-links a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-section p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* ========== 主内容区域 ========== */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 860px;
+            min-width: 0;
+        }
+
+        /* ========== 章节导航 ========== */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.88rem;
+            color: #718096;
+        }
+
+        .breadcrumb a {
+            color: #4299e1;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            color: #cbd5e0;
+        }
+
+        .breadcrumb .current {
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .chapter-nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chapter-nav-links a {
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .prev-chapter {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .prev-chapter:hover {
+            background: #e2e8f0;
+        }
+
+        .next-chapter {
+            background: #4299e1;
+            color: white;
+        }
+
+        .next-chapter:hover {
+            background: #3182ce;
+        }
+
+        /* ========== 章节标题 ========== */
+        .section-title {
+            font-size: 1.8rem;
+            color: #1a365d;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+        }
+
+        /* ========== 概念区域 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-section h2,
+        .concept-section h3 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+
+        .concept-section h2 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-section h2 i {
+            color: #4299e1;
+        }
+
+        .concept-section h3 {
+            font-size: 1.15rem;
+            margin-top: 1.5rem;
+        }
+
+        .concept-section p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        .concept-section ul, .concept-section ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .concept-section li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .concept-section strong {
+            color: #2d3748;
+        }
+
+        .concept-section code {
+            background: #edf2f7;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88em;
+            color: #e53e3e;
+        }
+
+        /* ========== 关键词高亮 ========== */
+        .keyword-highlight {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            color: #2b6cb0;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            border-bottom: 2px solid #4299e1;
+        }
+
+        /* ========== 学习目标 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #f0f9ff 100%);
+            border: 1px solid #90cdf4;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4a5568;
+        }
+
+        .learning-objectives li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+        }
+
+        /* ========== 前置要求 ========== */
+        .prerequisite-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            margin-bottom: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            padding-left: 1.5rem;
+        }
+
+        .prerequisite-box li {
+            margin-bottom: 0.3rem;
+            color: #744210;
+        }
+
+        /* ========== 知识点标记 ========== */
+        .knowledge-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: 1px solid #bee3f8;
+        }
+
+        .knowledge-point i {
+            font-size: 0.75rem;
+        }
+
+        /* ========== 代码块 ========== */
+        .code-block {
+            background: #1a202c;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .code-block-header {
+            background: #2d3748;
+            padding: 0.6rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: #a0aec0;
+        }
+
+        .code-block-header .lang-tag {
+            background: #4a5568;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 1.25rem;
+            overflow-x: auto;
+        }
+
+        .code-block pre code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        /* ========== 提示/警告/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 练习题 ========== */
+        .exercise-item {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .exercise-item::before {
+            content: '\f5b8';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .exercise-item h5 {
+            color: #276749;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .exercise-item p, .exercise-item ul {
+            color: #2d3748;
+            font-size: 0.92rem;
+        }
+
+        .exercise-item ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .exercise-item li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 概念框 ========== */
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ========== 流程图 ========== */
+        .flow-diagram {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .flow-diagram h4 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diagram-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .diagram-card {
+            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            min-width: 120px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-card i {
+            font-size: 1.5rem;
+            color: #4299e1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diagram-card .card-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .diagram-card .card-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .diagram-arrow {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* ========== TOC侧边栏 ========== */
+        .toc-sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            align-self: flex-start;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 0.95rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            text-decoration: none;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            background: #1a365d;
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section h3 i {
+            color: #63b3ed;
+        }
+
+        .footer-section p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.85rem;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .code-block pre code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
+            <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
+            <li><a href="ch17.html"><i class="fas fa-book-open"></i> 知识库</a></li>
+            <li><a href="ch18.html"><i class="fas fa-layer-group"></i> 记忆</a></li>
+            <li><a href="ch19.html"><i class="fas fa-comment-dots"></i> 提示</a></li>
+            <li><a href="ch20.html"><i class="fas fa-database"></i> 数据</a></li>
+            <li><a href="ch21.html"><i class="fas fa-exclamation-circle"></i> 局限</a></li>
+            <li><a href="ch22.html"><i class="fas fa-toolbox"></i> 平台</a></li>
+            <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
+            <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ==================== Hero Section ==================== -->
+    <section class="hero-section">
+        <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
+        <p>附录G：AI评估与基准测试</p>
+        <div class="hero-badges">
+            <span class="hero-badge"><i class="fas fa-book"></i> 系统学习</span>
+            <span class="hero-badge"><i class="fas fa-code"></i> 实践导向</span>
+        </div>
+    </section>
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+<nav class="chapter-nav">
+  <div class="breadcrumb">
+    <a href="../../index.html"><i class="fas fa-home"></i> 首页</a>
+    <span class="separator">/</span>
+    <span class="current">附录G：AI评估与基准测试</span>
+  </div>
+  <div class="chapter-nav-links">
+    <a href="ch33.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+    <a href="appendix-a.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+  </div>
+</nav>
+<!-- 附录G：AI评估与基准测试 -->
+<!-- ============================================================ -->
+<h2 class="section-title"><i class="fas fa-chart-bar"></i> 附录G：AI评估与基准测试</h2>
+
+<div class="concept-section">
+  <h3>学习目标</h3>
+  <div class="learning-objectives">
+    <ul>
+      <li>理解AI模型评估的核心理由与实际应用场景</li>
+      <li>掌握评估规范的设计原则与实施方法</li>
+      <li>熟练使用lm-eval-harness等主流评估工具</li>
+      <li>了解常见基准测试套件（MMLU、HumanEval等）的原理与用法</li>
+      <li>掌握多维度评估框架（准确性、鲁棒性、公平性等）</li>
+      <li>能够设计并构建自定义评估任务</li>
+      <li>具备构建端到端评估流水线的能力</li>
+      <li>学会分析评估结果并生成可操作的改进报告</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第一节：为什么要评估 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-1">
+  <h2><i class="fas fa-question-circle"></i> 第一节：为什么要评估</h2>
+
+  <p><span class="keyword-highlight">AI评估</span>是验证模型能力、发现潜在缺陷、指导迭代优化的关键环节。没有评估的模型开发就像没有指南针的航行——你不知道自己在进步还是在倒退。</p>
+
+  <h3>评估的核心价值</h3>
+  <p>评估在AI开发流程中扮演三重角色：</p>
+  <ul>
+    <li><strong>验证能力</strong>：量化模型在特定任务上的表现水平，回答"这个模型能做什么"</li>
+    <li><发现缺陷</strong>：暴露模型在边缘案例、偏见、安全性等方面的不足</li>
+    <li><strong>指导优化</strong>：为模型微调、提示工程、架构改进提供数据支撑</li>
+  </ul>
+
+  <h3>评估的实际应用场景</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>场景</th>
+        <th>评估目标</th>
+        <th>关键指标</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>模型选型</strong></td>
+        <td>比较不同模型在业务场景的表现</td>
+        <td>准确率、延迟、成本</td>
+      </tr>
+      <tr>
+        <td><strong>版本迭代</strong></td>
+        <td>验证新版本是否优于旧版本</td>
+        <td>各维度得分对比、回归检测</td>
+      </tr>
+      <tr>
+        <td><strong>安全审计</strong></td>
+        <td>检测模型的偏见、毒性、幻觉</td>
+        <td>毒性得分、公平性指标、幻觉率</td>
+      </tr>
+      <tr>
+        <td><strong>上线门槛</strong></td>
+        <td>判断模型是否达到部署标准</td>
+        <td>最低准确率、最大延迟、合规性</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <h5>为什么要建立评估体系？</h5>
+    <p>一个成熟的评估体系能帮你回答三个关键问题：模型当前水平如何？改进方向在哪里？何时可以发布？这比主观感受和少量测试用例可靠得多。</p>
+  </div>
+
+  <h3>不评估的风险</h3>
+  <p>跳过系统化评估会带来严重后果：</p>
+  <ul>
+    <li><strong>隐蔽的退化</strong>：修复一个bug时可能引入三个新bug，没有评估无法察觉</li>
+    <li><strong>虚假的信心</strong>：几个手动测试用例通过不代表模型整体可靠</li>
+    <li><strong>偏见放大</strong>：模型可能在特定群体上表现极差，但开发者毫不知情</li>
+    <li><strong>安全漏洞</strong>：未检测的越狱攻击路径可能被恶意利用</li>
+  </ul>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>思考你正在开发或使用的一个AI应用，列出至少三个需要评估的维度，并说明每个维度对应的评估方法。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第二节：评估规范 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-2">
+  <h2><i class="fas fa-file-alt"></i> 第二节：评估规范</h2>
+
+  <p><span class="keyword-highlight">评估规范</span>（Evaluation Specification）是定义"评什么、怎么评、评到什么程度"的标准化文档。好的规范确保评估过程可重复、可比较、可审计。</p>
+
+  <h3>规范的核心要素</h3>
+  <p>一份完整的评估规范应包含以下内容：</p>
+  <ul>
+    <li><strong>评估目标</strong>：明确本次评估要回答的问题（如"模型在中文数学推理上的能力"</li>
+    <li><strong>评估范围</strong>：限定测试的数据集、任务类型、语言等边界</li>
+    <li><strong>评估指标</strong>：定义具体的量化指标（准确率、F1、BLEU等）</li>
+    <li><strong>通过标准</strong>：设定各指标的最低阈值</li>
+    <li><strong>评估方法</strong>：说明使用的工具、配置、运行环境</li>
+    <li><strong>结果记录</strong>：规定结果的存储格式与报告模板</li>
+  </ul>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 评估规范模板</h4>
+    <pre><code class="language-yaml">evaluation_spec:
+  name: "v2.1-数学推理评估"
+  version: "1.0"
+  author: "AI团队"
+  created: "2025-01-15"
+
+  objective:
+    - 验证模型在中文数学推理任务上的能力
+    - 与基线模型进行对比
+    - 检测是否存在安全漏洞
+
+  scope:
+    datasets:
+      - GSM8K (英文数学推理)
+      - CMATH (中文数学推理)
+      - MATH (高难度数学)
+    languages: ["zh", "en"]
+    model_versions: ["gpt-4o", "qwen-72b", "custom-v2.1"]
+
+  metrics:
+    accuracy:
+      type: "exact_match"
+      threshold: 0.85
+    reasoning_quality:
+      type: "chain_of_thought_score"
+      threshold: 0.70
+    safety:
+      type: "toxicity_score"
+      threshold: 0.05
+
+  method:
+    tool: "lm-eval-harness"
+    config: "configs/math_eval.yaml"
+    num_fewshot: 5
+    batch_size: 32
+
+  output:
+    format: "json"
+    location: "results/v2.1/math_eval/"
+    report: "results/v2.1/math_eval/report.md"</code></pre>
+  </div>
+
+  <h3>评估规范的迭代</h3>
+  <p>评估规范本身也需要迭代优化：</p>
+  <ol>
+    <li><strong>初版</strong>：基于经验和最佳实践快速建立</li>
+    <li><strong>校准</strong>：用已知模型运行评估，调整阈值合理性</li>
+    <li><strong>扩展</strong>：根据新发现的问题补充评估维度</li>
+    <li><strong>自动化</strong>：将规范转化为CI/CD流水线中的自动检查</li>
+  </ol>
+
+  <div class="info-box">
+    <h5>规范与评估的关系</h5>
+    <p>评估规范是"宪法"，评估执行是"执法"。没有规范的评估是随意的；没有执行的规范是空洞的。两者缺一不可。</p>
+  </div>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>为你负责的AI项目编写一份简版评估规范（YAML格式），包含评估目标、范围、指标、通过标准四个核心字段。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第三节：评估工具 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-3">
+  <h2><i class="fas fa-tools"></i> 第三节：评估工具</h2>
+
+  <p>选择合适的评估工具能大幅提升评估效率。以下是主流评估工具的对比与使用指南。</p>
+
+  <h3>主流评估工具对比</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>工具</th>
+        <th>特点</th>
+        <th>适用场景</th>
+        <th>上手难度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>lm-eval-harness</strong></td>
+        <td>标准化框架，任务丰富，社区活跃</td>
+        <td>通用模型评估、学术研究</td>
+        <td>中等</td>
+      </tr>
+      <tr>
+        <td><strong>OpenCompass</strong></td>
+        <td>中文友好，支持100+数据集</td>
+        <td>中文模型评估、国产模型对比</td>
+        <td>中等</td>
+      </tr>
+      <tr>
+        <td><strong>HELM</strong></td>
+        <td>全面覆盖，标准化报告格式</td>
+        <td>全面基准测试、模型卡片生成</td>
+        <td>较高</td>
+      </tr>
+      <tr>
+        <td><strong>promptfoo</strong></td>
+        <td>轻量级，YAML配置，支持多提供商</td>
+        <td>快速原型评估、提示工程迭代</td>
+        <td>低</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>lm-eval-harness 快速上手</h3>
+  <p><span class="keyword-highlight">lm-eval-harness</span>（由EleutherAI开发）是最广泛使用的开源评估框架。以下是安装与基本使用：</p>
+
+  <pre><code class="language-bash"># 安装 lm-eval-harness
+pip install lm-eval
+
+# 或从源码安装（推荐，可获取最新任务）
+git clone https://github.com/EleutherAI/lm-evaluation-harness.git
+cd lm-evaluation-harness
+pip install -e .
+
+# 验证安装
+lm_eval --help</code></pre>
+
+  <h3>评估单个模型</h3>
+  <p>使用lm-eval-harness评估模型在MMLU上的表现：</p>
+
+  <pre><code class="language-bash"># 评估 HuggingFace 模型在 MMLU 上的表现（5-shot）
+lm_eval --model hf \
+    --model_args pretrained=meta-llama/Llama-3-8B-Instruct \
+    --tasks mmlu \
+    --num_fewshot 5 \
+    --batch_size 16 \
+    --output_path results/llama3-8b-mmlu
+
+# 评估 OpenAI API 模型
+lm_eval --model openai-completions \
+    --model_args model=gpt-4o-mini \
+    --tasks mmlu,hellaswag,arc_challenge \
+    --num_fewshot 0 \
+    --output_path results/gpt4o-mini</code></pre>
+
+  <div class="tip-box">
+    <h5>选择评估任务的建议</h5>
+    <p>不要试图一次评估所有任务。先选择3-5个与你的应用场景最相关的任务，建立基线后再逐步扩展。常见起点任务：<strong>MMLU</strong>（知识）、<strong>HumanEval</strong>（代码）、<strong>GSM8K</strong>（数学）、<strong>TruthfulQA</strong>（真实性）。</p>
+  </div>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>安装lm-eval-harness，选择一个开源模型（如Llama-3-8B），在至少两个基准任务上运行评估。记录评估结果并与其他同学的模型进行对比。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第四节：基准测试 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-4">
+  <h2><i class="fas fa-trophy"></i> 第四节：基准测试</h2>
+
+  <p><span class="keyword-highlight">基准测试</span>（Benchmark）是标准化的测试集与评估协议，用于在相同条件下公平比较不同模型的能力。</p>
+
+  <h3>常见基准测试概览</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>基准</th>
+        <th>评估能力</th>
+        <th>任务类型</th>
+        <th>规模</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>MMLU</strong></td>
+        <td>多学科知识</td>
+        <td>选择题（4选1）</td>
+        <td>57个学科，14K题</td>
+      </tr>
+      <tr>
+        <td><strong>HumanEval</strong></td>
+        <td>代码生成</td>
+        <td>函数补全 + 单元测试</td>
+        <td>164个编程题</td>
+      </tr>
+      <tr>
+        <td><strong>GSM8K</strong></td>
+        <td>小学数学推理</td>
+        <td>应用题求解</td>
+        <td>8.5K题</td>
+      </tr>
+      <tr>
+        <td><strong>TruthfulQA</strong></td>
+        <td>真实性与幻觉</td>
+        <td>开放问题 + GPT评判</td>
+        <td>817个问题</td>
+      </tr>
+      <tr>
+        <td><strong>HellaSwag</strong></td>
+        <td>常识推理</td>
+        <td>句子补全（4选1）</td>
+        <td>10K题</td>
+      </tr>
+      <tr>
+        <td><strong>ARC-Challenge</strong></td>
+        <td>科学推理</td>
+        <td>选择题（4选1）</td>
+        <td>2.6K题（困难集）</td>
+      </tr>
+      <tr>
+        <td><strong>WinoGrande</strong></td>
+        <td>常识消歧</td>
+        <td>代词消歧（2选1）</td>
+        <td>1.7K题</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>如何解读基准分数</h3>
+  <p>基准分数需要结合上下文理解：</p>
+  <ul>
+    <li><strong>绝对分数</strong>：80%的MMLU准确率意味着什么？需要与人类基准（~90%）和随机基线（~25%）对比</li>
+    <li><strong>相对排名</strong>：同一模型在不同版本的评估中分数可能波动，需要看趋势而非单点</li>
+    <li><strong>任务相关性</strong>：在HellaSwag上的高分不等于在你的业务场景中表现好</li>
+  </ul>
+
+  <div class="warning-box">
+    <h5>基准测试的局限性</h5>
+    <p>基准测试不等于真实能力。模型可能通过"刷榜"在特定基准上取得高分，但在实际应用中表现平庸。始终建议：在基准测试之外，建立针对你具体场景的<strong>自定义评估集</strong>。</p>
+  </div>
+
+  <h3>运行基准测试的最佳实践</h3>
+  <pre><code class="language-bash"># 1. 先运行小规模快速评估
+lm_eval --model hf \
+    --model_args pretrained=your-model \
+    --tasks mmlu \
+    --num_fewshot 5 \
+    --limit 100 \  # 先跑100题验证流程
+    --output_path results/quick-test
+
+# 2. 确认无误后运行完整评估
+lm_eval --model hf \
+    --model_args pretrained=your-model \
+    --tasks mmlu,hellaswag,arc_challenge,gsm8k \
+    --num_fewshot 5 \
+    --batch_size 16 \
+    --output_path results/full-eval
+
+# 3. 对比多次评估结果
+lm_eval --model hf \
+    --model_args pretrained=your-model-v2 \
+    --tasks mmlu \
+    --num_fewshot 5 \
+    --output_path results/v2-mmlu \
+    --compare_results results/v1-mmlu</code></pre>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>选择一个开源模型，分别在GSM8K（数学）和MMLU（知识）上运行5-shot评估。分析两个任务的分数差异，讨论模型的优势与短板。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第五节：评估维度 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-5">
+  <h2><i class="fas fa-layer-group"></i> 第五节：评估维度</h2>
+
+  <p>单一维度的评估只能看到模型能力的冰山一角。<span class="keyword-highlight">多维度评估</span>能帮助你全面了解模型的优势与弱点。</p>
+
+  <h3>核心评估维度</h3>
+  <div class="concept-box">
+    <h4><i class="fas fa-th-large"></i> 评估维度框架</h4>
+    <div class="diagram-section">
+      <div class="diagram-card">
+        <i class="fas fa-bullseye"></i>
+        <div class="card-title">准确性</div>
+        <div class="card-desc">任务完成的正确率</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-plus"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-shield-alt"></i>
+        <div class="card-title">鲁棒性</div>
+        <div class="card-desc">面对噪声的稳定性</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-plus"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-balance-scale"></i>
+        <div class="card-title">公平性</div>
+        <div class="card-desc">对不同群体的平等性</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-plus"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-lock"></i>
+        <div class="card-title">安全性</div>
+        <div class="card-desc">抵抗攻击的能力</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-plus"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-tachometer-alt"></i>
+        <div class="card-title">效率</div>
+        <div class="card-desc">延迟与资源消耗</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>各维度详解</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th>评估内容</th>
+        <th>常用指标</th>
+        <th>评估方法</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>准确性</strong></td>
+        <td>模型回答的正确程度</td>
+        <td>准确率、F1、BLEU、ROUGE</td>
+        <td>基准测试集</td>
+      </tr>
+      <tr>
+        <td><strong>鲁棒性</strong></td>
+        <td>面对拼写错误、同义替换、格式变化时的表现</td>
+        <td>扰动后的准确率下降比例</td>
+        <td>对抗性测试集</td>
+      </tr>
+      <tr>
+        <td><strong>公平性</strong></td>
+        <td>对不同性别、种族、年龄群体的表现差异</td>
+        <td>人口统计均等差距、机会均等</td>
+        <td>分组评估</td>
+      </tr>
+      <tr>
+        <td><strong>安全性</strong></td>
+        <td>抵抗越狱攻击、拒绝有害请求的能力</td>
+        <td>攻击成功率、拒绝率</td>
+        <td>红队测试</td>
+      </tr>
+      <tr>
+        <td><strong>效率</strong></td>
+        <td>推理速度、内存占用、成本</td>
+        <td>延迟（ms）、吞吐量（tokens/s）</td>
+        <td>性能基准测试</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>鲁棒性评估示例</h3>
+  <p>通过输入扰动测试模型的鲁棒性：</p>
+  <pre><code class="language-python">from lm_eval import evaluator
+from lm_eval.tasks import TaskManager
+
+def evaluate_robustness(model, task_name, perturbation_rate=0.1):
+    """评估模型在输入扰动下的鲁棒性"""
+    import random
+
+    # 1. 运行原始评估
+    baseline_results = evaluator.simple_evaluate(
+        model="hf",
+        model_args=f"pretrained={model}",
+        tasks=[task_name],
+        num_fewshot=5
+    )
+    baseline_acc = baseline_results["results"][task_name]["acc"]
+
+    # 2. 应用输入扰动（模拟拼写错误、同义替换等）
+    perturbed_results = apply_perturbation(
+        task_name, perturbation_rate
+    )
+
+    # 3. 计算鲁棒性得分
+    robustness_score = perturbed_acc / baseline_acc
+
+    print(f"原始准确率: {baseline_acc:.4f}")
+    print(f"扰动后准确率: {perturbed_acc:.4f}")
+    print(f"鲁棒性得分: {robustness_score:.4f}")
+    print(f"准确率下降: {(1-robustness_score)*100:.1f}%")
+
+    return {
+        "baseline": baseline_acc,
+        "perturbed": perturbed_acc,
+        "robustness": robustness_score
+    }</code></pre>
+
+  <div class="info-box">
+    <h5>评估维度的优先级</h5>
+    <p>不同应用场景对评估维度的优先级不同。医疗AI需要最高级别的安全性和公平性；搜索引擎需要高准确性；实时对话需要高效率。根据你的业务需求确定评估维度的优先级。</p>
+  </div>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>选择一个评估维度（鲁棒性、公平性或安全性），设计一个简短的评估实验方案，包括测试数据构造、评估指标和预期结果分析方法。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第六节：自定义评估 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-6">
+  <h2><i class="fas fa-cogs"></i> 第六节：自定义评估</h2>
+
+  <p>通用基准测试无法覆盖所有场景。<span class="keyword-highlight">自定义评估</span>让你针对特定业务需求设计专属的评估任务。</p>
+
+  <h3>自定义评估的设计流程</h3>
+  <div class="flow-diagram">
+    <h4><i class="fas fa-project-diagram"></i> 评估设计流程</h4>
+    <div class="diagram-section">
+      <div class="diagram-card">
+        <i class="fas fa-search"></i>
+        <div class="card-title">需求分析</div>
+        <div class="card-desc">明确评估目标</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-database"></i>
+        <div class="card-title">数据构造</div>
+        <div class="card-desc">创建测试样本</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-check-double"></i>
+        <div class="card-title">指标定义</div>
+        <div class="card-desc">选择评估标准</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-play-circle"></i>
+        <div class="card-title">执行评估</div>
+        <div class="card-desc">运行测试并收集结果</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-chart-line"></i>
+        <div class="card-title">结果分析</div>
+        <div class="card-desc">解读数据并优化</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>创建自定义评估任务</h3>
+  <p>以"中文客服对话质量评估"为例，展示如何创建自定义评估任务：</p>
+
+  <pre><code class="language-python">import json
+from pathlib import Path
+from typing import Dict, List
+
+class CustomEvalTask:
+    """自定义评估任务基类"""
+
+    def __init__(self, name: str, description: str):
+        self.name = name
+        self.description = description
+        self.examples = []
+        self.metrics = {}
+
+    def load_data(self, data_path: str):
+        """加载评估数据"""
+        with open(data_path, 'r', encoding='utf-8') as f:
+            self.examples = json.load(f)
+        print(f"Loaded {len(self.examples)} examples for {self.name}")
+
+    def evaluate(self, model_fn, example: Dict) -> Dict:
+        """评估单个样本"""
+        raise NotImplementedError
+
+    def compute_metrics(self, results: List[Dict]) -> Dict:
+        """计算总体指标"""
+        raise NotImplementedError
+
+
+class CustomerServiceEval(CustomEvalTask):
+    """中文客服对话质量评估"""
+
+    def __init__(self):
+        super().__init__(
+            name="customer_service_eval",
+            description="评估模型在客服场景中的回答质量"
+        )
+        self.metrics = {
+            "accuracy": 0.0,
+            "helpfulness": 0.0,
+            "safety": 0.0
+        }
+
+    def evaluate(self, model_fn, example: Dict) -> Dict:
+        """评估单个客服对话样本"""
+        query = example["query"]
+        expected_intent = example["expected_intent"]
+        expected_answer_type = example["expected_answer_type"]
+
+        # 调用模型生成回答
+        response = model_fn(query)
+
+        # 评估维度
+        results = {
+            "query": query,
+            "response": response,
+            "intent_correct": self._check_intent(response, expected_intent),
+            "answer_type_correct": self._check_answer_type(
+                response, expected_answer_type
+            ),
+            "has_greeting": self._check_greeting(response),
+            "has_closing": self._check_closing(response),
+            "safety_score": self._check_safety(response)
+        }
+        return results
+
+    def _check_intent(self, response, expected_intent):
+        """检查回答是否匹配预期意图"""
+        intent_keywords = {
+            "refund": ["退款", "退货", "返还"],
+            "complaint": ["抱歉", "对不起", "歉意"],
+            "inquiry": ["查询", "查看", "确认"],
+            "technical": ["重启", "设置", "操作步骤"]
+        }
+        keywords = intent_keywords.get(expected_intent, [])
+        return any(kw in response for kw in keywords)
+
+    def _check_answer_type(self, response, expected_type):
+        """检查回答类型是否正确"""
+        type_checks = {
+            "yes_no": any(w in response for w in ["可以", "不能", "支持", "不支持"]),
+            "step_by_step": any(w in response for w in ["第一", "步骤", "首先"]),
+            "explanation": len(response) > 50
+        }
+        return type_checks.get(expected_type, True)
+
+    def _check_greeting(self, response):
+        """检查是否包含问候语"""
+        greetings = ["您好", "你好", "亲", "尊敬的"]
+        return any(g in response for g in greetings)
+
+    def _check_closing(self, response):
+        """检查是否包含结束语"""
+        closings = ["还有其他", "请问", "祝您", "感谢"]
+        return any(c in response for c in closings)
+
+    def _check_safety(self, response):
+        """安全性检查（简化版）"""
+        unsafe_patterns = ["骂人", "歧视", "威胁"]
+        return 1.0 if not any(p in response for p in unsafe_patterns) else 0.0
+
+    def compute_metrics(self, results: List[Dict]) -> Dict:
+        """计算总体评估指标"""
+        n = len(results)
+        if n == 0:
+            return self.metrics
+
+        self.metrics = {
+            "accuracy": sum(r["intent_correct"] for r in results) / n,
+            "helpfulness": (
+                sum(r["answer_type_correct"] for r in results) / n * 0.6 +
+                sum(r["has_greeting"] for r in results) / n * 0.2 +
+                sum(r["has_closing"] for r in results) / n * 0.2
+            ),
+            "safety": sum(r["safety_score"] for r in results) / n
+        }
+        return self.metrics</code></pre>
+
+  <div class="tip-box">
+    <h5>自定义评估数据的质量</h5>
+    <p>自定义评估数据的质量直接决定评估结果的可信度。确保：(1) 样本覆盖典型和边缘场景；(2) 标注经过多人交叉验证；(3) 定期更新以反映真实分布变化。</p>
+  </div>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>为你负责的业务场景设计一个包含至少20个样本的自定义评估集，并实现对应的评估类。至少包含两个评估维度。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第七节：评估流水线 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-7">
+  <h2><i class="fas fa-stream"></i> 第七节：评估流水线</h2>
+
+  <p>将评估自动化集成到开发流程中，形成<span class="keyword-highlight">评估流水线</span>（Evaluation Pipeline），是实现持续质量保证的关键。</p>
+
+  <h3>评估流水线架构</h3>
+  <div class="flow-diagram">
+    <h4><i class="fas fa-cogs"></i> CI/CD评估流水线</h4>
+    <div class="diagram-section">
+      <div class="diagram-card">
+        <i class="fas fa-code-branch"></i>
+        <div class="card-title">代码提交</div>
+        <div class="card-desc">触发CI流水线</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-hammer"></i>
+        <div class="card-title">模型构建</div>
+        <div class="card-desc">训练/微调模型</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-vial"></i>
+        <div class="card-title">快速评估</div>
+        <div class="card-desc">核心任务验证</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-check-circle"></i>
+        <div class="card-title">通过/拒绝</div>
+        <div class="card-desc">质量门禁检查</div>
+      </div>
+      <span class="diagram-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="diagram-card">
+        <i class="fas fa-rocket"></i>
+        <div class="card-title">部署上线</div>
+        <div class="card-desc">推送到生产环境</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>实现自动化评估脚本</h3>
+  <pre><code class="language-python">#!/usr/bin/env python3
+"""
+自动化评估流水线脚本
+用法: python eval_pipeline.py --config configs/eval.yaml
+"""
+
+import argparse
+import json
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+
+import yaml
+
+
+def load_config(config_path: str) -> dict:
+    """加载评估配置"""
+    with open(config_path, 'r', encoding='utf-8') as f:
+        return yaml.safe_load(f)
+
+
+def run_quick_eval(config: dict) -> dict:
+    """运行快速评估（用于CI/CD门禁）"""
+    results = {}
+    for task in config["quick_tasks"]:
+        print(f"\n📊 Running task: {task['name']}")
+        cmd = [
+            "lm_eval",
+            "--model", config["model_type"],
+            "--model_args", config["model_args"],
+            "--tasks", task["name"],
+            "--num_fewshot", str(task.get("num_fewshot", 5)),
+            "--batch_size", str(task.get("batch_size", 16)),
+            "--output_path", f"results/quick/{task['name']}"
+        ]
+
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"❌ Task {task['name']} failed!")
+            results[task["name"]] = {"status": "failed", "error": result.stderr}
+            continue
+
+        # 解析结果
+        result_file = Path(f"results/quick/{task['name']}/results.json")
+        if result_file.exists():
+            with open(result_file) as f:
+                task_results = json.load(f)
+            results[task["name"]] = {
+                "status": "passed",
+                "results": task_results
+            }
+        else:
+            results[task["name"]] = {"status": "no_results"}
+
+    return results
+
+
+def check_quality_gate(results: dict, thresholds: dict) -> bool:
+    """检查质量门禁是否通过"""
+    all_passed = True
+    for task_name, threshold in thresholds.items():
+        if task_name not in results:
+            print(f"⚠️  Task {task_name} not found in results")
+            all_passed = False
+            continue
+
+        task_result = results[task_name]
+        if task_result["status"] != "passed":
+            print(f"❌ Task {task_name} did not complete successfully")
+            all_passed = False
+            continue
+
+        # 获取准确率
+        acc = task_result["results"].get("results", {}).get(task_name, {}).get("acc", 0)
+        if acc < threshold:
+            print(f"❌ Task {task_name}: {acc:.4f} < {threshold} (threshold)")
+            all_passed = False
+        else:
+            print(f"✅ Task {task_name}: {acc:.4f} >= {threshold}")
+
+    return all_passed
+
+
+def generate_report(results: dict, output_path: str):
+    """生成评估报告"""
+    report = {
+        "timestamp": datetime.now().isoformat(),
+        "summary": {
+            "total_tasks": len(results),
+            "passed": sum(1 for r in results.values() if r["status"] == "passed"),
+            "failed": sum(1 for r in results.values() if r["status"] != "passed")
+        },
+        "details": results
+    }
+
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=2, ensure_ascii=False)
+
+    print(f"\n📄 Report saved to: {output_path}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="AI Model Evaluation Pipeline")
+    parser.add_argument("--config", required=True, help="评估配置文件路径")
+    parser.add_argument("--mode", choices=["quick", "full"], default="quick",
+                       help="评估模式: quick (CI/CD) 或 full (完整评估)")
+    args = parser.parse_args()
+
+    # 加载配置
+    config = load_config(args.config)
+    print(f"🔧 Loaded config from: {args.config}")
+
+    # 运行评估
+    if args.mode == "quick":
+        print("\n🚀 Running QUICK evaluation...")
+        results = run_quick_eval(config)
+    else:
+        print("\n🚀 Running FULL evaluation...")
+        # 完整评估逻辑（类似quick但包含更多任务）
+        results = run_quick_eval(config)
+
+    # 检查质量门禁
+    if args.mode == "quick":
+        thresholds = config.get("quality_gates", {})
+        passed = check_quality_gate(results, thresholds)
+    else:
+        passed = True
+
+    # 生成报告
+    output_dir = Path("results/reports")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    report_path = output_dir / f"eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    generate_report(results, str(report_path))
+
+    # 退出码
+    if not passed:
+        print("\n❌ Quality gate FAILED!")
+        sys.exit(1)
+    else:
+        print("\n✅ All quality gates PASSED!")
+        sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+  <h3>评估配置文件示例</h3>
+  <pre><code class="language-yaml"># configs/eval.yaml
+# 评估流水线配置
+
+model_type: "hf"
+model_args: "pretrained=meta-llama/Llama-3-8B-Instruct"
+
+quick_tasks:
+  - name: "mmlu"
+    num_fewshot: 5
+    batch_size: 16
+  - name: "hellaswag"
+    num_fewshot: 10
+    batch_size: 16
+  - name: "arc_challenge"
+    num_fewshot: 25
+    batch_size: 16
+
+full_tasks:
+  - name: "mmlu"
+    num_fewshot: 5
+  - name: "hellaswag"
+    num_fewshot: 10
+  - name: "arc_challenge"
+    num_fewshot: 25
+  - name: "gsm8k"
+    num_fewshot: 5
+  - name: "truthfulqa"
+    num_fewshot: 0
+  - name: "humaneval"
+    num_fewshot: 0
+
+quality_gates:
+  mmlu: 0.65
+  hellaswag: 0.75
+  arc_challenge: 0.55
+
+output:
+  base_dir: "results"
+  reports_dir: "results/reports"</code></pre>
+
+  <div class="success-box">
+    <h5>流水线的最佳实践</h5>
+    <p>将评估集成到CI/CD中时，建议：(1) 快速评估放在PR检查中（<5分钟），完整评估每天运行一次；(2) 设置合理的阈值，过低会放过退化，过高会频繁误报；(3) 保留历史结果用于趋势分析。</p>
+  </div>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>将上面的评估流水线脚本适配到你的项目中。配置至少两个质量门禁阈值，并模拟一次"通过"和一次"失败"的评估流程。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第八节：评估结果分析 -->
+<!-- ============================================================ -->
+<div class="concept-section" id="section-8">
+  <h2><i class="fas fa-chart-pie"></i> 第八节：评估结果分析</h2>
+
+  <p>评估运行完成只是第一步。<span class="keyword-highlight">结果分析</span>才是将数据转化为洞察、将洞察转化为改进的关键环节。</p>
+
+  <h3>结果分析的核心步骤</h3>
+  <ol>
+    <li><strong>数据清洗</strong>：检查评估过程是否有错误、超时、异常值</li>
+    <li><strong>指标汇总</strong>：计算各维度的总体得分与分项得分</li>
+    <li><strong>对比分析</strong>：与基线模型、历史版本、行业基准对比</li>
+    <li><strong>错误分析</strong>：深入分析失败样本的模式与原因</li>
+    <li><strong>报告生成</strong>：输出可读性强、可操作的评估报告</li>
+  </ol>
+
+  <h3>可视化评估结果</h3>
+  <pre><code class="language-python">import json
+import matplotlib.pyplot as plt
+import numpy as np
+from pathlib import Path
+
+
+def visualize_eval_results(results_dir: str, output_path: str = "eval_dashboard.png"):
+    """生成评估结果可视化仪表盘"""
+
+    # 1. 加载结果
+    results_file = Path(results_dir) / "results.json"
+    with open(results_file) as f:
+        results = json.load(f)
+
+    # 2. 提取数据
+    tasks = []
+    scores = []
+    baselines = []
+
+    for task_name, task_data in results.get("results", {}).items():
+        tasks.append(task_name)
+        scores.append(task_data.get("acc", 0))
+        baselines.append(task_data.get("baseline_acc", 0))
+
+    # 3. 创建可视化
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    fig.suptitle("AI Model Evaluation Dashboard", fontsize=16, fontweight='bold')
+
+    # 图1: 各任务得分对比
+    ax1 = axes[0, 0]
+    x = np.arange(len(tasks))
+    width = 0.35
+    bars1 = ax1.bar(x - width/2, scores, width, label='Model', color='#4299e1')
+    bars2 = ax1.bar(x + width/2, baselines, width, label='Baseline', color='#a0aec0')
+    ax1.set_xlabel('Tasks')
+    ax1.set_ylabel('Accuracy')
+    ax1.set_title('Task Performance Comparison')
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(tasks, rotation=45, ha='right')
+    ax1.legend()
+    ax1.set_ylim(0, 1)
+
+    # 图2: 雷达图
+    ax2 = axes[0, 1]
+    categories = ['Accuracy', 'Robustness', 'Fairness', 'Safety', 'Efficiency']
+    values = [0.85, 0.78, 0.82, 0.90, 0.75]
+    values += values[:1]  # 闭合
+    angles = np.linspace(0, 2 * np.pi, len(categories), endpoint=False).tolist()
+    angles += angles[:1]
+
+    ax2 = fig.add_subplot(222, polar=True)
+    ax2.fill(angles, values, alpha=0.25, color='#4299e1')
+    ax2.plot(angles, values, 'o-', linewidth=2, color='#4299e1')
+    ax2.set_xticks(angles[:-1])
+    ax2.set_xticklabels(categories)
+    ax2.set_ylim(0, 1)
+    ax2.set_title('Multi-Dimension Evaluation')
+
+    # 图3: 历史趋势
+    ax3 = axes[1, 0]
+    versions = ['v1.0', 'v1.1', 'v1.2', 'v2.0', 'v2.1']
+    trend_scores = [0.72, 0.75, 0.78, 0.83, 0.87]
+    ax3.plot(versions, trend_scores, 'o-', color='#48bb78', linewidth=2, markersize=8)
+    ax3.fill_between(versions, trend_scores, alpha=0.1, color='#48bb78')
+    ax3.set_xlabel('Model Version')
+    ax3.set_ylabel('Overall Score')
+    ax3.set_title('Performance Trend')
+    ax3.grid(True, alpha=0.3)
+
+    # 图4: 错误分布
+    ax4 = axes[1, 1]
+    error_types = ['Factual', 'Reasoning', 'Language', 'Safety', 'Other']
+    error_counts = [23, 18, 12, 5, 7]
+    colors = ['#fc8181', '#f6ad55', '#fbd38d', '#c6f6d5', '#bee3f8']
+    ax4.pie(error_counts, labels=error_types, autopct='%1.1f%%', colors=colors)
+    ax4.set_title('Error Distribution')
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"📊 Dashboard saved to: {output_path}")
+
+
+def generate_text_report(results: dict, output_path: str):
+    """生成文本格式的评估报告"""
+    report_lines = [
+        "=" * 60,
+        "AI MODEL EVALUATION REPORT",
+        f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        "=" * 60,
+        "",
+        "SUMMARY",
+        "-" * 40,
+    ]
+
+    total = 0
+    passed = 0
+    for task_name, task_data in results.get("results", {}).items():
+        total += 1
+        acc = task_data.get("acc", 0)
+        threshold = task_data.get("threshold", 0)
+        status = "PASS" if acc >= threshold else "FAIL"
+        if status == "PASS":
+            passed += 1
+        report_lines.append(f"  {task_name:30s} {acc:.4f}  [{status}]")
+
+    report_lines.extend([
+        "",
+        f"Total Tasks: {total}",
+        f"Passed: {passed}/{total} ({passed/total*100:.0f}%)",
+        "",
+        "RECOMMENDATIONS",
+        "-" * 40,
+    ])
+
+    # 自动生成改进建议
+    for task_name, task_data in results.get("results", {}).items():
+        acc = task_data.get("acc", 0)
+        if acc < 0.5:
+            report_lines.append(
+                f"  ⚠️  {task_name}: Score critically low ({acc:.4f}). "
+                f"Consider fine-tuning or prompt engineering."
+            )
+        elif acc < 0.7:
+            report_lines.append(
+                f"  📌 {task_name}: Room for improvement ({acc:.4f}). "
+                f"Review error patterns for optimization opportunities."
+            )
+
+    report_lines.extend(["", "=" * 60])
+
+    report_text = "\n".join(report_lines)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(report_text)
+
+    print(f"📄 Report saved to: {output_path}")
+    return report_text</code></pre>
+
+  <h3>错误分析的最佳实践</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>错误类型</th>
+        <th>特征</th>
+        <th>改进方向</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>知识性错误</strong></td>
+        <td>事实性信息不准确</td>
+        <td>增强训练数据、RAG检索</td>
+      </tr>
+      <tr>
+        <td><strong>推理错误</strong></td>
+        <td>逻辑链条断裂、跳跃</td>
+        <td>CoT提示、推理数据增强</td>
+      </tr>
+      <tr>
+        <td><strong>语言错误</strong></td>
+        <td>语法不通、表达不清</td>
+        <td>语言模型微调、语法检查</td>
+      </tr>
+      <tr>
+        <td><strong>安全错误</strong></td>
+        <td>输出有害内容</td>
+        <td>安全对齐训练、内容过滤</td>
+      </tr>
+      <tr>
+        <td><strong>格式错误</strong></td>
+        <td>输出格式不符合要求</td>
+        <td>格式化提示、后处理脚本</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <h5>从数据到行动</h5>
+    <p>评估结果的价值在于指导行动。建议建立"评估-分析-改进"的闭环：每次评估后召开结果评审会，根据错误分析确定下一个迭代周期的优化重点，避免盲目改进。</p>
+  </div>
+
+  <div class="exercise-item">
+    <h5>练习题</h5>
+    <p>基于你在前面练习中收集的评估结果，执行一次完整的错误分析：识别最常见的错误类型，分析错误原因，并提出至少两个具体的改进建议。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 章节总结 -->
+<!-- ============================================================ -->
+<div class="concept-section">
+  <h2><i class="fas fa-flag-checkered"></i> 章节总结</h2>
+
+  <p>本附录系统介绍了AI评估与基准测试的核心知识：</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-list-ul"></i> 核心要点回顾</h4>
+    <ul>
+      <li><strong>评估理由</strong>：评估是验证能力、发现缺陷、指导优化的关键环节</li>
+      <li><strong>评估规范</strong>：标准化的评估规范确保评估可重复、可比较</li>
+      <li><strong>评估工具</strong>：lm-eval-harness、OpenCompass等工具大幅提升评估效率</li>
+      <li><strong>基准测试</strong>：MMLU、HumanEval等标准基准用于公平比较模型能力</li>
+      <li><strong>评估维度</strong>：多维度评估（准确性、鲁棒性、公平性、安全性、效率）提供全面视角</li>
+      <li><strong>自定义评估</strong>：针对业务场景设计专属评估任务，弥补通用基准的不足</li>
+      <li><strong>评估流水线</strong>：将评估自动化集成到CI/CD中，实现持续质量保证</li>
+      <li><strong>结果分析</strong>：将评估数据转化为洞察，驱动模型持续改进</li>
+    </ul>
+  </div>
+
+  <div class="tip-box">
+    <h5>下一步学习建议</h5>
+    <p>掌握评估基础后，建议深入学习：(1) LLM-as-Judge评估范式；(2) 人类评估与自动评估的校准方法；(3) 多语言评估的特殊挑战；(4) 评估数据集的构建与维护。评估能力是AI工程师的核心竞争力之一。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+
+        </main>
+
+        <!-- ========== TOC侧边栏 ========== -->
+        <aside class="toc-sidebar">
+            <h3><i class="fas fa-list"></i> 目录导航</h3>
+            <ul>
+                <li><a href="#section-1">一、为什么要评估</a></li>
+                <li><a href="#section-2">二、评估规范</a></li>
+                <li><a href="#section-3">三、评估工具</a></li>
+                <li><a href="#section-4">四、基准测试</a></li>
+                <li><a href="#section-5">五、评估维度</a></li>
+                <li><a href="#section-6">六、自定义评估</a></li>
+                <li><a href="#section-7">七、评估流水线</a></li>
+                <li><a href="#section-8">八、评估结果分析</a></li>
+                <div class="toc-divider"></div>
+                <li><a href="#section-8"><i class="fas fa-flag-checkered"></i> 章节总结</a></li>
+            </ul>
+        </aside>
+
+    </div>
+
+<!-- 页脚 -->
+<!-- ============================================================ -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+      <p>从零开始系统学习人工智能</p>
+      <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+      <p>第1-11章：基础与核心（见 ai-notes-core.html）</p>
+      <p>第12-33章：工程实践与进阶</p>
+      <p>附录A：GPU与算力指南</p>
+      <p>附录B-F：各专题附录</p>
+      <p>附录G：AI评估与基准测试</p>
+    </div>
+    <div class="footer-section">
+      <h3><i class="fas fa-info-circle"></i> 说明</h3>
+      <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+      <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+  </div>
+</footer>
+    </div><!-- /ai-notes-container -->
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+    <script>
+    // 目录滚动高亮
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-sidebar a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const el = document.querySelector(id);
+          if (el) sections.push({ link, el });
+        }
+      });
+      function updateActive() {
+        const scrollY = window.scrollY + 100;
+        let current = sections[0];
+        for (const s of sections) {
+          if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+      }
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+    </script>
+  </body>
+</html>

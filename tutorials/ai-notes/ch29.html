@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="模型微调实战——LoRA/QLoRA/PEFT原理与实践，从零掌握大模型微调全流程">
+    <meta name="keywords" content="LoRA, QLoRA, PEFT, 模型微调, 大语言模型, 微调实战, Llama, ChatGLM">
+    <meta name="author" content="AI Learner">
+    <title>第二十九章：模型微调实战 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section 样式 ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        /* ========== 章节导航 ========== */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .chapter-nav a {
+            color: #4299e1;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-nav a:hover {
+            color: #2b6cb0;
+        }
+
+        .chapter-nav .toc-link {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 案例卡片网格 ========== */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .case-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .case-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-card .case-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-card .case-title {
+            font-weight: 700;
+            color: #1a365d;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-card .case-desc {
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .case-card .case-highlight {
+            background: #f0fff4;
+            border-left: 3px solid #38a169;
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            color: #276749;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        /* ========== 代码块样式增强 ========== */
+        pre[class*="language-"] {
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .code-comment {
+            color: #68d391;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
+            <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
+            <li><a href="ch17.html"><i class="fas fa-book-open"></i> 知识库</a></li>
+            <li><a href="ch18.html"><i class="fas fa-layer-group"></i> 记忆</a></li>
+            <li><a href="ch19.html"><i class="fas fa-comment-dots"></i> 提示</a></li>
+            <li><a href="ch20.html"><i class="fas fa-database"></i> 数据</a></li>
+            <li><a href="ch21.html"><i class="fas fa-exclamation-circle"></i> 局限</a></li>
+            <li><a href="ch22.html"><i class="fas fa-toolbox"></i> 平台</a></li>
+            <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
+            <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ==================== Hero Section ==================== -->
+    <section class="hero-section">
+        <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
+        <p>第二十九章：模型微调实战 - LoRA/QLoRA/PEFT</p>
+        <div class="hero-badges">
+            <span class="hero-badge"><i class="fas fa-cogs"></i> LoRA/QLoRA</span>
+            <span class="hero-badge"><i class="fas fa-database"></i> PEFT库</span>
+            <span class="hero-badge"><i class="fas fa-rocket"></i> 实战微调</span>
+        </div>
+    </section>
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第二十九章：模型微调实战 -->
+<!-- ============================================================ -->
+
+<h2 class="section-title"><i class="fas fa-cogs"></i> 第二十九章：模型微调实战</h2>
+
+<div class="learning-objectives">
+  <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+  <ul>
+    <li>理解为什么需要微调以及微调与提示工程的区别</li>
+    <li>掌握LoRA低秩适配的核心原理和数学直觉</li>
+    <li>学会使用QLoRA进行4bit量化下的高效微调</li>
+    <li>能够使用HuggingFace PEFT库完成完整的微调流程</li>
+    <li>掌握数据准备、训练监控、模型合并与导出的全流程</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h4><i class="fas fa-book"></i> 前置要求</h4>
+  <ul>
+    <li>了解Transformer架构和大语言模型的基本原理</li>
+    <li>熟悉Python编程和PyTorch基础</li>
+    <li>了解HuggingFace Transformers库的使用</li>
+    <li>最好有GPU环境（NVIDIA显卡，至少16GB显存）</li>
+  </ul>
+</div>
+
+<!-- 一、为什么需要微调 -->
+<div class="concept-section" id="sec1">
+  <h2 class="section-subtitle"><i class="fas fa-question-circle"></i> 一、为什么需要微调</h2>
+
+  <p>大语言模型（LLM）在海量数据上预训练后，已经具备了强大的通用语言能力。但在特定领域或特定任务上，通用模型的表现往往不够理想。<strong>微调（Fine-tuning）</strong>就是用特定任务的数据对预训练模型进行进一步训练，使其适应我们的需求。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-route"></i> 三种适配方式对比</h4>
+    <p>我们可以从三个维度来理解模型适配：</p>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>方式</th>
+          <th>原理</th>
+          <th>优点</th>
+          <th>缺点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>预训练</strong></td>
+          <td>从零训练模型</td>
+          <td>完全自主可控</td>
+          <td>需要海量数据和算力</td>
+        </tr>
+        <tr>
+          <td><strong>微调</strong></td>
+          <td>在预训练模型上继续训练</td>
+          <td>数据需求少、效果好</td>
+          <td>需要一定算力</td>
+        </tr>
+        <tr>
+          <td><strong>提示工程</strong></td>
+          <td>通过Prompt引导模型</td>
+          <td>零算力、即插即用</td>
+          <td>效果不稳定、有上限</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="ai-usage"><strong>关键洞察：</strong>提示工程是"指挥"模型，微调是"教育"模型，预训练是"培养"模型。对于大多数应用场景，微调是性价比最高的选择。</div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 什么时候需要微调？</h4>
+    <ul>
+      <li><strong>领域适配</strong>：通用模型在医疗、法律、金融等专业领域表现不佳</li>
+      <li><strong>风格迁移</strong>：需要模型以特定风格回答（如客服语气、学术写作）</li>
+      <li><strong>任务特定</strong>：需要在特定格式的任务上提升表现（如代码生成、数据提取）</li>
+      <li><strong>数据隐私</strong>：不能将敏感数据发送到API，需要本地部署</li>
+      <li><strong>成本控制</strong>：API调用成本过高，微调后自部署更经济</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h5><i class="fas fa-info-circle"></i> 决策路径</h5>
+    <p>先尝试提示工程 → 效果不够 → 评估数据量和算力 → 选择微调方法。提示工程和微调并不互斥，微调后的模型仍然可以使用提示工程来进一步提升效果。</p>
+  </div>
+</div>
+
+<!-- 二、全参数微调 -->
+<div class="concept-section" id="sec2">
+  <h2 class="section-subtitle"><i class="fas fa-server"></i> 二、全参数微调（Full Fine-tuning）</h2>
+
+  <p>全参数微调是最直接的微调方式：在任务数据集上更新模型的<strong>所有参数</strong>。它理论上能达到最好的效果，但资源需求极高。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-memory"></i> 全参数微调的资源需求</h4>
+    <p>以一个7B参数的模型为例：</p>
+    <ul>
+      <li><strong>模型参数存储</strong>：7B × 4字节（FP32）= 28GB，或 7B × 2字节（FP16）= 14GB</li>
+      <li><strong>优化器状态</strong>：Adam优化器需要额外存储动量和方差，约 2 × 模型参数大小</li>
+      <li><strong>梯度</strong>：与模型参数同等大小，7B × 2字节 = 14GB</li>
+      <li><strong>激活值</strong>：取决于batch size和序列长度，通常需要数GB到数十GB</li>
+    </ul>
+    <p><strong>结论</strong>：微调一个7B模型，至少需要 64GB 显存（FP16）或更多。这需要多张A100或H100 GPU。</p>
+  </div>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 全参数微调的风险</h5>
+    <p>全参数微调可能导致<strong>灾难性遗忘</strong>（Catastrophic Forgetting）：模型在学习新任务时，忘记了预训练阶段学到的通用知识。如果微调数据量太少或训练轮次过多，这种风险尤其突出。</p>
+  </div>
+
+  <div class="tip-box">
+    <h5><i class="fas fa-lightbulb"></i> 参数高效微调的动机</h5>
+    <p>既然全参数微调这么昂贵，有没有办法只训练一小部分参数就达到接近的效果？这就是<strong>参数高效微调（Parameter-Efficient Fine-Tuning, PEFT）</strong>的核心思想。接下来我们重点介绍LoRA和QLoRA。</p>
+  </div>
+</div>
+
+<!-- 三、LoRA原理 -->
+<div class="concept-section" id="sec3">
+  <h2 class="section-subtitle"><i class="fas fa-compress-arrows-alt"></i> 三、LoRA：低秩适配的数学直觉</h2>
+
+  <p><strong>LoRA（Low-Rank Adaptation）</strong>是2021年微软提出的参数高效微调方法。核心思想：大模型在微调过程中的权重更新矩阵 $\Delta W$ 具有<strong>低秩</strong>特性，可以用两个小矩阵的乘积来近似。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-square-root-alt"></i> LoRA的数学原理</h4>
+    <p>对于预训练权重矩阵 $W_0 \in \mathbb{R}^{d \times k}$，LoRA将更新表示为：</p>
+    <p style="text-align: center; font-size: 1.1rem; padding: 1rem; background: #f7fafc; border-radius: 8px; border-left: 4px solid #4299e1;">
+      $W = W_0 + \Delta W = W_0 + BA$
+    </p>
+    <p>其中 $B \in \mathbb{R}^{d \times r}$，$A \in \mathbb{R}^{r \times k}$，$r \ll \min(d, k)$。</p>
+    <ul>
+      <li>$W_0$ 是冻结的预训练权重（不更新）</li>
+      <li>$A$ 用高斯随机初始化，$B$ 初始化为零</li>
+      <li>$r$ 是低秩的秩，通常取 4、8、16、64</li>
+      <li>可训练参数量：$r \times (d + k)$，远小于 $d \times k$</li>
+    </ul>
+    <div class="ai-usage"><strong>直觉理解：</strong>想象一个大地图（$W_0$），LoRA不是重画整张地图，而是只标记几个关键坐标点（$B$ 和 $A$），然后通过插值得到完整的修改方案。</div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-chart-pie"></i> LoRA的优势</h4>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th>全参数微调</th>
+          <th>LoRA（r=8）</th>
+          <th>提升</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>可训练参数</td>
+          <td>7B (100%)</td>
+          <td>~40M (0.57%)</td>
+          <td>减少 175×</td>
+        </tr>
+        <tr>
+          <td>显存需求</td>
+          <td>~64GB</td>
+          <td>~16GB</td>
+          <td>减少 75%</td>
+        </tr>
+        <tr>
+          <td>训练速度</td>
+          <td>1x</td>
+          <td>~3x</td>
+          <td>提升 3×</td>
+        </tr>
+        <tr>
+          <td>推理开销</td>
+          <td>无额外</td>
+          <td>无额外（可合并）</td>
+          <td>零开销</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> LoRA代码示例：使用PEFT库</h4>
+    <pre><code class="language-python">from peft import LoraConfig, get_peft_model, TaskType
+from transformers import AutoModelForCausalLM
+
+# 加载预训练模型
+model = AutoModelForCausalLM.from_pretrained(
+    "meta-llama/Llama-2-7b-hf",
+    torch_dtype="auto",
+    device_map="auto"
+)
+
+# 配置LoRA
+lora_config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,    # 因果语言模型
+    r=8,                              # LoRA的秩
+    lora_alpha=32,                    # 缩放因子，通常为2*r
+    lora_dropout=0.1,                 # Dropout比例
+    target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],  # 目标模块
+    bias="none",                      # 不训练bias
+)
+
+# 应用LoRA
+model = get_peft_model(model, lora_config)
+
+# 查看可训练参数量
+model.print_trainable_parameters()
+# 输出: trainable params: 4,194,304 || all params: 6,742,609,920 || trainable%: 0.0622</code></pre>
+  </div>
+
+  <div class="tip-box">
+    <h5><i class="fas fa-lightbulb"></i> 关键参数选择</h5>
+    <p><strong>target_modules</strong>的选择至关重要。对于Transformer模型，通常对注意力层（q_proj、v_proj、k_proj）和FFN层（gate_proj、up_proj、down_proj）应用LoRA。对更多层应用LoRA可以提升效果，但也增加参数量。</p>
+  </div>
+</div>
+
+<!-- 四、QLoRA -->
+<div class="concept-section" id="sec4">
+  <h2 class="section-subtitle"><i class="fas fa-bolt"></i> 四、QLoRA：量化+LoRA的4bit训练</h2>
+
+  <p><strong>QLoRA</strong>（Quantized LoRA）是2023年华盛顿大学提出的方法，将基座模型量化到4bit，然后在量化模型上应用LoRA。这使得在单张消费级GPU上微调7B甚至70B模型成为可能。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-layer-group"></i> QLoRA的三大技术创新</h4>
+    <ul>
+      <li><strong>4-bit NormalFloat (NF4)</strong>：一种信息论最优的4-bit数据类型，专为正态分布权重设计。比普通4-bit量化保留更多信息。</li>
+      <li><strong>双重量化（Double Quantization）</strong>：对量化常数本身也进行量化，进一步减少内存占用。每个参数额外节省约0.37bit。</li>
+      <li><strong>分页优化器（Paged Optimizers）</strong>：使用NVIDIA统一内存自动处理显存溢出，将优化器状态分页到CPU内存。</li>
+    </ul>
+    <div class="ai-usage"><strong>效果：</strong>QLoRA可以在单张48GB GPU（如A6000）上微调33B模型，或在单张24GB GPU（如RTX 3090/4090）上微调7B模型，且几乎不损失精度。</div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> QLoRA完整训练代码</h4>
+    <pre><code class="language-python">import torch
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    BitsAndBytesConfig,
+    TrainingArguments,
+)
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from trl import SFTTrainer
+
+# 1. 配置4-bit量化
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,                    # 启用4-bit加载
+    bnb_4bit_quant_type="nf4",            # NF4量化
+    bnb_4bit_compute_dtype=torch.bfloat16, # 计算精度
+    bnb_4bit_use_double_quant=True,        # 双重量化
+)
+
+# 2. 加载量化后的模型
+model = AutoModelForCausalLM.from_pretrained(
+    "meta-llama/Llama-2-7b-hf",
+    quantization_config=bnb_config,
+    device_map="auto",
+    trust_remote_code=True,
+)
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
+tokenizer.pad_token = tokenizer.eos_token
+
+# 3. 准备模型用于QLoRA训练
+model = prepare_model_for_kbit_training(model)
+
+# 4. 配置LoRA
+lora_config = LoraConfig(
+    r=16,                     # 秩
+    lora_alpha=32,            # 缩放因子
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM",
+    target_modules=[
+        "q_proj", "k_proj", "v_proj", "o_proj",
+        "gate_proj", "up_proj", "down_proj"
+    ],
+)
+
+model = get_peft_model(model, lora_config)
+
+# 5. 配置训练参数
+training_args = TrainingArguments(
+    output_dir="./qlora-output",
+    num_train_epochs=3,
+    per_device_train_batch_size=4,
+    gradient_accumulation_steps=4,
+    learning_rate=2e-4,
+    weight_decay=0.01,
+    warmup_ratio=0.03,
+    lr_scheduler_type="cosine",
+    logging_steps=10,
+    save_strategy="epoch",
+    fp16=False,
+    bf16=True,
+    report_to="wandb",
+    optim="paged_adamw_32bit",  # 分页优化器
+    max_grad_norm=0.3,
+)
+
+print(f"可训练参数: {model.print_trainable_parameters()}")</code></pre>
+  </div>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> QLoRA的局限</h5>
+    <p>QLoRA训练速度比纯LoRA慢约30-40%，因为4-bit反量化需要额外计算。此外，某些框架对4-bit量化的支持可能不完善，需要使用BitsAndBytes库。如果显存充足（40GB+），纯FP16 LoRA可能是更好的选择。</p>
+  </div>
+</div>
+
+<!-- 五、PEFT库使用 -->
+<div class="concept-section" id="sec5">
+  <h2 class="section-subtitle"><i class="fas fa-toolbox"></i> 五、HuggingFace PEFT库实战</h2>
+
+  <p>HuggingFace的PEFT（Parameter-Efficient Fine-Tuning）库是目前最流行的参数高效微调工具，支持LoRA、Prefix Tuning、P-Tuning v2等多种方法。下面我们用一个完整的例子演示微调流程。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-box-open"></i> PEFT支持的微调方法</h4>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>方法</th>
+          <th>原理</th>
+          <th>适用场景</th>
+          <th>参数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>LoRA</strong></td>
+          <td>低秩矩阵分解</td>
+          <td>通用，最常用</td>
+          <td>0.1%-1%</td>
+        </tr>
+        <tr>
+          <td><strong>QLoRA</strong></td>
+          <td>4-bit量化 + LoRA</td>
+          <td>显存受限场景</td>
+          <td>0.1%-1%</td>
+        </tr>
+        <tr>
+          <td><strong>Prefix Tuning</strong></td>
+          <td>在输入前添加可学习前缀</td>
+          <td>生成任务</td>
+          <td>0.1%</td>
+        </tr>
+        <tr>
+          <td><strong>P-Tuning v2</strong></td>
+          <td>在每层添加可学习提示</td>
+          <td>NLU任务</td>
+          <td>0.1%-1%</td>
+        </tr>
+        <tr>
+          <td><strong>IA3</strong></td>
+          <td>学习激活缩放向量</td>
+          <td>极低参数场景</td>
+          <td>&lt;0.1%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> 完整微调流程：使用SFTTrainer</h4>
+    <pre><code class="language-python">from datasets import load_dataset
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    BitsAndBytesConfig,
+    TrainingArguments,
+)
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from trl import SFTTrainer
+import torch
+
+# ========== 1. 加载数据集 ==========
+dataset = load_dataset("json", data_files="train_data.jsonl", split="train")
+print(f"训练样本数: {len(dataset)}")
+
+# ========== 2. 配置量化 ==========
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.bfloat16,
+    bnb_4bit_use_double_quant=True,
+)
+
+# ========== 3. 加载模型 ==========
+model_name = "THUDM/chatglm3-6b"
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    quantization_config=bnb_config,
+    device_map="auto",
+    trust_remote_code=True,
+)
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+tokenizer.pad_token = tokenizer.eos_token
+
+# ========== 4. 准备PEFT ==========
+model = prepare_model_for_kbit_training(model)
+lora_config = LoraConfig(
+    r=8,
+    lora_alpha=16,
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM",
+    target_modules=["query_key_value"],  # ChatGLM特有层名
+)
+model = get_peft_model(model, lora_config)
+
+# ========== 5. 数据格式化 ==========
+def format_prompt(example):
+    """将数据格式化为指令模板"""
+    return f"""### 指令:
+{example['instruction']}
+
+### 输入:
+{example['input']}
+
+### 回答:
+{example['output']}"""
+
+# ========== 6. 训练配置 ==========
+training_args = TrainingArguments(
+    output_dir="./chatglm3-finetuned",
+    num_train_epochs=3,
+    per_device_train_batch_size=2,
+    gradient_accumulation_steps=8,
+    learning_rate=2e-4,
+    warmup_steps=100,
+    logging_steps=10,
+    save_steps=200,
+    save_total_limit=3,
+    bf16=True,
+    optim="paged_adamw_32bit",
+    report_to="tensorboard",
+    max_grad_norm=0.3,
+    lr_scheduler_type="cosine",
+)
+
+# ========== 7. 开始训练 ==========
+trainer = SFTTrainer(
+    model=model,
+    tokenizer=tokenizer,
+    train_dataset=dataset,
+    formatting_func=format_prompt,
+    args=training_args,
+    max_seq_length=512,
+)
+
+trainer.train()
+
+# ========== 8. 保存模型 ==========
+trainer.save_model("./chatglm3-finetuned/final")
+tokenizer.save_pretrained("./chatglm3-finetuned/final")</code></pre>
+  </div>
+
+  <div class="success-box">
+    <h5><i class="fas fa-check-circle"></i> 训练检查清单</h5>
+    <p>开始训练前，确认以下事项：</p>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;"><span style="position: absolute; left: 0; color: #38a169;">✓</span> GPU显存是否足够（QLoRA 7B约需12-16GB）</li>
+      <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;"><span style="position: absolute; left: 0; color: #38a169;">✓</span> 数据格式是否正确（JSON/JSONL）</li>
+      <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;"><span style="position: absolute; left: 0; color: #38a169;">✓</span> 学习率是否合理（QLoRA通常1e-4到3e-4）</li>
+      <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;"><span style="position: absolute; left: 0; color: #38a169;">✓</span> batch size和gradient accumulation是否匹配</li>
+      <li style="padding: 0.3rem 0; padding-left: 1.5rem; position: relative;"><span style="position: absolute; left: 0; color: #38a169;">✓</span> 日志工具是否配置（TensorBoard/W&B）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 六、数据准备 -->
+<div class="concept-section" id="sec6">
+  <h2 class="section-subtitle"><i class="fas fa-database"></i> 六、数据准备</h2>
+
+  <p>数据质量直接决定微调效果。"Garbage in, garbage out"在微调中尤为适用。好的训练数据应该是<strong>格式统一、质量高、多样性好</strong>的。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-file-alt"></i> 常见数据集格式</h4>
+    <pre><code class="language-python"># 格式1: 指令格式（Instruction-Response）
+{"instruction": "翻译以下句子为英文", "input": "今天天气很好", "output": "The weather is nice today."}
+
+# 格式2: 对话格式（Conversation）
+{"conversations": [
+    {"role": "user", "content": "什么是机器学习？"},
+    {"role": "assistant", "content": "机器学习是人工智能的一个分支..."}
+]}
+
+# 格式3: Alpaca格式（带输入）
+{"instruction": "总结以下文章", "input": "人工智能正在改变世界...", "output": "本文介绍了AI的发展趋势..."}
+
+# 格式4: ShareGPT格式（多轮对话）
+{"conversation_id": "1", "items": [
+    {"role": "human", "content": "你好"},
+    {"role": "gpt", "content": "你好！有什么可以帮助你的？"},
+    {"role": "human", "content": "介绍一下LoRA"},
+    {"role": "gpt", "content": "LoRA是一种参数高效微调方法..."}
+]}</code></pre>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-broom"></i> 数据清洗与预处理</h4>
+    <pre><code class="language-python">import json
+import re
+
+def clean_text(text):
+    """文本清洗函数"""
+    # 去除多余空白
+    text = re.sub(r'\s+', ' ', text).strip()
+    # 去除特殊控制字符
+    text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', text)
+    return text
+
+def validate_sample(sample):
+    """验证数据样本质量"""
+    # 检查必要字段
+    if not all(k in sample for k in ["instruction", "output"]):
+        return False
+    # 检查文本长度
+    if len(sample["instruction"]) < 5 or len(sample["output"]) < 10:
+        return False
+    # 检查是否有过多重复内容
+    if sample["instruction"] == sample["output"]:
+        return False
+    return True
+
+# 加载并清洗数据
+cleaned_data = []
+with open("raw_data.jsonl", "r", encoding="utf-8") as f:
+    for line in f:
+        sample = json.loads(line)
+        sample["instruction"] = clean_text(sample["instruction"])
+        sample["output"] = clean_text(sample["output"])
+        if "input" in sample:
+            sample["input"] = clean_text(sample["input"])
+        if validate_sample(sample):
+            cleaned_data.append(sample)
+
+print(f"原始样本: {len(raw_data)}, 清洗后: {len(cleaned_data)}")
+
+# 保存清洗后的数据
+with open("cleaned_data.jsonl", "w", encoding="utf-8") as f:
+    for item in cleaned_data:
+        f.write(json.dumps(item, ensure_ascii=False) + "\n")</code></pre>
+  </div>
+
+  <div class="tip-box">
+    <h5><i class="fas fa-lightbulb"></i> 数据增强技巧</h5>
+    <p>当训练数据不足时，可以使用以下方法增强：</p>
+    <ul>
+      <li><strong>回译（Back Translation）</strong>：中→英→中，生成语义相同但表达不同的样本</li>
+      <li><strong>同义替换</strong>：用LLM改写指令，保持意图不变</li>
+      <li><strong>指令多样化</strong>：同一个回答配多种不同的提问方式</li>
+      <li><strong>数据蒸馏</strong>：用大模型生成小模型的训练数据</li>
+    </ul>
+  </div>
+
+  <div class="warning-box">
+    <h5><i class="fas fa-exclamation-triangle"></i> 数据质量红线</h5>
+    <p>以下数据必须清除：含敏感信息（姓名、电话、地址）的样本、明显错误或矛盾的样本、过短（&lt;10字）或过长（&gt;4096字）的样本、包含代码但格式不规范的样本、与目标任务无关的噪声数据。</p>
+  </div>
+</div>
+
+<!-- 七、训练监控 -->
+<div class="concept-section" id="sec7">
+  <h2 class="section-subtitle"><i class="fas fa-chart-line"></i> 七、训练监控</h2>
+
+  <p>训练过程中实时监控是确保微调成功的关键。主要关注的指标包括：loss曲线、学习率变化、显存占用、训练速度等。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-tachometer-alt"></i> 关键训练指标</h4>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th>正常范围</th>
+          <th>异常信号</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Training Loss</strong></td>
+          <td>稳定下降，最终趋于平稳</td>
+          <td>突然跳变、不下降、震荡剧烈</td>
+        </tr>
+        <tr>
+          <td><strong>Validation Loss</strong></td>
+          <td>先下降后趋于平稳</td>
+          <td>持续上升（过拟合）</td>
+        </tr>
+        <tr>
+          <td><strong>Learning Rate</strong></td>
+          <td>warmup后逐渐衰减</td>
+          <td>一直不变、突然变为0</td>
+        </tr>
+        <tr>
+          <td><strong>GPU Utilization</strong></td>
+          <td>&gt;80%</td>
+          <td>&lt;50%（数据加载瓶颈）</td>
+        </tr>
+        <tr>
+          <td><strong>Training Speed</strong></td>
+          <td>稳定（samples/sec）</td>
+          <td>持续下降（显存不足）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> 配置TensorBoard/W&B监控</h4>
+    <pre><code class="language-python"># 方式1: 使用TensorBoard
+training_args = TrainingArguments(
+    output_dir="./output",
+    report_to="tensorboard",           # 报告到TensorBoard
+    logging_dir="./logs",              # 日志目录
+    logging_steps=10,                  # 每10步记录一次
+)
+
+# 启动TensorBoard:
+# tensorboard --logdir ./logs
+
+# 方式2: 使用Weights & Biases
+import wandb
+wandb.init(project="llm-finetune", name="chatglm3-qlora")
+
+training_args = TrainingArguments(
+    output_dir="./output",
+    report_to="wandb",                 # 报告到W&B
+    logging_steps=10,
+)
+
+# 方式3: 自定义回调函数
+from transformers import TrainerCallback
+
+class LossCallback(TrainerCallback):
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs and "loss" in logs:
+            if state.global_step % 100 == 0:
+                print(f"Step {state.global_step}: loss={logs['loss']:.4f}")
+            # 自定义告警
+            if logs["loss"] > 10:
+                print("WARNING: Loss异常高，检查数据和学习率!")
+
+    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
+        if metrics and "eval_loss" in metrics:
+            if metrics["eval_loss"] > 2.0:
+                print("WARNING: 验证loss偏高，可能过拟合!")
+
+# 在训练器中添加回调
+trainer = SFTTrainer(
+    model=model,
+    callbacks=[LossCallback()],
+    # ... 其他参数
+)</code></pre>
+  </div>
+
+  <div class="info-box">
+    <h5><i class="fas fa-info-circle"></i> 常见训练问题诊断</h5>
+    <ul>
+      <li><strong>Loss不下降</strong>：学习率过小、数据格式错误、模型未正确加载LoRA</li>
+      <li><strong>Loss震荡</strong>：学习率过大、batch size过小、梯度爆炸</li>
+      <li><strong>过拟合</strong>：训练数据太少、epoch过多、没有验证集、LoRA秩过大</li>
+      <li><strong>显存溢出</strong>：减小batch size、增大gradient_accumulation_steps、降低序列长度</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 八、模型合并与导出 -->
+<div class="concept-section" id="sec8">
+  <h2 class="section-subtitle"><i class="fas fa-file-export"></i> 八、模型合并与导出</h2>
+
+  <p>微调完成后，我们需要将LoRA权重合并回基座模型，然后导出为可部署的格式。合并后的模型与原始模型结构完全一致，推理时没有额外开销。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> LoRA权重合并</h4>
+    <pre><code class="language-python">from peft import PeftModel
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+
+# 1. 加载基座模型（FP16精度）
+base_model = AutoModelForCausalLM.from_pretrained(
+    "THUDM/chatglm3-6b",
+    torch_dtype=torch.float16,
+    device_map="auto",
+    trust_remote_code=True,
+)
+
+# 2. 加载LoRA权重
+model = PeftModel.from_pretrained(
+    base_model,
+    "./chatglm3-finetuned/final",
+    torch_dtype=torch.float16,
+)
+
+# 3. 合并权重
+model = model.merge_and_unload()
+
+# 4. 保存合并后的完整模型
+model.save_pretrained("./chatglm3-merged")
+tokenizer = AutoTokenizer.from_pretrained("THUDM/chatglm3-6b")
+tokenizer.save_pretrained("./chatglm3-merged")
+
+print("模型合并完成！保存到 ./chatglm3-merged")</code></pre>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-exchange-alt"></i> GGUF格式转换（用于llama.cpp部署）</h4>
+    <pre><code class="language-python"># 步骤1: 安装转换工具
+# pip install llama-cpp-python
+# git clone https://github.com/ggerganov/llama.cpp
+# cd llama.cpp && make
+
+# 步骤2: 将模型转换为GGUF格式
+# python convert_hf_to_gguf.py ./chatglm3-merged --outfile chatglm3-finetuned.gguf
+
+# 步骤3: 量化为不同精度（可选）
+# Q5_K_M 推荐：质量与大小的平衡
+# ./quantize ./chatglm3-finetuned.gguf chatglm3-finetuned-q5_k_m.gguf q5_k_m
+
+# Q4_K_M 推荐：更小体积
+# ./quantize ./chatglm3-finetuned.gguf chatglm3-finetuned-q4_k_m.gguf q4_k_m
+
+# 步骤4: 使用llama.cpp推理
+# ./main -m chatglm3-finetuned-q5_k_m.gguf -n 256 --repeat_penalty 1.1 -p "你的提示词"</code></pre>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> 合并脚本（可直接运行）</h4>
+    <pre><code class="language-python">#!/usr/bin/env python3
+"""LoRA权重合并与导出脚本"""
+import argparse
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+
+def merge_and_export(base_model_name, lora_path, output_dir, export_gguf=False):
+    """合并LoRA权重并导出模型"""
+    print(f"加载基座模型: {base_model_name}")
+    base_model = AutoModelForCausalLM.from_pretrained(
+        base_model_name,
+        torch_dtype=torch.float16,
+        device_map="auto",
+        trust_remote_code=True,
+    )
+    tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
+
+    print(f"加载LoRA权重: {lora_path}")
+    model = PeftModel.from_pretrained(base_model, lora_path)
+
+    print("合并权重...")
+    model = model.merge_and_unload()
+
+    print(f"保存模型到: {output_dir}")
+    model.save_pretrained(output_dir, safe_serialization=True)
+    tokenizer.save_pretrained(output_dir)
+
+    if export_gguf:
+        print("导出GGUF格式...")
+        import subprocess
+        subprocess.run([
+            "python", "convert_hf_to_gguf.py",
+            output_dir,
+            "--outfile", f"{output_dir}/model.gguf",
+        ], check=True)
+
+    print("完成！")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--base-model", default="THUDM/chatglm3-6b")
+    parser.add_argument("--lora-path", default="./chatglm3-finetuned/final")
+    parser.add_argument("--output-dir", default="./chatglm3-merged")
+    parser.add_argument("--export-gguf", action="store_true")
+    args = parser.parse_args()
+
+    merge_and_export(args.base_model, args.lora_path, args.output_dir, args.export_gguf)</code></pre>
+  </div>
+
+  <div class="success-box">
+    <h5><i class="fas fa-check-circle"></i> 部署方案选择</h5>
+    <ul>
+      <li><strong>API服务</strong>：使用vLLM/TGI部署OpenAI兼容API，适合生产环境</li>
+      <li><strong>本地推理</strong>：使用llama.cpp + GGUF格式，适合个人设备（CPU/低配GPU）</li>
+      <li><strong>云端部署</strong>：使用HuggingFace Inference Endpoints或Replicate</li>
+      <li><strong>边缘设备</strong>：GGUF + 量化，可在手机/树莓派等设备运行</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 九、实战案例 -->
+<div class="concept-section" id="sec9">
+  <h2 class="section-subtitle"><i class="fas fa-flask"></i> 九、实战：微调ChatGLM/Qwen</h2>
+
+  <p>下面我们用一个完整的实战案例来串联所有知识点。目标：在中文问答数据集上微调ChatGLM-6B，使其成为专业的中文问答助手。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-project-diagram"></i> 实战项目架构</h4>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-icon" style="background: #dbeafe; color: #2563eb;"><i class="fas fa-database"></i></div>
+        <div class="case-title">数据准备</div>
+        <div class="case-desc">收集1000+中文问答对，格式化为指令模板，清洗噪声数据</div>
+      </div>
+      <div class="case-card">
+        <div class="case-icon" style="background: #dcfce7; color: #16a34a;"><i class="fas fa-cogs"></i></div>
+        <div class="case-title">模型配置</div>
+        <div class="case-desc">加载ChatGLM-6B，配置QLoRA 4-bit量化，设置LoRA参数</div>
+      </div>
+      <div class="case-card">
+        <div class="case-icon" style="background: #fef3c7; color: #d97706;"><i class="fas fa-play"></i></div>
+        <div class="case-title">训练执行</div>
+        <div class="case-desc">使用SFTTrainer训练3个epoch，监控loss和验证指标</div>
+      </div>
+      <div class="case-card">
+        <div class="case-icon" style="background: #f3e8ff; color: #9333ea;"><i class="fas fa-rocket"></i></div>
+        <div class="case-title">评估部署</div>
+        <div class="case-desc">合并权重，转GGUF格式，使用llama.cpp本地部署测试</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-code"></i> 完整训练脚本：train.py</h4>
+    <pre><code class="language-python">#!/usr/bin/env python3
+"""
+完整微调脚本：QLoRA微调ChatGLM-6B
+环境要求: pip install torch transformers peft trl datasets bitsandbytes accelerate
+"""
+import json
+import torch
+from datasets import Dataset
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    BitsAndBytesConfig,
+    TrainingArguments,
+)
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from trl import SFTTrainer
+
+# ========== 配置 ==========
+MODEL_NAME = "THUDM/chatglm3-6b"
+DATA_FILE = "train_data.jsonl"
+OUTPUT_DIR = "./output/chatglm3-qlora"
+MAX_SEQ_LENGTH = 512
+NUM_EPOCHS = 3
+BATCH_SIZE = 2
+GRAD_ACCUM = 8
+LEARNING_RATE = 2e-4
+LORA_R = 16
+LORA_ALPHA = 32
+
+# ========== 1. 加载数据 ==========
+print("📂 加载训练数据...")
+with open(DATA_FILE, "r", encoding="utf-8") as f:
+    raw_data = [json.loads(line) for line in f]
+
+def format_sample(sample):
+    """格式化为ChatGLM的对话格式"""
+    return f"[Round 1]\n问：{sample['instruction']}\n答：{sample['output']}"
+
+dataset = Dataset.from_list([{"text": format_sample(d)} for d in raw_data])
+dataset = dataset.train_test_split(test_size=0.1)
+print(f"训练集: {len(dataset['train'])}, 验证集: {len(dataset['test'])}")
+
+# ========== 2. 量化配置 ==========
+print("⚙️ 配置4-bit量化...")
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.bfloat16,
+    bnb_4bit_use_double_quant=True,
+)
+
+# ========== 3. 加载模型 ==========
+print("🤖 加载模型...")
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_NAME,
+    quantization_config=bnb_config,
+    device_map="auto",
+    trust_remote_code=True,
+)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True)
+model = prepare_model_for_kbit_training(model)
+
+# ========== 4. LoRA配置 ==========
+print("🔧 配置LoRA...")
+lora_config = LoraConfig(
+    r=LORA_R,
+    lora_alpha=LORA_ALPHA,
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM",
+    target_modules=["query_key_value"],
+)
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+
+# ========== 5. 训练参数 ==========
+print("📋 配置训练参数...")
+training_args = TrainingArguments(
+    output_dir=OUTPUT_DIR,
+    num_train_epochs=NUM_EPOCHS,
+    per_device_train_batch_size=BATCH_SIZE,
+    gradient_accumulation_steps=GRAD_ACCUM,
+    learning_rate=LEARNING_RATE,
+    weight_decay=0.01,
+    warmup_ratio=0.03,
+    lr_scheduler_type="cosine",
+    logging_steps=10,
+    save_steps=100,
+    save_total_limit=3,
+    bf16=True,
+    optim="paged_adamw_32bit",
+    max_grad_norm=0.3,
+    report_to="tensorboard",
+    evaluation_strategy="steps",
+    eval_steps=100,
+    load_best_model_at_end=True,
+)
+
+# ========== 6. 开始训练 ==========
+print("🚀 开始训练...")
+trainer = SFTTrainer(
+    model=model,
+    tokenizer=tokenizer,
+    train_dataset=dataset["train"],
+    eval_dataset=dataset["test"],
+    args=training_args,
+    max_seq_length=MAX_SEQ_LENGTH,
+)
+
+trainer.train()
+
+# ========== 7. 保存 ==========
+print("💾 保存模型...")
+trainer.save_model(f"{OUTPUT_DIR}/final")
+tokenizer.save_pretrained(f"{OUTPUT_DIR}/final")
+print("✅ 训练完成！")</code></pre>
+  </div>
+
+  <div class="tip-box">
+    <h5><i class="fas fa-lightbulb"></i> 实战建议</h5>
+    <ul>
+      <li><strong>从小数据集开始</strong>：先用100条数据验证流程，再扩展到全量</li>
+      <li><strong>保存checkpoint</strong>：训练过程中定期保存，避免意外中断</li>
+      <li><strong>使用W&B记录实验</strong>：方便对比不同超参数的效果</li>
+      <li><strong>测试多个epoch</strong>：过拟合的信号是验证loss开始上升</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 练习题 -->
+<div class="concept-section" id="sec10">
+  <h2 class="section-subtitle"><i class="fas fa-pencil-alt"></i> 练习题</h2>
+
+  <div class="exercise-box">
+    <h4><i class="fas fa-tasks"></i> 动手实践</h4>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习1：</span>
+      <strong>搭建微调环境并运行QLoRA</strong>
+      <p>在自己的GPU机器上（或使用Google Colab），安装bitsandbytes、peft、trl库，加载一个7B模型，配置QLoRA 4-bit量化，打印可训练参数量。记录训练过程中遇到的问题。</p>
+    </div>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习2：</span>
+      <strong>准备一个中文指令数据集</strong>
+      <p>收集或构造50条中文问答数据，按照Alpaca格式组织（instruction/input/output），编写数据清洗脚本，检查数据质量。尝试用不同的提问方式为同一个回答创建多个变体。</p>
+    </div>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习3：</span>
+      <strong>微调并评估模型</strong>
+      <p>使用练习2的数据集，微调一个7B模型（如ChatGLM/Qwen），训练3个epoch。保存最优checkpoint，手动测试几个问题，对比微调前后的回答质量。将微调后的LoRA权重合并到基座模型。</p>
+    </div>
+
+    <div class="exercise-item">
+      <span class="exercise-number">练习4：</span>
+      <strong>对比不同LoRA参数的效果</strong>
+      <p>分别使用 r=4, r=8, r=16, r=32 训练4个模型，对比可训练参数量、训练速度和最终效果。思考：LoRA的秩应该如何选择？是否越大越好？</p>
+    </div>
+  </div>
+</div>
+
+<!-- 章节小结 -->
+<div class="concept-section" id="sec11">
+  <h2 class="section-subtitle"><i class="fas fa-clipboard-list"></i> 章节小结</h2>
+
+  <div class="chapter-summary">
+    <h4><i class="fas fa-star"></i> 本章要点回顾</h4>
+    <ul>
+      <li><strong>微调的动机</strong>：提示工程有上限，微调可以让模型真正"学会"特定任务，且支持本地部署</li>
+      <li><strong>全参数微调</strong>：更新所有参数，效果最好但资源需求极高（7B模型需要64GB+显存），存在灾难性遗忘风险</li>
+      <li><strong>LoRA原理</strong>：利用权重更新矩阵的低秩特性，只训练两个小矩阵 $B$ 和 $A$，可训练参数减少到0.1%-1%</li>
+      <li><strong>QLoRA创新</strong>：NF4量化+双重量化+分页优化器，使单张24GB GPU可微调7B模型，几乎不损失精度</li>
+      <li><strong>PEFT库</strong>：HuggingFace PEFT库支持LoRA、Prefix Tuning等多种方法，配合SFTTrainer可快速完成微调</li>
+      <li><strong>数据准备</strong>：格式统一、清洗噪声、数据增强——数据质量直接决定微调效果</li>
+      <li><strong>训练监控</strong>：通过TensorBoard/W&B监控loss曲线、学习率、GPU利用率，及时发现过拟合等问题</li>
+      <li><strong>模型导出</strong>：LoRA合并后可直接导出，支持GGUF格式量化部署到llama.cpp</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h5><i class="fas fa-arrow-right"></i> 下一步学习</h5>
+    <p>掌握了LoRA微调后，可以进一步学习：DPO（直接偏好优化）——用人类偏好数据对齐模型行为；RLHF（基于人类反馈的强化学习）——ChatGPT的核心训练方法；多模态微调——让视觉语言模型适应特定任务。</p>
+  </div>
+</div>
+
+<!-- 章节导航 -->
+<div class="chapter-nav">
+  <a href="ch28.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+  <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+  <a href="ch30.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+</div>
+
+        </main>
+
+        <!-- ========== 右侧目录导航 ========== -->
+        <aside class="toc-sidebar">
+            <h3><i class="fas fa-list-ul"></i> 本章目录</h3>
+            <ul>
+                <li><a href="#sec1">一、为什么需要微调</a></li>
+                <li class="toc-sub"><a href="#sec1">预训练 vs 微调 vs 提示工程</a></li>
+                <li><a href="#sec2">二、全参数微调</a></li>
+                <li class="toc-sub"><a href="#sec2">资源需求与局限</a></li>
+                <li><a href="#sec3">三、LoRA原理</a></li>
+                <li class="toc-sub"><a href="#sec3">低秩适配数学直觉</a></li>
+                <li><a href="#sec4">四、QLoRA</a></li>
+                <li class="toc-sub"><a href="#sec4">4bit量化+LoRA训练</a></li>
+                <li><a href="#sec5">五、PEFT库使用</a></li>
+                <li class="toc-sub"><a href="#sec5">HuggingFace PEFT实战</a></li>
+                <li><a href="#sec6">六、数据准备</a></li>
+                <li class="toc-sub"><a href="#sec6">格式、清洗、增强</a></li>
+                <li><a href="#sec7">七、训练监控</a></li>
+                <li class="toc-sub"><a href="#sec7">W&B/TensorBoard</a></li>
+                <li><a href="#sec8">八、模型合并与导出</a></li>
+                <li class="toc-sub"><a href="#sec8">合并权重+GGUF转换</a></li>
+                <li><a href="#sec9">九、实战案例</a></li>
+                <li class="toc-sub"><a href="#sec9">微调ChatGLM完整流程</a></li>
+                <li><a href="#sec10">练习题</a></li>
+                <li><a href="#sec11">章节小结</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p>第1-11章：基础与核心</p>
+                <p>第12-24章：工程实践与进阶</p>
+                <p>第25章+：AI工具与应用</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+    <script>
+    // 目录滚动高亮
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-sidebar a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const el = document.querySelector(id);
+          if (el) sections.push({ link, el });
+        }
+      });
+      function updateActive() {
+        const scrollY = window.scrollY + 100;
+        let current = sections[0];
+        for (const s of sections) {
+          if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+      }
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+    </script>
+
+</body>
+</html>

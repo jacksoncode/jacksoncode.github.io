@@ -14,8 +14,11 @@ const CHAPTERS = [
   'ch14.html', 'ch15.html', 'ch16.html', 'ch17.html', 'ch18.html',
   'ch19.html', 'ch20.html', 'ch21.html', 'ch22.html', 'ch23.html',
   'ch24.html', 'ch25.html', 'ch26.html',
+  'ch27.html', 'ch28.html', 'ch29.html', 'ch30.html',
+  'ch31.html', 'ch32.html', 'ch33.html',
   'appendix-a.html', 'appendix-b.html', 'appendix-c.html',
-  'appendix-d.html', 'appendix-e.html', 'appendix-f.html'
+  'appendix-d.html', 'appendix-e.html', 'appendix-f.html',
+  'appendix-g.html'
 ];
 
 function parseArgs() {

@@ -1,0 +1,2945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三十三章：MCP模型上下文协议 - AI学习笔记</title>
+    <meta name="description" content="AI学习笔记第三十三章：MCP模型上下文协议 - 理解MCP协议架构、核心概念、传输机制、服务端与客户端开发，以及安全最佳实践。">
+    <meta name="keywords" content="MCP, 模型上下文协议, Model Context Protocol, LLM工具集成, API标准化, AI Agent, 工具调用">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+    <!-- Prism.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+
+    <style>
+        /* ========== 基础重置 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            min-height: 100vh;
+        }
+
+        /* ========== 导航栏 ========== */
+        .navbar {
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #fbd38d;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .navbar-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .navbar-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ========== 内容容器 ========== */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ========== 标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            color: #1a365d;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-subtitle i {
+            color: #4299e1;
+        }
+
+        /* ========== 概念区块 ========== */
+        .concept-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .concept-box h4 {
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box h4 i {
+            color: #4299e1;
+        }
+
+        .concept-box p {
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-box ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .concept-box li {
+            color: #4a5568;
+            margin-bottom: 0.4rem;
+        }
+
+        .ai-usage {
+            background: #ebf8ff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #2b6cb0;
+            border-left: 3px solid #4299e1;
+        }
+
+        .ai-usage strong {
+            color: #2c5282;
+        }
+
+        /* ========== 学习目标 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #4299e1;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f0b1';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 提示/警告/信息框 ========== */
+        .tip-box, .warning-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #f0fff4;
+            border: 1px solid #68d391;
+        }
+
+        .info-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .tip-box strong, .warning-box strong, .info-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box p, .warning-box p, .info-box p {
+            margin-bottom: 0;
+        }
+
+        .tip-box ul, .warning-box ul, .info-box ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .tip-box li, .warning-box li, .info-box li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* ========== 代码块样式 ========== */
+        pre[class*="language-"] {
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+        }
+
+        .code-label {
+            display: inline-block;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px 6px 0 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: -4px;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            color: white;
+            padding: 0.9rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 章节导航 ========== */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            gap: 1rem;
+        }
+
+        .chapter-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .prev-chapter {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .prev-chapter:hover {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+
+        .next-chapter {
+            background: #4299e1;
+            color: white;
+        }
+
+        .next-chapter:hover {
+            background: #3182ce;
+        }
+
+        .toc-link {
+            background: #f0fff4;
+            color: #38a169;
+            border: 1px solid #c6f6d5;
+        }
+
+        .toc-link:hover {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            background: #1a365d;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #fbd38d;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.88rem;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 0.75rem 1rem;
+            }
+
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding-top: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+            }
+
+            .chapter-nav a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i> AI学习笔记
+        </a>
+        <button class="navbar-toggle" id="navbarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-links" id="navbarLinks">
+            <li><a href="../index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="index.html"><i class="fas fa-list"></i> 目录</a></li>
+            <li><a href="ch32.html"><i class="fas fa-arrow-left"></i> 上一章</a></li>
+            <li><a href="appendix-g.html"><i class="fas fa-arrow-right"></i> 下一章</a></li>
+        </ul>
+    </nav>
+
+    <!-- ==================== 主要内容 ==================== -->
+    <div class="content-wrapper">
+        <main class="main-content">
+
+            <!-- 章节标题 -->
+            <h1 style="font-size: 2.2rem; color: #1a365d; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <i class="fas fa-plug" style="color: #4299e1;"></i>
+                第三十三章：MCP模型上下文协议
+            </h1>
+            <p style="color: #718096; font-size: 1.05rem; margin-bottom: 2rem;">Model Context Protocol —— 让AI与外部世界对话的标准化接口</p>
+
+            <!-- 学习目标 -->
+            <div class="learning-objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解MCP协议的设计动机与核心价值</li>
+                    <li>掌握MCP的三层架构：Host、Client、Server</li>
+                    <li>理解Resources、Tools、Prompts、Sampling四大原语</li>
+                    <li>掌握基于JSON-RPC 2.0的协议规范</li>
+                    <li>能够使用Python和TypeScript开发MCP Server</li>
+                    <li>了解MCP的安全机制与最佳实践</li>
+                </ul>
+            </div>
+
+            <!-- 前置要求 -->
+            <div class="prerequisite-box">
+                <h4><i class="fas fa-graduation-cap"></i> 前置知识</h4>
+                <ul>
+                    <li>了解大语言模型的基本工作原理（第1-15章）</li>
+                    <li>熟悉REST API与JSON-RPC协议基础</li>
+                    <li>具备Python或TypeScript编程基础</li>
+                    <li>了解AI Agent的概念（第二十九章）</li>
+                </ul>
+            </div>
+
+            <!-- ==================== 第一节：MCP简介 ==================== -->
+            <div class="concept-section" id="sec1">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    一、MCP简介：为什么需要模型上下文协议
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    在大语言模型快速发展的今天，每个AI应用都需要与外部数据源、工具和服务进行交互。然而，如果没有统一的标准，每个集成都需要从头开发，导致了大量重复劳动和碎片化问题。MCP（Model Context Protocol）正是为了解决这个问题而诞生的开放标准协议。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-lightbulb"></i> MCP是什么</h4>
+                    <p>
+                        MCP是由Anthropic于2024年底发布的开源协议，全称为Model Context Protocol（模型上下文协议）。它定义了一种标准化的方式，让AI模型能够安全、高效地与外部世界进行交互——包括读取数据、执行操作、访问工具等。
+                    </p>
+                    <ul>
+                        <li><strong>标准化接口</strong>：就像USB-C统一了设备连接方式，MCP统一了AI与外部服务的连接方式</li>
+                        <li><strong>可复用组件</strong>：一个MCP Server可以被任何支持MCP的AI应用复用</li>
+                        <li><strong>安全隔离</strong>：通过明确定义的权限边界，确保数据访问的安全性</li>
+                        <li><strong>跨平台兼容</strong>：不依赖特定的LLM提供商或应用框架</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>MCP的核心价值</strong>
+                    <p>
+                        在MCP出现之前，如果你想让AI助手访问数据库、文件系统或API，通常需要为每个集成编写定制代码。MCP让这变成"插拔式"的：编写一次MCP Server，所有支持MCP的AI应用都能使用。
+                    </p>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-code-branch"></i>
+                    MCP与函数调用的区别
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    很多开发者会混淆MCP与LLM的Function Calling。实际上，Function Calling是LLM内部的能力，而MCP是外部的标准化通信协议。两者是互补的关系，而非替代关系。
+                </p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>维度</th>
+                            <th>Function Calling</th>
+                            <th>MCP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>性质</strong></td>
+                            <td>LLM内部能力</td>
+                            <td>外部标准化协议</td>
+                        </tr>
+                        <tr>
+                            <td><strong>定义位置</strong></td>
+                            <td>应用代码中</td>
+                            <td>独立的MCP Server</td>
+                        </tr>
+                        <tr>
+                            <td><strong>复用性</strong></td>
+                            <td>每个应用独立实现</td>
+                            <td>跨应用复用</td>
+                        </tr>
+                        <tr>
+                            <td><strong>协议规范</strong></td>
+                            <td>各厂商各自定义</td>
+                            <td>统一标准（JSON-RPC 2.0）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>安全边界</strong></td>
+                            <td>由应用控制</td>
+                            <td>协议层内置权限控制</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="ai-usage">
+                    <strong>类比理解：</strong> Function Calling 像是"车里的方向盘"，MCP 像是"道路标准"——方向盘让你能操控车，而道路标准让不同品牌的车都能在同一条路上行驶。
+                </div>
+            </div>
+
+            <!-- ==================== 第二节：架构设计 ==================== -->
+            <div class="concept-section" id="sec2">
+                <h2 class="section-title">
+                    <i class="fas fa-sitemap"></i>
+                    二、架构设计：Host、Client、Server
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP采用分层架构，包含三个核心角色：Host（宿主）、Client（客户端）和Server（服务端）。这种分层设计使得协议既灵活又安全。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-server"></i> 三层架构概览</h4>
+                    <ul>
+                        <li><strong>Host（宿主）</strong>：用户直接交互的AI应用，如Claude Desktop、IDE插件或自定义聊天应用。Host负责管理整体的用户体验和会话状态。</li>
+                        <li><strong>Client（客户端）</strong>：嵌入在Host中的MCP客户端组件，负责与MCP Server建立连接、协商能力并处理消息。每个Client维护与一个Server的1:1连接。</li>
+                        <li><strong>Server（服务端）</strong>：独立运行的服务，通过MCP协议暴露Resources、Tools、Prompts等能力。Server可以是本地进程或远程服务。</li>
+                    </ul>
+                </div>
+
+                <p style="margin-bottom: 1rem;">
+                    一个Host可以同时连接多个Client，每个Client对应一个Server。这种设计使得Host能够聚合来自不同Server的能力，同时保持清晰的权限边界。
+                </p>
+
+                <div class="tip-box">
+                    <strong>架构图解</strong>
+                    <p>
+                        Host（AI应用）→ Client（MCP连接器）→ Server（能力提供方）<br>
+                        例如：Claude Desktop → MCP Client → 文件系统Server / 数据库Server / API Server
+                    </p>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-handshake"></i>
+                    连接生命周期
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP Client与Server之间的连接遵循标准的生命周期管理流程：
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-exchange-alt"></i> 连接三阶段</h4>
+                    <ul>
+                        <li><strong>1. 初始化（Initialize）</strong>：Client发送initialize请求，包含自身支持的协议版本和能力。Server返回自己的协议版本和能力。双方据此协商出共同支持的功能子集。</li>
+                        <li><strong>2. 运行（Operate）</strong>：连接建立后，Client和Server可以自由交换请求和通知。Server可以提供Resources、Tools和Prompts，Client可以调用这些能力。</li>
+                        <li><strong>3. 关闭（Shutdown）</strong>：任一方可以优雅地关闭连接。Client在关闭前应确保所有进行中的操作已完成。</li>
+                    </ul>
+                </div>
+
+                <p style="margin-bottom: 1rem;">
+                    这种设计确保了连接的可靠性和可预测性，使得错误处理和资源清理变得更加容易。
+                </p>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-arrows-alt-h"></i>
+                    消息流动模式
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP中的消息流动遵循严格的请求-响应和通知两种模式。理解这些模式对于正确实现协议至关重要。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-exchange-alt"></i> 请求-响应模式</h4>
+                    <p>
+                        Client发送一个请求（带有id字段），Server处理后返回对应的响应（带有相同id）。这是MCP中最常见的通信模式。例如：Client调用Tool、读取Resource等。
+                    </p>
+                    <ul>
+                        <li><strong>同步语义</strong>：虽然底层传输可能是异步的，但协议层面保证每个请求最多对应一个响应</li>
+                        <li><strong>超时处理</strong>：Client应为每个请求设置合理的超时时间，超时后应终止等待并清理资源</li>
+                        <li><strong>错误响应</strong>：Server可以返回错误响应（error字段），Client应根据错误码决定重试或报错</li>
+                    </ul>
+                </div>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-bell"></i> 通知模式</h4>
+                    <p>
+                        通知是没有id字段的消息，发送方不期望收到响应。通知常用于进度更新、状态变化等不需要回复的场景。
+                    </p>
+                    <ul>
+                        <li><strong>进度更新</strong>：Server在处理耗时操作时发送进度通知</li>
+                        <li><strong>资源变更</strong>：Server通知Client某个资源已更新</li>
+                        <li><strong>日志消息</strong>：Server发送调试或信息日志</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">JSON - 通知示例</span>
+<pre><code class="language-json">// Server → Client: 进度通知
+{
+  "jsonrpc": "2.0",
+  "method": "notifications/progress",
+  "params": {
+    "progressToken": "abc-123",
+    "progress": 50,
+    "total": 100,
+    "message": "正在处理第50条记录..."
+  }
+}
+
+// Server → Client: 资源变更通知
+{
+  "jsonrpc": "2.0",
+  "method": "notifications/resources/updated",
+  "params": {
+    "uri": "file:///data/report.csv"
+  }
+}
+</code></pre>
+
+                <div class="warning-box">
+                    <strong>通知不可靠性</strong>
+                    <p>
+                        通知是"发后即忘"的，不保证送达。如果Client需要可靠的进度更新，应使用带有进度token的请求，通过progressNotification跟踪进度。对于关键状态变更，应使用请求-响应模式。
+                    </p>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-project-diagram"></i>
+                    多Server聚合模式
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    在实际应用中，一个Host可能需要连接多个Server来聚合不同的能力。MCP的架构设计天然支持这种多Server聚合模式。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-layer-group"></i> 聚合架构</h4>
+                    <ul>
+                        <li><strong>扁平聚合</strong>：Host直接管理多个Client，每个Client对应一个Server。适用于Server数量较少的场景。</li>
+                        <li><strong>层级聚合</strong>：引入Aggregator Server，它本身也是一个MCP Server，同时作为Client连接多个下游Server。适用于需要统一入口的场景。</li>
+                        <li><strong>混合模式</strong>：结合扁平和层级模式，关键Server直接连接，辅助Server通过Aggregator聚合。</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - 多Server管理</span>
+<pre><code class="language-python">"""
+多Server管理示例
+展示如何在Host中管理多个MCP Server
+"""
+import asyncio
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+class MultiServerHost:
+    def __init__(self):
+        self.sessions: dict[str, ClientSession] = {}
+
+    async def add_server(self, name: str, params: StdioServerParameters):
+        """添加并连接一个新的MCP Server"""
+        read, write = await stdio_client(params).__aenter__()
+        session = ClientSession(read, write)
+        await session.__aenter__()
+        await session.initialize()
+
+        self.sessions[name] = session
+        print(f"已连接到Server: {name}")
+
+        # 列出该Server提供的能力
+        tools = await session.list_tools()
+        print(f"  工具: {[t.name for t in tools.tools]}")
+
+        resources = await session.list_resources()
+        print(f"  资源: {[r.uri for r in resources.resources]}")
+
+    async def call_tool(self, server_name: str, tool_name: str, args: dict):
+        """调用指定Server上的工具"""
+        if server_name not in self.sessions:
+            raise ValueError(f"Server未连接: {server_name}")
+
+        session = self.sessions[server_name]
+        result = await session.call_tool(tool_name, args)
+        return result.content[0].text
+
+    async def search_tools(self, query: str):
+        """在所有Server中搜索工具"""
+        results = []
+        for name, session in self.sessions.items():
+            tools = await session.list_tools()
+            for tool in tools.tools:
+                if query.lower() in tool.name.lower() or \
+                   query.lower() in tool.description.lower():
+                    results.append({
+                        "server": name,
+                        "tool": tool.name,
+                        "description": tool.description
+                    })
+        return results
+
+    async def disconnect_all(self):
+        """断开所有Server连接"""
+        for name, session in self.sessions.items():
+            await session.close()
+            print(f"已断开Server: {name}")
+        self.sessions.clear()
+
+async def main():
+    host = MultiServerHost()
+
+    # 连接文件系统Server
+    await host.add_server("filesystem", StdioServerParameters(
+        command="python",
+        args=["filesystem_server.py"]
+    ))
+
+    # 连接数据库Server
+    await host.add_server("database", StdioServerParameters(
+        command="python",
+        args=["database_server.py"]
+    ))
+
+    # 搜索所有包含"read"的工具
+    read_tools = await host.search_tools("read")
+    print(f"\n包含'read'的工具:")
+    for t in read_tools:
+        print(f"  [{t['server']}] {t['tool']}: {t['description']}")
+
+    # 调用文件系统Server的read_file工具
+    content = await host.call_tool(
+        "filesystem", "read_file",
+        {"path": "config.json"}
+    )
+    print(f"\n文件内容:\n{content}")
+
+    await host.disconnect_all()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+
+                <div class="info-box">
+                    <strong>聚合模式选择</strong>
+                    <p>
+                        对于桌面应用（如Claude Desktop），通常使用扁平聚合，直接管理所有Server连接。对于Web应用或微服务架构，层级聚合更合适，通过一个网关Server统一对外暴露接口。选择哪种模式取决于应用的部署架构和安全需求。
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 第三节：核心概念 ==================== -->
+            <div class="concept-section" id="sec3">
+                <h2 class="section-title">
+                    <i class="fas fa-cubes"></i>
+                    三、核心概念：四大原语
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP定义了四种核心原语（Primitives），它们是Server向Client暴露能力的基本方式。理解这四种原语是掌握MCP的关键。
+                </p>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-file-alt"></i>
+                    3.1 Resources：数据资源
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    Resources代表Server可以提供的数据内容，类似于REST API中的GET端点。Resources是只读的，由应用程序或用户控制是否包含在LLM上下文中。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-database"></i> Resource的类型</h4>
+                    <ul>
+                        <li><strong>文件内容</strong>：本地文件、配置文件、文档等</li>
+                        <li><strong>数据库记录</strong>：特定表、查询结果或记录</li>
+                        <li><strong>API响应</strong>：外部API返回的数据</li>
+                        <li><strong>实时信息</strong>：系统状态、监控数据等</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python</span>
+<pre><code class="language-python">from mcp.server import Server
+from mcp.types import Resource, ResourceContents
+
+server = Server("my-server")
+
+# 定义一个文件资源
+@server.resource("file:///logs/{date}")
+async def get_log_file(date: str) -> ResourceContents:
+    """读取指定日期的日志文件"""
+    file_path = f"/var/log/app/{date}.log"
+    content = await read_file(file_path)
+    return ResourceContents(
+        uri=f"file:///logs/{date}",
+        mimeType="text/plain",
+        text=content
+    )
+
+# 定义一个动态资源
+@server.resource("db://users/{user_id}")
+async def get_user(user_id: str) -> ResourceContents:
+    """获取用户信息"""
+    user = await db.get_user(user_id)
+    return ResourceContents(
+        uri=f"db://users/{user_id}",
+        mimeType="application/json",
+        text=json.dumps(user)
+    )
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-wrench"></i>
+                    3.2 Tools：可执行工具
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    Tools代表Server可以执行的操作，由模型控制（LLM决定何时调用）。Tools类似于函数，接受输入参数并返回执行结果。与Resources不同，Tools是有副作用的。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-cog"></i> Tool的特征</h4>
+                    <ul>
+                        <li><strong>模型控制</strong>：由LLM根据上下文决定是否调用</li>
+                        <li><strong>有副作用</strong>：可能修改外部状态（如发送邮件、更新数据库）</li>
+                        <li><strong>参数化</strong>：通过JSON Schema定义输入参数</li>
+                        <li><strong>结果返回</strong>：执行后返回文本或结构化数据</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python</span>
+<pre><code class="language-python">from mcp.server import Server
+from mcp.types import Tool, ToolResult
+from pydantic import BaseModel
+
+server = Server("my-server")
+
+# 定义工具的输入参数
+class SendEmailArgs(BaseModel):
+    to: str
+    subject: str
+    body: str
+
+# 注册邮件发送工具
+@server.tool()
+async def send_email(args: SendEmailArgs) -> ToolResult:
+    """发送邮件到指定地址"""
+    await email_service.send(
+        to=args.to,
+        subject=args.subject,
+        body=args.body
+    )
+    return ToolResult(
+        content=f"邮件已发送至 {args.to}",
+        isError=False
+    )
+
+# 注册数据库查询工具
+@server.tool()
+async def query_database(sql: str) -> ToolResult:
+    """执行SQL查询"""
+    try:
+        results = await db.execute(sql)
+        return ToolResult(
+            content=json.dumps(results),
+            isError=False
+        )
+    except Exception as e:
+        return ToolResult(
+            content=f"查询失败: {str(e)}",
+            isError=True
+        )
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-comments"></i>
+                    3.3 Prompts：提示模板
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    Prompts是Server提供的预定义提示模板，由用户控制（用户选择是否使用）。Prompts可以将上下文和指令封装为可复用的模板，简化复杂的交互流程。
+                </p>
+
+                <span class="code-label">Python</span>
+<pre><code class="language-python">from mcp.server import Server
+from mcp.types import Prompt, PromptMessage, Role
+
+server = Server("my-server")
+
+@server.prompt()
+async def code_review_prompt(
+    repository: str,
+    pull_request: int
+) -> list[PromptMessage]:
+    """代码审查提示模板"""
+    # 获取PR信息
+    pr_info = await github.get_pr(repository, pull_request)
+    diff = await github.get_diff(repository, pull_request)
+
+    return [
+        PromptMessage(
+            role=Role.USER,
+            content=f"请审查以下Pull Request:\n\n"
+                    f"标题: {pr_info['title']}\n"
+                    f"描述: {pr_info['body']}\n\n"
+                    f"代码变更:\n{diff}"
+        )
+    ]
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-robot"></i>
+                    3.4 Sampling：模型采样
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    Sampling是MCP最独特的原语，它允许Server请求LLM进行文本生成。这使得Server可以利用AI能力完成复杂任务，同时Host保持对采样过程的完全控制。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-brain"></i> Sampling工作流</h4>
+                    <ul>
+                        <li>1. Server向Client发送sampling/createMessage请求</li>
+                        <li>2. Client（通常由Host）可以审查和修改请求</li>
+                        <li>3. 请求被发送到LLM进行推理</li>
+                        <li>4. 响应返回给Server</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Sampling安全原则</strong>
+                    <p>
+                        Sampling赋予了Server调用LLM的能力，因此必须严格控制。Host应该：(1) 对所有采样请求进行人类审批；(2) 限制采样可以使用的模型范围；(3) 记录所有采样活动以供审计。
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 第四节：协议规范 ==================== -->
+            <div class="concept-section" id="sec4">
+                <h2 class="section-title">
+                    <i class="fas fa-file-code"></i>
+                    四、协议规范：JSON-RPC 2.0
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP基于JSON-RPC 2.0构建，这是一种轻量级的远程过程调用协议。JSON-RPC使用JSON作为数据格式，支持请求-响应和通知两种消息模式。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-exchange-alt"></i> 消息类型</h4>
+                    <ul>
+                        <li><strong>Request（请求）</strong>：带有id字段，期望收到Response。例如：tools/call、resources/read</li>
+                        <li><strong>Response（响应）</strong>：包含result或error字段，与请求的id对应</li>
+                        <li><strong>Notification（通知）</strong>：没有id字段，不期望响应。例如：进度更新、日志消息</li>
+                    </ul>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-plug"></i>
+                    初始化握手
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    连接建立时，Client和Server通过初始化消息交换能力信息：
+                </p>
+
+                <span class="code-label">JSON</span>
+<pre><code class="language-json">// Client → Server: 初始化请求
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {
+      "roots": { "listChanged": true },
+      "sampling": {}
+    },
+    "clientInfo": {
+      "name": "MyAIApp",
+      "version": "1.0.0"
+    }
+  }
+}
+
+// Server → Client: 初始化响应
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {
+      "resources": { "subscribe": true },
+      "tools": { "listChanged": true },
+      "prompts": {}
+    },
+    "serverInfo": {
+      "name": "DatabaseServer",
+      "version": "1.0.0"
+    }
+  }
+}
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-list"></i>
+                    能力发现
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    初始化完成后，Client可以通过列表请求发现Server提供的所有能力：
+                </p>
+
+                <span class="code-label">JSON</span>
+<pre><code class="language-json">// Client → Server: 列出所有工具
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/list",
+  "params": {}
+}
+
+// Server → Client: 返回工具列表
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "query_database",
+        "description": "执行SQL查询",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "sql": {
+              "type": "string",
+              "description": "SQL查询语句"
+            }
+          },
+          "required": ["sql"]
+        }
+      },
+      {
+        "name": "send_email",
+        "description": "发送邮件",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "to": { "type": "string" },
+            "subject": { "type": "string" },
+            "body": { "type": "string" }
+          },
+          "required": ["to", "subject", "body"]
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+
+                <div class="info-box">
+                    <strong>能力协商机制</strong>
+                    <p>
+                        MCP的初始化阶段使用协商机制：Client和Server各自声明自己支持的能力版本，最终以双方都支持的最高版本为准。这确保了协议的向后兼容性，使得不同版本的Client和Server可以互相通信。
+                    </p>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-exclamation-circle"></i>
+                    错误处理机制
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP定义了一套标准的错误码体系，用于处理各种异常情况。正确的错误处理对于构建健壮的MCP应用至关重要。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-bug"></i> 标准错误码</h4>
+                    <ul>
+                        <li><strong>-32700</strong> Parse Error：JSON解析失败，Server收到的不是有效的JSON</li>
+                        <li><strong>-32600</strong> Invalid Request：请求格式正确但语义无效</li>
+                        <li><strong>-32601</strong> Method Not Found：请求的方法不存在或未实现</li>
+                        <li><strong>-32602</strong> Invalid Params：参数验证失败，缺少必填参数或参数类型错误</li>
+                        <li><strong>-32603</strong> Internal Error：Server内部错误，如未捕获的异常</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">JSON - 错误响应示例</span>
+<pre><code class="language-json">// 参数验证错误
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "error": {
+    "code": -32602,
+    "message": "Invalid parameters",
+    "data": {
+      "field": "path",
+      "reason": "Path must be a non-empty string"
+    }
+  }
+}
+
+// 工具执行错误
+{
+  "jsonrpc": "2.0",
+  "id": 4,
+  "result": {
+    "content": [{
+      "type": "text",
+      "text": "文件不存在: /nonexistent/file.txt"
+    }],
+    "isError": true
+  }
+}
+</code></pre>
+
+                <div class="tip-box">
+                    <strong>错误处理最佳实践</strong>
+                    <p>
+                        Server应尽量返回有意义的错误信息，而不是抛出原始异常。在ToolResult中，使用isError=True标记错误结果，并在content中包含用户友好的错误描述。对于可重试的错误（如网络超时），Client可以自动重试；对于永久性错误（如文件不存在），应向用户报告。
+                    </p>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-sync-alt"></i>
+                    取消与超时
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    在实际使用中，某些操作可能耗时较长或被用户主动取消。MCP提供了标准化的取消机制来处理这些场景。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-stop-circle"></i> 取消机制</h4>
+                    <ul>
+                        <li><strong>请求取消</strong>：Client可以发送notifications/cancelled通知来取消一个进行中的请求</li>
+                        <li><strong>进度token</strong>：请求可以包含progressToken，用于跟踪和取消特定操作</li>
+                        <li><strong>优雅降级</strong>：Server收到取消通知后应尽快停止处理，并返回部分结果（如果可能）</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">JSON - 取消操作</span>
+<pre><code class="language-json">// Client → Server: 取消进行中的请求
+{
+  "jsonrpc": "2.0",
+  "method": "notifications/cancelled",
+  "params": {
+    "requestId": 5,
+    "reason": "用户取消操作"
+  }
+}
+</code></pre>
+
+                <p style="margin-bottom: 1rem;">
+                    超时是另一个重要的考虑因素。Client应该为每个请求设置合理的超时时间，避免无限等待。MCP规范建议使用30秒作为默认超时时间，对于长时间运行的操作（如文件上传），可以通过进度通知来延长超时。
+                </p>
+            </div>
+
+            <!-- ==================== 第五节：传输机制 ==================== -->
+            <div class="concept-section" id="sec5">
+                <h2 class="section-title">
+                    <i class="fas fa-network-wired"></i>
+                    五、传输机制
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP的传输层负责消息的序列化和通信。协议本身与传输方式解耦，当前支持两种主要的传输机制：标准输入/输出（stdio）和HTTP Server-Sent Events（SSE）。
+                </p>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-terminal"></i>
+                    5.1 标准输入/输出（stdio）
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    stdio是最简单的传输方式，适用于本地进程间通信。Server作为子进程启动，通过stdin/stdout交换JSON消息。这种方式无需网络配置，安全性由操作系统进程隔离保证。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-check-circle"></i> stdio适用场景</h4>
+                    <ul>
+                        <li>本地工具集成（文件系统、Git、数据库等）</li>
+                        <li>CLI工具封装为MCP Server</li>
+                        <li>开发和测试环境</li>
+                        <li>单用户场景</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - stdio传输</span>
+<pre><code class="language-python">import asyncio
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+
+server = Server("local-tools")
+
+@server.tool()
+async def read_file(path: str) -> str:
+    """读取本地文件"""
+    with open(path, 'r') as f:
+        return f.read()
+
+async def main():
+    # 启动stdio传输
+    async with stdio_server() as (read_stream, write_stream):
+        await server.run(
+            read_stream,
+            write_stream,
+            server.create_initialization_options()
+        )
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-globe"></i>
+                    5.2 HTTP SSE（Server-Sent Events）
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    SSE传输适用于远程Server部署场景。Server作为HTTP服务运行，Client通过POST请求发送消息，Server通过SSE流返回响应和通知。这种方式支持多Client并发连接，适合生产环境部署。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-server"></i> SSE传输特点</h4>
+                    <ul>
+                        <li><strong>HTTP兼容</strong>：使用标准HTTP，便于通过负载均衡器和代理</li>
+                        <li><strong>流式响应</strong>：通过SSE实现服务端到客户端的消息推送</li>
+                        <li><strong>多客户端支持</strong>：一个Server可同时服务多个Client</li>
+                        <li><strong>远程部署</strong>：Server可以部署在云端，Client通过网络访问</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - SSE传输</span>
+<pre><code class="language-python">import uvicorn
+from mcp.server import Server
+from mcp.server.sse import SseServerTransport
+from starlette.applications import Starlette
+from starlette.routing import Route, Mount
+
+server = Server("remote-server")
+
+@server.resource("config://app")
+async def get_config() -> str:
+    """获取应用配置"""
+    return json.dumps({"version": "1.0", "debug": False})
+
+# SSE传输实例
+sse = SseServerTransport("/messages/")
+
+async def handle_sse(request):
+    """处理SSE连接"""
+    async with sse.connect_sse(
+        request.scope, request.receive, request._send
+    ) as streams:
+        await server.run(
+            streams[0], streams[1],
+            server.create_initialization_options()
+        )
+
+# 创建Starlette应用
+app = Starlette(
+    routes=[
+        Route("/sse", endpoint=handle_sse),
+        Mount("/messages/", app=sse.handle_post_message),
+    ]
+)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+</code></pre>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>传输方式</th>
+                            <th>适用场景</th>
+                            <th>连接方式</th>
+                            <th>部署方式</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>stdio</strong></td>
+                            <td>本地集成、CLI工具</td>
+                            <td>进程stdin/stdout</td>
+                            <td>作为子进程启动</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SSE</strong></td>
+                            <td>远程服务、生产环境</td>
+                            <td>HTTP POST + SSE</td>
+                            <td>独立HTTP服务</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== 第六节：服务端开发 ==================== -->
+            <div class="concept-section" id="sec6">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    六、服务端开发实战
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    本节通过完整示例展示如何开发一个实用的MCP Server。我们将构建一个文件系统MCP Server，它能够读写文件、列出目录并执行基本的文件操作。
+                </p>
+
+                <h3 class="section-subtitle">
+                    <i class="fab fa-python"></i>
+                    6.1 Python实现
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    以下是使用Python MCP SDK实现的文件系统Server完整代码：
+                </p>
+
+                <span class="code-label">Python - 文件系统MCP Server</span>
+<pre><code class="language-python">"""
+文件系统MCP Server
+提供文件读写、目录列表等功能
+"""
+import os
+import json
+import asyncio
+from pathlib import Path
+from typing import Optional
+from mcp.server import Server
+from mcp.types import (
+    Tool, Resource, ResourceContents,
+    ToolResult, Prompt, PromptMessage, Role
+)
+from pydantic import BaseModel
+
+# 创建Server实例
+server = Server("filesystem-server")
+
+# 工具参数模型
+class ReadFileArgs(BaseModel):
+    path: str
+
+class WriteFileArgs(BaseModel):
+    path: str
+    content: str
+
+class ListDirArgs(BaseModel):
+    path: str = "."
+
+class DeleteFileArgs(BaseModel):
+    path: str
+
+# ==================== Tools ====================
+
+@server.tool()
+async def read_file(args: ReadFileArgs) -> ToolResult:
+    """读取文件内容"""
+    try:
+        file_path = Path(args.path).resolve()
+        if not file_path.exists():
+            return ToolResult(
+                content=f"文件不存在: {args.path}",
+                isError=True
+            )
+        content = file_path.read_text(encoding='utf-8')
+        return ToolResult(content=content)
+    except Exception as e:
+        return ToolResult(
+            content=f"读取失败: {str(e)}",
+            isError=True
+        )
+
+@server.tool()
+async def write_file(args: WriteFileArgs) -> ToolResult:
+    """写入文件内容"""
+    try:
+        file_path = Path(args.path).resolve()
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        file_path.write_text(args.content, encoding='utf-8')
+        return ToolResult(
+            content=f"文件已写入: {args.path} ({len(args.content)} 字节)"
+        )
+    except Exception as e:
+        return ToolResult(
+            content=f"写入失败: {str(e)}",
+            isError=True
+        )
+
+@server.tool()
+async def list_directory(args: ListDirArgs) -> ToolResult:
+    """列出目录内容"""
+    try:
+        dir_path = Path(args.path).resolve()
+        if not dir_path.is_dir():
+            return ToolResult(
+                content=f"目录不存在: {args.path}",
+                isError=True
+            )
+        items = []
+        for item in sorted(dir_path.iterdir()):
+            item_type = "📁" if item.is_dir() else "📄"
+            size = item.stat().st_size if item.is_file() else 0
+            items.append(f"{item_type} {item.name} ({size} bytes)")
+
+        result = f"目录: {dir_path}\n\n" + "\n".join(items)
+        return ToolResult(content=result)
+    except Exception as e:
+        return ToolResult(
+            content=f"列表失败: {str(e)}",
+            isError=True
+        )
+
+@server.tool()
+async def delete_file(args: DeleteFileArgs) -> ToolResult:
+    """删除指定文件"""
+    try:
+        file_path = Path(args.path).resolve()
+        if not file_path.exists():
+            return ToolResult(
+                content=f"文件不存在: {args.path}",
+                isError=True
+            )
+        if file_path.is_dir():
+            return ToolResult(
+                content="不能删除目录，请使用rm -r",
+                isError=True
+            )
+        file_path.unlink()
+        return ToolResult(content=f"文件已删除: {args.path}")
+    except Exception as e:
+        return ToolResult(
+            content=f"删除失败: {str(e)}",
+            isError=True
+        )
+
+# ==================== Resources ====================
+
+@server.resource("file://{path}")
+async def get_file_resource(path: str) -> ResourceContents:
+    """获取文件资源"""
+    file_path = Path(path).resolve()
+    content = file_path.read_text(encoding='utf-8')
+    mime_type = "text/plain"
+    if path.endswith('.json'):
+        mime_type = "application/json"
+    elif path.endswith('.md'):
+        mime_type = "text/markdown"
+
+    return ResourceContents(
+        uri=f"file://{path}",
+        mimeType=mime_type,
+        text=content
+    )
+
+# ==================== Prompts ====================
+
+@server.prompt()
+async def summarize_file_prompt(path: str) -> list[PromptMessage]:
+    """生成文件摘要的提示模板"""
+    file_content = await read_file(ReadFileArgs(path=path))
+    return [
+        PromptMessage(
+            role=Role.USER,
+            content=f"请为以下文件内容生成简洁的摘要:\n\n```\n{file_content.content}\n```"
+        )
+    ]
+
+# ==================== 启动 ====================
+
+async def main():
+    from mcp.server.stdio import stdio_server
+    async with stdio_server() as (read_stream, write_stream):
+        await server.run(
+            read_stream, write_stream,
+            server.create_initialization_options()
+        )
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fab fa-js"></i>
+                    6.2 TypeScript实现
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    TypeScript版本的实现同样简洁，使用官方@modelcontextprotocol/sdk包：
+                </p>
+
+                <span class="code-label">TypeScript - 文件系统MCP Server</span>
+<pre><code class="language-typescript">import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+import * as fs from "fs/promises";
+import * as path from "path";
+
+// 创建MCP Server
+const server = new McpServer({
+  name: "filesystem-server",
+  version: "1.0.0",
+});
+
+// 注册读取文件工具
+server.tool(
+  "read_file",
+  "读取文件内容",
+  { path: z.string().describe("文件路径") },
+  async ({ path: filePath }) => {
+    try {
+      const content = await fs.readFile(filePath, "utf-8");
+      return {
+        content: [{ type: "text", text: content }],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: "text", text: `读取失败: ${error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// 注册写入文件工具
+server.tool(
+  "write_file",
+  "写入文件内容",
+  {
+    path: z.string().describe("文件路径"),
+    content: z.string().describe("文件内容"),
+  },
+  async ({ path: filePath, content }) => {
+    try {
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+      await fs.writeFile(filePath, content, "utf-8");
+      return {
+        content: [{ type: "text", text: `文件已写入: ${filePath}` }],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: "text", text: `写入失败: ${error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// 注册列出目录工具
+server.tool(
+  "list_directory",
+  "列出目录内容",
+  { path: z.string().default(".").describe("目录路径") },
+  async ({ path: dirPath }) => {
+    try {
+      const items = await fs.readdir(dirPath, { withFileTypes: true });
+      const result = items
+        .map((item) => {
+          const icon = item.isDirectory() ? "📁" : "📄";
+          return `${icon} ${item.name}`;
+        })
+        .join("\n");
+      return {
+        content: [{ type: "text", text: `目录: ${dirPath}\n\n${result}` }],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: "text", text: `列表失败: ${error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// 注册资源
+server.resource("config", "config://app", async (uri) => ({
+  contents: [
+    {
+      uri: uri.href,
+      mimeType: "application/json",
+      text: JSON.stringify({ version: "1.0.0", debug: false }),
+    },
+  ],
+}));
+
+// 启动stdio传输
+async function main() {
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  console.error("Filesystem MCP Server 运行中...");
+}
+
+main().catch(console.error);
+</code></pre>
+
+                <div class="tip-box">
+                    <strong>Python vs TypeScript选择</strong>
+                    <p>
+                        Python SDK更适合数据科学和后端集成场景，TypeScript SDK更适合Web应用和前端工具链集成。两者都完全支持MCP协议的所有功能。对于新手，建议从Python SDK开始，因为它的API更直观。
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 第七节：客户端集成 ==================== -->
+            <div class="concept-section" id="sec7">
+                <h2 class="section-title">
+                    <i class="fas fa-plug"></i>
+                    七、客户端集成
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP客户端负责连接Server并将其能力集成到AI应用中。本节展示如何在Python应用中集成MCP客户端。
+                </p>
+
+                <span class="code-label">Python - MCP客户端</span>
+<pre><code class="language-python">"""
+MCP客户端示例
+连接MCP Server并调用其工具和资源
+"""
+import asyncio
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+async def main():
+    # 配置Server连接参数
+    server_params = StdioServerParameters(
+        command="python",
+        args=["filesystem_server.py"],
+        env=None  # 可选环境变量
+    )
+
+    # 建立连接
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            # 初始化连接
+            await session.initialize()
+
+            print("已连接到MCP Server!")
+
+            # 列出所有可用工具
+            tools = await session.list_tools()
+            print(f"\n可用工具 ({len(tools.tools)}):")
+            for tool in tools.tools:
+                print(f"  - {tool.name}: {tool.description}")
+
+            # 调用工具
+            result = await session.call_tool(
+                "list_directory",
+                arguments={"path": "."}
+            )
+            print(f"\n目录内容:\n{result.content[0].text}")
+
+            # 读取资源
+            resource = await session.read_resource("config://app")
+            print(f"\n配置信息:\n{resource.contents[0].text}")
+
+            # 使用提示模板
+            prompts = await session.list_prompts()
+            print(f"\n可用提示模板 ({len(prompts.prompts)}):")
+            for prompt in prompts.prompts:
+                print(f"  - {prompt.name}: {prompt.description}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-link"></i> 集成到AI应用的模式</h4>
+                    <ul>
+                        <li><strong>直接集成</strong>：在AI应用代码中直接使用MCP Client</li>
+                        <li><strong>中间件模式</strong>：通过MCP代理服务器聚合多个Server</li>
+                        <li><strong>插件模式</strong>：将MCP Client封装为可插拔的插件</li>
+                    </ul>
+                </div>
+
+                <p style="margin-bottom: 1rem;">
+                    在实际应用中，通常需要将MCP能力与LLM的Function Calling结合使用。以下是将MCP工具转换为LLM工具定义的示例：
+                </p>
+
+                <span class="code-label">Python - MCP工具转换为LLM工具</span>
+<pre><code class="language-python">async def convert_mcp_tools_to_llm(session):
+    """将MCP工具定义转换为LLM可使用的格式"""
+    tools = await session.list_tools()
+
+    llm_tools = []
+    for tool in tools.tools:
+        llm_tools.append({
+            "type": "function",
+            "function": {
+                "name": tool.name,
+                "description": tool.description,
+                "parameters": tool.inputSchema
+            }
+        })
+
+    return llm_tools
+
+async def handle_llm_tool_call(session, tool_name, arguments):
+    """处理LLM的工具调用请求"""
+    result = await session.call_tool(tool_name, arguments)
+    return result.content[0].text
+</code></pre>
+
+                <div class="info-box">
+                    <strong>现有MCP客户端支持</strong>
+                    <p>
+                        目前已有多款AI应用原生支持MCP协议，包括：Claude Desktop、Cursor、Windsurf、Cline等IDE插件、Continue.dev等。这些应用可以无缝连接任何符合MCP规范的Server。
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 第八节：安全机制 ==================== -->
+            <div class="concept-section" id="sec8">
+                <h2 class="section-title">
+                    <i class="fas fa-shield-alt"></i>
+                    八、安全机制与最佳实践
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    安全是MCP协议设计的核心考量。由于MCP Server可以访问文件系统、执行代码、连接数据库等敏感操作，必须采取严格的安全措施来保护用户数据和系统安全。
+                </p>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-lock"></i>
+                    8.1 安全架构原则
+                </h3>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-shield-alt"></i> 安全三层模型</h4>
+                    <ul>
+                        <li><strong>传输层安全</strong>：本地stdio传输依赖操作系统进程隔离；远程SSE传输应使用HTTPS/TLS加密</li>
+                        <li><strong>协议层安全</strong>：通过能力协商确保双方支持的安全特性；使用JSON Schema验证所有输入</li>
+                        <li><strong>应用层安全</strong>：Host实现人类审批机制；限制Tool的权限范围；记录所有操作日志</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - 安全Server配置</span>
+<pre><code class="language-python">from mcp.server import Server
+from mcp.types import ToolResult
+import logging
+
+server = Server("secure-server")
+
+# 配置日志
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("mcp-server")
+
+# 工具权限控制
+TOOL_PERMISSIONS = {
+    "read_file": {"requires_approval": False},
+    "write_file": {"requires_approval": True},
+    "delete_file": {"requires_approval": True},
+    "execute_query": {"requires_approval": True},
+}
+
+@server.tool()
+async def secure_tool_wrapper(tool_name: str, **kwargs) -> ToolResult:
+    """安全包装器：验证权限并记录操作"""
+    permission = TOOL_PERMISSIONS.get(tool_name)
+
+    if permission is None:
+        return ToolResult(
+            content=f"未知工具: {tool_name}",
+            isError=True
+        )
+
+    # 记录操作日志
+    logger.info(
+        f"工具调用: {tool_name}, "
+        f"参数: {kwargs}, "
+        f"需要审批: {permission['requires_approval']}"
+    )
+
+    # 执行实际工具（此处应调用对应的工具函数）
+    # result = await execute_tool(tool_name, **kwargs)
+
+    return ToolResult(content="操作完成")
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    8.2 常见安全威胁
+                </h3>
+
+                <div class="warning-box">
+                    <strong>必须防范的安全威胁</strong>
+                    <ul>
+                        <li><strong>提示注入</strong>：恶意用户可能通过工具返回的内容操纵LLM行为。Server应对所有输出进行消毒处理。</li>
+                        <li><strong>权限提升</strong>：确保Server只能访问明确授权的资源。使用最小权限原则。</li>
+                        <li><strong>数据泄露</strong>：敏感数据不应出现在Tool返回给LLM的内容中。实现数据分类和过滤。</li>
+                        <li><strong>拒绝服务</strong>：对工具调用设置超时和资源限制，防止Server被恶意请求压垮。</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - 输入验证与消毒</span>
+<pre><code class="language-python">from pydantic import BaseModel, validator
+import re
+
+class SafeQueryArgs(BaseModel):
+    """安全的SQL查询参数"""
+    query: str
+    max_rows: int = 100
+
+    @validator('query')
+    def validate_query(cls, v):
+        """验证SQL查询安全性"""
+        # 禁止危险操作
+        dangerous_keywords = [
+            'DROP', 'DELETE', 'TRUNCATE', 'ALTER',
+            'INSERT', 'UPDATE', 'EXEC', 'EXECUTE'
+        ]
+        upper_query = v.upper()
+        for keyword in dangerous_keywords:
+            if keyword in upper_query:
+                raise ValueError(f"禁止执行: {keyword}")
+
+        # 只允许SELECT查询
+        if not upper_query.strip().startswith('SELECT'):
+            raise ValueError("只允许SELECT查询")
+
+        return v
+
+    @validator('max_rows')
+    def validate_max_rows(cls, v):
+        """限制返回行数"""
+        if v > 1000:
+            return 1000
+        if v < 1:
+            return 1
+        return v
+
+@server.tool()
+async def safe_query(args: SafeQueryArgs) -> ToolResult:
+    """安全的数据库查询工具"""
+    try:
+        # 使用参数化查询防止SQL注入
+        results = await db.execute(
+            args.query + f" LIMIT {args.max_rows}"
+        )
+        return ToolResult(content=json.dumps(results))
+    except ValueError as e:
+        return ToolResult(
+            content=f"安全验证失败: {str(e)}",
+            isError=True
+        )
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-user-shield"></i>
+                    8.3 人类审批机制
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    对于高风险操作，MCP推荐实现人类审批（Human-in-the-Loop）机制。Host应该在执行敏感Tool前征求用户确认。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-user-check"></i> 审批流程设计</h4>
+                    <ul>
+                        <li>1. LLM决定调用某个Tool</li>
+                        <li>2. Host检查该Tool是否需要审批</li>
+                        <li>3. 如果需要，弹出确认对话框，显示Tool名称、参数和预期效果</li>
+                        <li>4. 用户确认后执行，拒绝则返回错误</li>
+                        <li>5. 记录用户的选择和操作结果</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - 人类审批实现</span>
+<pre><code class="language-python">"""
+人类审批机制示例
+在执行敏感操作前征求用户确认
+"""
+from dataclasses import dataclass
+from enum import Enum
+from typing import Optional, Callable
+import asyncio
+
+class ApprovalLevel(Enum):
+    NONE = "none"           # 无需审批
+    NOTIFICATION = "notification"  # 仅通知
+    CONFIRMATION = "confirmation"  # 需要确认
+    DIALOG = "dialog"       # 需要详细对话框
+
+@dataclass
+class ApprovalRequest:
+    tool_name: str
+    arguments: dict
+    description: str
+    risk_level: ApprovalLevel
+
+class ApprovalManager:
+    def __init__(self):
+        self.approval_configs: dict[str, ApprovalLevel] = {}
+        self.approval_history: list[dict] = []
+
+    def configure_tool(self, tool_name: str, level: ApprovalLevel):
+        """配置工具的审批级别"""
+        self.approval_configs[tool_name] = level
+
+    async def request_approval(
+        self, request: ApprovalRequest
+    ) -> bool:
+        """请求用户审批"""
+        level = self.approval_configs.get(
+            request.tool_name,
+            ApprovalLevel.CONFIRMATION
+        )
+
+        if level == ApprovalLevel.NONE:
+            return True
+
+        if level == ApprovalLevel.NOTIFICATION:
+            print(f"[通知] 即将执行: {request.tool_name}")
+            return True
+
+        # 需要用户确认的操作
+        print(f"\n{'='*50}")
+        print(f"工具调用审批请求")
+        print(f"{'='*50}")
+        print(f"工具: {request.tool_name}")
+        print(f"描述: {request.description}")
+        print(f"参数: {request.arguments}")
+        print(f"风险等级: {level.value}")
+        print(f"{'='*50}")
+
+        response = input("是否允许执行？(y/n): ").strip().lower()
+
+        approved = response == 'y'
+
+        # 记录审批历史
+        self.approval_history.append({
+            "tool": request.tool_name,
+            "approved": approved,
+            "arguments": request.arguments
+        })
+
+        return approved
+
+# 使用示例
+async def main():
+    manager = ApprovalManager()
+
+    # 配置高风险工具需要确认
+    manager.configure_tool("delete_file", ApprovalLevel.CONFIRMATION)
+    manager.configure_tool("execute_query", ApprovalLevel.DIALOG)
+    manager.configure_tool("read_file", ApprovalLevel.NONE)
+
+    # 请求删除文件审批
+    request = ApprovalRequest(
+        tool_name="delete_file",
+        arguments={"path": "important.txt"},
+        description="删除文件 important.txt",
+        risk_level=ApprovalLevel.CONFIRMATION
+    )
+
+    approved = await manager.request_approval(request)
+    if approved:
+        print("用户已批准，执行删除操作")
+    else:
+        print("用户拒绝，操作已取消")
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-key"></i>
+                    8.4 认证与授权
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    对于远程MCP Server（SSE传输），认证和授权是必不可少的安全机制。MCP协议本身定义了认证的框架，具体实现由Server和Host协商决定。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-shield-alt"></i> 认证方式</h4>
+                    <ul>
+                        <li><strong>API Key</strong>：最简单的认证方式，适合内部服务和开发环境。Client在连接时提供API Key，Server验证后允许访问。</li>
+                        <li><strong>OAuth 2.0</strong>：标准的授权框架，适合需要细粒度权限控制的场景。支持多种授权流程（授权码、客户端凭证等）。</li>
+                        <li><strong>mTLS</strong>：双向TLS认证，适合高安全性要求的生产环境。Client和Server都需要提供证书。</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - OAuth 2.0集成示例</span>
+<pre><code class="language-python">"""
+MCP Server OAuth 2.0认证示例
+展示如何在MCP Server中集成OAuth 2.0认证
+"""
+from fastapi import FastAPI, Depends, HTTPException, Security
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from authlib.integrations.starlette_client import OAuth
+from starlette.config import Config
+import jwt
+
+app = FastAPI()
+security = HTTPBearer()
+
+# OAuth配置
+oauth = OAuth()
+oauth.register(
+    name='mcp_provider',
+    client_id='your-client-id',
+    client_secret='your-client-secret',
+    server_metadata_url='https://auth.example.com/.well-known/openid-configuration',
+    client_kwargs={'scope': 'openid email profile mcp:tools'}
+)
+
+# JWT验证
+def verify_token(credentials: HTTPAuthorizationCredentials = Security(security)):
+    try:
+        payload = jwt.decode(
+            credentials.credentials,
+            'your-secret-key',
+            algorithms=['HS256']
+        )
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token已过期")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="无效的Token")
+
+# 需要认证的MCP端点
+@app.get("/mcp/tools")
+async def list_tools(user=Depends(verify_token)):
+    """列出可用工具（需要认证）"""
+    # 根据用户权限返回工具列表
+    tools = get_tools_for_user(user['sub'])
+    return {"tools": tools}
+
+@app.post("/mcp/tools/{tool_name}/call")
+async def call_tool(
+    tool_name: str,
+    arguments: dict,
+    user=Depends(verify_token)
+):
+    """调用工具（需要认证+授权）"""
+    # 检查用户是否有权调用该工具
+    if not has_permission(user['sub'], tool_name):
+        raise HTTPException(status_code=403, detail="权限不足")
+
+    result = await execute_tool(tool_name, arguments)
+    return result
+
+# 登录端点
+@app.get("/login")
+async def login(request):
+    """重定向到OAuth提供商"""
+    redirect_uri = request.url_for('auth_callback')
+    return await oauth.mcp_provider.authorize_redirect(request, redirect_uri)
+
+@app.get("/auth/callback")
+async def auth_callback(request):
+    """OAuth回调处理"""
+    token = await oauth.mcp_provider.authorize_access_token(request)
+    # 生成JWT并返回给客户端
+    jwt_token = create_jwt(token)
+    return {"access_token": jwt_token, "token_type": "bearer"}
+</code></pre>
+
+                <div class="warning-box">
+                    <strong>认证配置注意事项</strong>
+                    <ul>
+                        <li>永远不要在代码中硬编码密钥和凭证，使用环境变量或密钥管理服务</li>
+                        <li>为不同环境（开发、测试、生产）使用不同的密钥和配置</li>
+                        <li>定期轮换密钥，设置合理的过期时间</li>
+                        <li>记录所有认证事件，便于安全审计</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>安全最佳实践清单</strong>
+                    <ul>
+                        <li>始终使用最小权限原则设计Server</li>
+                        <li>对所有输入进行严格的验证和消毒</li>
+                        <li>实施速率限制防止滥用</li>
+                        <li>记录所有工具调用和资源访问日志</li>
+                        <li>定期进行安全审计和漏洞扫描</li>
+                        <li>为敏感操作实现人类审批机制</li>
+                        <li>使用HTTPS/TLS加密远程通信</li>
+                        <li>实施数据分类和访问控制</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ==================== 第九节：实战构建MCP Server ==================== -->
+            <div class="concept-section" id="sec9">
+                <h2 class="section-title">
+                    <i class="fas fa-hammer"></i>
+                    九、实战：构建一个完整的MCP Server
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    本节将综合前面所学，从零开始构建一个实用的天气查询MCP Server。该Server提供天气查询工具、城市资源和天气预报提示模板。
+                </p>
+
+                <span class="code-label">Python - 天气查询MCP Server（完整版）</span>
+<pre><code class="language-python">"""
+天气查询MCP Server
+提供天气查询工具、城市资源和天气预报提示模板
+"""
+import json
+import asyncio
+import httpx
+from datetime import datetime
+from mcp.server import Server
+from mcp.types import (
+    Tool, Resource, ResourceContents,
+    ToolResult, Prompt, PromptMessage, Role
+)
+from pydantic import BaseModel
+
+server = Server("weather-server")
+
+# 模拟天气数据（实际应用中应调用真实API）
+WEATHER_DATA = {
+    "北京": {"temp": 25, "condition": "晴", "humidity": 45, "wind": "北风3级"},
+    "上海": {"temp": 28, "condition": "多云", "humidity": 70, "wind": "东南风2级"},
+    "广州": {"temp": 32, "condition": "雷阵雨", "humidity": 85, "wind": "南风2级"},
+    "深圳": {"temp": 31, "condition": "多云", "humidity": 80, "wind": "西南风3级"},
+    "杭州": {"temp": 26, "condition": "晴转多云", "humidity": 60, "wind": "东风2级"},
+    "成都": {"temp": 24, "condition": "阴", "humidity": 75, "wind": "微风"},
+    "武汉": {"temp": 29, "condition": "晴", "humidity": 55, "wind": "北风2级"},
+    "西安": {"temp": 27, "condition": "晴", "humidity": 40, "wind": "西北风3级"},
+}
+
+# ==================== 工具参数 ====================
+
+class WeatherQueryArgs(BaseModel):
+    city: str
+    unit: str = "celsius"
+
+class ForecastArgs(BaseModel):
+    city: str
+    days: int = 3
+
+class CompareArgs(BaseModel):
+    cities: list[str]
+
+# ==================== Tools ====================
+
+@server.tool()
+async def query_weather(args: WeatherQueryArgs) -> ToolResult:
+    """查询指定城市的当前天气"""
+    city = args.city
+
+    if city not in WEATHER_DATA:
+        available = ", ".join(WEATHER_DATA.keys())
+        return ToolResult(
+            content=f"未找到 {city} 的天气数据。支持的城市: {available}",
+            isError=True
+        )
+
+    data = WEATHER_DATA[city]
+    temp = data["temp"]
+    if args.unit == "fahrenheit":
+        temp = temp * 9/5 + 32
+
+    result = {
+        "city": city,
+        "temperature": f"{temp}°{'F' if args.unit == 'fahrenheit' else 'C'}",
+        "condition": data["condition"],
+        "humidity": f"{data['humidity']}%",
+        "wind": data["wind"],
+        "update_time": datetime.now().isoformat()
+    }
+
+    return ToolResult(content=json.dumps(result, ensure_ascii=False))
+
+@server.tool()
+async def get_forecast(args: ForecastArgs) -> ToolResult:
+    """获取未来几天的天气预报"""
+    if args.city not in WEATHER_DATA:
+        return ToolResult(
+            content=f"未找到 {args.city} 的天气数据",
+            isError=True
+        )
+
+    base = WEATHER_DATA[args.city]
+    forecasts = []
+    for i in range(args.days):
+        forecast = {
+            "date": f"第{i+1}天",
+            "city": args.city,
+            "temp_high": base["temp"] + i,
+            "temp_low": base["temp"] - 2 + i,
+            "condition": base["condition"],
+            "humidity": f"{base['humidity']}%"
+        }
+        forecasts.append(forecast)
+
+    return ToolResult(
+        content=json.dumps(forecasts, ensure_ascii=False, indent=2)
+    )
+
+@server.tool()
+async def compare_cities(args: CompareArgs) -> ToolResult:
+    """比较多个城市的天气"""
+    results = []
+    for city in args.cities:
+        if city in WEATHER_DATA:
+            data = WEATHER_DATA[city]
+            results.append({
+                "city": city,
+                "temp": f"{data['temp']}°C",
+                "condition": data["condition"]
+            })
+        else:
+            results.append({
+                "city": city,
+                "error": "数据不可用"
+            })
+
+    return ToolResult(
+        content=json.dumps(results, ensure_ascii=False, indent=2)
+    )
+
+# ==================== Resources ====================
+
+@server.resource("weather://cities")
+async def get_supported_cities() -> ResourceContents:
+    """获取支持的城市列表"""
+    cities = list(WEATHER_DATA.keys())
+    return ResourceContents(
+        uri="weather://cities",
+        mimeType="application/json",
+        text=json.dumps(cities, ensure_ascii=False)
+    )
+
+@server.resource("weather://{city}/current")
+async def get_city_weather_resource(city: str) -> ResourceContents:
+    """获取城市当前天气资源"""
+    if city not in WEATHER_DATA:
+        raise ValueError(f"城市不存在: {city}")
+
+    data = WEATHER_DATA[city]
+    return ResourceContents(
+        uri=f"weather://{city}/current",
+        mimeType="application/json",
+        text=json.dumps({
+            "city": city,
+            "data": data,
+            "timestamp": datetime.now().isoformat()
+        }, ensure_ascii=False)
+    )
+
+# ==================== Prompts ====================
+
+@server.prompt()
+async def weather_advisor_prompt(
+    city: str,
+    activity: str
+) -> list[PromptMessage]:
+    """天气出行建议提示模板"""
+    weather_data = WEATHER_DATA.get(city, {})
+    prompt_text = f"""请根据以下天气信息，为用户的{activity}活动提供出行建议：
+
+城市: {city}
+温度: {weather_data.get('temp', '未知')}°C
+天气: {weather_data.get('condition', '未知')}
+湿度: {weather_data.get('humidity', '未知')}%
+风力: {weather_data.get('wind', '未知')}
+
+请给出：
+1. 是否适合进行该活动
+2. 穿衣建议
+3. 注意事项
+4. 替代方案（如果不适合）"""
+
+    return [PromptMessage(role=Role.USER, content=prompt_text)]
+
+# ==================== 启动 ====================
+
+async def main():
+    from mcp.server.stdio import stdio_server
+    async with stdio_server() as (read_stream, write_stream):
+        await server.run(
+            read_stream, write_stream,
+            server.create_initialization_options()
+        )
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+
+                <div class="info-box">
+                    <strong>Server测试</strong>
+                    <p>
+                        可以使用MCP Inspector工具来测试Server。运行 <code>npx @modelcontextprotocol/inspector python weather_server.py</code> 即可在浏览器中调试所有工具、资源和提示模板。
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 第十节：MCP生态系统 ==================== -->
+            <div class="concept-section" id="sec10">
+                <h2 class="section-title">
+                    <i class="fas fa-globe-americas"></i>
+                    十、MCP生态系统与未来展望
+                </h2>
+
+                <p style="margin-bottom: 1rem;">
+                    MCP协议自发布以来，已经形成了一个活跃的生态系统。从官方Server到社区贡献，从工具库到最佳实践，MCP正在成为AI工具集成的事实标准。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-seedling"></i> 官方MCP Server</h4>
+                    <ul>
+                        <li><strong>文件系统</strong>：安全的本地文件访问，支持读写、目录列表、文件搜索</li>
+                        <li><strong>GitHub</strong>：仓库管理、Issue、PR操作、代码搜索</li>
+                        <li><strong>PostgreSQL</strong>：数据库查询和管理，支持Schema探索</li>
+                        <li><strong>Slack</strong>：消息发送、频道管理、用户搜索</li>
+                        <li><strong>Google Drive</strong>：文件访问、搜索、权限管理</li>
+                        <li><strong>Puppeteer</strong>：浏览器自动化、截图、页面交互</li>
+                        <li><strong>Brave Search</strong>：网页搜索、新闻搜索</li>
+                        <li><strong>Memory</strong>：持久化记忆存储和检索</li>
+                    </ul>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-users"></i>
+                    社区贡献
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    除了官方Server，MCP社区也贡献了大量高质量的Server和工具库。这些社区项目覆盖了更多使用场景，推动了MCP生态的繁荣。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-puzzle-piece"></i> 社区热门项目</h4>
+                    <ul>
+                        <li><strong>Notion MCP</strong>：Notion API集成，支持页面、数据库、块操作</li>
+                        <li><strong>Airtable MCP</strong>：Airtable数据查询和管理</li>
+                        <li><strong>Linear MCP</strong>：Linear项目管理工具集成</li>
+                        <li><strong>Figma MCP</strong>：Figma设计文件访问和操作</li>
+                        <li><strong>Docker MCP</strong>：Docker容器管理和部署</li>
+                        <li><strong>Kubernetes MCP</strong>：K8s集群管理</li>
+                        <li><strong>AWS MCP</strong>：AWS服务集成（S3、Lambda、DynamoDB等）</li>
+                        <li><strong>Cloudflare MCP</strong>：Cloudflare Workers和R2集成</li>
+                    </ul>
+                </div>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-tools"></i> 开发工具</h4>
+                    <ul>
+                        <li><strong>MCP Inspector</strong>：官方调试工具，可视化测试Server能力</li>
+                        <li><strong>MCP CLI</strong>：命令行工具，快速创建和测试Server</li>
+                        <li><strong>MCP Dev</strong>：开发服务器，支持热重载和实时调试</li>
+                        <li><strong>MCP Proxy</strong>：代理工具，用于测试和监控MCP通信</li>
+                    </ul>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-road"></i>
+                    未来发展方向
+                </h3>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-rocket"></i> 协议演进路线</h4>
+                    <ul>
+                        <li><strong>认证标准化</strong>：引入OAuth 2.0等标准认证机制，支持企业级SSO</li>
+                        <li><strong>远程发现</strong>：通过DNS/HTTP发现远程MCP Server，支持动态服务发现</li>
+                        <li><strong>权限模型</strong>：更细粒度的权限控制框架，支持RBAC和ABAC</li>
+                        <li><strong>性能优化</strong>：减少协议开销，提升大数据传输效率，支持流式处理</li>
+                        <li><strong>多模态支持</strong>：支持图像、音频、视频等非文本数据的传输和处理</li>
+                        <li><strong>批量操作</strong>：支持批量Tool调用，减少网络往返次数</li>
+                        <li><strong>事务支持</strong>：引入事务机制，确保多个操作的原子性</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>加入MCP生态</strong>
+                    <p>
+                        如果你正在开发AI应用，强烈建议采用MCP协议来处理工具集成。这不仅可以减少开发工作量，还能让你的应用立即兼容现有的MCP Server生态。访问 <a href="https://modelcontextprotocol.io" target="_blank">modelcontextprotocol.io</a> 获取最新文档和SDK。你也可以通过GitHub贡献自己的MCP Server，帮助生态繁荣发展。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 练习题 -->
+            <div class="exercise-box" id="exercises">
+                <h4><i class="fas fa-pen"></i> 练习题</h4>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">练习1：</span>
+                    <strong>MCP Server开发</strong>
+                    <p>开发一个TODO列表MCP Server，支持创建、完成、删除和列出待办事项。使用Python或TypeScript实现，并编写测试代码验证所有功能。</p>
+                    <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        <strong>提示：</strong>考虑使用内存存储或JSON文件持久化数据。为每个TODO项添加ID、标题、描述、完成状态和创建时间字段。
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">练习2：</span>
+                    <strong>多Server聚合</strong>
+                    <p>设计一个MCP代理（Aggregator），能够同时连接文件系统Server和数据库Server，并提供统一的查询接口。编写客户端代码测试聚合功能。</p>
+                    <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        <strong>提示：</strong>参考本章"多Server聚合模式"一节，使用MultiServerHost类管理多个连接。考虑如何处理不同Server返回的结果格式差异。
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">练习3：</span>
+                    <strong>安全审计</strong>
+                    <p>分析本章提供的文件系统Server代码，识别至少3个潜在的安全风险，并提出具体的修复方案。编写安全测试用例验证修复效果。</p>
+                    <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        <strong>提示：</strong>关注路径遍历、命令注入、权限绕过等常见漏洞。参考OWASP Top 10和MCP安全最佳实践。
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">练习4：</span>
+                    <strong>生态贡献</strong>
+                    <p>选择一个你常用的API（如天气、新闻、翻译等），将其封装为MCP Server并开源。编写完整的README文档和使用示例。</p>
+                    <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        <strong>提示：</strong>参考官方MCP Server仓库的结构，包含pyproject.toml、README.md、LICENSE等文件。添加详细的API文档和配置说明。
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">练习5：</span>
+                    <strong>Prompt模板设计</strong>
+                    <p>为一个代码审查工具设计MCP Prompt模板，支持多种审查场景（安全审查、性能优化、代码风格等）。模板应能根据输入的代码片段和审查类型生成合适的提示。</p>
+                    <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        <strong>提示：</strong>使用动态Prompt模板，根据参数生成不同的审查指令。考虑如何平衡提示的详细程度和LLM的上下文限制。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 章节小结 -->
+            <div class="chapter-summary" id="summary">
+                <h4><i class="fas fa-bookmark"></i> 章节小结</h4>
+                <ul>
+                    <li><strong>MCP</strong>是标准化AI与外部服务交互的开放协议，解决了工具集成的碎片化问题</li>
+                    <li><strong>三层架构</strong>（Host、Client、Server）提供了清晰的职责分离和安全边界</li>
+                    <li><strong>四大原语</strong>（Resources、Tools、Prompts、Sampling）覆盖了AI应用的主要集成场景</li>
+                    <li><strong>JSON-RPC 2.0</strong>提供了轻量级、可扩展的协议基础</li>
+                    <li><strong>stdio和SSE</strong>两种传输机制分别适用于本地和远程部署场景</li>
+                    <li><strong>安全机制</strong>贯穿协议设计，包括输入验证、权限控制和人类审批</li>
+                    <li><strong>MCP生态</strong>正在快速发展，越来越多的AI应用和Server正在涌现</li>
+                </ul>
+            </div>
+
+            <!-- 章节导航 -->
+            <div class="chapter-nav">
+                <a href="ch32.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+                <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+                <a href="appendix-g.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+        </main>
+
+        <!-- ========== 右侧目录导航 ========== -->
+        <aside class="toc-sidebar">
+            <h3><i class="fas fa-list-ul"></i> 本章目录</h3>
+            <ul>
+                <li><a href="#sec1">一、MCP简介</a></li>
+                <li class="toc-sub"><a href="#sec1">为什么需要MCP</a></li>
+                <li><a href="#sec2">二、架构设计</a></li>
+                <li class="toc-sub"><a href="#sec2">Host、Client、Server</a></li>
+                <li><a href="#sec3">三、核心概念</a></li>
+                <li class="toc-sub"><a href="#sec3">四大原语</a></li>
+                <li><a href="#sec4">四、协议规范</a></li>
+                <li class="toc-sub"><a href="#sec4">JSON-RPC 2.0</a></li>
+                <li><a href="#sec5">五、传输机制</a></li>
+                <li class="toc-sub"><a href="#sec5">stdio与SSE</a></li>
+                <li><a href="#sec6">六、服务端开发</a></li>
+                <li class="toc-sub"><a href="#sec6">Python与TypeScript实现</a></li>
+                <li><a href="#sec7">七、客户端集成</a></li>
+                <li><a href="#sec8">八、安全机制</a></li>
+                <li class="toc-sub"><a href="#sec8">威胁与防护</a></li>
+                <li><a href="#sec9">九、实战构建</a></li>
+                <li><a href="#sec10">十、生态系统</a></li>
+                <li class="toc-divider"></li>
+                <li><a href="#exercises">练习题</a></li>
+                <li><a href="#summary">章节小结</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p>第1-11章：基础与核心</p>
+                <p>第12-24章：工程实践与进阶</p>
+                <p>第25章+：AI工具与应用</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+    <script>
+    // 目录滚动高亮
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-sidebar a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const el = document.querySelector(id);
+          if (el) sections.push({ link, el });
+        }
+      });
+      function updateActive() {
+        const scrollY = window.scrollY + 100;
+        let current = sections[0];
+        for (const s of sections) {
+          if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+      }
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+    </script>
+</body>
+</html>

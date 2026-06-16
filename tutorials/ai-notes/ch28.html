@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="深入学习强化学习原理与RLHF技术，从马尔可夫决策到大语言模型的人类反馈优化。">
+    <title>第二十八章：强化学习与RLHF - AI学习笔记</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../styles/notes.css">
+    <style>
+        .reinforcement-diagram {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            text-align: center;
+        }
+        .reinforcement-diagram h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        .agent-environment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .agent-box, .env-box {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            min-width: 150px;
+        }
+        .agent-box i, .env-box i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .flow-arrow {
+            font-size: 2rem;
+        }
+        .algorithm-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .algo-card {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        .algo-card h4 {
+            margin-bottom: 0.5rem;
+        }
+        .algo-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .reward-model-flow {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .reward-model-flow h3 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+        .reward-model-flow .flow-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .reward-model-flow .step {
+            background: rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            min-width: 120px;
+        }
+        .reward-model-flow .step i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .comparison-table tr:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="../index.html">
+                <i class="fas fa-brain"></i>
+                <span>AI学习笔记</span>
+            </a>
+        </div>
+        <div class="navbar-links">
+            <a href="../index.html">首页</a>
+            <a href="index.html">AI笔记目录</a>
+            <a href="https://github.com/jacksoncode" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- 侧边导航 -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>AI学习笔记</h3>
+            <button class="sidebar-close" aria-label="Close sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">第二十八章：强化学习与RLHF</div>
+                <ul class="nav-list">
+                    <li><a href="#section1" class="nav-link active">28.1 强化学习基础概念</a></li>
+                    <li><a href="#section2" class="nav-link">28.2 核心算法：Q-Learning与策略梯度</a></li>
+                    <li><a href="#section3" class="nav-link">28.3 深度强化学习</a></li>
+                    <li><a href="#section4" class="nav-link">28.4 RLHF详解</a></li>
+                    <li><a href="#section5" class="nav-link">28.5 奖励模型训练</a></li>
+                    <li><a href="#section6" class="nav-link">28.6 PPO在大语言模型中的应用</a></li>
+                    <li><a href="#section7" class="nav-link">28.7 DPO与RLHF的对比</a></li>
+                    <li><a href="#section8" class="nav-link">28.8 动手实践：TRL库</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <article class="chapter-content">
+            <header class="chapter-header">
+                <div class="chapter-meta">
+                    <span class="chapter-number">第二十八章</span>
+                    <span class="chapter-divider">|</span>
+                    <span class="chapter-date">2024年更新</span>
+                </div>
+                <h1 class="chapter-title">强化学习与RLHF</h1>
+                <p class="chapter-subtitle">从马尔可夫决策到大语言模型的人类反馈优化</p>
+                <div class="chapter-tags">
+                    <span class="tag">强化学习</span>
+                    <span class="tag">RLHF</span>
+                    <span class="tag">PPO</span>
+                    <span class="tag">DPO</span>
+                </div>
+            </header>
+
+            <section class="learning-objectives">
+                <h2><i class="fas fa-bullseye"></i> 学习目标</h2>
+                <ul>
+                    <li>理解强化学习的基本概念：智能体、环境、奖励、策略</li>
+                    <li>掌握Q-Learning、策略梯度等核心算法原理</li>
+                    <li>了解深度强化学习的发展与应用</li>
+                    <li>深入理解RLHF的完整训练流程</li>
+                    <li>掌握奖励模型的训练方法</li>
+                    <li>了解PPO在大语言模型中的具体应用</li>
+                    <li>对比DPO与RLHF的优缺点</li>
+                    <li>能够使用TRL库进行RLHF训练实践</li>
+                </ul>
+            </section>
+
+            <section class="prerequisite-box">
+                <h2><i class="fas fa-list-check"></i> 前置知识</h2>
+                <ul>
+                    <li>机器学习基础概念</li>
+                    <li>深度学习基础（神经网络、反向传播）</li>
+                    <li>大语言模型基础概念</li>
+                    <li>监督学习的基本流程</li>
+                </ul>
+            </section>
+
+            <section id="section1" class="content-section">
+                <h2>28.1 强化学习基础概念</h2>
+                
+                <p>强化学习（Reinforcement Learning, RL）是机器学习的一个重要分支，它通过让智能体（Agent）在环境（Environment）中采取行动，根据获得的奖励（Reward）来学习最优策略。与监督学习不同，强化学习没有明确的标签，而是通过试错来学习。</p>
+
+                <div class="reinforcement-diagram">
+                    <h3>强化学习基本框架</h3>
+                    <div class="agent-environment">
+                        <div class="agent-box">
+                            <i class="fas fa-robot"></i>
+                            <div>智能体 (Agent)</div>
+                            <small>学习决策</small>
+                        </div>
+                        <div class="flow-arrow">
+                            <i class="fas fa-arrow-left"></i> 状态 (s)
+                            <br><br>
+                            <i class="fas fa-arrow-right"></i> 动作 (a)
+                        </div>
+                        <div class="env-box">
+                            <i class="fas fa-globe"></i>
+                            <div>环境 (Environment)</div>
+                            <small>执行并反馈</small>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>马尔可夫决策过程（MDP）</h3>
+                <p>强化学习问题通常被形式化为马尔可夫决策过程（Markov Decision Process, MDP），它由五元组 $(S, A, P, R, \gamma)$ 定义：</p>
+                
+                <div class="tip-box">
+                    <div class="tip-title"><i class="fas fa-lightbulb"></i> MDP五元组</div>
+                    <p><strong>状态空间 S</strong>：所有可能状态的集合</p>
+                    <p><strong>动作空间 A</strong>：所有可能动作的集合</p>
+                    <p><strong>转移概率 P</strong>：在状态 s 采取动作 a 后转移到状态 s' 的概率</p>
+                    <p><strong>奖励函数 R</strong>：在状态 s 采取动作 a 获得的即时奖励</p>
+                    <p><strong>折扣因子 γ</strong>：介于0到1之间，决定未来奖励的重要性</p>
+                </div>
+
+                <h3>核心概念</h3>
+                <ul>
+                    <li><strong>策略（Policy）</strong>：从状态到动作的映射，表示为 π(a|s)</li>
+                    <li><strong>价值函数（Value Function）</strong>：从某个状态开始的期望累积奖励</li>
+                    <li><strong>动作价值函数（Q-Function）</strong>：在某个状态采取某个动作后的期望累积奖励</li>
+                    <li><strong>回报（Return）</strong>：从当前时刻开始的累积折扣奖励：$G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k}$</li>
+                </ul>
+
+                <div class="info-box">
+                    <div class="info-title"><i class="fas fa-info-circle"></i> 强化学习与监督学习的区别</div>
+                    <p><strong>监督学习</strong>：有明确的标签，目标是最小化预测误差</p>
+                    <p><strong>强化学习</strong>：没有明确标签，目标是最大化长期累积奖励</p>
+                </div>
+            </section>
+
+            <section id="section2" class="content-section">
+                <h2>28.2 核心算法：Q-Learning与策略梯度</h2>
+                
+                <p>强化学习算法主要分为两大类：基于价值的方法和基于策略的方法。Q-Learning是典型的基于价值的方法，而策略梯度则是基于策略的方法的代表。</p>
+
+                <h3>Q-Learning算法</h3>
+                <p>Q-Learning是一种无模型的强化学习算法，它通过学习一个Q值函数来找到最优策略。Q-Learning的核心思想是：在状态 s 采取动作 a 的价值等于即时奖励加上折扣后的下一个状态的最大Q值。</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">Q-Learning算法实现</span>
+                    </div>
+                    <pre><code class="language-python">import numpy as np
+import random
+from collections import defaultdict
+
+class QLearningAgent:
+    """Q-Learning智能体"""
+    
+    def __init__(self, state_size, action_size, learning_rate=0.1, 
+                 discount_factor=0.99, epsilon=0.1):
+        self.state_size = state_size
+        self.action_size = action_size
+        self.lr = learning_rate
+        self.gamma = discount_factor
+        self.epsilon = epsilon
+        
+        # 初始化Q表
+        self.q_table = np.zeros((state_size, action_size))
+    
+    def get_action(self, state):
+        """ε-贪婪策略选择动作"""
+        if random.random() < self.epsilon:
+            # 探索：随机选择动作
+            return random.randint(0, self.action_size - 1)
+        else:
+            # 利用：选择Q值最大的动作
+            return np.argmax(self.q_table[state])
+    
+    def update(self, state, action, reward, next_state, done):
+        """更新Q值"""
+        if done:
+            target = reward
+        else:
+            target = reward + self.gamma * np.max(self.q_table[next_state])
+        
+        # Q-Learning更新公式
+        self.q_table[state][action] += self.lr * (target - self.q_table[state][action])
+    
+    def train(self, env, episodes=1000):
+        """训练智能体"""
+        rewards_per_episode = []
+        
+        for episode in range(episodes):
+            state = env.reset()
+            total_reward = 0
+            done = False
+            
+            while not done:
+                action = self.get_action(state)
+                next_state, reward, done, _ = env.step(action)
+                
+                self.update(state, action, reward, next_state, done)
+                
+                state = next_state
+                total_reward += reward
+            
+            rewards_per_episode.append(total_reward)
+            
+            # 每100个episode打印一次
+            if (episode + 1) % 100 == 0:
+                avg_reward = np.mean(rewards_per_episode[-100:])
+                print(f"Episode {episode + 1}, Average Reward: {avg_reward:.2f}")
+        
+        return rewards_per_episode
+
+# 示例使用
+# env = gym.make('FrozenLake-v1')
+# agent = QLearningAgent(state_size=16, action_size=4)
+# rewards = agent.train(env, episodes=5000)
+print("Q-Learning算法示例代码")</code></pre>
+                </div>
+
+                <h3>策略梯度方法</h3>
+                <p>策略梯度方法直接优化策略函数，通过梯度上升来最大化期望回报。与Q-Learning不同，策略梯度方法可以处理连续动作空间，并且能够学习随机策略。</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">策略梯度核心思想</span>
+                    </div>
+                    <pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.distributions import Categorical
+
+class PolicyNetwork(nn.Module):
+    """策略网络：输入状态，输出动作概率分布"""
+    
+    def __init__(self, state_size, action_size, hidden_size=64):
+        super(PolicyNetwork, self).__init__()
+        self.network = nn.Sequential(
+            nn.Linear(state_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, action_size),
+            nn.Softmax(dim=-1)
+        )
+    
+    def forward(self, state):
+        return self.network(state)
+
+class PolicyGradientAgent:
+    """策略梯度智能体"""
+    
+    def __init__(self, state_size, action_size, lr=0.001):
+        self.policy = PolicyNetwork(state_size, action_size)
+        self.optimizer = optim.Adam(self.policy.parameters(), lr=lr)
+        self.gamma = 0.99
+        
+        # 存储轨迹
+        self.states = []
+        self.actions = []
+        self.rewards = []
+    
+    def get_action(self, state):
+        """根据策略网络选择动作"""
+        state_tensor = torch.FloatTensor(state).unsqueeze(0)
+        action_probs = self.policy(state_tensor)
+        
+        # 从概率分布中采样
+        dist = Categorical(action_probs)
+        action = dist.sample()
+        
+        # 记录状态和动作
+        self.states.append(state_tensor)
+        self.actions.append(action)
+        
+        return action.item()
+    
+    def store_reward(self, reward):
+        """存储奖励"""
+        self.rewards.append(reward)
+    
+    def update(self):
+        """使用策略梯度更新网络"""
+        # 计算折扣回报
+        returns = []
+        G = 0
+        for reward in reversed(self.rewards):
+            G = reward + self.gamma * G
+            returns.insert(0, G)
+        
+        returns = torch.FloatTensor(returns)
+        
+        # 标准化回报（减少方差）
+        if len(returns) > 1:
+            returns = (returns - returns.mean()) / (returns.std() + 1e-8)
+        
+        # 计算策略梯度损失
+        policy_loss = []
+        for log_prob, G in zip(
+            [torch.log(prob) for prob in self.policy(torch.cat(self.states)).gather(1, torch.stack(self.actions).unsqueeze(1)).squeeze()],
+            returns
+        ):
+            policy_loss.append(-log_prob * G)
+        
+        policy_loss = torch.stack(policy_loss).sum()
+        
+        # 更新网络
+        self.optimizer.zero_grad()
+        policy_loss.backward()
+        self.optimizer.step()
+        
+        # 清空轨迹
+        self.states = []
+        self.actions = []
+        self.rewards = []
+        
+        return policy_loss.item()
+
+print("策略梯度算法示例代码")</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> 注意事项</div>
+                    <p>策略梯度方法的方差通常很大，因此需要使用各种方差减少技术，如基线（baseline）、优势函数（advantage function）等。</p>
+                </div>
+
+                <h3>算法对比</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>特性</th>
+                            <th>Q-Learning</th>
+                            <th>策略梯度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>方法类型</strong></td>
+                            <td>基于价值</td>
+                            <td>基于策略</td>
+                        </tr>
+                        <tr>
+                            <td><strong>动作空间</strong></td>
+                            <td>离散</td>
+                            <td>离散/连续</td>
+                        </tr>
+                        <tr>
+                            <td><strong>收敛性</strong></td>
+                            <td>需要满足某些条件</td>
+                            <td>局部最优</td>
+                        </tr>
+                        <tr>
+                            <td><strong>样本效率</strong></td>
+                            <td>较低</td>
+                            <td>较高</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="section3" class="content-section">
+                <h2>28.3 深度强化学习</h2>
+                
+                <p>深度强化学习（Deep Reinforcement Learning, Deep RL）是将深度学习与强化学习相结合的研究领域。它使用深度神经网络来近似价值函数或策略函数，从而能够处理高维状态空间的问题。</p>
+
+                <div class="algorithm-comparison">
+                    <div class="algo-card">
+                        <h4><i class="fas fa-network-wired"></i> DQN</h4>
+                        <p>深度Q网络</p>
+                        <small>2013-2015</small>
+                    </div>
+                    <div class="algo-card">
+                        <h4><i class="fas fa-cogs"></i> A3C</h4>
+                        <p>异步优势Actor-Critic</p>
+                        <small>2016</small>
+                    </div>
+                    <div class="algo-card">
+                        <h4><i class="fas fa-bolt"></i> PPO</h4>
+                        <p>近端策略优化</p>
+                        <small>2017</small>
+                    </div>
+                    <div class="algo-card">
+                        <h4><i class="fas fa-database"></i> SAC</h4>
+                        <p>软演员-评论家</p>
+                        <small>2018</small>
+                    </div>
+                </div>
+
+                <h3>DQN（深度Q网络）</h3>
+                <p>DQN是深度强化学习的里程碑工作，它使用深度神经网络来近似Q值函数，并引入了经验回放（Experience Replay）和目标网络（Target Network）来稳定训练。</p>
+
+                <div class="tip-box">
+                    <div class="tip-title"><i class="fas fa-lightbulb"></i> DQN的关键创新</div>
+                    <p><strong>经验回放</strong>：存储历史经验，随机采样进行训练，打破数据相关性</p>
+                    <p><strong>目标网络</strong>：使用独立的网络计算目标值，减少训练不稳定</p>
+                </div>
+
+                <h3>Actor-Critic方法</h3>
+                <p>Actor-Critic方法结合了基于价值和基于策略的方法，Actor负责选择动作，Critic负责评估动作的价值。</p>
+
+                <div class="info-box">
+                    <div class="info-title"><i class="fas fa-info-circle"></i> Actor-Critic架构</div>
+                    <p><strong>Actor</strong>：策略网络，输入状态，输出动作分布</p>
+                    <p><strong>Critic</strong>：价值网络，输入状态（或状态-动作对），输出价值估计</p>
+                    <p><strong>优势</strong>：Actor的梯度由Critic提供，减少了方差</p>
+                </div>
+            </section>
+
+            <section id="section4" class="content-section">
+                <h2>28.4 RLHF详解</h2>
+                
+                <p>RLHF（Reinforcement Learning from Human Feedback，基于人类反馈的强化学习）是近年来大语言模型训练中的重要技术。它通过人类的偏好反馈来优化模型，使其生成的内容更符合人类的期望和价值观。</p>
+
+                <div class="reward-model-flow">
+                    <h3>RLHF训练流程</h3>
+                    <div class="flow-steps">
+                        <div class="step">
+                            <i class="fas fa-database"></i>
+                            <div>1. 收集数据</div>
+                            <small>人类标注偏好对</small>
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-brain"></i>
+                            <div>2. 训练奖励模型</div>
+                            <small>学习人类偏好</small>
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-cogs"></i>
+                            <div>3. PPO优化</div>
+                            <small>用奖励模型优化策略</small>
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-check-circle"></i>
+                            <div>4. 评估与迭代</div>
+                            <small>持续改进模型</small>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>为什么需要RLHF？</h3>
+                <p>传统的监督学习方法存在以下问题：</p>
+                <ul>
+                    <li><strong>标注不一致</strong>：不同标注者可能给出不同的标签</li>
+                    <li><strong>难以定义"好"的回答</strong>：主观性强，难以用简单标签表示</li>
+                    <li><strong>安全和对齐问题</strong>：模型可能生成有害或偏见内容</li>
+                </ul>
+
+                <p>RLHF通过以下方式解决这些问题：</p>
+                <ul>
+                    <li><strong>比较学习</strong>：让人类比较两个回答的好坏，比直接打分更容易</li>
+                    <li><strong>间接优化</strong>：通过奖励模型间接优化人类偏好</li>
+                    <li><strong>灵活调整</strong>：可以根据不同场景调整偏好方向</li>
+                </ul>
+
+                <div class="warning-box">
+                    <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> RLHF的挑战</div>
+                    <p><strong>标注成本高</strong>：需要大量人类标注数据</p>
+                    <p><strong>奖励模型偏差</strong>：如果标注数据有偏差，奖励模型也会学习到偏差</p>
+                    <p><strong>训练不稳定</strong>：PPO训练可能不稳定，需要仔细调参</p>
+                </div>
+            </section>
+
+            <section id="section5" class="content-section">
+                <h2>28.5 奖励模型训练</h2>
+                
+                <p>奖励模型（Reward Model）是RLHF的核心组件之一。它的作用是学习人类的偏好，将人类的主观判断转化为可以用于优化的数值信号。</p>
+
+                <h3>奖励模型的输入输出</h3>
+                <ul>
+                    <li><strong>输入</strong>：一个问题（prompt）和一个回答（response）</li>
+                    <li><strong>输出</strong>：一个标量分数，表示这个回答的质量</li>
+                </ul>
+
+                <h3>训练数据格式</h3>
+                <p>奖励模型的训练数据通常由偏好对（preference pairs）组成：</p>
+
+                <div class="tip-box">
+                    <div class="tip-title"><i class="fas fa-lightbulb"></i> 偏好对格式</div>
+                    <p>每个样本包含：问题 q、回答 r₁、回答 r₂、偏好标签 y</p>
+                    <p>其中 y = 1 表示 r₁ 优于 r₂，y = 0 表示 r₂ 优于 r₁</p>
+                </div>
+
+                <h3>训练目标</h3>
+                <p>奖励模型通常使用 Bradley-Terry 模型进行训练，目标是最大化正确偏好对的似然概率：</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">奖励模型训练示例</span>
+                    </div>
+                    <pre><code class="language-python">import torch
+import torch.nn as nn
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+class RewardModel(nn.Module):
+    """奖励模型：基于预训练语言模型"""
+    
+    def __init__(self, model_name="gpt2", hidden_size=768):
+        super(RewardModel, self).__init__()
+        self.reward_model = AutoModelForSequenceClassification.from_pretrained(
+            model_name, num_labels=1
+        )
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+    
+    def forward(self, input_ids, attention_mask):
+        """前向传播，返回奖励分数"""
+        outputs = self.reward_model(input_ids, attention_mask=attention_mask)
+        return outputs.logits.squeeze(-1)
+
+def reward_loss(reward_chosen, reward_rejected):
+    """Bradley-Terry偏好损失"""
+    # 希望 chosen 的奖励高于 rejected
+    loss = -torch.log(torch.sigmoid(reward_chosen - reward_rejected))
+    return loss.mean()
+
+def train_reward_model(model, train_dataloader, optimizer, epochs=3):
+    """训练奖励模型"""
+    model.train()
+    
+    for epoch in range(epochs):
+        total_loss = 0
+        
+        for batch in train_dataloader:
+            # 编码 chosen 和 rejected 回答
+            chosen_input = model.tokenizer(
+                batch['chosen'], 
+                padding=True, 
+                truncation=True, 
+                return_tensors='pt'
+            )
+            rejected_input = model.tokenizer(
+                batch['rejected'], 
+                padding=True, 
+                truncation=True, 
+                return_tensors='pt'
+            )
+            
+            # 计算奖励
+            reward_chosen = model(**chosen_input)
+            reward_rejected = model(**rejected_input)
+            
+            # 计算损失
+            loss = reward_loss(reward_chosen, reward_rejected)
+            
+            # 更新模型
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            
+            total_loss += loss.item()
+        
+        avg_loss = total_loss / len(train_dataloader)
+        print(f"Epoch {epoch + 1}, Average Loss: {avg_loss:.4f}")
+
+print("奖励模型训练示例代码")</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title"><i class="fas fa-info-circle"></i> 奖励模型的评估</div>
+                    <p><strong>准确率</strong>：在测试集上预测偏好的准确率</p>
+                    <p><strong>奖励分数分布</strong>：检查奖励分数是否符合预期</p>
+                    <p><strong>与人类评估的相关性</strong>：奖励模型的分数是否与人类评分相关</p>
+                </div>
+            </section>
+
+            <section id="section6" class="content-section">
+                <h2>28.6 PPO在大语言模型中的应用</h2>
+                
+                <p>PPO（Proximal Policy Optimization，近端策略优化）是目前RLHF中最常用的强化学习算法。它通过限制策略更新的幅度来保证训练的稳定性。</p>
+
+                <h3>PPO的核心思想</h3>
+                <p>PPO的核心是 clipped surrogate objective，它限制了策略更新的幅度，防止更新过大导致训练不稳定：</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">PPO算法实现</span>
+                    </div>
+                    <pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.distributions import Categorical
+import numpy as np
+
+class PPOAgent:
+    """PPO智能体：用于大语言模型的RLHF训练"""
+    
+    def __init__(self, policy_model, ref_model, reward_model, 
+                 lr=1e-5, clip_range=0.2, gamma=0.99):
+        self.policy_model = policy_model  # 被优化的策略模型
+        self.ref_model = ref_model        # 参考模型（SFT模型）
+        self.reward_model = reward_model  # 奖励模型
+        
+        self.optimizer = optim.Adam(self.policy_model.parameters(), lr=lr)
+        self.clip_range = clip_range
+        self.gamma = gamma
+        
+        self.kl_coef = 0.1  # KL散度惩罚系数
+    
+    def compute_kl_penalty(self, policy_logits, ref_logits):
+        """计算KL散度惩罚"""
+        policy_dist = torch.distributions.Categorical(logits=policy_logits)
+        ref_dist = torch.distributions.Categorical(logits=ref_logits)
+        
+        # KL(policy || ref)
+        kl = torch.distributions.kl_divergence(policy_dist, ref_dist)
+        return kl
+    
+    def ppo_loss(self, old_log_probs, new_log_probs, advantages, clip_range):
+        """PPO损失函数"""
+        # 比率：新策略 / 旧策略
+        ratio = torch.exp(new_log_probs - old_log_probs)
+        
+        # 裁剪的目标函数
+        clipped_ratio = torch.clamp(ratio, 1 - clip_range, 1 + clip_range)
+        
+        # 取两者中的最小值
+        surrogate1 = ratio * advantages
+        surrogate2 = clipped_ratio * advantages
+        
+        return -torch.min(surrogate1, surrogate2).mean()
+    
+    def compute_advantages(self, rewards, values, gamma=0.99, lam=0.95):
+        """计算优势函数（GAE）"""
+        advantages = []
+        gae = 0
+        
+        for reward, value in zip(reversed(rewards), reversed(values)):
+            next_value = values[values.index(value) + 1] if values.index(value) < len(values) - 1 else 0
+            delta = reward + gamma * next_value - value
+            gae = delta + gamma * lam * gae
+            advantages.insert(0, gae)
+        
+        advantages = torch.FloatTensor(advantages)
+        
+        # 标准化
+        if len(advantages) > 1:
+            advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        
+        return advantages
+    
+    def update(self, rollout):
+        """PPO更新"""
+        states = rollout['states']
+        actions = rollout['actions']
+        old_log_probs = rollout['log_probs']
+        rewards = rollout['rewards']
+        
+        # 计算当前策略的log概率
+        new_log_probs = []
+        policy_logits_list = []
+        ref_logits_list = []
+        
+        for state in states:
+            # 当前策略
+            state_tensor = torch.FloatTensor(state).unsqueeze(0)
+            policy_output = self.policy_model(state_tensor)
+            policy_logits = policy_output['logits']
+            policy_dist = torch.distributions.Categorical(logits=policy_logits)
+            new_log_prob = policy_dist.log_prob(torch.LongTensor([actions[states.index(state)]]))
+            new_log_probs.append(new_log_prob)
+            policy_logits_list.append(policy_logits)
+            
+            # 参考模型
+            with torch.no_grad():
+                ref_output = self.ref_model(state_tensor)
+                ref_logits_list.append(ref_output['logits'])
+        
+        new_log_probs = torch.stack(new_log_probs)
+        old_log_probs = torch.FloatTensor(old_log_probs)
+        
+        # 计算优势函数
+        values = torch.zeros(len(rewards))  # 简化：假设value=0
+        advantages = self.compute_advantages(rewards, values)
+        
+        # PPO损失
+        ppo_loss = self.ppo_loss(old_log_probs, new_log_probs, advantages, self.clip_range)
+        
+        # KL惩罚
+        kl_penalties = []
+        for policy_logits, ref_logits in zip(policy_logits_list, ref_logits_list):
+            kl_penalty = self.compute_kl_penalty(policy_logits, ref_logits)
+            kl_penalties.append(kl_penalty)
+        kl_penalty = torch.stack(kl_penalties).mean()
+        
+        # 总损失
+        total_loss = ppo_loss + self.kl_coef * kl_penalty
+        
+        # 更新模型
+        self.optimizer.zero_grad()
+        total_loss.backward()
+        self.optimizer.step()
+        
+        return ppo_loss.item(), kl_penalty.item()
+
+print("PPO算法实现示例")</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> PPO训练技巧</div>
+                    <p><strong>学习率调度</strong>：使用较小的学习率（如1e-5到5e-5）</p>
+                    <p><strong>KL惩罚</strong>：防止策略偏离参考模型太远</p>
+                    <p><strong>mini-batch更新</strong>：使用mini-batch进行更新以提高稳定性</p>
+                </div>
+            </section>
+
+            <section id="section7" class="content-section">
+                <h2>28.7 DPO与RLHF的对比</h2>
+                
+                <p>DPO（Direct Preference Optimization，直接偏好优化）是近年来提出的一种替代RLHF的方法。它直接优化策略模型，不需要单独训练奖励模型。</p>
+
+                <h3>DPO的核心思想</h3>
+                <p>DPO的核心思想是：将奖励模型的优化目标直接转化为策略优化目标，从而跳过奖励模型的训练步骤。</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">DPO损失函数</span>
+                    </div>
+                    <pre><code class="language-python">import torch
+import torch.nn.functional as F
+
+def dpo_loss(policy_chosen_logps, policy_rejected_logps,
+             reference_chosen_logps, reference_rejected_logps,
+             beta=0.1):
+    """
+    DPO损失函数
+    
+    Args:
+        policy_chosen_logps: 策略模型对chosen回答的log概率
+        policy_rejected_logps: 策略模型对rejected回答的log概率
+        reference_chosen_logps: 参考模型对chosen回答的log概率
+        reference_rejected_logps: 参考模型对rejected回答的log概率
+        beta: 温度参数，控制与参考模型的偏离程度
+    
+    Returns:
+        DPO损失
+    """
+    # 计算log比率
+    chosen_log_ratio = policy_chosen_logps - reference_chosen_logps
+    rejected_log_ratio = policy_rejected_logps - reference_rejected_logps
+    
+    # DPO损失
+    logits = beta * (chosen_log_ratio - rejected_log_ratio)
+    loss = -F.logsigmoid(logits).mean()
+    
+    return loss
+
+# 计算log概率的辅助函数
+def compute_log_probs(model, input_ids, attention_mask):
+    """计算模型对输入的log概率"""
+    outputs = model(input_ids, attention_mask=attention_mask)
+    logits = outputs.logits
+    
+    # 使用log_softmax计算log概率
+    log_probs = F.log_softmax(logits, dim=-1)
+    
+    # 取token级别的log概率并求和
+    token_log_probs = torch.gather(
+        log_probs[:, :-1], 
+        dim=2, 
+        index=input_ids[:, 1:].unsqueeze(2)
+    ).squeeze(2)
+    
+    return token_log_probs.sum(dim=-1)
+
+print("DPO损失函数示例")</code></pre>
+                </div>
+
+                <h3>DPO vs RLHF对比</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>特性</th>
+                            <th>RLHF (PPO)</th>
+                            <th>DPO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>训练流程</strong></td>
+                            <td>奖励模型 → PPO优化</td>
+                            <td>直接优化策略</td>
+                        </tr>
+                        <tr>
+                            <td><strong>计算复杂度</strong></td>
+                            <td>高（需要多个模型）</td>
+                            <td>低（只需策略和参考模型）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>稳定性</strong></td>
+                            <td>需要仔细调参</td>
+                            <td>更稳定</td>
+                        </tr>
+                        <tr>
+                            <td><strong>效果</strong></td>
+                            <td>通常更好</td>
+                            <td>接近RLHF</td>
+                        </tr>
+                        <tr>
+                            <td><strong>内存需求</strong></td>
+                            <td>高</td>
+                            <td>低</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    <div class="tip-title"><i class="fas fa-lightbulb"></i> 如何选择？</div>
+                    <p><strong>选择RLHF</strong>：当计算资源充足，追求最佳效果时</p>
+                    <p><strong>选择DPO</strong>：当计算资源有限，需要快速迭代时</p>
+                </div>
+            </section>
+
+            <section id="section8" class="content-section">
+                <h2>28.8 动手实践：TRL库</h2>
+                
+                <p>TRL（Transformer Reinforcement Learning）是Hugging Face提供的一个库，它简化了RLHF训练流程。TRL提供了SFTTrainer、RewardTrainer、PPOTrainer等组件，使得在大语言模型上进行RLHF训练变得更加容易。</p>
+
+                <h3>安装与配置</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Bash</span>
+                        <span class="code-title">安装TRL库</span>
+                    </div>
+                    <pre><code class="language-bash"># 安装TRL及其依赖
+pip install trl
+pip install transformers
+pip install datasets
+pip install peft  # 用于LoRA</code></pre>
+                </div>
+
+                <h3>SFT（监督微调）阶段</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">SFT训练示例</span>
+                    </div>
+                    <pre><code class="language-python">from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+from trl import SFTTrainer
+from datasets import load_dataset
+
+# 加载模型和分词器
+model_name = "gpt2"
+model = AutoModelForCausalLM.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer.pad_token = tokenizer.eos_token
+
+# 加载数据集
+dataset = load_dataset("imdb", split="train[:1000]")
+
+def preprocess_function(examples):
+    """预处理数据集"""
+    return tokenizer(
+        examples["text"],
+        truncation=True,
+        padding="max_length",
+        max_length=512
+    )
+
+tokenized_dataset = dataset.map(preprocess_function, batched=True)
+
+# 训练参数
+training_args = TrainingArguments(
+    output_dir="./sft_model",
+    num_train_epochs=3,
+    per_device_train_batch_size=4,
+    learning_rate=2e-5,
+    warmup_steps=100,
+    logging_steps=10,
+    save_strategy="epoch",
+)
+
+# SFT训练器
+trainer = SFTTrainer(
+    model=model,
+    args=training_args,
+    train_dataset=tokenized_dataset,
+    tokenizer=tokenizer,
+    max_seq_length=512,
+)
+
+# 开始训练
+trainer.train()
+print("SFT训练完成！")</code></pre>
+                </div>
+
+                <h3>RLHF训练流程</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">RLHF完整训练流程</span>
+                    </div>
+                    <pre><code class="language-python">from trl import PPOTrainer, PPOConfig, AutoModelForCausalLMWithValueHead
+from transformers import AutoTokenizer
+import torch
+
+# 1. 加载SFT模型（作为初始策略）
+model_name = "gpt2"
+model = AutoModelForCausalLMWithValueHead.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer.pad_token = tokenizer.eos_token
+
+# 2. 加载参考模型（SFT模型的副本）
+ref_model = AutoModelForCausalLMWithValueHead.from_pretrained(model_name)
+
+# 3. PPO配置
+ppo_config = PPOConfig(
+    learning_rate=1e-5,
+    batch_size=16,
+    mini_batch_size=4,
+    ppo_epochs=4,
+    kl_penalty="kl",  # 或 "abs", "full"
+    init_kl_coef=0.2,
+    target_kl=6.0,
+)
+
+# 4. 创建PPO训练器
+ppo_trainer = PPOTrainer(
+    config=ppo_config,
+    model=model,
+    ref_model=ref_model,
+    tokenizer=tokenizer,
+)
+
+# 5. 加载奖励模型（示例：使用简单的启发式奖励）
+def reward_function(response):
+    """简单的奖励函数（实际应使用训练好的奖励模型）"""
+    # 示例：奖励包含特定关键词的回答
+    good_keywords = ["helpful", "accurate", "clear"]
+    reward = sum(1 for word in good_keywords if word in response.lower())
+    return reward
+
+# 6. 准备训练数据
+prompts = [
+    "What is machine learning?",
+    "Explain neural networks",
+    "What is reinforcement learning?",
+]
+
+# 7. RLHF训练循环
+for epoch in range(3):
+    print(f"\n=== Epoch {epoch + 1} ===")
+    
+    for prompt in prompts:
+        # 编码prompt
+        query_tensors = tokenizer.encode(prompt, return_tensors="pt")[0]
+        
+        # 生成回答
+        response_tensors = ppo_trainer.generate(
+            query_tensors.unsqueeze(0),
+            max_new_tokens=128,
+            do_sample=True,
+            top_k=50,
+            top_p=0.95,
+        )
+        
+        # 解码回答
+        response = tokenizer.decode(response_tensors[0], skip_special_tokens=True)
+        
+        # 计算奖励
+        reward = reward_function(response)
+        reward_tensors = [torch.tensor([reward])]
+        
+        # PPO更新
+        stats = ppo_trainer.step(
+            [query_tensors],
+            [response_tensors[0]],
+            reward_tensors
+        )
+        
+        print(f"Prompt: {prompt[:30]}...")
+        print(f"Reward: {reward:.2f}")
+        print(f"KL: {stats['ppo/kl']:.2f}")
+        print(f"Entropy: {stats['ppo/entropy']:.2f}")
+
+print("\nRLHF训练完成！")</code></pre>
+                </div>
+
+                <h3>评估与监控</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <span class="code-title">模型评估示例</span>
+                    </div>
+                    <pre><code class="language-python>import numpy as np
+from rouge_score import rouge_scorer
+from bleu_score import corpus_bleu
+
+def evaluate_model(model, tokenizer, test_data, reward_model=None):
+    """评估模型性能"""
+    results = {
+        'rewards': [],
+        'kl_divergences': [],
+        'response_lengths': [],
+        'rouge_scores': [],
+    }
+    
+    for sample in test_data:
+        prompt = sample['prompt']
+        reference = sample['reference']
+        
+        # 生成回答
+        inputs = tokenizer(prompt, return_tensors="pt")
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs,
+                max_new_tokens=128,
+                do_sample=True,
+                top_k=50,
+                top_p=0.95,
+            )
+        
+        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        # 计算奖励
+        if reward_model:
+            reward_inputs = tokenizer(
+                f"{prompt}\n{response}",
+                return_tensors="pt",
+                padding=True,
+                truncation=True
+            )
+            with torch.no_grad():
+                reward = reward_model(**reward_inputs)
+            results['rewards'].append(reward.item())
+        
+        # 计算生成长度
+        results['response_lengths'].append(len(outputs[0]))
+        
+        # 计算ROUGE分数
+        scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+        scores = scorer.score(response, reference)
+        results['rouge_scores'].append({
+            'rouge1': scores['rouge1'].fmeasure,
+            'rouge2': scores['rouge2'].fmeasure,
+            'rougeL': scores['rougeL'].fmeasure,
+        })
+    
+    # 汇总结果
+    summary = {
+        'avg_reward': np.mean(results['rewards']) if results['rewards'] else 0,
+        'avg_response_length': np.mean(results['response_lengths']),
+        'avg_rouge1': np.mean([s['rouge1'] for s in results['rouge_scores']]),
+        'avg_rouge2': np.mean([s['rouge2'] for s in results['rouge_scores']]),
+        'avg_rougeL': np.mean([s['rougeL'] for s in results['rouge_scores']]),
+    }
+    
+    print("=== 评估结果 ===")
+    print(f"平均奖励: {summary['avg_reward']:.4f}")
+    print(f"平均生成长度: {summary['avg_response_length']:.2f}")
+    print(f"ROUGE-1: {summary['avg_rouge1']:.4f}")
+    print(f"ROUGE-2: {summary['avg_rouge2']:.4f}")
+    print(f"ROUGE-L: {summary['avg_rougeL']:.4f}")
+    
+    return summary
+
+print("模型评估示例代码")</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title"><i class="fas fa-info-circle"></i> TRL库的优势</div>
+                    <p><strong>集成度高</strong>：SFT、奖励模型、PPO训练一站式解决</p>
+                    <p><strong>易于使用</strong>：提供简洁的API，快速开始训练</p>
+                    <p><strong>灵活可扩展</strong>：支持自定义训练流程和奖励函数</p>
+                    <p><strong>生态丰富</strong>：与Hugging Face其他库无缝集成</p>
+                </div>
+            </section>
+
+            <section class="exercise-section">
+                <h2><i class="fas fa-tasks"></i> 练习题</h2>
+                
+                <div class="exercise-item">
+                    <h3>练习1：Q-Learning实现</h3>
+                    <p>实现一个Q-Learning智能体，在FrozenLake环境中训练，并绘制训练曲线。</p>
+                    <div class="exercise-hint">
+                        <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
+                        <div class="hint-content">
+                            <p>提示：使用gym库创建环境，实现ε-贪婪策略，记录每个episode的奖励。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <h3>练习2：奖励模型训练</h3>
+                    <p>使用给定的偏好对数据，训练一个奖励模型，并评估其准确率。</p>
+                    <div class="exercise-hint">
+                        <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
+                        <div class="hint-content">
+                            <p>提示：使用Bradley-Terry模型，计算chosen和rejected回答的奖励差异。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <h3>练习3：DPO vs RLHF对比实验</h3>
+                    <p>在相同的数据集上分别使用DPO和RLHF训练模型，比较两者的效果和训练效率。</p>
+                    <div class="exercise-hint">
+                        <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
+                        <div class="hint-content">
+                            <p>提示：使用TRL库，记录训练时间、GPU内存使用、最终效果等指标进行对比。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="summary-section">
+                <h2><i class="fas fa-bookmark"></i> 本章小结</h2>
+                <ul>
+                    <li>强化学习通过智能体与环境的交互来学习最优策略</li>
+                    <li>Q-Learning和策略梯度是两种核心的强化学习算法</li>
+                    <li>深度强化学习使用神经网络来近似价值函数或策略</li>
+                    <li>RLHF通过人类反馈来优化大语言模型</li>
+                    <li>奖励模型学习人类偏好，将主观判断转化为数值信号</li>
+                    <li>PPO是RLHF中最常用的优化算法</li>
+                    <li>DPO提供了一种更简单、更稳定的替代方案</li>
+                    <li>TRL库简化了RLHF训练流程，提供了完整的工具链</li>
+                </ul>
+            </section>
+
+            <div class="chapter-nav">
+                <a href="ch27.html" class="prev-chapter">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>上一章：大语言模型微调</span>
+                </a>
+                <a href="ch29.html" class="next-chapter">
+                    <span>下一章：大语言模型评估</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>AI学习笔记 - 深入浅出人工智能</p>
+            <p>&copy; 2024 jacksoncode. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button class="top-of-page" id="topOfPage" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- 侧边栏切换按钮 -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="../scripts/notes.js"></script>
+    <script>
+        // 初始化代码高亮
+        document.addEventListener('DOMContentLoaded', function() {
+            // KaTeX渲染
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+            
+            // Prism.js代码高亮
+            Prism.highlightAll();
+            
+            // 提示框切换
+            document.querySelectorAll('.hint-toggle').forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    var content = this.nextElementSibling;
+                    content.classList.toggle('show');
+                    var icon = this.querySelector('i');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

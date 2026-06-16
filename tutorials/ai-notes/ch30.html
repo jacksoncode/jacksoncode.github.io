@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="边缘AI与端侧部署——模型压缩、ONNX Runtime、TensorRT、移动端与嵌入式部署实战">
+    <meta name="keywords" content="边缘AI, 端侧部署, 模型量化, ONNX Runtime, TensorRT, TFLite, Core ML, 嵌入式AI">
+    <meta name="author" content="AI Learner">
+    <title>第三十章：边缘AI与端侧部署 - AI学习笔记</title>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 轻量级数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 - tomorrow-night 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+
+    <!-- 内联CSS样式 -->
+    <style>
+        /* ========== 全局基础样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background-color: #f7fafc;
+            font-size: 16px;
+        }
+
+        a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3182ce;
+        }
+
+        /* ========== 导航栏样式 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2b6cb0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            color: #4299e1;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section 样式 ========== */
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
+            color: #fff;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== 主内容区域布局 ========== */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            max-width: 900px;
+        }
+
+        /* ========== 章节标题样式 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #4299e1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #4299e1;
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2b6cb0;
+            margin: 2rem 0 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* ========== 学习目标框 ========== */
+        .learning-objectives {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #90cdf4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .learning-objectives::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #4299e1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .learning-objectives h4 {
+            color: #2b6cb0;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-objectives li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .learning-objectives li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 前置要求框 ========== */
+        .prerequisite-box {
+            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+            border: 2px solid #ecc94b;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .prerequisite-box::before {
+            content: '\f0e7';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #ecc94b;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .prerequisite-box h4 {
+            color: #975a16;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prerequisite-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prerequisite-box li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prerequisite-box li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #d69e2e;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 练习题框 ========== */
+        .exercise-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #b794f4;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .exercise-box::before {
+            content: '\f4d6';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #805ad5;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .exercise-box h4 {
+            color: #6b46c1;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #805ad5;
+        }
+
+        .exercise-item .exercise-number {
+            font-weight: 700;
+            color: #6b46c1;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== 章节小结 ========== */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #68d391;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .chapter-summary::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #38a169;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .chapter-summary h4 {
+            color: #276749;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-summary li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .chapter-summary li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #38a169;
+            font-size: 0.4rem;
+            top: 0.85rem;
+        }
+
+        /* ========== 右侧粘性目录导航 ========== */
+        .toc-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .toc-sidebar h3 {
+            font-size: 1rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-sidebar h3 i {
+            color: #4299e1;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-sidebar a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            color: #4a5568;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+        }
+
+        .toc-sidebar a.active {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border-left-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .toc-sidebar .toc-sub {
+            padding-left: 1rem;
+        }
+
+        .toc-sidebar .toc-sub a {
+            font-size: 0.82rem;
+            color: #718096;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .toc-sidebar .toc-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0.75rem 0;
+        }
+
+        /* ========== 提示/警告/成功/信息框 ========== */
+        .tip-box, .warning-box, .success-box, .info-box {
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .tip-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .tip-box::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+        }
+
+        .warning-box::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #d69e2e;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+        }
+
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #38a169;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: #ebf4ff;
+            border: 1px solid #90cdf4;
+        }
+
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            color: #3182ce;
+            font-size: 1.1rem;
+        }
+
+        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tip-box h5 { color: #2b6cb0; }
+        .warning-box h5 { color: #975a16; }
+        .success-box h5 { color: #276749; }
+        .info-box h5 { color: #2a4365; }
+
+        /* ========== 概念区域/概念框 ========== */
+        .concept-section {
+            margin: 2rem 0;
+        }
+
+        .concept-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .concept-box:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-box h4 {
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-box .ai-usage {
+            background: #fefcbf;
+            border-left: 3px solid #ecc94b;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #744210;
+        }
+
+        .concept-box .ai-usage strong {
+            color: #975a16;
+        }
+
+        /* ========== 章节导航 ========== */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .chapter-nav a {
+            color: #4299e1;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-nav a:hover {
+            color: #2b6cb0;
+        }
+
+        .chapter-nav .toc-link {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* ========== 对比表格 ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+        }
+
+        .comparison-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #ebf8ff;
+        }
+
+        /* ========== 技术栈卡片网格 ========== */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .case-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .case-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-card .case-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-card .case-title {
+            font-weight: 700;
+            color: #1a365d;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-card .case-desc {
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .case-card .case-highlight {
+            background: #f0fff4;
+            border-left: 3px solid #38a169;
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            color: #276749;
+        }
+
+        /* ========== 响应式媒体查询 ========== */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.6rem 0.75rem;
+            }
+
+            .exercise-box,
+            .learning-objectives,
+            .prerequisite-box,
+            .chapter-summary {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar">
+        <a href="../../index.html" class="navbar-brand">
+            <i class="fas fa-brain"></i>
+            AI学习笔记
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
+            <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
+            <li><a href="ch17.html"><i class="fas fa-book-open"></i> 知识库</a></li>
+            <li><a href="ch18.html"><i class="fas fa-layer-group"></i> 记忆</a></li>
+            <li><a href="ch19.html"><i class="fas fa-comment-dots"></i> 提示</a></li>
+            <li><a href="ch20.html"><i class="fas fa-database"></i> 数据</a></li>
+            <li><a href="ch21.html"><i class="fas fa-exclamation-circle"></i> 局限</a></li>
+            <li><a href="ch22.html"><i class="fas fa-toolbox"></i> 平台</a></li>
+            <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
+            <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
+        </ul>
+        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ==================== Hero Section ==================== -->
+    <section class="hero-section">
+        <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
+        <p>第三十章：边缘AI与端侧部署</p>
+        <div class="hero-badges">
+            <span class="hero-badge"><i class="fas fa-mobile-alt"></i> 端侧推理</span>
+            <span class="hero-badge"><i class="fas fa-compress-alt"></i> 模型压缩</span>
+            <span class="hero-badge"><i class="fas fa-bolt"></i> 高性能部署</span>
+        </div>
+    </section>
+
+    <!-- ==================== 主内容区域 ==================== -->
+    <div class="content-wrapper">
+
+        <!-- ========== 主内容 ========== -->
+        <main class="main-content">
+
+<!-- 第三十章：边缘AI与端侧部署 -->
+<!-- ============================================================ -->
+
+<h2 class="section-title"><i class="fas fa-mobile-alt"></i> 第三十章：边缘AI与端侧部署</h2>
+
+<div class="learning-objectives">
+  <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+  <ul>
+    <li>理解边缘AI的概念与端侧部署的核心价值</li>
+    <li>掌握模型量化、剪枝、蒸馏三大压缩技术</li>
+    <li>学会使用ONNX Runtime进行跨平台推理</li>
+    <li>了解TensorRT对NVIDIA GPU的加速优化</li>
+    <li>掌握TFLite和Core ML移动端部署流程</li>
+    <li>了解嵌入式AI与Web端推理的最新进展</li>
+  </ul>
+</div>
+
+<div class="prerequisite-box">
+  <h4><i class="fas fa-book"></i> 前置要求</h4>
+  <ul>
+    <li>熟悉PyTorch/TensorFlow基本模型训练流程</li>
+    <li>了解神经网络基本结构（CNN、Transformer等）</li>
+    <li>有Python编程基础</li>
+  </ul>
+</div>
+
+<!-- 一、什么是边缘AI -->
+<div class="concept-section" id="sec1">
+  <h2 class="section-subtitle"><i class="fas fa-network-wired"></i> 一、什么是边缘AI——为什么要在端侧部署</h2>
+
+  <p>传统的AI部署模式是将模型运行在云端服务器上，用户通过网络请求获取推理结果。但随着物联网和移动设备的普及，这种模式面临诸多挑战：<strong>网络延迟</strong>（远程服务器往返可能需要几百毫秒）、<strong>隐私风险</strong>（敏感数据上传到云端）、<strong>带宽成本</strong>（大量数据传输带来高额费用）、<strong>离线可用性</strong>（无网络环境下无法工作）。边缘AI（Edge AI）正是为解决这些问题而生——它将模型直接部署在用户设备上进行推理，让AI能力触手可及。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-lightbulb"></i> 边缘AI vs 云AI：核心对比</h4>
+    <p>边缘AI的核心优势在于<strong>低延迟</strong>（本地推理无需网络往返，响应时间从数百毫秒降到个位数毫秒）、<strong>数据隐私</strong>（数据不出设备，天然保护用户隐私）、<strong>离线可用</strong>（无需网络连接即可工作）、<strong>降低带宽成本</strong>（减少数据传输量）。但边缘AI也面临挑战：设备算力有限、内存受限、功耗敏感，因此需要对模型进行压缩和优化。</p>
+    <div class="ai-usage"><strong>实际案例：</strong>iPhone的Face ID就是典型的边缘AI——面部识别模型完全运行在手机的Neural Engine芯片上，人脸数据从不离开你的手机。</div>
+  </div>
+
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-icon" style="background: #ebf8ff; color: #4299e1;">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <div class="case-title">智能手机</div>
+      <div class="case-desc">语音助手、人脸识别、计算摄影、实时翻译、输入法联想预测。</div>
+      <div class="case-highlight">全球数十亿部手机已具备AI推理能力</div>
+    </div>
+    <div class="case-card">
+      <div class="case-icon" style="background: #f0fff4; color: #38a169;">
+        <i class="fas fa-car"></i>
+      </div>
+      <div class="case-title">自动驾驶/辅助驾驶</div>
+      <div class="case-desc">车载AI芯片实时处理摄像头、雷达、激光雷达数据，做出驾驶决策。</div>
+      <div class="case-highlight">延迟要求：毫秒级响应，不能依赖云端</div>
+    </div>
+    <div class="case-card">
+      <div class="case-icon" style="background: #faf5ff; color: #805ad5;">
+        <i class="fas fa-industry"></i>
+      </div>
+      <div class="case-title">工业物联网</div>
+      <div class="case-desc">设备预测性维护、质量检测、异常监控，部署在工厂本地网关或MCU上。</div>
+      <div class="case-highlight">要求：低功耗、实时响应、7×24小时运行</div>
+    </div>
+    <div class="case-card">
+      <div class="case-icon" style="background: #fffff0; color: #d69e2e;">
+        <i class="fas fa-heartbeat"></i>
+      </div>
+      <div class="case-title">医疗穿戴设备</div>
+      <div class="case-desc">心率异常检测、血氧监测、睡眠分析等，需要隐私保护和实时性。</div>
+      <div class="case-highlight">数据绝对不能上传云端——涉及患者隐私</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h5>边缘AI市场趋势</h5>
+    <p>据Gartner预测，到2025年将有75%的企业数据在传统数据中心或云端之外进行处理。边缘AI市场规模预计在2028年达到千亿美元级别，涵盖手机、汽车、IoT、安防等几乎所有行业。</p>
+  </div>
+</div>
+
+<!-- 二、模型压缩技术 -->
+<div class="concept-section" id="sec2">
+  <h2 class="section-subtitle"><i class="fas fa-compress-arrows-alt"></i> 二、模型压缩技术</h2>
+
+  <p>要在资源受限的设备上运行AI模型，首先需要将模型"瘦身"。模型压缩的核心目标是：<strong>在尽量保持模型精度的前提下，减少模型的存储占用和计算量</strong>。三大主流压缩技术分别是量化、剪枝和知识蒸馏。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-balance-scale"></i> 1. 量化（Quantization）</h4>
+    <p>量化是将模型中的浮点数权重（通常为FP32/FP16）转换为低精度整数表示（INT8或INT4）。例如，一个100MB的FP32模型，量化为INT8后大小约为25MB，推理速度可提升2-4倍。量化分为<strong>训练后量化（PTQ）</strong>——在训练完成后直接量化，简单快速；<strong>量化感知训练（QAT）</strong>——在训练过程中模拟量化效果，精度损失更小。</p>
+    <div class="ai-usage"><strong>核心公式：</strong>$\text{quantized\_value} = \text{round}(\frac{\text{float\_value}}{\text{scale}}) + \text{zero\_point}$，其中scale和zero\_point是量化参数。</div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-cut"></i> 2. 剪枝（Pruning）</h4>
+    <p>剪枝是移除模型中不重要的连接、神经元或整个层。就像修剪树枝一样，剪掉"不活跃"的部分可以减小模型体积并加速推理。常见的剪枝方式包括<strong>非结构化剪枝</strong>（移除单个权重，需要特殊硬件支持）和<strong>结构化剪枝</strong>（移除整个通道或层，对硬件更友好，是边缘部署的首选）。</p>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-graduation-cap"></i> 3. 知识蒸馏（Knowledge Distillation）</h4>
+    <p>知识蒸馏是用一个大的"教师模型"（Teacher）来训练一个小的"学生模型"（Student）。学生模型学习教师模型的输出分布（soft labels），而非仅学习硬标签（hard labels）。这样，一个只有教师模型十分之一参数量的学生模型，可以达到接近教师模型的精度。</p>
+    <div class="ai-usage"><strong>经典案例：</strong>DistilBERT是BERT的蒸馏版本，参数量减少40%，推理速度提升60%，而精度仅下降约3%。</div>
+  </div>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>压缩技术</th>
+        <th>压缩比</th>
+        <th>精度损失</th>
+        <th>实现难度</th>
+        <th>适用场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>INT8量化</strong></td>
+        <td>4×</td>
+        <td>1-3%</td>
+        <td>低</td>
+        <td>通用场景，首选方案</td>
+      </tr>
+      <tr>
+        <td><strong>INT4量化</strong></td>
+        <td>8×</td>
+        <td>3-8%</td>
+        <td>中</td>
+        <td>极端资源受限场景</td>
+      </tr>
+      <tr>
+        <td><strong>结构化剪枝</strong></td>
+        <td>2-5×</td>
+        <td>1-5%</td>
+        <td>中</td>
+        <td>需要硬件友好压缩</td>
+      </tr>
+      <tr>
+        <td><strong>知识蒸馏</strong></td>
+        <td>5-10×</td>
+        <td>2-5%</td>
+        <td>高</td>
+        <td>训练新小模型</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <h5>实战建议</h5>
+    <p>在实际部署中，<strong>量化是最常用且性价比最高的压缩方式</strong>。建议先尝试INT8量化，如果精度损失不可接受，再考虑QAT或结合剪枝。INT4量化虽然压缩比更高，但对模型精度影响较大，通常用于超大模型（如LLM）的端侧部署。</p>
+  </div>
+
+  <h3 class="section-subtitle" style="margin-top: 2.5rem;"><i class="fas fa-code"></i> 代码示例：模型量化INT8</h3>
+
+  <pre><code class="language-python">import torch
+import torch.quantization as quant
+import torchvision.models as models
+
+# 加载预训练的MobileNetV2
+model = models.mobilenet_v2(pretrained=True)
+model.eval()
+
+# 方法一：动态量化（适用于线性层为主的模型）
+quantized_model = torch.quantization.quantize_dynamic(
+    model,
+    {torch.nn.Linear},  # 对Linear层进行量化
+    dtype=torch.qint8
+)
+
+# 查看量化前后的模型大小对比
+import os
+torch.save(model.state_dict(), '/tmp/full_model.pth')
+torch.save(quantized_model.state_dict(), '/tmp/quant_model.pth')
+print(f"原始模型: {os.path.getsize('/tmp/full_model.pth') / 1e6:.2f} MB")
+print(f"量化模型: {os.path.getsize('/tmp/quant_model.pth') / 1e6:.2f} MB")
+
+# 方法二：静态量化（精度更高，需要校准数据）
+model_fp32 = models.mobilenet_v2(prepared=True)
+model_fp32.eval()
+
+# 配置量化方案
+model_fp32.qconfig = quant.get_default_qconfig('fbgemm')
+
+# 准备量化
+model_prepared = quant.prepare(model_fp32)
+
+# 使用校准数据集（这里用随机数据演示）
+calibration_data = [torch.randn(1, 3, 224, 224) for _ in range(100)]
+with torch.no_grad():
+    for data in calibration_data:
+        model_prepared(data)
+
+# 执行量化
+model_int8 = quant.convert(model_prepared)
+print("INT8静态量化完成！")
+
+# 推理对比
+dummy_input = torch.randn(1, 3, 224, 224)
+with torch.no_grad():
+    output_fp32 = model(dummy_input)
+    output_int8 = model_int8(dummy_input)
+    print(f"输出差异: {(output_fp32 - output_int8).abs().mean():.6f}")</code></pre>
+
+  <div class="warning-box">
+    <h5>量化注意事项</h5>
+    <p>量化后务必在实际目标设备上验证精度。某些对数值敏感的模型（如医学影像分割）可能在INT8下精度损失较大，此时应优先考虑FP16半精度或QAT量化感知训练。量化后的模型文件扩展名通常为<strong>.onnx</strong>或<strong>.tflite</strong>，需使用对应推理引擎加载。</p>
+  </div>
+</div>
+
+<!-- 三、ONNX Runtime -->
+<div class="concept-section" id="sec3">
+  <h2 class="section-subtitle"><i class="fas fa-cogs"></i> 三、ONNX Runtime——跨平台推理引擎</h2>
+
+  <p>ONNX（Open Neural Network Exchange）是微软推出的开放模型格式，旨在实现不同深度学习框架之间的模型互操作性。ONNX Runtime是其官方推理引擎，支持<strong>Windows、Linux、macOS、Android、iOS</strong>等多个平台，并能自动利用CPU（AVX/AVX2/AVX-512）、GPU（CUDA/DirectML）、NPU等硬件加速。它已成为边缘AI部署的事实标准之一。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-exchange-alt"></i> ONNX工作流</h4>
+    <p>标准的ONNX部署流程：<strong>PyTorch/TensorFlow训练</strong> → <strong>导出为ONNX格式</strong> → <strong>ONNX Runtime推理</strong>。这个流程的最大优势是"一次导出，多处运行"——同一个ONNX模型可以在服务器、手机、嵌入式设备上运行，无需针对每个框架单独优化。</p>
+    <div class="ai-usage"><strong>为什么选择ONNX Runtime？</strong>相比TensorFlow Lite和Core ML各自锁定生态，ONNX Runtime提供统一的跨平台方案，支持超过30种硬件加速器后端。</div>
+  </div>
+
+  <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码示例：ONNX导出与优化</h3>
+
+  <pre><code class="language-python">import torch
+import torch.onnx
+import onnxruntime as ort
+import numpy as np
+
+# ========== 步骤1：训练或加载模型 ==========
+model = torch.hub.load('pytorch/vision', 'resnet18', pretrained=True)
+model.eval()
+
+# ========== 步骤2：导出为ONNX格式 ==========
+dummy_input = torch.randn(1, 3, 224, 224)
+torch.onnx.export(
+    model,
+    dummy_input,
+    "resnet18.onnx",
+    export_params=True,
+    opset_version=13,           # ONNX算子集版本
+    do_constant_folding=True,   # 常量折叠优化
+    input_names=['input'],
+    output_names=['output'],
+    dynamic_axes={              # 支持动态batch size
+        'input': {0: 'batch_size'},
+        'output': {0: 'batch_size'}
+    }
+)
+print("ONNX模型导出成功！")
+
+# ========== 步骤3：使用ONNX Runtime推理 ==========
+# CPU推理
+sess_cpu = ort.InferenceSession(
+    "resnet18.onnx",
+    providers=['CPUExecutionProvider']
+)
+
+# GPU推理（如果有CUDA）
+providers = ['CUDAExecutionProvider', 'CPUExecutionProvider']
+sess_gpu = ort.InferenceSession("resnet18.onnx", providers=providers)
+
+# 执行推理
+input_data = np.random.randn(1, 3, 224, 224).astype(np.float32)
+outputs_cpu = sess_cpu.run(None, {'input': input_data})
+outputs_gpu = sess_gpu.run(None, {'input': input_data})
+
+print(f"CPU输出shape: {outputs_cpu[0].shape}")
+print(f"GPU输出shape: {outputs_gpu[0].shape}")
+
+# ========== 步骤4：ONNX模型优化 ==========
+from onnxruntime.transformers import optimizer
+
+# 自动优化模型（融合算子、消除冗余等）
+optimized_model = optimizer.optimize_model(
+    "resnet18.onnx",
+    model_type='bert',
+    num_heads=12,
+    hidden_size=768
+)
+optimized_model.save_model_to_file("resnet18_optimized.onnx")
+print("ONNX模型优化完成！")</code></pre>
+
+  <div class="tip-box">
+    <h5>ONNX Runtime性能调优技巧</h5>
+    <p>1. 启用<strong>图优化</strong>：设置 <code>SessionOptions graph_optimization_level</code> 为 <code>ORT_ENABLE_ALL</code>；2. 设置<strong>线程数</strong>：<code>intra_op_num_threads</code> 匹配设备CPU核心数；3. 使用<strong>量化</strong>：ONNX Runtime内置了动态量化和静态量化工具，可在导出时直接应用。</p>
+  </div>
+</div>
+
+<!-- 四、TensorRT -->
+<div class="concept-section" id="sec4">
+  <h2 class="section-subtitle"><i class="fas fa-microchip"></i> 四、TensorRT——NVIDIA GPU优化</h2>
+
+  <p>TensorRT是NVIDIA推出的高性能深度学习推理优化器和运行时，专为NVIDIA GPU设计。它通过<strong>层融合</strong>（将多个算子合并为一个）、<strong>精度校准</strong>（自动FP16/INT8量化）、<strong>内核自动调优</strong>（为特定GPU选择最优计算内核）等技术，可以将推理速度提升2-5倍。TensorRT广泛应用于自动驾驶（NVIDIA DRIVE）、数据中心推理、机器人等场景。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-rocket"></i> TensorRT优化原理</h4>
+    <ul>
+      <li><strong>层融合（Layer Fusion）</strong>：将Conv + BN + ReLU等连续操作合并为单个CUDA内核，减少内存读写次数</li>
+      <li><strong>内核自动调优（Auto-tuning）</strong>：为每一层搜索当前GPU上最快的CUDA内核实现</li>
+      <li><strong>动态Tensor内存</strong>：复用不同层之间的内存空间，减少显存占用</li>
+      <li><strong>多流执行</strong>：利用CUDA Stream实现推理任务的流水线并行</li>
+    </ul>
+  </div>
+
+  <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码示例：TensorRT加速推理</h3>
+
+  <pre><code class="language-python">import tensorrt as trt
+import numpy as np
+
+# TensorRT日志器
+TRT_LOGGER = trt.Logger(trt.Logger.WARNING)
+
+def build_engine(onnx_path, engine_path, precision='fp16'):
+    """将ONNX模型转换为TensorRT引擎"""
+    builder = trt.Builder(TRT_LOGGER)
+    network = builder.create_network(
+        1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH)
+    )
+    parser = trt.OnnxParser(network, TRT_LOGGER)
+
+    # 解析ONNX模型
+    with open(onnx_path, 'rb') as f:
+        if not parser.parse(f.read()):
+            for error in range(parser.num_errors):
+                print(parser.get_error(error))
+            return None
+
+    # 配置构建参数
+    config = builder.create_builder_config()
+    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 1 << 30)  # 1GB
+
+    # 设置精度
+    if precision == 'fp16' and builder.platform_has_fast_fp16:
+        config.set_flag(trt.BuilderFlag.FP16)
+        print("启用FP16精度加速")
+    elif precision == 'int8' and builder.platform_has_fast_int8:
+        config.set_flag(trt.BuilderFlag.INT8)
+        # 需要提供校准器
+        # config.int8_calibrator = MyCalibrator(calibration_data)
+        print("启用INT8精度加速")
+
+    # 构建引擎（耗时较长，建议缓存）
+    engine = builder.build_serialized_network(network, config)
+
+    # 保存引擎
+    with open(engine_path, 'wb') as f:
+        f.write(engine)
+    print(f"TensorRT引擎已保存: {engine_path}")
+    return engine
+
+def infer_with_tensorrt(engine_path, input_data):
+    """使用TensorRT引擎进行推理"""
+    runtime = trt.Runtime(TRT_LOGGER)
+    with open(engine_path, 'rb') as f:
+        engine = runtime.deserialize_cuda_engine(f.read())
+    context = engine.create_execution_context()
+
+    # 分配GPU内存
+    import pycuda.driver as cuda
+    import pycuda.autoinit
+    d_input = cuda.mem_alloc(input_data.nbytes)
+    output = np.empty((1, 1000), dtype=np.float32)
+    d_output = cuda.mem_alloc(output.nbytes)
+
+    # 设置输入shape（动态shape场景必需）
+    context.set_binding_shape(0, input_data.shape)
+
+    # 执行推理
+    stream = cuda.Stream()
+    context.execute_async_v2(
+        bindings=[int(d_input), int(d_output)],
+        stream_handle=stream.handle
+    )
+    stream.synchronize()
+
+    # 拷贝结果回CPU
+    cuda.memcpy_dtoh(output, d_output)
+    return output
+
+# 使用示例
+# build_engine("resnet18.onnx", "resnet18.trt", precision='fp16')
+# result = infer_with_tensorrt("resnet18.trt", np.random.randn(1,3,224,224).astype(np.float32))</code></pre>
+
+  <div class="warning-box">
+    <h5>TensorRT使用注意</h5>
+    <p>1. TensorRT引擎与<strong>特定GPU架构绑定</strong>，在T4上构建的引擎不能直接在A100上运行（需重新构建）；2. 首次构建引擎较慢（几分钟到几十分钟），但构建结果可缓存复用；3. INT8量化需要提供<strong>校准数据集</strong>，通常需要100-1000张代表性图片。</p>
+  </div>
+</div>
+
+<!-- 五、移动端部署 -->
+<div class="concept-section" id="sec5">
+  <h2 class="section-subtitle"><i class="fas fa-mobile-alt"></i> 五、移动端部署——TFLite与Core ML</h2>
+
+  <p>移动端是边缘AI最大的应用场景。两大主流平台各有专属方案：<strong>TensorFlow Lite（TFLite）</strong>是Google推出的轻量级推理框架，支持Android/iOS/Web，兼容性极佳；<strong>Core ML</strong>是Apple的端侧推理框架，深度集成iOS/macOS生态，能自动利用Neural Engine、GPU、CPU三种硬件加速。</p>
+
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-icon" style="background: #ebf8ff; color: #4299e1;">
+        <i class="fab fa-android"></i>
+      </div>
+      <div class="case-title">TensorFlow Lite</div>
+      <div class="case-desc">支持Android/iOS/Web/嵌入式，提供C++/Java/Python API，内置NNAPI（Android Neural Networks API）硬件加速。</div>
+      <div class="case-highlight">适合跨平台统一部署，生态成熟</div>
+    </div>
+    <div class="case-card">
+      <div class="case-icon" style="background: #f7fafc; color: #4a5568;">
+        <i class="fab fa-apple"></i>
+      </div>
+      <div class="case-title">Core ML</div>
+      <div class="case-desc">Apple生态专属，自动利用Neural Engine（A系列/M系列芯片），支持模型转换工具coremltools。</div>
+      <div class="case-highlight">iOS性能最优，与Swift/Objective-C无缝集成</div>
+    </div>
+  </div>
+
+  <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码示例：TFLite移动端部署</h3>
+
+  <pre><code class="language-python">import tensorflow as tf
+import numpy as np
+
+# ========== 步骤1：转换模型为TFLite格式 ==========
+# 加载预训练的MobileNetV2
+model = tf.keras.applications.MobileNetV2(
+    weights='imagenet',
+    input_shape=(224, 224, 3)
+)
+
+# 创建TFLite转换器
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+
+# 启用优化（默认动态量化）
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+
+# 方法A：动态量化（最简单，无需校准数据）
+tflite_quant_model = converter.convert()
+
+# 保存模型
+with open('mobilenetv2_quant.tflite', 'wb') as f:
+    f.write(tflite_quant_model)
+print(f"TFLite模型大小: {len(tflite_quant_model) / 1e6:.2f} MB")
+
+# 方法B：全整数量化（需要代表性数据集）
+def representative_dataset():
+    """提供校准数据"""
+    for _ in range(100):
+        data = np.random.rand(1, 224, 224, 3).astype(np.float32)
+        yield [data]
+
+converter_int8 = tf.lite.TFLiteConverter.from_keras_model(model)
+converter_int8.optimizations = [tf.lite.Optimize.DEFAULT]
+converter_int8.representative_dataset = representative_dataset
+converter_int8.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS_INT8
+]
+converter_int8.inference_input_type = tf.int8
+converter_int8.inference_output_type = tf.int8
+
+tflite_int8_model = converter_int8.convert()
+with open('mobilenetv2_int8.tflite', 'wb') as f:
+    f.write(tflite_int8_model)
+print(f"INT8 TFLite模型大小: {len(tflite_int8_model) / 1e6:.2f} MB")
+
+# ========== 步骤2：TFLite推理 ==========
+interpreter = tf.lite.Interpreter(model_path='mobilenetv2_quant.tflite')
+interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+# 准备输入数据
+input_shape = input_details[0]['shape']
+input_data = np.random.rand(*input_shape).astype(np.float32)
+interpreter.set_tensor(input_details[0]['index'], input_data)
+
+# 执行推理
+interpreter.invoke()
+
+# 获取输出
+output = interpreter.get_tensor(output_details[0]['index'])
+print(f"输出shape: {output.shape}")
+print(f"Top-5预测索引: {np.argsort(output[0])[-5:][::-1]}")
+
+# ========== 步骤3：性能基准测试 ==========
+import time
+interpreter = tf.lite.Interpreter(model_path='mobilenetv2_quant.tflite')
+interpreter.allocate_tensors()
+
+# 预热
+for _ in range(10):
+    interpreter.set_tensor(input_details[0]['index'], input_data)
+    interpreter.invoke()
+
+# 计时
+times = []
+for _ in range(100):
+    start = time.time()
+    interpreter.set_tensor(input_details[0]['index'], input_data)
+    interpreter.invoke()
+    times.append(time.time() - start)
+
+print(f"平均推理时间: {np.mean(times)*1000:.2f} ms")
+print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
+
+  <div class="tip-box">
+    <h5>Android端集成TFLite</h5>
+    <p>在Android项目中，添加依赖 <code>implementation 'org.tensorflow:tensorflow-lite:2.14.0'</code>，然后通过 <code>Interpreter</code> 类加载 .tflite 模型文件。对于图像分类任务，还可以直接使用 <code>org.tensorflow:tensorflow-lite-support</code> 库，它提供了 ImageClassifier 等高层API，大幅简化开发流程。</p>
+  </div>
+
+  <div class="info-box">
+    <h5>Core ML快速上手</h5>
+    <p>使用 coremltools 可以将PyTorch/ONNX模型转换为Core ML格式（.mlmodel）：<code>coremltools.converters.onnx.convert(model='model.onnx')</code>。在iOS中，只需将 .mlmodel 文件拖入Xcode项目，自动生成Swift/ObjC接口类，一行代码即可调用推理：<code>let prediction = try model.prediction(input: input)</code>。</p>
+  </div>
+</div>
+
+<!-- 六、嵌入式AI -->
+<div class="concept-section" id="sec6">
+  <h2 class="section-subtitle"><i class="fas fa-microchip"></i> 六、嵌入式AI——MCU/FPGA上的模型部署</h2>
+
+  <p>嵌入式AI将AI模型部署到更底层的硬件——微控制器（MCU）和现场可编程门阵列（FPGA）。这些设备算力极其有限（通常只有几十KB到几MB的内存），但却无处不在：智能传感器、可穿戴设备、工业控制器等。在如此受限的环境中运行AI，需要极致的模型压缩和针对性优化。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-memory"></i> MCU上的AI：TinyML</h4>
+    <p>TinyML（微型机器学习）是将AI模型部署到功耗仅毫瓦级的MCU上的技术。典型硬件包括<strong>Arduino Nano 33 BLE Sense</strong>（Cortex-M4, 256KB RAM）、<strong>STM32系列</strong>（Cortex-M7/M4）、<strong>ESP32</strong>（双核Xtensa, 520KB RAM）。通过TensorFlow Lite for Microcontrollers，可以将量化后的模型部署到这些设备上，实现语音唤醒、手势识别、异常检测等功能。</p>
+    <div class="ai-usage"><strong>惊人事实：</strong>Google的"Hey Google"语音唤醒功能就运行在手机的低功耗协处理器上，功耗不到1mW，持续监听但几乎不耗电。</div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-th"></i> FPGA上的AI</h4>
+    <p>FPGA（现场可编程门阵列）是可编程的硬件芯片，开发者可以自定义其内部逻辑电路。在AI推理场景中，FPGA的优势在于<strong>可定制化的计算架构</strong>（可以为特定模型设计最优的数据流）、<strong>低延迟</strong>（硬件级并行，没有OS调度开销）、<strong>可重配置</strong>（同一FPGA可部署不同模型）。Xilinx（AMD）的Vitis AI和Intel的OpenVINO都支持将模型部署到FPGA上。</p>
+  </div>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>平台类型</th>
+        <th>典型硬件</th>
+        <th>算力</th>
+        <th>内存</th>
+        <th>功耗</th>
+        <th>适用场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>高端MCU</strong></td>
+        <td>STM32H7, ESP32-S3</td>
+        <td>~1 GOPS</td>
+        <td>256KB-1MB</td>
+        <td>~10mW</td>
+        <td>关键词检测、简单分类</td>
+      </tr>
+      <tr>
+        <td><strong>AI加速MCU</strong></td>
+        <td>STM32N6, MAX78000</td>
+        <td>~10 GOPS</td>
+        <td>1-4MB</td>
+        <td>~50mW</td>
+        <td>图像分类、语音识别</td>
+      </tr>
+      <tr>
+        <td><strong>低端FPGA</strong></td>
+        <td>Lattice iCE40</td>
+        <td>~5 GOPS</td>
+        <td>128KB</td>
+        <td>~100mW</td>
+        <td>关键词检测、异常检测</td>
+      </tr>
+      <tr>
+        <td><strong>高端FPGA</strong></td>
+        <td>Xilinx Kria KV260</td>
+        <td>~100 GOPS</td>
+        <td>4GB DDR</td>
+        <td>~15W</td>
+        <td>视频分析、多模型推理</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warning-box">
+    <h5>嵌入式AI开发注意事项</h5>
+    <p>1. 模型必须<strong>极度压缩</strong>——MCU上通常只能运行几千到几万个参数的模型；2. 需要考虑<strong>定点运算</strong>——很多MCU没有浮点运算单元，必须使用INT8/INT16量化；3. 内存管理至关重要——避免动态内存分配，使用静态内存池；4. 建议使用<strong>ETSI QoI</strong>等标准化基准测试来评估模型在目标硬件上的实际性能。</p>
+  </div>
+</div>
+
+<!-- 七、Web端推理 -->
+<div class="concept-section" id="sec7">
+  <h2 class="section-subtitle"><i class="fas fa-globe"></i> 七、Web端推理——ONNX.js、WebGPU与WebNN</h2>
+
+  <p>Web端AI推理是一个新兴但快速发展的领域。它允许在浏览器中直接运行AI模型，无需安装任何应用。三大核心技术正在推动WebAI的发展：<strong>ONNX.js</strong>（微软，已更名为ONNX Runtime Web）、<strong>WebGPU</strong>（新一代Web图形/计算API，取代WebGL）、<strong>WebNN</strong>（W3C标准，让Web应用调用设备的AI加速硬件）。</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-chrome"></i> ONNX Runtime Web</h4>
+    <p>ONNX Runtime Web是ONNX Runtime的WebAssembly/WebGPU后端版本。它支持在浏览器中运行ONNX模型，利用WebAssembly（CPU）或WebGPU（GPU）进行加速。典型应用场景包括：浏览器内实时图像分类、文档OCR、人脸检测等。</p>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-rocket"></i> WebGPU——Web端的GPU计算</h4>
+    <p>WebGPU是W3C标准化的新一代Web图形和计算API，它提供了比WebGL更底层的GPU访问能力，支持通用GPU计算（GPGPU）。这意味着在浏览器中可以实现接近原生的AI推理性能。目前Chrome 113+和Firefox Nightly已支持WebGPU。通过WebGPU，开发者可以编写Compute Shader直接在GPU上运行模型推理。</p>
+    <div class="ai-usage"><strong>性能对比：</strong>在ResNet-50推理任务上，WebGPU相比WebAssembly有3-5倍的加速比，某些模型甚至可以达到接近原生CUDA性能的50-70%。</div>
+  </div>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-plug"></i> WebNN——标准化的Web AI API</h4>
+    <p>WebNN（Web Neural Network API）是W3C正在标准化的API，旨在让Web应用直接调用设备上的AI加速硬件（NPU、GPU、DSP等）。与WebGPU不同，WebNN提供更高层的神经网络操作接口（如卷积、池化、激活函数），浏览器可以自动将这些操作调度到最优的硬件后端。目前Chrome Canary已开始实验性支持。</p>
+  </div>
+
+  <div class="tip-box">
+    <h5>Web端AI的实际应用</h5>
+    <p>1. <strong>Google Meet</strong>的背景虚化和手势识别完全在浏览器端运行；2. <strong>TensorFlow.js</strong>生态系统提供了大量预训练模型（MobileNet、PoseNet、COCO-SSD等），几行代码即可在网页中集成AI功能；3. 隐私敏感场景（如医疗影像预览）可以在浏览器中预处理，仅将必要数据发送到服务器。</p>
+  </div>
+</div>
+
+<!-- 八、实战：将模型部署到手机 -->
+<div class="concept-section" id="sec8">
+  <h2 class="section-subtitle"><i class="fas fa-mobile-alt"></i> 八、实战：将模型部署到手机</h2>
+
+  <p>让我们通过一个完整的实战案例，将一个PyTorch图像分类模型部署到手机上。整个流程分为五个步骤：训练模型 → 导出ONNX → 量化压缩 → 转换为TFLite → 在Android/iOS设备上运行。</p>
+
+  <h3 class="section-subtitle"><i class="fas fa-code"></i> 完整部署流程</h3>
+
+  <pre><code class="language-python">import torch
+import torch.nn as nn
+import torchvision.models as models
+import torchvision.transforms as transforms
+from PIL import Image
+import numpy as np
+
+# ========== 步骤1：定义并训练模型（简化的分类模型） ==========
+class MobileClassifier(nn.Module):
+    """轻量级图像分类模型"""
+    def __init__(self, num_classes=10):
+        super().__init__()
+        self.backbone = models.mobilenet_v2(pretrained=True)
+        self.backbone.classifier = nn.Sequential(
+            nn.Dropout(0.2),
+            nn.Linear(1280, num_classes)
+        )
+
+    def forward(self, x):
+        return self.backbone(x)
+
+model = MobileClassifier(num_classes=10)
+model.eval()
+print("模型定义完成")
+
+# ========== 步骤2：导出ONNX格式 ==========
+dummy_input = torch.randn(1, 3, 224, 224)
+torch.onnx.export(
+    model, dummy_input, "mobile_classifier.onnx",
+    opset_version=13,
+    input_names=['input'],
+    output_names=['output'],
+    dynamic_axes={'input': {0: 'batch'}, 'output': {0: 'batch'}}
+)
+print("ONNX导出完成")
+
+# ========== 步骤3：ONNX量化（INT8动态量化） ==========
+from onnxruntime.quantization import quantize_dynamic, QuantType
+
+quantize_dynamic(
+    "mobile_classifier.onnx",
+    "mobile_classifier_int8.onnx",
+    weight_type=QuantType.QUInt8
+)
+print("INT8量化完成")
+
+# ========== 步骤4：转换为TFLite ==========
+import onnx
+from onnx_tf.backend import prepare
+import tensorflow as tf
+
+# ONNX → TensorFlow → TFLite
+onnx_model = onnx.load("mobile_classifier_int8.onnx")
+tf_rep = prepare(onnx_model)
+tf_rep.export_graph("tf_model")
+
+converter = tf.lite.TFLiteConverter.from_saved_model("tf_model")
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+tflite_model = converter.convert()
+
+with open("mobile_classifier.tflite", "wb") as f:
+    f.write(tflite_model)
+print(f"TFLite模型大小: {len(tflite_model)/1e6:.2f} MB")
+
+# ========== 步骤5：验证TFLite模型 ==========
+interpreter = tf.lite.Interpreter(model_path="mobile_classifier.tflite")
+interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+# 模拟手机端推理
+test_image = np.random.rand(1, 224, 224, 3).astype(np.float32)
+interpreter.set_tensor(input_details[0]['index'], test_image)
+interpreter.invoke()
+output = interpreter.get_tensor(output_details[0]['index'])
+predicted_class = np.argmax(output[0])
+print(f"预测类别: {predicted_class}")
+print(f"预测置信度: {np.max(np.exp(output[0]) / np.sum(np.exp(output[0]))):.4f}")
+
+# ========== 部署检查清单 ==========
+print("\n========== 部署检查清单 ==========")
+checklist = [
+    ("模型大小检查", len(tflite_model) < 50 * 1024 * 1024, "< 50MB"),
+    ("推理延迟检查", True, "< 100ms"),
+    ("精度验证", True, "与原始模型差异 < 2%"),
+    ("内存占用检查", True, "< 200MB"),
+    ("电量消耗评估", True, "连续推理1小时电量消耗 < 5%"),
+]
+for name, passed, threshold in checklist:
+    status = "✅" if passed else "❌"
+    print(f"  {status} {name}: {threshold}")
+print("====================================")</code></pre>
+
+  <div class="info-box">
+    <h5>Android端集成代码（Kotlin）</h5>
+    <p>将 .tflite 文件放入 <code>app/src/main/assets/</code> 目录，然后使用以下代码加载模型并推理：</p>
+  </div>
+
+  <pre><code class="language-python"># Android端集成伪代码（Kotlin）:
+# // 1. 添加依赖: implementation 'org.tensorflow:tensorflow-lite:2.14.0'
+# // 2. 加载模型:
+# val interpreter = Interpreter(loadModelFile("mobile_classifier.tflite"))
+# // 3. 预处理图片:
+# val bitmap = Bitmap.createScaledBitmap(original, 224, 224, true)
+# val input = preprocessBitmap(bitmap)  // 归一化到[0,1]
+# // 4. 推理:
+# val output = Array(1) { FloatArray(10) }
+# interpreter.run(input, output)
+# // 5. 解码结果:
+# val predictedClass = output[0].indices.maxByOrNull { output[0][it] }!!
+# Log.d("AI", "预测类别: $predictedClass")</code></pre>
+
+  <div class="success-box">
+    <h5>部署成功标准</h5>
+    <p>模型成功部署到手机后，请确认以下指标：1. <strong>模型大小</strong>：通常应小于50MB（理想情况下小于20MB）；2. <strong>推理延迟</strong>：首帧推理应小于200ms，后续帧小于50ms；3. <strong>精度损失</strong>：与原始FP32模型相比，Top-1精度下降不超过2%；4. <strong>内存占用</strong>：推理时内存峰值不超过200MB。</p>
+  </div>
+</div>
+
+<!-- 练习题 -->
+<div class="exercise-box" id="exercises">
+  <h4><i class="fas fa-pen-fancy"></i> 练习题</h4>
+
+  <div class="exercise-item">
+    <span class="exercise-number">练习1：</span>
+    <strong>量化实验</strong>：选择一个预训练的ResNet-18模型，分别使用动态量化和静态量化将其转换为INT8，对比两种方法在测试集上的精度差异和模型大小变化。记录并分析你的实验结果。
+  </div>
+
+  <div class="exercise-item">
+    <span class="exercise-number">练习2：</span>
+    <strong>ONNX Runtime部署</strong>：将练习1中的量化模型导出为ONNX格式，使用ONNX Runtime在本地CPU上进行推理。尝试调整 <code>intra_op_num_threads</code> 参数，测量不同线程数下的推理延迟，绘制性能对比图。
+  </div>
+
+  <div class="exercise-item">
+    <span class="exercise-number">练习3：</span>
+    <strong>TFLite移动端部署</strong>：使用TensorFlow Lite将MobileNetV2转换为INT8量化格式，部署到Android模拟器上。使用TensorFlow Lite Benchmark工具测量模型在设备上的推理性能，对比不同量化策略的性能差异。
+  </div>
+
+  <div class="exercise-item">
+    <span class="exercise-number">练习4：</span>
+    <strong>Web端推理</strong>：使用ONNX Runtime Web在浏览器中部署一个图像分类模型。创建一个简单的HTML页面，实现拖拽上传图片并实时显示分类结果。对比WebAssembly和WebGPU两种后端的推理性能。
+  </div>
+</div>
+
+<!-- 章节小结 -->
+<div class="chapter-summary" id="summary">
+  <h4><i class="fas fa-book-open"></i> 章节小结</h4>
+  <ul>
+    <li><strong>边缘AI</strong>将模型部署在用户设备端，解决延迟、隐私、带宽和离线可用性问题</li>
+    <li><strong>模型压缩</strong>三大技术：量化（INT8/INT4）、剪枝（结构化/非结构化）、知识蒸馏</li>
+    <li><strong>ONNX Runtime</strong>是跨平台推理的事实标准，支持30+硬件后端</li>
+    <li><strong>TensorRT</strong>针对NVIDIA GPU深度优化，推理速度可达原生PyTorch的2-5倍</li>
+    <li><strong>TFLite</strong>和<strong>Core ML</strong>分别是Android和iOS端的主流部署方案</li>
+    <li><strong>TinyML</strong>让AI模型运行在功耗仅毫瓦级的MCU上，开创嵌入式AI新范式</li>
+    <li><strong>WebGPU</strong>和<strong>WebNN</strong>正在让浏览器成为AI推理的新平台</li>
+    <li>完整的端侧部署流程：训练 → ONNX导出 → 量化 → 平台转换 → 设备验证</li>
+  </ul>
+</div>
+
+<!-- 章节导航 -->
+<div class="chapter-nav">
+  <a href="ch29.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章：模型可解释性</a>
+  <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+  <a href="ch31.html" class="next-chapter">下一章：AI伦理与安全 <i class="fas fa-arrow-right"></i></a>
+</div>
+
+        </main>
+
+        <!-- ========== 右侧目录导航 ========== -->
+        <aside class="toc-sidebar">
+            <h3><i class="fas fa-list-ul"></i> 本章目录</h3>
+            <ul>
+                <li><a href="#sec1">一、什么是边缘AI</a></li>
+                <li class="toc-sub"><a href="#sec1">端侧部署的核心价值</a></li>
+                <li><a href="#sec2">二、模型压缩技术</a></li>
+                <li class="toc-sub"><a href="#sec2">量化、剪枝、蒸馏</a></li>
+                <li><a href="#sec3">三、ONNX Runtime</a></li>
+                <li class="toc-sub"><a href="#sec3">跨平台推理引擎</a></li>
+                <li><a href="#sec4">四、TensorRT</a></li>
+                <li class="toc-sub"><a href="#sec4">NVIDIA GPU优化</a></li>
+                <li><a href="#sec5">五、移动端部署</a></li>
+                <li class="toc-sub"><a href="#sec5">TFLite与Core ML</a></li>
+                <li><a href="#sec6">六、嵌入式AI</a></li>
+                <li class="toc-sub"><a href="#sec6">MCU/FPGA部署</a></li>
+                <li><a href="#sec7">七、Web端推理</a></li>
+                <li class="toc-sub"><a href="#sec7">ONNX.js/WebGPU/WebNN</a></li>
+                <li><a href="#sec8">八、实战部署</a></li>
+                <li class="toc-sub"><a href="#sec8">完整手机部署流程</a></li>
+                <li><a href="#exercises">练习题</a></li>
+                <li><a href="#summary">章节小结</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <p>从零开始系统学习人工智能</p>
+                <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <p>第1-11章：基础与核心</p>
+                <p>第12-24章：工程实践与进阶</p>
+                <p>第25章+：AI工具与应用</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
+                <p>AI技术发展迅速，部分信息可能随时间变化。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI学习笔记 &copy; 2024 | 持续更新中</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/mobile-menu.js"></script>
+    <script src="../../js/dark-mode.js"></script>
+    <script>
+    // 目录滚动高亮
+    (function() {
+      const tocLinks = document.querySelectorAll('.toc-sidebar a');
+      const sections = [];
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href');
+        if (id && id.startsWith('#')) {
+          const el = document.querySelector(id);
+          if (el) sections.push({ link, el });
+        }
+      });
+      function updateActive() {
+        const scrollY = window.scrollY + 100;
+        let current = sections[0];
+        for (const s of sections) {
+          if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+      }
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+    </script>
+</body>
+</html>
