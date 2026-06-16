@@ -2228,6 +2228,159 @@ class SafeQueryArgs(BaseModel):
         upper_query = v.upper()
         for keyword in dangerous_keywords:
             if keyword in upper_query:
+                raise ValueError(f"禁止执行危险操作: {keyword}")
+
+        # 长度限制
+        if len(v) > 1000:
+            raise ValueError("查询长度超过限制")
+
+        return v
+
+    @validator('max_rows')
+    def validate_max_rows(cls, v):
+        """验证返回行数限制"""
+        if v < 1 or v > 1000:
+            raise ValueError("返回行数必须在1-1000之间")
+        return v
+</code></pre>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-clipboard-list"></i>
+                    8.3 日志与审计
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    完善的日志记录和审计机制是MCP Server安全运行的重要保障。通过记录所有关键操作，可以快速定位问题并满足合规要求。
+                </p>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-file-alt"></i> 日志记录要点</h4>
+                    <ul>
+                        <li><strong>请求日志</strong>：记录所有Tool调用请求，包括参数、来源、时间戳</li>
+                        <li><strong>响应日志</strong>：记录Tool执行结果，包括成功/失败状态、耗时</li>
+                        <li><strong>错误日志</strong>：记录所有错误详情，包括堆栈跟踪、上下文信息</li>
+                        <li><strong>安全事件</strong>：记录权限拒绝、认证失败等安全相关事件</li>
+                        <li><strong>性能指标</strong>：记录Tool执行时间，用于性能监控和优化</li>
+                    </ul>
+                </div>
+
+                <span class="code-label">Python - 审计日志实现</span>
+<pre><code class="language-python">"""
+MCP Server审计日志实现
+记录所有工具调用和安全事件
+"""
+import logging
+import json
+from datetime import datetime
+from typing import Any
+from dataclasses import dataclass, asdict
+
+# 配置审计日志
+audit_logger = logging.getLogger("mcp.audit")
+audit_logger.setLevel(logging.INFO)
+
+# 创建JSON格式的审计日志处理器
+class AuditFormatter(logging.Formatter):
+    def format(self, record):
+        audit_entry = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "level": record.levelname,
+            "message": record.getMessage(),
+            "extra": getattr(record, 'extra', {})
+        }
+        return json.dumps(audit_entry, ensure_ascii=False)
+
+handler = logging.StreamHandler()
+handler.setFormatter(AuditFormatter())
+audit_logger.addHandler(handler)
+
+@dataclass
+class AuditEvent:
+    """审计事件数据结构"""
+    event_type: str  # tool_call, auth_failure, permission_denied
+    tool_name: str
+    arguments: dict
+    result: str
+    duration_ms: float
+    user_id: str = None
+    error: str = None
+
+def log_tool_call(event: AuditEvent):
+    """记录工具调用审计日志"""
+    audit_logger.info(
+        f"Tool调用: {event.tool_name}",
+        extra={"extra": asdict(event)}
+    )
+
+def log_security_event(event_type: str, details: dict):
+    """记录安全事件审计日志"""
+    audit_logger.warning(
+        f"安全事件: {event_type}",
+        extra={"extra": details}
+    )
+
+# 使用示例
+async def audited_tool_call(tool_name: str, args: dict) -> Any:
+    """带审计的工具调用包装器"""
+    start_time = datetime.now()
+
+    try:
+        # 执行工具
+        result = await execute_tool(tool_name, args)
+        duration = (datetime.now() - start_time).total_seconds() * 1000
+
+        # 记录成功调用
+        event = AuditEvent(
+            event_type="tool_call",
+            tool_name=tool_name,
+            arguments=args,
+            result="success",
+            duration_ms=duration
+        )
+        log_tool_call(event)
+
+        return result
+
+    except PermissionError as e:
+        duration = (datetime.now() - start_time).total_seconds() * 1000
+        # 记录权限拒绝
+        event = AuditEvent(
+            event_type="permission_denied",
+            tool_name=tool_name,
+            arguments=args,
+            result="denied",
+            duration_ms=duration,
+            error=str(e)
+        )
+        log_tool_call(event)
+        raise
+
+    except Exception as e:
+        duration = (datetime.now() - start_time).total_seconds() * 1000
+        # 记录执行错误
+        event = AuditEvent(
+            event_type="tool_error",
+            tool_name=tool_name,
+            arguments=args,
+            result="error",
+            duration_ms=duration,
+            error=str(e)
+        )
+        log_tool_call(event)
+        raise
+</code></pre>
+
+                <div class="info-box">
+                    <strong>审计日志最佳实践</strong>
+                    <ul>
+                        <li>使用结构化日志（JSON格式），便于后续分析和查询</li>
+                        <li>将审计日志与应用日志分离，便于独立管理</li>
+                        <li>设置日志保留策略，定期归档旧日志</li>
+                        <li>敏感信息（如密码、Token）应在日志中脱敏</li>
+                        <li>考虑使用集中式日志服务（如ELK Stack）进行日志聚合</li>
+                    </ul>
+                </div>
+            if keyword in upper_query:
                 raise ValueError(f"禁止执行: {keyword}")
 
         # 只允许SELECT查询
@@ -2695,6 +2848,269 @@ if __name__ == "__main__":
     asyncio.run(main())
 </code></pre>
 
+                <h3 class="section-subtitle">
+                    <i class="fas fa-code"></i>
+                    TypeScript MCP Server示例
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    TypeScript是MCP的另一种主流开发语言。以下是使用官方TypeScript SDK构建MCP Server的完整示例：
+                </p>
+
+                <span class="code-label">TypeScript - MCP Server基础示例</span>
+<pre><code class="language-typescript">import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+
+// 创建MCP Server实例
+const server = new McpServer({
+  name: "weather-server",
+  version: "1.0.0",
+});
+
+// 定义工具 - 使用zod进行参数验证
+server.tool(
+  "query_weather",
+  "查询指定城市的当前天气",
+  {
+    city: z.string().describe("城市名称"),
+    unit: z.enum(["celsius", "fahrenheit"]).default("celsius").describe("温度单位"),
+  },
+  async ({ city, unit }) => {
+    // 模拟天气数据
+    const weatherData: Record&lt;string, any&gt; = {
+      "北京": { temp: 25, condition: "晴", humidity: 45 },
+      "上海": { temp: 28, condition: "多云", humidity: 70 },
+      "广州": { temp: 32, condition: "雷阵雨", humidity: 85 },
+    };
+
+    const data = weatherData[city];
+    if (!data) {
+      return {
+        content: [{ type: "text", text: `未找到 ${city} 的天气数据` }],
+        isError: true,
+      };
+    }
+
+    let temp = data.temp;
+    if (unit === "fahrenheit") {
+      temp = temp * 9/5 + 32;
+    }
+
+    return {
+      content: [{
+        type: "text",
+        text: JSON.stringify({
+          city,
+          temperature: `${temp}°${unit === "fahrenheit" ? "F" : "C"}`,
+          condition: data.condition,
+          humidity: `${data.humidity}%`,
+        }),
+      }],
+    };
+  }
+);
+
+// 定义资源
+server.resource(
+  "config",
+  "config://app",
+  async (uri) => ({
+    contents: [{
+      uri: uri.href,
+      mimeType: "application/json",
+      text: JSON.stringify({
+        name: "天气查询服务",
+        version: "1.0.0",
+        supportedCities: ["北京", "上海", "广州"],
+      }),
+    }],
+  })
+);
+
+// 启动Server
+async function main() {
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  console.error("MCP Server已启动");
+}
+
+main().catch(console.error);
+</code></pre>
+
+                <div class="concept-box">
+                    <h4><i class="fas fa-exchange-alt"></i> Python vs TypeScript对比</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>Python SDK</th>
+                                <th>TypeScript SDK</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>参数验证</strong></td>
+                                <td>Pydantic BaseModel</td>
+                                <td>zod schema</td>
+                            </tr>
+                            <tr>
+                                <td><strong>异步支持</strong></td>
+                                <td>asyncio</td>
+                                <td>原生async/await</td>
+                            </tr>
+                            <tr>
+                                <td><strong>类型安全</strong></td>
+                                <td>运行时检查</td>
+                                <td>编译时+运行时</td>
+                            </tr>
+                            <tr>
+                                <td><strong>包管理</strong></td>
+                                <td>pip / poetry</td>
+                                <td>npm / pnpm</td>
+                            </tr>
+                            <tr>
+                                <td><strong>适用场景</strong></td>
+                                <td>数据处理、ML集成</td>
+                                <td>Web服务、全栈应用</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="section-subtitle">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    错误处理与重试模式
+                </h3>
+
+                <p style="margin-bottom: 1rem;">
+                    健壮的MCP Server需要完善的错误处理机制。以下是常见的错误处理模式和最佳实践：
+                </p>
+
+                <span class="code-label">Python - MCP错误处理模式</span>
+<pre><code class="language-python">import asyncio
+import logging
+from functools import wraps
+from typing import Callable, Any
+
+logger = logging.getLogger("mcp-server")
+
+# ==================== 重试装饰器 ====================
+
+def with_retry(
+    max_retries: int = 3,
+    delay: float = 1.0,
+    backoff: float = 2.0,
+    exceptions: tuple = (Exception,)
+):
+    """带指数退避的重试装饰器"""
+    def decorator(func: Callable) -> Callable:
+        @wraps(func)
+        async def wrapper(*args, **kwargs) -> Any:
+            last_exception = None
+            current_delay = delay
+
+            for attempt in range(max_retries + 1):
+                try:
+                    return await func(*args, **kwargs)
+                except exceptions as e:
+                    last_exception = e
+                    if attempt < max_retries:
+                        logger.warning(
+                            f"尝试 {attempt + 1}/{max_retries} 失败: {e}, "
+                            f"{current_delay}秒后重试..."
+                        )
+                        await asyncio.sleep(current_delay)
+                        current_delay *= backoff
+                    else:
+                        logger.error(f"所有重试均失败: {e}")
+
+            raise last_exception
+        return wrapper
+    return decorator
+
+# ==================== 工具错误处理 ====================
+
+class MCPErrorHandler:
+    """MCP错误处理器"""
+
+    @staticmethod
+    def create_error_result(message: str, error_code: str = "UNKNOWN_ERROR"):
+        """创建标准错误结果"""
+        return {
+            "content": [{
+                "type": "text",
+                "text": f"[{error_code}] {message}"
+            }],
+            "isError": True,
+            "_meta": {"errorCode": error_code}
+        }
+
+    @staticmethod
+    def handle_validation_error(e: Exception):
+        """处理参数验证错误"""
+        return MCPErrorHandler.create_error_result(
+            f"参数验证失败: {str(e)}",
+            error_code="VALIDATION_ERROR"
+        )
+
+    @staticmethod
+    def handle_not_found(resource: str, identifier: str):
+        """处理资源未找到"""
+        return MCPErrorHandler.create_error_result(
+            f"未找到{resource}: {identifier}",
+            error_code="NOT_FOUND"
+        )
+
+    @staticmethod
+    def handle_permission_denied(operation: str):
+        """处理权限不足"""
+        return MCPErrorHandler.create_error_result(
+            f"权限不足，无法执行操作: {operation}",
+            error_code="PERMISSION_DENIED"
+        )
+
+    @staticmethod
+    def handle_rate_limit(retry_after: int = 60):
+        """处理速率限制"""
+        return {
+            "content": [{
+                "type": "text",
+                "text": f"请求过于频繁，请在{retry_after}秒后重试"
+            }],
+            "isError": True,
+            "_meta": {
+                "errorCode": "RATE_LIMITED",
+                "retryAfter": retry_after
+            }
+        }
+
+# ==================== 使用示例 ====================
+
+@server.tool()
+@with_retry(max_retries=3, delay=1.0, exceptions=(ConnectionError,))
+async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
+    """带重试机制的天气查询工具"""
+    try:
+        # 模拟可能失败的API调用
+        data = await fetch_weather_api(args.city)
+        return ToolResult(content=json.dumps(data))
+    except ConnectionError as e:
+        logger.error(f"天气API连接失败: {e}")
+        raise  # 交给重试装饰器处理
+    except TimeoutError as e:
+        return MCPErrorHandler.create_error_result(
+            "天气API请求超时",
+            error_code="TIMEOUT"
+        )
+    except Exception as e:
+        logger.exception("未知错误")
+        return MCPErrorHandler.create_error_result(
+            f"查询失败: {str(e)}",
+            error_code="INTERNAL_ERROR"
+        )
+</code></pre>
+
                 <div class="info-box">
                     <strong>Server测试</strong>
                     <p>
@@ -2849,6 +3265,12 @@ if __name__ == "__main__":
                     <li><strong>安全机制</strong>贯穿协议设计，包括输入验证、权限控制和人类审批</li>
                     <li><strong>MCP生态</strong>正在快速发展，越来越多的AI应用和Server正在涌现</li>
                 </ul>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    <strong>核心要点回顾：</strong>MCP的设计哲学是"一次集成，处处可用"。通过标准化协议，开发者只需实现一次MCP Server，即可被所有支持MCP的Host调用。这种解耦模式不仅降低了集成成本，还促进了AI工具生态的繁荣。
+                </p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                    <strong>下一步学习建议：</strong>建议读者亲自尝试编写一个简单的MCP Server（如练习1），加深对协议的理解。然后可以阅读官方文档和SDK源码，了解更高级的特性。最后，考虑为开源社区贡献自己的MCP Server，将所学知识付诸实践。
+                </p>
             </div>
 
             <!-- 章节导航 -->
@@ -2868,6 +3290,8 @@ if __name__ == "__main__":
                 <li class="toc-sub"><a href="#sec1">为什么需要MCP</a></li>
                 <li><a href="#sec2">二、架构设计</a></li>
                 <li class="toc-sub"><a href="#sec2">Host、Client、Server</a></li>
+                <li class="toc-sub"><a href="#sec2">消息流动模式</a></li>
+                <li class="toc-sub"><a href="#sec2">多Server聚合</a></li>
                 <li><a href="#sec3">三、核心概念</a></li>
                 <li class="toc-sub"><a href="#sec3">四大原语</a></li>
                 <li><a href="#sec4">四、协议规范</a></li>

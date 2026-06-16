@@ -1110,9 +1110,172 @@
     <p>评估规范是"宪法"，评估执行是"执法"。没有规范的评估是随意的；没有执行的规范是空洞的。两者缺一不可。</p>
   </div>
 
+  <h3>完整评估规范示例</h3>
+  <p>以下是一个更完整的生产级评估规范模板，包含多阶段评估和自动化集成：</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-file-code"></i> 生产级评估规范YAML模板</h4>
+    <pre><code class="language-yaml">evaluation_spec:
+  name: "production-eval-v2.1"
+  version: "2.1.0"
+  author: "AI团队"
+  created: "2025-06-15"
+  last_updated: "2025-06-20"
+  
+  # ==================== 评估目标 ====================
+  objective:
+    primary: "验证模型在客服场景中的综合能力"
+    secondary:
+      - "确保回答准确性达到95%以上"
+      - "保证安全合规，无有害输出"
+      - "响应时间符合SLA要求"
+  
+  # ==================== 评估范围 ====================
+  scope:
+    models:
+      - name: "custom-customer-service-v2.1"
+        type: "fine-tuned"
+        base: "qwen-72b"
+      - name: "baseline"
+        type: "commercial"
+        provider: "openai"
+        model: "gpt-4o"
+    
+    datasets:
+      - name: "customer_service_test"
+        version: "1.2"
+        size: 500
+        split: "test"
+        source: "internal_annotated"
+      - name: "edge_cases"
+        version: "1.0"
+        size: 100
+        split: "test"
+        source: "synthetic_augmented"
+    
+    languages: ["zh-CN"]
+    domains: ["customer_service", "technical_support"]
+  
+  # ==================== 评估维度 ====================
+  dimensions:
+    - name: "accuracy"
+      description: "回答准确性"
+      weight: 0.4
+      metrics:
+        - type: "exact_match"
+          name: "intent_accuracy"
+          threshold: 0.90
+        - type: "f1_score"
+          name: "entity_f1"
+          threshold: 0.85
+    
+    - name: "helpfulness"
+      description: "回答有用性"
+      weight: 0.3
+      metrics:
+        - type: "human_rating"
+          name: "quality_score"
+          scale: 1-5
+          threshold: 4.0
+        - type: "completion_rate"
+          name: "task_completion"
+          threshold: 0.95
+    
+    - name: "safety"
+      description: "安全性"
+      weight: 0.2
+      metrics:
+        - type: "toxicity_score"
+          name: "harmlessness"
+          threshold: 0.05
+        - type: "policy_violation"
+          name: "compliance"
+          threshold: 0.0
+    
+    - name: "efficiency"
+      description: "效率"
+      weight: 0.1
+      metrics:
+        - type: "latency_p95"
+          name: "response_time"
+          threshold: 2000  # ms
+        - type: "throughput"
+          name: "tokens_per_second"
+          threshold: 50
+  
+  # ==================== 执行配置 ====================
+  execution:
+    tool: "lm-eval-harness"
+    version: "0.4.3"
+    num_fewshot: 3
+    batch_size: 32
+    max_gen_tokens: 512
+    temperature: 0.0
+    
+    hardware:
+      gpus: "8x A100-80GB"
+      precision: "fp16"
+    
+    parallelism:
+      tensor_parallel: 4
+      pipeline_parallel: 1
+  
+  # ==================== 通过标准 ====================
+  pass_criteria:
+    overall_score: 0.85
+    dimension_scores:
+      accuracy: 0.85
+      helpfulness: 0.80
+      safety: 0.95  # 安全性要求更高
+      efficiency: 0.70
+    
+    blocking_conditions:
+      - "safety.toxicity_score > 0.1"
+      - "safety.policy_violation > 0"
+    
+    comparison:
+      baseline: "gpt-4o"
+      min_improvement: 0.0  # 不低于基线
+  
+  # ==================== 输出配置 ====================
+  output:
+    format: "json"
+    location: "results/production-eval-v2.1/"
+    artifacts:
+      - "results.json"
+      - "metrics_summary.json"
+      - "error_analysis.json"
+      - "comparison_report.html"
+    
+    notifications:
+      - type: "email"
+        recipients: ["ai-team@company.com"]
+        on: ["failure", "significant_regression"]
+      - type: "slack"
+        channel: "#ai-model-updates"
+        on: ["success", "failure"]
+  
+  # ==================== CI/CD集成 ====================
+  cicd:
+    trigger: "on_merge_to_main"
+    auto_run: true
+    timeout: 3600  # 1小时
+    
+    gates:
+      - name: "accuracy_gate"
+        metric: "accuracy.intent_accuracy"
+        threshold: 0.85
+        blocking: true
+      
+      - name: "safety_gate"
+        metric: "safety.harmlessness"
+        threshold: 0.95
+        blocking: true</code></pre>
+  </div>
+
   <div class="exercise-item">
     <h5>练习题</h5>
-    <p>为你负责的AI项目编写一份简版评估规范（YAML格式），包含评估目标、范围、指标、通过标准四个核心字段。</p>
+    <p>为你负责的AI项目编写一份完整评估规范（YAML格式），包含评估目标、范围、维度、通过标准、CI/CD集成五个核心字段。</p>
   </div>
 </div>
 
@@ -1612,6 +1775,244 @@ class CustomerServiceEval(CustomEvalTask):
             "safety": sum(r["safety_score"] for r in results) / n
         }
         return self.metrics</code></pre>
+
+  <h3>为lm-eval-harness创建自定义任务</h3>
+  <p>lm-eval-harness支持通过插件系统添加自定义评估任务。以下是完整的自定义任务创建流程：</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-puzzle-piece"></i> lm-eval-harness自定义任务结构</h4>
+    <pre><code class="language-python">"""
+自定义lm-eval-harness任务示例：中文客服对话质量评估
+文件路径: lm_eval/tasks/custom/customer_service.py
+"""
+import json
+from typing import Dict, List, Optional
+from lm_eval.api.task import ConfigurableTask
+from lm_eval.api.instance import Instance
+from lm_eval.api.metrics import mean, pass_at_k
+
+
+class CustomerServiceTask(ConfigurableTask):
+    """中文客服对话质量评估任务"""
+    
+    VERSION = "1.0"
+    OUTPUT_TYPE = "generate_until"
+    
+    def __init__(self, config=None):
+        super().__init__(config=config)
+        self.config = config or {}
+        self.dataset = None
+        self._load_data()
+    
+    def _load_data(self):
+        """加载评估数据集"""
+        data_path = self.config.get("data_path", "data/customer_service_test.json")
+        with open(data_path, "r", encoding="utf-8") as f:
+            self.dataset = json.load(f)
+    
+    def has_training_docs(self) -> bool:
+        return False
+    
+    def has_validation_docs(self) -> bool:
+        return False
+    
+    def has_test_docs(self) -> bool:
+        return True
+    
+    def test_docs(self):
+        return self.dataset
+    
+    def doc_to_text(self, doc: Dict) -> str:
+        """将文档转换为输入文本"""
+        return f"""你是一个专业的客服助手。请根据以下用户问题提供准确、有帮助的回答。
+
+用户问题：{doc['query']}
+
+客服回答："""
+    
+    def doc_to_target(self, doc: Dict) -> str:
+        """将文档转换为目标文本"""
+        return doc["expected_answer"]
+    
+    def construct_requests(
+        self, doc: Dict, ctx: str, **kwargs
+    ) -> List[Instance]:
+        """构造评估请求"""
+        return [
+            Instance(
+                instance_id=doc.get("id", ""),
+                request_type=self.OUTPUT_TYPE,
+                arguments={
+                    "context": ctx,
+                    "continuation": "",
+                    "num_tokens": 512,
+                },
+            )
+        ]
+    
+    def process_results(
+        self, doc: Dict, results: List[str], **kwargs
+    ) -> Dict:
+        """处理评估结果"""
+        response = results[0]
+        
+        # 多维度评估
+        scores = {
+            "accuracy": self._check_accuracy(response, doc),
+            "completeness": self._check_completeness(response, doc),
+            "safety": self._check_safety(response),
+            "relevance": self._check_relevance(response, doc),
+        }
+        
+        # 加权综合分数
+        weights = {"accuracy": 0.4, "completeness": 0.3, "safety": 0.2, "relevance": 0.1}
+        scores["overall"] = sum(scores[k] * weights[k] for k in weights)
+        
+        return scores
+    
+    def _check_accuracy(self, response: str, doc: Dict) -> float:
+        """检查回答准确性"""
+        expected_keywords = doc.get("keywords", [])
+        if not expected_keywords:
+            return 1.0
+        
+        matched = sum(1 for kw in expected_keywords if kw in response)
+        return matched / len(expected_keywords)
+    
+    def _check_completeness(self, response: str, doc: Dict) -> float:
+        """检查回答完整性"""
+        required_elements = doc.get("required_elements", [])
+        if not required_elements:
+            return 1.0
+        
+        found = sum(1 for elem in required_elements if elem in response)
+        return found / len(required_elements)
+    
+    def _check_safety(self, response: str) -> float:
+        """检查安全性"""
+        unsafe_patterns = ["骂人", "歧视", "威胁", "违法"]
+        for pattern in unsafe_patterns:
+            if pattern in response:
+                return 0.0
+        return 1.0
+    
+    def _check_relevance(self, response: str, doc: Dict) -> float:
+        """检查相关性"""
+        query_words = set(doc["query"].split())
+        response_words = set(response.split())
+        
+        if not query_words:
+            return 1.0
+        
+        overlap = len(query_words & response_words)
+        return min(overlap / len(query_words), 1.0)
+    
+    def aggregation(self) -> Dict:
+        """聚合指标"""
+        return {
+            "accuracy": mean,
+            "completeness": mean,
+            "safety": mean,
+            "relevance": mean,
+            "overall": mean,
+        }
+    
+    def higher_is_better(self) -> Dict:
+        """指标方向"""
+        return {
+            "accuracy": True,
+            "completeness": True,
+            "safety": True,
+            "relevance": True,
+            "overall": True,
+        }
+
+
+# 注册任务
+TASK_NAME = "customer_service"
+TASK_CLASS = CustomerServiceTask</code></pre>
+  </div>
+
+  <h3>自定义任务配置YAML</h3>
+  <p>创建任务后，需要编写YAML配置文件来注册任务：</p>
+
+  <div class="concept-box">
+    <h4><i class="fas fa-cog"></i> 任务配置YAML模板</h4>
+    <pre><code class="language-yaml"># 文件路径: lm_eval/tasks/custom/customer_service.yaml
+task: customer_service
+dataset_path: json
+dataset_name: customer_service_test
+output_type: generate_until
+
+# 数据集配置
+dataset_kwargs:
+  data_files:
+    test: data/customer_service_test.json
+  split: test
+
+# 生成配置
+generation_kwargs:
+  until:
+    - "\n\n"
+    - "用户问题："
+  max_gen_toks: 512
+  temperature: 0.0
+
+# Few-shot配置
+num_fewshot: 3
+fewshot_split: null
+fewshot_config:
+  sampler: first_n
+
+# 评估指标
+metric_list:
+  - metric: accuracy
+    aggregation: mean
+    higher_is_better: true
+  - metric: completeness
+    aggregation: mean
+    higher_is_better: true
+  - metric: safety
+    aggregation: mean
+    higher_is_better: true
+  - metric: relevance
+    aggregation: mean
+    higher_is_better: true
+  - metric: overall
+    aggregation: mean
+    higher_is_better: true
+
+# 模型配置
+model_args:
+  - pretrained=custom-customer-service-v2.1
+  - dtype=float16
+  - device=cuda:0
+
+# 批处理配置
+batch_size: 16
+thread: 4</code></pre>
+  </div>
+
+  <h3>运行自定义评估</h3>
+  <pre><code class="language-bash"># 运行自定义评估任务
+lm_eval --model hf \
+    --model_args pretrained=custom-customer-service-v2.1 \
+    --tasks customer_service \
+    --batch_size 16 \
+    --output_path results/custom_eval
+
+# 同时运行多个自定义任务
+lm_eval --model hf \
+    --model_args pretrained=custom-customer-service-v2.1 \
+    --tasks customer_service,sentiment_analysis,intent_classification \
+    --batch_size 16 \
+    --output_path results/multi_task_eval
+
+# 使用自定义配置文件运行
+lm_eval --model hf \
+    --model_args pretrained=custom-customer-service-v2.1 \
+    --config configs/custom_eval.yaml \
+    --output_path results/config_based_eval</code></pre>
 
   <div class="tip-box">
     <h5>自定义评估数据的质量</h5>
