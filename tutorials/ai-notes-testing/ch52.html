@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="测试数据生成 - AI智能测试数据构建">
+    <meta name="keywords" content="AI测试数据, Mock数据, 测试数据生成">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch52.html">
+    <title>第52章：测试数据生成 - AI测试实战</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第52章：上下文管理测试 - AI测试实战">
+    <meta property="og:description" content="测试AI系统的上下文处理、记忆和状态管理">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch52.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第52章：上下文管理测试">
+    <meta name="twitter:description" content="测试AI系统的上下文处理、记忆和状态管理">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第52章：上下文管理测试",
+        "description": "测试AI系统的上下文处理、记忆和状态管理",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch52.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav"><a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks"><li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li><li><a href="ch51.html"><i class="fas fa-code"></i> 测试脚本生成</a></li><li><a href="ch53.html"><i class="fas fa-bug"></i> 缺陷分析</a></li></ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button></nav>
+    <div class="ai-chapter-nav"><a href="ch51.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a><a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a><a href="ch53.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a></div>
+    <main class="ai-main"><section id="chapter52"><h2 class="ai-section-title"><i class="fas fa-database"></i> 第52章：测试数据生成</h2>
+        <div class="ai-box ai-box--objectives"><h4><i class="fas fa-bullseye"></i> 学习目标</h4><ul><li>掌握AI生成测试数据的方法与类型</li><li>理解边界值数据、异常数据的设计</li><li>学会生成Mock数据与测试数据集</li><li>了解数据隐私保护的脱敏处理</li></ul></div>
+        <h3 class="ai-section-subtitle">测试数据类型</h3>
+        <table class="ai-table"><thead><tr><th>数据类型</th><th>生成要点</th><th>AI优势</th></tr></thead><tbody>
+            <tr><td><strong>正向数据</strong></td><td>符合规格的有效数据</td><td>快速生成大量样本</td></tr>
+            <tr><td><strong>边界数据</strong></td><td>最大/最小/临界值</td><td>自动识别边界条件</td></tr>
+            <tr><td><strong>异常数据</strong></td><td>非法格式、空值、溢出</td><td>覆盖多种异常场景</td></tr>
+            <tr><td><strong>Mock数据</strong></td><td>模拟API响应</td><td>生成真实感数据</td></tr>
+        </tbody></table>
+        <h3 class="ai-section-subtitle">AI生成测试数据示例</h3>
+        <div class="ai-code"><div class="ai-code-header"><span class="lang-label"><i class="fab fa-python"></i> Python</span></div>
+        <pre><code class="language-python"># AI生成的用户注册测试数据
+test_users = [
+    # 正向数据
+    {"username": "user001", "email": "user001@test.com", "age": 25},
+    {"username": "user002", "email": "user002@test.com", "age": 30},
+    
+    # 边界数据
+    {"username": "a", "email": "a@b.com", "age": 0},       # 最小长度
+    {"username": "maxlenuser1234567890", "email": "max@test.com", "age": 150},  # 最大
+    
+    # 异常数据
+    {"username": "", "email": "", "age": -1},            # 空值
+    {"username": "user!", "email": "invalid", "age": 999},  # 格式错误
+]</code></pre></div>
+        <div class="ai-box ai-box--summary"><h4><i class="fas fa-bookmark"></i> 本章小结</h4><ul><li>测试数据类型：正向、边界、异常、Mock四类</li><li>AI优势：快速批量生成、自动识别边界、覆盖异常场景</li><li>脱敏处理：生成测试数据时保护隐私信息</li></ul></div>
+        <div class="ai-box ai-box--reading"><h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4><ul><li><a href="ch53.html">第53章：缺陷分析</a></li></ul></div></section></main>
+    <div class="ai-chapter-nav"><a href="ch51.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a><a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a><a href="ch53.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a></div>
+    <footer class="ai-footer"><div class="footer-content"><p>AI测试实战 | 第52章：测试数据生成</p></div></footer>
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

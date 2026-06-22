@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Skills技能体系 - AI能力的模块化封装与管理">
+    <meta name="keywords" content="Skills, AI技能, Claude Skills, 能力封装">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch38.html">
+    <title>第38章：Skills技能体系 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第38章：MCP调试与监控 - AI测试实战">
+    <meta property="og:description" content="MCP协议调试工具、日志分析和性能监控最佳实践">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch38.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第38章：MCP调试与监控">
+    <meta name="twitter:description" content="MCP协议调试工具、日志分析和性能监控最佳实践">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第38章：MCP调试与监控",
+        "description": "MCP协议调试工具、日志分析和性能监控最佳实践",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch38.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch37.html"><i class="fas fa-server"></i> MCP开发</a></li>
+            <li><a href="ch40.html"><i class="fas fa-robot"></i> Agent</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch37.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch39.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter38">
+            <h2 class="ai-section-title"><i class="fas fa-cubes"></i> 第38章：Skills技能体系</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解Skills的核心定位：MCP之上的能力封装</li>
+                    <li>掌握Skill的组成部分：Tools、Prompts、知识库</li>
+                    <li>了解Skill的发现、加载、执行机制</li>
+                    <li>学会从测试视角评估Skill质量</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--prereq">
+                <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                <ul>
+                    <li>已完成第36-37章MCP的学习</li>
+                    <li>理解AI Agent的基本概念</li>
+                    <li>了解Prompt Engineering基础</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">一句话定义</h3>
+
+            <div class="ai-success">
+                <h5>Skill（技能）</h5>
+                <p><strong>Skill是封装好的AI能力包，包含Tools（工具）、Prompts（提示词模板）、知识库（Knowledge），让AI可以像"调用函数"一样执行复杂任务。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">生活类比：技能证书</h3>
+
+            <div class="ai-info">
+                <h5>为什么叫Skill？</h5>
+                <p>就像人考取技能证书：会计证代表你有记账能力、驾照代表你能开车。Skill就是AI的"技能证书"——封装了执行某类任务所需的全部能力。</p>
+                <p>例如：<strong>"测试报告生成"Skill</strong>包含读取测试数据的工具、生成报告的Prompt模板、报告规范的知识库。</p>
+            </div>
+
+            <h3 class="ai-section-subtitle">Skill与MCP的关系</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-sitemap"></i> Skill层级关系</span></div>
+                <pre><code class="language-text">┌──────────────────────────────────────────────────────────────────┐
+│                   Skill 与 MCP 的关系                              │
+│                                                                  │
+│   ┌───────────────────────┐                                     │
+│   │  Skill（技能包）        │ ← 最高层：完整的任务能力封装          │
+│   │                       │                                     │
+│   │  包含：                 │                                     │
+│   │  - Tools（工具）        │                                     │
+│   │  - Prompts（提示词）    │                                     │
+│   │  - Knowledge（知识库）  │                                     │
+│   │  - Workflows（工作流）  │                                     │
+│   └──────────┬────────────┘                                     │
+│              │                                                   │
+│   ┌──────────▼────────────┐                                     │
+│   │  MCP Server（工具服务） │ ← 中间层：工具实现                    │
+│   │                       │                                     │
+│   │  提供：                 │                                     │
+│   │  - 工具定义和执行       │                                     │
+│   │  - 数据访问            │                                     │
+│   │  - 基础Prompt模板       │                                     │
+│   └──────────┬────────────┘                                     │
+│              │                                                   │
+│   ┌──────────▼────────────┐                                     │
+│   │  MCP Protocol          │ ← 基础层：通信协议                    │
+│   │  （JSON-RPC通信）       │                                     │
+│   └───────────────────────┘                                     │
+│                                                                  │
+│   关系：                                                         │
+│   Skill调用MCP Server的工具 → MCP通过协议传输 → AI得到结果        │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Skill的核心组成</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>组成部分</th>
+                        <th>说明</th>
+                        <th>作用</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tools</strong></td>
+                        <td>具体执行功能的工具集</td>
+                        <td>让Skill能"做事"</td>
+                        <td>查询测试结果、生成报告、发送通知</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prompts</strong></td>
+                        <td>预设的提示词模板</td>
+                        <td>让Skill"知道怎么做"</td>
+                        <td>报告生成模板、缺陷分析模板</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Knowledge</strong></td>
+                        <td>领域知识库文档</td>
+                        <td>让Skill"懂领域知识"</td>
+                        <td>测试规范文档、常见问题FAQ</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Workflows</strong></td>
+                        <td>预设的执行流程</td>
+                        <td>让Skill"有序执行"</td>
+                        <td>测试执行流程、报告审批流程</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">Skill的典型结构</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-folder-open"></i> Markdown - Skill目录结构</span></div>
+                <pre><code class="language-markdown">test-report-generator/
+├── SKILL.md            # Skill定义文件（元信息）
+├── tools/
+│   ├── query_results.py    # 查询测试结果工具
+│   ├── generate_html.py    # 生成HTML报告工具
+│   └── send_email.py       # 发送邮件通知工具
+├── prompts/
+│   ├── report_summary.md   # 报告摘要生成Prompt
+│   ├── bug_analysis.md     # 缺陷分析Prompt
+│   └── executive_summary.md # 管理层摘要Prompt
+├── knowledge/
+│   ├── test_standards.md   # 测试规范文档
+│   ├── report_templates.md # 报告模板说明
+│   └── common_issues.md     # 常见问题FAQ
+└── workflows/
+    └── daily_report.yaml   # 每日报告生成流程</code></pre>
+            </div>
+
+            <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">SKILL.md定义示例</h4>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-file-code"></i> Markdown - SKILL.md示例</span></div>
+                <pre><code class="language-markdown">---
+name: test-report-generator
+version: 1.0.0
+description: 自动生成测试报告的技能包
+author: 测试团队
+tools:
+  - query_results
+  - generate_html
+  - send_email
+prompts:
+  - report_summary
+  - bug_analysis
+  - executive_summary
+knowledge:
+  - test_standards
+  - report_templates
+---
+
+# 测试报告生成器 Skill
+
+## 功能说明
+自动从测试平台拉取执行结果，生成HTML格式的测试报告，并发送给相关人员。
+
+## 适用场景
+- 每日测试汇总报告
+- 版本发布测试报告
+- 缺陷分析报告
+
+## 使用示例
+用户输入："生成今天的测试报告"
+Skill会：
+1. 查询今日测试结果
+2. 分析缺陷分布
+3. 生成HTML报告
+4. 发送给团队
+
+## 输入参数
+- date: 报告日期（可选，默认今天）
+- project: 项目名称（可选）
+- format: 报告格式（html/pdf，默认html）</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Skill的发现与加载机制</h3>
+
+            <div class="ai-info">
+                <h5>AI如何找到并使用Skill？</h5>
+                <ol>
+                    <li><strong>发现</strong>：AI扫描Skills目录，解析每个SKILL.md的元信息</li>
+                    <li><strong>匹配</strong>：用户提问时，AI根据description匹配最合适的Skill</li>
+                    <li><strong>加载</strong>：加载Skill的Tools、Prompts、Knowledge到上下文</li>
+                    <li><strong>执行</strong>：AI按Skill定义的流程调用工具完成任务</li>
+                </ol>
+            </div>
+
+            <h3 class="ai-section-subtitle">企业测试Skills示例</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>Skill名称</th>
+                        <th>功能</th>
+                        <th>包含能力</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>test-case-generator</strong></td>
+                        <td>自动生成测试用例</td>
+                        <td>需求解析工具、用例模板Prompt、测试规范Knowledge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>defect-analyzer</strong></td>
+                        <td>缺陷根因分析</td>
+                        <td>日志分析工具、根因分析Prompt、常见缺陷Knowledge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>test-planner</strong></td>
+                        <td>制定测试计划</td>
+                        <td>风险评估工具、计划模板Prompt、测试策略Knowledge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>regression-checker</strong></td>
+                        <td>回归测试执行</td>
+                        <td>版本比对工具、执行流程Workflow、回归范围Knowledge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>performance-monitor</strong></td>
+                        <td>性能监控分析</td>
+                        <td>指标采集工具、分析Prompt、性能阈值Knowledge</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">测试视角：Skill质量评估要点</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>评估维度</th>
+                        <th>检查项</th>
+                        <th>验证方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>定义完整性</strong></td>
+                        <td>SKILL.md元信息完整、描述清晰</td>
+                        <td>检查必需字段（name、description、tools）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工具可用性</strong></td>
+                        <td>所有Tools可正常调用</td>
+                        <td>逐个调用工具，验证返回格式</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prompt有效性</strong></td>
+                        <td>模板能生成符合预期的输出</td>
+                        <td>使用模板生成内容，人工评审质量</td>
+                    </tr>
+                    <tr>
+                        <td><strong>知识库准确性</strong></td>
+                        <td>知识内容正确、更新及时</td>
+                        <td>抽查关键知识点，验证准确性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>匹配准确性</strong></td>
+                        <td>AI能正确识别何时使用该Skill</td>
+                        <td>测试多种提问方式，验证Skill选择</td>
+                    </tr>
+                    <tr>
+                        <td><strong>执行成功率</strong></td>
+                        <td>Skill完整执行且结果正确</td>
+                        <td>端到端测试Skill执行流程</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>Skill是封装好的AI能力包，包含Tools、Prompts、Knowledge、Workflows四个核心部分</li>
+                    <li>Skill位于MCP之上，是更高层的能力封装——MCP提供工具，Skill组合工具完成任务</li>
+                    <li>Skill的典型结构：SKILL.md定义文件 + tools目录 + prompts目录 + knowledge目录</li>
+                    <li>AI通过发现、匹配、加载、执行四个步骤使用Skill</li>
+                    <li>测试团队可构建测试报告生成、用例生成、缺陷分析等专属Skills</li>
+                    <li>Skill质量需评估定义完整性、工具可用性、Prompt有效性、知识准确性、匹配准确性、执行成功率</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch39.html">第39章：Skills开发实战</a> - 从零构建测试Skill</li>
+                    <li><a href="ch40.html">第40章：Agent智能体架构</a> - 多Skill协作的Agent设计</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch37.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch39.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第38章：Skills技能体系 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent开发实战 - 使用LangChain和Claude构建测试执行Agent">
+    <meta name="keywords" content="Agent开发, LangChain Agent, Claude Agent, 测试Agent">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch41.html">
+    <title>第41章：Agent开发实战 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第41章：Skills编排与组合 - AI测试实战">
+    <meta property="og:description" content="多Skills协作模式、依赖管理和编排策略">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch41.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第41章：Skills编排与组合">
+    <meta name="twitter:description" content="多Skills协作模式、依赖管理和编排策略">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第41章：Skills编排与组合",
+        "description": "多Skills协作模式、依赖管理和编排策略",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch41.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch40.html"><i class="fas fa-robot"></i> Agent架构</a></li>
+            <li><a href="ch42.html"><i class="fas fa-project-diagram"></i> Harness</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch40.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch42.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter41">
+            <h2 class="ai-section-title"><i class="fas fa-code"></i> 第41章：Agent开发实战</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>掌握使用LangChain构建Agent的基础方法</li>
+                    <li>理解Claude Code的Agent能力与使用方式</li>
+                    <li>学会定义Agent的工具集和执行流程</li>
+                    <li>了解Agent的测试验证方法</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--prereq">
+                <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                <ul>
+                    <li>已完成第40章Agent架构的学习</li>
+                    <li>有Python开发能力</li>
+                    <li>了解LangChain或Claude API基础</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">Agent开发框架选型</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>框架</th>
+                        <th>特点</th>
+                        <th>适用场景</th>
+                        <th>推荐度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LangChain</strong></td>
+                        <td>成熟生态、丰富工具集成、ReAct实现</td>
+                        <td>复杂多工具Agent、生产环境</td>
+                        <td>★★★★☆</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude Code</strong></td>
+                        <td>Anthropic官方、深度Claude集成、MCP原生支持</td>
+                        <td>Claude生态、代码助手、测试工具链</td>
+                        <td>★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AutoGPT</strong></td>
+                        <td>完全自主、目标驱动、实验性</td>
+                        <td>研究探索、原型验证</td>
+                        <td>★★★☆☆</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OpenAI Assistants</strong></td>
+                        <td>托管服务、简化部署、GPT集成</td>
+                        <td>快速原型、GPT生态</td>
+                        <td>★★★★☆</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">实战1：使用LangChain构建测试Agent</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-terminal"></i> Bash - 安装依赖</span></div>
+                <pre><code class="language-bash"># 安装 LangChain
+pip install langchain langchain-anthropic
+
+# 或使用 uv
+uv add langchain langchain-anthropic</code></pre>
+            </div>
+
+            <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">定义测试工具集</h4>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> Python - 定义Agent工具</span></div>
+                <pre><code class="language-python">from langchain.tools import tool
+from typing import Optional
+import json
+
+# 定义测试相关工具
+
+@tool
+def query_test_results(project: str, date: Optional[str] = None) -> str:
+    """查询测试执行结果
+    
+    Args:
+        project: 项目名称
+        date: 查询日期（可选，默认今天）
+    
+    Returns:
+        测试结果JSON字符串
+    """
+    # 模拟查询（实际项目中调用真实API）
+    results = {
+        "project": project,
+        "date": date or "2025-01-15",
+        "total": 50,
+        "passed": 45,
+        "failed": 3,
+        "skipped": 2,
+        "duration": "12.5 minutes"
+    }
+    return json.dumps(results)
+
+@tool
+def get_failed_test_cases(project: str) -> str:
+    """获取失败测试用例详情
+    
+    Args:
+        project: 项目名称
+    
+    Returns:
+        失败用例列表
+    """
+    failed_cases = [
+        {"id": "TC-001", "name": "支付接口测试", "error": "超时"},
+        {"id": "TC-002", "name": "登录验证测试", "error": "断言失败"},
+        {"id": "TC-003", "name": "数据同步测试", "error": "数据不一致"}
+    ]
+    return json.dumps(failed_cases, indent=2)
+
+@tool
+def generate_test_report(results: str, format: str = "html") -> str:
+    """生成测试报告
+    
+    Args:
+        results: 测试结果JSON字符串
+        format: 报告格式（html/markdown）
+    
+    Returns:
+        生成的报告内容
+    """
+    data = json.loads(results)
+    report = f"""
+    ## 测试报告 - {data['project']}
+    
+    - 日期: {data['date']}
+    - 执行总数: {data['total']}
+    - 通过: {data['passed']} ({data['passed']/data['total']*100:.1f}%)
+    - 失败: {data['failed']}
+    - 跳过: {data['skipped']}
+    - 耗时: {data['duration']}
+    """
+    return report
+
+# 工具列表
+tools = [query_test_results, get_failed_test_cases, generate_test_report]</code></pre>
+            </div>
+
+            <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">创建Agent并执行</h4>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> Python - 创建ReAct Agent</span></div>
+                <pre><code class="language-python">from langchain.agents import AgentExecutor, create_react_agent
+from langchain_anthropic import ChatAnthropic
+from langchain import hub
+
+# 初始化 LLM
+llm = ChatAnthropic(
+    model="claude-3-5-sonnet-20241022",
+    temperature=0
+)
+
+# 获取 ReAct Prompt模板
+prompt = hub.pull("hwchase17/react")
+
+# 创建 Agent
+agent = create_react_agent(llm, tools, prompt)
+
+# 创建 Agent Executor
+agent_executor = AgentExecutor(
+    agent=agent,
+    tools=tools,
+    verbose=True,  # 显示执行过程
+    handle_parsing_errors=True  # 处理解析错误
+)
+
+# 执行任务
+result = agent_executor.invoke({
+    "input": "查询web项目的测试结果，并生成一份测试报告"
+})
+
+print("=== Agent 执行结果 ===")
+print(result["output"])</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">实战2：使用Claude Code构建Agent</h3>
+
+            <div class="ai-info">
+                <h5>Claude Code的优势</h5>
+                <p>Claude Code是Anthropic官方的Agent框架，与Claude深度集成，原生支持MCP工具调用，非常适合测试工具链场景。</p>
+            </div>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-terminal"></i> Bash - Claude Code使用</span></div>
+                <pre><code class="language-bash"># Claude Code 通过 CLI 使用
+# 安装 Claude Code CLI
+npm install -g @anthropic-ai/claude-code
+
+# 或直接使用
+claude-code
+
+# 在 Claude Code 中配置 MCP Server
+# 编辑 ~/.claude-code/config.json
+{
+  "mcpServers": {
+    "test-tools": {
+      "command": "python",
+      "args": ["test_mcp_server.py"]
+    }
+  }
+}
+
+# 启动 Agent 任务
+claude-code --task "执行web项目的回归测试并生成报告"</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Agent开发的关键要素</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>要素</th>
+                        <th>说明</th>
+                        <th>开发要点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>工具定义</strong></td>
+                        <td>Agent可调用的功能集</td>
+                        <td>每个工具要有清晰的描述和参数Schema</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prompt模板</strong></td>
+                        <td>指导Agent如何思考和行动</td>
+                        <td>ReAct模板包含：思考→行动→观察→反思</td>
+                    </tr>
+                    <tr>
+                        <td><strong>记忆系统</strong></td>
+                        <td>存储执行历史和上下文</td>
+                        <td>LangChain提供多种记忆类型（Buffer、Summary）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>错误处理</strong></td>
+                        <td>处理工具调用失败</td>
+                        <td>设置handle_parsing_errors，提供重试机制</td>
+                    </tr>
+                    <tr>
+                        <td><strong>执行控制</strong></td>
+                        <td>限制执行次数和资源</td>
+                        <td>设置max_iterations防止无限循环</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">Agent测试验证清单</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-clipboard-check"></i> Agent验证测试</span></div>
+                <pre><code class="language-python"># Agent 测试验证脚本示例
+
+def test_agent_execution():
+    """测试Agent基本执行能力"""
+    
+    # 测试1：简单任务
+    result = agent_executor.invoke({
+        "input": "查询web项目的测试结果"
+    })
+    assert "passed" in result["output"] or "failed" in result["output"]
+    
+    # 测试2：复杂任务链
+    result = agent_executor.invoke({
+        "input": "查询测试结果，找出失败用例，生成报告"
+    })
+    assert "报告" in result["output"]
+    
+    # 测试3：异常处理
+    result = agent_executor.invoke({
+        "input": "查询不存在项目的测试结果"
+    })
+    assert result is not None  # 应有错误处理，不应崩溃
+    
+    # 测试4：多次执行一致性
+    results = [
+        agent_executor.invoke({"input": "生成今日报告"})
+        for _ in range(3)
+    ]
+    # 验证结果格式一致（内容可能不同）
+    assert all("测试报告" in r["output"] for r in results)
+    
+    print("所有Agent测试通过！")
+
+if __name__ == "__main__":
+    test_agent_execution()</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Agent开发最佳实践</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-lightbulb"></i> 开发建议</h4>
+                <ul>
+                    <li><strong>工具描述要清晰</strong>：Agent通过描述理解何时用哪个工具，描述越清晰，选择越准确</li>
+                    <li><strong>限制执行次数</strong>：设置max_iterations防止Agent陷入循环</li>
+                    <li><strong>启用verbose模式</strong>：开发时启用verbose观察Agent的思考过程</li>
+                    <li><strong>处理解析错误</strong>：LLM输出可能格式错误，需要容错处理</li>
+                    <li><strong>添加记忆系统</strong>：长任务需要记忆中间结果</li>
+                    <li><strong>设置成功标准</strong>：明确什么状态算"任务完成"</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>Agent开发框架：LangChain（成熟生态）、Claude Code（官方集成）、AutoGPT（实验性）</li>
+                    <li>LangChain开发流程：定义Tools → 选择Prompt模板 → 创建Agent → AgentExecutor执行</li>
+                    <li>Claude Code通过MCP集成工具，原生支持测试工具链</li>
+                    <li>关键要素：工具定义、Prompt模板、记忆系统、错误处理、执行控制</li>
+                    <li>测试验证：简单任务、复杂链式任务、异常处理、一致性验证</li>
+                    <li>最佳实践：清晰工具描述、限制循环次数、启用verbose、处理解析错误</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch42.html">第42章：Harness框架</a> - Agent执行框架详解</li>
+                    <li><a href="https://python.langchain.com/docs/modules/agents/" target="_blank">LangChain Agent官方文档</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch40.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch42.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第41章：Agent开发实战 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

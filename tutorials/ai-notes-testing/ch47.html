@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="向量数据库选型 - RAG系统存储方案对比">
+    <meta name="keywords" content="向量数据库, Pinecone, Chroma, FAISS, Qdrant, RAG">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch47.html">
+    <title>第47章：向量数据库选型 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第47章：持续集成实践 - AI测试实战">
+    <meta property="og:description" content="AI系统CI/CD流程、测试自动化和发布策略">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch47.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第47章：持续集成实践">
+    <meta name="twitter:description" content="AI系统CI/CD流程、测试自动化和发布策略">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第47章：持续集成实践",
+        "description": "AI系统CI/CD流程、测试自动化和发布策略",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch47.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch46.html"><i class="fas fa-robot"></i> Hugging Face</a></li>
+            <li><a href="ch48.html"><i class="fas fa-users"></i> 团队协作</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch46.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch48.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter47">
+            <h2 class="ai-section-title"><i class="fas fa-database"></i> 第47章：向量数据库选型</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解向量数据库在RAG系统中的作用</li>
+                    <li>掌握主流向量数据库的对比选型</li>
+                    <li>了解不同场景的最佳存储方案</li>
+                    <li>学会在测试知识库中应用向量存储</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">向量数据库核心定位</h3>
+
+            <div class="ai-success">
+                <h5>RAG系统的记忆层</h5>
+                <p><strong>向量数据库存储文本的Embedding向量，支持语义相似度检索——RAG系统检索外部知识的核心基础设施。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">主流向量数据库对比</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>数据库</th>
+                        <th>类型</th>
+                        <th>特点</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pinecone</strong></td>
+                        <td>云托管</td>
+                        <td>全托管、高性能、免运维</td>
+                        <td>生产级RAG、无运维需求</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chroma</strong></td>
+                        <td>开源轻量</td>
+                        <td>Python原生、嵌入式、易上手</td>
+                        <td>开发测试、本地原型</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FAISS</strong></td>
+                        <td>算法库</td>
+                        <td>Meta开源、极致性能、纯算法</td>
+                        <td>大规模检索、研究场景</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Qdrant</strong></td>
+                        <td>开源服务</td>
+                        <td>Rust实现、高性能、过滤强</td>
+                        <td>自托管生产、过滤需求</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weaviate</strong></td>
+                        <td>开源服务</td>
+                        <td>GraphQL API、模块化、混合搜索</td>
+                        <td>复杂搜索、多模态</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Milvus</strong></td>
+                        <td>开源服务</td>
+                        <td>云原生、分布式、企业级</td>
+                        <td>大规模企业部署</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">选型决策依据</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-balance-scale"></i> 选型决策要点</h4>
+                <table class="ai-table">
+                    <thead>
+                        <tr>
+                            <th>场景</th>
+                            <th>推荐方案</th>
+                            <th>理由</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>快速原型开发</td>
+                            <td>Chroma</td>
+                            <td>Python原生，5分钟上手</td>
+                        </tr>
+                        <tr>
+                            <td>生产免运维</td>
+                            <td>Pinecone</td>
+                            <td>全托管，SLA保障</td>
+                        </tr>
+                        <tr>
+                            <td>私有化部署</td>
+                            <td>Qdrant/Milvus</td>
+                            <td>数据不出域，可控</td>
+                        </tr>
+                        <tr>
+                            <td>研究/算法优化</td>
+                            <td>FAISS</td>
+                            <td>纯算法，极致性能</td>
+                        </tr>
+                        <tr>
+                            <td>大规模数据</td>
+                            <td>Milvus</td>
+                            <td>分布式架构，可扩展</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="ai-section-subtitle">测试知识库应用示例</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fab fa-python"></i> Chroma测试知识库</span></div>
+                <pre><code class="language-python"># 安装Chroma
+pip install chromadb
+
+# 创建测试知识库
+import chromadb
+from chromadb.utils import embedding_functions
+
+client = chromadb.Client()
+ef = embedding_functions.DefaultEmbeddingFunction()
+
+# 创建collection
+collection = client.create_collection("test-knowledge")
+
+# 添加测试文档
+docs = [
+    "测试用例应覆盖边界条件",
+    "回归测试应定期执行",
+    "缺陷报告需包含重现步骤"
+]
+collection.add(
+    documents=docs,
+    ids=["tc-001", "tc-002", "tc-003"]
+)
+
+# 语义检索
+results = collection.query(
+    query_texts=["如何编写测试"],
+    n_results=2
+)
+print(results)</code></pre>
+            </div>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>向量数据库：存储Embedding向量，支持语义检索，RAG核心基础设施</li>
+                    <li>云托管：Pinecone（生产免运维首选）</li>
+                    <li>开源轻量：Chroma（开发测试原型首选）</li>
+                    <li>算法库：FAISS（研究/极致性能）</li>
+                    <li>开源服务：Qdrant（自托管）、Milvus（大规模）、Weaviate（混合搜索）</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch48.html">第48章：团队协作工具</a></li>
+                    <li><a href="https://www.pinecone.io/learn/" target="_blank">Pinecone学习中心</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch46.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch48.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第47章：向量数据库选型 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

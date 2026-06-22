@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harness框架 - Agent执行与评估的标准化框架">
+    <meta name="keywords" content="Harness, Agent框架, Agent评估, 测试Harness">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch42.html">
+    <title>第42章：Harness框架 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第42章：错误处理与容错机制 - AI测试实战">
+    <meta property="og:description" content="企业级AI系统的错误分类、处理策略和容错设计">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch42.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第42章：错误处理与容错机制">
+    <meta name="twitter:description" content="企业级AI系统的错误分类、处理策略和容错设计">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第42章：错误处理与容错机制",
+        "description": "企业级AI系统的错误分类、处理策略和容错设计",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch42.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch40.html"><i class="fas fa-robot"></i> Agent架构</a></li>
+            <li><a href="ch43.html"><i class="fas fa-cloud"></i> 开发者生态</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch41.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch43.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter42">
+            <h2 class="ai-section-title"><i class="fas fa-project-diagram"></i> 第42章：Harness框架</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解Harness的核心定位：Agent的标准化执行框架</li>
+                    <li>掌握Harness的架构：环境、数据集、评估器、执行器</li>
+                    <li>了解如何使用Harness评估Agent质量</li>
+                    <li>学会构建测试领域Agent Harness</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--prereq">
+                <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                <ul>
+                    <li>已完成第40-41章Agent开发的学习</li>
+                    <li>理解Agent的基本执行流程</li>
+                    <li>了解测试评估的基本概念</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">一句话定义</h3>
+
+            <div class="ai-success">
+                <h5>Harness（执行框架）</h5>
+                <p><strong>Harness是Agent的标准化执行和评估框架——它定义了Agent运行的环境、输入数据、执行流程、评估标准，让Agent的质量评估有统一的基准。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">生活类比：考试系统</h3>
+
+            <div class="ai-info">
+                <h5>为什么叫Harness？</h5>
+                <p>Harness就像考试系统：提供了考场（环境）、试卷（数据集）、监考老师（执行监控）、评分标准（评估器）。Agent在Harness中"考试"，成绩就是质量评估结果。</p>
+                <p>例如：<strong>"测试Agent Harness"</strong>定义了测试任务数据集、执行监控、成功率评估标准。</p>
+            </div>
+
+            <h3 class="ai-section-subtitle">Harness的核心架构</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-sitemap"></i> Harness架构组成</span></div>
+                <pre><code class="language-text">┌──────────────────────────────────────────────────────────────────┐
+│                   Harness 框架架构                                 │
+│                                                                  │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  1. Environment（执行环境）                                 │  │
+│  │  ───────────────────────────────────────────────────────    │  │
+│  │  - 工具可用性：哪些MCP Server/Skill可被调用                 │  │
+│  │  - 资源限制：最大执行次数、时间限制                          │  │
+│  │  - 状态隔离：每次执行的独立上下文                            │  │
+│  │  - 配置管理：API密钥、环境变量                               │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                              ↓                                   │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  2. Dataset（测试数据集）                                   │  │
+│  │  ───────────────────────────────────────────────────────    │  │
+│  │  - 任务定义：用户目标、预期输出                              │  │
+│  │  - 输入数据：任务所需的上下文信息                            │  │
+│  │  - Ground Truth：预期的正确结果                             │  │
+│  │  - 难度分级：简单/中等/困难任务                              │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                              ↓                                   │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  3. Executor（执行器）                                      │  │
+│  │  ───────────────────────────────────────────────────────    │  │
+│  │  - 任务分发：按数据集逐个执行任务                            │  │
+│  │  - 执行监控：记录每次工具调用、思考过程                      │  │
+│  │  - 日志收集：保存执行轨迹便于分析                            │  │
+│  │  - 并行执行：支持多任务并行测试                              │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                              ↓                                   │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  4. Evaluator（评估器）                                     │  │
+│  │  ───────────────────────────────────────────────────────    │  │
+│  │  - 成率评估：任务是否成功完成                                │  │
+│  │  - 质量评估：输出是否符合预期                                │  │
+│  │  - 效率评估：执行耗时、调用次数                              │  │
+│  │  - 稳定性评估：多次执行的一致性                              │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                              ↓                                   │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  5. Reporter（报告生成器）                                  │  │
+│  │  ───────────────────────────────────────────────────────    │  │
+│  │  - 结果汇总：成功率、失败原因分布                            │  │
+│  │  - 详细日志：每个任务的执行轨迹                              │  │
+│  │  - 对比分析：不同版本/模型的对比                             │  │
+│  │  - 可视化图表：趋势图、分布图                                │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Harness的核心组件详解</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>组件</th>
+                        <th>职责</th>
+                        <th>配置要素</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Environment</strong></td>
+                        <td>定义Agent运行环境</td>
+                        <td>工具列表、资源限制、配置</td>
+                        <td>测试工具MCP Server、max_iterations=10</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dataset</strong></td>
+                        <td>定义测试任务集</td>
+                        <td>任务列表、输入数据、预期结果</td>
+                        <td>10个测试报告生成任务</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Executor</strong></td>
+                        <td>执行Agent任务</td>
+                        <td>Agent实例、执行策略</td>
+                        <td>LangChain AgentExecutor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evaluator</strong></td>
+                        <td>评估执行结果</td>
+                        <td>评估标准、评分规则</td>
+                        <td>成功率、准确性、耗时</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reporter</strong></td>
+                        <td>生成评估报告</td>
+                        <td>报告格式、可视化选项</td>
+                        <td>HTML报告、JSON日志</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">Harness配置示例</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-file-code"></i> YAML - Harness配置</span></div>
+                <pre><code class="language-yaml"># test-agent-harness.yaml
+name: test-report-agent-harness
+version: 1.0.0
+description: 测试报告生成Agent评估框架
+
+# 1. Environment配置
+environment:
+  tools:
+    - mcp_server: test-tools-server
+    - skill: test-report-generator
+  limits:
+    max_iterations: 10
+    timeout_seconds: 120
+    max_tokens: 4000
+  config:
+    api_keys:
+      anthropic: "${ANTHROPIC_API_KEY}"
+    test_platform_url: "https://test.company.com"
+
+# 2. Dataset配置
+dataset:
+  name: test-report-tasks
+  tasks:
+    - id: task-001
+      input: "生成web项目今天的测试报告"
+      expected_output:
+        contains: ["测试报告", "通过率"]
+        format: "html"
+      difficulty: "easy"
+      
+    - id: task-002
+      input: "分析支付模块失败测试的根因"
+      expected_output:
+        contains: ["根因", "建议"]
+        has_sections: ["问题描述", "分析过程", "修复建议"]
+      difficulty: "medium"
+      
+    - id: task-003
+      input: "执行回归测试并生成完整报告"
+      expected_output:
+        contains: ["执行结果", "缺陷分析", "改进建议"]
+        format: "html"
+        attachments: ["report.html"]
+      difficulty: "hard"
+
+# 3. Executor配置
+executor:
+  agent_type: "langchain-react"
+  parallel_workers: 3
+  retry_count: 2
+  logging:
+    level: "verbose"
+    save_traces: true
+
+# 4. Evaluator配置
+evaluator:
+  metrics:
+    - name: success_rate
+      weight: 0.4
+      criteria: "任务是否成功完成"
+      
+    - name: output_quality
+      weight: 0.3
+      criteria: "输出是否符合预期"
+      
+    - name: execution_efficiency
+      weight: 0.2
+      criteria: "执行耗时和调用次数"
+      
+    - name: stability
+      weight: 0.1
+      criteria: "多次执行的一致性"
+  
+  thresholds:
+    passing_score: 0.7
+    excellent_score: 0.9
+
+# 5. Reporter配置
+reporter:
+  output_format: "html"
+  include_traces: true
+  include_metrics: true
+  visualization:
+    - success_rate_chart
+    - difficulty_distribution
+    - execution_time_histogram</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Harness执行流程</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-project-diagram"></i> Harness执行流程</span></div>
+                <pre><code class="language-text">Harness 执行流程：
+
+输入：Harness配置 + Agent实例
+
+┌────────────────────────────────────────────────────────────┐
+│  Phase 1: 初始化                                            │
+│  ──────────────────────────────────────────────────────    │
+│  1.1 加载Environment配置                                    │
+│  1.2 准备工具和资源                                          │
+│  1.3 验证Agent实例                                           │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 2: 任务分发                                          │
+│  ──────────────────────────────────────────────────────    │
+│  For each task in Dataset:                                 │
+│    2.1 准备任务输入                                          │
+│    2.2 设置执行上下文                                        │
+│    2.3 触发Agent执行                                         │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 3: 执行监控                                          │
+│  ──────────────────────────────────────────────────────    │
+│  During execution:                                          │
+│    3.1 记录每次工具调用                                      │
+│    3.2 记录Agent思考过程                                     │
+│    3.3 监控资源消耗                                          │
+│    3.4 检测异常和超时                                        │
+│    3.5 收集执行日志                                          │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 4: 结果评估                                          │
+│  ──────────────────────────────────────────────────────    │
+│  After execution:                                           │
+│    4.1 计算成功率                                            │
+│    4.2 检查输出质量                                          │
+│    4.3 统计效率指标                                          │
+│    4.4 测试稳定性（可选重复执行）                             │
+│    4.5 综合评分                                              │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 5: 报告生成                                          │
+│  ──────────────────────────────────────────────────────    │
+│  5.1 汇总评估结果                                            │
+│  5.2 生成详细日志                                            │
+│  5.3 可视化展示                                              │
+│  5.4 输出最终报告                                            │
+└────────────────────────────────────────────────────────────┘
+
+输出：评估报告 + 执行日志 + 评分结果</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">测试领域Harness应用</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>Harness类型</th>
+                        <th>评估场景</th>
+                        <th>数据集内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>报告生成Harness</strong></td>
+                        <td>评估Agent生成测试报告的质量</td>
+                        <td>10个不同项目的报告生成任务</td>
+                    </tr>
+                    <tr>
+                        <td><strong>缺陷分析Harness</strong></td>
+                        <td>评估Agent根因分析能力</td>
+                        <td>20个真实缺陷分析任务</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用例生成Harness</strong></td>
+                        <td>评估Agent生成测试用例的准确性</td>
+                        <td>15个需求解析+用例生成任务</td>
+                    </tr>
+                    <tr>
+                        <td><strong>回归测试Harness</strong></td>
+                        <td>评估Agent执行回归测试的效率</td>
+                        <td>不同变更规模的回归任务</td>
+                    </tr>
+                    <tr>
+                        <td><strong>性能测试Harness</strong></td>
+                        <td>评估Agent性能测试设计和分析</td>
+                        <td>压测场景设计+结果分析任务</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">Harness评估结果解读</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-chart-bar"></i> 评估报告关键指标</h4>
+                <table class="ai-table">
+                    <thead>
+                        <tr>
+                            <th>指标</th>
+                            <th>含义</th>
+                            <th>阈值参考</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>成功率</strong></td>
+                            <td>任务成功完成的比例</td>
+                            <td>≥70%合格，≥90%优秀</td>
+                        </tr>
+                        <tr>
+                            <td><strong>输出质量</strong></td>
+                            <td>输出符合预期的程度</td>
+                            <td>关键内容覆盖率≥80%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>执行效率</strong></td>
+                            <td>完成任务的耗时和调用次数</td>
+                            <td>平均耗时≤60s，调用≤10次</td>
+                        </tr>
+                        <tr>
+                            <td><strong>稳定性</strong></td>
+                            <td>多次执行的一致性</td>
+                            <td>结果一致性≥85%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>Harness是Agent的标准化执行和评估框架，像"考试系统"</li>
+                    <li>核心架构：Environment（环境）→ Dataset（数据集）→ Executor（执行器）→ Evaluator（评估器）→ Reporter（报告）</li>
+                    <li>Environment定义工具可用性、资源限制、配置</li>
+                    <li>Dataset定义任务集、输入数据、预期结果、难度分级</li>
+                    <li>Executor执行监控、日志收集、支持并行</li>
+                    <li>Evaluator计算成功率、输出质量、效率、稳定性</li>
+                    <li>Reporter生成评估报告和可视化图表</li>
+                    <li>测试领域Harness：报告生成、缺陷分析、用例生成、回归测试、性能测试</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch43.html">第43章：开发者平台生态</a> - Agent开发工具链</li>
+                    <li><a href="ch44.html">第44章：Claude Code实战</a> - Claude Code的Harness集成</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch41.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch43.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第42章：Harness框架 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

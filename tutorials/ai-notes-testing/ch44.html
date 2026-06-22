@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Claude Code实战 - Anthropic官方AI编程助手的完整使用指南">
+    <meta name="keywords" content="Claude Code, Anthropic, AI编程, MCP集成">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch44.html">
+    <title>第44章：Claude Code实战 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第44章：日志系统设计 - AI测试实战">
+    <meta property="og:description" content="AI系统日志架构、收集策略和分析最佳实践">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch44.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第44章：日志系统设计">
+    <meta name="twitter:description" content="AI系统日志架构、收集策略和分析最佳实践">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第44章：日志系统设计",
+        "description": "AI系统日志架构、收集策略和分析最佳实践",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch44.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch43.html"><i class="fas fa-layer-group"></i> 平台生态</a></li>
+            <li><a href="ch45.html"><i class="fas fa-code-branch"></i> 开源vs商业</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch43.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch45.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter44">
+            <h2 class="ai-section-title"><i class="fas fa-code"></i> 第44章：Claude Code实战</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>掌握Claude Code的核心功能与使用方式</li>
+                    <li>理解Claude Code与MCP的深度集成</li>
+                    <li>学会配置测试工具链</li>
+                    <li>了解Claude Code在测试场景的应用实践</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">Claude Code核心定位</h3>
+
+            <div class="ai-success">
+                <h5>Claude Code</h5>
+                <p><strong>Claude Code是Anthropic官方的AI编程助手，深度集成Claude模型和MCP协议——不仅是代码补全工具，而是能自主规划、执行、测试的AI Agent。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">核心能力矩阵</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>能力</th>
+                        <th>说明</th>
+                        <th>测试场景应用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>代码生成</strong></td>
+                        <td>根据需求生成完整代码</td>
+                        <td>自动生成测试用例代码</td>
+                    </tr>
+                    <tr>
+                        <td><strong>代码编辑</strong></td>
+                        <td>智能重构、Bug修复</td>
+                        <td>修复测试脚本Bug</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工具调用</strong></td>
+                        <td>通过MCP调用外部工具</td>
+                        <td>操作测试平台、查询结果</td>
+                    </tr>
+                    <tr>
+                        <td><strong>任务执行</strong></td>
+                        <td>自主规划并执行复杂任务</td>
+                        <td>执行完整回归测试流程</td>
+                    </tr>
+                    <tr>
+                        <td><strong>文件操作</strong></td>
+                        <td>读写创建文件</td>
+                        <td>生成测试报告文件</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Git操作</strong></td>
+                        <td>提交、分支、PR创建</td>
+                        <td>提交测试代码变更</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">配置MCP工具链</h3>
+
+            <div class="ai-info">
+                <h5>MCP配置示例</h5>
+                <pre style="background:#1a1a2e; padding:1rem; border-radius:4px; overflow-x:auto;"><code style="color:#e2e8f0;">// ~/.claude-code/config.json
+{
+  "mcpServers": {
+    "test-platform": {
+      "command": "python",
+      "args": ["test_platform_server.py"]
+    },
+    "git-tools": {
+      "command": "python",
+      "args": ["git_mcp_server.py"]
+    },
+    "report-generator": {
+      "command": "python",
+      "args": ["report_skill_server.py"]
+    }
+  }
+}</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">测试场景实战案例</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-vial"></i> 测试应用实例</h4>
+                <ul>
+                    <li><strong>生成测试用例</strong>："为登录功能生成测试用例"</li>
+                    <li><strong>执行回归测试</strong>："执行web项目回归测试并报告结果"</li>
+                    <li><strong>分析缺陷</strong>："分析TC-002失败的根本原因"</li>
+                    <li><strong>生成报告</strong>："生成今天的测试汇总报告"</li>
+                    <li><strong>代码重构</strong>："重构test_login.py提高可维护性"</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>Claude Code是Anthropic官方Agent，深度集成Claude模型和MCP</li>
+                    <li>核心能力：代码生成、编辑、工具调用、任务执行、文件操作、Git操作</li>
+                    <li>测试场景：生成用例、执行回归、分析缺陷、生成报告、代码重构</li>
+                    <li>通过MCP配置测试平台、Git工具、报告生成器</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch45.html">第45章：开源vs商业平台</a></li>
+                    <li><a href="https://docs.anthropic.com/claude-code" target="_blank">Claude Code官方文档</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch43.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch45.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第44章：Claude Code实战 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

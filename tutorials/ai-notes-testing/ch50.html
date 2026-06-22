@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="测试用例生成 - AI驱动的智能测试用例设计">
+    <meta name="keywords" content="AI测试用例, 自动生成测试, Claude测试">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch50.html">
+    <title>第50章：测试用例生成 - AI测试实战</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第50章：Prompt测试方法论 - AI测试实战">
+    <meta property="og:description" content="Prompt测试策略、评估指标和优化方法">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch50.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第50章：Prompt测试方法论">
+    <meta name="twitter:description" content="Prompt测试策略、评估指标和优化方法">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第50章：Prompt测试方法论",
+        "description": "Prompt测试策略、评估指标和优化方法",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch50.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch49.html"><i class="fas fa-shield-alt"></i> 企业AI治理</a></li>
+            <li><a href="ch51.html"><i class="fas fa-code"></i> 测试脚本生成</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+    <div class="ai-chapter-nav">
+        <a href="ch49.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch51.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <main class="ai-main">
+        <section id="chapter50">
+            <h2 class="ai-section-title"><i class="fas fa-vial"></i> 第50章：测试用例生成</h2>
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>掌握AI生成测试用例的方法与技巧</li>
+                    <li>理解测试用例AI生成的边界与局限</li>
+                    <li>学会结合业务需求定制测试用例生成Prompt</li>
+                    <li>了解测试用例生成的质量验证方法</li>
+                </ul>
+            </div>
+            <h3 class="ai-section-subtitle">AI生成测试用例核心流程</h3>
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-project-diagram"></i> 生成流程</span></div>
+                <pre><code class="language-text">AI测试用例生成流程：
+
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│  [输入]                                                    │
+│   ├─ 业务需求文档                                          │
+│   ├─ 功能规格说明                                          │
+│   ├─ API接口定义                                           │
+│   └─ 用户故事/场景                                         │
+│                                                            │
+│  [AI处理]                                                  │
+│   ├─ 解析需求提取测试点                                    │
+│   ├─ 分析边界条件                                          │
+│   ├─ 设计测试场景                                          │
+│   └─ 生成测试步骤                                          │
+│                                                            │
+│  [输出]                                                    │
+│   ├─ 测试用例列表                                          │
+│   ├─ 测试数据建议                                          │
+│   ├─ 预期结果定义                                          │
+│   └─ 优先级评估                                            │
+│                                                            │
+│  [验证]                                                    │
+│   ├─ 业务人员确认                                          │
+│   ├─ 测试工程师审核                                        │
+│   ├─ 补充遗漏场景                                          │
+│   └─ 最终定稿                                              │
+│                                                            │
+└────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+            <h3 class="ai-section-subtitle">测试用例生成Prompt模板</h3>
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-comment"></i> Prompt模板</span></div>
+                <pre><code class="language-markdown">## 测试用例生成Prompt模板
+
+你是一名资深测试工程师。请根据以下需求生成完整的测试用例。
+
+### 输入需求
+{需求文档内容}
+
+### 输出要求
+1. 按功能模块分类
+2. 每个用例包含：
+   - 用例编号
+   - 用例名称
+   - 前置条件
+   - 测试步骤
+   - 测试数据
+   - 预期结果
+   - 优先级(P0/P1/P2)
+3. 覆盖以下场景类型：
+   - 正向场景（正常流程）
+   - 异常场景（错误处理）
+   - 边界场景（极限值）
+   - 安全场景（权限验证）
+
+### 输出格式
+| 编号 | 名称 | 前置条件 | 步骤 | 数据 | 预期 | 优先级 |</code></pre>
+            </div>
+            <h3 class="ai-section-subtitle">AI生成测试用例示例</h3>
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-lightbulb"></i> 登录功能测试用例示例</h4>
+                <table class="ai-table">
+                    <thead><tr><th>编号</th><th>名称</th><th>场景</th><th>优先级</th></tr></thead>
+                    <tbody>
+                        <tr><td>TC-001</td><td>正常登录</td><td>正向</td><td>P0</td></tr>
+                        <tr><td>TC-002</td><td>密码错误</td><td>异常</td><td>P0</td></tr>
+                        <tr><td>TC-003</td><td>账号不存在</td><td>异常</td><td>P1</td></tr>
+                        <tr><td>TC-004</td><td>密码为空</td><td>边界</td><td>P1</td></tr>
+                        <tr><td>TC-005</td><td>SQL注入</td><td>安全</td><td>P0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>AI生成测试用例流程：输入需求→AI处理→输出用例→人工验证</li>
+                    <li>Prompt模板：明确角色、需求、输出格式、场景覆盖要求</li>
+                    <li>场景覆盖：正向、异常、边界、安全四类</li>
+                    <li>人工验证必不可少：业务确认+测试审核+补充遗漏</li>
+                </ul>
+            </div>
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch51.html">第51章：测试脚本生成</a></li>
+                    <li><a href="ch52.html">第52章：测试数据生成</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <div class="ai-chapter-nav">
+        <a href="ch49.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch51.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <footer class="ai-footer"><div class="footer-content"><p>AI测试实战 | 第50章：测试用例生成 | <a href="../../index.html">返回首页</a></p></div></footer>
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI测试实战 - 企业级AI架构、MCP协议、Skills系统、Agent智能体、测试应用实战">
+    <meta name="keywords" content="AI测试, MCP协议, Skills, Agent, AI架构, 软件测试">
+    <meta name="author" content="AI Tester">
+    <title>AI测试实战 - 企业级AI架构与测试应用</title>
+    
+    <!-- SEO: Canonical -->
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI测试实战 - 企业级AI架构与测试应用">
+    <meta property="og:description" content="AI测试实战 - 企业级AI架构、MCP协议、Skills系统、Agent智能体、测试应用实战">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/">
+    <meta property="og:site_name" content="Jackson Code">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI测试实战 - 企业级AI架构与测试应用">
+    <meta name="twitter:description" content="36章节系统讲解企业级AI架构、MCP协议、Skills体系、Agent智能体及测试实战应用">
+    
+    <!-- SEO: Robots -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- KaTeX - 数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });"></script>
+
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <!-- 自定义样式表 -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../ai-notes/assets/ai-notes.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "AI测试实战",
+        "description": "企业级AI架构与测试应用实战教程，涵盖MCP协议、Skills系统、Agent智能体、测试应用实战",
+        "provider": {
+            "@type": "Organization",
+            "name": "Jackson Code",
+            "url": "https://jacksoncode.github.io"
+        },
+        "numberOfLessons": 36,
+        "educationalLevel": "Intermediate",
+        "inLanguage": "zh-CN"
+    }
+    </script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="ai-nav">
+        <a href="../../index.html" class="ai-nav-brand">
+            <i class="fas fa-flask"></i>
+            <span>AI测试实战</span>
+        </a>
+        <ul class="navbar-nav">
+            <li><a href="../../index.html">首页</a></li>
+            <li><a href="../ai-notes/index.html">AI学习笔记</a></li>
+            <li><a href="index.html" class="active">测试实战</a></li>
+            <li><a href="../../nav.html">导航</a></li>
+            <li><a href="../../blog.html">博客</a></li>
+        </ul>
+        <button class="mobile-menu-toggle" aria-label="菜单">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="ai-hero">
+        <div class="hero-content">
+            <h1 class="hero-title"><i class="fas fa-vial"></i> AI测试实战</h1>
+            <p class="hero-subtitle">企业级AI架构与测试团队应用实战</p>
+            <p class="hero-description">
+                基于ZCode企业实战经验，系统讲解AI在企业中的应用架构、<br>
+                MCP协议、Skills系统、Agent智能体，以及在软件测试中的实战应用。
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">36</span>
+                    <span class="hero-stat-label">章节</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">56</span>
+                    <span class="hero-stat-label">核心概念</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">14</span>
+                    <span class="hero-stat-label">测试实战案例</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模块概览 -->
+    <section class="modules-section">
+        <div class="section-header">
+            <h2><i class="fas fa-layer-group"></i> 模块架构</h2>
+            <p>四大模块系统覆盖企业AI架构与测试应用</p>
+        </div>
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-building" style="color: #4299e1;"></i></div>
+                <h3>Phase 1：核心架构认知</h3>
+                <p>企业级AI架构认知、MCP协议标准、Skills技能体系、Agent智能体、Harness测试框架</p>
+                <div class="chapters-count">9 个章节 (ch34-ch42)</div>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-tools" style="color: #ed8936;"></i></div>
+                <h3>Phase 2：开发者工具生态</h3>
+                <p>开发者平台生态、主流AI工具对比、开源vs商业方案、团队协作平台</p>
+                <div class="chapters-count">7 个章节 (ch43-ch49)</div>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-microscope" style="color: #e53e3e;"></i></div>
+                <h3>Phase 3：测试应用实战</h3>
+                <p>AI辅助测试设计、自动化测试增强、智能缺陷分析、测试数据生成、测试报告智能分析</p>
+                <div class="chapters-count">14 个章节 (ch50-ch63)</div>
+            </div>
+            <div class="module-card">
+                <div class="module-icon"><i class="fas fa-rocket" style="color: #38a169;"></i></div>
+                <h3>Phase 4：前沿趋势与优化</h3>
+                <p>多模态AI、AI安全与伦理、质量体系建设、成本优化、附录：企业AI术语表</p>
+                <div class="chapters-count">6 个章节 (ch64-ch69)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 详细章节目录 -->
+    <section class="chapters-section">
+        <div class="section-header">
+            <h2><i class="fas fa-book-open"></i> 章节目录</h2>
+        </div>
+        
+        <!-- Phase 1 -->
+        <div class="chapter-group">
+            <h3 class="group-title"><i class="fas fa-building"></i> Phase 1：核心架构认知</h3>
+            <div class="chapter-list">
+                <div class="chapter-item">
+                    <span class="chapter-number">34</span>
+                    <a href="ch34.html">企业级AI架构认知</a>
+                    <span class="chapter-desc">企业AI架构全景、技术选型、部署模式</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">35</span>
+                    <a href="ch35.html">AI架构设计原则</a>
+                    <span class="chapter-desc">分层架构、模块化设计、扩展性考量</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">36</span>
+                    <a href="ch36.html">MCP协议标准</a>
+                    <span class="chapter-desc">Model Context Protocol核心概念与实现</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">37</span>
+                    <a href="ch37.html">MCP服务器开发实战</a>
+                    <span class="chapter-desc">从零构建MCP服务器、最佳实践</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">38</span>
+                    <a href="ch38.html">Skills技能体系</a>
+                    <span class="chapter-desc">Skills架构、设计模式、复用机制</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">39</span>
+                    <a href="ch39.html">Skills开发实战</a>
+                    <span class="chapter-desc">编写自定义Skills、测试与调试</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">40</span>
+                    <a href="ch40.html">Agent智能体架构</a>
+                    <span class="chapter-desc">Agent核心能力、自主决策、协作机制</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">41</span>
+                    <a href="ch41.html">Agent开发实战</a>
+                    <span class="chapter-desc">构建智能Agent、任务规划、工具调用</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">42</span>
+                    <a href="ch42.html">Harness测试框架</a>
+                    <span class="chapter-desc">AI驱动的测试框架设计与实现</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="chapter-group">
+            <h3 class="group-title"><i class="fas fa-tools"></i> Phase 2：开发者工具生态</h3>
+            <div class="chapter-list">
+                <div class="chapter-item">
+                    <span class="chapter-number">43</span>
+                    <a href="ch43.html">开发者平台生态概览</a>
+                    <span class="chapter-desc">主流AI开发平台对比分析</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">44</span>
+                    <a href="ch44.html">Claude Code实战</a>
+                    <span class="chapter-desc">Anthropic Claude CLI深度应用</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">45</span>
+                    <a href="ch45.html">开源vs商业方案</a>
+                    <span class="chapter-desc">Ollama、vLLM、TensorRT-LLM对比</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">46</span>
+                    <a href="ch46.html">Hugging Face生态</a>
+                    <span class="chapter-desc">模型库、数据集、Spaces使用指南</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">47</span>
+                    <a href="ch47.html">向量数据库实践</a>
+                    <span class="chapter-desc">Pinecone、Qdrant、Chroma实战</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">48</span>
+                    <a href="ch48.html">团队协作平台</a>
+                    <span class="chapter-desc">AI团队协作工具与流程设计</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">49</span>
+                    <a href="ch49.html">企业AI治理</a>
+                    <span class="chapter-desc">权限管理、审计、合规框架</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="chapter-group">
+            <h3 class="group-title"><i class="fas fa-microscope"></i> Phase 3：测试应用实战</h3>
+            <div class="chapter-list">
+                <div class="chapter-item">
+                    <span class="chapter-number">50</span>
+                    <a href="ch50.html">AI辅助测试设计</a>
+                    <span class="chapter-desc">智能测试方案生成与优化</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">51</span>
+                    <a href="ch51.html">测试用例智能生成</a>
+                    <span class="chapter-desc">基于需求自动生成测试用例</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">52</span>
+                    <a href="ch52.html">自动化测试增强</a>
+                    <span class="chapter-desc">AI驱动的自动化测试优化</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">53</span>
+                    <a href="ch53.html">智能缺陷分析</a>
+                    <span class="chapter-desc">AI辅助缺陷定位与根因分析</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">54</span>
+                    <a href="ch54.html">测试数据智能生成</a>
+                    <span class="chapter-desc">AI生成测试数据与边界场景</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">55</span>
+                    <a href="ch55.html">UI自动化智能维护</a>
+                    <span class="chapter-desc">AI辅助UI元素定位与维护</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">56</span>
+                    <a href="ch56.html">API测试智能辅助</a>
+                    <span class="chapter-desc">AI辅助API测试与契约验证</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">57</span>
+                    <a href="ch57.html">性能测试AI增强</a>
+                    <span class="chapter-desc">AI辅助性能分析与瓶颈定位</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">58</span>
+                    <a href="ch58.html">安全测试AI辅助</a>
+                    <span class="chapter-desc">AI辅助漏洞检测与安全审计</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">59</span>
+                    <a href="ch59.html">测试报告智能分析</a>
+                    <span class="chapter-desc">AI生成测试报告与趋势分析</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">60</span>
+                    <a href="ch60.html">测试流程智能化</a>
+                    <span class="chapter-desc">AI驱动的测试流程优化</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">61</span>
+                    <a href="ch61.html">测试知识管理</a>
+                    <span class="chapter-desc">构建团队测试知识库</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">62</span>
+                    <a href="ch62.html">测试质量度量</a>
+                    <span class="chapter-desc">AI辅助测试质量评估体系</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">63</span>
+                    <a href="ch63.html">测试团队AI转型</a>
+                    <span class="chapter-desc">测试团队AI能力建设路径</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="chapter-group">
+            <h3 class="group-title"><i class="fas fa-rocket"></i> Phase 4：前沿趋势与优化</h3>
+            <div class="chapter-list">
+                <div class="chapter-item">
+                    <span class="chapter-number">64</span>
+                    <a href="ch64.html">多模态AI发展</a>
+                    <span class="chapter-desc">视觉、语音、文本融合趋势</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">65</span>
+                    <a href="ch65.html">AI安全与伦理</a>
+                    <span class="chapter-desc">企业AI安全框架与伦理考量</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">66</span>
+                    <a href="ch66.html">AI成本优化</a>
+                    <span class="chapter-desc">Token优化、模型选择、成本控制</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">67</span>
+                    <a href="ch67.html">AI质量体系建设</a>
+                    <span class="chapter-desc">企业AI质量保证体系设计</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">68</span>
+                    <a href="ch68.html">AI团队培养</a>
+                    <span class="chapter-desc">企业AI人才培养与团队建设</span>
+                </div>
+                <div class="chapter-item">
+                    <span class="chapter-number">69</span>
+                    <a href="ch69.html">附录：企业AI术语表</a>
+                    <span class="chapter-desc">56个核心概念完整术语表</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学习建议 -->
+    <section class="tips-section">
+        <div class="section-header">
+            <h2><i class="fas fa-lightbulb"></i> 学习建议</h2>
+        </div>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <i class="fas fa-route"></i>
+                <h4>推荐路径</h4>
+                <p>建议按照Phase顺序学习：先理解架构 → 掌握工具 → 实战应用 → 关注趋势</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-code"></i>
+                <h4>动手实践</h4>
+                <p>每个章节包含可运行的代码示例，建议边学边练，加深理解</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-users"></i>
+                <h4>团队应用</h4>
+                <p>Phase 3专门针对测试团队实战，可直接应用到日常工作</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-book"></i>
+                <h4>配套阅读</h4>
+                <p>建议配合《AI学习笔记》学习基础概念，再深入本实战指南</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 - 企业级AI架构与测试应用实战指南</p>
+            <p>基于ZCode企业实战经验整理 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航菜单切换
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar-nav').classList.toggle('active');
+        });
+        
+        // 代码复制功能
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

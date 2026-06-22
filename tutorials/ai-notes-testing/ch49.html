@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="企业AI治理 - 安全合规与最佳实践框架">
+    <meta name="keywords" content="AI治理, 企业AI, 安全合规, 数据隐私, AI伦理">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch49.html">
+    <title>第49章：企业AI治理 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第49章：文档与知识管理 - AI测试实战">
+    <meta property="og:description" content="AI项目文档架构、知识库建设和维护策略">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch49.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第49章：文档与知识管理">
+    <meta name="twitter:description" content="AI项目文档架构、知识库建设和维护策略">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第49章：文档与知识管理",
+        "description": "AI项目文档架构、知识库建设和维护策略",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch49.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch48.html"><i class="fas fa-users"></i> 团队协作</a></li>
+            <li><a href="ch50.html"><i class="fas fa-vial"></i> 测试用例生成</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch48.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch50.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter49">
+            <h2 class="ai-section-title"><i class="fas fa-shield-alt"></i> 第49章：企业AI治理</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解企业AI治理的核心框架与原则</li>
+                    <li>掌握AI应用的安全合规要点</li>
+                    <li>了解数据隐私保护的最佳实践</li>
+                    <li>学会构建测试团队的AI治理体系</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">企业AI治理框架</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-sitemap"></i> AI治理框架</span></div>
+                <pre><code class="language-text">企业AI治理框架：
+
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│  1. 数据治理                                               │
+│     ───────────────────────────────────────────────────    │
+│     - 数据分类分级                                         │
+│     - 数据访问控制                                         │
+│     - 数据脱敏处理                                         │
+│     - 数据传输加密                                         │
+│                                                            │
+│  2. 模型治理                                               │
+│     ───────────────────────────────────────────────────    │
+│     - 模型准入审核                                         │
+│     - 模型风险评估                                         │
+│     - 模型版本管理                                         │
+│     - 模型监控审计                                         │
+│                                                            │
+│  3. 应用治理                                               │
+│     ───────────────────────────────────────────────────    │
+│     - AI应用审批流程                                       │
+│     - 使用场景限制                                         │
+│     - 输出审核机制                                         │
+│     - 应急响应预案                                         │
+│                                                            │
+│  4. 伦理治理                                               │
+│     ───────────────────────────────────────────────────    │
+│     - 偏见检测消除                                         │
+│     - 透明度要求                                           │
+│     - 可解释性标准                                         │
+│     - 公平性保障                                           │
+│                                                            │
+│  5. 合规治理                                               │
+│     ───────────────────────────────────────────────────    │
+│     - GDPR/数据安全法合规                                  │
+│     - 行业监管要求                                         │
+│     - 审计报告生成                                         │
+│     - 定期合规评估                                         │
+│                                                            │
+└────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">数据隐私保护要点</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>保护措施</th>
+                        <th>实施要点</th>
+                        <th>测试应用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>数据分类</strong></td>
+                        <td>敏感/内部/公开三级</td>
+                        <td>测试数据分级管理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>脱敏处理</strong></td>
+                        <td>PII数据匿名化</td>
+                        <td>测试用例数据脱敏</td>
+                    </tr>
+                    <tr>
+                        <td><strong>本地部署</strong></td>
+                        <td>敏感场景用开源模型</td>
+                        <td>私有化测试工具</td>
+                    </tr>
+                    <tr>
+                        <td><strong>传输加密</strong></td>
+                        <td>API调用HTTPS加密</td>
+                        <td>测试平台安全通信</td>
+                    </tr>
+                    <tr>
+                        <td><strong>访问控制</strong></td>
+                        <td>角色权限分级</td>
+                        <td>测试工具权限管理</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">AI风险评估矩阵</h3>
+
+            <div class="ai-box ai-box--warning">
+                <h4><i class="fas fa-exclamation-triangle"></i> AI风险类型与应对</h4>
+                <table class="ai-table">
+                    <thead>
+                        <tr>
+                            <th>风险类型</th>
+                            <th>风险描述</th>
+                            <th>应对措施</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>数据泄露</strong></td>
+                            <td>敏感数据传输至云端</td>
+                            <td>敏感场景本地部署</td>
+                        </tr>
+                        <tr>
+                            <td><strong>输出错误</strong></td>
+                            <td>AI生成内容不准确</td>
+                            <td>人工审核机制</td>
+                        </tr>
+                        <tr>
+                            <td><strong>偏见歧视</strong></td>
+                            <td>模型输出存在偏见</td>
+                            <td>偏见检测+纠偏</td>
+                        </tr>
+                        <tr>
+                            <td><strong>滥用风险</strong></td>
+                            <td>AI用于不当目的</td>
+                            <td>场景限制+审批</td>
+                        </tr>
+                        <tr>
+                            <td><strong>依赖风险</strong></td>
+                            <td>过度依赖AI丧失判断</td>
+                            <td>人工兜底机制</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="ai-section-subtitle">测试团队AI治理实践</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-tasks"></i> 测试团队治理要点</h4>
+                <ul>
+                    <li><strong>数据脱敏</strong>：测试用例中的PII数据必须脱敏</li>
+                    <li><strong>结果审核</strong>：AI生成的测试代码需人工审核</li>
+                    <li><strong>场景限制</strong>：AI用于辅助而非替代决策</li>
+                    <li><strong>记录留存</strong>：AI调用记录审计留存</li>
+                    <li><strong>应急预案</strong>：AI工具故障人工兜底方案</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>AI治理框架：数据、模型、应用、伦理、合规五大维度</li>
+                    <li>数据隐私：分类分级、脱敏处理、本地部署、加密传输、访问控制</li>
+                    <li>风险评估：数据泄露、输出错误、偏见歧视、滥用风险、依赖风险</li>
+                    <li>测试治理：数据脱敏、结果审核、场景限制、记录留存、应急预案</li>
+                    <li>Phase 2（开发者工具篇）完成，进入Phase 3（测试应用篇）</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch50.html">第50章：测试用例生成</a> - Phase 3开始</li>
+                    <li><a href="https://www.anthropic.com/responsible-ai" target="_blank">Anthropic负责任AI</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch48.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch50.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第49章：企业AI治理 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

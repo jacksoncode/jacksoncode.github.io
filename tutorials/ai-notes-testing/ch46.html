@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hugging Face生态 - 开源AI模型中心完整指南">
+    <meta name="keywords" content="Hugging Face, Transformers, 开源模型, 模型下载">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch46.html">
+    <title>第46章：Hugging Face生态 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第46章：自动化测试框架 - AI测试实战">
+    <meta property="og:description" content="构建AI系统自动化测试框架，覆盖单元、集成和E2E测试">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch46.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第46章：自动化测试框架">
+    <meta name="twitter:description" content="构建AI系统自动化测试框架，覆盖单元、集成和E2E测试">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第46章：自动化测试框架",
+        "description": "构建AI系统自动化测试框架，覆盖单元、集成和E2E测试",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch46.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch45.html"><i class="fas fa-code-branch"></i> 开源vs商业</a></li>
+            <li><a href="ch47.html"><i class="fas fa-database"></i> 向量数据库</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch45.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch47.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter46">
+            <h2 class="ai-section-title"><i class="fas fa-robot"></i> 第46章：Hugging Face生态</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解Hugging Face在开源AI生态中的核心地位</li>
+                    <li>掌握模型下载、部署、微调的基本流程</li>
+                    <li>了解Transformers库的使用方法</li>
+                    <li>学会在测试场景中应用开源模型</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">Hugging Face核心定位</h3>
+
+            <div class="ai-success">
+                <h5>开源AI模型中心</h5>
+                <p><strong>Hugging Face是开源AI的GitHub，托管10万+模型、数据集和Spaces，提供Transformers库统一API——降低AI应用门槛的核心基础设施。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">生态核心组件</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>组件</th>
+                        <th>功能</th>
+                        <th>测试应用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Model Hub</strong></td>
+                        <td>托管10万+开源模型</td>
+                        <td>下载测试用模型</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dataset Hub</strong></td>
+                        <td>托管公共数据集</td>
+                        <td>获取测试数据</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spaces</strong></td>
+                        <td>在线模型演示</td>
+                        <td>快速验证模型效果</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transformers</strong></td>
+                        <td>统一模型调用API</td>
+                        <td>集成到测试脚本</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PEFT</strong></td>
+                        <td>参数高效微调</td>
+                        <td>定制测试专用模型</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inference API</strong></td>
+                        <td>免费推理服务</td>
+                        <td>快速原型测试</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">Transformers库核心用法</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fab fa-python"></i> Python</span></div>
+                <pre><code class="language-python"># 安装Transformers
+pip install transformers torch
+
+# 加载模型
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "meta-llama/Llama-3.1-8B"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name)
+
+# 生成文本
+inputs = tokenizer("测试用例生成:", return_tensors="pt")
+outputs = model.generate(**inputs, max_length=100)
+result = tokenizer.decode(outputs[0])
+
+print(result)</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">本地部署方案</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-server"></i> 部署架构选择</h4>
+                <table class="ai-table">
+                    <thead>
+                        <tr>
+                            <th>方案</th>
+                            <th>适用场景</th>
+                            <th>硬件要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Transformers本地</strong></td>
+                            <td>开发测试</td>
+                            <td>GPU 8GB+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>vLLM</strong></td>
+                            <td>高性能推理</td>
+                            <td>GPU 16GB+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>llama.cpp</strong></td>
+                            <td>CPU推理</td>
+                            <td>CPU 8核+RAM 16GB</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ollama</strong></td>
+                            <td>简单部署</td>
+                            <td>Mac/Linux，GPU可选</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>Hugging Face：开源AI模型中心，托管10万+模型</li>
+                    <li>核心组件：Model Hub、Dataset Hub、Spaces、Transformers、PEFT</li>
+                    <li>Transformers库：统一API加载、调用各类开源模型</li>
+                    <li>部署方案：Transformers本地、vLLM高性能、llama.cpp CPU、Ollama简单</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch47.html">第47章：向量数据库选型</a></li>
+                    <li><a href="https://huggingface.co/docs" target="_blank">Hugging Face官方文档</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch45.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch47.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第46章：Hugging Face生态 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

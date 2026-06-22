@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCP协议标准 - Model Context Protocol核心概念、架构设计与企业应用">
+    <meta name="keywords" content="MCP, Model Context Protocol, AI工具协议, Anthropic MCP">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch36.html">
+    <title>第36章：MCP协议标准 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第36章：MCP客户端开发实战 - AI测试实战">
+    <meta property="og:description" content="从零构建MCP客户端，实现与AI服务的标准化通信">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch36.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第36章：MCP客户端开发实战">
+    <meta name="twitter:description" content="从零构建MCP客户端，实现与AI服务的标准化通信">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第36章：MCP客户端开发实战",
+        "description": "从零构建MCP客户端，实现与AI服务的标准化通信",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch36.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch34.html"><i class="fas fa-building"></i> 架构认知</a></li>
+            <li><a href="ch38.html"><i class="fas fa-cubes"></i> Skills</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch35.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch37.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter36">
+            <h2 class="ai-section-title"><i class="fas fa-network-wired"></i> 第36章：MCP协议标准</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解MCP协议的核心定位和设计理念</li>
+                    <li>掌握MCP的架构组成：Server、Client、Tools、Resources、Prompts</li>
+                    <li>了解MCP与传统API集成的区别</li>
+                    <li>学会从测试视角评估MCP集成质量</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--prereq">
+                <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                <ul>
+                    <li>已完成第34-35章架构基础的学习</li>
+                    <li>理解LLM的Function Calling能力</li>
+                    <li>有基本的API集成开发经验</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">一句话定义</h3>
+
+            <div class="ai-success">
+                <h5>MCP（Model Context Protocol）</h5>
+                <p><strong>MCP 是 Anthropic 提出的开放协议，定义了AI模型与外部工具/数据源之间的标准通信方式——可以理解为"AI世界的USB接口"，让任何AI都能即插即用地连接任何工具。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">生活类比：USB接口的故事</h3>
+
+            <div class="ai-info">
+                <h5>为什么MCP像USB？</h5>
+                <p>在USB出现之前，每种外设都有不同的接口——键盘用PS/2、打印机用并口、鼠标用串口，换一个设备就要装一个驱动。USB统一了接口标准，插上就能用。</p>
+                <p>MCP之于AI工具，就像USB之于电脑外设：<strong>统一接口标准，即插即用</strong>。</p>
+            </div>
+
+            <h3 class="ai-section-subtitle">为什么需要MCP？</h3>
+
+            <p>在没有MCP的世界，每个AI模型和每个工具的集成都是"定制开发"，导致大量重复劳动：</p>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code-branch"></i> 无MCP vs 有MCP的集成成本</span></div>
+                <pre><code class="language-text">没有 MCP 的世界：
+  Claude 要连 GitHub → 写专门的 GitHub 集成
+  GPT 要连 GitHub → 又写一套 GitHub 集成
+  Cursor 要连 GitHub → 再写一套
+  
+  → M个AI模型 × N个工具 = M×N 套集成代码（重复劳动）
+
+有 MCP 的世界：
+  每个工具写一个 MCP Server（1份）
+  每个AI模型实现 MCP Client（1份）
+  
+  → M + N 套代码（大幅减少重复）
+  
+示例：
+  GitHub写1个MCP Server → Claude、GPT、Cursor都能用
+  测试平台写1个MCP Server → 所有AI助手都能操作测试平台</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">MCP的核心架构</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-sitemap"></i> MCP架构全景</span></div>
+                <pre><code class="language-text">┌──────────────────────────────────────────────────────────────────┐
+│                     MCP 协议架构                                    │
+│                                                                  │
+│  ┌──────────┐    MCP协议(JSON-RPC)    ┌───────────────────────┐  │
+│  │  MCP     │ ◄──────────────────► │  MCP Server            │  │
+│  │  Client  │                       │  (工具提供方)          │  │
+│  │  (AI侧)  │                       │                        │  │
+│  │          │                       │  示例：                 │  │
+│  └────┬─────┘                       │  - GitHub Server       │  │
+│       │                             │  - 数据库 Server       │  │
+│  AI应用示例：                        │  - 文件系统 Server     │  │
+│  - Claude Code                      │  - 测试平台 Server     │  │
+│  - Cursor IDE                       │  - API服务 Server      │  │
+│  - Zed Editor                       │                        │  │
+│  - 其他AI助手                        └───────────────────────┘  │
+│                                                                  │
+│  通信内容：                                                       │
+│  - 工具列表（有哪些工具可用）                                      │
+│  - 工具调用（调用某个工具，传入参数）                               │
+│  - 结果返回（工具执行结果）                                        │
+│  - 资源访问（读取文件/数据等）                                     │
+│  - Prompt模板（预设提示词）                                        │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">MCP的核心概念</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>概念</th>
+                        <th>说明</th>
+                        <th>类比</th>
+                        <th>测试关注点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>MCP Server</strong></td>
+                        <td>提供工具和数据的服务端</td>
+                        <td>USB设备（如U盘）</td>
+                        <td>工具定义准确性、执行可靠性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MCP Client</strong></td>
+                        <td>AI应用端的连接器</td>
+                        <td>USB接口/驱动</td>
+                        <td>协议兼容性、发现机制</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tools</strong></td>
+                        <td>Server提供的可调用功能</td>
+                        <td>U盘的功能（读写文件）</td>
+                        <td>参数验证、返回格式、错误处理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resources</strong></td>
+                        <td>Server提供的可读数据</td>
+                        <td>U盘里的文件</td>
+                        <td>数据完整性、权限控制</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prompts</strong></td>
+                        <td>Server提供的预设提示词模板</td>
+                        <td>U盘自带的说明书</td>
+                        <td>模板有效性、参数填充</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">MCP vs 传统API集成对比</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>传统API集成</th>
+                        <th>MCP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>接口标准</strong></td>
+                        <td>每个API不同，需单独适配</td>
+                        <td>统一协议，即插即用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>开发成本</strong></td>
+                        <td>高（每个工具单独集成）</td>
+                        <td>低（写一次Server，所有AI可用）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>发现机制</strong></td>
+                        <td>需手动配置</td>
+                        <td>自动发现可用工具</td>
+                    </tr>
+                    <tr>
+                        <td><strong>维护成本</strong></td>
+                        <td>每个集成独立维护</td>
+                        <td>统一维护</td>
+                    </tr>
+                    <tr>
+                        <td><strong>生态效应</strong></td>
+                        <td>孤岛（各自独立）</td>
+                        <td>共享生态（一次开发，多方受益）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>测试复用</strong></td>
+                        <td>每个集成单独测试</td>
+                        <td>Server测试一次，所有Client受益</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">MCP通信协议详解</h3>
+
+            <p>MCP基于JSON-RPC 2.0协议，使用标准化的消息格式进行通信：</p>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> JSON - MCP消息示例</span></div>
+                <pre><code class="language-json">// MCP工具调用请求示例
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "github_search_issues",
+    "arguments": {
+      "query": "bug in authentication",
+      "repo": "facebook/react"
+    }
+  }
+}
+
+// MCP工具返回结果示例
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Found 5 issues matching query..."
+      }
+    ]
+  }
+}</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">企业测试中的MCP应用</h3>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-vial"></i> 测试团队的MCP实践建议</h4>
+                <ul>
+                    <li><strong>搭建测试工具MCP Server</strong>：把测试管理平台、CI/CD系统、缺陷管理系统封装为MCP Server，让AI直接操作</li>
+                    <li><strong>让AI Agent通过MCP调用测试工具</strong>：AI自动从Jira拉取需求→生成用例→推送到测试平台→执行→报告</li>
+                    <li><strong>测试MCP集成质量</strong>：验证工具调用的正确性、错误处理、权限控制、并发性能</li>
+                    <li><strong>贡献测试领域MCP Server</strong>：将性能测试工具、安全扫描工具封装为MCP Server，供整个AI生态使用</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">测试视角：MCP集成测试要点</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>测试维度</th>
+                        <th>测试内容</th>
+                        <th>验证方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>协议兼容性</strong></td>
+                        <td>消息格式、字段完整性</td>
+                        <td>发送标准请求，验证返回格式</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工具发现</strong></td>
+                        <td>Client能否正确获取Server的工具列表</td>
+                        <td>调用tools/list，验证返回完整性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工具调用</strong></td>
+                        <td>参数传递正确、执行成功</td>
+                        <td>调用具体工具，验证返回结果</td>
+                    </tr>
+                    <tr>
+                        <td><strong>错误处理</strong></td>
+                        <td>无效参数、超时、权限不足等场景</td>
+                        <td>发送异常请求，验证错误返回格式</td>
+                    </tr>
+                    <tr>
+                        <td><strong>并发性能</strong></td>
+                        <td>多工具并行调用、高并发请求</td>
+                        <td>并发调用测试，验证响应时间和稳定性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>资源访问</strong></td>
+                        <td>读取Server提供的资源数据</td>
+                        <td>调用resources/read，验证数据完整性</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>MCP是Anthropic提出的开放协议，定义AI与工具的标准通信方式，像"AI世界的USB接口"</li>
+                    <li>MCP架构包含Server（工具提供方）、Client（AI侧）、Tools、Resources、Prompts五个核心概念</li>
+                    <li>MCP统一接口标准，大幅降低集成开发成本，一次开发多方受益</li>
+                    <li>测试团队可搭建测试工具MCP Server，让AI直接操作测试系统</li>
+                    <li>MCP集成测试需关注协议兼容性、工具发现、调用准确性、错误处理和并发性能</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch37.html">第37章：MCP服务器开发实战</a> - 从零构建MCP Server</li>
+                    <li><a href="ch38.html">第38章：Skills技能体系</a> - MCP之上的能力封装</li>
+                    <li><a href="https://spec.modelcontextprotocol.io/" target="_blank">MCP官方规范文档</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch35.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch37.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第36章：MCP协议标准 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

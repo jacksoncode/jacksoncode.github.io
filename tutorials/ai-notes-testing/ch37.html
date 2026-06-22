@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCP服务器开发实战 - 使用Python和TypeScript构建MCP Server">
+    <meta name="keywords" content="MCP Server开发, FastMCP, Python MCP, TypeScript MCP">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch37.html">
+    <title>第37章：MCP服务器开发实战 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第37章：MCP服务端开发实战 - AI测试实战">
+    <meta property="og:description" content="构建MCP服务端，暴露工具、资源和提示词给AI客户端">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch37.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第37章：MCP服务端开发实战">
+    <meta name="twitter:description" content="构建MCP服务端，暴露工具、资源和提示词给AI客户端">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第37章：MCP服务端开发实战",
+        "description": "构建MCP服务端，暴露工具、资源和提示词给AI客户端",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch37.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch36.html"><i class="fas fa-network-wired"></i> MCP协议</a></li>
+            <li><a href="ch38.html"><i class="fas fa-cubes"></i> Skills</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch36.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch38.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter37">
+            <h2 class="ai-section-title"><i class="fas fa-server"></i> 第37章：MCP服务器开发实战</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>掌握使用FastMCP快速构建MCP Server</li>
+                    <li>理解MCP Server的核心组成部分</li>
+                    <li>学会定义Tool、Resource、Prompt三种能力</li>
+                    <li>了解MCP Server的测试验证方法</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--prereq">
+                <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                <ul>
+                    <li>已完成第36章MCP协议的学习</li>
+                    <li>有Python或TypeScript基础开发能力</li>
+                    <li>理解JSON-RPC协议基本概念</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">开发工具选型</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>工具</th>
+                        <th>语言</th>
+                        <th>特点</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>FastMCP</strong></td>
+                        <td>Python</td>
+                        <td>装饰器语法，极简开发</td>
+                        <td>快速原型、数据工具、脚本集成</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@modelcontextprotocol/sdk</strong></td>
+                        <td>TypeScript</td>
+                        <td>官方SDK，类型安全</td>
+                        <td>生产环境、复杂工具链</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mcp-go</strong></td>
+                        <td>Go</td>
+                        <td>高性能，并发友好</td>
+                        <td>高并发场景、系统工具</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">FastMCP快速入门（推荐）</h3>
+
+            <div class="ai-info">
+                <h5>为什么推荐FastMCP？</h5>
+                <p>FastMCP用装饰器语法简化MCP开发，几行代码就能定义一个工具，非常适合快速原型和测试场景。</p>
+            </div>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-terminal"></i> Bash - 安装FastMCP</span></div>
+                <pre><code class="language-bash"># 安装 FastMCP
+pip install fastmcp
+
+# 或使用 uv（推荐）
+uv add fastmcp</code></pre>
+            </div>
+
+            <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">最小MCP Server示例</h4>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> Python - 最小MCP Server</span></div>
+                <pre><code class="language-python">from fastmcp import FastMCP
+
+# 创建 MCP Server
+mcp = FastMCP("测试工具服务")
+
+# 定义一个简单的工具
+@mcp.tool()
+def get_test_status(test_id: str) -> str:
+    """查询测试执行状态
+    
+    Args:
+        test_id: 测试任务ID
+        
+    Returns:
+        测试状态描述
+    """
+    # 模拟查询逻辑
+    status_map = {
+        "test_001": "运行中 - 已完成 75%",
+        "test_002": "已完成 - 通过",
+        "test_003": "已完成 - 失败"
+    }
+    return status_map.get(test_id, f"未找到测试 {test_id}")
+
+# 运行 Server
+if __name__ == "__main__":
+    mcp.run()</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">定义Tool：核心能力</h3>
+
+            <p>Tool是MCP Server最核心的能力——AI可以调用的具体功能。每个Tool需要定义名称、参数Schema和执行逻辑。</p>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> Python - 定义多个Tool</span></div>
+                <pre><code class="language-python">from fastmcp import FastMCP
+import json
+
+mcp = FastMCP("测试管理平台")
+
+@mcp.tool()
+def list_test_cases(project: str, status: str = "all") -> list:
+    """获取项目的测试用例列表
+    
+    Args:
+        project: 项目名称
+        status: 过滤状态（all/pass/fail/pending）
+        
+    Returns:
+        测试用例列表
+    """
+    # 模拟数据
+    cases = [
+        {"id": "TC001", "name": "登录功能测试", "status": "pass"},
+        {"id": "TC002", "name": "支付流程测试", "status": "fail"},
+        {"id": "TC003", "name": "搜索功能测试", "status": "pending"},
+    ]
+    
+    if status != "all":
+        cases = [c for c in cases if c["status"] == status]
+    
+    return cases
+
+@mcp.tool()
+def run_test_case(case_id: str) -> dict:
+    """执行指定测试用例
+    
+    Args:
+        case_id: 测试用例ID
+        
+    Returns:
+        执行结果（状态、耗时、日志）
+    """
+    return {
+        "case_id": case_id,
+        "status": "pass",
+        "duration": "2.5s",
+        "log": "测试执行完成，所有断言通过"
+    }
+
+@mcp.tool()
+def create_bug_report(title: str, description: str, severity: str = "medium") -> dict:
+    """创建缺陷报告
+    
+    Args:
+        title: 缺陷标题
+        description: 缺陷描述
+        severity: 严重程度（low/medium/high/critical）
+        
+    Returns:
+        创建结果（缺陷ID、链接）
+    """
+    bug_id = f"BUG-{hash(title) % 10000:04d}"
+    return {
+        "bug_id": bug_id,
+        "title": title,
+        "severity": severity,
+        "link": f"https://jira.company.com/bug/{bug_id}"
+    }</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">定义Resource：数据访问</h3>
+
+            <p>Resource让AI可以读取Server提供的数据，如配置文件、测试报告、知识库文档等。</p>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> Python - 定义Resource</span></div>
+                <pre><code class="language-python">from fastmcp import FastMCP
+
+mcp = FastMCP("测试数据服务")
+
+@mcp.resource("config://test-settings")
+def get_test_settings() -> str:
+    """获取测试配置信息"""
+    config = {
+        "timeout": 30,
+        "retry_count": 3,
+        "parallel_workers": 4,
+        "report_format": "html"
+    }
+    return json.dumps(config, indent=2)
+
+@mcp.resource("report://daily-summary")
+def get_daily_summary() -> str:
+    """获取每日测试汇总报告"""
+    report = """
+    ## 今日测试汇总
+    
+    - 执行总数：125
+    - 通过：118
+    - 失败：5
+    - 跳过：2
+    - 通过率：94.4%
+    
+    ### 失败用例
+    1. TC-045: 支付接口超时
+    2. TC-078: 数据同步失败
+    ...
+    """
+    return report
+
+@mcp.resource("data://test-results/{test_id}")
+def get_test_result(test_id: str) -> str:
+    """获取指定测试的详细结果"""
+    # 动态参数示例
+    return f"测试 {test_id} 的详细结果数据..."</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">定义Prompt：预设模板</h3>
+
+            <p>Prompt提供预设的提示词模板，AI可以快速使用这些模板生成规范的输出。</p>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-code"></i> Python - 定义Prompt</span></div>
+                <pre><code class="language-python">from fastmcp import FastMCP
+
+mcp = FastMCP("测试助手")
+
+@mcp.prompt()
+def test_case_template(feature: str) -> str:
+    """生成测试用例模板
+    
+    Args:
+        feature: 要测试的功能名称
+    """
+    return f"""
+请为以下功能生成测试用例：
+
+功能：{feature}
+
+请按照以下格式输出：
+1. 测试用例ID
+2. 测试场景描述
+3. 前置条件
+4. 测试步骤
+5. 预期结果
+6. 优先级
+"""
+
+@mcp.prompt()
+def bug_report_template() -> str:
+    """缺陷报告模板"""
+    return """
+请按照以下格式编写缺陷报告：
+
+## 缺陷标题
+[简洁描述问题]
+
+## 环境信息
+- 版本：[版本号]
+- 环境：[测试/生产]
+- 浏览器：[浏览器信息]
+
+## 问题描述
+[详细描述缺陷现象]
+
+## 复现步骤
+1. [步骤1]
+2. [步骤2]
+...
+
+## 期望行为
+[描述正确行为]
+
+## 截图/日志
+[附上证据]
+
+## 严重程度
+[low/medium/high/critical]
+"""</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">运行与调试MCP Server</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-terminal"></i> Bash - 运行MCP Server</span></div>
+                <pre><code class="language-bash"># 方式1：直接运行（stdio模式）
+python my_mcp_server.py
+
+# 方式2：指定传输方式
+python my_mcp_server.py --transport stdio
+
+# 方式3：HTTP模式（用于远程访问）
+python my_mcp_server.py --transport http --port 8080
+
+# 调试：使用 MCP Inspector 工具
+npx @anthropic-ai/mcp-inspector python my_mcp_server.py</code></pre>
+            </div>
+
+            <div class="ai-box ai-box--tip">
+                <h4><i class="fas fa-lightbulb"></i> MCP Inspector调试技巧</h4>
+                <p>MCP Inspector是官方提供的调试工具，可以可视化查看Server提供的所有能力：</p>
+                <ul>
+                    <li>查看Tool列表和参数Schema</li>
+                    <li>直接调用Tool测试执行结果</li>
+                    <li>查看Resource内容</li>
+                    <li>测试Prompt模板生成效果</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">测试视角：MCP Server质量验证</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>测试项</th>
+                        <th>验证内容</th>
+                        <th>测试方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>协议合规</strong></td>
+                        <td>消息格式符合MCP规范</td>
+                        <td>用Inspector发送标准请求，验证返回</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tool定义</strong></td>
+                        <td>参数Schema正确、描述清晰</td>
+                        <td>检查tools/list返回的JSON Schema</td>
+                    </tr>
+                    <tr>
+                        <td><strong>执行正确</strong></td>
+                        <td>Tool执行结果符合预期</td>
+                        <td>调用各Tool，验证返回数据格式和内容</td>
+                    </tr>
+                    <tr>
+                        <td><strong>错误处理</strong></td>
+                        <td>异常场景有正确错误返回</td>
+                        <td>发送无效参数，验证错误消息格式</td>
+                    </tr>
+                    <tr>
+                        <td><strong>性能表现</strong></td>
+                        <td>响应时间在合理范围</td>
+                        <td>测量各Tool调用延迟</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>FastMCP用装饰器语法简化开发，几行代码即可定义Tool</li>
+                    <li>Tool定义需要：名称、参数Schema（自动推断）、描述、执行函数</li>
+                    <li>Resource提供数据访问能力，适合暴露配置、报告、知识库</li>
+                    <li>Prompt提供预设模板，帮助AI生成规范输出</li>
+                    <li>MCP Inspector是调试利器，可视化测试所有能力</li>
+                    <li>Server质量需验证协议合规、Tool定义、执行正确、错误处理、性能表现</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch38.html">第38章：Skills技能体系</a> - MCP之上的能力封装</li>
+                    <li><a href="https://github.com/anthropics/mcp" target="_blank">Anthropic MCP官方仓库</a></li>
+                    <li><a href="https://gofastmcp.com" target="_blank">FastMCP官方文档</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch36.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch38.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第37章：MCP服务器开发实战 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

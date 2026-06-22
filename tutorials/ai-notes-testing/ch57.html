@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="安全测试辅助 - AI辅助渗透测试与安全审计">
+    <meta name="keywords" content="AI安全测试, 渗透测试, 安全审计, Claude安全">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch57.html">
+    <title>第57章：安全测试辅助 - AI测试实战</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第57章：安全测试实践 - AI测试实战">
+    <meta property="og:description" content="AI系统安全测试策略、漏洞检测和防护验证">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch57.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第57章：安全测试实践">
+    <meta name="twitter:description" content="AI系统安全测试策略、漏洞检测和防护验证">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第57章：安全测试实践",
+        "description": "AI系统安全测试策略、漏洞检测和防护验证",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch57.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav"><a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a><ul class="ai-nav-links" id="navLinks"><li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li><li><a href="ch56.html"><i class="fas fa-tachometer-alt"></i> 性能测试</a></li><li><a href="ch58.html"><i class="fas fa-shield-alt"></i> 合规测试</a></li></ul><button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button></nav>
+    <div class="ai-chapter-nav"><a href="ch56.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a><a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a><a href="ch58.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a></div>
+    <main class="ai-main"><section id="chapter57"><h2 class="ai-section-title"><i class="fas fa-user-secret"></i> 第57章：安全测试辅助</h2>
+        <div class="ai-box ai-box--objectives"><h4><i class="fas fa-bullseye"></i> 学习目标</h4><ul><li>掌握AI辅助安全测试的方法</li><li>理解渗透测试Prompt设计</li><li>学会AI生成安全测试用例</li><li>了解安全漏洞AI分析技巧</li></ul></div>
+        <h3 class="ai-section-subtitle">AI辅助安全测试场景</h3>
+        <table class="ai-table"><thead><tr><th>场景</th><th>AI能力</th><th>应用示例</th></tr></thead><tbody><tr><td><strong>漏洞扫描辅助</strong></td><td>解释扫描结果</td><td>分析Nessus/OpenVAS报告</td></tr><tr><td><strong>渗透测试</strong></td><td>生成攻击Payload</td><td>SQL注入/XSS测试字符串</td></tr><tr><td><strong>代码审计</strong></td><td>识别安全风险</td><td>检测敏感数据处理</td></tr><tr><td><strong>合规检查</strong></td><td>对照标准审计</td><td>OWASP Top 10验证</td></tr></tbody></table>
+        <div class="ai-box ai-box--tip"><h4><i class="fas fa-exclamation-triangle"></i> 安全测试Prompt示例</h4><pre style="background:#1a1a2e;padding:1rem;border-radius:4px;"><code style="color:#e2e8f0;">分析以下代码的安全风险:
+
+```python
+def login(username, password):
+    query = f"SELECT * FROM users WHERE username='{username}'"
+    return db.execute(query)
+```
+
+输出要求:
+1. 漏洞类型
+2. 风险等级
+3. 攻击示例
+4. 修复建议</code></pre></div>
+        <div class="ai-box ai-box--summary"><h4><i class="fas fa-bookmark"></i> 本章小结</h4><ul><li>AI辅助安全测试：漏洞扫描、渗透测试、代码审计、合规检查</li><li>Prompt设计：明确漏洞类型、风险等级、攻击示例、修复建议</li><li>安全边界：AI生成攻击Payload需谨慎，仅用于授权测试</li></ul></div>
+        <div class="ai-box ai-box--reading"><h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4><ul><li><a href="ch58.html">第58章：合规测试辅助</a></li></ul></div>
+    </section></main>
+    <div class="ai-chapter-nav"><a href="ch56.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a><a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a><a href="ch58.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a></div>
+    <footer class="ai-footer"><div class="footer-content"><p>AI测试实战 | 第57章：安全测试辅助 | <a href="../../index.html">返回首页</a></p></div></footer>
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

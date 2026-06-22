@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="测试脚本生成 - AI自动化测试脚本编写">
+    <meta name="keywords" content="AI测试脚本, 自动化测试, Selenium, Pytest">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch51.html">
+    <title>第51章：测试脚本生成 - AI测试实战</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第51章：模型能力边界测试 - AI测试实战">
+    <meta property="og:description" content="测试AI模型的能力边界、限制和失败模式">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch51.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第51章：模型能力边界测试">
+    <meta name="twitter:description" content="测试AI模型的能力边界、限制和失败模式">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第51章：模型能力边界测试",
+        "description": "测试AI模型的能力边界、限制和失败模式",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch51.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav"><a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks"><li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li><li><a href="ch50.html"><i class="fas fa-vial"></i> 测试用例生成</a></li><li><a href="ch52.html"><i class="fas fa-database"></i> 测试数据生成</a></li></ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button></nav>
+    <div class="ai-chapter-nav"><a href="ch50.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a><a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a><a href="ch52.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a></div>
+    <main class="ai-main"><section id="chapter51"><h2 class="ai-section-title"><i class="fas fa-code"></i> 第51章：测试脚本生成</h2>
+        <div class="ai-box ai-box--objectives"><h4><i class="fas fa-bullseye"></i> 学习目标</h4><ul><li>掌握AI生成自动化测试脚本的方法</li><li>理解不同测试框架的脚本生成差异</li><li>学会Prompt定制生成高质量脚本</li><li>了解脚本生成的最佳实践与验证</li></ul></div>
+        <h3 class="ai-section-subtitle">测试脚本生成框架对比</h3>
+        <table class="ai-table"><thead><tr><th>框架</th><th>语言</th><th>AI生成优势</th><th>适用场景</th></tr></thead><tbody>
+            <tr><td><strong>Pytest</strong></td><td>Python</td><td>语法简洁、断言清晰</td><td>API测试、单元测试</td></tr>
+            <tr><td><strong>Selenium</strong></td><td>Python/Java</td><td>页面操作直观</td><td>Web UI自动化</td></tr>
+            <tr><td><strong>Playwright</strong></td><td>JS/Python</td><td>现代API、异步支持</td><td>现代Web测试</td></tr>
+            <tr><td><strong>Jest</strong></td><td>JavaScript</td><td>前端原生集成</td><td>前端组件测试</td></tr>
+        </tbody></table>
+        <h3 class="ai-section-subtitle">Pytest脚本生成示例</h3>
+        <div class="ai-code"><div class="ai-code-header"><span class="lang-label"><i class="fab fa-python"></i> Pytest</span></div>
+        <pre><code class="language-python"># AI生成的登录测试脚本示例
+import pytest
+from selenium import webdriver
+from pages.login_page import LoginPage
+
+class TestLogin:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.driver = webdriver.Chrome()
+        self.login_page = LoginPage(self.driver)
+        yield
+        self.driver.quit()
+
+    def test_login_success(self):
+        """正向：正常登录"""
+        self.login_page.login("admin", "password123")
+        assert self.login_page.is_logged_in()
+
+    def test_login_wrong_password(self):
+        """异常：密码错误"""
+        self.login_page.login("admin", "wrongpass")
+        assert "密码错误" in self.login_page.get_error_message()</code></pre></div>
+        <div class="ai-box ai-box--summary"><h4><i class="fas fa-bookmark"></i> 本章小结</h4><ul><li>AI生成测试脚本框架：Pytest（API）、Selenium（Web）、Playwright（现代Web）、Jest（前端）</li><li>生成要点：语法正确、断言清晰、注释充分、异常处理</li><li>验证步骤：语法检查→执行验证→结果比对→优化调整</li></ul></div>
+        <div class="ai-box ai-box--reading"><h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4><ul><li><a href="ch52.html">第52章：测试数据生成</a></li></ul></div></section></main>
+    <div class="ai-chapter-nav"><a href="ch50.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a><a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a><a href="ch52.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a></div>
+    <footer class="ai-footer"><div class="footer-content"><p>AI测试实战 | 第51章：测试脚本生成</p></div></footer>
+    <script>document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));</script>
+</body>
+</html>

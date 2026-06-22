@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent智能体架构 - ReAct循环、规划能力与工具链集成">
+    <meta name="keywords" content="Agent, AI智能体, ReAct, Agent架构, 工具调用">
+    <link rel="canonical" href="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch40.html">
+    <title>第40章：Agent智能体架构 - AI测试实战</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <link rel="stylesheet" href="../../css/mobile-optimizations.css">
+    <link rel="stylesheet" href="../assets/ai-notes.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="第40章：Skills开发实战 - AI测试实战">
+    <meta property="og:description" content="创建自定义Skills，实现AI能力模块化封装">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes-testing/ch40.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="第40章：Skills开发实战">
+    <meta name="twitter:description" content="创建自定义Skills，实现AI能力模块化封装">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第40章：Skills开发实战",
+        "description": "创建自定义Skills，实现AI能力模块化封装",
+        "author": { "@type": "Person", "name": "AI Tester" },
+        "datePublished": "2026-06-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://jacksoncode.github.io/tutorials/ai-notes-testing/ch40.html"
+        },
+        "isPartOf": {
+            "@type": "Course",
+            "name": "AI测试实战",
+            "url": "https://jacksoncode.github.io/tutorials/ai-notes-testing/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="ai-nav">
+        <a href="index.html" class="ai-nav-brand"><i class="fas fa-flask"></i> AI测试实战</a>
+        <ul class="ai-nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="ch39.html"><i class="fas fa-tools"></i> Skills开发</a></li>
+            <li><a href="ch42.html"><i class="fas fa-project-diagram"></i> Harness</a></li>
+        </ul>
+        <button class="ai-nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <div class="ai-chapter-nav">
+        <a href="ch39.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch41.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <main class="ai-main">
+        <section id="chapter40">
+            <h2 class="ai-section-title"><i class="fas fa-robot"></i> 第40章：Agent智能体架构</h2>
+
+            <div class="ai-box ai-box--objectives">
+                <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
+                <ul>
+                    <li>理解Agent的核心定义：自主规划与执行的AI系统</li>
+                    <li>掌握ReAct循环：思考→行动→观察→反思</li>
+                    <li>了解Agent的架构组成：规划器、执行器、记忆系统</li>
+                    <li>学会从测试视角评估Agent质量</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--prereq">
+                <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
+                <ul>
+                    <li>已完成第36-39章MCP和Skills的学习</li>
+                    <li>理解LLM的推理和工具调用能力</li>
+                    <li>有基本的软件架构概念</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">一句话定义</h3>
+
+            <div class="ai-success">
+                <h5>Agent（智能体）</h5>
+                <p><strong>Agent是具有自主规划、决策和执行能力的AI系统——它不只是回答问题，而是能分解任务、选择工具、执行操作、处理异常，最终完成复杂目标。</strong></p>
+            </div>
+
+            <h3 class="ai-section-subtitle">生活类比：智能助理</h3>
+
+            <div class="ai-info">
+                <h5>为什么叫Agent？</h5>
+                <p>普通AI像一个"知识渊博的顾问"——你问它答，但不动手。Agent像一个"全能助理"——你给它目标，它会自己规划、查资料、打电话、写文档、直到任务完成。</p>
+                <p>例如：<strong>"帮我准备明天的项目汇报"</strong></p>
+                <ul>
+                    <li>普通AI：生成汇报模板和内容建议</li>
+                    <li>Agent：自动拉取项目数据→生成PPT→发送给团队→预定会议室→创建提醒事项</li>
+                </ul>
+            </div>
+
+            <h3 class="ai-section-subtitle">Agent vs Chatbot vs Skill</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>能力类型</th>
+                        <th>交互模式</th>
+                        <th>自主程度</th>
+                        <th>典型应用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Chatbot</strong></td>
+                        <td>问答式：用户提问，AI回答</td>
+                        <td>被动响应，无自主行动</td>
+                        <td>客服咨询、知识问答</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skill</strong></td>
+                        <td>任务式：用户触发，执行固定流程</td>
+                        <td>半自主：按预设流程执行</td>
+                        <td>生成报告、发送通知</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent</strong></td>
+                        <td>目标式：用户给目标，Agent自主完成</td>
+                        <td>高自主：规划、决策、执行、调整</td>
+                        <td>自动化测试、数据分析、项目管理</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">ReAct循环：Agent的核心机制</h3>
+
+            <p>ReAct（Reasoning + Acting）是Agent的核心执行模式——思考、行动、观察、反思的循环：</p>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-sync-alt"></i> ReAct循环示意</span></div>
+                <pre><code class="language-text">┌──────────────────────────────────────────────────────────────────┐
+│                     ReAct 循环                                    │
+│                                                                  │
+│   用户目标：执行回归测试并生成报告                                 │
+│                                                                  │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  Step 1: Reasoning（思考）                               │   │
+│   │  ─────────────────                                      │   │
+│   │  "我需要先查询当前版本，找出变更的模块，                    │   │
+│   │   选择对应的测试用例，执行测试，分析结果，生成报告"          │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                         ↓                                        │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  Step 2: Acting（行动）                                  │   │
+│   │  ─────────────────                                      │   │
+│   │  调用工具：query_version_diff()                          │   │
+│   │  输入：{ current: "v2.1", previous: "v2.0" }             │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                         ↓                                        │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  Step 3: Observation（观察）                             │   │
+│   │  ─────────────────                                      │   │
+│   │  结果：变更模块：[payment, user, search]                  │   │
+│   │  影响范围：支付流程、用户认证、搜索功能                    │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                         ↓                                        │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  Step 4: Reflection（反思）                              │   │
+│   │  ─────────────────                                      │   │
+│   │  "支付模块变更最大，需要重点测试。                         │   │
+│   │   继续下一步：选择支付相关测试用例"                        │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                         ↓                                        │
+│   循环继续：选择测试用例 → 执行测试 → 观察结果 → 反思 → ...      │
+│                         ↓                                        │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  最终输出：                                               │   │
+│   │  - 执行15个回归测试用例                                   │   │
+│   │  - 通过率：93.3%                                         │   │
+│   │  - 发现2个缺陷                                           │   │
+│   │  - HTML报告已生成并发送                                   │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">Agent架构组成</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>组件</th>
+                        <th>职责</th>
+                        <th>关键技术</th>
+                        <th>测试关注点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>规划器（Planner）</strong></td>
+                        <td>分解目标、制定执行计划</td>
+                        <td>任务分解算法、优先级排序</td>
+                        <td>计划合理性、覆盖完整性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>执行器（Executor）</strong></td>
+                        <td>调用工具、执行具体操作</td>
+                        <td>Tool调用、MCP集成</td>
+                        <td>执行成功率、异常处理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>观察器（Observer）</strong></td>
+                        <td>收集执行结果、反馈信息</td>
+                        <td>结果解析、状态监控</td>
+                        <td>信息完整性、准确性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>反思器（Reflector）</strong></td>
+                        <td>分析结果、调整策略</td>
+                        <td>结果评估、计划修正</td>
+                        <td>反思有效性、调整正确性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>记忆系统（Memory）</strong></td>
+                        <td>存储执行历史、上下文信息</td>
+                        <td>短期记忆、长期存储</td>
+                        <td>记忆准确性、检索效率</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工具库（Toolbox）</strong></td>
+                        <td>提供可调用的工具集</td>
+                        <td>MCP Servers、Skills</td>
+                        <td>工具可用性、参数正确性</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">Agent的典型工作流程</h3>
+
+            <div class="ai-code">
+                <div class="ai-code-header"><span class="lang-label"><i class="fas fa-project-diagram"></i> Agent工作流程</span></div>
+                <pre><code class="language-text">Agent 完整工作流程：
+
+输入：用户目标（如："执行回归测试并报告结果")
+
+┌────────────────────────────────────────────────────────────┐
+│  Phase 1: 目标理解                                          │
+│  ──────────────────────────────────────────────────────    │
+│  1.1 解析用户意图                                           │
+│  1.2 提取关键信息（项目、范围、时间等）                       │
+│  1.3 确定成功标准                                           │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 2: 任务规划                                          │
+│  ──────────────────────────────────────────────────────    │
+│  2.1 分解为子任务                                           │
+│      任务1：识别变更范围                                     │
+│      任务2：选择测试用例                                     │
+│      任务3：执行测试                                         │
+│      任务4：分析结果                                         │
+│      任务5：生成报告                                         │
+│  2.2 确定任务顺序和依赖                                      │
+│  2.3 估算所需资源和时间                                     │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 3: 循环执行                                          │
+│  ──────────────────────────────────────────────────────    │
+│  For each task:                                             │
+│    3.1 选择合适的工具                                        │
+│    3.2 准备调用参数                                          │
+│    3.3 执行并收集结果                                        │
+│    3.4 评估执行效果                                          │
+│    3.5 如失败：尝试替代方案或调整计划                         │
+│    3.6 更新记忆系统                                          │
+└────────────────────────────────────────────────────────────┘
+                          ↓
+┌────────────────────────────────────────────────────────────┐
+│  Phase 4: 结果整合                                          │
+│  ──────────────────────────────────────────────────────    │
+│  4.1 汇总各任务结果                                          │
+│  4.2 验证目标达成情况                                        │
+│  4.3 生成最终输出                                           │
+│  4.4 报告执行过程和发现                                      │
+└────────────────────────────────────────────────────────────┘
+
+输出：完整报告 + 执行过程记录 + 发现的问题</code></pre>
+            </div>
+
+            <h3 class="ai-section-subtitle">企业测试Agent应用场景</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>场景</th>
+                        <th>Agent任务</th>
+                        <th>调用的工具链</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>自动化回归测试</strong></td>
+                        <td>分析变更→选测试用例→执行→分析→报告</td>
+                        <td>版本比对工具、用例管理工具、执行引擎、报告生成</td>
+                    </tr>
+                    <tr>
+                        <td><strong>缺陷根因分析</strong></td>
+                        <td>读取缺陷→分析日志→定位代码→生成修复建议</td>
+                        <td>缺陷系统、日志分析工具、代码检索、知识库</td>
+                    </tr>
+                    <tr>
+                        <td><strong>测试数据准备</strong></td>
+                        <td>分析需求→生成测试数据→验证数据质量→导入系统</td>
+                        <td>需求解析、数据生成工具、数据校验、数据库操作</td>
+                    </tr>
+                    <tr>
+                        <td><strong>性能测试执行</strong></td>
+                        <td>设计场景→配置环境→执行压测→分析瓶颈→优化建议</td>
+                        <td>场景设计工具、配置管理、压测工具、性能分析</td>
+                    </tr>
+                    <tr>
+                        <td><strong>测试报告自动化</strong></td>
+                        <td>收集数据→统计分析→生成图表→格式化报告→分发</td>
+                        <td>数据采集工具、统计分析、图表生成、邮件发送</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="ai-section-subtitle">测试视角：Agent质量评估维度</h3>
+
+            <table class="ai-table">
+                <thead>
+                    <tr>
+                        <th>评估维度</th>
+                        <th>关键指标</th>
+                        <th>测试方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>规划能力</strong></td>
+                        <td>任务分解合理性、计划覆盖率</td>
+                        <td>给复杂目标，评估分解的子任务是否完整合理</td>
+                    </tr>
+                    <tr>
+                        <td><strong>执行成功率</strong></td>
+                        <td>工具调用成功率、任务完成率</td>
+                        <td>统计成功完成的任务比例</td>
+                    </tr>
+                    <tr>
+                        <td><strong>异常处理</strong></td>
+                        <td>失败恢复能力、替代方案有效性</td>
+                        <td>模拟工具失败，观察Agent如何应对</td>
+                    </tr>
+                    <tr>
+                        <td><strong>目标达成率</strong></td>
+                        <td>最终结果是否满足用户目标</td>
+                        <td>端到端测试，验证输出是否符合预期</td>
+                    </tr>
+                    <tr>
+                        <td><strong>效率表现</strong></td>
+                        <td>执行耗时、资源消耗</td>
+                        <td>测量完成任务的耗时和调用次数</td>
+                    </tr>
+                    <tr>
+                        <td><strong>稳定性</strong></td>
+                        <td>多次执行的一致性</td>
+                        <td>重复执行相同任务，验证结果一致性</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="ai-box ai-box--summary">
+                <h4><i class="fas fa-bookmark"></i> 本章小结</h4>
+                <ul>
+                    <li>Agent是具有自主规划、决策、执行能力的AI系统——不只是回答问题，而是完成目标</li>
+                    <li>ReAct循环是Agent核心：思考→行动→观察→反思的迭代过程</li>
+                    <li>Agent架构包含规划器、执行器、观察器、反思器、记忆系统、工具库六大组件</li>
+                    <li>Agent工作流程：目标理解→任务规划→循环执行→结果整合</li>
+                    <li>企业测试场景：回归测试、缺陷分析、数据准备、性能测试、报告自动化</li>
+                    <li>Agent质量评估：规划能力、执行成功率、异常处理、目标达成率、效率、稳定性</li>
+                </ul>
+            </div>
+
+            <div class="ai-box ai-box--reading">
+                <h4><i class="fas fa-external-link-alt"></i> 扩展阅读</h4>
+                <ul>
+                    <li><a href="ch41.html">第41章：Agent开发实战</a> - 构建测试执行Agent</li>
+                    <li><a href="ch42.html">第42章：Harness框架</a> - Agent的执行框架</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="ai-chapter-nav">
+        <a href="ch39.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
+        <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
+        <a href="ch41.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <footer class="ai-footer">
+        <div class="footer-content">
+            <p>AI测试实战 | 第40章：Agent智能体架构 | <a href="../../index.html">返回首页</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        function copyCode(btn) {
+            const code = btn.closest('.ai-code').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> 复制', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
