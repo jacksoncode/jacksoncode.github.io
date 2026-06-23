@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="AI学习笔记 - 从零开始系统学习人工智能，涵盖前置基础、核心原理、工程实践、应用工具、进阶展望">
     <meta name="keywords" content="AI, 人工智能, 机器学习, 深度学习, Python, 数学基础">
-    <meta name="author" content="AI Learner">
+<meta name="author" content="AI Learner">
     <title>AI学习笔记 - 系统学习人工智能</title>
-
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI学习笔记 - 系统学习人工智能">
+    <meta property="og:description" content="AI学习笔记 - 从零开始系统学习人工智能，涵盖前置基础、核心原理、工程实践、应用工具、进阶展望">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jacksoncode.github.io/tutorials/ai-notes/">
+    <meta property="og:site_name" content="Jackson Code">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI学习笔记 - 系统学习人工智能">
+    <meta name="twitter:description" content="AI学习笔记 - 从零开始系统学习人工智能，涵盖前置基础、核心原理、工程实践、应用工具、进阶展望">
+    
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,160 +34,13 @@
     <link rel="stylesheet" href="../../css/dark-mode.css">
     <link rel="stylesheet" href="../../css/mobile-optimizations.css">
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.8; color: #2d3748; background-color: #f7fafc; font-size: 16px;
-        }
-        a { color: #4299e1; text-decoration: none; transition: color 0.3s ease; }
-        a:hover { color: #3182ce; }
-
-        /* 导航栏 */
-        .navbar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 0 2rem;
-            height: 64px; display: flex; align-items: center; justify-content: space-between;
-        }
-        .navbar-brand { font-size: 1.4rem; font-weight: 700; color: #2b6cb0; display: flex; align-items: center; gap: 0.5rem; }
-        .navbar-brand i { color: #4299e1; }
-        .navbar-nav { display: flex; gap: 2rem; list-style: none; }
-        .navbar-nav a { color: #4a5568; font-weight: 500; padding: 0.5rem 0; position: relative; }
-        .navbar-nav a:hover, .navbar-nav a.active { color: #2b6cb0; }
-        .mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: #2b6cb0; cursor: pointer; }
-
-        /* Hero */
-        .hero-section {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
-            color: white; padding: 140px 2rem 80px; text-align: center; position: relative; overflow: hidden;
-        }
-        .hero-section::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;
-            opacity: 0.3; pointer-events: none;
-        }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .hero-title { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .hero-subtitle { font-size: 1.3rem; font-weight: 300; opacity: 0.95; margin-bottom: 1.5rem; }
-        .hero-description { font-size: 1rem; opacity: 0.85; max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
-        .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; }
-        .hero-stat { text-align: center; }
-        .hero-stat-number { font-size: 2rem; font-weight: 700; display: block; }
-        .hero-stat-label { font-size: 0.9rem; opacity: 0.8; }
-
-        /* 进度条 */
-        .progress-section { background: white; padding: 1.5rem 2rem; border-bottom: 1px solid #e2e8f0; }
-        .progress-container { max-width: 1200px; margin: 0 auto; }
-        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .progress-title { font-size: 1rem; font-weight: 600; color: #2d3748; }
-        .progress-percentage { font-size: 1.2rem; font-weight: 700; color: #2b6cb0; }
-        .progress-bar-bg { width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #4299e1, #2b6cb0); border-radius: 5px; transition: width 0.5s ease; width: 0%; }
-        .progress-reset { font-size: 0.85rem; color: #718096; cursor: pointer; margin-left: 1rem; }
-        .progress-reset:hover { color: #e53e3e; }
-
-        /* 模块卡片 */
-        .modules-section { padding: 60px 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 3rem; }
-        .section-header h2 { font-size: 2rem; color: #2d3748; margin-bottom: 0.5rem; }
-        .section-header p { color: #718096; font-size: 1.1rem; }
-        .modules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-        .module-card {
-            background: white; border-radius: 12px; padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .module-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        .module-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-        .module-card h3 { font-size: 1.2rem; color: #2d3748; margin-bottom: 0.5rem; }
-        .module-card p { color: #718096; font-size: 0.95rem; line-height: 1.6; }
-        .module-card .chapters-count { font-size: 0.85rem; color: #4299e1; font-weight: 600; margin-top: 0.5rem; }
-
-        /* 章节目录 */
-        .toc-section { padding: 40px 2rem 60px; max-width: 1200px; margin: 0 auto; }
-        .toc-module { margin-bottom: 2.5rem; }
-        .toc-module-header {
-            display: flex; align-items: center; gap: 0.75rem;
-            padding: 1rem 1.25rem; background: linear-gradient(135deg, #edf2f7, #e2e8f0);
-            border-radius: 10px; margin-bottom: 0.75rem;
-        }
-        .toc-module-header i { font-size: 1.3rem; }
-        .toc-module-header h3 { font-size: 1.15rem; color: #2d3748; }
-        .toc-module-header span { color: #718096; font-size: 0.9rem; margin-left: auto; }
-        .toc-list { list-style: none; }
-        .toc-item {
-            display: flex; align-items: center; gap: 1rem;
-            padding: 0.85rem 1.25rem; background: white;
-            border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 0.5rem;
-            transition: all 0.2s;
-        }
-        .toc-item:hover { border-color: #4299e1; background: #f7fafc; }
-        .toc-item.completed { border-left: 4px solid #48bb78; }
-        .toc-item.completed .toc-check { color: #48bb78; }
-        .toc-check { width: 24px; text-align: center; color: #cbd5e0; font-size: 1.1rem; }
-        .toc-number { font-weight: 700; color: #4299e1; min-width: 60px; font-size: 0.9rem; }
-        .toc-info { flex: 1; }
-        .toc-title { font-weight: 600; color: #2d3748; font-size: 1rem; }
-        .toc-desc { color: #718096; font-size: 0.85rem; margin-top: 0.15rem; }
-        .toc-btn {
-            padding: 0.4rem 1rem; background: #4299e1; color: white;
-            border-radius: 6px; font-size: 0.85rem; font-weight: 500;
-            transition: background 0.2s; white-space: nowrap;
-        }
-        .toc-btn:hover { background: #3182ce; color: white; }
-        .toc-btn.completed { background: #48bb78; }
-
-        /* 学习路径推荐 */
-        .learning-paths-section { padding: 60px 2rem; max-width: 1200px; margin: 0 auto; background: #f7fafc; }
-        .paths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .path-card {
-            background: white; border-radius: 12px; padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex; flex-direction: column;
-        }
-        .path-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        .path-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
-        .path-card h3 { font-size: 1.1rem; color: #2d3748; margin-bottom: 0.5rem; }
-        .path-route { color: #4a5568; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem; }
-        .path-meta { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
-        .path-time { font-size: 0.85rem; color: #718096; display: flex; align-items: center; gap: 0.3rem; }
-        .path-audience { font-size: 0.85rem; color: #2b6cb0; background: #ebf8ff; padding: 0.2rem 0.6rem; border-radius: 4px; }
-        .path-btn {
-            margin-top: auto; padding: 0.5rem 1rem; background: #4299e1; color: white;
-            border-radius: 6px; font-size: 0.9rem; font-weight: 500; text-align: center;
-            transition: background 0.2s; display: inline-block;
-        }
-        .path-btn:hover { background: #3182ce; color: white; }
-
-        /* 附录区域 */
-        .appendix-section { padding: 0 2rem 60px; max-width: 1200px; margin: 0 auto; }
-        .appendix-section .toc-module-header { background: linear-gradient(135deg, #faf5ff, #e9d8fd); }
-
-        /* 页脚 */
-        .footer { background: #2d3748; color: #a0aec0; padding: 3rem 2rem 1.5rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .footer-section h3 { color: white; font-size: 1.1rem; margin-bottom: 1rem; }
-        .footer-section p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.5rem; }
-        .footer-bottom { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #4a5568; font-size: 0.85rem; }
-
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .navbar-nav { display: none; }
-            .mobile-menu-toggle { display: block; }
-            .hero-title { font-size: 2rem; }
-            .hero-stats { gap: 1.5rem; }
-            .modules-grid { grid-template-columns: 1fr; }
-            .toc-item { flex-wrap: wrap; }
-            .toc-btn { width: 100%; text-align: center; margin-top: 0.5rem; }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <a href="../../index.html" class="navbar-brand">
+    <nav class="ai-nav">
+        <a href="../../index.html" class="ai-nav-brand">
             <i class="fas fa-graduation-cap"></i>
             <span>AI学习笔记</span>
         </a>
@@ -191,7 +57,7 @@
     </nav>
 
     <!-- Hero区域 -->
-    <section class="hero-section">
+    <section class="ai-hero">
         <div class="hero-content">
             <h1 class="hero-title"><i class="fas fa-brain"></i> AI学习笔记</h1>
             <p class="hero-subtitle">从零开始系统学习人工智能</p>
@@ -883,5 +749,6 @@
         updateUI();
     })();
     </script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

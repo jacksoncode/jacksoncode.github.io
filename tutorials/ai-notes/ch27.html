@@ -15,642 +15,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #2d3748;
-            line-height: 1.8;
-            min-height: 100vh;
-        }
-
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-        .navbar .logo i { font-size: 1.5rem; color: #4299e1; }
-        .navbar .logo span { font-size: 1.2rem; font-weight: 700; color: #1a365d; }
-
-        .chapter-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .chapter-nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .chapter-nav .prev-chapter { background: #ebf8ff; color: #2b6cb0; }
-        .chapter-nav .prev-chapter:hover { background: #bee3f8; }
-        .chapter-nav .next-chapter { background: #ebf8ff; color: #2b6cb0; }
-        .chapter-nav .next-chapter:hover { background: #bee3f8; }
-        .chapter-nav .toc-link { background: #f0fff4; color: #276749; }
-        .chapter-nav .toc-link:hover { background: #c6f6d5; }
-
-        .ai-notes-container {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            min-width: 0;
-            max-width: 900px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a365d;
-            margin: 3rem 0 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-title i { color: #4299e1; font-size: 1.5rem; }
-
-        .section-subtitle {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #2b6cb0;
-            margin: 2rem 0 1rem;
-            padding-left: 0.75rem;
-            border-left: 4px solid #4299e1;
-        }
-
-        .learning-objectives {
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-            border: 2px solid #90cdf4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .learning-objectives::before {
-            content: '\f02d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #4299e1;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .learning-objectives h4 {
-            color: #2b6cb0;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .learning-objectives ul { list-style: none; padding: 0; }
-
-        .learning-objectives li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .learning-objectives li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.8rem;
-        }
-
-        .prerequisite-box {
-            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
-            border: 2px solid #ecc94b;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .prerequisite-box::before {
-            content: '\f0e7';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #ecc94b;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .prerequisite-box h4 {
-            color: #975a16;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .prerequisite-box ul { list-style: none; padding: 0; }
-
-        .prerequisite-box li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .prerequisite-box li::before {
-            content: '\f0da';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #d69e2e;
-            font-size: 0.8rem;
-        }
-
-        .exercise-box {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border: 2px solid #b794f4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .exercise-box::before {
-            content: '\f4d6';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #805ad5;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .exercise-box h4 {
-            color: #6b46c1;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .exercise-item {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.75rem;
-            border-left: 3px solid #805ad5;
-        }
-
-        .exercise-item .exercise-number {
-            font-weight: 700;
-            color: #6b46c1;
-            margin-right: 0.5rem;
-        }
-
-        .exercise-item:last-child { margin-bottom: 0; }
-
-        .math-block {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.25rem 1.5rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .math-block .math-content {
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 0.5rem 0;
-        }
-
-        .math-block .math-description {
-            font-size: 0.9rem;
-            color: #718096;
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-
-        .code-block {
-            position: relative;
-            margin: 1.25rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .code-block-header {
-            background: #1d1f21;
-            color: #c5c8c6;
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-
-        .code-block-header .lang-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .code-block-header .lang-label i { color: #4299e1; }
-
-        .code-block-header .copy-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #c5c8c6;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: all 0.2s;
-        }
-
-        .code-block-header .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        .code-block pre { margin: 0; border-radius: 0; }
-
-        .code-block pre code {
-            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .chapter-summary {
-            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-            border: 2px solid #68d391;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .chapter-summary::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #38a169;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .chapter-summary h4 {
-            color: #276749;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chapter-summary ul { list-style: none; padding: 0; }
-
-        .chapter-summary li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .chapter-summary li::before {
-            content: '\f111';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.4rem;
-            top: 0.85rem;
-        }
-
-        .toc-sidebar {
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 80px;
-            height: fit-content;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .toc-sidebar::-webkit-scrollbar { width: 4px; }
-        .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 2px; }
-
-        .toc-sidebar h3 {
-            font-size: 1rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toc-sidebar h3 i { color: #4299e1; }
-        .toc-sidebar ul { list-style: none; padding: 0; }
-        .toc-sidebar li { margin-bottom: 0.25rem; }
-
-        .toc-sidebar a {
-            display: block;
-            padding: 0.4rem 0.75rem;
-            color: #4a5568;
-            font-size: 0.88rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-            text-decoration: none;
-        }
-
-        .toc-sidebar a:hover {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-        }
-
-        .toc-sidebar a.active {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-            font-weight: 600;
-        }
-
-        .toc-sidebar .toc-sub { padding-left: 1rem; }
-        .toc-sidebar .toc-sub a { font-size: 0.82rem; color: #718096; padding: 0.3rem 0.75rem; }
-        .toc-sidebar .toc-divider { height: 1px; background: #e2e8f0; margin: 0.75rem 0; }
-
-        .knowledge-point {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: #ebf8ff;
-            color: #2b6cb0;
-            padding: 0.15rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            border: 1px solid #bee3f8;
-        }
-
-        .knowledge-point i { font-size: 0.75rem; }
-
-        .tip-box, .warning-box, .success-box, .info-box {
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.25rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .tip-box { background: #ebf8ff; border: 1px solid #90cdf4; }
-        .tip-box::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #4299e1;
-            font-size: 1.1rem;
-        }
-
-        .warning-box { background: #fffbeb; border: 1px solid #f6e05e; }
-        .warning-box::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #d69e2e;
-            font-size: 1.1rem;
-        }
-
-        .success-box { background: #f0fff4; border: 1px solid #9ae6b4; }
-        .success-box::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .info-box { background: #ebf4ff; border: 1px solid #90cdf4; }
-        .info-box::before {
-            content: '\f05a';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #3182ce;
-            font-size: 1.1rem;
-        }
-
-        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .tip-box h5 { color: #2b6cb0; }
-        .warning-box h5 { color: #975a16; }
-        .success-box h5 { color: #276749; }
-        .info-box h5 { color: #2a4365; }
-
-        .flow-diagram {
-            background: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-        }
-
-        .flow-diagram h4 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .diagram-card {
-            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1.25rem;
-            text-align: center;
-            margin: 0.5rem;
-            display: inline-block;
-            min-width: 120px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .diagram-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .diagram-card i { font-size: 1.5rem; color: #4299e1; margin-bottom: 0.5rem; display: block; }
-        .diagram-card p { font-size: 0.85rem; color: #4a5568; font-weight: 500; margin-top: 0.5rem; }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .comparison-table th {
-            background: #1a365d;
-            color: #fff;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-
-        .comparison-table td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.9rem;
-        }
-
-        .comparison-table tr:nth-child(even) td {
-            background: #f7fafc;
-        }
-
-        .comparison-table tr:hover td {
-            background: #ebf8ff;
-        }
-
-        .footer {
-            background: #1a365d;
-            color: #e2e8f0;
-            padding: 3rem 2rem 1rem;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #90cdf4;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-section p { margin-bottom: 0.5rem; font-size: 0.9rem; color: #a0aec0; }
-        .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2d3748; }
-        .footer-bottom p { font-size: 0.85rem; color: #718096; }
-
-        @media (max-width: 1024px) {
-            .toc-sidebar { display: none; }
-            .ai-notes-container { padding: 1rem; }
-            .main-content { max-width: 100%; }
-        }
-
-        @media (max-width: 768px) {
-            .section-title { font-size: 1.5rem; }
-            .section-subtitle { font-size: 1.2rem; }
-            .chapter-nav { flex-wrap: wrap; gap: 0.5rem; }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="ai-nav">
         <a href="index.html" class="logo">
             <i class="fas fa-brain"></i>
             <span>AI 学习笔记</span>
@@ -686,7 +55,7 @@
             <!-- ========================================= -->
             <!-- 学习目标 -->
             <!-- ========================================= -->
-            <div class="learning-objectives">
+            <div class="ai-box ai-box--objectives">
                 <h4><i class="fas fa-bullseye"></i> 本章学习目标</h4>
                 <ul>
                     <li>理解多模态AI的基本概念，区分单模态与多模态模型的差异</li>
@@ -702,7 +71,7 @@
             <!-- ========================================= -->
             <!-- 前置要求 -->
             <!-- ========================================= -->
-            <div class="prerequisite-box">
+            <div class="ai-box ai-box--prereq">
                 <h4><i class="fas fa-link"></i> 前置知识</h4>
                 <ul>
                     <li>第11章：神经网络基础 —— 理解前馈网络和反向传播</li>
@@ -721,7 +90,7 @@
             <!-- 27.1 什么是多模态AI -->
             <!-- ========================================= -->
             <section id="sec-27-1">
-                <h2 class="section-title"><i class="fas fa-layer-group"></i> 27.1 什么是多模态AI</h2>
+                <h2 class="ai-section-title"><i class="fas fa-layer-group"></i> 27.1 什么是多模态AI</h2>
 
                 <p>
                     <span class="knowledge-point"><i class="fas fa-lightbulb"></i> 多模态 (Multimodal)</span>
@@ -741,7 +110,7 @@
                     单模态模型（如纯文本GPT-3、ResNet图像分类器、Whisper语音识别）只处理一种类型的数据。而多模态模型的核心目标是建立<strong>跨模态关联</strong>——理解"一张猫的图片"和"一只猫"这两个不同模态的表达指向同一概念。
                 </p>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <h5>💡 多模态的数学直觉</h5>
                     <p>
                         从数学角度看，多模态融合本质上是将不同模态的表示向量映射到一个<strong>共享的语义空间</strong>（Shared Semantic Space）。在这个空间中，语义相近的内容（无论来自哪个模态）应当具有相近的向量表示。用公式表达就是：给定图像 \(I\) 和文本 \(T\)，我们希望 \(\text{sim}(f_I(I), f_T(T))\) 在语义匹配时最大化。
@@ -752,7 +121,7 @@
                     为什么需要多模态？现实世界的信息天然是多模态的。医生需要同时查看影像（CT/MRI）和文本病历来诊断疾病；电商客服需要理解用户上传的商品图片和文字描述才能准确回答问题；自动驾驶系统需要融合摄像头、激光雷达、高精地图和语音指令才能安全行驶。单一模态无法提供完整的语义理解。
                 </p>
 
-                <h3 class="section-subtitle">模态的详细分类与特征</h3>
+                <h3 class="ai-section-subtitle">模态的详细分类与特征</h3>
                 <p>
                     每种模态都有独特的数据结构和处理方式。理解这些差异是设计多模态系统的第一步。例如，文本是离散的符号序列，而图像是连续的像素矩阵；音频具有时频双重结构，而视频则在图像基础上增加了时间维度。不同的数据结构决定了它们需要不同的编码器和预处理流程。
                 </p>
@@ -809,7 +178,7 @@
                     多模态系统的设计核心挑战在于：如何让这些结构迥异的数据在同一个语义空间中对齐。这不仅仅是维度对齐的问题，更是语义层面的对齐——让"猫"这个文字和猫的图像在数学上表示为相似的向量。
                 </p>
 
-                <h3 class="section-subtitle">多模态AI的发展历程</h3>
+                <h3 class="ai-section-subtitle">多模态AI的发展历程</h3>
                 <p>
                     多模态AI并非突然出现，而是经历了几十年的渐进发展。早期的研究主要集中在图像描述生成（Image Captioning）和视觉问答（VQA）这两个任务上。2021年，OpenAI发布的CLIP标志着多模态AI进入了新的阶段——通过大规模对比学习，模型可以将图像和文本映射到同一空间。2023年，GPT-4V和BLIP-2的出现将多模态AI推向了对话式理解的新高度。
                 </p>
@@ -849,7 +218,7 @@
                     值得注意的是，多模态AI的发展与大语言模型（LLM）的进步密切相关。早期的多模态模型（如VisualBERT）参数量只有几亿，而如今的GPT-4V、Gemini等模型参数量已达数千亿甚至万亿级别。这种规模的提升使得模型能够处理更复杂的跨模态推理任务，例如理解图像中的幽默、推理场景中物体的因果关系等。
                 </p>
 
-                <h3 class="section-subtitle">为什么现在是多模态AI的爆发期？</h3>
+                <h3 class="ai-section-subtitle">为什么现在是多模态AI的爆发期？</h3>
                 <p>
                     三个关键因素推动了多模态AI的快速发展：
                 </p>
@@ -897,7 +266,7 @@
                     </div>
                 </div>
 
-                <h3 class="section-subtitle">单模态 vs 多模态：核心差异</h3>
+                <h3 class="ai-section-subtitle">单模态 vs 多模态：核心差异</h3>
 
                 <table class="comparison-table">
                     <thead>
@@ -941,7 +310,7 @@
             <!-- 27.2 核心架构：视觉编码器与语言模型的融合 -->
             <!-- ========================================= -->
             <section id="sec-27-2">
-                <h2 class="section-title"><i class="fas fa-sitemap"></i> 27.2 核心架构：视觉编码器与语言模型的融合</h2>
+                <h2 class="ai-section-title"><i class="fas fa-sitemap"></i> 27.2 核心架构：视觉编码器与语言模型的融合</h2>
 
                 <p>
                     多模态大模型的主流架构可以概括为一个经典三段式：<strong>视觉编码器</strong> → <strong>投影层/融合模块</strong> → <strong>语言模型</strong>。这种架构的关键在于，将视觉信息"翻译"成语言模型能够理解的表示。
@@ -951,7 +320,7 @@
                     为什么是这样的三段式？因为语言模型（如LLaMA、GPT）是目前最强大的"思考引擎"，它拥有强大的推理、规划和生成能力。如果我们能让语言模型"看懂"图像，就能直接利用这些能力进行视觉推理。因此，多模态大模型的设计哲学是：<strong>让视觉编码器负责"看"，让语言模型负责"想"</strong>，中间用一个轻量级的模块来连接两者。
                 </p>
 
-                <h3 class="section-subtitle">架构图解</h3>
+                <h3 class="ai-section-subtitle">架构图解</h3>
                 <div class="flow-diagram">
                     <h4><i class="fas fa-diagram-project"></i> 多模态大模型典型架构</h4>
                     <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.5rem;">
@@ -981,7 +350,7 @@
                     </div>
                 </div>
 
-                <h3 class="section-subtitle">视觉编码器选型</h3>
+                <h3 class="ai-section-subtitle">视觉编码器选型</h3>
                 <p>
                     视觉编码器负责将原始图像转换为特征向量序列。它是多模态模型"看"世界的"眼睛"。不同的视觉编码器有不同的特性，选择合适的编码器对最终性能至关重要。
                 </p>
@@ -1000,7 +369,7 @@
                     <li><strong>DINOv2</strong>：Meta提出的自监督ViT，不依赖文本，但在视觉任务上表现出色。适合需要精细视觉特征的场景。</li>
                 </ul>
 
-                <h3 class="section-subtitle">投影层的设计</h3>
+                <h3 class="ai-section-subtitle">投影层的设计</h3>
                 <p>
                     投影层是多模态模型中最灵活的部分，它的设计直接决定了视觉信息如何被语言模型"消化"。根据不同的设计思路，投影层可以分为以下几种类型：
                 </p>
@@ -1020,8 +389,8 @@
                     选择哪种投影层取决于任务需求和资源限制。对于快速原型开发，MLP投影是最佳选择；对于追求最佳性能，交叉注意力值得尝试；对于资源受限的场景，线性投影或Q-Former更为合适。
                 </p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 不同类型的投影层实现</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1065,7 +434,7 @@ class QFormerProjection(nn.Module):
         return self.norm(attended)</code></pre>
                 </div>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <h5>💡 投影层设计的关键原则</h5>
                     <p>
                         无论选择哪种投影层，设计时都需要考虑三个关键因素：（1）<strong>维度匹配</strong>：视觉编码器输出维度和语言模型输入维度通常不匹配，投影层的首要任务是解决维度不一致问题；（2）<strong>信息压缩</strong>：视觉特征的token数量通常远多于语言模型能处理的长度，需要进行信息压缩（如Q-Former）或降采样；（3）<strong>训练效率</strong>：投影层的参数量应该远小于语言模型，以保证训练的可行性。
@@ -1097,14 +466,14 @@ print(f"Patch特征形状: {patch_features.shape}")
 # [1, 49, 768] -> 7x7=49个视觉token</code></pre>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <h5>💡 关键理解：patch embedding</h5>
                     <p>
                         ViT将224×224的图像切成196个16×16的patch，每个patch被线性映射为一个768维向量。加上一个可学习的[CLS]token和位置编码后，序列送入Transformer编码器。这意味着一张图像在多模态模型眼中，本质上是一串"视觉token"——就像文本被分词成word token一样。理解这个类比是理解多模态架构的关键。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">投影层：连接视觉与语言</h3>
+                <h3 class="ai-section-subtitle">投影层：连接视觉与语言</h3>
                 <p>
                     视觉编码器输出的特征维度（如768）通常与语言模型的输入维度（如4096）不一致。投影层（Projection Layer）的作用就是完成这个维度对齐。不同模型采用了不同的投影策略：
                 </p>
@@ -1115,8 +484,8 @@ print(f"Patch特征形状: {patch_features.shape}")
                     <li><strong>C-Abstractor</strong>：Honeybee模型提出的卷积投影，通过跨步卷积压缩视觉token数量，在效率和效果之间取得平衡。</li>
                 </ul>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - MLP投影层实现</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1141,14 +510,14 @@ projected = vision_proj(dummy_vision)
 print(f"投影后形状: {projected.shape}")  # [1, 50, 4096]</code></pre>
                 </div>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <h5>⚠️ 注意：位置编码的处理</h5>
                     <p>
                         当图像patch经过投影后插入文本token序列时，需要为这些视觉token分配位置编码。如果语言模型使用RoPE（旋转位置编码），需要特别处理，因为视觉token和文本token的相对位置关系与纯文本序列不同。LLaVA系列的做法是直接延续文本的位置索引，即视觉token被视为序列开头的特殊token。这种处理虽然简单但在实践中效果不错。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">完整推理流程</h3>
+                <h3 class="ai-section-subtitle">完整推理流程</h3>
                 <p>
                     理解了各组件后，让我们把它们组合起来，看看一个完整的多模态推理是如何进行的。以"描述这张图片"为例：
                 </p>
@@ -1161,8 +530,8 @@ print(f"投影后形状: {projected.shape}")  # [1, 50, 4096]</code></pre>
                     <li>语言模型自回归地生成描述文本</li>
                 </ol>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 完整多模态推理流程示意</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1200,13 +569,13 @@ def multimodal_inference(image, text_prompt):
             <!-- 27.3 三种融合策略 -->
             <!-- ========================================= -->
             <section id="sec-27-3">
-                <h2 class="section-title"><i class="fas fa-code-branch"></i> 27.3 三种融合策略</h2>
+                <h2 class="ai-section-title"><i class="fas fa-code-branch"></i> 27.3 三种融合策略</h2>
 
                 <p>
                     多模态融合的核心问题是：<strong>在模型的哪个阶段、以何种方式将不同模态的信息结合起来？</strong>根据融合时机的不同，分为三种主要策略。每种策略都有其适用场景和优缺点。
                 </p>
 
-                <h3 class="section-subtitle">策略一：早期融合 (Early Fusion)</h3>
+                <h3 class="ai-section-subtitle">策略一：早期融合 (Early Fusion)</h3>
                 <p>
                     在模型的最底层就将不同模态的输入拼接在一起，让模型从头开始学习跨模态交互。代表模型：VisualBERT、FLAVA、ViLBERT。这种策略的优势是模型可以学习到最深层的跨模态交互，但缺点是需要大量的配对数据和计算资源。
                 </p>
@@ -1216,8 +585,8 @@ def multimodal_inference(image, text_prompt):
                 <p>
                     早期融合的代价是计算量。Transformer的自注意力复杂度为 \(O(n^2)\)，其中 \(n\) 是序列长度。当图像和文本的token拼接后，序列长度显著增加，导致计算量急剧上升。这也是为什么早期融合方案通常只适用于较短的文本和较小的图像输入。
                 </p>
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 早期融合示例</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1252,7 +621,7 @@ class EarlyFusionModel(nn.Module):
         return output</code></pre>
                 </div>
 
-                <h3 class="section-subtitle">策略二：晚期融合 (Late Fusion)</h3>
+                <h3 class="ai-section-subtitle">策略二：晚期融合 (Late Fusion)</h3>
                 <p>
                     各模态独立编码，在最后阶段才进行交互。代表模型：CLIP、ALIGN。CLIP分别编码图像和文本，通过对比损失学习对齐，但两个编码器之间没有直接的注意力交互。这种策略的优势是训练效率高、可以独立优化各模态编码器，但缺点是缺乏深层交互。
                 </p>
@@ -1262,8 +631,8 @@ class EarlyFusionModel(nn.Module):
                 <p>
                     然而，晚期融合的局限性也很明显。由于模态间没有直接的注意力交互，模型无法学习到细粒度的跨模态关系。例如，对于"红色的猫在蓝色的沙发上"这个描述，晚期融合模型可能分别识别出"红色"、"猫"、"蓝色"、"沙发"这些概念，但无法精确理解它们之间的空间和属性关系。这也是为什么CLIP在组合性描述上的表现不如预期。
                 </p>
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - CLIP对比学习损失</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1285,12 +654,12 @@ def clip_contrastive_loss(image_features, text_features, temperature=0.07):
     return (loss_i2t + loss_t2i) / 2</code></pre>
                 </div>
 
-                <h3 class="section-subtitle">策略三：交叉注意力融合 (Cross-Attention)</h3>
+                <h3 class="ai-section-subtitle">策略三：交叉注意力融合 (Cross-Attention)</h3>
                 <p>
                     在Transformer层之间插入交叉注意力模块，让一种模态能够"关注"另一种模态的信息。这是当前多模态大模型最主流的方案，代表模型：BLIP-2、Flamingo、GPT-4V。交叉注意力在效果和效率之间取得了最佳平衡。
                 </p>
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 交叉注意力融合模块</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1328,7 +697,7 @@ class CrossAttentionFusion(nn.Module):
         return self.norm(text_features + out)</code></pre>
                 </div>
 
-                <h3 class="section-subtitle">三种策略对比</h3>
+                <h3 class="ai-section-subtitle">三种策略对比</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -1364,7 +733,7 @@ class CrossAttentionFusion(nn.Module):
                     </tbody>
                 </table>
 
-                <div class="success-box">
+                <div class="ai-success">
                     <h5>✅ 实践建议</h5>
                     <p>
                         如果你在构建自己的多模态模型，<strong>MLP投影（晚期融合变体）</strong>是最佳起点——简单、高效、效果好。只有在需要更精细的视觉-语言交互时，才考虑引入交叉注意力或Q-Former。
@@ -1376,13 +745,13 @@ class CrossAttentionFusion(nn.Module):
             <!-- 27.4 CLIP：连接视觉与语言的桥梁 -->
             <!-- ========================================= -->
             <section id="sec-27-4">
-                <h2 class="section-title"><i class="fas fa-link"></i> 27.4 CLIP：连接视觉与语言的桥梁</h2>
+                <h2 class="ai-section-title"><i class="fas fa-link"></i> 27.4 CLIP：连接视觉与语言的桥梁</h2>
 
                 <p>
                     CLIP（Contrastive Language-Image Pre-training）是OpenAI于2021年发布的里程碑式工作。它通过在4亿个图文对上进行对比学习，学会了将图像和文本映射到同一语义空间。CLIP之所以重要，是因为它为后续几乎所有多模态大模型提供了视觉编码器的基础。
                 </p>
 
-                <h3 class="section-subtitle">CLIP的训练目标</h3>
+                <h3 class="ai-section-subtitle">CLIP的训练目标</h3>
                 <p>
                     CLIP的训练非常直觉：在一个batch中，有N个图文对。模型需要学会让正确匹配的图文对相似度最高，同时让不匹配的对相似度最低。这本质上是一个N选1的分类问题。
                 </p>
@@ -1398,8 +767,8 @@ class CrossAttentionFusion(nn.Module):
                     这个损失函数的设计非常巧妙：分子只计算正确匹配对的相似度，分母计算所有可能对的相似度之和。当损失最小时，正确匹配对的相似度在所有对中占主导地位。温度参数 \(\tau\) 控制了相似度分布的"锐度"——较小的 \(\tau\) 会让分布更尖锐，模型更"自信"。
                 </p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 使用CLIP进行零样本图像分类</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1432,14 +801,14 @@ for label, prob in zip(candidate_labels, probs[0]):
     print(f"  {label}: {prob:.4f}")</code></pre>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <h5>💡 Prompt Engineering提升零样本性能</h5>
                     <p>
                         直接使用类别标签（如"猫"）作为文本输入效果一般。加上上下文描述（如"一张猫的照片"、"这是一个{label}"）可以显著提升准确率。这是因为CLIP在训练时看到的文本通常是完整的句子描述，而非孤立的词语。研究发现，使用集成多个prompt的策略（如"一张{label}的照片"、"{label}的特写"、"一张{label}的图像"）可以进一步提升1-2%的准确率。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">CLIP的局限性</h3>
+                <h3 class="ai-section-subtitle">CLIP的局限性</h3>
                 <ul style="margin:1rem 0 1rem 1.5rem;color:#4a5568;">
                     <li><strong>缺乏生成能力</strong>：CLIP只能判断图文匹配度，不能生成文本描述或图像。它是一个判别模型而非生成模型。</li>
                     <li><strong>组合性较弱</strong>：对于"红色的猫在蓝色的车上"这种组合描述，CLIP的理解有限。它更擅长识别"红色"、"猫"、"车"等独立概念，但对它们的组合关系理解不足。这是对比学习的固有局限——它学习的是全局相似度，而非细粒度的组成关系。</li>
@@ -1452,8 +821,8 @@ for label, prob in zip(candidate_labels, probs[0]):
                     尽管存在这些局限性，CLIP的影响力是不可否认的。几乎所有的多模态大模型都使用CLIP ViT作为视觉编码器的基础。理解CLIP的工作原理，是理解现代多模态AI系统的第一步。在下一节中，我们将看到BLIP-2如何通过Q-Former来弥补CLIP在生成能力上的不足。
                 </p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - CLIP图像特征用于下游任务</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1494,13 +863,13 @@ class CLIPFeatureExtractor:
             <!-- 27.5 BLIP-2与视觉语言大模型 -->
             <!-- ========================================= -->
             <section id="sec-27-5">
-                <h2 class="section-title"><i class="fas fa-robot"></i> 27.5 BLIP-2与视觉语言大模型</h2>
+                <h2 class="ai-section-title"><i class="fas fa-robot"></i> 27.5 BLIP-2与视觉语言大模型</h2>
 
                 <p>
                     BLIP-2（Bootstrapping Language-Image Pre-training 2）是Salesforce提出的高效多模态大模型架构。它的核心创新是<strong>Q-Former</strong>——一个轻量级的桥梁模块，用可学习的查询向量从冻结的视觉编码器中提取信息，然后传递给冻结的语言模型。这种设计大幅降低了训练成本，同时保持了强大的多模态理解能力。
                 </p>
 
-                <h3 class="section-subtitle">Q-Former的工作原理</h3>
+                <h3 class="ai-section-subtitle">Q-Former的工作原理</h3>
                 <p>
                     Q-Former包含一组可学习的查询向量（通常32个），它们通过交叉注意力机制从视觉特征中提取信息。这种设计有两个优势：（1）大幅减少了需要训练的参数量——视觉编码器和LLM都被冻结，只训练Q-Former；（2）查询向量可以学到"该关注图像的哪些部分"，实现信息的自适应提取。
                 </p>
@@ -1536,8 +905,8 @@ class CLIPFeatureExtractor:
                     </div>
                 </div>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 使用BLIP-2进行图像描述</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1569,14 +938,14 @@ print(f"问题: {question}")
 print(f"回答: {answer}")</code></pre>
                 </div>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <h5>💡 GPT-4V、Gemini与开源替代</h5>
                     <p>
                         GPT-4V和Gemini是目前最强大的多模态大模型。虽然它们的具体架构未公开，但从技术报告和学术推测来看，都采用了类似的"视觉编码器 + 融合模块 + 大语言模型"架构。GPT-4V支持同时处理多达20张图像，Gemini原生支持图像、音频和视频的混合输入。对于开源替代方案，LLaVA系列（如LLaVA-NeXT）、InternVL、Qwen-VL等都提供了不错的性能。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">主流多模态模型对比</h3>
+                <h3 class="ai-section-subtitle">主流多模态模型对比</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -1633,7 +1002,7 @@ print(f"回答: {answer}")</code></pre>
                     </tbody>
                 </table>
 
-                <h3 class="section-subtitle">多模态大模型的涌现能力</h3>
+                <h3 class="ai-section-subtitle">多模态大模型的涌现能力</h3>
                 <p>
                     当模型规模达到一定阈值后，会表现出在小模型中不存在的能力，这种现象被称为"涌现能力"（Emergent Abilities）。在多模态领域，涌现能力尤为显著。例如，GPT-4V能够理解图像中的幽默、讽刺和文化隐喻——这些能力在小模型中完全不存在。它能够从X光片中诊断疾病、从卫星图像中估算GDP、从手绘草图中生成代码。
                 </p>
@@ -1649,13 +1018,13 @@ print(f"回答: {answer}")</code></pre>
             <!-- 27.6 实战：构建图文检索系统 -->
             <!-- ========================================= -->
             <section id="sec-27-6">
-                <h2 class="section-title"><i class="fas fa-search"></i> 27.6 实战：构建图文检索系统</h2>
+                <h2 class="ai-section-title"><i class="fas fa-search"></i> 27.6 实战：构建图文检索系统</h2>
 
                 <p>
                     图文检索是多模态AI的经典应用场景：给定一段文字，从图片库中找到最相关的图片（Text→Image Retrieval），或给定一张图片找到最匹配的文字描述（Image→Text Retrieval）。我们利用CLIP的对齐表示来实现一个完整的图文检索系统。
                 </p>
 
-                <h3 class="section-subtitle">检索系统的评估指标</h3>
+                <h3 class="ai-section-subtitle">检索系统的评估指标</h3>
                 <p>
                     评估图文检索系统的质量需要使用专门的指标。不同于简单的分类准确率，检索任务的评估需要考虑排名（ranking）——正确结果出现在前几位比出现在后几位更好。以下是图文检索中最常用的评估指标。
                 </p>
@@ -1672,8 +1041,8 @@ print(f"回答: {answer}")</code></pre>
                     在实际应用中，通常同时报告Recall@1、Recall@5、Recall@10和mAP。一个好的图文检索系统应该在这些指标上都达到较高水平。
                 </p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 基于CLIP的图文检索系统</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1762,7 +1131,7 @@ for r in results:
     print(f"  {r['score']:.4f} - {r['path']}")</code></pre>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <h5>💡 提升检索性能的技巧</h5>
                     <ul style="margin:0.5rem 0 0 1rem;">
                         <li><strong>数据增强</strong>：对查询图像做裁剪、翻转等增强，取平均特征可以提升鲁棒性</li>
@@ -1773,8 +1142,8 @@ for r in results:
                     </ul>
                 </div>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 检索评估指标计算</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1827,7 +1196,7 @@ class RetrievalEvaluator:
         }</code></pre>
                 </div>
 
-                <h3 class="section-subtitle">图像描述生成</h3>
+                <h3 class="ai-section-subtitle">图像描述生成</h3>
                 <p>
                     图文检索的逆任务是图像描述生成（Image Captioning）——给定一张图像，自动生成自然语言描述。这是多模态AI最直观的应用之一。图像描述生成需要模型同时"理解"图像内容和"生成"自然语言，这比单纯的分类或检索更具挑战性。
                 </p>
@@ -1835,8 +1204,8 @@ class RetrievalEvaluator:
                     图像描述生成经历了从模板方法到深度学习的演变。早期方法使用预定义的模板（如"一个[物体]在[位置][动作]"），生成的描述机械且缺乏细节。现代方法（如BLIP、BLIP-2）利用端到端的编码器-解码器架构，能够生成流畅、详细的描述。更高级的模型甚至可以生成包含推理的描述，例如"图片中有一只猫正在追逐一只蝴蝶，这可能是在花园里"。
                 </p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 使用BLIP进行图像描述生成</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1864,13 +1233,13 @@ print(f"条件描述: {caption}")</code></pre>
             <!-- 27.7 多模态AI的未来与挑战 -->
             <!-- ========================================= -->
             <section id="sec-27-7">
-                <h2 class="section-title"><i class="fas fa-rocket"></i> 27.7 多模态AI的未来与挑战</h2>
+                <h2 class="ai-section-title"><i class="fas fa-rocket"></i> 27.7 多模态AI的未来与挑战</h2>
 
                 <p>
                     多模态AI正处于快速发展期，从"能看能说"向"能理解能推理能行动"演进。以下是该领域的关键趋势和尚未解决的挑战。
                 </p>
 
-                <h3 class="section-subtitle">前沿趋势</h3>
+                <h3 class="ai-section-subtitle">前沿趋势</h3>
 
                 <div class="flow-diagram">
                     <h4><i class="fas fa-chart-line"></i> 多模态AI发展路线</h4>
@@ -1898,7 +1267,7 @@ print(f"条件描述: {caption}")</code></pre>
                     </div>
                 </div>
 
-                <h3 class="section-subtitle">核心挑战</h3>
+                <h3 class="ai-section-subtitle">核心挑战</h3>
                 <ul style="margin:1rem 0 1rem 1.5rem;color:#4a5568;">
                     <li><strong>幻觉问题</strong>：多模态模型可能"看到"图像中不存在的内容，生成看似合理但错误的描述。例如，给模型展示一张空房间里有一张桌子的图片，问"桌子上有几个苹果？"模型可能回答"3个"而非"没有苹果"。</li>
                     <li><strong>空间理解</strong>：当前模型在判断物体的精确位置、数量和空间关系方面仍有不足。对于"左边的杯子"、"桌子下面的猫"这类描述，模型经常混淆。</li>
@@ -1907,14 +1276,14 @@ print(f"条件描述: {caption}")</code></pre>
                     <li><strong>计算效率</strong>：多模态输入（尤其是视频）的token数量远超纯文本，对推理资源要求很高。一张图像可能产生数百个token，一段视频可能产生数万个token。</li>
                 </ul>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <h5>⚠️ 多模态幻觉的典型案例</h5>
                     <p>
                         多模态幻觉（Multimodal Hallucination）是当前多模态模型最严重的问题之一。模型可能：（1）描述图像中不存在的物体；（2）错误描述物体的属性（颜色、大小、位置）；（3）编造不存在的场景关系。这种幻觉源于语言模型的先验偏见——它在训练数据中见过太多"桌子上有水果"的描述，因此即使看不到也会"脑补"。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">新兴应用方向</h3>
+                <h3 class="ai-section-subtitle">新兴应用方向</h3>
                 <ul style="margin:1rem 0 1rem 1.5rem;color:#4a5568;">
                     <li><strong>多模态Agent</strong>：能够操作电脑界面、浏览网页、使用工具的AI助手。例如，用户可以截图一个网页，让AI自动完成表单填写。</li>
                     <li><strong>世界模型</strong>：基于视频预测未来帧，理解物理世界规律。这是实现真正通用智能的关键一步。</li>
@@ -1925,7 +1294,7 @@ print(f"条件描述: {caption}")</code></pre>
                     <li><strong>无障碍辅助</strong>：为视障人士描述图像内容，为听障人士生成视频字幕，为语言障碍人士提供语音交互。多模态AI正在成为无障碍技术的核心驱动力。</li>
                 </ul>
 
-                <h3 class="section-subtitle">伦理与安全挑战</h3>
+                <h3 class="ai-section-subtitle">伦理与安全挑战</h3>
                 <p>
                     多模态AI的伦理挑战比纯文本模型更加复杂，因为它们涉及图像、视频等更敏感的数据类型。以下是一些核心的伦理问题：
                 </p>
@@ -1937,14 +1306,14 @@ print(f"条件描述: {caption}")</code></pre>
                     <li><strong>军事应用</strong>：多模态AI可以被用于自主武器系统、监控和情报分析。国际社会正在讨论是否应该限制或禁止某些军事用途的多模态AI。</li>
                 </ul>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <h5>⚠️ 负责任地使用多模态AI</h5>
                     <p>
                         在使用多模态AI时，必须遵循以下原则：（1）不要使用模型生成或传播虚假内容；（2）尊重图像中人物的隐私权；（3）在医疗、法律等高风险领域，AI的输出必须经过人类专家审核；（4）披露AI生成内容，避免误导；（5）持续监控模型的偏见和公平性。负责任地使用多模态AI是每个从业者的义务。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">未来研究方向</h3>
+                <h3 class="ai-section-subtitle">未来研究方向</h3>
                 <p>
                     多模态AI的未来充满了令人兴奋的研究方向。以下是几个最具潜力的方向：
                 </p>
@@ -1957,7 +1326,7 @@ print(f"条件描述: {caption}")</code></pre>
                     <li><strong>跨文化多模态理解</strong>：不同文化对图像的解读方式不同。未来的多模态模型需要具备文化感知能力，能够根据用户的文化背景调整理解方式。</li>
                 </ul>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <h5>💡 推荐学习资源</h5>
                     <p>
                         想深入学习多模态AI，推荐以下资源：Hugging Face的Multimodal Course（免费在线课程）、Stanford CS231n（视觉深度学习）、BLIP-2和LLaVA的原始论文。动手实践时，Hugging Face Transformers库提供了最便捷的接口。对于中文社区，Qwen-VL和InternVL提供了优秀的中文多模态能力。
@@ -1968,7 +1337,7 @@ print(f"条件描述: {caption}")</code></pre>
             <!-- ========================================= -->
             <!-- 练习题 -->
             <!-- ========================================= -->
-            <div class="exercise-box">
+            <div class="ai-box ai-box--exercise">
                 <h4><i class="fas fa-pen-fancy"></i> 练习题</h4>
                 <div class="exercise-item">
                     <span class="exercise-number">[1]</span>
@@ -1995,7 +1364,7 @@ print(f"条件描述: {caption}")</code></pre>
             <!-- ========================================= -->
             <!-- 章节小结 -->
             <!-- ========================================= -->
-            <div class="chapter-summary">
+            <div class="ai-box ai-box--summary">
                 <h4><i class="fas fa-lightbulb"></i> 章节小结</h4>
                 <ul>
                     <li>多模态AI让模型能够同时处理文本、图像、音频等多种模态的信息，核心挑战是跨模态语义对齐</li>
@@ -2108,5 +1477,6 @@ print(f"条件描述: {caption}")</code></pre>
             }
         });
     </script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

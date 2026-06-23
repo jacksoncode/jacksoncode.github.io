@@ -22,788 +22,20 @@
     <!-- Prism.js -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 
-    <style>
-        /* ========== 基础重置 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.8;
-            color: #2d3748;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-            min-height: 100vh;
-        }
-
-        /* ========== 导航栏 ========== */
-        .navbar {
-            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .navbar-brand {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-brand i {
-            color: #fbd38d;
-        }
-
-        .navbar-links {
-            display: flex;
-            list-style: none;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .navbar-links a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            padding: 0.5rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .navbar-links a:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-        }
-
-        .navbar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* ========== 内容容器 ========== */
-        .content-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            background: white;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        /* ========== 标题样式 ========== */
-        .section-title {
-            font-size: 2rem;
-            color: #1a365d;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-title i {
-            color: #4299e1;
-        }
-
-        .section-subtitle {
-            font-size: 1.5rem;
-            color: #2d3748;
-            margin: 2rem 0 1rem;
-            padding-left: 1rem;
-            border-left: 4px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-subtitle i {
-            color: #4299e1;
-        }
-
-        /* ========== 概念区块 ========== */
-        .concept-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .concept-box {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1rem 0;
-            position: relative;
-        }
-
-        .concept-box h4 {
-            color: #2d3748;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .concept-box h4 i {
-            color: #4299e1;
-        }
-
-        .concept-box p {
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-        }
-
-        .concept-box ul {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .concept-box li {
-            color: #4a5568;
-            margin-bottom: 0.4rem;
-        }
-
-        .ai-usage {
-            background: #ebf8ff;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: #2b6cb0;
-            border-left: 3px solid #4299e1;
-        }
-
-        .ai-usage strong {
-            color: #2c5282;
-        }
-
-        /* ========== 学习目标 ========== */
-        .learning-objectives {
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-            border: 2px solid #4299e1;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .learning-objectives::before {
-            content: '\f0b1';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #4299e1;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .learning-objectives h4 {
-            color: #2b6cb0;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .learning-objectives ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .learning-objectives li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .learning-objectives li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 前置要求 ========== */
-        .prerequisite-box {
-            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
-            border: 2px solid #ecc94b;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .prerequisite-box::before {
-            content: '\f0e7';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #ecc94b;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .prerequisite-box h4 {
-            color: #975a16;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .prerequisite-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .prerequisite-box li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .prerequisite-box li::before {
-            content: '\f0da';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #d69e2e;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 练习题框 ========== */
-        .exercise-box {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border: 2px solid #b794f4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .exercise-box::before {
-            content: '\f4d6';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #805ad5;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .exercise-box h4 {
-            color: #6b46c1;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .exercise-item {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.75rem;
-            border-left: 3px solid #805ad5;
-        }
-
-        .exercise-item .exercise-number {
-            font-weight: 700;
-            color: #6b46c1;
-            margin-right: 0.5rem;
-        }
-
-        .exercise-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* ========== 章节小结 ========== */
-        .chapter-summary {
-            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-            border: 2px solid #68d391;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .chapter-summary::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #38a169;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .chapter-summary h4 {
-            color: #276749;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chapter-summary ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .chapter-summary li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .chapter-summary li::before {
-            content: '\f111';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.4rem;
-            top: 0.85rem;
-        }
-
-        /* ========== 右侧粘性目录导航 ========== */
-        .toc-sidebar {
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 80px;
-            height: fit-content;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .toc-sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .toc-sidebar::-webkit-scrollbar-thumb {
-            background: #cbd5e0;
-            border-radius: 2px;
-        }
-
-        .toc-sidebar h3 {
-            font-size: 1rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toc-sidebar h3 i {
-            color: #4299e1;
-        }
-
-        .toc-sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc-sidebar li {
-            margin-bottom: 0.25rem;
-        }
-
-        .toc-sidebar a {
-            display: block;
-            padding: 0.4rem 0.75rem;
-            color: #4a5568;
-            font-size: 0.88rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        .toc-sidebar a:hover {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-        }
-
-        .toc-sidebar a.active {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-            font-weight: 600;
-        }
-
-        .toc-sidebar .toc-sub {
-            padding-left: 1rem;
-        }
-
-        .toc-sidebar .toc-sub a {
-            font-size: 0.82rem;
-            color: #718096;
-            padding: 0.3rem 0.75rem;
-        }
-
-        .toc-sidebar .toc-divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 0.75rem 0;
-        }
-
-        /* ========== 提示/警告/信息框 ========== */
-        .tip-box, .warning-box, .info-box {
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.25rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .tip-box {
-            background: #ebf8ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .tip-box::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #4299e1;
-            font-size: 1.1rem;
-        }
-
-        .warning-box {
-            background: #fffbeb;
-            border: 1px solid #f6e05e;
-        }
-
-        .warning-box::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #d69e2e;
-            font-size: 1.1rem;
-        }
-
-        .info-box {
-            background: #f0fff4;
-            border: 1px solid #68d391;
-        }
-
-        .info-box::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .tip-box strong, .warning-box strong, .info-box strong {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .tip-box p, .warning-box p, .info-box p {
-            margin-bottom: 0;
-        }
-
-        .tip-box ul, .warning-box ul, .info-box ul {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .tip-box li, .warning-box li, .info-box li {
-            margin-bottom: 0.3rem;
-        }
-
-        /* ========== 代码块样式 ========== */
-        pre[class*="language-"] {
-            border-radius: 10px;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
-
-        code {
-            font-family: 'Fira Code', 'Consolas', monospace;
-        }
-
-        .code-label {
-            display: inline-block;
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 0.3rem 0.75rem;
-            border-radius: 6px 6px 0 0;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: -4px;
-        }
-
-        /* ========== 对比表格 ========== */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .comparison-table th {
-            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
-            color: white;
-            padding: 0.9rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .comparison-table td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background: #f7fafc;
-        }
-
-        .comparison-table tr:hover {
-            background: #ebf8ff;
-        }
-
-        /* ========== 章节导航 ========== */
-        .chapter-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid #e2e8f0;
-            gap: 1rem;
-        }
-
-        .chapter-nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .prev-chapter {
-            background: #edf2f7;
-            color: #4a5568;
-        }
-
-        .prev-chapter:hover {
-            background: #e2e8f0;
-            color: #2d3748;
-        }
-
-        .next-chapter {
-            background: #4299e1;
-            color: white;
-        }
-
-        .next-chapter:hover {
-            background: #3182ce;
-        }
-
-        .toc-link {
-            background: #f0fff4;
-            color: #38a169;
-            border: 1px solid #c6f6d5;
-        }
-
-        .toc-link:hover {
-            background: #c6f6d5;
-            color: #276749;
-        }
-
-        /* ========== 页脚 ========== */
-        .footer {
-            background: #1a365d;
-            color: rgba(255, 255, 255, 0.85);
-            padding: 3rem 2rem 1.5rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            color: #fbd38d;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-section p {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.88rem;
-        }
-
-        /* ========== 响应式媒体查询 ========== */
-        @media (max-width: 1024px) {
-            .toc-sidebar {
-                display: none;
-            }
-
-            .content-wrapper {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-wrap: wrap;
-                padding: 0.75rem 1rem;
-            }
-
-            .navbar-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                padding-top: 0.5rem;
-            }
-
-            .navbar-links.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .main-content {
-                padding: 1.5rem;
-                border-radius: 12px;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .chapter-nav {
-                flex-direction: column;
-            }
-
-            .chapter-nav a {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
 
     <!-- ==================== 导航栏 ==================== -->
-    <nav class="navbar">
-        <a href="../index.html" class="navbar-brand">
+    <nav class="ai-nav">
+        <a href="../index.html" class="ai-nav-brand">
             <i class="fas fa-brain"></i> AI学习笔记
         </a>
-        <button class="navbar-toggle" id="navbarToggle">
+        <button class="ai-nav-toggle" id="navbarToggle">
             <i class="fas fa-bars"></i>
         </button>
-        <ul class="navbar-links" id="navbarLinks">
+        <ul class="ai-nav-links" id="navbarLinks">
             <li><a href="../index.html"><i class="fas fa-home"></i> 首页</a></li>
             <li><a href="index.html"><i class="fas fa-list"></i> 目录</a></li>
             <li><a href="ch32.html"><i class="fas fa-arrow-left"></i> 上一章</a></li>
@@ -823,7 +55,7 @@
             <p style="color: #718096; font-size: 1.05rem; margin-bottom: 2rem;">Model Context Protocol —— 让AI与外部世界对话的标准化接口</p>
 
             <!-- 学习目标 -->
-            <div class="learning-objectives">
+            <div class="ai-box ai-box--objectives">
                 <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
                 <ul>
                     <li>理解MCP协议的设计动机与核心价值</li>
@@ -836,7 +68,7 @@
             </div>
 
             <!-- 前置要求 -->
-            <div class="prerequisite-box">
+            <div class="ai-box ai-box--prereq">
                 <h4><i class="fas fa-graduation-cap"></i> 前置知识</h4>
                 <ul>
                     <li>了解大语言模型的基本工作原理（第1-15章）</li>
@@ -848,7 +80,7 @@
 
             <!-- ==================== 第一节：MCP简介 ==================== -->
             <div class="concept-section" id="sec1">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-info-circle"></i>
                     一、MCP简介：为什么需要模型上下文协议
                 </h2>
@@ -870,14 +102,14 @@
                     </ul>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <strong>MCP的核心价值</strong>
                     <p>
                         在MCP出现之前，如果你想让AI助手访问数据库、文件系统或API，通常需要为每个集成编写定制代码。MCP让这变成"插拔式"的：编写一次MCP Server，所有支持MCP的AI应用都能使用。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-code-branch"></i>
                     MCP与函数调用的区别
                 </h3>
@@ -930,7 +162,7 @@
 
             <!-- ==================== 第二节：架构设计 ==================== -->
             <div class="concept-section" id="sec2">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-sitemap"></i>
                     二、架构设计：Host、Client、Server
                 </h2>
@@ -952,7 +184,7 @@
                     一个Host可以同时连接多个Client，每个Client对应一个Server。这种设计使得Host能够聚合来自不同Server的能力，同时保持清晰的权限边界。
                 </p>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <strong>架构图解</strong>
                     <p>
                         Host（AI应用）→ Client（MCP连接器）→ Server（能力提供方）<br>
@@ -960,7 +192,7 @@
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-handshake"></i>
                     连接生命周期
                 </h3>
@@ -982,7 +214,7 @@
                     这种设计确保了连接的可靠性和可预测性，使得错误处理和资源清理变得更加容易。
                 </p>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-arrows-alt-h"></i>
                     消息流动模式
                 </h3>
@@ -1038,14 +270,14 @@
 }
 </code></pre>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <strong>通知不可靠性</strong>
                     <p>
                         通知是"发后即忘"的，不保证送达。如果Client需要可靠的进度更新，应使用带有进度token的请求，通过progressNotification跟踪进度。对于关键状态变更，应使用请求-响应模式。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-project-diagram"></i>
                     多Server聚合模式
                 </h3>
@@ -1158,7 +390,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 </code></pre>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <strong>聚合模式选择</strong>
                     <p>
                         对于桌面应用（如Claude Desktop），通常使用扁平聚合，直接管理所有Server连接。对于Web应用或微服务架构，层级聚合更合适，通过一个网关Server统一对外暴露接口。选择哪种模式取决于应用的部署架构和安全需求。
@@ -1168,7 +400,7 @@ if __name__ == "__main__":
 
             <!-- ==================== 第三节：核心概念 ==================== -->
             <div class="concept-section" id="sec3">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-cubes"></i>
                     三、核心概念：四大原语
                 </h2>
@@ -1177,7 +409,7 @@ if __name__ == "__main__":
                     MCP定义了四种核心原语（Primitives），它们是Server向Client暴露能力的基本方式。理解这四种原语是掌握MCP的关键。
                 </p>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-file-alt"></i>
                     3.1 Resources：数据资源
                 </h3>
@@ -1226,7 +458,7 @@ async def get_user(user_id: str) -> ResourceContents:
     )
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-wrench"></i>
                     3.2 Tools：可执行工具
                 </h3>
@@ -1289,7 +521,7 @@ async def query_database(sql: str) -> ToolResult:
         )
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-comments"></i>
                     3.3 Prompts：提示模板
                 </h3>
@@ -1325,7 +557,7 @@ async def code_review_prompt(
     ]
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-robot"></i>
                     3.4 Sampling：模型采样
                 </h3>
@@ -1344,7 +576,7 @@ async def code_review_prompt(
                     </ul>
                 </div>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <strong>Sampling安全原则</strong>
                     <p>
                         Sampling赋予了Server调用LLM的能力，因此必须严格控制。Host应该：(1) 对所有采样请求进行人类审批；(2) 限制采样可以使用的模型范围；(3) 记录所有采样活动以供审计。
@@ -1354,7 +586,7 @@ async def code_review_prompt(
 
             <!-- ==================== 第四节：协议规范 ==================== -->
             <div class="concept-section" id="sec4">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-file-code"></i>
                     四、协议规范：JSON-RPC 2.0
                 </h2>
@@ -1372,7 +604,7 @@ async def code_review_prompt(
                     </ul>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-plug"></i>
                     初始化握手
                 </h3>
@@ -1419,7 +651,7 @@ async def code_review_prompt(
 }
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-list"></i>
                     能力发现
                 </h3>
@@ -1475,14 +707,14 @@ async def code_review_prompt(
 }
 </code></pre>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <strong>能力协商机制</strong>
                     <p>
                         MCP的初始化阶段使用协商机制：Client和Server各自声明自己支持的能力版本，最终以双方都支持的最高版本为准。这确保了协议的向后兼容性，使得不同版本的Client和Server可以互相通信。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-exclamation-circle"></i>
                     错误处理机制
                 </h3>
@@ -1531,14 +763,14 @@ async def code_review_prompt(
 }
 </code></pre>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <strong>错误处理最佳实践</strong>
                     <p>
                         Server应尽量返回有意义的错误信息，而不是抛出原始异常。在ToolResult中，使用isError=True标记错误结果，并在content中包含用户友好的错误描述。对于可重试的错误（如网络超时），Client可以自动重试；对于永久性错误（如文件不存在），应向用户报告。
                     </p>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-sync-alt"></i>
                     取消与超时
                 </h3>
@@ -1575,7 +807,7 @@ async def code_review_prompt(
 
             <!-- ==================== 第五节：传输机制 ==================== -->
             <div class="concept-section" id="sec5">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-network-wired"></i>
                     五、传输机制
                 </h2>
@@ -1584,7 +816,7 @@ async def code_review_prompt(
                     MCP的传输层负责消息的序列化和通信。协议本身与传输方式解耦，当前支持两种主要的传输机制：标准输入/输出（stdio）和HTTP Server-Sent Events（SSE）。
                 </p>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-terminal"></i>
                     5.1 标准输入/输出（stdio）
                 </h3>
@@ -1629,7 +861,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-globe"></i>
                     5.2 HTTP SSE（Server-Sent Events）
                 </h3>
@@ -1715,7 +947,7 @@ if __name__ == "__main__":
 
             <!-- ==================== 第六节：服务端开发 ==================== -->
             <div class="concept-section" id="sec6">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-code"></i>
                     六、服务端开发实战
                 </h2>
@@ -1724,7 +956,7 @@ if __name__ == "__main__":
                     本节通过完整示例展示如何开发一个实用的MCP Server。我们将构建一个文件系统MCP Server，它能够读写文件、列出目录并执行基本的文件操作。
                 </p>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fab fa-python"></i>
                     6.1 Python实现
                 </h3>
@@ -1896,7 +1128,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fab fa-js"></i>
                     6.2 TypeScript实现
                 </h3>
@@ -2009,7 +1241,7 @@ async function main() {
 main().catch(console.error);
 </code></pre>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <strong>Python vs TypeScript选择</strong>
                     <p>
                         Python SDK更适合数据科学和后端集成场景，TypeScript SDK更适合Web应用和前端工具链集成。两者都完全支持MCP协议的所有功能。对于新手，建议从Python SDK开始，因为它的API更直观。
@@ -2019,7 +1251,7 @@ main().catch(console.error);
 
             <!-- ==================== 第七节：客户端集成 ==================== -->
             <div class="concept-section" id="sec7">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-plug"></i>
                     七、客户端集成
                 </h2>
@@ -2117,7 +1349,7 @@ async def handle_llm_tool_call(session, tool_name, arguments):
     return result.content[0].text
 </code></pre>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <strong>现有MCP客户端支持</strong>
                     <p>
                         目前已有多款AI应用原生支持MCP协议，包括：Claude Desktop、Cursor、Windsurf、Cline等IDE插件、Continue.dev等。这些应用可以无缝连接任何符合MCP规范的Server。
@@ -2127,7 +1359,7 @@ async def handle_llm_tool_call(session, tool_name, arguments):
 
             <!-- ==================== 第八节：安全机制 ==================== -->
             <div class="concept-section" id="sec8">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-shield-alt"></i>
                     八、安全机制与最佳实践
                 </h2>
@@ -2136,7 +1368,7 @@ async def handle_llm_tool_call(session, tool_name, arguments):
                     安全是MCP协议设计的核心考量。由于MCP Server可以访问文件系统、执行代码、连接数据库等敏感操作，必须采取严格的安全措施来保护用户数据和系统安全。
                 </p>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-lock"></i>
                     8.1 安全架构原则
                 </h3>
@@ -2193,12 +1425,12 @@ async def secure_tool_wrapper(tool_name: str, **kwargs) -> ToolResult:
     return ToolResult(content="操作完成")
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-exclamation-triangle"></i>
                     8.2 常见安全威胁
                 </h3>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <strong>必须防范的安全威胁</strong>
                     <ul>
                         <li><strong>提示注入</strong>：恶意用户可能通过工具返回的内容操纵LLM行为。Server应对所有输出进行消毒处理。</li>
@@ -2244,7 +1476,7 @@ class SafeQueryArgs(BaseModel):
         return v
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-clipboard-list"></i>
                     8.3 日志与审计
                 </h3>
@@ -2370,7 +1602,7 @@ async def audited_tool_call(tool_name: str, args: dict) -> Any:
         raise
 </code></pre>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <strong>审计日志最佳实践</strong>
                     <ul>
                         <li>使用结构化日志（JSON格式），便于后续分析和查询</li>
@@ -2414,7 +1646,7 @@ async def safe_query(args: SafeQueryArgs) -> ToolResult:
         )
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-user-shield"></i>
                     8.3 人类审批机制
                 </h3>
@@ -2529,7 +1761,7 @@ async def main():
         print("用户拒绝，操作已取消")
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-key"></i>
                     8.4 认证与授权
                 </h3>
@@ -2623,7 +1855,7 @@ async def auth_callback(request):
     return {"access_token": jwt_token, "token_type": "bearer"}
 </code></pre>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <strong>认证配置注意事项</strong>
                     <ul>
                         <li>永远不要在代码中硬编码密钥和凭证，使用环境变量或密钥管理服务</li>
@@ -2633,7 +1865,7 @@ async def auth_callback(request):
                     </ul>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <strong>安全最佳实践清单</strong>
                     <ul>
                         <li>始终使用最小权限原则设计Server</li>
@@ -2650,7 +1882,7 @@ async def auth_callback(request):
 
             <!-- ==================== 第九节：实战构建MCP Server ==================== -->
             <div class="concept-section" id="sec9">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-hammer"></i>
                     九、实战：构建一个完整的MCP Server
                 </h2>
@@ -2848,7 +2080,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 </code></pre>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-code"></i>
                     TypeScript MCP Server示例
                 </h3>
@@ -2978,7 +2210,7 @@ main().catch(console.error);
                     </table>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-exclamation-triangle"></i>
                     错误处理与重试模式
                 </h3>
@@ -3111,7 +2343,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
         )
 </code></pre>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <strong>Server测试</strong>
                     <p>
                         可以使用MCP Inspector工具来测试Server。运行 <code>npx @modelcontextprotocol/inspector python weather_server.py</code> 即可在浏览器中调试所有工具、资源和提示模板。
@@ -3121,7 +2353,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
 
             <!-- ==================== 第十节：MCP生态系统 ==================== -->
             <div class="concept-section" id="sec10">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-globe-americas"></i>
                     十、MCP生态系统与未来展望
                 </h2>
@@ -3144,7 +2376,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
                     </ul>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-users"></i>
                     社区贡献
                 </h3>
@@ -3177,7 +2409,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
                     </ul>
                 </div>
 
-                <h3 class="section-subtitle">
+                <h3 class="ai-section-subtitle">
                     <i class="fas fa-road"></i>
                     未来发展方向
                 </h3>
@@ -3195,7 +2427,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
                     </ul>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <strong>加入MCP生态</strong>
                     <p>
                         如果你正在开发AI应用，强烈建议采用MCP协议来处理工具集成。这不仅可以减少开发工作量，还能让你的应用立即兼容现有的MCP Server生态。访问 <a href="https://modelcontextprotocol.io" target="_blank">modelcontextprotocol.io</a> 获取最新文档和SDK。你也可以通过GitHub贡献自己的MCP Server，帮助生态繁荣发展。
@@ -3204,7 +2436,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
             </div>
 
             <!-- 练习题 -->
-            <div class="exercise-box" id="exercises">
+            <div class="ai-box ai-box--exercise" id="exercises">
                 <h4><i class="fas fa-pen"></i> 练习题</h4>
 
                 <div class="exercise-item">
@@ -3254,7 +2486,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
             </div>
 
             <!-- 章节小结 -->
-            <div class="chapter-summary" id="summary">
+            <div class="ai-box ai-box--summary" id="summary">
                 <h4><i class="fas fa-bookmark"></i> 章节小结</h4>
                 <ul>
                     <li><strong>MCP</strong>是标准化AI与外部服务交互的开放协议，解决了工具集成的碎片化问题</li>
@@ -3274,7 +2506,7 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
             </div>
 
             <!-- 章节导航 -->
-            <div class="chapter-nav">
+            <div class="ai-chapter-nav">
                 <a href="ch32.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章</a>
                 <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
                 <a href="appendix-g.html" class="next-chapter">下一章 <i class="fas fa-arrow-right"></i></a>
@@ -3365,5 +2597,6 @@ async def query_weather_with_retry(args: WeatherQueryArgs) -> ToolResult:
       updateActive();
     })();
     </script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

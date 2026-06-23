@@ -43,870 +43,18 @@
     <link rel="stylesheet" href="../../css/mobile-optimizations.css">
 
     <!-- 内联CSS样式 -->
-    <style>
-        /* ========== 全局基础样式 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.8;
-            color: #2d3748;
-            background-color: #f7fafc;
-            font-size: 16px;
-        }
-
-        a {
-            color: #4299e1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #3182ce;
-        }
-
-        /* ========== 导航栏样式 ========== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0 2rem;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-brand {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2b6cb0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-brand i {
-            color: #4299e1;
-        }
-
-        .navbar-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .navbar-links a {
-            color: #4a5568;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        .navbar-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #4299e1;
-            transition: width 0.3s ease;
-        }
-
-        .navbar-links a:hover::after {
-            width: 100%;
-        }
-
-        .navbar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        /* ========== Hero Section 样式 ========== */
-        .hero-section {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
-            color: #fff;
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            margin-top: 64px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.3;
-        }
-
-        .hero-section h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            position: relative;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-section p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-            position: relative;
-            line-height: 1.8;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            position: relative;
-        }
-
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            backdrop-filter: blur(5px);
-        }
-
-        /* ========== 主内容区域布局 ========== */
-        .content-wrapper {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            min-width: 0;
-            max-width: 900px;
-        }
-
-        /* ========== 章节标题样式 ========== */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a365d;
-            margin: 3rem 0 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-title i {
-            color: #4299e1;
-            font-size: 1.5rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #2b6cb0;
-            margin: 2rem 0 1rem;
-            padding-left: 0.75rem;
-            border-left: 4px solid #4299e1;
-        }
-
-        /* ========== 学习目标框 ========== */
-        .learning-objectives {
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-            border: 2px solid #90cdf4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .learning-objectives::before {
-            content: '\f02d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #4299e1;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .learning-objectives h4 {
-            color: #2b6cb0;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .learning-objectives ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .learning-objectives li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .learning-objectives li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 前置要求框 ========== */
-        .prerequisite-box {
-            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
-            border: 2px solid #ecc94b;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .prerequisite-box::before {
-            content: '\f0e7';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #ecc94b;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .prerequisite-box h4 {
-            color: #975a16;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .prerequisite-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .prerequisite-box li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .prerequisite-box li::before {
-            content: '\f0da';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #d69e2e;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 练习题框 ========== */
-        .exercise-box {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border: 2px solid #b794f4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .exercise-box::before {
-            content: '\f4d6';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #805ad5;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .exercise-box h4 {
-            color: #6b46c1;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .exercise-item {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.75rem;
-            border-left: 3px solid #805ad5;
-        }
-
-        .exercise-item .exercise-number {
-            font-weight: 700;
-            color: #6b46c1;
-            margin-right: 0.5rem;
-        }
-
-        .exercise-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* ========== 章节小结 ========== */
-        .chapter-summary {
-            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-            border: 2px solid #68d391;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .chapter-summary::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #38a169;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .chapter-summary h4 {
-            color: #276749;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chapter-summary ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .chapter-summary li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .chapter-summary li::before {
-            content: '\f111';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.4rem;
-            top: 0.85rem;
-        }
-
-        /* ========== 右侧粘性目录导航 ========== */
-        .toc-sidebar {
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 80px;
-            height: fit-content;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .toc-sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .toc-sidebar::-webkit-scrollbar-thumb {
-            background: #cbd5e0;
-            border-radius: 2px;
-        }
-
-        .toc-sidebar h3 {
-            font-size: 1rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toc-sidebar h3 i {
-            color: #4299e1;
-        }
-
-        .toc-sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc-sidebar li {
-            margin-bottom: 0.25rem;
-        }
-
-        .toc-sidebar a {
-            display: block;
-            padding: 0.4rem 0.75rem;
-            color: #4a5568;
-            font-size: 0.88rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        .toc-sidebar a:hover {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-        }
-
-        .toc-sidebar a.active {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-            font-weight: 600;
-        }
-
-        .toc-sidebar .toc-sub {
-            padding-left: 1rem;
-        }
-
-        .toc-sidebar .toc-sub a {
-            font-size: 0.82rem;
-            color: #718096;
-            padding: 0.3rem 0.75rem;
-        }
-
-        .toc-sidebar .toc-divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 0.75rem 0;
-        }
-
-        /* ========== 提示/警告/成功/信息框 ========== */
-        .tip-box, .warning-box, .success-box, .info-box {
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.25rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .tip-box {
-            background: #ebf8ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .tip-box::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #4299e1;
-            font-size: 1.1rem;
-        }
-
-        .warning-box {
-            background: #fffbeb;
-            border: 1px solid #f6e05e;
-        }
-
-        .warning-box::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #d69e2e;
-            font-size: 1.1rem;
-        }
-
-        .success-box {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-        }
-
-        .success-box::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .info-box {
-            background: #ebf4ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .info-box::before {
-            content: '\f05a';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #3182ce;
-            font-size: 1.1rem;
-        }
-
-        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .tip-box h5 { color: #2b6cb0; }
-        .warning-box h5 { color: #975a16; }
-        .success-box h5 { color: #276749; }
-        .info-box h5 { color: #2a4365; }
-
-        /* ========== 概念区域/概念框 ========== */
-        .concept-section {
-            margin: 2rem 0;
-        }
-
-        .concept-box {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1rem 0;
-            transition: box-shadow 0.3s;
-        }
-
-        .concept-box:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .concept-box h4 {
-            color: #1a365d;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .concept-box .ai-usage {
-            background: #fefcbf;
-            border-left: 3px solid #ecc94b;
-            padding: 0.75rem 1rem;
-            margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
-            color: #744210;
-        }
-
-        .concept-box .ai-usage strong {
-            color: #975a16;
-        }
-
-        /* ========== 章节导航 ========== */
-        .chapter-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .chapter-nav a {
-            color: #4299e1;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chapter-nav a:hover {
-            color: #2b6cb0;
-        }
-
-        .chapter-nav .toc-link {
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
-        /* ========== 对比表格 ========== */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .comparison-table thead {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
-            color: #fff;
-        }
-
-        .comparison-table th {
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .comparison-table td {
-            padding: 0.85rem 1.25rem;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.92rem;
-        }
-
-        .comparison-table tbody tr:nth-child(even) {
-            background: #f7fafc;
-        }
-
-        .comparison-table tbody tr:hover {
-            background: #ebf8ff;
-        }
-
-        /* ========== 技术栈卡片网格 ========== */
-        .case-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .case-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .case-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .case-card .case-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .case-card .case-title {
-            font-weight: 700;
-            color: #1a365d;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .case-card .case-desc {
-            font-size: 0.9rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        .case-card .case-highlight {
-            background: #f0fff4;
-            border-left: 3px solid #38a169;
-            padding: 0.5rem 0.75rem;
-            margin-top: 0.75rem;
-            border-radius: 0 6px 6px 0;
-            font-size: 0.85rem;
-            color: #276749;
-        }
-
-        /* ========== 响应式媒体查询 ========== */
-        @media (max-width: 1024px) {
-            .toc-sidebar {
-                display: none;
-            }
-
-            .content-wrapper {
-                max-width: 100%;
-            }
-
-            .main-content {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: #fff;
-                flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                gap: 0.5rem;
-            }
-
-            .navbar-links.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .hero-section {
-                padding: 6rem 1.5rem 3rem;
-            }
-
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-
-            .hero-section p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .content-wrapper {
-                padding: 1rem;
-            }
-
-            .comparison-table {
-                font-size: 0.85rem;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 0.6rem 0.75rem;
-            }
-
-            .exercise-box,
-            .learning-objectives,
-            .prerequisite-box,
-            .chapter-summary {
-                padding: 1.25rem 1.5rem;
-            }
-
-            .chapter-nav {
-                flex-direction: column;
-                gap: 0.75rem;
-                text-align: center;
-            }
-
-            .case-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-section h1 {
-                font-size: 1.6rem;
-            }
-
-            .hero-badges {
-                gap: 0.5rem;
-            }
-
-            .hero-badge {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
 
     <!-- ==================== 导航栏 ==================== -->
-    <nav class="navbar">
-        <a href="../../index.html" class="navbar-brand">
+    <nav class="ai-nav">
+        <a href="../../index.html" class="ai-nav-brand">
             <i class="fas fa-brain"></i>
             AI学习笔记
         </a>
-        <ul class="navbar-links" id="navLinks">
+        <ul class="ai-nav-links" id="navLinks">
             <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
             <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
             <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
@@ -919,19 +67,19 @@
             <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
             <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
         </ul>
-        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+        <button class="ai-nav-toggle" id="navToggle" aria-label="切换导航">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
 
     <!-- ==================== Hero Section ==================== -->
-    <section class="hero-section">
+    <section class="ai-hero">
         <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
         <p>第三十章：边缘AI与端侧部署</p>
-        <div class="hero-badges">
-            <span class="hero-badge"><i class="fas fa-mobile-alt"></i> 端侧推理</span>
-            <span class="hero-badge"><i class="fas fa-compress-alt"></i> 模型压缩</span>
-            <span class="hero-badge"><i class="fas fa-bolt"></i> 高性能部署</span>
+        <div class="ai-hero-badges">
+            <span class="ai-hero-badge"><i class="fas fa-mobile-alt"></i> 端侧推理</span>
+            <span class="ai-hero-badge"><i class="fas fa-compress-alt"></i> 模型压缩</span>
+            <span class="ai-hero-badge"><i class="fas fa-bolt"></i> 高性能部署</span>
         </div>
     </section>
 
@@ -944,9 +92,9 @@
 <!-- 第三十章：边缘AI与端侧部署 -->
 <!-- ============================================================ -->
 
-<h2 class="section-title"><i class="fas fa-mobile-alt"></i> 第三十章：边缘AI与端侧部署</h2>
+<h2 class="ai-section-title"><i class="fas fa-mobile-alt"></i> 第三十章：边缘AI与端侧部署</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
   <ul>
     <li>理解边缘AI的概念与端侧部署的核心价值</li>
@@ -958,7 +106,7 @@
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h4><i class="fas fa-book"></i> 前置要求</h4>
   <ul>
     <li>熟悉PyTorch/TensorFlow基本模型训练流程</li>
@@ -969,7 +117,7 @@
 
 <!-- 一、什么是边缘AI -->
 <div class="concept-section" id="sec1">
-  <h2 class="section-subtitle"><i class="fas fa-network-wired"></i> 一、什么是边缘AI——为什么要在端侧部署</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-network-wired"></i> 一、什么是边缘AI——为什么要在端侧部署</h2>
 
   <p>传统的AI部署模式是将模型运行在云端服务器上，用户通过网络请求获取推理结果。但随着物联网和移动设备的普及，这种模式面临诸多挑战：<strong>网络延迟</strong>（远程服务器往返可能需要几百毫秒）、<strong>隐私风险</strong>（敏感数据上传到云端）、<strong>带宽成本</strong>（大量数据传输带来高额费用）、<strong>离线可用性</strong>（无网络环境下无法工作）。边缘AI（Edge AI）正是为解决这些问题而生——它将模型直接部署在用户设备上进行推理，让AI能力触手可及。</p>
 
@@ -1014,7 +162,7 @@
     </div>
   </div>
 
-  <div class="info-box">
+  <div class="ai-info">
     <h5>边缘AI市场趋势</h5>
     <p>据Gartner预测，到2025年将有75%的企业数据在传统数据中心或云端之外进行处理。边缘AI市场规模预计在2028年达到千亿美元级别，涵盖手机、汽车、IoT、安防等几乎所有行业。</p>
   </div>
@@ -1022,7 +170,7 @@
 
 <!-- 二、模型压缩技术 -->
 <div class="concept-section" id="sec2">
-  <h2 class="section-subtitle"><i class="fas fa-compress-arrows-alt"></i> 二、模型压缩技术</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-compress-arrows-alt"></i> 二、模型压缩技术</h2>
 
   <p>要在资源受限的设备上运行AI模型，首先需要将模型"瘦身"。模型压缩的核心目标是：<strong>在尽量保持模型精度的前提下，减少模型的存储占用和计算量</strong>。三大主流压缩技术分别是量化、剪枝和知识蒸馏。</p>
 
@@ -1085,12 +233,12 @@
     </tbody>
   </table>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>实战建议</h5>
     <p>在实际部署中，<strong>量化是最常用且性价比最高的压缩方式</strong>。建议先尝试INT8量化，如果精度损失不可接受，再考虑QAT或结合剪枝。INT4量化虽然压缩比更高，但对模型精度影响较大，通常用于超大模型（如LLM）的端侧部署。</p>
   </div>
 
-  <h3 class="section-subtitle" style="margin-top: 2.5rem;"><i class="fas fa-code"></i> 代码示例：模型量化INT8</h3>
+  <h3 class="ai-section-subtitle" style="margin-top: 2.5rem;"><i class="fas fa-code"></i> 代码示例：模型量化INT8</h3>
 
   <pre><code class="language-python">import torch
 import torch.quantization as quant
@@ -1141,7 +289,7 @@ with torch.no_grad():
     output_int8 = model_int8(dummy_input)
     print(f"输出差异: {(output_fp32 - output_int8).abs().mean():.6f}")</code></pre>
 
-  <div class="warning-box">
+  <div class="ai-warning">
     <h5>量化注意事项</h5>
     <p>量化后务必在实际目标设备上验证精度。某些对数值敏感的模型（如医学影像分割）可能在INT8下精度损失较大，此时应优先考虑FP16半精度或QAT量化感知训练。量化后的模型文件扩展名通常为<strong>.onnx</strong>或<strong>.tflite</strong>，需使用对应推理引擎加载。</p>
   </div>
@@ -1149,7 +297,7 @@ with torch.no_grad():
 
 <!-- 三、ONNX Runtime -->
 <div class="concept-section" id="sec3">
-  <h2 class="section-subtitle"><i class="fas fa-cogs"></i> 三、ONNX Runtime——跨平台推理引擎</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-cogs"></i> 三、ONNX Runtime——跨平台推理引擎</h2>
 
   <p>ONNX（Open Neural Network Exchange）是微软推出的开放模型格式，旨在实现不同深度学习框架之间的模型互操作性。ONNX Runtime是其官方推理引擎，支持<strong>Windows、Linux、macOS、Android、iOS</strong>等多个平台，并能自动利用CPU（AVX/AVX2/AVX-512）、GPU（CUDA/DirectML）、NPU等硬件加速。它已成为边缘AI部署的事实标准之一。</p>
 
@@ -1159,7 +307,7 @@ with torch.no_grad():
     <div class="ai-usage"><strong>为什么选择ONNX Runtime？</strong>相比TensorFlow Lite和Core ML各自锁定生态，ONNX Runtime提供统一的跨平台方案，支持超过30种硬件加速器后端。</div>
   </div>
 
-  <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码示例：ONNX导出与优化</h3>
+  <h3 class="ai-section-subtitle"><i class="fas fa-code"></i> 代码示例：ONNX导出与优化</h3>
 
   <pre><code class="language-python">import torch
 import torch.onnx
@@ -1220,7 +368,7 @@ optimized_model = optimizer.optimize_model(
 optimized_model.save_model_to_file("resnet18_optimized.onnx")
 print("ONNX模型优化完成！")</code></pre>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>ONNX Runtime性能调优技巧</h5>
     <p>1. 启用<strong>图优化</strong>：设置 <code>SessionOptions graph_optimization_level</code> 为 <code>ORT_ENABLE_ALL</code>；2. 设置<strong>线程数</strong>：<code>intra_op_num_threads</code> 匹配设备CPU核心数；3. 使用<strong>量化</strong>：ONNX Runtime内置了动态量化和静态量化工具，可在导出时直接应用。</p>
   </div>
@@ -1228,7 +376,7 @@ print("ONNX模型优化完成！")</code></pre>
 
 <!-- 四、TensorRT -->
 <div class="concept-section" id="sec4">
-  <h2 class="section-subtitle"><i class="fas fa-microchip"></i> 四、TensorRT——NVIDIA GPU优化</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-microchip"></i> 四、TensorRT——NVIDIA GPU优化</h2>
 
   <p>TensorRT是NVIDIA推出的高性能深度学习推理优化器和运行时，专为NVIDIA GPU设计。它通过<strong>层融合</strong>（将多个算子合并为一个）、<strong>精度校准</strong>（自动FP16/INT8量化）、<strong>内核自动调优</strong>（为特定GPU选择最优计算内核）等技术，可以将推理速度提升2-5倍。TensorRT广泛应用于自动驾驶（NVIDIA DRIVE）、数据中心推理、机器人等场景。</p>
 
@@ -1242,7 +390,7 @@ print("ONNX模型优化完成！")</code></pre>
     </ul>
   </div>
 
-  <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码示例：TensorRT加速推理</h3>
+  <h3 class="ai-section-subtitle"><i class="fas fa-code"></i> 代码示例：TensorRT加速推理</h3>
 
   <pre><code class="language-python">import tensorrt as trt
 import numpy as np
@@ -1321,7 +469,7 @@ def infer_with_tensorrt(engine_path, input_data):
 # build_engine("resnet18.onnx", "resnet18.trt", precision='fp16')
 # result = infer_with_tensorrt("resnet18.trt", np.random.randn(1,3,224,224).astype(np.float32))</code></pre>
 
-  <div class="warning-box">
+  <div class="ai-warning">
     <h5>TensorRT使用注意</h5>
     <p>1. TensorRT引擎与<strong>特定GPU架构绑定</strong>，在T4上构建的引擎不能直接在A100上运行（需重新构建）；2. 首次构建引擎较慢（几分钟到几十分钟），但构建结果可缓存复用；3. INT8量化需要提供<strong>校准数据集</strong>，通常需要100-1000张代表性图片。</p>
   </div>
@@ -1329,7 +477,7 @@ def infer_with_tensorrt(engine_path, input_data):
 
 <!-- 五、移动端部署 -->
 <div class="concept-section" id="sec5">
-  <h2 class="section-subtitle"><i class="fas fa-mobile-alt"></i> 五、移动端部署——TFLite与Core ML</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-mobile-alt"></i> 五、移动端部署——TFLite与Core ML</h2>
 
   <p>移动端是边缘AI最大的应用场景。两大主流平台各有专属方案：<strong>TensorFlow Lite（TFLite）</strong>是Google推出的轻量级推理框架，支持Android/iOS/Web，兼容性极佳；<strong>Core ML</strong>是Apple的端侧推理框架，深度集成iOS/macOS生态，能自动利用Neural Engine、GPU、CPU三种硬件加速。</p>
 
@@ -1352,7 +500,7 @@ def infer_with_tensorrt(engine_path, input_data):
     </div>
   </div>
 
-  <h3 class="section-subtitle"><i class="fas fa-code"></i> 代码示例：TFLite移动端部署</h3>
+  <h3 class="ai-section-subtitle"><i class="fas fa-code"></i> 代码示例：TFLite移动端部署</h3>
 
   <pre><code class="language-python">import tensorflow as tf
 import numpy as np
@@ -1440,12 +588,12 @@ for _ in range(100):
 print(f"平均推理时间: {np.mean(times)*1000:.2f} ms")
 print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>Android端集成TFLite</h5>
     <p>在Android项目中，添加依赖 <code>implementation 'org.tensorflow:tensorflow-lite:2.14.0'</code>，然后通过 <code>Interpreter</code> 类加载 .tflite 模型文件。对于图像分类任务，还可以直接使用 <code>org.tensorflow:tensorflow-lite-support</code> 库，它提供了 ImageClassifier 等高层API，大幅简化开发流程。</p>
   </div>
 
-  <div class="info-box">
+  <div class="ai-info">
     <h5>Core ML快速上手</h5>
     <p>使用 coremltools 可以将PyTorch/ONNX模型转换为Core ML格式（.mlmodel）：<code>coremltools.converters.onnx.convert(model='model.onnx')</code>。在iOS中，只需将 .mlmodel 文件拖入Xcode项目，自动生成Swift/ObjC接口类，一行代码即可调用推理：<code>let prediction = try model.prediction(input: input)</code>。</p>
   </div>
@@ -1453,7 +601,7 @@ print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
 
 <!-- 六、嵌入式AI -->
 <div class="concept-section" id="sec6">
-  <h2 class="section-subtitle"><i class="fas fa-microchip"></i> 六、嵌入式AI——MCU/FPGA上的模型部署</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-microchip"></i> 六、嵌入式AI——MCU/FPGA上的模型部署</h2>
 
   <p>嵌入式AI将AI模型部署到更底层的硬件——微控制器（MCU）和现场可编程门阵列（FPGA）。这些设备算力极其有限（通常只有几十KB到几MB的内存），但却无处不在：智能传感器、可穿戴设备、工业控制器等。在如此受限的环境中运行AI，需要极致的模型压缩和针对性优化。</p>
 
@@ -1515,7 +663,7 @@ print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
     </tbody>
   </table>
 
-  <div class="warning-box">
+  <div class="ai-warning">
     <h5>嵌入式AI开发注意事项</h5>
     <p>1. 模型必须<strong>极度压缩</strong>——MCU上通常只能运行几千到几万个参数的模型；2. 需要考虑<strong>定点运算</strong>——很多MCU没有浮点运算单元，必须使用INT8/INT16量化；3. 内存管理至关重要——避免动态内存分配，使用静态内存池；4. 建议使用<strong>ETSI QoI</strong>等标准化基准测试来评估模型在目标硬件上的实际性能。</p>
   </div>
@@ -1523,7 +671,7 @@ print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
 
 <!-- 七、Web端推理 -->
 <div class="concept-section" id="sec7">
-  <h2 class="section-subtitle"><i class="fas fa-globe"></i> 七、Web端推理——ONNX.js、WebGPU与WebNN</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-globe"></i> 七、Web端推理——ONNX.js、WebGPU与WebNN</h2>
 
   <p>Web端AI推理是一个新兴但快速发展的领域。它允许在浏览器中直接运行AI模型，无需安装任何应用。三大核心技术正在推动WebAI的发展：<strong>ONNX.js</strong>（微软，已更名为ONNX Runtime Web）、<strong>WebGPU</strong>（新一代Web图形/计算API，取代WebGL）、<strong>WebNN</strong>（W3C标准，让Web应用调用设备的AI加速硬件）。</p>
 
@@ -1543,7 +691,7 @@ print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
     <p>WebNN（Web Neural Network API）是W3C正在标准化的API，旨在让Web应用直接调用设备上的AI加速硬件（NPU、GPU、DSP等）。与WebGPU不同，WebNN提供更高层的神经网络操作接口（如卷积、池化、激活函数），浏览器可以自动将这些操作调度到最优的硬件后端。目前Chrome Canary已开始实验性支持。</p>
   </div>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>Web端AI的实际应用</h5>
     <p>1. <strong>Google Meet</strong>的背景虚化和手势识别完全在浏览器端运行；2. <strong>TensorFlow.js</strong>生态系统提供了大量预训练模型（MobileNet、PoseNet、COCO-SSD等），几行代码即可在网页中集成AI功能；3. 隐私敏感场景（如医疗影像预览）可以在浏览器中预处理，仅将必要数据发送到服务器。</p>
   </div>
@@ -1551,11 +699,11 @@ print(f"FPS: {1000/np.mean(times):.1f}")</code></pre>
 
 <!-- 八、实战：将模型部署到手机 -->
 <div class="concept-section" id="sec8">
-  <h2 class="section-subtitle"><i class="fas fa-mobile-alt"></i> 八、实战：将模型部署到手机</h2>
+  <h2 class="ai-section-subtitle"><i class="fas fa-mobile-alt"></i> 八、实战：将模型部署到手机</h2>
 
   <p>让我们通过一个完整的实战案例，将一个PyTorch图像分类模型部署到手机上。整个流程分为五个步骤：训练模型 → 导出ONNX → 量化压缩 → 转换为TFLite → 在Android/iOS设备上运行。</p>
 
-  <h3 class="section-subtitle"><i class="fas fa-code"></i> 完整部署流程</h3>
+  <h3 class="ai-section-subtitle"><i class="fas fa-code"></i> 完整部署流程</h3>
 
   <pre><code class="language-python">import torch
 import torch.nn as nn
@@ -1651,7 +799,7 @@ for name, passed, threshold in checklist:
     print(f"  {status} {name}: {threshold}")
 print("====================================")</code></pre>
 
-  <div class="info-box">
+  <div class="ai-info">
     <h5>Android端集成代码（Kotlin）</h5>
     <p>将 .tflite 文件放入 <code>app/src/main/assets/</code> 目录，然后使用以下代码加载模型并推理：</p>
   </div>
@@ -1670,14 +818,14 @@ print("====================================")</code></pre>
 # val predictedClass = output[0].indices.maxByOrNull { output[0][it] }!!
 # Log.d("AI", "预测类别: $predictedClass")</code></pre>
 
-  <div class="success-box">
+  <div class="ai-success">
     <h5>部署成功标准</h5>
     <p>模型成功部署到手机后，请确认以下指标：1. <strong>模型大小</strong>：通常应小于50MB（理想情况下小于20MB）；2. <strong>推理延迟</strong>：首帧推理应小于200ms，后续帧小于50ms；3. <strong>精度损失</strong>：与原始FP32模型相比，Top-1精度下降不超过2%；4. <strong>内存占用</strong>：推理时内存峰值不超过200MB。</p>
   </div>
 </div>
 
 <!-- 练习题 -->
-<div class="exercise-box" id="exercises">
+<div class="ai-box ai-box--exercise" id="exercises">
   <h4><i class="fas fa-pen-fancy"></i> 练习题</h4>
 
   <div class="exercise-item">
@@ -1702,7 +850,7 @@ print("====================================")</code></pre>
 </div>
 
 <!-- 章节小结 -->
-<div class="chapter-summary" id="summary">
+<div class="ai-box ai-box--summary" id="summary">
   <h4><i class="fas fa-book-open"></i> 章节小结</h4>
   <ul>
     <li><strong>边缘AI</strong>将模型部署在用户设备端，解决延迟、隐私、带宽和离线可用性问题</li>
@@ -1717,7 +865,7 @@ print("====================================")</code></pre>
 </div>
 
 <!-- 章节导航 -->
-<div class="chapter-nav">
+<div class="ai-chapter-nav">
   <a href="ch29.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> 上一章：模型可解释性</a>
   <a href="index.html" class="toc-link"><i class="fas fa-list"></i> 目录</a>
   <a href="ch31.html" class="next-chapter">下一章：AI伦理与安全 <i class="fas fa-arrow-right"></i></a>
@@ -1804,5 +952,6 @@ print("====================================")</code></pre>
       updateActive();
     })();
     </script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

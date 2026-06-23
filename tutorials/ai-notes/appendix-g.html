@@ -25,882 +25,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
-    <style>
-        /* ========== 全局样式 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.8;
-            color: #2d3748;
-            background: #f7fafc;
-        }
-
-        /* ========== 导航栏 ========== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e2e8f0;
-            padding: 0 2rem;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-        }
-
-        .navbar-brand {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1a365d;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-brand i {
-            color: #4299e1;
-        }
-
-        .navbar-links {
-            list-style: none;
-            display: flex;
-            gap: 0.25rem;
-        }
-
-        .navbar-links a {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.5rem 0.75rem;
-            color: #4a5568;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.88rem;
-            transition: all 0.2s;
-        }
-
-        .navbar-links a:hover {
-            background: #ebf8ff;
-            color: #2b6cb0;
-        }
-
-        .navbar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.3rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        /* ========== Hero Section ========== */
-        .hero-section {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
-            color: white;
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.75rem;
-        }
-
-        .hero-section p {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.88rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        /* ========== 主内容区域 ========== */
-        .content-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            max-width: 860px;
-            min-width: 0;
-        }
-
-        /* ========== 章节导航 ========== */
-        .chapter-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.88rem;
-            color: #718096;
-        }
-
-        .breadcrumb a {
-            color: #4299e1;
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .breadcrumb .separator {
-            color: #cbd5e0;
-        }
-
-        .breadcrumb .current {
-            color: #2d3748;
-            font-weight: 500;
-        }
-
-        .chapter-nav-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .chapter-nav-links a {
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.88rem;
-            transition: all 0.2s;
-        }
-
-        .prev-chapter {
-            background: #edf2f7;
-            color: #4a5568;
-        }
-
-        .prev-chapter:hover {
-            background: #e2e8f0;
-        }
-
-        .next-chapter {
-            background: #4299e1;
-            color: white;
-        }
-
-        .next-chapter:hover {
-            background: #3182ce;
-        }
-
-        /* ========== 章节标题 ========== */
-        .section-title {
-            font-size: 1.8rem;
-            color: #1a365d;
-            margin-bottom: 2rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-title i {
-            color: #4299e1;
-        }
-
-        /* ========== 概念区域 ========== */
-        .concept-section {
-            margin: 2rem 0;
-        }
-
-        .concept-section h2,
-        .concept-section h3 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-        }
-
-        .concept-section h2 {
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .concept-section h2 i {
-            color: #4299e1;
-        }
-
-        .concept-section h3 {
-            font-size: 1.15rem;
-            margin-top: 1.5rem;
-        }
-
-        .concept-section p {
-            margin-bottom: 1rem;
-            color: #4a5568;
-        }
-
-        .concept-section ul, .concept-section ol {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        .concept-section li {
-            margin-bottom: 0.5rem;
-            color: #4a5568;
-        }
-
-        .concept-section strong {
-            color: #2d3748;
-        }
-
-        .concept-section code {
-            background: #edf2f7;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.88em;
-            color: #e53e3e;
-        }
-
-        /* ========== 关键词高亮 ========== */
-        .keyword-highlight {
-            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
-            color: #2b6cb0;
-            padding: 0.1rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            border-bottom: 2px solid #4299e1;
-        }
-
-        /* ========== 学习目标 ========== */
-        .learning-objectives {
-            background: linear-gradient(135deg, #ebf8ff 0%, #f0f9ff 100%);
-            border: 1px solid #90cdf4;
-            border-radius: 10px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-        }
-
-        .learning-objectives h4 {
-            color: #2b6cb0;
-            margin-bottom: 0.75rem;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .learning-objectives ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .learning-objectives li {
-            padding: 0.4rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #4a5568;
-        }
-
-        .learning-objectives li::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #48bb78;
-        }
-
-        /* ========== 前置要求 ========== */
-        .prerequisite-box {
-            background: #fffbeb;
-            border: 1px solid #f6e05e;
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .prerequisite-box h4 {
-            color: #975a16;
-            margin-bottom: 0.5rem;
-        }
-
-        .prerequisite-box ul {
-            padding-left: 1.5rem;
-        }
-
-        .prerequisite-box li {
-            margin-bottom: 0.3rem;
-            color: #744210;
-        }
-
-        /* ========== 知识点标记 ========== */
-        .knowledge-point {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: #ebf8ff;
-            color: #2b6cb0;
-            padding: 0.15rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            border: 1px solid #bee3f8;
-        }
-
-        .knowledge-point i {
-            font-size: 0.75rem;
-        }
-
-        /* ========== 代码块 ========== */
-        .code-block {
-            background: #1a202c;
-            border-radius: 10px;
-            margin: 1.5rem 0;
-            overflow: hidden;
-        }
-
-        .code-block-header {
-            background: #2d3748;
-            padding: 0.6rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.82rem;
-            color: #a0aec0;
-        }
-
-        .code-block-header .lang-tag {
-            background: #4a5568;
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        .code-block pre {
-            margin: 0;
-            padding: 1.25rem;
-            overflow-x: auto;
-        }
-
-        .code-block pre code {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.88rem;
-            line-height: 1.6;
-            color: #e2e8f0;
-        }
-
-        /* ========== 提示/警告/信息框 ========== */
-        .tip-box, .warning-box, .success-box, .info-box {
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.25rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .tip-box {
-            background: #ebf8ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .tip-box::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #4299e1;
-            font-size: 1.1rem;
-        }
-
-        .warning-box {
-            background: #fffbeb;
-            border: 1px solid #f6e05e;
-        }
-
-        .warning-box::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #d69e2e;
-            font-size: 1.1rem;
-        }
-
-        .success-box {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-        }
-
-        .success-box::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .info-box {
-            background: #ebf4ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .info-box::before {
-            content: '\f05a';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #3182ce;
-            font-size: 1.1rem;
-        }
-
-        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .tip-box h5 { color: #2b6cb0; }
-        .warning-box h5 { color: #975a16; }
-        .success-box h5 { color: #276749; }
-        .info-box h5 { color: #2a4365; }
-
-        /* ========== 练习题 ========== */
-        .exercise-item {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .exercise-item::before {
-            content: '\f5b8';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .exercise-item h5 {
-            color: #276749;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .exercise-item p, .exercise-item ul {
-            color: #2d3748;
-            font-size: 0.92rem;
-        }
-
-        .exercise-item ul {
-            padding-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .exercise-item li {
-            margin-bottom: 0.3rem;
-        }
-
-        /* ========== 对比表格 ========== */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .comparison-table thead {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
-            color: #fff;
-        }
-
-        .comparison-table th {
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .comparison-table td {
-            padding: 0.85rem 1.25rem;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.92rem;
-        }
-
-        .comparison-table tbody tr:nth-child(even) {
-            background: #f7fafc;
-        }
-
-        .comparison-table tbody tr:hover {
-            background: #ebf8ff;
-        }
-
-        /* ========== 概念框 ========== */
-        .concept-box {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1rem 0;
-            transition: box-shadow 0.3s;
-        }
-
-        .concept-box:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .concept-box h4 {
-            color: #1a365d;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* ========== 流程图 ========== */
-        .flow-diagram {
-            background: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-        }
-
-        .flow-diagram h4 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .diagram-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin: 1rem 0;
-        }
-
-        .diagram-card {
-            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1.25rem;
-            text-align: center;
-            min-width: 120px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .diagram-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .diagram-card i {
-            font-size: 1.5rem;
-            color: #4299e1;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .diagram-card .card-title {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.9rem;
-        }
-
-        .diagram-card .card-desc {
-            font-size: 0.8rem;
-            color: #718096;
-            margin-top: 0.25rem;
-        }
-
-        .diagram-arrow {
-            color: #a0aec0;
-            font-size: 1.2rem;
-        }
-
-        /* ========== TOC侧边栏 ========== */
-        .toc-sidebar {
-            width: 240px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 80px;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            padding: 1.5rem;
-            background: #fff;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            align-self: flex-start;
-        }
-
-        .toc-sidebar h3 {
-            font-size: 0.95rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toc-sidebar h3 i {
-            color: #4299e1;
-        }
-
-        .toc-sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc-sidebar li {
-            margin-bottom: 0.25rem;
-        }
-
-        .toc-sidebar a {
-            display: block;
-            padding: 0.4rem 0.75rem;
-            color: #4a5568;
-            font-size: 0.88rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-            text-decoration: none;
-        }
-
-        .toc-sidebar a:hover {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-        }
-
-        .toc-sidebar a.active {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-            font-weight: 600;
-        }
-
-        .toc-sidebar .toc-sub {
-            padding-left: 1rem;
-        }
-
-        .toc-sidebar .toc-sub a {
-            font-size: 0.82rem;
-            color: #718096;
-            padding: 0.3rem 0.75rem;
-        }
-
-        .toc-sidebar .toc-divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 0.75rem 0;
-        }
-
-        /* ========== 页脚 ========== */
-        .footer {
-            background: #1a365d;
-            color: white;
-            padding: 3rem 2rem 1.5rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-section h3 i {
-            color: #63b3ed;
-        }
-
-        .footer-section p {
-            color: #a0aec0;
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #a0aec0;
-            font-size: 0.85rem;
-        }
-
-        /* ========== 响应式 ========== */
-        @media (max-width: 1024px) {
-            .toc-sidebar {
-                display: none;
-            }
-
-            .content-wrapper {
-                max-width: 100%;
-            }
-
-            .main-content {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: #fff;
-                flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                gap: 0.5rem;
-            }
-
-            .navbar-links.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .hero-section {
-                padding: 6rem 1.5rem 3rem;
-            }
-
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-
-            .hero-section p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .content-wrapper {
-                padding: 1rem;
-            }
-
-            .comparison-table {
-                font-size: 0.85rem;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 0.6rem 0.75rem;
-            }
-
-            .exercise-box,
-            .learning-objectives,
-            .prerequisite-box,
-            .chapter-summary {
-                padding: 1.25rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-section h1 {
-                font-size: 1.6rem;
-            }
-
-            .hero-badges {
-                gap: 0.5rem;
-            }
-
-            .hero-badge {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .code-block pre code {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
 
     <!-- ==================== 导航栏 ==================== -->
-    <nav class="navbar">
-        <a href="../../index.html" class="navbar-brand">
+    <nav class="ai-nav">
+        <a href="../../index.html" class="ai-nav-brand">
             <i class="fas fa-brain"></i>
             AI学习笔记
         </a>
-        <ul class="navbar-links" id="navLinks">
+        <ul class="ai-nav-links" id="navLinks">
             <li><a href="../../index.html"><i class="fas fa-home"></i> 首页</a></li>
             <li><a href="ch15.html"><i class="fas fa-robot"></i> Agent</a></li>
             <li><a href="ch16.html"><i class="fas fa-tools"></i> 工具</a></li>
@@ -913,18 +49,18 @@
             <li><a href="ch23.html"><i class="fas fa-history"></i> 简史</a></li>
             <li><a href="ch24.html"><i class="fas fa-rocket"></i> 实战</a></li>
         </ul>
-        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+        <button class="ai-nav-toggle" id="navToggle" aria-label="切换导航">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
 
     <!-- ==================== Hero Section ==================== -->
-    <section class="hero-section">
+    <section class="ai-hero">
         <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
         <p>附录G：AI评估与基准测试</p>
-        <div class="hero-badges">
-            <span class="hero-badge"><i class="fas fa-book"></i> 系统学习</span>
-            <span class="hero-badge"><i class="fas fa-code"></i> 实践导向</span>
+        <div class="ai-hero-badges">
+            <span class="ai-hero-badge"><i class="fas fa-book"></i> 系统学习</span>
+            <span class="ai-hero-badge"><i class="fas fa-code"></i> 实践导向</span>
         </div>
     </section>
 
@@ -933,7 +69,7 @@
 
         <!-- ========== 主内容 ========== -->
         <main class="main-content">
-<nav class="chapter-nav">
+<nav class="ai-chapter-nav">
   <div class="breadcrumb">
     <a href="../../index.html"><i class="fas fa-home"></i> 首页</a>
     <span class="separator">/</span>
@@ -946,11 +82,11 @@
 </nav>
 <!-- 附录G：AI评估与基准测试 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-chart-bar"></i> 附录G：AI评估与基准测试</h2>
+<h2 class="ai-section-title"><i class="fas fa-chart-bar"></i> 附录G：AI评估与基准测试</h2>
 
 <div class="concept-section">
   <h3>学习目标</h3>
-  <div class="learning-objectives">
+  <div class="ai-box ai-box--objectives">
     <ul>
       <li>理解AI模型评估的核心理由与实际应用场景</li>
       <li>掌握评估规范的设计原则与实施方法</li>
@@ -1013,7 +149,7 @@
     </tbody>
   </table>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>为什么要建立评估体系？</h5>
     <p>一个成熟的评估体系能帮你回答三个关键问题：模型当前水平如何？改进方向在哪里？何时可以发布？这比主观感受和少量测试用例可靠得多。</p>
   </div>
@@ -1105,7 +241,7 @@
     <li><strong>自动化</strong>：将规范转化为CI/CD流水线中的自动检查</li>
   </ol>
 
-  <div class="info-box">
+  <div class="ai-info">
     <h5>规范与评估的关系</h5>
     <p>评估规范是"宪法"，评估执行是"执法"。没有规范的评估是随意的；没有执行的规范是空洞的。两者缺一不可。</p>
   </div>
@@ -1357,7 +493,7 @@ lm_eval --model openai-completions \
     --num_fewshot 0 \
     --output_path results/gpt4o-mini</code></pre>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>选择评估任务的建议</h5>
     <p>不要试图一次评估所有任务。先选择3-5个与你的应用场景最相关的任务，建立基线后再逐步扩展。常见起点任务：<strong>MMLU</strong>（知识）、<strong>HumanEval</strong>（代码）、<strong>GSM8K</strong>（数学）、<strong>TruthfulQA</strong>（真实性）。</p>
   </div>
@@ -1440,7 +576,7 @@ lm_eval --model openai-completions \
     <li><strong>任务相关性</strong>：在HellaSwag上的高分不等于在你的业务场景中表现好</li>
   </ul>
 
-  <div class="warning-box">
+  <div class="ai-warning">
     <h5>基准测试的局限性</h5>
     <p>基准测试不等于真实能力。模型可能通过"刷榜"在特定基准上取得高分，但在实际应用中表现平庸。始终建议：在基准测试之外，建立针对你具体场景的<strong>自定义评估集</strong>。</p>
   </div>
@@ -1601,7 +737,7 @@ def evaluate_robustness(model, task_name, perturbation_rate=0.1):
         "robustness": robustness_score
     }</code></pre>
 
-  <div class="info-box">
+  <div class="ai-info">
     <h5>评估维度的优先级</h5>
     <p>不同应用场景对评估维度的优先级不同。医疗AI需要最高级别的安全性和公平性；搜索引擎需要高准确性；实时对话需要高效率。根据你的业务需求确定评估维度的优先级。</p>
   </div>
@@ -2014,7 +1150,7 @@ lm_eval --model hf \
     --config configs/custom_eval.yaml \
     --output_path results/config_based_eval</code></pre>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>自定义评估数据的质量</h5>
     <p>自定义评估数据的质量直接决定评估结果的可信度。确保：(1) 样本覆盖典型和边缘场景；(2) 标注经过多人交叉验证；(3) 定期更新以反映真实分布变化。</p>
   </div>
@@ -2258,7 +1394,7 @@ output:
   base_dir: "results"
   reports_dir: "results/reports"</code></pre>
 
-  <div class="success-box">
+  <div class="ai-success">
     <h5>流水线的最佳实践</h5>
     <p>将评估集成到CI/CD中时，建议：(1) 快速评估放在PR检查中（<5分钟），完整评估每天运行一次；(2) 设置合理的阈值，过低会放过退化，过高会频繁误报；(3) 保留历史结果用于趋势分析。</p>
   </div>
@@ -2463,7 +1599,7 @@ def generate_text_report(results: dict, output_path: str):
     </tbody>
   </table>
 
-  <div class="info-box">
+  <div class="ai-info">
     <h5>从数据到行动</h5>
     <p>评估结果的价值在于指导行动。建议建立"评估-分析-改进"的闭环：每次评估后召开结果评审会，根据错误分析确定下一个迭代周期的优化重点，避免盲目改进。</p>
   </div>
@@ -2496,7 +1632,7 @@ def generate_text_report(results: dict, output_path: str):
     </ul>
   </div>
 
-  <div class="tip-box">
+  <div class="ai-tip">
     <h5>下一步学习建议</h5>
     <p>掌握评估基础后，建议深入学习：(1) LLM-as-Judge评估范式；(2) 人类评估与自动评估的校准方法；(3) 多语言评估的特殊挑战；(4) 评估数据集的构建与维护。评估能力是AI工程师的核心竞争力之一。</p>
   </div>

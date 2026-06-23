@@ -16,131 +16,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link rel="stylesheet" href="../styles/notes.css">
-    <style>
-        .reinforcement-diagram {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            color: white;
-            text-align: center;
-        }
-        .reinforcement-diagram h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-        .agent-environment {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .agent-box, .env-box {
-            background: rgba(255,255,255,0.2);
-            border-radius: 8px;
-            padding: 1.5rem;
-            min-width: 150px;
-        }
-        .agent-box i, .env-box i {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        .flow-arrow {
-            font-size: 2rem;
-        }
-        .algorithm-comparison {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .algo-card {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            border-radius: 8px;
-            padding: 1.5rem;
-            color: white;
-            text-align: center;
-        }
-        .algo-card h4 {
-            margin-bottom: 0.5rem;
-        }
-        .algo-card p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        .reward-model-flow {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .reward-model-flow h3 {
-            color: #1a1a1a;
-            margin-bottom: 1rem;
-        }
-        .reward-model-flow .flow-steps {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .reward-model-flow .step {
-            background: rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            min-width: 120px;
-        }
-        .reward-model-flow .step i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .comparison-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-        }
-        .comparison-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-        .comparison-table tr:hover {
-            background: #f5f5f5;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="navbar-brand">
+    <nav class="ai-nav">
+        <div class="ai-nav-brand">
             <a href="../index.html">
                 <i class="fas fa-brain"></i>
                 <span>AI学习笔记</span>
             </a>
         </div>
-        <div class="navbar-links">
+        <div class="ai-nav-links">
             <a href="../index.html">首页</a>
             <a href="index.html">AI笔记目录</a>
             <a href="https://github.com/jacksoncode" target="_blank">
                 <i class="fab fa-github"></i>
             </a>
         </div>
-        <button class="navbar-toggle" aria-label="Toggle navigation">
+        <button class="ai-nav-toggle" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
@@ -148,7 +44,7 @@
     <!-- 侧边导航 -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>AI学习笔记</h3>
+            <h3 id="sub0-1">AI学习笔记</h3>
             <button class="sidebar-close" aria-label="Close sidebar">
                 <i class="fas fa-times"></i>
             </button>
@@ -172,7 +68,7 @@
 
     <!-- 主内容区 -->
     <main class="main-content">
-        <article class="chapter-content">
+        <article class="ai-main">
             <header class="chapter-header">
                 <div class="chapter-meta">
                     <span class="chapter-number">第二十八章</span>
@@ -189,8 +85,8 @@
                 </div>
             </header>
 
-            <section class="learning-objectives">
-                <h2><i class="fas fa-bullseye"></i> 学习目标</h2>
+            <section class="ai-box ai-box--objectives">
+                <h2 id="sec1"><i class="fas fa-bullseye"></i> 学习目标</h2>
                 <ul>
                     <li>理解强化学习的基本概念：智能体、环境、奖励、策略</li>
                     <li>掌握Q-Learning、策略梯度等核心算法原理</li>
@@ -203,8 +99,8 @@
                 </ul>
             </section>
 
-            <section class="prerequisite-box">
-                <h2><i class="fas fa-list-check"></i> 前置知识</h2>
+            <section class="ai-box ai-box--prereq">
+                <h2 id="sec2"><i class="fas fa-list-check"></i> 前置知识</h2>
                 <ul>
                     <li>机器学习基础概念</li>
                     <li>深度学习基础（神经网络、反向传播）</li>
@@ -214,12 +110,12 @@
             </section>
 
             <section id="section1" class="content-section">
-                <h2>28.1 强化学习基础概念</h2>
+                <h2 id="sec3">28.1 强化学习基础概念</h2>
                 
                 <p>强化学习（Reinforcement Learning, RL）是机器学习的一个重要分支，它通过让智能体（Agent）在环境（Environment）中采取行动，根据获得的奖励（Reward）来学习最优策略。与监督学习不同，强化学习没有明确的标签，而是通过试错来学习。</p>
 
                 <div class="reinforcement-diagram">
-                    <h3>强化学习基本框架</h3>
+                    <h3 id="sub3-2">强化学习基本框架</h3>
                     <div class="agent-environment">
                         <div class="agent-box">
                             <i class="fas fa-robot"></i>
@@ -239,10 +135,10 @@
                     </div>
                 </div>
 
-                <h3>马尔可夫决策过程（MDP）</h3>
+                <h3 id="sub3-3">马尔可夫决策过程（MDP）</h3>
                 <p>强化学习问题通常被形式化为马尔可夫决策过程（Markov Decision Process, MDP），它由五元组 $(S, A, P, R, \gamma)$ 定义：</p>
                 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <div class="tip-title"><i class="fas fa-lightbulb"></i> MDP五元组</div>
                     <p><strong>状态空间 S</strong>：所有可能状态的集合</p>
                     <p><strong>动作空间 A</strong>：所有可能动作的集合</p>
@@ -251,7 +147,7 @@
                     <p><strong>折扣因子 γ</strong>：介于0到1之间，决定未来奖励的重要性</p>
                 </div>
 
-                <h3>核心概念</h3>
+                <h3 id="sub3-4">核心概念</h3>
                 <ul>
                     <li><strong>策略（Policy）</strong>：从状态到动作的映射，表示为 π(a|s)</li>
                     <li><strong>价值函数（Value Function）</strong>：从某个状态开始的期望累积奖励</li>
@@ -259,7 +155,7 @@
                     <li><strong>回报（Return）</strong>：从当前时刻开始的累积折扣奖励：$G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k}$</li>
                 </ul>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <div class="info-title"><i class="fas fa-info-circle"></i> 强化学习与监督学习的区别</div>
                     <p><strong>监督学习</strong>：有明确的标签，目标是最小化预测误差</p>
                     <p><strong>强化学习</strong>：没有明确标签，目标是最大化长期累积奖励</p>
@@ -267,14 +163,14 @@
             </section>
 
             <section id="section2" class="content-section">
-                <h2>28.2 核心算法：Q-Learning与策略梯度</h2>
+                <h2 id="sec4">28.2 核心算法：Q-Learning与策略梯度</h2>
                 
                 <p>强化学习算法主要分为两大类：基于价值的方法和基于策略的方法。Q-Learning是典型的基于价值的方法，而策略梯度则是基于策略的方法的代表。</p>
 
-                <h3>Q-Learning算法</h3>
+                <h3 id="sub4-5">Q-Learning算法</h3>
                 <p>Q-Learning是一种无模型的强化学习算法，它通过学习一个Q值函数来找到最优策略。Q-Learning的核心思想是：在状态 s 采取动作 a 的价值等于即时奖励加上折扣后的下一个状态的最大Q值。</p>
 
-                <div class="code-block">
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">Q-Learning算法实现</span>
@@ -350,10 +246,10 @@ class QLearningAgent:
 print("Q-Learning算法示例代码")</code></pre>
                 </div>
 
-                <h3>策略梯度方法</h3>
+                <h3 id="sub4-6">策略梯度方法</h3>
                 <p>策略梯度方法直接优化策略函数，通过梯度上升来最大化期望回报。与Q-Learning不同，策略梯度方法可以处理连续动作空间，并且能够学习随机策略。</p>
 
-                <div class="code-block">
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">策略梯度核心思想</span>
@@ -452,12 +348,12 @@ class PolicyGradientAgent:
 print("策略梯度算法示例代码")</code></pre>
                 </div>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> 注意事项</div>
                     <p>策略梯度方法的方差通常很大，因此需要使用各种方差减少技术，如基线（baseline）、优势函数（advantage function）等。</p>
                 </div>
 
-                <h3>算法对比</h3>
+                <h3 id="sub4-7">算法对比</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -492,7 +388,7 @@ print("策略梯度算法示例代码")</code></pre>
             </section>
 
             <section id="section3" class="content-section">
-                <h2>28.3 深度强化学习</h2>
+                <h2 id="sec5">28.3 深度强化学习</h2>
                 
                 <p>深度强化学习（Deep Reinforcement Learning, Deep RL）是将深度学习与强化学习相结合的研究领域。它使用深度神经网络来近似价值函数或策略函数，从而能够处理高维状态空间的问题。</p>
 
@@ -519,19 +415,19 @@ print("策略梯度算法示例代码")</code></pre>
                     </div>
                 </div>
 
-                <h3>DQN（深度Q网络）</h3>
+                <h3 id="sub5-8">DQN（深度Q网络）</h3>
                 <p>DQN是深度强化学习的里程碑工作，它使用深度神经网络来近似Q值函数，并引入了经验回放（Experience Replay）和目标网络（Target Network）来稳定训练。</p>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <div class="tip-title"><i class="fas fa-lightbulb"></i> DQN的关键创新</div>
                     <p><strong>经验回放</strong>：存储历史经验，随机采样进行训练，打破数据相关性</p>
                     <p><strong>目标网络</strong>：使用独立的网络计算目标值，减少训练不稳定</p>
                 </div>
 
-                <h3>Actor-Critic方法</h3>
+                <h3 id="sub5-9">Actor-Critic方法</h3>
                 <p>Actor-Critic方法结合了基于价值和基于策略的方法，Actor负责选择动作，Critic负责评估动作的价值。</p>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <div class="info-title"><i class="fas fa-info-circle"></i> Actor-Critic架构</div>
                     <p><strong>Actor</strong>：策略网络，输入状态，输出动作分布</p>
                     <p><strong>Critic</strong>：价值网络，输入状态（或状态-动作对），输出价值估计</p>
@@ -540,12 +436,12 @@ print("策略梯度算法示例代码")</code></pre>
             </section>
 
             <section id="section4" class="content-section">
-                <h2>28.4 RLHF详解</h2>
+                <h2 id="sec6">28.4 RLHF详解</h2>
                 
                 <p>RLHF（Reinforcement Learning from Human Feedback，基于人类反馈的强化学习）是近年来大语言模型训练中的重要技术。它通过人类的偏好反馈来优化模型，使其生成的内容更符合人类的期望和价值观。</p>
 
                 <div class="reward-model-flow">
-                    <h3>RLHF训练流程</h3>
+                    <h3 id="sub6-10">RLHF训练流程</h3>
                     <div class="flow-steps">
                         <div class="step">
                             <i class="fas fa-database"></i>
@@ -570,7 +466,7 @@ print("策略梯度算法示例代码")</code></pre>
                     </div>
                 </div>
 
-                <h3>为什么需要RLHF？</h3>
+                <h3 id="sub6-11">为什么需要RLHF？</h3>
                 <p>传统的监督学习方法存在以下问题：</p>
                 <ul>
                     <li><strong>标注不一致</strong>：不同标注者可能给出不同的标签</li>
@@ -585,7 +481,7 @@ print("策略梯度算法示例代码")</code></pre>
                     <li><strong>灵活调整</strong>：可以根据不同场景调整偏好方向</li>
                 </ul>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> RLHF的挑战</div>
                     <p><strong>标注成本高</strong>：需要大量人类标注数据</p>
                     <p><strong>奖励模型偏差</strong>：如果标注数据有偏差，奖励模型也会学习到偏差</p>
@@ -594,29 +490,29 @@ print("策略梯度算法示例代码")</code></pre>
             </section>
 
             <section id="section5" class="content-section">
-                <h2>28.5 奖励模型训练</h2>
+                <h2 id="sec7">28.5 奖励模型训练</h2>
                 
                 <p>奖励模型（Reward Model）是RLHF的核心组件之一。它的作用是学习人类的偏好，将人类的主观判断转化为可以用于优化的数值信号。</p>
 
-                <h3>奖励模型的输入输出</h3>
+                <h3 id="sub7-12">奖励模型的输入输出</h3>
                 <ul>
                     <li><strong>输入</strong>：一个问题（prompt）和一个回答（response）</li>
                     <li><strong>输出</strong>：一个标量分数，表示这个回答的质量</li>
                 </ul>
 
-                <h3>训练数据格式</h3>
+                <h3 id="sub7-13">训练数据格式</h3>
                 <p>奖励模型的训练数据通常由偏好对（preference pairs）组成：</p>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <div class="tip-title"><i class="fas fa-lightbulb"></i> 偏好对格式</div>
                     <p>每个样本包含：问题 q、回答 r₁、回答 r₂、偏好标签 y</p>
                     <p>其中 y = 1 表示 r₁ 优于 r₂，y = 0 表示 r₂ 优于 r₁</p>
                 </div>
 
-                <h3>训练目标</h3>
+                <h3 id="sub7-14">训练目标</h3>
                 <p>奖励模型通常使用 Bradley-Terry 模型进行训练，目标是最大化正确偏好对的似然概率：</p>
 
-                <div class="code-block">
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">奖励模型训练示例</span>
@@ -690,7 +586,7 @@ def train_reward_model(model, train_dataloader, optimizer, epochs=3):
 print("奖励模型训练示例代码")</code></pre>
                 </div>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <div class="info-title"><i class="fas fa-info-circle"></i> 奖励模型的评估</div>
                     <p><strong>准确率</strong>：在测试集上预测偏好的准确率</p>
                     <p><strong>奖励分数分布</strong>：检查奖励分数是否符合预期</p>
@@ -699,14 +595,14 @@ print("奖励模型训练示例代码")</code></pre>
             </section>
 
             <section id="section6" class="content-section">
-                <h2>28.6 PPO在大语言模型中的应用</h2>
+                <h2 id="sec8">28.6 PPO在大语言模型中的应用</h2>
                 
                 <p>PPO（Proximal Policy Optimization，近端策略优化）是目前RLHF中最常用的强化学习算法。它通过限制策略更新的幅度来保证训练的稳定性。</p>
 
-                <h3>PPO的核心思想</h3>
+                <h3 id="sub8-15">PPO的核心思想</h3>
                 <p>PPO的核心是 clipped surrogate objective，它限制了策略更新的幅度，防止更新过大导致训练不稳定：</p>
 
-                <div class="code-block">
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">PPO算法实现</span>
@@ -831,7 +727,7 @@ class PPOAgent:
 print("PPO算法实现示例")</code></pre>
                 </div>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> PPO训练技巧</div>
                     <p><strong>学习率调度</strong>：使用较小的学习率（如1e-5到5e-5）</p>
                     <p><strong>KL惩罚</strong>：防止策略偏离参考模型太远</p>
@@ -840,14 +736,14 @@ print("PPO算法实现示例")</code></pre>
             </section>
 
             <section id="section7" class="content-section">
-                <h2>28.7 DPO与RLHF的对比</h2>
+                <h2 id="sec9">28.7 DPO与RLHF的对比</h2>
                 
                 <p>DPO（Direct Preference Optimization，直接偏好优化）是近年来提出的一种替代RLHF的方法。它直接优化策略模型，不需要单独训练奖励模型。</p>
 
-                <h3>DPO的核心思想</h3>
+                <h3 id="sub9-16">DPO的核心思想</h3>
                 <p>DPO的核心思想是：将奖励模型的优化目标直接转化为策略优化目标，从而跳过奖励模型的训练步骤。</p>
 
-                <div class="code-block">
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">DPO损失函数</span>
@@ -902,7 +798,7 @@ def compute_log_probs(model, input_ids, attention_mask):
 print("DPO损失函数示例")</code></pre>
                 </div>
 
-                <h3>DPO vs RLHF对比</h3>
+                <h3 id="sub9-17">DPO vs RLHF对比</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -940,7 +836,7 @@ print("DPO损失函数示例")</code></pre>
                     </tbody>
                 </table>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <div class="tip-title"><i class="fas fa-lightbulb"></i> 如何选择？</div>
                     <p><strong>选择RLHF</strong>：当计算资源充足，追求最佳效果时</p>
                     <p><strong>选择DPO</strong>：当计算资源有限，需要快速迭代时</p>
@@ -948,12 +844,12 @@ print("DPO损失函数示例")</code></pre>
             </section>
 
             <section id="section8" class="content-section">
-                <h2>28.8 动手实践：TRL库</h2>
+                <h2 id="sec10">28.8 动手实践：TRL库</h2>
                 
                 <p>TRL（Transformer Reinforcement Learning）是Hugging Face提供的一个库，它简化了RLHF训练流程。TRL提供了SFTTrainer、RewardTrainer、PPOTrainer等组件，使得在大语言模型上进行RLHF训练变得更加容易。</p>
 
-                <h3>安装与配置</h3>
-                <div class="code-block">
+                <h3 id="sub10-18">安装与配置</h3>
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Bash</span>
                         <span class="code-title">安装TRL库</span>
@@ -965,8 +861,8 @@ pip install datasets
 pip install peft  # 用于LoRA</code></pre>
                 </div>
 
-                <h3>SFT（监督微调）阶段</h3>
-                <div class="code-block">
+                <h3 id="sub10-19">SFT（监督微调）阶段</h3>
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">SFT训练示例</span>
@@ -1020,8 +916,8 @@ trainer.train()
 print("SFT训练完成！")</code></pre>
                 </div>
 
-                <h3>RLHF训练流程</h3>
-                <div class="code-block">
+                <h3 id="sub10-20">RLHF训练流程</h3>
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">RLHF完整训练流程</span>
@@ -1112,8 +1008,8 @@ for epoch in range(3):
 print("\nRLHF训练完成！")</code></pre>
                 </div>
 
-                <h3>评估与监控</h3>
-                <div class="code-block">
+                <h3 id="sub10-21">评估与监控</h3>
+                <div class="ai-code">
                     <div class="code-header">
                         <span class="code-lang">Python</span>
                         <span class="code-title">模型评估示例</span>
@@ -1193,7 +1089,7 @@ def evaluate_model(model, tokenizer, test_data, reward_model=None):
 print("模型评估示例代码")</code></pre>
                 </div>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <div class="info-title"><i class="fas fa-info-circle"></i> TRL库的优势</div>
                     <p><strong>集成度高</strong>：SFT、奖励模型、PPO训练一站式解决</p>
                     <p><strong>易于使用</strong>：提供简洁的API，快速开始训练</p>
@@ -1203,10 +1099,10 @@ print("模型评估示例代码")</code></pre>
             </section>
 
             <section class="exercise-section">
-                <h2><i class="fas fa-tasks"></i> 练习题</h2>
+                <h2 id="sec11"><i class="fas fa-tasks"></i> 练习题</h2>
                 
                 <div class="exercise-item">
-                    <h3>练习1：Q-Learning实现</h3>
+                    <h3 id="sub11-22">练习1：Q-Learning实现</h3>
                     <p>实现一个Q-Learning智能体，在FrozenLake环境中训练，并绘制训练曲线。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -1217,7 +1113,7 @@ print("模型评估示例代码")</code></pre>
                 </div>
 
                 <div class="exercise-item">
-                    <h3>练习2：奖励模型训练</h3>
+                    <h3 id="sub11-23">练习2：奖励模型训练</h3>
                     <p>使用给定的偏好对数据，训练一个奖励模型，并评估其准确率。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -1228,7 +1124,7 @@ print("模型评估示例代码")</code></pre>
                 </div>
 
                 <div class="exercise-item">
-                    <h3>练习3：DPO vs RLHF对比实验</h3>
+                    <h3 id="sub11-24">练习3：DPO vs RLHF对比实验</h3>
                     <p>在相同的数据集上分别使用DPO和RLHF训练模型，比较两者的效果和训练效率。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -1240,7 +1136,7 @@ print("模型评估示例代码")</code></pre>
             </section>
 
             <section class="summary-section">
-                <h2><i class="fas fa-bookmark"></i> 本章小结</h2>
+                <h2 id="sec12"><i class="fas fa-bookmark"></i> 本章小结</h2>
                 <ul>
                     <li>强化学习通过智能体与环境的交互来学习最优策略</li>
                     <li>Q-Learning和策略梯度是两种核心的强化学习算法</li>
@@ -1253,7 +1149,7 @@ print("模型评估示例代码")</code></pre>
                 </ul>
             </section>
 
-            <div class="chapter-nav">
+            <div class="ai-chapter-nav">
                 <a href="ch27.html" class="prev-chapter">
                     <i class="fas fa-chevron-left"></i>
                     <span>上一章：大语言模型微调</span>
@@ -1311,5 +1207,7 @@ print("模型评估示例代码")</code></pre>
             });
         });
     </script>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

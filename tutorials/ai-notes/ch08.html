@@ -43,813 +43,18 @@
     <link rel="stylesheet" href="../../css/mobile-optimizations.css">
 
     <!-- 内联CSS样式 -->
-    <style>
-        /* ========== 全局基础样式 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.8;
-            color: #2d3748;
-            background-color: #f7fafc;
-            font-size: 16px;
-        }
-
-        a {
-            color: #4299e1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #3182ce;
-        }
-
-        /* ========== 导航栏样式 ========== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0 2rem;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-brand {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2b6cb0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-brand i {
-            color: #4299e1;
-        }
-
-        .navbar-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .navbar-links a {
-            color: #4a5568;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        .navbar-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #4299e1;
-            transition: width 0.3s ease;
-        }
-
-        .navbar-links a:hover::after {
-            width: 100%;
-        }
-
-        .navbar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        /* ========== 章节导航样式 ========== */
-        .chapter-nav {
-            background: #f7fafc;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 2rem;
-            margin-top: 64px;
-        }
-
-        .chapter-nav-bottom {
-            background: #f7fafc;
-            border-top: 1px solid #e2e8f0;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        .chapter-nav-bottom a:hover {
-            background: #ebf8ff;
-        }
-
-        /* ========== 主内容区域布局 ========== */
-        .content-wrapper {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            min-width: 0;
-            max-width: 900px;
-        }
-
-        /* ========== 章节标题样式 ========== */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a365d;
-            margin: 3rem 0 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-title i {
-            color: #4299e1;
-            font-size: 1.5rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #2b6cb0;
-            margin: 2rem 0 1rem;
-            padding-left: 0.75rem;
-            border-left: 4px solid #4299e1;
-        }
-
-        /* ========== 学习目标框 ========== */
-        .learning-objectives {
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-            border: 2px solid #90cdf4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .learning-objectives::before {
-            content: '\f02d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #4299e1;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .learning-objectives h3, .learning-objectives h4 {
-            color: #2b6cb0;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .learning-objectives ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .learning-objectives li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .learning-objectives li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 前置要求框 ========== */
-        .prerequisite-box {
-            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
-            border: 2px solid #ecc94b;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .prerequisite-box::before {
-            content: '\f0e7';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #ecc94b;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .prerequisite-box h3, .prerequisite-box h4 {
-            color: #975a16;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .prerequisite-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .prerequisite-box li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .prerequisite-box li::before {
-            content: '\f0da';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #d69e2e;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 练习题框 ========== */
-        .exercise-box {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border: 2px solid #b794f4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .exercise-box::before {
-            content: '\f4d6';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #805ad5;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .exercise-box h3, .exercise-box h4 {
-            color: #6b46c1;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .exercise-item {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.75rem;
-            border-left: 3px solid #805ad5;
-        }
-
-        .exercise-item .exercise-number {
-            font-weight: 700;
-            color: #6b46c1;
-            margin-right: 0.5rem;
-        }
-
-        .exercise-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* ========== 数学公式块 ========== */
-        .math-block {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.25rem 1.5rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .math-block .math-content {
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 0.5rem 0;
-        }
-
-        .math-block .math-description {
-            font-size: 0.9rem;
-            color: #718096;
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-
-        /* ========== 代码块样式 ========== */
-        .code-block {
-            position: relative;
-            margin: 1.25rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .code-block-header {
-            background: #1d1f21;
-            color: #c5c8c6;
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-
-        .code-block-header .lang-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .code-block-header .lang-label i {
-            color: #4299e1;
-        }
-
-        .code-block pre {
-            margin: 0;
-            border-radius: 0;
-        }
-
-        .code-block pre code {
-            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* ========== 章节小结 ========== */
-        .chapter-summary {
-            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-            border: 2px solid #68d391;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .chapter-summary::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #38a169;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .chapter-summary h3, .chapter-summary h4 {
-            color: #276749;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chapter-summary ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .chapter-summary li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .chapter-summary li::before {
-            content: '\f111';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.4rem;
-            top: 0.85rem;
-        }
-
-        /* ========== 提示/警告/成功/信息框 ========== */
-        .tip-box, .warning-box, .success-box, .info-box {
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.25rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .tip-box {
-            background: #ebf8ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .tip-box::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #4299e1;
-            font-size: 1.1rem;
-        }
-
-        .warning-box {
-            background: #fffbeb;
-            border: 1px solid #f6e05e;
-        }
-
-        .warning-box::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #d69e2e;
-            font-size: 1.1rem;
-        }
-
-        .success-box {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-        }
-
-        .success-box::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .info-box {
-            background: #ebf4ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .info-box::before {
-            content: '\f05a';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #3182ce;
-            font-size: 1.1rem;
-        }
-
-        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .tip-box h5 { color: #2b6cb0; }
-        .warning-box h5 { color: #975a16; }
-        .success-box h5 { color: #276749; }
-        .info-box h5 { color: #2a4365; }
-
-        /* ========== 流程图/图表卡片 ========== */
-        .flow-diagram {
-            background: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-        }
-
-        .flow-diagram h4 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .diagram-card {
-            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1.25rem;
-            text-align: center;
-            margin: 0.5rem;
-            display: inline-block;
-            min-width: 120px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .diagram-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .diagram-card i {
-            font-size: 1.5rem;
-            color: #4299e1;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .diagram-card .card-title {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.9rem;
-        }
-
-        .diagram-card .card-desc {
-            font-size: 0.8rem;
-            color: #718096;
-            margin-top: 0.25rem;
-        }
-
-        .diagram-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin: 1rem 0;
-        }
-
-        .diagram-arrow {
-            color: #a0aec0;
-            font-size: 1.2rem;
-        }
-
-        /* ========== 对比表格 ========== */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .comparison-table thead {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
-            color: #fff;
-        }
-
-        .comparison-table th {
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .comparison-table td {
-            padding: 0.85rem 1.25rem;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.92rem;
-        }
-
-        .comparison-table tbody tr:nth-child(even) {
-            background: #f7fafc;
-        }
-
-        .comparison-table tbody tr:hover {
-            background: #ebf8ff;
-        }
-
-        /* ========== 概念区域/概念框 ========== */
-        .concept-section {
-            margin: 2rem 0;
-        }
-
-        .concept-box {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1rem 0;
-            transition: box-shadow 0.3s;
-        }
-
-        .concept-box:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .concept-box h4 {
-            color: #1a365d;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .concept-box .ai-usage {
-            background: #fefcbf;
-            border-left: 3px solid #ecc94b;
-            padding: 0.75rem 1rem;
-            margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
-            color: #744210;
-        }
-
-        .concept-box .ai-usage strong {
-            color: #975a16;
-        }
-
-        .keyword-highlight {
-            background: linear-gradient(120deg, #ebf8ff 0%, #e6fffa 100%);
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #2b6cb0;
-        }
-
-        /* ========== 页脚样式 ========== */
-        .footer {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
-            color: #fff;
-            padding: 3rem 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-section p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* ========== 响应式媒体查询 ========== */
-        @media (max-width: 1024px) {
-            .content-wrapper {
-                max-width: 100%;
-            }
-
-            .main-content {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: #fff;
-                flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                gap: 0.5rem;
-            }
-
-            .navbar-links.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .content-wrapper {
-                padding: 1rem;
-            }
-
-            .comparison-table {
-                font-size: 0.85rem;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 0.6rem 0.75rem;
-            }
-
-            .exercise-box,
-            .learning-objectives,
-            .prerequisite-box,
-            .chapter-summary {
-                padding: 1.25rem 1.5rem;
-            }
-
-            .chapter-nav .breadcrumb,
-            .chapter-nav .chapter-links {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .section-title {
-                font-size: 1.3rem;
-            }
-
-            .code-block pre code {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
 
     <!-- ==================== 导航栏 ==================== -->
-    <nav class="navbar">
-        <a href="../../index.html" class="navbar-brand">
+    <nav class="ai-nav">
+        <a href="../../index.html" class="ai-nav-brand">
             <i class="fas fa-brain"></i>
             AI学习笔记
         </a>
-        <ul class="navbar-links" id="navLinks">
+        <ul class="ai-nav-links" id="navLinks">
             <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
             <li><a href="ch06.html"><i class="fas fa-box"></i> 模型</a></li>
             <li><a href="ch07.html"><i class="fas fa-dumbbell"></i> 训练</a></li>
@@ -861,14 +66,14 @@
             <li><a href="ch13.html"><i class="fas fa-search"></i> RAG</a></li>
             <li><a href="ch14.html"><i class="fas fa-arrows-alt"></i> 向量Embedding</a></li>
         </ul>
-        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+        <button class="ai-nav-toggle" id="navToggle" aria-label="切换导航">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
 
 
     <!-- ==================== 章节导航 ==================== -->
-    <nav class="chapter-nav" style="background: #f7fafc; border-bottom: 1px solid #e2e8f0; padding: 1rem 2rem; margin-top: 64px;">
+    <nav class="ai-chapter-nav" style="background: #f7fafc; border-bottom: 1px solid #e2e8f0; padding: 1rem 2rem; margin-top: 64px;">
         <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
             <div class="breadcrumb" style="font-size: 0.9rem; color: #718096;">
                 <a href="../../index.html" style="color: #4299e1;"><i class="fas fa-home"></i> 首页</a>
@@ -893,10 +98,10 @@
 
 <!-- 第八章：模型评估与调优 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-chart-bar"></i> 第八章：模型评估与调优</h2>
+<h2 id="sec1"  class="ai-section-title"><i class="fas fa-chart-bar"></i> 第八章：模型评估与调优</h2>
 
-<div class="learning-objectives">
-  <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
+<div class="ai-box ai-box--objectives">
+  <h3 id="sub1-1"><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解模型评估的意义和核心指标</li>
     <li>掌握准确率、精确率、召回率、F1分数的计算与适用场景</li>
@@ -906,13 +111,13 @@
   </ul>
 </div>
 
-<div class="prerequisite-box">
-  <h3><i class="fas fa-book"></i> 前置要求</h3>
+<div class="ai-box ai-box--prereq">
+  <h3 id="sub1-2"><i class="fas fa-book"></i> 前置要求</h3>
   <p>第七章：训练（理解损失函数、训练过程和常见问题）。</p>
 </div>
 
 <div class="concept-section">
-  <h2><i class="fas fa-tachometer-alt"></i> 为什么需要评估？</h2>
+  <h2 id="sec2"><i class="fas fa-tachometer-alt"></i> 为什么需要评估？</h2>
   <p>训练完成后，需要评估模型性能，判断模型是否达到要求，是否可以投入使用。</p>
 
   <div class="concept-box">
@@ -922,9 +127,9 @@
 </div>
 
 <div class="concept-section">
-  <h2><i class="fas fa-bullseye"></i> 核心评估指标</h2>
+  <h2 id="sec3"><i class="fas fa-bullseye"></i> 核心评估指标</h2>
 
-  <h3>准确率（Accuracy）</h3>
+  <h3 id="sub3-3">准确率（Accuracy）</h3>
   <p><span class="keyword-highlight">准确率</span>是模型预测正确的比例。</p>
   <div class="concept-box success">
     <h4><i class="fas fa-calculator"></i> 公式</h4>
@@ -932,7 +137,7 @@
     例如：100个样本，预测正确90个，准确率=90%</p>
   </div>
 
-  <h3>精确率与召回率</h3>
+  <h3 id="sub3-4">精确率与召回率</h3>
   <p>这两个指标用于评估分类模型的不同角度：</p>
   <table class="comparison-table">
     <tr>
@@ -962,7 +167,7 @@
     • 通常需要根据场景权衡</p>
   </div>
 
-  <h3>F1分数</h3>
+  <h3 id="sub3-5">F1分数</h3>
   <p><span class="keyword-highlight">F1分数</span>是精确率和召回率的调和平均，综合评估模型性能。</p>
   <div class="concept-box">
     <h4><i class="fas fa-calculator"></i> F1分数公式</h4>
@@ -970,7 +175,7 @@
     当精确率和召回率都很重要时，使用F1分数作为综合指标。</p>
   </div>
 
-  <h3>损失值（Loss）</h3>
+  <h3 id="sub3-6">损失值（Loss）</h3>
   <p><span class="keyword-highlight">损失值</span>衡量模型预测与真实答案的差距，训练过程中持续下降说明模型在学习。</p>
   <ul>
     <li>训练初期：损失值高，模型在学习</li>
@@ -978,7 +183,7 @@
     <li>训练后期：损失值稳定，模型收敛</li>
   </ul>
 
-  <h3>评估指标的Python代码示例</h3>
+  <h3 id="sub3-7">评估指标的Python代码示例</h3>
   <pre><code class="language-python">from sklearn.metrics import (
     accuracy_score, precision_score,
     recall_score, f1_score, confusion_matrix
@@ -1009,7 +214,7 @@ print(f"混淆矩阵:\n{cm}")
 # [[3 1]
 #  [1 5]]</code></pre>
 
-  <h3>混淆矩阵</h3>
+  <h3 id="sub3-8">混淆矩阵</h3>
   <p><span class="keyword-highlight">混淆矩阵</span>是展示分类结果的表格，清晰显示预测正确和错误的情况。</p>
 
   <table class="comparison-table">
@@ -1032,10 +237,10 @@ print(f"混淆矩阵:\n{cm}")
 </div>
 
 <div class="concept-section">
-  <h2><i class="fas fa-balance-scale"></i> 过拟合与欠拟合</h2>
+  <h2 id="sec4"><i class="fas fa-balance-scale"></i> 过拟合与欠拟合</h2>
   <p>模型训练中最重要的两个问题就是过拟合和欠拟合，它们与<span class="keyword-highlight">偏差-方差权衡（Bias-Variance Tradeoff）</span>密切相关。</p>
 
-  <h3>偏差与方差</h3>
+  <h3 id="sub4-9">偏差与方差</h3>
   <table class="comparison-table">
     <tr>
       <th>概念</th>
@@ -1063,7 +268,7 @@ print(f"混淆矩阵:\n{cm}")
     • <strong>高偏差+高方差</strong>：弹孔散布且偏离靶心 → 最差情况</p>
   </div>
 
-  <h3>学习曲线</h3>
+  <h3 id="sub4-10">学习曲线</h3>
   <p>通过观察学习曲线（训练损失和验证损失随训练进行的变化）可以诊断问题：</p>
   <ul>
     <li><strong>欠拟合</strong>：训练损失和验证损失都很高，且差距不大 → 模型太简单</li>
@@ -1073,10 +278,10 @@ print(f"混淆矩阵:\n{cm}")
 </div>
 
 <div class="concept-section">
-  <h2><i class="fas fa-shield-alt"></i> 正则化方法</h2>
+  <h2 id="sec5"><i class="fas fa-shield-alt"></i> 正则化方法</h2>
   <p><span class="keyword-highlight">正则化</span>是防止过拟合的核心技术，通过限制模型复杂度来提高泛化能力。</p>
 
-  <h3>L1 正则化（Lasso）</h3>
+  <h3 id="sub5-11">L1 正则化（Lasso）</h3>
   <p>在损失函数中添加参数绝对值之和：</p>
   <div class="concept-box">
     <h4><i class="fas fa-calculator"></i> L1正则化公式</h4>
@@ -1084,7 +289,7 @@ print(f"混淆矩阵:\n{cm}")
     效果：使部分参数变为0，起到特征选择的作用，产生稀疏模型。</p>
   </div>
 
-  <h3>L2 正则化（Ridge）</h3>
+  <h3 id="sub5-12">L2 正则化（Ridge）</h3>
   <p>在损失函数中添加参数平方和：</p>
   <div class="concept-box">
     <h4><i class="fas fa-calculator"></i> L2正则化公式</h4>
@@ -1093,7 +298,7 @@ print(f"混淆矩阵:\n{cm}")
     这是最常用的正则化方法，PyTorch中的weight_decay就是L2正则化。</p>
   </div>
 
-  <h3>Dropout</h3>
+  <h3 id="sub5-13">Dropout</h3>
   <p><span class="keyword-highlight">Dropout</span>在训练过程中随机"关闭"一部分神经元，迫使网络不依赖任何单个神经元。</p>
   <div class="concept-box success">
     <h4><i class="fas fa-lightbulb"></i> Dropout原理</h4>
@@ -1103,7 +308,7 @@ print(f"混淆矩阵:\n{cm}")
     • 常用丢弃率：0.2~0.5</p>
   </div>
 
-  <h3>数据增强（Data Augmentation）</h3>
+  <h3 id="sub5-14">数据增强（Data Augmentation）</h3>
   <p>通过变换训练数据来增加数据多样性，让模型学到更鲁棒的特征。</p>
   <ul>
     <li><strong>图像</strong>：旋转、翻转、裁剪、颜色变换、添加噪声</li>
@@ -1113,10 +318,10 @@ print(f"混淆矩阵:\n{cm}")
 </div>
 
 <div class="concept-section">
-  <h2><i class="fas fa-sync-alt"></i> 交叉验证</h2>
+  <h2 id="sec6"><i class="fas fa-sync-alt"></i> 交叉验证</h2>
   <p><span class="keyword-highlight">交叉验证</span>是一种更可靠的模型评估方法，能充分利用数据，减少评估结果的偶然性。</p>
 
-  <h3>K折交叉验证（K-Fold Cross Validation）</h3>
+  <h3 id="sub6-15">K折交叉验证（K-Fold Cross Validation）</h3>
   <p>将数据集分成K个大小相等的子集（"折"），每次用其中一折作为验证集，其余K-1折作为训练集，重复K次，取K次评估结果的平均值。</p>
 
   <div class="flow-diagram">
@@ -1141,8 +346,8 @@ print(f"混淆矩阵:\n{cm}")
   </div>
 </div>
 
-<div class="chapter-summary">
-  <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
+<div class="ai-box ai-box--summary" id="summary">
+  <h3 id="sub6-16"><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>模型评估的核心指标包括准确率、精确率、召回率和F1分数，不同场景应选择不同指标。</li>
     <li>过拟合（训练好、测试差）和欠拟合（训练差、测试差）是最常见的两个问题，对应偏差-方差权衡。</li>
@@ -1152,8 +357,8 @@ print(f"混淆矩阵:\n{cm}")
   </ol>
 </div>
 
-<div class="exercise-box">
-  <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
+<div class="ai-box ai-box--exercise" id="exercises">
+  <h3 id="sub6-17"><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
       <p><strong>在医疗诊断场景中，以下哪个指标最重要？</strong></p>
@@ -1198,12 +403,12 @@ print(f"混淆矩阵:\n{cm}")
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
+                <h3 id="sub6-18"><i class="fas fa-graduation-cap"></i> AI学习笔记</h3>
                 <p>从零开始系统学习人工智能</p>
                 <p>涵盖前置基础、核心原理、工程实践、应用工具、进阶展望</p>
             </div>
             <div class="footer-section">
-                <h3><i class="fas fa-bookmark"></i> 内容导航</h3>
+                <h3 id="sub6-19"><i class="fas fa-bookmark"></i> 内容导航</h3>
                 <p><a href="ch06.html" style="color: rgba(255,255,255,0.9);">第六章：模型</a></p>
                 <p><a href="ch07.html" style="color: rgba(255,255,255,0.9);">第七章：训练</a></p>
                 <p><a href="ch08.html" style="color: rgba(255,255,255,0.9);">第八章：模型评估与调优</a></p>
@@ -1211,7 +416,7 @@ print(f"混淆矩阵:\n{cm}")
                 <p><a href="ch10.html" style="color: rgba(255,255,255,0.9);">第十章：Transformer</a></p>
             </div>
             <div class="footer-section">
-                <h3><i class="fas fa-info-circle"></i> 说明</h3>
+                <h3 id="sub6-20"><i class="fas fa-info-circle"></i> 说明</h3>
                 <p>本笔记仅供学习参考，内容如有错误欢迎指正。</p>
                 <p>AI技术发展迅速，部分信息可能随时间变化。</p>
             </div>
@@ -1224,5 +429,6 @@ print(f"混淆矩阵:\n{cm}")
     <!-- Scripts -->
     <script src="../../js/mobile-menu.js"></script>
     <script src="../../js/dark-mode.js"></script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

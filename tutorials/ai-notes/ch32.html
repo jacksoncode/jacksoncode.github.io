@@ -21,203 +21,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <link rel="stylesheet" href="../styles/notes.css">
-    <style>
-        .domain-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            border-radius: 16px;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-        .domain-hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-        .domain-hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-        .section-header i {
-            font-size: 2rem;
-            color: #667eea;
-        }
-        .domain-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-        }
-        .stat-card .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #667eea;
-            display: block;
-        }
-        .stat-card .stat-label {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-        .pipeline-diagram {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-        .pipeline-diagram .pipeline-steps {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .pipeline-diagram .pipeline-step {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        .pipeline-diagram .pipeline-arrow {
-            color: #667eea;
-            font-size: 1.5rem;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-        }
-        .comparison-table th {
-            background: #667eea;
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-        .comparison-table td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .comparison-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-        .comparison-table tr:hover {
-            background: #f1f5f9;
-        }
-        .tech-stack-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .tech-item {
-            background: white;
-            border-radius: 10px;
-            padding: 1.2rem;
-            text-align: center;
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-        .tech-item:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-        }
-        .tech-item i {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-        .tech-item .tech-name {
-            font-weight: 600;
-            color: #1e293b;
-            display: block;
-        }
-        .tech-item .tech-desc {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 0.25rem;
-        }
-        .implementation-phase {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-left: 4px solid #667eea;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .implementation-phase h4 {
-            color: #667eea;
-            margin-bottom: 0.75rem;
-        }
-        .implementation-phase ul {
-            margin: 0;
-            padding-left: 1.5rem;
-        }
-        .implementation-phase li {
-            margin: 0.5rem 0;
-            color: #475569;
-        }
-        .success-story {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid #86efac;
-        }
-        .success-story h4 {
-            color: #16a34a;
-            margin-bottom: 0.75rem;
-        }
-        .success-story p {
-            color: #166534;
-            margin: 0.5rem 0;
-        }
-        .metrics-highlight {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .metric-badge {
-            background: white;
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-            color: #16a34a;
-            border: 1px solid #86efac;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/dark-mode.css">
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
+    <nav class="ai-nav">
         <div class="nav-container">
             <a href="../index.html" class="nav-logo">
                 <i class="fas fa-brain"></i>
@@ -234,7 +44,7 @@
 
     <!-- 主要内容 -->
     <main class="main-content">
-        <article class="chapter-content">
+        <article class="ai-main">
             <!-- 章节头部 -->
             <section class="domain-hero">
                 <h1><i class="fas fa-hospital"></i> 第三十二章：AI+垂直领域应用</h1>
@@ -242,8 +52,8 @@
             </section>
 
             <!-- 学习目标 -->
-            <section class="learning-objectives">
-                <h2><i class="fas fa-bullseye"></i> 学习目标</h2>
+            <section class="ai-box ai-box--objectives">
+                <h2 id="sec1"><i class="fas fa-bullseye"></i> 学习目标</h2>
                 <ul>
                     <li>了解AI在医疗、金融、教育、法律等垂直领域的应用场景</li>
                     <li>掌握不同行业AI应用的技术栈和实现方法</li>
@@ -254,8 +64,8 @@
             </section>
 
             <!-- 前置知识 -->
-            <section class="prerequisite-box">
-                <h2><i class="fas fa-list-check"></i> 前置知识</h2>
+            <section class="ai-box ai-box--prereq">
+                <h2 id="sec2"><i class="fas fa-list-check"></i> 前置知识</h2>
                 <ul>
                     <li>机器学习基础（监督学习、无监督学习、强化学习）</li>
                     <li>深度学习框架使用（PyTorch或TensorFlow）</li>
@@ -266,7 +76,7 @@
 
             <!-- 章节概述 -->
             <section class="content-section">
-                <h2><i class="fas fa-info-circle"></i> 章节概述</h2>
+                <h2 id="sec3"><i class="fas fa-info-circle"></i> 章节概述</h2>
                 <p>人工智能技术正在从实验室走向各行各业，深刻改变着传统产业的运作模式。本章将系统介绍AI在八个关键垂直领域的应用实践，包括医疗健康、金融服务、智能教育、法律科技、智能制造、智慧零售、智能交通和行业落地方法论。每个领域都有其独特的数据特点、技术需求和合规要求，理解这些差异对于成功实施AI项目至关重要。</p>
 
                 <div class="domain-stats">
@@ -299,14 +109,14 @@
                 <div class="section-header">
                     <i class="fas fa-heartbeat"></i>
                     <div>
-                        <h2 style="margin:0;">医疗健康AI应用</h2>
+                        <h2 id="sec4"  style="margin:0;">医疗健康AI应用</h2>
                         <p style="margin:0; color:#64748b;">Medical & Healthcare AI Applications</p>
                     </div>
                 </div>
 
                 <p>医疗健康是AI最具变革潜力的应用领域之一。从医学影像诊断到药物研发，AI正在重新定义医疗服务的质量和效率。在医疗领域，AI的应用必须遵循严格的数据隐私法规（如HIPAA）和医疗器械监管要求。</p>
 
-                <h3><i class="fas fa-x-ray"></i> 医学影像分析</h3>
+                <h3 id="sub4-1"><i class="fas fa-x-ray"></i> 医学影像分析</h3>
                 <p>医学影像分析是AI在医疗领域最成熟的应用之一。通过深度学习技术，AI系统能够以接近甚至超越人类专家的准确率识别病变、肿瘤和异常区域。主要应用包括：</p>
                 <ul>
                     <li><strong>放射影像分析</strong>：X光、CT、MRI图像的自动解读</li>
@@ -332,7 +142,7 @@
                     </div>
                 </div>
 
-                <h3><i class="fas fa-code"></i> 医疗影像分类实现</h3>
+                <h3 id="sub4-2"><i class="fas fa-code"></i> 医疗影像分类实现</h3>
                 <p>以下是一个使用PyTorch实现的医疗影像分类系统，用于检测胸部X光片中的肺炎病变：</p>
 
                 <pre><code class="language-python">import torch
@@ -557,7 +367,7 @@ if __name__ == '__main__':
     print(f"预测结果: {result['prediction']}")
     print(f"置信度: {result['confidence']:.2%}")</code></pre>
 
-                <h3><i class="fas fa-pills"></i> 药物研发与发现</h3>
+                <h3 id="sub4-3"><i class="fas fa-pills"></i> 药物研发与发现</h3>
                 <p>AI正在加速药物研发进程，从靶点识别到临床试验优化，AI技术显著降低了新药研发的时间和成本。主要应用包括：</p>
 
                 <ul>
@@ -572,7 +382,7 @@ if __name__ == '__main__':
                     <p>在医疗AI项目中，数据质量和标注准确性至关重要。建议与领域专家密切合作，建立严格的数据质量控制流程。同时，模型的可解释性对于获得医生信任和通过监管审批非常重要。</p>
                 </div>
 
-                <h3><i class="fas fa-robot"></i> 智能诊断辅助系统</h3>
+                <h3 id="sub4-4"><i class="fas fa-robot"></i> 智能诊断辅助系统</h3>
                 <p>智能诊断系统整合多模态医疗数据（影像、病历、实验室检查），为医生提供综合诊断建议。这类系统通常采用多任务学习框架，同时输出多个诊断维度的预测结果。</p>
 
                 <div class="reinforcement-diagram">
@@ -603,14 +413,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-chart-line"></i>
                     <div>
-                        <h2 style="margin:0;">金融服务AI应用</h2>
+                        <h2 id="sec5"  style="margin:0;">金融服务AI应用</h2>
                         <p style="margin:0; color:#64748b;">Financial Services AI Applications</p>
                     </div>
                 </div>
 
                 <p>金融行业是AI技术最早且最广泛应用的领域之一。从风险控制到智能投顾，AI正在重塑金融服务的各个方面。金融AI应用对准确性、实时性和可解释性有极高的要求。</p>
 
-                <h3><i class="fas fa-shield-alt"></i> 智能风控系统</h3>
+                <h3 id="sub5-5"><i class="fas fa-shield-alt"></i> 智能风控系统</h3>
                 <p>风险控制是金融机构的核心竞争力。AI驱动的风控系统能够实时分析海量交易数据，识别潜在的欺诈行为和信用风险。主要应用场景包括：</p>
 
                 <ul>
@@ -648,7 +458,7 @@ if __name__ == '__main__':
                     </div>
                 </div>
 
-                <h3><i class="fas fa-code"></i> 金融风控模型实现</h3>
+                <h3 id="sub5-6"><i class="fas fa-code"></i> 金融风控模型实现</h3>
                 <p>以下是一个完整的金融风控模型实现，包含特征工程、模型训练和实时推理：</p>
 
                 <pre><code class="language-python">import pandas as pd
@@ -980,7 +790,7 @@ if __name__ == '__main__':
     print(f"风险等级: {prediction['risk_level']}")
     print(f"需要告警: {prediction['alert_required']}")</code></pre>
 
-                <h3><i class="fas fa-robot"></i> 智能投顾系统</h3>
+                <h3 id="sub5-7"><i class="fas fa-robot"></i> 智能投顾系统</h3>
                 <p>智能投顾（Robo-Advisor）利用AI算法为客户提供个性化的投资组合建议。系统根据客户的风险偏好、投资目标和市场状况，自动进行资产配置和再平衡。</p>
 
                 <div class="implementation-phase">
@@ -1004,14 +814,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-graduation-cap"></i>
                     <div>
-                        <h2 style="margin:0;">智能教育AI应用</h2>
+                        <h2 id="sec6"  style="margin:0;">智能教育AI应用</h2>
                         <p style="margin:0; color:#64748b;">Intelligent Education AI Applications</p>
                     </div>
                 </div>
 
                 <p>教育行业正在经历一场由AI驱动的个性化革命。从自适应学习到智能评估，AI技术正在重新定义教育的边界，使因材施教从理想变为现实。</p>
 
-                <h3><i class="fas fa-user-graduate"></i> 自适应学习系统</h3>
+                <h3 id="sub6-8"><i class="fas fa-user-graduate"></i> 自适应学习系统</h3>
                 <p>自适应学习系统能够根据学生的学习进度、知识掌握程度和学习风格，动态调整教学内容和难度。系统通过持续追踪学生表现，构建个性化的学习路径。</p>
 
                 <ul>
@@ -1038,7 +848,7 @@ if __name__ == '__main__':
                     </div>
                 </div>
 
-                <h3><i class="fas fa-code"></i> 个性化学习推荐系统</h3>
+                <h3 id="sub6-9"><i class="fas fa-code"></i> 个性化学习推荐系统</h3>
                 <p>以下是一个基于协同过滤和知识图谱的个性化学习推荐系统实现：</p>
 
                 <pre><code class="language-python">import numpy as np
@@ -1392,7 +1202,7 @@ if __name__ == '__main__':
     diagnosis = system.diagnose_knowledge_state('student_1')
     print(f"\n学习诊断: {diagnosis['total_courses']}门课程完成，平均分: {diagnosis['average_score']:.2f}")</code></pre>
 
-                <h3><i class="fas fa-pen-fancy"></i> 智能作文评分</h3>
+                <h3 id="sub6-10"><i class="fas fa-pen-fancy"></i> 智能作文评分</h3>
                 <p>AI驱动的作文评分系统能够自动评估学生作文的内容、结构、语言和创新性，为教师提供辅助评分，同时为学生提供详细的写作反馈。</p>
 
                 <div class="success-story">
@@ -1416,14 +1226,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-balance-scale"></i>
                     <div>
-                        <h2 style="margin:0;">法律科技AI应用</h2>
+                        <h2 id="sec7"  style="margin:0;">法律科技AI应用</h2>
                         <p style="margin:0; color:#64748b;">Legal Tech AI Applications</p>
                     </div>
                 </div>
 
                 <p>法律行业正在经历数字化转型，AI技术在合同审查、法律研究和诉讼预测等方面展现出巨大潜力。法律AI应用对准确性和可解释性有极高要求，因为任何错误都可能导致严重的法律后果。</p>
 
-                <h3><i class="fas fa-file-contract"></i> 智能合同审查</h3>
+                <h3 id="sub7-11"><i class="fas fa-file-contract"></i> 智能合同审查</h3>
                 <p>AI合同审查系统能够自动分析合同条款，识别风险点、不合规条款和潜在争议。系统通过自然语言处理技术理解法律文本，并与知识库中的标准条款进行比对。</p>
 
                 <ul>
@@ -1456,7 +1266,7 @@ if __name__ == '__main__':
                     </div>
                 </div>
 
-                <h3><i class="fas fa-search"></i> 法律研究辅助</h3>
+                <h3 id="sub7-12"><i class="fas fa-search"></i> 法律研究辅助</h3>
                 <p>AI法律研究系统能够快速检索相关案例、法规和学术文献，为律师提供案件研究支持。系统使用语义搜索技术，理解法律问题的实质而非仅仅关键词匹配。</p>
 
                 <div class="implementation-phase">
@@ -1480,14 +1290,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-industry"></i>
                     <div>
-                        <h2 style="margin:0;">智能制造AI应用</h2>
+                        <h2 id="sec8"  style="margin:0;">智能制造AI应用</h2>
                         <p style="margin:0; color:#64748b;">Smart Manufacturing AI Applications</p>
                     </div>
                 </div>
 
                 <p>制造业正在经历工业4.0革命，AI技术在质量检测、预测性维护和生产优化等方面发挥着关键作用。智能制造要求AI系统具备高可靠性和实时响应能力。</p>
 
-                <h3><i class="fas fa-eye"></i> 工业视觉检测</h3>
+                <h3 id="sub8-13"><i class="fas fa-eye"></i> 工业视觉检测</h3>
                 <p>AI视觉检测系统能够以超人精度识别产品缺陷，大幅降低质量控制成本。系统可在生产线上实时运行，对每个产品进行100%检测。</p>
 
                 <ul>
@@ -1512,7 +1322,7 @@ if __name__ == '__main__':
                     </div>
                 </div>
 
-                <h3><i class="fas fa-wrench"></i> 预测性维护</h3>
+                <h3 id="sub8-14"><i class="fas fa-wrench"></i> 预测性维护</h3>
                 <p>预测性维护通过分析设备传感器数据，预测设备故障并提前安排维护，避免非计划停机造成的损失。AI模型能够识别设备异常模式，在故障发生前发出预警。</p>
 
                 <div class="success-story">
@@ -1536,14 +1346,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-shopping-cart"></i>
                     <div>
-                        <h2 style="margin:0;">智慧零售AI应用</h2>
+                        <h2 id="sec9"  style="margin:0;">智慧零售AI应用</h2>
                         <p style="margin:0; color:#64748b;">Smart Retail AI Applications</p>
                     </div>
                 </div>
 
                 <p>零售行业正在利用AI技术提升客户体验、优化库存管理和个性化营销。从智能推荐到无人商店，AI正在重塑零售业的各个环节。</p>
 
-                <h3><i class="fas fa-tags"></i> 个性化推荐系统</h3>
+                <h3 id="sub9-15"><i class="fas fa-tags"></i> 个性化推荐系统</h3>
                 <p>零售推荐系统通过分析用户行为和偏好，为每位顾客提供个性化的产品推荐。高效的推荐系统能够显著提升转化率和客单价。</p>
 
                 <pre><code class="language-python">import numpy as np
@@ -1783,7 +1593,7 @@ if __name__ == '__main__':
     for rec in recommendations:
         print(f"  - 商品{rec['item_id']}: 评分{rec['score']:.2f} ({rec['strategy']})")</code></pre>
 
-                <h3><i class="fas fa-warehouse"></i> 智能库存管理</h3>
+                <h3 id="sub9-16"><i class="fas fa-warehouse"></i> 智能库存管理</h3>
                 <p>AI库存管理系统通过分析销售数据、季节性趋势和外部因素，预测商品需求并优化库存水平。系统能够自动触发补货订单，避免缺货或积压。</p>
 
                 <div class="note-box info">
@@ -1797,14 +1607,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-car"></i>
                     <div>
-                        <h2 style="margin:0;">智能交通AI应用</h2>
+                        <h2 id="sec10"  style="margin:0;">智能交通AI应用</h2>
                         <p style="margin:0; color:#64748b;">Intelligent Transportation AI Applications</p>
                     </div>
                 </div>
 
                 <p>智能交通系统利用AI技术优化交通流量、提升道路安全和改善出行体验。从自动驾驶到智能信号控制，AI正在改变城市交通的面貌。</p>
 
-                <h3><i class="fas fa-road"></i> 自动驾驶技术</h3>
+                <h3 id="sub10-17"><i class="fas fa-road"></i> 自动驾驶技术</h3>
                 <p>自动驾驶是AI在交通领域最具挑战性和影响力的应用。系统需要融合多种传感器数据，实时感知环境并做出驾驶决策。</p>
 
                 <ul>
@@ -1829,7 +1639,7 @@ if __name__ == '__main__':
                     </div>
                 </div>
 
-                <h3><i class="fas fa-traffic-light"></i> 智能交通信号控制</h3>
+                <h3 id="sub10-18"><i class="fas fa-traffic-light"></i> 智能交通信号控制</h3>
                 <p>AI交通信号控制系统通过分析实时车流数据，动态调整信号灯配时，优化路口通行效率。强化学习技术使系统能够适应不断变化的交通模式。</p>
 
                 <div class="success-story">
@@ -1853,14 +1663,14 @@ if __name__ == '__main__':
                 <div class="section-header">
                     <i class="fas fa-project-diagram"></i>
                     <div>
-                        <h2 style="margin:0;">行业落地方法论</h2>
+                        <h2 id="sec11"  style="margin:0;">行业落地方法论</h2>
                         <p style="margin:0; color:#64748b;">Industry Implementation Methodology</p>
                     </div>
                 </div>
 
                 <p>成功的AI项目不仅需要先进的技术，还需要系统化的实施方法论。本节将介绍AI在垂直行业落地的最佳实践、常见挑战和解决方案。</p>
 
-                <h3><i class="fas fa-tasks"></i> AI项目实施框架</h3>
+                <h3 id="sub11-19"><i class="fas fa-tasks"></i> AI项目实施框架</h3>
                 
                 <div class="implementation-phase">
                     <h4><i class="fas fa-clipboard-list"></i> 阶段一：业务理解与需求分析</h4>
@@ -1902,7 +1712,7 @@ if __name__ == '__main__':
                     </ul>
                 </div>
 
-                <h3><i class="fas fa-exclamation-circle"></i> 常见挑战与解决方案</h3>
+                <h3 id="sub11-20"><i class="fas fa-exclamation-circle"></i> 常见挑战与解决方案</h3>
 
                 <table class="comparison-table">
                     <thead>
@@ -1941,7 +1751,7 @@ if __name__ == '__main__':
                     </tbody>
                 </table>
 
-                <h3><i class="fas fa-chart-pie"></i> ROI评估模型</h3>
+                <h3 id="sub11-21"><i class="fas fa-chart-pie"></i> ROI评估模型</h3>
                 <p>评估AI项目投资回报需要综合考虑直接收益、成本节约和战略价值。建议使用以下框架：</p>
 
                 <pre><code class="language-python">class AIRoICalculator:
@@ -2098,10 +1908,10 @@ if __name__ == '__main__':
 
             <!-- 练习题 -->
             <section class="exercises-section">
-                <h2><i class="fas fa-pen"></i> 练习题</h2>
+                <h2 id="sec12"><i class="fas fa-pen"></i> 练习题</h2>
                 
                 <div class="exercise-item">
-                    <h3>练习1：医疗影像分类系统设计</h3>
+                    <h3 id="sub12-22">练习1：医疗影像分类系统设计</h3>
                     <p>设计一个完整的医疗影像分类系统架构，包括数据预处理、模型训练、推理服务和结果可视化模块。考虑如何处理类别不平衡和模型可解释性问题。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -2112,7 +1922,7 @@ if __name__ == '__main__':
                 </div>
 
                 <div class="exercise-item">
-                    <h3>练习2：金融风控模型优化</h3>
+                    <h3 id="sub12-23">练习2：金融风控模型优化</h3>
                     <p>针对给定的交易数据集，实现一个包含特征工程、模型训练和实时预测的完整风控系统。对比XGBoost和深度学习模型的效果。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -2123,7 +1933,7 @@ if __name__ == '__main__':
                 </div>
 
                 <div class="exercise-item">
-                    <h3>练习3：个性化推荐系统评估</h3>
+                    <h3 id="sub12-24">练习3：个性化推荐系统评估</h3>
                     <p>设计一个推荐系统的离线评估框架，包括准确率、覆盖率、多样性和新颖性等多维度指标。使用公开数据集验证你的评估框架。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -2134,7 +1944,7 @@ if __name__ == '__main__':
                 </div>
 
                 <div class="exercise-item">
-                    <h3>练习4：AI项目ROI分析</h3>
+                    <h3 id="sub12-25">练习4：AI项目ROI分析</h3>
                     <p>为你所在组织的一个潜在AI项目进行ROI分析，包括成本估算、收益预测和敏感性分析。撰写一份项目提案报告。</p>
                     <div class="exercise-hint">
                         <button class="hint-toggle">查看提示 <i class="fas fa-chevron-down"></i></button>
@@ -2147,7 +1957,7 @@ if __name__ == '__main__':
 
             <!-- 本章小结 -->
             <section class="summary-section">
-                <h2><i class="fas fa-bookmark"></i> 本章小结</h2>
+                <h2 id="sec13"><i class="fas fa-bookmark"></i> 本章小结</h2>
                 <ul>
                     <li>AI在垂直领域的应用需要深入理解行业特点和业务需求</li>
                     <li>医疗AI应用必须遵守严格的监管要求和数据隐私法规</li>
@@ -2165,7 +1975,7 @@ if __name__ == '__main__':
     </main>
 
     <!-- 章节导航 -->
-    <div class="chapter-nav">
+    <div class="ai-chapter-nav">
         <a href="ch31.html" class="prev-chapter">
             <i class="fas fa-chevron-left"></i>
             <span>上一章：AI+伦理与社会</span>
@@ -2221,5 +2031,7 @@ if __name__ == '__main__':
             });
         });
     </script>
+    <script src="../../js/dark-mode.js"></script>
+    <script src="../assets/ai-notes.js"></script>
 </body>
 </html>

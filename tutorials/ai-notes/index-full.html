@@ -43,968 +43,18 @@
     <link rel="stylesheet" href="../../css/mobile-optimizations.css">
 
     <!-- 内联CSS样式 -->
-    <style>
-        /* ========== 全局基础样式 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.8;
-            color: #2d3748;
-            background-color: #f7fafc;
-            font-size: 16px;
-        }
-
-        a {
-            color: #4299e1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #3182ce;
-        }
-
-        /* ========== 导航栏样式 ========== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0 2rem;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-brand {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2b6cb0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar-brand i {
-            color: #4299e1;
-        }
-
-        .navbar-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .navbar-links a {
-            color: #4a5568;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        .navbar-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #4299e1;
-            transition: width 0.3s ease;
-        }
-
-        .navbar-links a:hover::after {
-            width: 100%;
-        }
-
-        .navbar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        /* ========== Hero Section 样式 ========== */
-        .hero-section {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 50%, #4299e1 100%);
-            color: #fff;
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            margin-top: 64px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.3;
-        }
-
-        .hero-section h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            position: relative;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-section p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-            position: relative;
-            line-height: 1.8;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            position: relative;
-        }
-
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            backdrop-filter: blur(5px);
-        }
-
-        /* ========== 主内容区域布局 ========== */
-        .content-wrapper {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            min-width: 0;
-            max-width: 900px;
-        }
-
-        /* ========== 章节标题样式 ========== */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a365d;
-            margin: 3rem 0 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px solid #4299e1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-title i {
-            color: #4299e1;
-            font-size: 1.5rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #2b6cb0;
-            margin: 2rem 0 1rem;
-            padding-left: 0.75rem;
-            border-left: 4px solid #4299e1;
-        }
-
-        /* ========== 学习目标框 ========== */
-        .learning-objectives {
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-            border: 2px solid #90cdf4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .learning-objectives::before {
-            content: '\f02d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #4299e1;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .learning-objectives h4 {
-            color: #2b6cb0;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .learning-objectives ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .learning-objectives li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .learning-objectives li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 前置要求框 ========== */
-        .prerequisite-box {
-            background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
-            border: 2px solid #ecc94b;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .prerequisite-box::before {
-            content: '\f0e7';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #ecc94b;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .prerequisite-box h4 {
-            color: #975a16;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .prerequisite-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .prerequisite-box li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .prerequisite-box li::before {
-            content: '\f0da';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #d69e2e;
-            font-size: 0.8rem;
-        }
-
-        /* ========== 练习题框 ========== */
-        .exercise-box {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border: 2px solid #b794f4;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .exercise-box::before {
-            content: '\f4d6';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #805ad5;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .exercise-box h4 {
-            color: #6b46c1;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .exercise-item {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.75rem;
-            border-left: 3px solid #805ad5;
-        }
-
-        .exercise-item .exercise-number {
-            font-weight: 700;
-            color: #6b46c1;
-            margin-right: 0.5rem;
-        }
-
-        .exercise-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* ========== 数学公式块 ========== */
-        .math-block {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.25rem 1.5rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .math-block .math-toggle {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: none;
-            border: none;
-            color: #a0aec0;
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .math-block .math-toggle:hover {
-            color: #4299e1;
-            background: #ebf8ff;
-        }
-
-        .math-block .math-content {
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 0.5rem 0;
-        }
-
-        .math-block .math-description {
-            font-size: 0.9rem;
-            color: #718096;
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-
-        /* ========== 代码块样式 ========== */
-        .code-block {
-            position: relative;
-            margin: 1.25rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .code-block-header {
-            background: #1d1f21;
-            color: #c5c8c6;
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-
-        .code-block-header .lang-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .code-block-header .lang-label i {
-            color: #4299e1;
-        }
-
-        .code-block-header .copy-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #c5c8c6;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: all 0.2s;
-        }
-
-        .code-block-header .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        .code-block pre {
-            margin: 0;
-            border-radius: 0;
-        }
-
-        .code-block pre code {
-            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* ========== 章节小结 ========== */
-        .chapter-summary {
-            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-            border: 2px solid #68d391;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .chapter-summary::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: -12px;
-            left: 1.5rem;
-            background: #38a169;
-            color: #fff;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        .chapter-summary h4 {
-            color: #276749;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chapter-summary ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .chapter-summary li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .chapter-summary li::before {
-            content: '\f111';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #38a169;
-            font-size: 0.4rem;
-            top: 0.85rem;
-        }
-
-        /* ========== 右侧粘性目录导航 ========== */
-        .toc-sidebar {
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 80px;
-            height: fit-content;
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .toc-sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .toc-sidebar::-webkit-scrollbar-thumb {
-            background: #cbd5e0;
-            border-radius: 2px;
-        }
-
-        .toc-sidebar h3 {
-            font-size: 1rem;
-            color: #1a365d;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toc-sidebar h3 i {
-            color: #4299e1;
-        }
-
-        .toc-sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc-sidebar li {
-            margin-bottom: 0.25rem;
-        }
-
-        .toc-sidebar a {
-            display: block;
-            padding: 0.4rem 0.75rem;
-            color: #4a5568;
-            font-size: 0.88rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        .toc-sidebar a:hover {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-        }
-
-        .toc-sidebar a.active {
-            background: #ebf8ff;
-            color: #2b6cb0;
-            border-left-color: #4299e1;
-            font-weight: 600;
-        }
-
-        .toc-sidebar .toc-sub {
-            padding-left: 1rem;
-        }
-
-        .toc-sidebar .toc-sub a {
-            font-size: 0.82rem;
-            color: #718096;
-            padding: 0.3rem 0.75rem;
-        }
-
-        .toc-sidebar .toc-divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 0.75rem 0;
-        }
-
-        /* ========== 知识点标记 ========== */
-        .knowledge-point {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: #ebf8ff;
-            color: #2b6cb0;
-            padding: 0.15rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            border: 1px solid #bee3f8;
-        }
-
-        .knowledge-point i {
-            font-size: 0.75rem;
-        }
-
-        /* ========== 提示/警告/成功/信息框 ========== */
-        .tip-box, .warning-box, .success-box, .info-box {
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin: 1.25rem 0;
-            position: relative;
-            padding-left: 3.5rem;
-        }
-
-        .tip-box {
-            background: #ebf8ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .tip-box::before {
-            content: '\f0eb';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #4299e1;
-            font-size: 1.1rem;
-        }
-
-        .warning-box {
-            background: #fffbeb;
-            border: 1px solid #f6e05e;
-        }
-
-        .warning-box::before {
-            content: '\f071';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #d69e2e;
-            font-size: 1.1rem;
-        }
-
-        .success-box {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-        }
-
-        .success-box::before {
-            content: '\f058';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #38a169;
-            font-size: 1.1rem;
-        }
-
-        .info-box {
-            background: #ebf4ff;
-            border: 1px solid #90cdf4;
-        }
-
-        .info-box::before {
-            content: '\f05a';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            color: #3182ce;
-            font-size: 1.1rem;
-        }
-
-        .tip-box h5, .warning-box h5, .success-box h5, .info-box h5 {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .tip-box h5 { color: #2b6cb0; }
-        .warning-box h5 { color: #975a16; }
-        .success-box h5 { color: #276749; }
-        .info-box h5 { color: #2a4365; }
-
-        /* ========== 流程图/图表卡片 ========== */
-        .flow-diagram {
-            background: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-        }
-
-        .flow-diagram h4 {
-            color: #1a365d;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .diagram-card {
-            background: linear-gradient(135deg, #fff 0%, #f7fafc 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1.25rem;
-            text-align: center;
-            margin: 0.5rem;
-            display: inline-block;
-            min-width: 120px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .diagram-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .diagram-card i {
-            font-size: 1.5rem;
-            color: #4299e1;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .diagram-card .card-title {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.9rem;
-        }
-
-        .diagram-card .card-desc {
-            font-size: 0.8rem;
-            color: #718096;
-            margin-top: 0.25rem;
-        }
-
-        .diagram-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin: 1rem 0;
-        }
-
-        .diagram-arrow {
-            color: #a0aec0;
-            font-size: 1.2rem;
-        }
-
-        /* ========== 对比表格 ========== */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .comparison-table thead {
-            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
-            color: #fff;
-        }
-
-        .comparison-table th {
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .comparison-table td {
-            padding: 0.85rem 1.25rem;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.92rem;
-        }
-
-        .comparison-table tbody tr:nth-child(even) {
-            background: #f7fafc;
-        }
-
-        .comparison-table tbody tr:hover {
-            background: #ebf8ff;
-        }
-
-        /* ========== 概念区域/概念框 ========== */
-        .concept-section {
-            margin: 2rem 0;
-        }
-
-        .concept-box {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 1rem 0;
-            transition: box-shadow 0.3s;
-        }
-
-        .concept-box:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .concept-box h4 {
-            color: #1a365d;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .concept-box .ai-usage {
-            background: #fefcbf;
-            border-left: 3px solid #ecc94b;
-            padding: 0.75rem 1rem;
-            margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
-            color: #744210;
-        }
-
-        .concept-box .ai-usage strong {
-            color: #975a16;
-        }
-
-        /* ========== 响应式媒体查询 ========== */
-        @media (max-width: 1024px) {
-            .toc-sidebar {
-                display: none;
-            }
-
-            .content-wrapper {
-                max-width: 100%;
-            }
-
-            .main-content {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: #fff;
-                flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                gap: 0.5rem;
-            }
-
-            .navbar-links.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .hero-section {
-                padding: 6rem 1.5rem 3rem;
-            }
-
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-
-            .hero-section p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .content-wrapper {
-                padding: 1rem;
-            }
-
-            .comparison-table {
-                font-size: 0.85rem;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 0.6rem 0.75rem;
-            }
-
-            .exercise-box,
-            .learning-objectives,
-            .prerequisite-box,
-            .chapter-summary {
-                padding: 1.25rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-section h1 {
-                font-size: 1.6rem;
-            }
-
-            .hero-badges {
-                gap: 0.5rem;
-            }
-
-            .hero-badge {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .code-block pre code {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <!-- AI-Notes共享样式 -->
+    <link rel="stylesheet" href="../assets/ai-notes.css">
 </head>
 <body>
 
     <!-- ==================== 导航栏 ==================== -->
-    <nav class="navbar">
-        <a href="#" class="navbar-brand">
+    <nav class="ai-nav">
+        <a href="#" class="ai-nav-brand">
             <i class="fas fa-brain"></i>
             AI学习笔记
         </a>
-        <ul class="navbar-links" id="navLinks">
+        <ul class="ai-nav-links" id="navLinks">
             <li><a href="#chapter0"><i class="fas fa-map"></i> 学习路线</a></li>
             <li><a href="#chapter1"><i class="fab fa-python"></i> Python基础</a></li>
             <li><a href="#chapter2"><i class="fas fa-square-root-variable"></i> 数学基础</a></li>
@@ -1013,21 +63,21 @@
             <li><a href="#chapter5"><i class="fas fa-tools"></i> 工程实践</a></li>
             <li><a href="#chapter6"><i class="fas fa-rocket"></i> 进阶展望</a></li>
         </ul>
-        <button class="navbar-toggle" id="navToggle" aria-label="切换导航">
+        <button class="ai-nav-toggle" id="navToggle" aria-label="切换导航">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
 
     <!-- ==================== Hero Section ==================== -->
-    <section class="hero-section">
+    <section class="ai-hero">
         <h1><i class="fas fa-brain"></i> AI 学习笔记</h1>
         <p>从零开始系统学习人工智能，涵盖<strong>前置基础</strong>、<strong>核心原理</strong>、<strong>工程实践</strong>、<strong>应用工具</strong>、<strong>进阶展望</strong>5大模块，助你构建完整的AI知识体系</p>
-        <div class="hero-badges">
-            <span class="hero-badge"><i class="fab fa-python"></i> Python</span>
-            <span class="hero-badge"><i class="fas fa-calculator"></i> 数学基础</span>
-            <span class="hero-badge"><i class="fas fa-robot"></i> 机器学习</span>
-            <span class="hero-badge"><i class="fas fa-network-wired"></i> 深度学习</span>
-            <span class="hero-badge"><i class="fas fa-code"></i> 工程实践</span>
+        <div class="ai-hero-badges">
+            <span class="ai-hero-badge"><i class="fab fa-python"></i> Python</span>
+            <span class="ai-hero-badge"><i class="fas fa-calculator"></i> 数学基础</span>
+            <span class="ai-hero-badge"><i class="fas fa-robot"></i> 机器学习</span>
+            <span class="ai-hero-badge"><i class="fas fa-network-wired"></i> 深度学习</span>
+            <span class="ai-hero-badge"><i class="fas fa-code"></i> 工程实践</span>
         </div>
     </section>
 
@@ -1041,12 +91,12 @@
             <!-- 第零章：学习路线图                           -->
             <!-- ========================================== -->
             <section id="chapter0">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-map-signs"></i>
                     第零章：学习路线图
                 </h2>
 
-                <div class="learning-objectives">
+                <div class="ai-box ai-box--objectives">
                     <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
                     <ul>
                         <li>了解AI学习的完整知识体系与各模块之间的关系</li>
@@ -1057,7 +107,7 @@
                     </ul>
                 </div>
 
-                <div class="prerequisite-box">
+                <div class="ai-box ai-box--prereq">
                     <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
                     <ul>
                         <li>基本的计算机操作能力</li>
@@ -1067,7 +117,7 @@
                     </ul>
                 </div>
 
-                <h3 class="section-subtitle">学习路线图</h3>
+                <h3 class="ai-section-subtitle">学习路线图</h3>
                 <p>以下是AI学习的完整路线图，共分为6大模块，建议按照顺序逐步学习。每个模块都有明确的学习目标和预期成果。</p>
 
                 <table class="comparison-table">
@@ -1126,7 +176,7 @@
                     </tbody>
                 </table>
 
-                <h3 class="section-subtitle">预计学习时间</h3>
+                <h3 class="ai-section-subtitle">预计学习时间</h3>
                 <div class="flow-diagram">
                     <div class="diagram-section">
                         <div class="diagram-card">
@@ -1149,7 +199,7 @@
                     </div>
                 </div>
 
-                <h3 class="section-subtitle">所需工具清单</h3>
+                <h3 class="ai-section-subtitle">所需工具清单</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -1199,7 +249,7 @@
                     </tbody>
                 </table>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <h5>学习建议</h5>
                     <p>建议使用 <strong>Anaconda</strong> 发行版，它已经预装了 Python、Jupyter Notebook、NumPy、Matplotlib 等常用工具，可以省去大量环境配置时间。安装命令：<code>conda install numpy matplotlib jupyter</code></p>
                 </div>
@@ -1209,12 +259,12 @@
             <!-- 第一章：Python编程基础                       -->
             <!-- ========================================== -->
             <section id="chapter1">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fab fa-python"></i>
                     第一章：Python编程基础
                 </h2>
 
-                <div class="learning-objectives">
+                <div class="ai-box ai-box--objectives">
                     <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
                     <ul>
                         <li>掌握Python基本语法：变量、数据类型、运算符</li>
@@ -1225,7 +275,7 @@
                     </ul>
                 </div>
 
-                <div class="prerequisite-box">
+                <div class="ai-box ai-box--prereq">
                     <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
                     <ul>
                         <li>已安装Python 3.10或更高版本</li>
@@ -1235,15 +285,15 @@
                 </div>
 
                 <!-- Python环境安装 -->
-                <h3 class="section-subtitle">Python 环境安装</h3>
+                <h3 class="ai-section-subtitle">Python 环境安装</h3>
 
-                <div class="info-box">
+                <div class="ai-info">
                     <h5>推荐安装方式</h5>
                     <p>推荐使用 <strong>Anaconda</strong> 进行安装，它包含了Python解释器和大量科学计算库。访问 <a href="https://www.anaconda.com/download" target="_blank">anaconda.com/download</a> 下载对应系统的安装包。</p>
                 </div>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fas fa-terminal"></i> Bash - 环境检查与安装</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1261,19 +311,19 @@ conda install numpy matplotlib jupyter
 jupyter notebook</code></pre>
                 </div>
 
-                <div class="success-box">
+                <div class="ai-success">
                     <h5>验证安装</h5>
                     <p>在终端输入 <code>python -c "import numpy; import matplotlib; print('安装成功！')"</code>，如果没有报错，说明环境安装成功。</p>
                 </div>
 
                 <!-- 基础语法 -->
-                <h3 class="section-subtitle">基础语法</h3>
+                <h3 class="ai-section-subtitle">基础语法</h3>
 
                 <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">变量与数据类型</h4>
                 <p>Python是动态类型语言，变量不需要提前声明类型。以下是常用的数据类型。</p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 变量与数据类型</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1321,8 +371,8 @@ print(f"图像尺寸: {image_shape[0]}x{image_shape[1]}")</code></pre>
                 <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">控制流</h4>
                 <p>条件判断和循环是编程的基础，在AI中常用于数据预处理、训练循环等场景。</p>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - 控制流</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1370,19 +420,19 @@ normalized = [(x - min(raw_data)) / (max(raw_data) - min(raw_data))
 print(f"归一化结果: {normalized}")</code></pre>
                 </div>
 
-                <div class="tip-box">
+                <div class="ai-tip">
                     <h5>Python小贴士</h5>
                     <p>在AI编程中，<strong>列表推导式</strong>和<strong>字典推导式</strong>非常常用，它们比传统循环更简洁高效。此外，<code>enumerate()</code> 和 <code>zip()</code> 也是数据处理中的常用函数。</p>
                 </div>
 
                 <!-- NumPy基础 -->
-                <h3 class="section-subtitle">NumPy 基础</h3>
+                <h3 class="ai-section-subtitle">NumPy 基础</h3>
                 <p>NumPy是Python科学计算的核心库，提供了高效的多维数组对象和丰富的数学函数。在AI中，NumPy是几乎所有数据处理和数值计算的基础。</p>
 
                 <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">数组创建</h4>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - NumPy 数组创建</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1421,8 +471,8 @@ print(f"等差数组: {y}")</code></pre>
 
                 <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">矩阵运算</h4>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - NumPy 矩阵运算</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1471,19 +521,19 @@ print(f"求和: {np.sum(data)}")
 print(f"排序: {np.sort(data)}")</code></pre>
                 </div>
 
-                <div class="warning-box">
+                <div class="ai-warning">
                     <h5>注意</h5>
                     <p>在NumPy中，<code>*</code> 是逐元素乘法，<code>@</code> 或 <code>np.dot()</code> 才是矩阵乘法。在AI编程中，矩阵乘法（<code>@</code>）远比逐元素乘法更常用，务必区分清楚。</p>
                 </div>
 
                 <!-- Matplotlib基础 -->
-                <h3 class="section-subtitle">Matplotlib 基础</h3>
+                <h3 class="ai-section-subtitle">Matplotlib 基础</h3>
                 <p>Matplotlib是Python最常用的数据可视化库。在AI中，我们用它来可视化训练过程、数据分布、模型性能等。</p>
 
                 <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">折线图 - 训练损失可视化</h4>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - Matplotlib 折线图</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1514,8 +564,8 @@ plt.show()</code></pre>
 
                 <h4 style="color:#2d3748; margin:1.5rem 0 0.75rem;">散点图 - 数据分布可视化</h4>
 
-                <div class="code-block">
-                    <div class="code-block-header">
+                <div class="ai-code">
+                    <div class="ai-code-header">
                         <span class="lang-label"><i class="fab fa-python"></i> Python - Matplotlib 散点图</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> 复制</button>
                     </div>
@@ -1550,7 +600,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 练习题 -->
-                <div class="exercise-box">
+                <div class="ai-box ai-box--exercise">
                     <h4><i class="fas fa-pen-fancy"></i> 练习题</h4>
                     <div class="exercise-item">
                         <span class="exercise-number">[1]</span>
@@ -1567,7 +617,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 章节小结 -->
-                <div class="chapter-summary">
+                <div class="ai-box ai-box--summary">
                     <h4><i class="fas fa-lightbulb"></i> 章节小结</h4>
                     <ul>
                         <li>Python是AI开发的首选语言，其简洁的语法和丰富的库生态是最大优势</li>
@@ -1583,12 +633,12 @@ plt.show()</code></pre>
             <!-- 第二章：数学基础                             -->
             <!-- ========================================== -->
             <section id="chapter2">
-                <h2 class="section-title">
+                <h2 class="ai-section-title">
                     <i class="fas fa-square-root-variable"></i>
                     第二章：数学基础
                 </h2>
 
-                <div class="learning-objectives">
+                <div class="ai-box ai-box--objectives">
                     <h4><i class="fas fa-bullseye"></i> 学习目标</h4>
                     <ul>
                         <li>掌握线性代数核心概念：向量、矩阵、矩阵乘法及其几何意义</li>
@@ -1599,7 +649,7 @@ plt.show()</code></pre>
                     </ul>
                 </div>
 
-                <div class="prerequisite-box">
+                <div class="ai-box ai-box--prereq">
                     <h4><i class="fas fa-clipboard-check"></i> 前置要求</h4>
                     <ul>
                         <li>高中数学基础（函数、方程、基本概率）</li>
@@ -1609,7 +659,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 线性代数 -->
-                <h3 class="section-subtitle">线性代数</h3>
+                <h3 class="ai-section-subtitle">线性代数</h3>
                 <p>线性代数是AI的数学基石。神经网络的前向传播本质上是矩阵乘法，反向传播需要计算梯度，这些操作都建立在线性代数之上。</p>
 
                 <div class="concept-section">
@@ -1696,7 +746,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 微积分 -->
-                <h3 class="section-subtitle">微积分</h3>
+                <h3 class="ai-section-subtitle">微积分</h3>
                 <p>微积分是理解AI优化过程的关键。神经网络的训练本质上就是通过微积分中的梯度下降来最小化损失函数。</p>
 
                 <div class="concept-section">
@@ -1791,7 +841,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 概率统计 -->
-                <h3 class="section-subtitle">概率统计</h3>
+                <h3 class="ai-section-subtitle">概率统计</h3>
                 <p>概率论为AI提供了处理不确定性的数学框架。从朴素贝叶斯分类器到贝叶斯神经网络，概率统计无处不在。</p>
 
                 <div class="concept-section">
@@ -1886,7 +936,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 信息论 -->
-                <h3 class="section-subtitle">信息论</h3>
+                <h3 class="ai-section-subtitle">信息论</h3>
                 <p>信息论为AI提供了衡量"信息量"和"不确定性"的工具，是理解损失函数设计的基础。</p>
 
                 <div class="concept-section">
@@ -1949,7 +999,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 数学概念汇总表 -->
-                <h3 class="section-subtitle">数学概念与AI应用对照表</h3>
+                <h3 class="ai-section-subtitle">数学概念与AI应用对照表</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -1998,7 +1048,7 @@ plt.show()</code></pre>
                 </table>
 
                 <!-- 练习题 -->
-                <div class="exercise-box">
+                <div class="ai-box ai-box--exercise">
                     <h4><i class="fas fa-pen-fancy"></i> 练习题</h4>
                     <div class="exercise-item">
                         <span class="exercise-number">[1]</span>
@@ -2015,7 +1065,7 @@ plt.show()</code></pre>
                 </div>
 
                 <!-- 章节小结 -->
-                <div class="chapter-summary">
+                <div class="ai-box ai-box--summary">
                     <h4><i class="fas fa-lightbulb"></i> 章节小结</h4>
                     <ul>
                         <li>线性代数是AI计算的基础，矩阵乘法是神经网络的核心运算</li>
@@ -2157,9 +1207,9 @@ plt.show()</code></pre>
 <!-- ============================================================ -->
 
 <!-- 第二章（补充）：环境配置实战 -->
-<h2 class="section-title">第二章（补充）：环境配置实战</h2>
+<h2 class="ai-section-title">第二章（补充）：环境配置实战</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3>学习目标</h3>
   <ol>
     <li>掌握 Anaconda 在 Windows、Mac、Linux 上的安装与配置方法</li>
@@ -2170,7 +1220,7 @@ plt.show()</code></pre>
   </ol>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3>前置要求</h3>
   <ul>
     <li>具备基本的命令行操作能力（Windows CMD/PowerShell、Mac/Linux Terminal）</li>
@@ -2505,7 +1555,7 @@ print("\n恭喜你，成功运行了第一个神经网络！")</code></pre>
   </div>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3>练习题</h3>
   <ol>
     <li>
@@ -2523,7 +1573,7 @@ print("\n恭喜你，成功运行了第一个神经网络！")</code></pre>
   </ol>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3>章节小结</h3>
   <p>本章系统介绍了 AI 开发环境的搭建流程，涵盖 Anaconda 安装、虚拟环境管理、PyTorch 安装、Jupyter Notebook 使用以及常用库的配置。通过完成本章学习，你应该已经具备了以下能力：</p>
   <ul>
@@ -2537,7 +1587,7 @@ print("\n恭喜你，成功运行了第一个神经网络！")</code></pre>
 </div>
 
 <!-- 附录C：常见问题（FAQ） -->
-<h2 class="section-title">附录C：常见问题（FAQ）</h2>
+<h2 class="ai-section-title">附录C：常见问题（FAQ）</h2>
 
 <details>
   <summary><strong>CUDA out of memory 怎么办？</strong></summary>
@@ -2830,9 +1880,9 @@ print("模型加载成功并可以正常推理！")</code></pre>
 <!-- ============================================================ -->
 <!-- 第三章：AI基础概念 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-lightbulb"></i> 第三章：AI基础概念</h2>
+<h2 class="ai-section-title"><i class="fas fa-lightbulb"></i> 第三章：AI基础概念</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解人工智能（AI）的定义与核心能力</li>
@@ -2843,7 +1893,7 @@ print("模型加载成功并可以正常推理！")</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>无特殊前置要求，具备基本的计算机使用经验即可。</p>
 </div>
@@ -3109,7 +2159,7 @@ print("模型加载成功并可以正常推理！")</code></pre>
   </ul>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>人工智能（AI）是让计算机模拟人类智能行为的技术，核心能力包括感知、推理、学习和交互。</li>
@@ -3120,7 +2170,7 @@ print("模型加载成功并可以正常推理！")</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -3144,9 +2194,9 @@ print("模型加载成功并可以正常推理！")</code></pre>
 <!-- ============================================================ -->
 <!-- 第四章：机器学习概述 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-layer-group"></i> 第四章：机器学习概述</h2>
+<h2 class="ai-section-title"><i class="fas fa-layer-group"></i> 第四章：机器学习概述</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解机器学习（ML）的定义与核心思想</li>
@@ -3157,7 +2207,7 @@ print("模型加载成功并可以正常推理！")</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第三章：AI基础概念（理解AI的基本定义和分类）。</p>
 </div>
@@ -3472,7 +2522,7 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>机器学习是AI的核心分支，核心思想是让计算机从数据中自动学习规律，而非人工编写所有规则。</li>
@@ -3483,7 +2533,7 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -3507,9 +2557,9 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
 <!-- ============================================================ -->
 <!-- 第五章：深度学习概述 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-project-diagram"></i> 第五章：深度学习概述</h2>
+<h2 class="ai-section-title"><i class="fas fa-project-diagram"></i> 第五章：深度学习概述</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解深度学习（DL）的定义及其与ML的关系</li>
@@ -3520,7 +2570,7 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第四章：机器学习概述（理解ML的基本概念和三种学习类型）。</p>
 </div>
@@ -3742,7 +2792,7 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>深度学习是机器学习的子集，使用多层神经网络自动学习数据的复杂特征表示。</li>
@@ -3753,7 +2803,7 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -3777,9 +2827,9 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
 <!-- ============================================================ -->
 <!-- 第六章：模型 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-box"></i> 第六章：模型</h2>
+<h2 class="ai-section-title"><i class="fas fa-box"></i> 第六章：模型</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解模型（Model）的概念与本质</li>
@@ -3790,7 +2840,7 @@ print("聚类中心坐标:", kmeans.cluster_centers_)
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第五章：深度学习概述（理解神经网络的基本结构和深度学习架构）。</p>
 </div>
@@ -4077,7 +3127,7 @@ print(result)
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>模型是机器学习的核心产出，本质是包含大量参数的数学函数，将输入转换为预测输出。</li>
@@ -4088,7 +3138,7 @@ print(result)
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -4112,9 +3162,9 @@ print(result)
 <!-- ============================================================ -->
 <!-- 第七章：训练 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-dumbbell"></i> 第七章：训练</h2>
+<h2 class="ai-section-title"><i class="fas fa-dumbbell"></i> 第七章：训练</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解训练的定义与核心流程</li>
@@ -4125,7 +3175,7 @@ print(result)
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第五章：深度学习概述（理解神经网络结构）、第二章：数学基础（理解导数和梯度概念）。</p>
 </div>
@@ -4390,7 +3440,7 @@ print(f"\n最终结果: x = {x:.6f}, loss = {loss_function(x):.6f}")
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>训练是通过反复前向传播和反向传播来调整模型参数，使损失函数最小化的过程。</li>
@@ -4401,7 +3451,7 @@ print(f"\n最终结果: x = {x:.6f}, loss = {loss_function(x):.6f}")
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -4425,9 +3475,9 @@ print(f"\n最终结果: x = {x:.6f}, loss = {loss_function(x):.6f}")
 <!-- ============================================================ -->
 <!-- 第八章：模型评估与调优 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-chart-bar"></i> 第八章：模型评估与调优</h2>
+<h2 class="ai-section-title"><i class="fas fa-chart-bar"></i> 第八章：模型评估与调优</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解模型评估的意义和核心指标</li>
@@ -4438,7 +3488,7 @@ print(f"\n最终结果: x = {x:.6f}, loss = {loss_function(x):.6f}")
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第七章：训练（理解损失函数、训练过程和常见问题）。</p>
 </div>
@@ -4673,7 +3723,7 @@ print(f"混淆矩阵:\n{cm}")
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>模型评估的核心指标包括准确率、精确率、召回率和F1分数，不同场景应选择不同指标。</li>
@@ -4684,7 +3734,7 @@ print(f"混淆矩阵:\n{cm}")
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -4708,9 +3758,9 @@ print(f"混淆矩阵:\n{cm}")
 <!-- ============================================================ -->
 <!-- 第九章：卷积神经网络（CNN） -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-th"></i> 第九章：卷积神经网络（CNN）</h2>
+<h2 class="ai-section-title"><i class="fas fa-th"></i> 第九章：卷积神经网络（CNN）</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解CNN的定义及其为什么适合处理图像</li>
@@ -4721,7 +3771,7 @@ print(f"混淆矩阵:\n{cm}")
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第五章：深度学习概述（理解神经网络的基本结构和激活函数）。</p>
 </div>
@@ -4980,7 +4030,7 @@ output = model(dummy_input)
 print(f"输出形状: {output.shape}")  # 输出: torch.Size([1, 10])</code></pre>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>CNN是专为图像处理设计的深度学习架构，通过卷积操作保留空间关系，逐层提取从简单到复杂的特征。</li>
@@ -4991,7 +4041,7 @@ print(f"输出形状: {output.shape}")  # 输出: torch.Size([1, 10])</code></pr
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -5015,9 +4065,9 @@ print(f"输出形状: {output.shape}")  # 输出: torch.Size([1, 10])</code></pr
 <!-- ============================================================ -->
 <!-- 第十章：Transformer架构 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-random"></i> 第十章：Transformer架构</h2>
+<h2 class="ai-section-title"><i class="fas fa-random"></i> 第十章：Transformer架构</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解Transformer架构的革命性意义</li>
@@ -5028,7 +4078,7 @@ print(f"输出形状: {output.shape}")  # 输出: torch.Size([1, 10])</code></pr
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第五章：深度学习概述（理解神经网络结构）、第二章：数学基础（理解矩阵运算、Softmax函数）。</p>
 </div>
@@ -5294,7 +4344,7 @@ print(f"\n输出形状: {output.shape}")</code></pre>
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>Transformer通过注意力机制实现了并行处理序列数据，彻底取代了RNN的逐词处理方式，开启了AI新时代。</li>
@@ -5305,7 +4355,7 @@ print(f"\n输出形状: {output.shape}")</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -5329,9 +4379,9 @@ print(f"\n输出形状: {output.shape}")</code></pre>
 <!-- ============================================================ -->
 <!-- 第十一章：大语言模型（LLM）详解 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-language"></i> 第十一章：大语言模型（LLM）详解</h2>
+<h2 class="ai-section-title"><i class="fas fa-language"></i> 第十一章：大语言模型（LLM）详解</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解LLM的预训练任务和训练流程</li>
@@ -5342,7 +4392,7 @@ print(f"\n输出形状: {output.shape}")</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>第十章：Transformer架构（理解Self-Attention、位置编码和Decoder结构）。</p>
 </div>
@@ -5541,7 +4591,7 @@ print("Top-k+p:", tokenizer.decode(output_topp[0], skip_special_tokens=True))</c
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>LLM基于Transformer Decoder架构，通过Next Token Prediction预训练任务在海量文本上学习语言规律和知识。</li>
@@ -5552,7 +4602,7 @@ print("Top-k+p:", tokenizer.decode(output_topp[0], skip_special_tokens=True))</c
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -5575,9 +4625,9 @@ print("Top-k+p:", tokenizer.decode(output_topp[0], skip_special_tokens=True))</c
 <!-- ============================================================ -->
 <!-- 第十二章：推理与部署 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-rocket"></i> 第十二章：推理与部署</h2>
+<h2 class="ai-section-title"><i class="fas fa-rocket"></i> 第十二章：推理与部署</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解推理（Inference）的基本概念及其与训练的区别</li>
@@ -5588,7 +4638,7 @@ print("Top-k+p:", tokenizer.decode(output_topp[0], skip_special_tokens=True))</c
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第七章：训练</strong>，了解模型训练的基本流程和概念，以便更好地理解推理与训练的区别和联系。</p>
 </div>
@@ -5900,7 +4950,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)</code></pre>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>推理是使用训练好的模型对新数据进行预测/生成的过程，关键指标包括首Token延迟、Token生成速度和吞吐量。</li>
@@ -5911,7 +4961,7 @@ print(response.choices[0].message.content)</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -5935,9 +4985,9 @@ print(response.choices[0].message.content)</code></pre>
 <!-- ============================================================ -->
 <!-- 第十三章：RAG（检索增强生成） -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-search"></i> 第十三章：RAG（检索增强生成）</h2>
+<h2 class="ai-section-title"><i class="fas fa-search"></i> 第十三章：RAG（检索增强生成）</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解RAG（Retrieval-Augmented Generation）的核心原理与价值</li>
@@ -5948,7 +4998,7 @@ print(response.choices[0].message.content)</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理和使用方法，以便理解RAG如何增强LLM的能力。</p>
 </div>
@@ -6286,7 +5336,7 @@ print(f"引用来源：{[doc.metadata for doc in result['source_documents']]}")<
   <p>常用评估框架：<strong>RAGAS</strong>（RAG Assessment）是一个专门用于评估RAG系统的开源框架，提供上述指标的自动化计算。</p>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>RAG通过"检索+生成"的范式，将外部知识库与大语言模型结合，有效解决了LLM的知识过时、幻觉和私有数据缺失等问题。</li>
@@ -6297,7 +5347,7 @@ print(f"引用来源：{[doc.metadata for doc in result['source_documents']]}")<
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -6320,9 +5370,9 @@ print(f"引用来源：{[doc.metadata for doc in result['source_documents']]}")<
 <!-- ============================================================ -->
 <!-- 第十四章：向量与Embedding -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-arrows-alt"></i> 第十四章：向量与Embedding</h2>
+<h2 class="ai-section-title"><i class="fas fa-arrows-alt"></i> 第十四章：向量与Embedding</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解标量和向量的基本概念</li>
@@ -6333,7 +5383,7 @@ print(f"引用来源：{[doc.metadata for doc in result['source_documents']]}")<
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第二章：数学基础</strong>，了解基本的数学概念（如坐标系、距离等），有助于理解向量和向量运算。</p>
 </div>
@@ -6485,7 +5535,7 @@ for i in range(len(texts)):
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>标量是单个数值，只有大小；向量是一组有序数值，可以表示方向和大小。在AI中，向量是表示数据的核心方式。</li>
@@ -6496,7 +5546,7 @@ for i in range(len(texts)):
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -6520,9 +5570,9 @@ for i in range(len(texts)):
 <!-- ============================================================ -->
 <!-- 第十五章：AI智能体（Agent） -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-robot"></i> 第十五章：AI智能体（Agent）</h2>
+<h2 class="ai-section-title"><i class="fas fa-robot"></i> 第十五章：AI智能体（Agent）</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解AI智能体（Agent）的概念和核心能力</li>
@@ -6533,7 +5583,7 @@ for i in range(len(texts)):
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理，因为Agent的核心"大脑"通常就是一个LLM。</p>
 </div>
@@ -6858,7 +5908,7 @@ print(result["output"])</code></pre>
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>AI Agent是能够自主感知、规划、执行和记忆的AI系统，核心公式为 Agent = LLM + 工具 + 记忆 + 规划。</li>
@@ -6869,7 +5919,7 @@ print(result["output"])</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -6893,9 +5943,9 @@ print(result["output"])</code></pre>
 <!-- ============================================================ -->
 <!-- 第十六章：工具（Tools）与技能（Skills） -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-tools"></i> 第十六章：工具（Tools）与技能（Skills）</h2>
+<h2 class="ai-section-title"><i class="fas fa-tools"></i> 第十六章：工具（Tools）与技能（Skills）</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解工具（Tools）的类型和作用</li>
@@ -6905,7 +5955,7 @@ print(result["output"])</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十五章：AI智能体（Agent）</strong>，了解Agent的基本概念，因为工具和技能是Agent执行任务的核心手段。</p>
 </div>
@@ -7060,7 +6110,7 @@ print(result["output"])</code></pre>
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>工具（Tools）是Agent调用外部功能的基本单元，弥补了LLM在获取实时信息、执行操作和复杂计算方面的不足。</li>
@@ -7070,7 +6120,7 @@ print(result["output"])</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -7094,9 +6144,9 @@ print(result["output"])</code></pre>
 <!-- ============================================================ -->
 <!-- 第十七章：知识库与向量数据库 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-book-open"></i> 第十七章：知识库与向量数据库</h2>
+<h2 class="ai-section-title"><i class="fas fa-book-open"></i> 第十七章：知识库与向量数据库</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解知识库的类型和建设流程</li>
@@ -7106,7 +6156,7 @@ print(result["output"])</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十四章：向量与Embedding</strong>，了解向量、Embedding和相似度计算的基本概念。</p>
 </div>
@@ -7357,7 +6407,7 @@ filtered_results = collection.query(
 )</code></pre>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>知识库是有组织地存储和管理知识的系统，分为结构化、非结构化、向量和混合四种类型，是AI应用的重要基础设施。</li>
@@ -7367,7 +6417,7 @@ filtered_results = collection.query(
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -7391,9 +6441,9 @@ filtered_results = collection.query(
 <!-- ============================================================ -->
 <!-- 第十八章：上下文（Context）与记忆 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-layer-group"></i> 第十八章：上下文（Context）与记忆</h2>
+<h2 class="ai-section-title"><i class="fas fa-layer-group"></i> 第十八章：上下文（Context）与记忆</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解上下文窗口的概念和限制</li>
@@ -7403,7 +6453,7 @@ filtered_results = collection.query(
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理和Token概念。</p>
 </div>
@@ -7585,7 +6635,7 @@ print(f"含历史对话总消耗：{total} tokens")
 print(f"8K窗口剩余：{8192 - total} tokens")</code></pre>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>上下文是LLM在一次对话中能"看到"的所有信息，上下文窗口大小以Token数量衡量，超出部分会被遗忘。</li>
@@ -7595,7 +6645,7 @@ print(f"8K窗口剩余：{8192 - total} tokens")</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -7619,9 +6669,9 @@ print(f"8K窗口剩余：{8192 - total} tokens")</code></pre>
 <!-- ============================================================ -->
 <!-- 第十九章：高级提示技术 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-comment-dots"></i> 第十九章：高级提示技术</h2>
+<h2 class="ai-section-title"><i class="fas fa-comment-dots"></i> 第十九章：高级提示技术</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>掌握思维链（Chain of Thought）提示技术</li>
@@ -7631,7 +6681,7 @@ print(f"8K窗口剩余：{8192 - total} tokens")</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理和Prompt概念。</p>
 </div>
@@ -7842,7 +6892,7 @@ prompt = """
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>思维链（CoT）通过引导LLM逐步推理来提升复杂问题的回答质量，特别适用于数学、逻辑推理和多步骤任务。</li>
@@ -7853,7 +6903,7 @@ prompt = """
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -7877,9 +6927,9 @@ prompt = """
 <!-- ============================================================ -->
 <!-- 第二十章：数据——AI的燃料 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-database"></i> 第二十章：数据——AI的燃料</h2>
+<h2 class="ai-section-title"><i class="fas fa-database"></i> 第二十章：数据——AI的燃料</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解数据集的划分原则和重要性</li>
@@ -7890,7 +6940,7 @@ prompt = """
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第四章：机器学习概述</strong>，了解机器学习的基本概念和工作流程。</p>
 </div>
@@ -8167,7 +7217,7 @@ for i in range(5):
 # 4. 随机删除：随机删除部分词</code></pre>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>数据集通常划分为训练集（70%-80%）、验证集（10%-15%）和测试集（10%-15%），测试集绝不能参与训练过程。</li>
@@ -8178,7 +7228,7 @@ for i in range(5):
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -8202,9 +7252,9 @@ for i in range(5):
 <!-- ============================================================ -->
 <!-- 第二十一章：AI的局限与挑战 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-exclamation-circle"></i> 第二十一章：AI的局限与挑战</h2>
+<h2 class="ai-section-title"><i class="fas fa-exclamation-circle"></i> 第二十一章：AI的局限与挑战</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>理解AI幻觉问题的类型和减少方法</li>
@@ -8214,7 +7264,7 @@ for i in range(5):
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第十一章：大语言模型（LLM）详解</strong>，了解LLM的基本原理，以便理解AI的局限性和挑战。</p>
 </div>
@@ -8396,7 +7446,7 @@ for i in range(5):
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>AI幻觉是LLM生成看似合理但实际不正确内容的现象，分为事实性、引用、逻辑和能力四种类型，可通过RAG、降低Temperature、明确约束等方法减少。</li>
@@ -8407,7 +7457,7 @@ for i in range(5):
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -8431,9 +7481,9 @@ for i in range(5):
 <!-- ============================================================ -->
 <!-- 第二十二章：常用AI工具与平台 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-toolbox"></i> 第二十二章：常用AI工具与平台</h2>
+<h2 class="ai-section-title"><i class="fas fa-toolbox"></i> 第二十二章：常用AI工具与平台</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>了解主流AI助手的特点和适用场景</li>
@@ -8444,7 +7494,7 @@ for i in range(5):
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>无特殊前置要求，本章为独立章节，适合所有读者。</p>
 </div>
@@ -8685,7 +7735,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
   </table>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>主流AI助手各有特色：ChatGPT功能全面，Claude擅长长文档分析，国产模型在中文场景表现优秀。</li>
@@ -8695,7 +7745,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -8719,9 +7769,9 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
 <!-- ============================================================ -->
 <!-- 第二十三章：AI发展简史 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-history"></i> 第二十三章：AI发展简史</h2>
+<h2 class="ai-section-title"><i class="fas fa-history"></i> 第二十三章：AI发展简史</h2>
 
-<div class="learning-objectives">
+<div class="ai-box ai-box--objectives">
   <h3><i class="fas fa-bullseye"></i> 学习目标</h3>
   <ul>
     <li>了解AI发展的三波浪潮</li>
@@ -8731,7 +7781,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
   </ul>
 </div>
 
-<div class="prerequisite-box">
+<div class="ai-box ai-box--prereq">
   <h3><i class="fas fa-book"></i> 前置要求</h3>
   <p>建议先学习<strong>第三章：AI基础概念</strong>，了解AI的基本定义和分类。</p>
 </div>
@@ -8848,7 +7898,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
   </div>
 </div>
 
-<div class="chapter-summary">
+<div class="ai-box ai-box--summary">
   <h3><i class="fas fa-clipboard-list"></i> 本章小结</h3>
   <ol>
     <li>AI发展经历了三波浪潮：规则驱动（1950s-1980s）→数据驱动（1990s-2010s）→大模型时代（2017-至今），每一波都建立在前一波的基础之上。</li>
@@ -8858,7 +7908,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
   </ol>
 </div>
 
-<div class="exercise-box">
+<div class="ai-box ai-box--exercise">
   <h3><i class="fas fa-pencil-alt"></i> 练习题</h3>
   <ol>
     <li>
@@ -8882,7 +7932,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
 <!-- ============================================================ -->
 <!-- 附录A：GPU与算力指南 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-microchip"></i> 附录A：GPU与算力指南</h2>
+<h2 class="ai-section-title"><i class="fas fa-microchip"></i> 附录A：GPU与算力指南</h2>
 
 <div class="concept-section">
   <h2><i class="fas fa-tachometer-alt"></i> 算力是什么？</h2>
@@ -8988,7 +8038,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
 <!-- ============================================================ -->
 <!-- 附录B：术语表 -->
 <!-- ============================================================ -->
-<h2 class="section-title"><i class="fas fa-book"></i> 附录B：术语表</h2>
+<h2 class="ai-section-title"><i class="fas fa-book"></i> 附录B：术语表</h2>
 
 <div class="concept-section">
   <table class="comparison-table">
@@ -9169,11 +8219,11 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
 <!-- 第二十四章：综合实战——搭建个人AI助手 -->
 <!-- ============================================================ -->
 
-<h2 class="section-title">第二十四章：综合实战——搭建个人AI助手</h2>
+<h2 class="ai-section-title">第二十四章：综合实战——搭建个人AI助手</h2>
 
 <div class="concept-section">
   <h3>学习目标</h3>
-  <div class="learning-objectives">
+  <div class="ai-box ai-box--objectives">
     <ul>
       <li>能够独立搭建一个功能完整的个人AI助手，整合对话、检索、工具调用和记忆功能</li>
       <li>掌握从项目初始化到部署上线的完整开发流程</li>
@@ -9186,7 +8236,7 @@ print(tokenizer.decode(response, skip_special_tokens=True))</code></pre>
 
 <div class="concept-section">
   <h3>前置要求</h3>
-  <div class="prerequisite-box">
+  <div class="ai-box ai-box--prereq">
     <p>在开始本章之前，请确保你已经掌握以下内容：</p>
     <ul>
       <li>Python编程基础（函数、类、文件操作、虚拟环境）</li>
@@ -10540,7 +9590,7 @@ messages = [{
 <div class="concept-section">
   <h3>练习题</h3>
 
-  <div class="exercise-box">
+  <div class="ai-box ai-box--exercise">
     <h4>练习1：修改项目支持图片输入</h4>
     <p>在现有Gradio界面中添加图片上传功能，使助手能够：</p>
     <ol>
@@ -10551,7 +9601,7 @@ messages = [{
     <p><strong>提示：</strong> Gradio的 <code>gr.Image</code> 组件可以接收图片，OpenAI API支持传入base64编码的图片URL。</p>
   </div>
 
-  <div class="exercise-box">
+  <div class="ai-box ai-box--exercise">
     <h4>练习2：添加新的自定义工具</h4>
     <p>为AI助手添加一个实用的自定义工具，例如：</p>
     <ul>
@@ -10562,7 +9612,7 @@ messages = [{
     <p><strong>要求：</strong> 完整实现工具函数、参数定义、注册逻辑，并在Web界面中测试。</p>
   </div>
 
-  <div class="exercise-box">
+  <div class="ai-box ai-box--exercise">
     <h4>练习3：优化RAG检索效果</h4>
     <p>当前RAG实现使用基础的关键词相似度检索，尝试以下优化：</p>
     <ol>
@@ -10577,7 +9627,7 @@ messages = [{
 
 <div class="concept-section">
   <h3>章节小结</h3>
-  <div class="chapter-summary">
+  <div class="ai-box ai-box--summary">
     <p>本章通过一个完整的综合项目——<strong>个人AI助手</strong>，将前面所学的核心知识点串联起来，涵盖以下关键内容：</p>
     <ul>
       <li><strong>项目初始化</strong>：合理的目录结构、依赖管理、配置分离（config.yaml + .env）</li>
@@ -10596,211 +9646,6 @@ messages = [{
 <!-- 附录D：练习题答案与解析 -->
 <!-- ============================================================ -->
 
-<style>
-  /* 进度条样式 */
-  .progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: #e0e0e0;
-    z-index: 9999;
-  }
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #4a90d9, #357abd);
-    width: 0%;
-    transition: width 0.3s ease;
-  }
-  .progress-info {
-    position: fixed;
-    top: 10px;
-    right: 20px;
-    background: rgba(255,255,255,0.95);
-    padding: 8px 16px;
-    border-radius: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    font-size: 14px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .progress-text {
-    font-weight: 600;
-    color: #357abd;
-  }
-
-  /* 标记完成按钮 */
-  .mark-complete-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border: 1px solid #357abd;
-    background: #fff;
-    color: #357abd;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s ease;
-    margin-top: 12px;
-  }
-  .mark-complete-btn:hover {
-    background: #357abd;
-    color: #fff;
-  }
-  .mark-complete-btn.completed {
-    background: #4caf50;
-    border-color: #4caf50;
-    color: #fff;
-  }
-
-  /* 已完成章节样式 */
-  .chapter-completed h2,
-  .chapter-completed h3 {
-    color: #4caf50 !important;
-  }
-  .chapter-completed .completion-badge {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 2px 8px;
-    background: #4caf50;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 4px;
-  }
-
-  /* 目录高亮 */
-  .toc-completed {
-    color: #4caf50 !important;
-    font-weight: 600;
-  }
-  .toc-completed::after {
-    content: " ✓";
-  }
-
-  /* 答案区域样式 */
-  .answer-section {
-    margin: 30px 0;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 1px solid #e9ecef;
-  }
-  .answer-section h4 {
-    margin-top: 0;
-    color: #2c3e50;
-    font-size: 18px;
-    border-bottom: 2px solid #357abd;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-  }
-  .answer-item {
-    margin: 12px 0;
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-    overflow: hidden;
-  }
-  .answer-item summary {
-    padding: 14px 18px;
-    cursor: pointer;
-    font-weight: 500;
-    color: #495057;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .answer-item summary::-webkit-details-marker {
-    display: none;
-  }
-  .answer-item summary::before {
-    content: "▶";
-    font-size: 12px;
-    color: #357abd;
-    transition: transform 0.2s ease;
-  }
-  .answer-item[open] summary::before {
-    transform: rotate(90deg);
-  }
-  .answer-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    background: #357abd;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 13px;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-  .answer-content {
-    padding: 16px 18px;
-    border-top: 1px solid #e9ecef;
-    background: #fafbfc;
-  }
-  .answer-content p {
-    margin: 8px 0;
-    line-height: 1.7;
-    color: #343a40;
-  }
-
-  /* Colab卡片样式 */
-  .colab-section {
-    margin: 40px 0;
-  }
-  .colab-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  .colab-card {
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .colab-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    border-color: #357abd;
-  }
-  .colab-icon {
-    font-size: 36px;
-    margin-bottom: 12px;
-  }
-  .colab-card h4 {
-    margin: 0 0 8px 0;
-    color: #2c3e50;
-    font-size: 17px;
-  }
-  .colab-card p {
-    margin: 0 0 16px 0;
-    color: #6c757d;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .colab-badge {
-    display: inline-block;
-  }
-  .colab-badge img {
-    height: 28px;
-  }
-
-  /* 章节容器 */
-  .chapter {
-    position: relative;
-    padding: 20px 0;
-  }
-</style>
 
 <!-- 进度条 -->
 <div class="progress-container">
@@ -11424,7 +10269,7 @@ messages = [{
     <h4>Python基础练习</h4>
     <p>涵盖Python语法、数据结构、函数和面向对象编程的基础练习，适合初学者快速上手。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-python-basics" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11433,7 +10278,7 @@ messages = [{
     <h4>NumPy矩阵运算</h4>
     <p>NumPy数组操作、矩阵乘法、广播机制、线性代数运算等核心概念的实践练习。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-numpy-operations" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11442,7 +10287,7 @@ messages = [{
     <h4>梯度下降可视化</h4>
     <p>交互式可视化梯度下降算法，理解学习率、收敛过程和不同优化器的行为差异。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-gradient-descent" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11451,7 +10296,7 @@ messages = [{
     <h4>K-Means聚类</h4>
     <p>实现K-Means算法，理解聚类原理、肘部法则和不同初始化策略对结果的影响。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-kmeans-clustering" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11460,7 +10305,7 @@ messages = [{
     <h4>PyTorch CNN</h4>
     <p>使用PyTorch构建卷积神经网络，在CIFAR-10数据集上进行图像分类训练。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-pytorch-cnn" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11469,7 +10314,7 @@ messages = [{
     <h4>Transformer Self-Attention</h4>
     <p>从零实现Self-Attention机制，可视化注意力权重，理解Transformer的核心原理。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-transformer-attention" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11478,7 +10323,7 @@ messages = [{
     <h4>LLM文本生成</h4>
     <p>使用Hugging Face Transformers加载预训练模型，进行文本生成和提示工程实验。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-llm-text-generation" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11487,7 +10332,7 @@ messages = [{
     <h4>LangChain RAG</h4>
     <p>构建完整的RAG应用，包括文档加载、向量存储、检索和问答链的实现。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-langchain-rag" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11496,7 +10341,7 @@ messages = [{
     <h4>LangChain Agent</h4>
     <p>创建能使用工具的AI Agent，实现ReAct推理循环，让模型自主完成复杂任务。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-langchain-agent" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 
@@ -11505,7 +10350,7 @@ messages = [{
     <h4>个人AI助手项目</h4>
     <p>综合运用所学知识，构建一个具备记忆、工具使用和知识库的个人AI助手。</p>
     <a class="colab-badge" href="https://colab.research.google.com/drive/example-personal-ai-assistant" target="_blank">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" loading="lazy">
     </a>
   </div>
 </div>
