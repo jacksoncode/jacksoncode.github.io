@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent架构图</title>
+  <style>
+    :root {
+      --purple-50: #EEEDFE; --purple-600: #534AB7; --purple-800: #3C3489;
+      --teal-50: #E1F5EE; --teal-600: #0F6E56; --teal-800: #085041;
+      --coral-50: #FAECE7; --coral-600: #993C1D; --coral-800: #712B13;
+      --gray-50: #F1EFE8; --gray-600: #5F5E5A; --gray-800: #444441;
+      --blue-50: #E6F1FB; --blue-600: #185FA5; --blue-800: #0C447C;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --purple-50: #3C3489; --purple-600: #CECBF6; --purple-800: #EEEDFE;
+        --teal-50: #085041; --teal-600: #9FE1CB; --teal-800: #E1F5EE;
+        --coral-50: #712B13; --coral-600: #F5C4B3; --coral-800: #FAECE7;
+        --gray-50: #444441; --gray-600: #D3D1C7; --gray-800: #F1EFE8;
+        --blue-50: #0C447C; --blue-600: #B5D4F4; --blue-800: #E6F1FB;
+      }
+    }
+    body { margin: 0; padding: 20px; background: var(--gray-50); font-family: Inter, system-ui, sans-serif; }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 20px; font-weight: 600; color: var(--gray-800); margin: 0 0 8px 0; }
+    h2 { font-size: 14px; font-weight: 400; color: var(--gray-600); margin: 0 0 20px 0; }
+    svg { display: block; }
+    .th { font-size: 14px; font-weight: 500; fill: var(--gray-800); }
+    .ts { font-size: 12px; font-weight: 400; fill: var(--gray-600); }
+    .arr { stroke: var(--gray-600); stroke-width: 1.5; fill: none; }
+    .arr-loop { stroke: var(--purple-600); stroke-width: 1.5; fill: none; stroke-dasharray: 4 2; }
+    .node-purple rect { fill: var(--purple-50); stroke: var(--purple-600); }
+    .node-purple text { fill: var(--purple-800); }
+    .node-teal rect { fill: var(--teal-50); stroke: var(--teal-600); }
+    .node-teal text { fill: var(--teal-800); }
+    .node-gray rect { fill: var(--gray-50); stroke: var(--gray-600); }
+    .node-gray text { fill: var(--gray-800); }
+    .node-coral rect { fill: var(--coral-50); stroke: var(--coral-600); }
+    .node-coral text { fill: var(--coral-800); }
+    .node-blue rect { fill: var(--blue-50); stroke: var(--blue-600); }
+    .node-blue text { fill: var(--blue-800); }
+    .core-box rect { fill: transparent; stroke: var(--purple-200); stroke-width: 1.5; stroke-dasharray: 6 3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Agent架构</h1>
+    <h2>感知-思考-行动循环模型</h2>
+    <svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      
+      <g class="core-box">
+        <rect x="180" y="60" width="320" height="180" rx="16"/>
+        <text class="ts" x="200" y="80" fill="var(--purple-800)">Agent 核心</text>
+      </g>
+      
+      <g class="node-purple">
+        <rect x="220" y="100" width="240" height="50" rx="10" stroke-width="0.5"/>
+        <text class="th" x="340" y="125" text-anchor="middle" dominant-baseline="central">大语言模型 (LLM)</text>
+      </g>
+      
+      <g class="node-teal">
+        <rect x="220" y="170" width="100" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="270" y="192" text-anchor="middle" dominant-baseline="central">记忆</text>
+      </g>
+      <g class="node-coral">
+        <rect x="340" y="170" width="100" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="390" y="192" text-anchor="middle" dominant-baseline="central">规划</text>
+      </g>
+      
+      <g class="node-gray">
+        <rect x="80" y="130" width="80" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="120" y="152" text-anchor="middle" dominant-baseline="central">感知</text>
+      </g>
+      <g class="node-gray">
+        <rect x="520" y="130" width="80" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="560" y="152" text-anchor="middle" dominant-baseline="central">行动</text>
+      </g>
+      
+      <g class="node-blue">
+        <rect x="80" y="240" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="140" y="262" text-anchor="middle" dominant-baseline="central">环境输入</text>
+      </g>
+      <g class="node-blue">
+        <rect x="480" y="240" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="540" y="262" text-anchor="middle" dominant-baseline="central">工具执行</text>
+      </g>
+      
+      <path d="M140 262 L120 174" class="arr" marker-end="url(#arrow)"/>
+      <path d="M120 174 L220 125" class="arr" marker-end="url(#arrow)"/>
+      
+      <path d="M340 150 L390 170" class="arr" marker-end="url(#arrow)"/>
+      <path d="M270 170 L340 150" class="arr" marker-end="url(#arrow)"/>
+      
+      <path d="M460 150 L560 152" class="arr" marker-end="url(#arrow)"/>
+      <path d="M560 174 L540 240" class="arr" marker-end="url(#arrow)"/>
+      
+      <path d="M600 262 Q620 200 600 152 Q580 100 540 100" class="arr-loop" marker-end="url(#arrow-purple)" fill="none"/>
+      
+      <text class="ts" x="620" y="180" text-anchor="start" dominant-baseline="central" fill="var(--purple-600)">反馈循环</text>
+      <text class="ts" x="120" y="110" text-anchor="middle" dominant-baseline="central" fill="var(--gray-600)">观察</text>
+      <text class="ts" x="560" y="110" text-anchor="middle" dominant-baseline="central" fill="var(--gray-600)">执行</text>
+    </svg>
+  </div>
+</body>
+</html>

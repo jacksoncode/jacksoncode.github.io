@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1370,7 +1375,7 @@
                 </ol>
                 <p>为了同时回答这两个问题，我来构造两个表a和b：</p>
                 <!-- [[[read_end]]] -->
-                <pre><code>create table a(f1 int, f2 int, index(f1))engine=innodb;
+                <pre><code class="language-sql">create table a(f1 int, f2 int, index(f1))engine=innodb;
 create table b(f1 int, f2 int)engine=innodb;
 insert into a values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6);
 insert into b values(3,3),(4,4),(5,5),(6,6),(7,7),(8,8);
@@ -1379,7 +1384,7 @@ insert into b values(3,3),(4,4),(5,5),(6,6),(7,7),(8,8);
                   表a和b都有两个字段f1和f2，不同的是表a的字段f1上有索引。然后，我往两个表中都插入了6条记录，其中在表a和b中同时存在的数据有4行。
                 </p>
                 <p>@郭健 同学提到的第二个问题，其实就是下面这两种写法的区别：</p>
-                <pre><code>select * from a left join b on(a.f1=b.f1) and (a.f2=b.f2); /*Q1*/
+                <pre><code class="language-sql">select * from a left join b on(a.f1=b.f1) and (a.f2=b.f2); /*Q1*/
 select * from a left join b on(a.f1=b.f1) where (a.f2=b.f2);/*Q2*/
 </code></pre>
                 <p>我把这两条语句分别记为Q1和Q2。</p>
@@ -1498,7 +1503,7 @@ select * from a left join b on(a.f1=b.f1) where (a.f2=b.f2);/*Q2*/
                   >那如果是join语句呢？
                 </p>
                 <p>这时候，我们再看看这两条语句：</p>
-                <pre><code>select * from a join b on(a.f1=b.f1) and (a.f2=b.f2); /*Q3*/
+                <pre><code class="language-sql">select * from a join b on(a.f1=b.f1) and (a.f2=b.f2); /*Q3*/
 select * from a join b on(a.f1=b.f1) where (a.f2=b.f2);/*Q4*/
 </code></pre>
                 <p>我们再使用一次看explain 和 show warnings的方法，看看优化器是怎么做的。</p>
@@ -1510,7 +1515,7 @@ select * from a join b on(a.f1=b.f1) where (a.f2=b.f2);/*Q4*/
                 </p>
                 <center><span class="reference">图6 join语句改写</span></center>
                 <p>可以看到，这两条语句都被改写成：</p>
-                <pre><code>select * from a join b where (a.f1=b.f1) and (a.f2=b.f2);
+                <pre><code class="language-sql">select * from a join b where (a.f1=b.f1) and (a.f2=b.f2);
 </code></pre>
                 <p>执行计划自然也是一模一样的。</p>
                 <p>也就是说，在这种情况下，join将判断条件是否全部放在on部分就没有区别了。</p>
@@ -1571,7 +1576,7 @@ select * from a join b on(a.f1=b.f1) where (a.f2=b.f2);/*Q4*/
                   by哪种效率高一些呢？
                 </p>
                 <p>我来展开一下他的问题：如果表t的字段a上没有索引，那么下面这两条语句：</p>
-                <pre><code>select a from t group by a order by null;
+                <pre><code class="language-sql">select a from t group by a order by null;
 select distinct a from t;
 </code></pre>
                 <p>的性能是不是相同的?</p>
@@ -1579,7 +1584,7 @@ select distinct a from t;
                   首先需要说明的是，这种group by的写法，并不是SQL标准的写法。标准的group
                   by语句，是需要在select部分加一个聚合函数，比如：
                 </p>
-                <pre><code>select a,count(*) from t group by a order by null;
+                <pre><code class="language-sql">select a,count(*) from t group by a order by null;
 </code></pre>
                 <p>
                   这条语句的逻辑是：按照字段a分组，计算每组的a出现的次数。在这个结果里，由于做的是聚合计算，相同的a只出现一次。
@@ -1624,7 +1629,7 @@ select distinct a from t;
                   event里面直接写了每一行的所有字段的值。
                 </p>
                 <p>而至于为什么不会发生不一致的情况，我们来看一下下面的这个例子。</p>
-                <pre><code>create table t(id int auto_increment primary key);
+                <pre><code class="language-sql">create table t(id int auto_increment primary key);
 insert into t values(null);
 </code></pre>
                 <p>
@@ -1642,7 +1647,7 @@ insert into t values(null);
                   这个SET
                   INSERT_ID语句是固定跟在insert语句之前的，比如@帽子掉了同学提到的场景，主库上语句A的id是1，语句B的id是2，但是写入binlog的顺序先B后A，那么binlog就变成：
                 </p>
-                <pre><code>SET INSERT_ID=2;
+                <pre><code class="language-sql">SET INSERT_ID=2;
 语句B；
 SET INSERT_ID=1;
 语句A；
@@ -1675,7 +1680,7 @@ SET INSERT_ID=1;
                   id)这种模式。因为用ftime做分区key，说明大多数语句都是包含ftime的，使用这种模式，可以利用前缀索引的规则，减少一个索引。
                 </p>
                 <p>这时的建表语句是：</p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ftime` datetime NOT NULL,
   `c` int(11) DEFAULT NULL,
@@ -1690,7 +1695,7 @@ PARTITION BY RANGE (YEAR(ftime))
                 <p>
                   当然，我的建议是你要尽量使用InnoDB引擎。InnoDB表要求至少有一个索引，以自增字段作为第一个字段，所以需要加一个id的单独索引。
                 </p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ftime` datetime NOT NULL,
   `c` int(11) DEFAULT NULL,
@@ -1704,7 +1709,7 @@ PARTITION BY RANGE (YEAR(ftime))
  PARTITION p_others VALUES LESS THAN MAXVALUE ENGINE = InnoDB);
 </code></pre>
                 <p>当然把字段反过来，创建成：</p>
-                <pre><code>  PRIMARY KEY (`id`,`ftime`),
+                <pre><code class="language-sql">  PRIMARY KEY (`id`,`ftime`),
   KEY `id` (`ftime`)
 </code></pre>
                 <p>也是可以的。</p>

@@ -44,14 +44,14 @@
             <i class="fas fa-graduation-cap"></i>
             <span>AI学习笔记</span>
         </a>
-        <ul class="navbar-nav">
+        <ul class="ai-nav-links" id="navLinks">
             <li><a href="../../index.html" class="active">首页</a></li>
             <li><a href="../../nav.html">导航</a></li>
             <li><a href="../../blog.html">博客</a></li>
             <li><a href="../../book.html">书单</a></li>
             <li><a href="../../about.html">关于</a></li>
         </ul>
-        <button class="mobile-menu-toggle" aria-label="菜单">
+        <button class="ai-nav-toggle" id="navToggle" aria-label="菜单">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
@@ -697,24 +697,22 @@
     <script src="../../js/mobile-menu.js"></script>
     <script src="../../js/dark-mode.js"></script>
     <script>
-    // 进度管理
+    // 进度管理 - 与 ai-notes.js 使用统一的对象结构 {chapterId: timestamp}
     (function() {
         const STORAGE_KEY = 'ai-notes-progress';
         const TOTAL_CHAPTERS = 35;
 
         function getProgress() {
             try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            } catch(e) { return []; }
-        }
-
-        function saveProgress(chapters) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(chapters));
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                return Array.isArray(data) ? {} : data;
+            } catch(e) { return {}; }
         }
 
         function updateUI() {
             const completed = getProgress();
-            const percent = Math.round((completed.length / TOTAL_CHAPTERS) * 100);
+            const completedCount = Object.keys(completed).length;
+            const percent = Math.round((completedCount / TOTAL_CHAPTERS) * 100);
 
             // 更新进度条
             document.getElementById('progress-bar').style.width = percent + '%';
@@ -723,7 +721,7 @@
             // 更新章节状态
             document.querySelectorAll('.toc-item').forEach(item => {
                 const chapter = item.dataset.chapter;
-                if (completed.includes(chapter)) {
+                if (completed[chapter]) {
                     item.classList.add('completed');
                     const check = item.querySelector('.toc-check i');
                     check.className = 'fas fa-check-circle';

@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1504,7 +1509,7 @@
                   table语句里面设定等待时间，如果在这个指定的等待时间里面能够拿到MDL写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。之后开发人员或者DBA再通过重试命令重复这个过程。
                 </p>
                 <p>MariaDB已经合并了AliSQL的这个功能，所以这两个开源分支目前都支持DDL NOWAIT/WAIT n这个语法。</p>
-                <pre><code>ALTER TABLE tbl_name NOWAIT add column ...
+                <pre><code class="language-sql">ALTER TABLE tbl_name NOWAIT add column ...
 ALTER TABLE tbl_name WAIT N add column ... 
 </code></pre>
                 <h1>小结</h1>

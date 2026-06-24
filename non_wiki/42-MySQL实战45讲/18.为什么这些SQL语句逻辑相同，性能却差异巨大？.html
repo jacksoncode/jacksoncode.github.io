@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1350,7 +1355,7 @@
                 <p>
                   假设你现在维护了一个交易系统，其中交易记录表tradelog包含交易流水号（tradeid）、交易员id（operator）、交易时间（t_modified）等字段。为了便于描述，我们先忽略其他字段。这个表的建表语句如下：
                 </p>
-                <pre><code>mysql&gt; CREATE TABLE `tradelog` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `tradelog` (
   `id` int(11) NOT NULL,
   `tradeid` varchar(32) DEFAULT NULL,
   `operator` int(11) DEFAULT NULL,
@@ -1363,7 +1368,7 @@
                 <p>
                   假设，现在已经记录了从2016年初到2018年底的所有数据，运营部门有一个需求是，要统计发生在所有年份中7月份的交易记录总数。这个逻辑看上去并不复杂，你的SQL语句可能会这么写：
                 </p>
-                <pre><code>mysql&gt; select count(*) from tradelog where month(t_modified)=7;
+                <pre><code class="language-sql">mysql&gt; select count(*) from tradelog where month(t_modified)=7;
 </code></pre>
                 <p>
                   由于t_modified字段上有索引，于是你就很放心地在生产库中执行了这条语句，但却发现执行了特别久，才返回了结果。
@@ -1414,7 +1419,7 @@
                 <p>
                   也就是说，由于在t_modified字段加了month()函数操作，导致了全索引扫描。为了能够用上索引的快速定位能力，我们就要把SQL语句改成基于字段本身的范围查询。按照下面这个写法，优化器就能按照我们预期的，用上t_modified索引的快速定位能力了。
                 </p>
-                <pre><code>mysql&gt; select count(*) from tradelog where
+                <pre><code class="language-sql">mysql&gt; select count(*) from tradelog where
     -&gt; (t_modified &gt;= '2016-7-1' and t_modified&lt;'2016-8-1') or
     -&gt; (t_modified &gt;= '2017-7-1' and t_modified&lt;'2017-8-1') or 
     -&gt; (t_modified &gt;= '2018-7-1' and t_modified&lt;'2018-8-1');
@@ -1432,7 +1437,7 @@
                 <h1>案例二：隐式类型转换</h1>
                 <p>接下来我再跟你说一说，另一个经常让程序员掉坑里的例子。</p>
                 <p>我们一起看一下这条SQL语句：</p>
-                <pre><code>mysql&gt; select * from tradelog where tradeid=110717;
+                <pre><code class="language-sql">mysql&gt; select * from tradelog where tradeid=110717;
 </code></pre>
                 <p>
                   交易编号tradeid这个字段上，本来就有索引，但是explain的结果却显示，这条语句需要走全表扫描。你可能也发现了，tradeid的字段类型是varchar(32)，而输入的参数却是整型，所以需要做类型转换。
@@ -1471,14 +1476,14 @@
                   9返回的是1，所以你就能确认MySQL里的转换规则了：在MySQL中，字符串和数字做比较的话，是将字符串转换成数字。
                 </p>
                 <p>这时，你再看这个全表扫描的语句：</p>
-                <pre><code>mysql&gt; select * from tradelog where tradeid=110717;
+                <pre><code class="language-sql">mysql&gt; select * from tradelog where tradeid=110717;
 </code></pre>
                 <p>就知道对于优化器来说，这个语句相当于：</p>
-                <pre><code>mysql&gt; select * from tradelog where  CAST(tradid AS signed int) = 110717;
+                <pre><code class="language-sql">mysql&gt; select * from tradelog where  CAST(tradid AS signed int) = 110717;
 </code></pre>
                 <p>也就是说，这条语句触发了我们上面说到的规则：对索引字段做函数操作，优化器会放弃走树搜索功能。</p>
                 <p>现在，我留给你一个小问题，id的类型是int，如果执行下面这个语句，是否会导致全表扫描呢？</p>
-                <pre><code>select * from tradelog where id=&quot;83126&quot;;
+                <pre><code class="language-sql">select * from tradelog where id=&quot;83126&quot;;
 </code></pre>
                 <p>你可以先自己分析一下，再到数据库里面去验证确认。</p>
                 <p>接下来，我们再来看一个稍微复杂点的例子。</p>
@@ -1486,7 +1491,7 @@
                 <p>
                   假设系统里还有另外一个表trade_detail，用于记录交易的操作细节。为了便于量化分析和复现，我往交易日志表tradelog和交易详情表trade_detail这两个表里插入一些数据。
                 </p>
-                <pre><code>mysql&gt; CREATE TABLE `trade_detail` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `trade_detail` (
   `id` int(11) NOT NULL,
   `tradeid` varchar(32) DEFAULT NULL,
   `trade_step` int(11) DEFAULT NULL, /*操作步骤*/
@@ -1512,7 +1517,7 @@ insert into trade_detail values(10, 'aaaaaaac', 3, 'update again');
 insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
 </code></pre>
                 <p>这时候，如果要查询id=2的交易的所有操作步骤信息，SQL语句可以这么写：</p>
-                <pre><code>mysql&gt; select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2; /*语句Q1*/
+                <pre><code class="language-sql">mysql&gt; select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2; /*语句Q1*/
 </code></pre>
                 <p>
                   <img
@@ -1559,7 +1564,7 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                 </p>
                 <p>但是你应该再追问一下，为什么字符集不同就用不上索引呢？</p>
                 <p>我们说问题是出在执行步骤的第3步，如果单独把这一步改成SQL语句的话，那就是：</p>
-                <pre><code>mysql&gt; select * from trade_detail where tradeid=$L2.tradeid.value; 
+                <pre><code class="language-sql">mysql&gt; select * from trade_detail where tradeid=$L2.tradeid.value; 
 </code></pre>
                 <p>其中，$L2.tradeid.value的字符集是utf8mb4。</p>
                 <p>
@@ -1572,7 +1577,7 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                 </blockquote>
                 <p>因此， 在执行上面这个语句的时候，需要将被驱动数据表里的字段一个个地转换成utf8mb4，再跟L2做比较。</p>
                 <p>也就是说，实际上这个语句等同于下面这个写法：</p>
-                <pre><code>select * from trade_detail  where CONVERT(traideid USING utf8mb4)=$L2.tradeid.value; 
+                <pre><code class="language-sql">select * from trade_detail  where CONVERT(traideid USING utf8mb4)=$L2.tradeid.value; 
 </code></pre>
                 <p>CONVERT()函数，在这里的意思是把输入的字符串转成utf8mb4字符集。</p>
                 <p>这就再次触发了我们上面说到的原则：对索引字段做函数操作，优化器会放弃走树搜索功能。</p>
@@ -1582,7 +1587,7 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                 <p>
                   作为对比验证，我给你提另外一个需求，“查找trade_detail表里id=4的操作，对应的操作者是谁”，再来看下这个语句和它的执行计划。
                 </p>
-                <pre><code>mysql&gt;select l.operator from tradelog l , trade_detail d where d.tradeid=l.tradeid and d.id=4;
+                <pre><code class="language-sql">mysql&gt;select l.operator from tradelog l , trade_detail d where d.tradeid=l.tradeid and d.id=4;
 </code></pre>
                 <p>
                   <img
@@ -1600,16 +1605,16 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                   假设驱动表trade_detail里id=4的行记为R4，那么在连接的时候（图5的第3步），被驱动表tradelog上执行的就是类似这样的SQL
                   语句：
                 </p>
-                <pre><code>select operator from tradelog  where traideid =$R4.tradeid.value; 
+                <pre><code class="language-sql">select operator from tradelog  where traideid =$R4.tradeid.value; 
 </code></pre>
                 <p>
                   这时候$R4.tradeid.value的字符集是utf8, 按照字符集转换规则，要转成utf8mb4，所以这个过程就被改写成：
                 </p>
-                <pre><code>select operator from tradelog  where traideid =CONVERT($R4.tradeid.value USING utf8mb4); 
+                <pre><code class="language-sql">select operator from tradelog  where traideid =CONVERT($R4.tradeid.value USING utf8mb4); 
 </code></pre>
                 <p>你看，这里的CONVERT函数是加在输入参数上的，这样就可以用上被驱动表的traideid索引。</p>
                 <p>理解了原理以后，就可以用来指导操作了。如果要优化语句</p>
-                <pre><code>select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2;
+                <pre><code class="language-sql">select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2;
 </code></pre>
                 <p>的执行过程，有两种做法：</p>
                 <ul>
@@ -1617,7 +1622,7 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                     比较常见的优化方法是，把trade_detail表上的tradeid字段的字符集也改成utf8mb4，这样就没有字符集转换的问题了。
                   </li>
                 </ul>
-                <pre><code>alter table trade_detail modify tradeid varchar(32) CHARACTER SET utf8mb4 default null;
+                <pre><code class="language-sql">alter table trade_detail modify tradeid varchar(32) CHARACTER SET utf8mb4 default null;
 </code></pre>
                 <ul>
                   <li>
@@ -1625,7 +1630,7 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                     或者业务上暂时不能做这个DDL的话，那就只能采用修改SQL语句的方法了。
                   </li>
                 </ul>
-                <pre><code>mysql&gt; select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tradeid USING utf8) and l.id=2; 
+                <pre><code class="language-sql">mysql&gt; select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tradeid USING utf8) and l.id=2; 
 </code></pre>
                 <p>
                   <img
@@ -1667,7 +1672,7 @@ insert into trade_detail values(11, 'aaaaaaac', 4, 'commit');
                 <p>
                   这里我给出一种方法，取Y1、Y2和Y3里面最大的一个数，记为M，最小的一个数记为N，然后执行下面这条SQL语句：
                 </p>
-                <pre><code>mysql&gt; select * from t limit N, M-N+1;
+                <pre><code class="language-sql">mysql&gt; select * from t limit N, M-N+1;
 </code></pre>
                 <p>再加上取整个表总行数的C行，这个方案的扫描行数总共只需要C+M+1行。</p>
                 <p>

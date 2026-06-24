@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1350,7 +1355,7 @@
                   当然，为了避免对源表加读锁，更稳妥的方案是先将数据写到外部文本文件，然后再写回目标表。这时，有两种常用的方法。接下来的内容，我会和你详细展开一下这两种方法。
                 </p>
                 <p>为了便于说明，我还是先创建一个表db1.t，并插入1000行数据，同时创建一个相同结构的表db2.t。</p>
-                <pre><code>create database db1;
+                <pre><code class="language-sql">create database db1;
 use db1;
 
 create table t(id int primary key, a int, b int, index(a))engine=innodb;
@@ -1373,7 +1378,7 @@ create table db2.t like db1.t
                 <p>假设，我们要把db1.t里面a&gt;900的数据行导出来，插入到db2.t中。</p>
                 <h1>mysqldump方法</h1>
                 <p>一种方法是，使用mysqldump命令将数据导出成一组INSERT语句。你可以使用下面的命令：</p>
-                <pre><code>mysqldump -h$host -P$port -u$user --add-locks=0 --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where=&quot;a&gt;900&quot; --result-file=/client_tmp/t.sql
+                <pre><code class="language-sql">mysqldump -h$host -P$port -u$user --add-locks=0 --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where=&quot;a&gt;900&quot; --result-file=/client_tmp/t.sql
 </code></pre>
                 <p>把结果输出到临时文件。</p>
                 <p>这条命令中，主要参数含义如下：</p>
@@ -1413,7 +1418,7 @@ create table db2.t like db1.t
                   如果你希望生成的文件中一条INSERT语句只插入一行数据的话，可以在执行mysqldump命令时，加上参数–skip-extended-insert。
                 </p>
                 <p>然后，你可以通过下面这条命令，将这些INSERT语句放到db2库里去执行。</p>
-                <pre><code>mysql -h127.0.0.1 -P13000  -uroot db2 -e &quot;source /client_tmp/t.sql&quot;
+                <pre><code class="language-sql">mysql -h127.0.0.1 -P13000  -uroot db2 -e &quot;source /client_tmp/t.sql&quot;
 </code></pre>
                 <p>
                   需要说明的是，source并不是一条SQL语句，而是一个客户端命令。mysql客户端执行这个命令的流程是这样的：
@@ -1432,7 +1437,7 @@ create table db2.t like db1.t
                 </p>
                 <h1>导出CSV文件</h1>
                 <p>另一种方法是直接将结果导出成.csv文件。MySQL提供了下面的语法，用来将查询结果导出到服务端本地目录：</p>
-                <pre><code>select * from db1.t where a&gt;900 into outfile '/server_tmp/t.csv';
+                <pre><code class="language-sql">select * from db1.t where a&gt;900 into outfile '/server_tmp/t.csv';
 </code></pre>
                 <p>我们在使用这条语句时，需要注意如下几点。</p>
                 <ol>
@@ -1464,7 +1469,7 @@ create table db2.t like db1.t
                   </li>
                 </ol>
                 <p>得到.csv导出文件后，你就可以用下面的load data命令将数据导入到目标表db2.t中。</p>
-                <pre><code>load data infile '/server_tmp/t.csv' into table db2.t;
+                <pre><code class="language-sql">load data infile '/server_tmp/t.csv' into table db2.t;
 </code></pre>
                 <p>这条语句的执行流程如下所示。</p>
                 <ol>
@@ -1542,7 +1547,7 @@ create table db2.t like db1.t
                   另外需要注意的是，<strong>select …into outfile方法不会生成表结构文件</strong>,
                   所以我们导数据时还需要单独的命令得到表结构定义。mysqldump提供了一个–tab参数，可以同时导出表结构定义文件和csv数据文件。这条命令的使用方法如下：
                 </p>
-                <pre><code>mysqldump -h$host -P$port -u$user ---single-transaction  --set-gtid-purged=OFF db1 t --where=&quot;a&gt;900&quot; --tab=$secure_file_priv
+                <pre><code class="language-sql">mysqldump -h$host -P$port -u$user ---single-transaction  --set-gtid-purged=OFF db1 t --where=&quot;a&gt;900&quot; --tab=$secure_file_priv
 </code></pre>
                 <p>
                   这条命令会在$secure_file_priv定义的目录下，创建一个t.sql文件保存建表语句，同时创建一个t.txt文件保存CSV数据。

@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1489,7 +1494,7 @@
                   上期我给你留的问题是：当备库用–single-transaction做逻辑备份的时候，如果从主库的binlog传来一个DDL语句会怎么样？
                 </p>
                 <p>假设这个DDL是针对表t1的， 这里我把备份过程中几个关键的语句列出来：</p>
-                <pre><code>Q1:SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+                <pre><code class="language-sql">Q1:SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 Q2:START TRANSACTION  WITH CONSISTENT SNAPSHOT；
 /* other tables */
 Q3:SAVEPOINT sp;

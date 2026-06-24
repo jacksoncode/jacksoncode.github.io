@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1353,7 +1358,7 @@
                 </ol>
                 <p>今天这篇文章，我就先跟你说说join语句到底是怎么执行的，然后再来回答这两个问题。</p>
                 <p>为了便于量化分析，我还是创建两个表t1和t2来和你说明。</p>
-                <pre><code>CREATE TABLE `t2` (
+                <pre><code class="language-sql">CREATE TABLE `t2` (
   `id` int(11) NOT NULL,
   `a` int(11) DEFAULT NULL,
   `b` int(11) DEFAULT NULL,
@@ -1383,7 +1388,7 @@ insert into t1 (select * from t2 where id&lt;=100)
                 </p>
                 <h1>Index Nested-Loop Join</h1>
                 <p>我们来看一下这个语句：</p>
-                <pre><code>select * from t1 straight_join t2 on (t1.a=t2.a);
+                <pre><code class="language-sql">select * from t1 straight_join t2 on (t1.a=t2.a);
 </code></pre>
                 <p>
                   如果直接使用join语句，MySQL优化器可能会选择表t1或t2作为驱动表，这样会影响我们分析SQL语句的执行过程。所以，为了便于分析执行过程中的性能问题，我改用straight_join让MySQL使用固定的连接方式执行查询，这样优化器只会按照我们指定的方式去join。在这个语句里，t1
@@ -1489,7 +1494,7 @@ insert into t1 (select * from t2 where id&lt;=100)
                 <p>接下来，我们再看看被驱动表用不上索引的情况。</p>
                 <h1>Simple Nested-Loop Join</h1>
                 <p>现在，我们把SQL语句改成这样：</p>
-                <pre><code>select * from t1 straight_join t2 on (t1.a=t2.b);
+                <pre><code class="language-sql">select * from t1 straight_join t2 on (t1.a=t2.b);
 </code></pre>
                 <p>由于表t2的字段b上没有索引，因此再用图2的执行流程时，每次到t2去匹配的时候，就要做一次全表扫描。</p>
                 <p>
@@ -1558,7 +1563,7 @@ insert into t1 (select * from t2 where id&lt;=100)
                 <p>
                   join_buffer的大小是由参数join_buffer_size设定的，默认值是256k。<strong>如果放不下表t1的所有数据话，策略很简单，就是分段放。</strong>我把join_buffer_size改成1200，再执行：
                 </p>
-                <pre><code>select * from t1 straight_join t2 on (t1.a=t2.b);
+                <pre><code class="language-sql">select * from t1 straight_join t2 on (t1.a=t2.b);
 </code></pre>
                 <p>执行过程就变成了：</p>
                 <ol>
@@ -1647,7 +1652,7 @@ insert into t1 (select * from t2 where id&lt;=100)
                   我们前面的例子是没有加条件的。如果我在语句的where条件加上
                   t2.id&lt;=50这个限定条件，再来看下这两条语句：
                 </p>
-                <pre><code>select * from t1 straight_join t2 on (t1.b=t2.b) where t2.id&lt;=50;
+                <pre><code class="language-sql">select * from t1 straight_join t2 on (t1.b=t2.b) where t2.id&lt;=50;
 select * from t2 straight_join t1 on (t1.b=t2.b) where t2.id&lt;=50;
 </code></pre>
                 <p>注意，为了让两条语句的被驱动表都用不上索引，所以join字段都使用了没有索引的字段b。</p>
@@ -1655,7 +1660,7 @@ select * from t2 straight_join t1 on (t1.b=t2.b) where t2.id&lt;=50;
                   但如果是用第二个语句的话，join_buffer只需要放入t2的前50行，显然是更好的。所以这里，“t2的前50行”是那个相对小的表，也就是“小表”。
                 </p>
                 <p>我们再来看另外一组例子：</p>
-                <pre><code>select t1.b,t2.* from  t1  straight_join t2 on (t1.b=t2.b) where t2.id&lt;=100;
+                <pre><code class="language-sql">select t1.b,t2.* from  t1  straight_join t2 on (t1.b=t2.b) where t2.id&lt;=100;
 select t1.b,t2.* from  t2  straight_join t1 on (t1.b=t2.b) where t2.id&lt;=100;
 </code></pre>
                 <p>

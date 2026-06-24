@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1483,7 +1488,7 @@
                   那为什么执行show processlist的时候，会看到Command列显示为killed呢？其实，这就是因为在执行show
                   processlist的时候，有一个特别的逻辑：
                 </p>
-                <pre><code>如果一个线程的状态是KILL_CONNECTION，就把Command列显示成Killed。
+                <pre><code class="language-sql">如果一个线程的状态是KILL_CONNECTION，就把Command列显示成Killed。
 </code></pre>
                 <p>所以其实，即使是客户端退出了，这个线程的状态仍然是在等待中。那这个线程什么时候会退出呢？</p>
                 <p>

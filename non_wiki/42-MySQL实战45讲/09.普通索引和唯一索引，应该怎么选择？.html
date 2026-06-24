@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1367,7 +1372,7 @@
                   假设你在维护一个市民系统，每个人都有一个唯一的身份证号，而且业务代码已经保证了不会写入两个重复的身份证号。如果市民系统需要按照身份证号查姓名，就会执行类似这样的SQL语句：
                 </p>
                 <!-- [[[read_end]]] -->
-                <pre><code>select name from CUser where id_card = 'xxxxxxxyyyyyyzzzzz';
+                <pre><code class="language-sql">select name from CUser where id_card = 'xxxxxxxyyyyyyzzzzz';
 </code></pre>
                 <p>所以，你一定会考虑在id_card字段上建索引。</p>
                 <p>
@@ -1516,7 +1521,7 @@
                   </p>
                 </blockquote>
                 <p>现在，我们要在表上执行这个插入语句：</p>
-                <pre><code>mysql&gt; insert into t(id,k) values(id1,k1),(id2,k2);
+                <pre><code class="language-sql">mysql&gt; insert into t(id,k) values(id1,k1),(id2,k2);
 </code></pre>
                 <p>
                   这里，我们假设当前k索引树的状态，查找到位置后，k1所在的数据页在内存(InnoDB buffer

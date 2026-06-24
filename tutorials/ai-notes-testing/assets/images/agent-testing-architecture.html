@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent测试架构</title>
+  <style>
+    :root {
+      --purple-50: #EEEDFE; --purple-600: #534AB7; --purple-800: #3C3489;
+      --teal-50: #E1F5EE; --teal-600: #0F6E56; --teal-800: #085041;
+      --coral-50: #FAECE7; --coral-600: #993C1D; --coral-800: #712B13;
+      --gray-50: #F1EFE8; --gray-600: #5F5E5A; --gray-800: #444441;
+      --blue-50: #E6F1FB; --blue-600: #185FA5; --blue-800: #0C447C;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --purple-50: #3C3489; --purple-600: #CECBF6; --purple-800: #EEEDFE;
+        --teal-50: #085041; --teal-600: #9FE1CB; --teal-800: #E1F5EE;
+        --coral-50: #712B13; --coral-600: #F5C4B3; --coral-800: #FAECE7;
+        --gray-50: #444441; --gray-600: #D3D1C7; --gray-800: #F1EFE8;
+        --blue-50: #0C447C; --blue-600: #B5D4F4; --blue-800: #E6F1FB;
+      }
+    }
+    body { margin: 0; padding: 20px; background: var(--gray-50); font-family: Inter, system-ui, sans-serif; }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 20px; font-weight: 600; color: var(--gray-800); margin: 0 0 8px 0; }
+    h2 { font-size: 14px; font-weight: 400; color: var(--gray-600); margin: 0 0 20px 0; }
+    svg { display: block; }
+    .th { font-size: 14px; font-weight: 500; fill: var(--gray-800); }
+    .ts { font-size: 12px; font-weight: 400; fill: var(--gray-600); }
+    .arr { stroke: var(--gray-600); stroke-width: 1.5; fill: none; }
+    .node-purple rect { fill: var(--purple-50); stroke: var(--purple-600); }
+    .node-purple text { fill: var(--purple-800); }
+    .node-teal rect { fill: var(--teal-50); stroke: var(--teal-600); }
+    .node-teal text { fill: var(--teal-800); }
+    .node-gray rect { fill: var(--gray-50); stroke: var(--gray-600); }
+    .node-gray text { fill: var(--gray-800); }
+    .node-coral rect { fill: var(--coral-50); stroke: var(--coral-600); }
+    .node-coral text { fill: var(--coral-800); }
+    .node-blue rect { fill: var(--blue-50); stroke: var(--blue-600); }
+    .node-blue text { fill: var(--blue-800); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Agent测试架构</h1>
+    <h2>从组件验证到行为评估的多层测试策略</h2>
+    <svg width="100%" viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      
+      <g class="node-purple">
+        <rect x="260" y="40" width="160" height="50" rx="10" stroke-width="0.5"/>
+        <text class="th" x="340" y="65" text-anchor="middle" dominant-baseline="central">被测Agent</text>
+      </g>
+      
+      <g class="node-gray">
+        <rect x="80" y="100" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="140" y="122" text-anchor="middle" dominant-baseline="central">Mock LLM</text>
+      </g>
+      <g class="node-gray">
+        <rect x="220" y="100" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="280" y="122" text-anchor="middle" dominant-baseline="central">Mock Tools</text>
+      </g>
+      <g class="node-gray">
+        <rect x="360" y="100" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="420" y="122" text-anchor="middle" dominant-baseline="central">Mock Memory</text>
+      </g>
+      
+      <g class="node-teal">
+        <rect x="80" y="160" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="140" y="182" text-anchor="middle" dominant-baseline="central">单元测试</text>
+      </g>
+      <g class="node-teal">
+        <rect x="220" y="160" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="280" y="182" text-anchor="middle" dominant-baseline="central">集成测试</text>
+      </g>
+      <g class="node-teal">
+        <rect x="360" y="160" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="420" y="182" text-anchor="middle" dominant-baseline="central">场景测试</text>
+      </g>
+      
+      <g class="node-coral">
+        <rect x="80" y="220" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="140" y="242" text-anchor="middle" dominant-baseline="central">轨迹验证</text>
+      </g>
+      <g class="node-coral">
+        <rect x="220" y="220" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="280" y="242" text-anchor="middle" dominant-baseline="central">输出验证</text>
+      </g>
+      <g class="node-coral">
+        <rect x="360" y="220" width="120" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="420" y="242" text-anchor="middle" dominant-baseline="central">行为评估</text>
+      </g>
+      
+      <g class="node-blue">
+        <rect x="520" y="100" width="120" height="164" rx="12" stroke-width="0.5"/>
+        <text class="th" x="580" y="130" text-anchor="middle" dominant-baseline="central">测试框架</text>
+        <text class="ts" x="580" y="150" text-anchor="middle" dominant-baseline="central">pytest</text>
+        <text class="ts" x="580" y="170" text-anchor="middle" dominant-baseline="central">unittest</text>
+        <text class="ts" x="580" y="190" text-anchor="middle" dominant-baseline="central">LangSmith</text>
+        <text class="ts" x="580" y="210" text-anchor="middle" dominant-baseline="central">AgentOps</text>
+        <text class="ts" x="580" y="230" text-anchor="middle" dominant-baseline="central">Ragas</text>
+      </g>
+      
+      <line x1="340" y1="90" x2="140" y2="100" class="arr" marker-end="url(#arrow)"/>
+      <line x1="340" y1="90" x2="280" y2="100" class="arr" marker-end="url(#arrow)"/>
+      <line x1="340" y1="90" x2="420" y2="100" class="arr" marker-end="url(#arrow)"/>
+      
+      <line x1="140" y1="144" x2="140" y2="160" class="arr" marker-end="url(#arrow)"/>
+      <line x1="280" y1="144" x2="280" y2="160" class="arr" marker-end="url(#arrow)"/>
+      <line x1="420" y1="144" x2="420" y2="160" class="arr" marker-end="url(#arrow)"/>
+      
+      <line x1="140" y1="204" x2="140" y2="220" class="arr" marker-end="url(#arrow)"/>
+      <line x1="280" y1="204" x2="280" y2="220" class="arr" marker-end="url(#arrow)"/>
+      <line x1="420" y1="204" x2="420" y2="220" class="arr" marker-end="url(#arrow)"/>
+      
+      <text class="ts" x="60" y="122" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">隔离层</text>
+      <text class="ts" x="60" y="182" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">测试层</text>
+      <text class="ts" x="60" y="242" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">验证层</text>
+      
+      <text class="ts" x="340" y="280" text-anchor="middle" dominant-baseline="central" fill="var(--gray-600)">覆盖：组件→交互→行为→质量</text>
+    </svg>
+  </div>
+</body>
+</html>

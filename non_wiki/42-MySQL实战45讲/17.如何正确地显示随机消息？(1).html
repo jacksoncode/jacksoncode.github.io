@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1353,7 +1358,7 @@
                 <p>
                   为了便于理解，我对这个例子进行了简化：去掉每个级别的用户都有一个对应的单词表这个逻辑，直接就是从一个单词表中随机选出三个单词。这个表的建表语句和初始数据的命令如下：
                 </p>
-                <pre><code>mysql&gt; CREATE TABLE `words` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `words` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `word` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1378,7 +1383,7 @@ call idata();
                 </p>
                 <h1>内存临时表</h1>
                 <p>首先，你会想到用order by rand()来实现这个逻辑。</p>
-                <pre><code>mysql&gt; select word from words order by rand() limit 3;
+                <pre><code class="language-sql">mysql&gt; select word from words order by rand() limit 3;
 </code></pre>
                 <p>这个语句的意思很直白，随机排序取前3个。虽然这个SQL语句写法很简单，但执行流程却有点复杂的。</p>
                 <!-- [[[read_end]]] -->
@@ -1452,7 +1457,7 @@ call idata();
                   </li>
                 </ol>
                 <p>接下来，我们通过慢查询日志（slow log）来验证一下我们分析得到的扫描行数是否正确。</p>
-                <pre><code># Query_time: 0.900376  Lock_time: 0.000347 Rows_sent: 3 Rows_examined: 20003
+                <pre><code class="language-sql"># Query_time: 0.900376  Lock_time: 0.000347 Rows_sent: 3 Rows_examined: 20003
 SET timestamp=1541402277;
 select word from words order by rand() limit 3;
 </code></pre>
@@ -1505,7 +1510,7 @@ select word from words order by rand() limit 3;
                   为了复现这个过程，我把tmp_table_size设置成1024，把sort_buffer_size设置成 32768, 把
                   max_length_for_sort_data 设置成16。
                 </p>
-                <pre><code>set tmp_table_size=1024;
+                <pre><code class="language-sql">set tmp_table_size=1024;
 set sort_buffer_size=32768;
 set max_length_for_sort_data=16;
 /* 打开 optimizer_trace，只对本线程有效 */
@@ -1575,7 +1580,7 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`\G
                   这个流程结束后，我们构造的堆里面，就是这个10000行里面R值最小的三行。然后，依次把它们的rowid取出来，去临时表里面拿到word字段，这个过程就跟上一篇文章的rowid排序的过程一样了。
                 </p>
                 <p>我们再看一下上面一篇文章的SQL查询语句：</p>
-                <pre><code>select city,name,age from t where city='杭州' order by name limit 1000  ;
+                <pre><code class="language-sql">select city,name,age from t where city='杭州' order by name limit 1000  ;
 </code></pre>
                 <p>
                   你可能会问，这里也用到了limit，为什么没用优先队列排序算法呢？原因是，这条SQL语句是limit
@@ -1600,7 +1605,7 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`\G
                   </li>
                 </ol>
                 <p>我们把这个算法，暂时称作随机算法1。这里，我直接给你贴一下执行语句的序列:</p>
-                <pre><code>mysql&gt; select max(id),min(id) into @M,@N from t ;
+                <pre><code class="language-sql">mysql&gt; select max(id),min(id) into @M,@N from t ;
 set @X= floor((@M-@N+1)*rand() + @N);
 select * from t where id &gt;= @X limit 1;
 </code></pre>
@@ -1625,7 +1630,7 @@ select * from t where id &gt;= @X limit 1;
                   </li>
                 </ol>
                 <p>我们把这个算法，称为随机算法2。下面这段代码，就是上面流程的执行语句的序列。</p>
-                <pre><code>mysql&gt; select count(*) into @C from t;
+                <pre><code class="language-sql">mysql&gt; select count(*) into @C from t;
 set @Y = floor(@C * rand());
 set @sql = concat(&quot;select * from t limit &quot;, @Y, &quot;,1&quot;);
 prepare stmt from @sql;
@@ -1659,7 +1664,7 @@ DEALLOCATE prepare stmt;
                   </li>
                 </ol>
                 <p>我们把这个算法，称作随机算法3。下面这段代码，就是上面流程的执行语句的序列。</p>
-                <pre><code>mysql&gt; select count(*) into @C from t;
+                <pre><code class="language-sql">mysql&gt; select count(*) into @C from t;
 set @Y1 = floor(@C * rand());
 set @Y2 = floor(@C * rand());
 set @Y3 = floor(@C * rand());
@@ -1721,20 +1726,20 @@ select * from t limit @Y3，1；
                   如果把这条SQL语句里“limit 100”改成“limit
                   10000,100”的话，处理方式其实也差不多，即：要把上面的两条语句改成写：
                 </p>
-                <pre><code>select * from t where city=&quot;杭州&quot; order by name limit 10100; 
+                <pre><code class="language-sql">select * from t where city=&quot;杭州&quot; order by name limit 10100; 
 </code></pre>
                 <p>和</p>
-                <pre><code> select * from t where city=&quot;苏州&quot; order by name limit 10100。
+                <pre><code class="language-sql"> select * from t where city=&quot;苏州&quot; order by name limit 10100。
 </code></pre>
                 <p>
                   这时候数据量较大，可以同时起两个连接一行行读结果，用归并排序算法拿到这两个结果集里，按顺序取第10001~10100的name值，就是需要的结果了。
                 </p>
                 <p>当然这个方案有一个明显的损失，就是从数据库返回给客户端的数据量变大了。</p>
                 <p>所以，如果数据的单行比较大的话，可以考虑把这两条SQL语句改成下面这种写法：</p>
-                <pre><code>select id,name from t where city=&quot;杭州&quot; order by name limit 10100; 
+                <pre><code class="language-sql">select id,name from t where city=&quot;杭州&quot; order by name limit 10100; 
 </code></pre>
                 <p>和</p>
-                <pre><code>select id,name from t where city=&quot;苏州&quot; order by name limit 10100。
+                <pre><code class="language-sql">select id,name from t where city=&quot;苏州&quot; order by name limit 10100。
 </code></pre>
                 <p>
                   然后，再用归并排序的方法取得按name顺序第10001~10100的name、id的值，然后拿着这100个id到数据库中去查出所有记录。

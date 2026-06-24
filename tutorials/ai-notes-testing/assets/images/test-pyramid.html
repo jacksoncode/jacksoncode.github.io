@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI测试金字塔</title>
+  <style>
+    :root {
+      --purple-50: #EEEDFE; --purple-600: #534AB7; --purple-800: #3C3489;
+      --teal-50: #E1F5EE; --teal-600: #0F6E56; --teal-800: #085041;
+      --coral-50: #FAECE7; --coral-600: #993C1D; --coral-800: #712B13;
+      --gray-50: #F1EFE8; --gray-600: #5F5E5A; --gray-800: #444441;
+      --blue-50: #E6F1FB; --blue-600: #185FA5; --blue-800: #0C447C;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --purple-50: #3C3489; --purple-600: #CECBF6; --purple-800: #EEEDFE;
+        --teal-50: #085041; --teal-600: #9FE1CB; --teal-800: #E1F5EE;
+        --coral-50: #712B13; --coral-600: #F5C4B3; --coral-800: #FAECE7;
+        --gray-50: #444441; --gray-600: #D3D1C7; --gray-800: #F1EFE8;
+        --blue-50: #0C447C; --blue-600: #B5D4F4; --blue-800: #E6F1FB;
+      }
+    }
+    body { margin: 0; padding: 20px; background: var(--gray-50); font-family: Inter, system-ui, sans-serif; }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 20px; font-weight: 600; color: var(--gray-800); margin: 0 0 8px 0; }
+    h2 { font-size: 14px; font-weight: 400; color: var(--gray-600); margin: 0 0 20px 0; }
+    svg { display: block; }
+    .th { font-size: 14px; font-weight: 500; fill: var(--gray-800); }
+    .ts { font-size: 12px; font-weight: 400; fill: var(--gray-600); }
+    .layer-base { fill: var(--purple-50); stroke: var(--purple-600); }
+    .layer-mid { fill: var(--teal-50); stroke: var(--teal-600); }
+    .layer-top { fill: var(--coral-50); stroke: var(--coral-600); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI测试金字塔</title>
+    <h2>从单元测试到端到端测试的层次结构</h2>
+    <svg width="100%" viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+      <path d="M120 40 L560 40 L560 240 L120 240 Z" class="layer-top" stroke-width="0.5"/>
+      <path d="M180 100 L500 100 L500 240 L180 240 Z" class="layer-mid" stroke-width="0.5"/>
+      <path d="M260 160 L420 160 L420 240 L260 240 Z" class="layer-base" stroke-width="0.5"/>
+      
+      <text class="th" x="340" y="80" text-anchor="middle" dominant-baseline="central" fill="var(--coral-800)">端到端测试 (E2E)</text>
+      <text class="ts" x="340" y="95" text-anchor="middle" dominant-baseline="central" fill="var(--coral-600)">完整场景验证</text>
+      
+      <text class="th" x="340" y="140" text-anchor="middle" dominant-baseline="central" fill="var(--teal-800)">集成测试</text>
+      <text class="ts" x="340" y="155" text-anchor="middle" dominant-baseline="central" fill="var(--teal-600)">组件交互验证</text>
+      
+      <text class="th" x="340" y="200" text-anchor="middle" dominant-baseline="central" fill="var(--purple-800)">单元测试</text>
+      <text class="ts" x="340" y="215" text-anchor="middle" dominant-baseline="central" fill="var(--purple-600)">函数/模块验证</text>
+      
+      <text class="ts" x="60" y="80" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">慢</text>
+      <text class="ts" x="60" y="200" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">快</text>
+      <text class="ts" x="600" y="80" text-anchor="start" dominant-baseline="central" fill="var(--gray-600)">少</text>
+      <text class="ts" x="600" y="200" text-anchor="start" dominant-baseline="central" fill="var(--gray-600)">多</text>
+      
+      <line x1="70" y1="80" x2="70" y2="200" stroke="var(--gray-600)" stroke-width="1"/>
+      <line x1="610" y1="80" x2="610" y2="200" stroke="var(--gray-600)" stroke-width="1"/>
+      
+      <text class="ts" x="60" y="250" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">执行速度</text>
+      <text class="ts" x="600" y="250" text-anchor="start" dominant-baseline="central" fill="var(--gray-600)">测试数量</text>
+      
+      <text class="ts" x="340" y="265" text-anchor="middle" dominant-baseline="central" fill="var(--gray-600)">金字塔原则：底层测试最多、最快、最稳定</text>
+    </svg>
+  </div>
+</body>
+</html>

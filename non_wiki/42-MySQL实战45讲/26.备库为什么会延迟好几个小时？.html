@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1493,7 +1498,7 @@
                 <p>
                   但是，这个“唯一键”只有主键id还是不够的，我们还需要考虑下面这种场景，表t1中除了主键，还有唯一索引a：
                 </p>
-                <pre><code>CREATE TABLE `t1` (
+                <pre><code class="language-sql">CREATE TABLE `t1` (
   `id` int(11) NOT NULL,
   `a` int(11) DEFAULT NULL,
   `b` int(11) DEFAULT NULL,
@@ -1806,7 +1811,7 @@ insert into t1 values(1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);
                   <li>一种是大事务（包括大表DDL、一个事务操作很多行）；</li>
                   <li>还有一种情况比较隐蔽，就是备库起了一个长事务，比如</li>
                 </ul>
-                <pre><code>begin; 
+                <pre><code class="language-sql">begin; 
 select * from t limit 1;
 </code></pre>
                 <p>然后就不动了。</p>

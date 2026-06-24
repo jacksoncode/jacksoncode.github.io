@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1460,7 +1465,7 @@
                 <p>每一个索引在InnoDB里面对应一棵B+树。</p>
                 <p>假设，我们有一个主键列为ID的表，表中有字段k，并且在k上有索引。</p>
                 <p>这个表的建表语句是：</p>
-                <pre><code>mysql&gt; create table T(
+                <pre><code class="language-sql">mysql&gt; create table T(
 id int primary key, 
 k int not null, 
 name varchar(16),
@@ -1547,11 +1552,11 @@ index (k))engine=InnoDB;
                 <p>
                   最后，我给你留下一个问题吧。对于上面例子中的InnoDB表T，如果你要重建索引 k，你的两个SQL语句可以这么写：
                 </p>
-                <pre><code>alter table T drop index k;
+                <pre><code class="language-sql">alter table T drop index k;
 alter table T add index(k);
 </code></pre>
                 <p>如果你要重建主键索引，也可以这么写：</p>
-                <pre><code>alter table T drop primary key;
+                <pre><code class="language-sql">alter table T drop primary key;
 alter table T add primary key(id);
 </code></pre>
                 <p>

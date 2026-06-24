@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1355,7 +1360,7 @@
                   假设，我们现在要对一个200G的InnoDB表db1.
                   t，执行一个全表扫描。当然，你要把扫描结果保存在客户端，会使用类似这样的命令：
                 </p>
-                <pre><code>mysql -h$host -P$port -u$user -p$pwd -e &quot;select * from db1.t&quot; &gt; $target_file
+                <pre><code class="language-sql">mysql -h$host -P$port -u$user -p$pwd -e &quot;select * from db1.t&quot; &gt; $target_file
 </code></pre>
                 <p>
                   你已经知道了，InnoDB的数据是保存在主键索引上的，所以全表扫描实际上是直接扫描表t的主键索引。这条查询语句由于没有其他的判断条件，所以查到的每一行都可以直接放到结果集里面，然后返回给客户端。

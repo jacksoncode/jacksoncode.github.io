@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1604,7 +1609,7 @@
                 <p>接下来，我要和你介绍的等主库位点方案，就可以解决这两个问题。</p>
                 <h1>等主库位点方案</h1>
                 <p>要理解等主库位点方案，我需要先和你介绍一条命令：</p>
-                <pre><code>select master_pos_wait(file, pos[, timeout]);
+                <pre><code class="language-sql">select master_pos_wait(file, pos[, timeout]);
 </code></pre>
                 <p>这条命令的逻辑如下：</p>
                 <ol>
@@ -1672,7 +1677,7 @@
                 <h1>GTID方案</h1>
                 <p>如果你的数据库开启了GTID模式，对应的也有等待GTID的方案。</p>
                 <p>MySQL中同样提供了一个类似的命令：</p>
-                <pre><code> select wait_for_executed_gtid_set(gtid_set, 1);
+                <pre><code class="language-sql"> select wait_for_executed_gtid_set(gtid_set, 1);
 </code></pre>
                 <p>这条命令的逻辑是：</p>
                 <ol>

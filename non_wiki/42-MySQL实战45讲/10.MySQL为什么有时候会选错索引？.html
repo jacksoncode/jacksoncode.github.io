@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1350,7 +1355,7 @@
                 </p>
                 <p>我们一起来看一个例子吧。</p>
                 <p>我们先建一个简单的表，表里有a、b两个字段，并分别建上索引：</p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `a` int(11) DEFAULT NULL,
   `b` int(11) DEFAULT NULL,
@@ -1364,7 +1369,7 @@
                   直到(100000,100000,100000)。
                 </p>
                 <p>我是用存储过程来插入数据的，这里我贴出来方便你复现：</p>
-                <pre><code>delimiter ;;
+                <pre><code class="language-sql">delimiter ;;
 create procedure idata()
 begin
   declare i int;
@@ -1378,7 +1383,7 @@ delimiter ;
 call idata();
 </code></pre>
                 <p>接下来，我们分析一条SQL语句：</p>
-                <pre><code>mysql&gt; select * from t where a between 10000 and 20000;
+                <pre><code class="language-sql">mysql&gt; select * from t where a between 10000 and 20000;
 </code></pre>
                 <p>你一定会说，这个语句还用分析吗，很简单呀，a上有索引，肯定是要使用索引a的。</p>
                 <p>你说得没错，图1显示的就是使用explain命令看到的这条语句的执行情况。</p>
@@ -1412,7 +1417,7 @@ call idata();
                   index(a)来让优化器强制使用索引a（这部分内容，我还会在这篇文章的后半部分中提到）。
                 </p>
                 <p>下面的三条SQL语句，就是这个实验过程。</p>
-                <pre><code>set long_query_time=0;
+                <pre><code class="language-sql">set long_query_time=0;
 select * from t where a between 10000 and 20000; /*Q1*/
 select * from t force index(a) where a between 10000 and 20000;/*Q2*/
 </code></pre>
@@ -1531,7 +1536,7 @@ select * from t force index(a) where a between 10000 and 20000;/*Q2*/
                   其实，如果只是索引统计不准确，通过analyze命令可以解决很多问题，但是前面我们说了，优化器可不止是看扫描行数。
                 </p>
                 <p>依然是基于这个表t，我们看看另外一个语句：</p>
-                <pre><code>mysql&gt; select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) order by b limit 1;
+                <pre><code class="language-sql">mysql&gt; select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) order by b limit 1;
 </code></pre>
                 <p>从条件上看，这个查询没有符合条件的记录，因此会返回空集合。</p>
                 <p>在开始执行这条语句之前，你可以先设想一下，如果你来选择索引，会选择哪一个呢？</p>
@@ -1553,7 +1558,7 @@ select * from t force index(a) where a between 10000 and 20000;/*Q2*/
                   所以你一定会想，如果使用索引a的话，执行速度明显会快很多。那么，下面我们就来看看到底是不是这么一回事儿。
                 </p>
                 <p>图8是执行explain的结果。</p>
-                <pre><code>mysql&gt; explain select * from t where (a between 1 and 1000) and (b between 50000 and 100000) order by b limit 1;
+                <pre><code class="language-sql">mysql&gt; explain select * from t where (a between 1 and 1000) and (b between 50000 and 100000) order by b limit 1;
 </code></pre>
                 <p>
                   <img
@@ -1629,7 +1634,7 @@ select * from t force index(a) where a between 10000 and 20000;/*Q2*/
                   by b limit 1和order by b,a limit 1 都会返回b是最小的那一行，逻辑上一致，才可以这么做。
                 </p>
                 <p>如果你觉得修改语义这件事儿不太好，这里还有一种改法，图11是执行效果。</p>
-                <pre><code>mysql&gt; select * from  (select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) order by b limit 100)alias limit 1;
+                <pre><code class="language-sql">mysql&gt; select * from  (select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) order by b limit 100)alias limit 1;
 </code></pre>
                 <p>
                   <img

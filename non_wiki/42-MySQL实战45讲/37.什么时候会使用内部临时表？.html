@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1357,7 +1362,7 @@
                 </p>
                 <h1>union 执行流程</h1>
                 <p>为了便于量化分析，我用下面的表t1来举例。</p>
-                <pre><code>create table t1(id int primary key, a int, b int, index(a));
+                <pre><code class="language-sql">create table t1(id int primary key, a int, b int, index(a));
 delimiter ;;
 create procedure idata()
 begin
@@ -1373,7 +1378,7 @@ delimiter ;
 call idata();
 </code></pre>
                 <p>然后，我们执行下面这条语句：</p>
-                <pre><code>(select 1000 as f) union (select id from t1 order by id desc limit 2);
+                <pre><code class="language-sql">(select 1000 as f) union (select id from t1 order by id desc limit 2);
 </code></pre>
                 <p>
                   这条语句用到了union，它的语义是，取这两个子查询结果的并集。并集的意思就是这两个集合加起来，重复的行只保留一行。
@@ -1438,7 +1443,7 @@ call idata();
                 <p>可以看到，第二行的Extra字段显示的是Using index，表示只使用了覆盖索引，没有用临时表了。</p>
                 <h1>group by 执行流程</h1>
                 <p>另外一个常见的使用临时表的例子是group by，我们来看一下这个语句：</p>
-                <pre><code>select id%10 as m, count(*) as c from t1 group by m;
+                <pre><code class="language-sql">select id%10 as m, count(*) as c from t1 group by m;
 </code></pre>
                 <p>
                   这个语句的逻辑是把表t1里的数据，按照 id%10
@@ -1503,7 +1508,7 @@ call idata();
                 </p>
                 <center><span class="reference">图 7 group by执行结果</span></center>
                 <p>如果你的需求并不需要对结果进行排序，那你可以在SQL语句末尾增加order by null，也就是改成：</p>
-                <pre><code>select id%10 as m, count(*) as c from t1 group by m order by null;
+                <pre><code class="language-sql">select id%10 as m, count(*) as c from t1 group by m order by null;
 </code></pre>
                 <p>这样就跳过了最后排序的阶段，直接从临时表中取数据返回。返回的结果如图8所示。</p>
                 <p>
@@ -1520,7 +1525,7 @@ call idata();
                   这个例子里由于临时表只有10行，内存可以放得下，因此全程只使用了内存临时表。但是，内存临时表的大小是有限制的，参数tmp_table_size就是控制这个内存大小的，默认是16M。
                 </p>
                 <p>如果我执行下面这个语句序列：</p>
-                <pre><code>set tmp_table_size=1024;
+                <pre><code class="language-sql">set tmp_table_size=1024;
 select id%100 as m, count(*) as c from t1 group by m order by null limit 10;
 </code></pre>
                 <p>
@@ -1577,10 +1582,10 @@ select id%100 as m, count(*) as c from t1 group by m order by null limit 10;
                   column机制，用来实现列数据的关联更新。你可以用下面的方法创建一个列z，然后在z列上创建一个索引（如果是MySQL
                   5.6及之前的版本，你也可以创建普通列和索引，来解决这个问题）。
                 </p>
-                <pre><code>alter table t1 add column z int generated always as(id % 100), add index(z);
+                <pre><code class="language-sql">alter table t1 add column z int generated always as(id % 100), add index(z);
 </code></pre>
                 <p>这样，索引z上的数据就是类似图10这样有序的了。上面的group by语句就可以改成：</p>
-                <pre><code>select z, count(*) as c from t1 group by z;
+                <pre><code class="language-sql">select z, count(*) as c from t1 group by z;
 </code></pre>
                 <p>优化后的group by语句的explain结果，如下图所示：</p>
                 <p>
@@ -1611,7 +1616,7 @@ select id%100 as m, count(*) as c from t1 group by m order by null limit 10;
                   MySQL的优化器一看，磁盘临时表是B+树存储，存储效率不如数组来得高。所以，既然你告诉我数据量很大，那从磁盘空间考虑，还是直接用数组来存吧。
                 </p>
                 <p>因此，下面这个语句</p>
-                <pre><code>select SQL_BIG_RESULT id%100 as m, count(*) as c from t1 group by m;
+                <pre><code class="language-sql">select SQL_BIG_RESULT id%100 as m, count(*) as c from t1 group by m;
 </code></pre>
                 <p>的执行流程就是这样的：</p>
                 <ol>

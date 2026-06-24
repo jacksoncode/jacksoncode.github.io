@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1346,7 +1351,7 @@
                   在你开发应用的时候，一定会经常碰到需要根据指定的字段排序来显示结果的需求。还是以我们前面举例用过的市民表为例，假设你要查询城市是“杭州”的所有人名字，并且按照姓名排序返回前1000个人的姓名、年龄。
                 </p>
                 <p>假设这个表的部分定义是这样的：</p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `city` varchar(16) NOT NULL,
   `name` varchar(16) NOT NULL,
@@ -1357,7 +1362,7 @@
 ) ENGINE=InnoDB;
 </code></pre>
                 <p>这时，你的SQL语句可以这么写：</p>
-                <pre><code>select city,name,age from t where city='杭州' order by name limit 1000  ;
+                <pre><code class="language-sql">select city,name,age from t where city='杭州' order by name limit 1000  ;
 </code></pre>
                 <p>
                   这个语句看上去逻辑很清晰，但是你了解它的执行流程吗？今天，我就和你聊聊这个语句是怎么执行的，以及有什么参数会影响执行的行为。
@@ -1427,7 +1432,7 @@
                   sort_buffer_size，就是MySQL为排序开辟的内存（sort_buffer）的大小。如果要排序的数据量小于sort_buffer_size，排序就在内存中完成。但如果排序数据量太大，内存放不下，则不得不利用磁盘临时文件辅助排序。
                 </p>
                 <p>你可以用下面介绍的方法，来确定一个排序语句是否使用了临时文件。</p>
-                <pre><code>/* 打开optimizer_trace，只对本线程有效 */
+                <pre><code class="language-sql">/* 打开optimizer_trace，只对本线程有效 */
 SET optimizer_trace='enabled=on'; 
 
 /* @a保存Innodb_rows_read的初始值 */
@@ -1491,7 +1496,7 @@ select @b-@a;
                 <p>所以如果单行很大，这个方法效率不够好。</p>
                 <p>那么，<strong>如果MySQL认为排序的单行长度太大会怎么做呢？</strong></p>
                 <p>接下来，我来修改一个参数，让MySQL采用另外一种算法。</p>
-                <pre><code>SET max_length_for_sort_data = 16;
+                <pre><code class="language-sql">SET max_length_for_sort_data = 16;
 </code></pre>
                 <p>
                   max_length_for_sort_data，是MySQL中专门控制用于排序的行数据的长度的一个参数。它的意思是，如果单行的长度超过这个值，MySQL就认为单行太大，要换一个算法。
@@ -1586,7 +1591,7 @@ select @b-@a;
                 </p>
                 <p>确实是这样的。</p>
                 <p>所以，我们可以在这个市民表上创建一个city和name的联合索引，对应的SQL语句是：</p>
-                <pre><code>alter table t add index city_user(city, name);
+                <pre><code class="language-sql">alter table t add index city_user(city, name);
 </code></pre>
                 <p>作为与city索引的对比，我们来看看这个索引的示意图。</p>
                 <p>
@@ -1646,7 +1651,7 @@ select @b-@a;
                 </p>
                 <p>按照覆盖索引的概念，我们可以再优化一下这个查询语句的执行流程。</p>
                 <p>针对这个查询，我们可以创建一个city、name和age的联合索引，对应的SQL语句就是：</p>
-                <pre><code>alter table t add index city_user_age(city, name, age);
+                <pre><code class="language-sql">alter table t add index city_user_age(city, name, age);
 </code></pre>
                 <p>
                   这时，对于city字段的值相同的行来说，还是按照name字段的值递增排序的，此时的查询语句也就不再需要排序了。这样整个查询语句的执行流程就变成了：
@@ -1695,7 +1700,7 @@ select @b-@a;
                   name)这个联合索引，然后你要查杭州和苏州两个城市中所有的市民的姓名，并且按名字排序，显示前100条记录。如果SQL查询语句是这么写的
                   ：
                 </p>
-                <pre><code>mysql&gt; select * from t where city in ('杭州',&quot;苏州&quot;) order by name limit 100;
+                <pre><code class="language-sql">mysql&gt; select * from t where city in ('杭州',&quot;苏州&quot;) order by name limit 100;
 </code></pre>
                 <p>那么，这个语句执行的时候会有排序过程吗，为什么？</p>
                 <p>如果业务端代码由你来开发，需要实现一个在数据库端不需要排序的方案，你会怎么实现呢？</p>

@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1351,7 +1356,7 @@
                 <p>
                   我们先从昨天的问题说起吧。表t和t2的表结构、初始化数据语句如下，今天的例子我们还是针对这两个表展开。
                 </p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `c` int(11) DEFAULT NULL,
   `d` int(11) DEFAULT NULL,
@@ -1367,7 +1372,7 @@ insert into t values(null, 4,4);
 create table t2 like t
 </code></pre>
                 <p>现在，我们一起来看看为什么在可重复读隔离级别下，binlog_format=statement时执行：</p>
-                <pre><code>insert into t2(c,d) select c,d from t;
+                <pre><code class="language-sql">insert into t2(c,d) select c,d from t;
 </code></pre>
                 <p>这个语句时，需要对表t的所有行和间隙加锁呢？</p>
                 <p>其实，这个问题我们需要考虑的还是日志和数据的一致性。我们看下这个执行序列：</p>
@@ -1387,7 +1392,7 @@ create table t2 like t
                   B的insert语句先执行，但是后写入binlog的情况。于是，在binlog_format=statement的情况下，binlog里面就记录了这样的语句序列：
                 </p>
                 <!-- [[[read_end]]] -->
-                <pre><code>insert into t values(-1,-1,-1);
+                <pre><code class="language-sql">insert into t values(-1,-1,-1);
 insert into t2(c,d) select c,d from t;
 </code></pre>
                 <p>这个语句到了备库执行，就会把id=-1这一行也写到表t2中，出现主备不一致。</p>
@@ -1395,7 +1400,7 @@ insert into t2(c,d) select c,d from t;
                 <p>当然了，执行insert … select 的时候，对目标表也不是锁全表，而是只锁住需要访问的资源。</p>
                 <p>如果现在有这么一个需求：要往表t2中插入一行数据，这一行的c值是表t中c值的最大值加1。</p>
                 <p>此时，我们可以这么写这条SQL语句 ：</p>
-                <pre><code>insert into t2(c,d)  (select c+1, d from t force index(c) order by c desc limit 1);
+                <pre><code class="language-sql">insert into t2(c,d)  (select c+1, d from t force index(c) order by c desc limit 1);
 </code></pre>
                 <p>
                   这个语句的加锁范围，就是表t索引c上的(3,4]和(4,supremum]这两个next-key lock，以及主键索引上id=4这一行。
@@ -1412,7 +1417,7 @@ insert into t2(c,d) select c,d from t;
                 <center><span class="reference">图2 慢查询日志--将数据插入表t2</span></center>
                 <p>通过这个慢查询日志，我们看到Rows_examined=1，正好验证了执行这条语句的扫描行数为1。</p>
                 <p>那么，如果我们是要把这样的一行数据插入到表t中的话：</p>
-                <pre><code>insert into t(c,d)  (select c+1, d from t force index(c) order by c desc limit 1);
+                <pre><code class="language-sql">insert into t(c,d)  (select c+1, d from t force index(c) order by c desc limit 1);
 </code></pre>
                 <p>语句的执行流程是怎样的？扫描行数又是多少呢？</p>
                 <p>这时候，我们再看慢查询日志就会发现不对了。</p>
@@ -1488,7 +1493,7 @@ insert into t2(c,d) select c,d from t;
                 <p>
                   当然，由于这个语句涉及的数据量很小，你可以考虑使用内存临时表来做这个优化。使用内存临时表优化时，语句序列的写法如下：
                 </p>
-                <pre><code>create temporary table temp_t(c int,d int) engine=memory;
+                <pre><code class="language-sql">create temporary table temp_t(c int,d int) engine=memory;
 insert into temp_t  (select c+1, d from t force index(c) order by c desc limit 1);
 insert into t select * from temp_t;
 drop table temp_t;
@@ -1581,7 +1586,7 @@ drop table temp_t;
                 <center><span class="reference">图8 状态变化图--死锁</span></center>
                 <h1>insert into … on duplicate key update</h1>
                 <p>上面这个例子是主键冲突后直接报错，如果是改写成</p>
-                <pre><code>insert into t values(11,10,10) on duplicate key update d=100; 
+                <pre><code class="language-sql">insert into t values(11,10,10) on duplicate key update d=100; 
 </code></pre>
                 <p>的话，就会给索引c上(5,10] 加一个排他的next-key lock（写锁）。</p>
                 <p>

@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1381,7 +1386,7 @@
                 <p>
                   其中“读提交”和“可重复读”比较难理解，所以我用一个例子说明这几种隔离级别。假设数据表T中只有一列，其中一行的值为1，下面是按照时间顺序执行两个事务的行为。
                 </p>
-                <pre><code>mysql&gt; create table T(c int) engine=InnoDB;
+                <pre><code class="language-sql">mysql&gt; create table T(c int) engine=InnoDB;
 insert into T(c) values(1);
 </code></pre>
                 <p>
@@ -1417,7 +1422,7 @@ insert into T(c) values(1);
                   配置的方式是，将启动参数transaction-isolation的值设置成READ-COMMITTED。你可以用show
                   variables来查看当前的值。
                 </p>
-                <pre><code>mysql&gt; show variables like 'transaction_isolation';
+                <pre><code class="language-sql">mysql&gt; show variables like 'transaction_isolation';
 
 +-----------------------+----------------+
 
@@ -1498,7 +1503,7 @@ insert into T(c) values(1);
                 <p>
                   你可以在information_schema库的innodb_trx这个表中查询长事务，比如下面这个语句，用于查找持续时间超过60s的事务。
                 </p>
-                <pre><code>select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))&gt;60
+                <pre><code class="language-sql">select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))&gt;60
 </code></pre>
                 <h1>小结</h1>
                 <p>

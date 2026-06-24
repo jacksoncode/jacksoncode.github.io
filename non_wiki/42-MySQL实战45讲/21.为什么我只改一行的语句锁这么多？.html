@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1391,7 +1396,7 @@
                 </ol>
                 <!-- [[[read_end]]] -->
                 <p>我还是以上篇文章的表t为例，和你解释一下这些规则。表t的建表语句和初始化语句如下。</p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `c` int(11) DEFAULT NULL,
   `d` int(11) DEFAULT NULL,
@@ -1474,7 +1479,7 @@ insert into t values(0,0,0),(5,5,5),
                 <h1>案例三：主键索引范围锁</h1>
                 <p>第三个例子是关于范围查询的。</p>
                 <p>举例之前，你可以先思考一下这个问题：对于我们这个表t，下面这两条查询语句，加锁范围相同吗？</p>
-                <pre><code>mysql&gt; select * from t where id=10 for update;
+                <pre><code class="language-sql">mysql&gt; select * from t where id=10 for update;
 mysql&gt; select * from t where id&gt;=10 and id&lt;11 for update;
 </code></pre>
                 <p>你可能会想，id定义为int类型，这两个语句就是等价的吧？其实，它们并不完全等价。</p>
@@ -1558,7 +1563,7 @@ mysql&gt; select * from t where id&gt;=10 and id&lt;11 for update;
                 </p>
                 <h1>案例六：非唯一索引上存在"等值"的例子</h1>
                 <p>接下来的例子，是为了更好地说明“间隙”这个概念。这里，我给表t插入一条新记录。</p>
-                <pre><code>mysql&gt; insert into t values(30,10,30);
+                <pre><code class="language-sql">mysql&gt; insert into t values(30,10,30);
 </code></pre>
                 <p>
                   新插入的这一行c=10，也就是说现在表里有两个c=10的行。那么，这时候索引c上的间隙是什么状态了呢？你要知道，由于非唯一索引上包含主键的值，所以是不可能存在“相同”的两行的。
@@ -1728,7 +1733,7 @@ mysql&gt; select * from t where id&gt;=10 and id&lt;11 for update;
                   </li>
                   <li>有几位同学提到说，上一篇文章自己验证的结果跟案例一不同，就是在session A执行完这两个语句：</li>
                 </ul>
-                <pre><code>begin;
+                <pre><code class="language-sql">begin;
 select * from t where d=5 for update; /*Q1*/
 </code></pre>
                 <p>以后，session B 的update 和session C的insert 都会被堵住。这是不是跟文章的结论矛盾？</p>

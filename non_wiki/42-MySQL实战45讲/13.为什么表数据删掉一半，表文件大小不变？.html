@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1523,16 +1528,16 @@
                 <p>所以，我现在问你，如果你有一个1TB的表，现在磁盘间是1.2TB，能不能做一个inplace的DDL呢？</p>
                 <p>答案是不能。因为，tmp_file也是要占用临时空间的。</p>
                 <p>我们重建表的这个语句alter table t engine=InnoDB，其实隐含的意思是：</p>
-                <pre><code>alter table t engine=innodb,ALGORITHM=inplace;
+                <pre><code class="language-sql">alter table t engine=innodb,ALGORITHM=inplace;
 </code></pre>
                 <p>跟inplace对应的就是拷贝表的方式了，用法是：</p>
-                <pre><code>alter table t engine=innodb,ALGORITHM=copy;
+                <pre><code class="language-sql">alter table t engine=innodb,ALGORITHM=copy;
 </code></pre>
                 <p>当你使用ALGORITHM=copy的时候，表示的是强制拷贝表，对应的流程就是图3的操作过程。</p>
                 <p>但我这样说你可能会觉得，inplace跟Online是不是就是一个意思？</p>
                 <p>其实不是的，只是在重建表这个逻辑中刚好是这样而已。</p>
                 <p>比如，如果我要给InnoDB表的一个字段加全文索引，写法是：</p>
-                <pre><code>alter table t add FULLTEXT(field_name);
+                <pre><code class="language-sql">alter table t add FULLTEXT(field_name);
 </code></pre>
                 <p>这个过程是inplace的，但会阻塞增删改操作，是非Online的。</p>
                 <p>如果说这两个逻辑之间的关系是什么的话，可以概括为：</p>

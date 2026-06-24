@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1521,7 +1526,7 @@
                 </p>
                 <p>我们把这个切换流程，暂时称作可用性优先流程。这个切换流程的代价，就是可能出现数据不一致的情况。</p>
                 <p>接下来，我就和你分享一个可用性优先流程产生数据不一致的例子。假设有一个表 t：</p>
-                <pre><code>mysql&gt; CREATE TABLE `t` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `t` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `c` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1532,7 +1537,7 @@ insert into t(c) values(1),(2),(3);
                 <p>
                   这个表定义了一个自增主键id，初始化数据后，主库和备库上都是3行数据。接下来，业务人员要继续在表t上执行两条插入语句的命令，依次是：
                 </p>
-                <pre><code>insert into t(c) values(4);
+                <pre><code class="language-sql">insert into t(c) values(4);
 insert into t(c) values(5);
 </code></pre>
                 <p>
@@ -1681,12 +1686,12 @@ insert into t(c) values(5);
                 <center><span class="reference">图7 三节点循环复制</span></center>
                 <p>这种三节点复制的场景，做数据库迁移的时候会出现。</p>
                 <p>如果出现了循环复制，可以在A或者A’上，执行如下命令：</p>
-                <pre><code>stop slave；
+                <pre><code class="language-sql">stop slave；
 CHANGE MASTER TO IGNORE_SERVER_IDS=(server_id_of_B);
 start slave;
 </code></pre>
                 <p>这样这个节点收到日志后就不会再执行。过一段时间后，再执行下面的命令把这个值改回来。</p>
-                <pre><code>stop slave；
+                <pre><code class="language-sql">stop slave；
 CHANGE MASTER TO IGNORE_SERVER_IDS=();
 start slave;
 </code></pre>

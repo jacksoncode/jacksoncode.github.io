@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1346,14 +1351,14 @@
                   现在，几乎所有的系统都支持邮箱登录，如何在邮箱这样的字段上建立合理的索引，是我们今天要讨论的问题。
                 </p>
                 <p>假设，你现在维护一个支持邮箱登录的系统，用户表是这么定义的：</p>
-                <pre><code>mysql&gt; create table SUser(
+                <pre><code class="language-sql">mysql&gt; create table SUser(
 ID bigint unsigned primary key,
 email varchar(64), 
 ... 
 )engine=innodb; 
 </code></pre>
                 <p>由于要使用邮箱登录，所以业务代码中一定会出现类似于这样的语句：</p>
-                <pre><code>mysql&gt; select f1, f2 from SUser where email='xxx';
+                <pre><code class="language-sql">mysql&gt; select f1, f2 from SUser where email='xxx';
 </code></pre>
                 <p>
                   从第4和第5篇讲解索引的文章中，我们可以知道，如果email这个字段上没有索引，那么这个语句就只能做全表扫描。
@@ -1362,7 +1367,7 @@ email varchar(64),
                   同时，MySQL是支持前缀索引的，也就是说，你可以定义字符串的一部分作为索引。默认地，如果你创建索引的语句不指定前缀长度，那么索引就会包含整个字符串。
                 </p>
                 <p>比如，这两个在email字段上创建索引的语句：</p>
-                <pre><code>mysql&gt; alter table SUser add index index1(email);
+                <pre><code class="language-sql">mysql&gt; alter table SUser add index index1(email);
 或
 mysql&gt; alter table SUser add index index2(email(6));
 </code></pre>
@@ -1390,7 +1395,7 @@ mysql&gt; alter table SUser add index index2(email(6));
                 <!-- [[[read_end]]] -->
                 <p>但，这同时带来的损失是，可能会增加额外的记录扫描次数。</p>
                 <p>接下来，我们再看看下面这个语句，在这两个索引定义下分别是怎么执行的。</p>
-                <pre><code>select id,name,email from SUser where email='zhangssxyz@xxx.com';
+                <pre><code class="language-sql">select id,name,email from SUser where email='zhangssxyz@xxx.com';
 </code></pre>
                 <p><strong>如果使用的是index1</strong>（即email整个字符串的索引结构），执行顺序是这样的：</p>
                 <ol>
@@ -1439,10 +1444,10 @@ mysql&gt; alter table SUser add index index2(email(6));
                   实际上，我们在建立索引时关注的是区分度，区分度越高越好。因为区分度越高，意味着重复的键值越少。因此，我们可以通过统计索引上有多少个不同的值来判断要使用多长的前缀。
                 </p>
                 <p>首先，你可以使用下面这个语句，算出这个列上有多少个不同的值：</p>
-                <pre><code>mysql&gt; select count(distinct email) as L from SUser;
+                <pre><code class="language-sql">mysql&gt; select count(distinct email) as L from SUser;
 </code></pre>
                 <p>然后，依次选取不同长度的前缀来看这个值，比如我们要看一下4~7个字节的前缀索引，可以用这个语句：</p>
-                <pre><code>mysql&gt; select 
+                <pre><code class="language-sql">mysql&gt; select 
   count(distinct left(email,4)）as L4,
   count(distinct left(email,5)）as L5,
   count(distinct left(email,6)）as L6,
@@ -1458,10 +1463,10 @@ from SUser;
                   前面我们说了使用前缀索引可能会增加扫描行数，这会影响到性能。其实，前缀索引的影响不止如此，我们再看一下另外一个场景。
                 </p>
                 <p>你先来看看这个SQL语句：</p>
-                <pre><code>select id,email from SUser where email='zhangssxyz@xxx.com';
+                <pre><code class="language-sql">select id,email from SUser where email='zhangssxyz@xxx.com';
 </code></pre>
                 <p>与前面例子中的SQL语句</p>
-                <pre><code>select id,name,email from SUser where email='zhangssxyz@xxx.com';
+                <pre><code class="language-sql">select id,name,email from SUser where email='zhangssxyz@xxx.com';
 </code></pre>
                 <p>相比，这个语句只要求返回id和email字段。</p>
                 <p>
@@ -1495,7 +1500,7 @@ from SUser;
                   <strong>第一种方式是使用倒序存储。</strong
                   >如果你存储身份证号的时候把它倒过来存，每次查询的时候，你可以这么写：
                 </p>
-                <pre><code>mysql&gt; select field_list from t where id_card = reverse('input_id_card_string');
+                <pre><code class="language-sql">mysql&gt; select field_list from t where id_card = reverse('input_id_card_string');
 </code></pre>
                 <p>
                   由于身份证号的最后6位没有地址码这样的重复逻辑，所以最后这6位很可能就提供了足够的区分度。当然了，实践中你不要忘记使用count(distinct)方法去做个验证。
@@ -1504,12 +1509,12 @@ from SUser;
                   <strong>第二种方式是使用hash字段。</strong
                   >你可以在表上再创建一个整数字段，来保存身份证的校验码，同时在这个字段上创建索引。
                 </p>
-                <pre><code>mysql&gt; alter table t add id_card_crc int unsigned, add index(id_card_crc);
+                <pre><code class="language-sql">mysql&gt; alter table t add id_card_crc int unsigned, add index(id_card_crc);
 </code></pre>
                 <p>
                   然后每次插入新记录的时候，都同时用crc32()这个函数得到校验码填到这个新字段。由于校验码可能存在冲突，也就是说两个不同的身份证号通过crc32()函数得到的结果可能是相同的，所以你的查询语句where部分要判断id_card的值是否精确相同。
                 </p>
-                <pre><code>mysql&gt; select field_list from t where id_card_crc=crc32('input_id_card_string') and id_card='input_id_card_string'
+                <pre><code class="language-sql">mysql&gt; select field_list from t where id_card_crc=crc32('input_id_card_string') and id_card='input_id_card_string'
 </code></pre>
                 <p>这样，索引的长度变成了4个字节，比原来小了很多。</p>
                 <p>接下来，我们再一起看看<strong>使用倒序存储和使用hash字段这两种方法的异同点。</strong></p>

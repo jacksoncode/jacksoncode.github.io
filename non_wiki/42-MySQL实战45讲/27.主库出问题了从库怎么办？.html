@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1384,7 +1389,7 @@
                 <h1>基于位点的主备切换</h1>
                 <p>这里，我们需要先来回顾一个知识点。</p>
                 <p>当我们把节点B设置成节点A’的从库的时候，需要执行一条change master命令：</p>
-                <pre><code>CHANGE MASTER TO 
+                <pre><code class="language-sql">CHANGE MASTER TO 
 MASTER_HOST=$host_name 
 MASTER_PORT=$port 
 MASTER_USER=$user_name 
@@ -1428,7 +1433,7 @@ MASTER_LOG_POS=$master_log_pos
                     <p>用mysqlbinlog工具解析A’的File，得到T时刻的位点。</p>
                   </li>
                 </ol>
-                <pre><code>mysqlbinlog File --stop-datetime=T --start-datetime=T
+                <pre><code class="language-sql">mysqlbinlog File --stop-datetime=T --start-datetime=T
 </code></pre>
                 <p>
                   <img
@@ -1467,7 +1472,7 @@ MASTER_LOG_POS=$master_log_pos
                 </p>
                 <p>所以，<strong>通常情况下，我们在切换任务的时候，要先主动跳过这些错误，有两种常用的方法。</strong></p>
                 <p><strong>一种做法是</strong>，主动跳过一个事务。跳过命令的写法是：</p>
-                <pre><code>set global sql_slave_skip_counter=1;
+                <pre><code class="language-sql">set global sql_slave_skip_counter=1;
 start slave;
 </code></pre>
                 <p>
@@ -1496,7 +1501,7 @@ start slave;
                   GTID的全称是Global Transaction
                   Identifier，也就是全局事务ID，是一个事务在提交的时候生成的，是这个事务的唯一标识。它由两部分组成，格式是：
                 </p>
-                <pre><code>GTID=server_uuid:gno
+                <pre><code class="language-sql">GTID=server_uuid:gno
 </code></pre>
                 <p>其中：</p>
                 <ul>
@@ -1504,7 +1509,7 @@ start slave;
                   <li>gno是一个整数，初始值是1，每次提交事务的时候分配给这个事务，并加1。</li>
                 </ul>
                 <p>这里我需要和你说明一下，在MySQL的官方文档里，GTID格式是这么定义的：</p>
-                <pre><code>GTID=source_id:transaction_id
+                <pre><code class="language-sql">GTID=source_id:transaction_id
 </code></pre>
                 <p>
                   这里的source_id就是server_uuid；而后面的这个transaction_id，我觉得容易造成误导，所以我改成了gno。为什么说使用transaction_id容易造成误解呢？
@@ -1544,7 +1549,7 @@ start slave;
                 <p>这样，每个MySQL实例都维护了一个GTID集合，用来对应“这个实例执行过的所有事务”。</p>
                 <p>这样看上去不太容易理解，接下来我就用一个简单的例子，来和你说明GTID的基本用法。</p>
                 <p>我们在实例X中创建一个表t。</p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `c` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1565,14 +1570,14 @@ insert into t values(1,1);
                   这样被加入从库的GTID集合的，就是图中的这两个GTID。
                 </p>
                 <p>假设，现在这个实例X是另外一个实例Y的从库，并且此时在实例Y上执行了下面这条插入语句：</p>
-                <pre><code>insert into t values(1,1);
+                <pre><code class="language-sql">insert into t values(1,1);
 </code></pre>
                 <p>并且，这条语句在实例Y上的GTID是 “aaaaaaaa-cccc-dddd-eeee-ffffffffffff:10”。</p>
                 <p>
                   那么，实例X作为Y的从库，就要同步这个事务过来执行，显然会出现主键冲突，导致实例X的同步线程停止。这时，我们应该怎么处理呢？
                 </p>
                 <p>处理方法就是，你可以执行下面的这个语句序列：</p>
-                <pre><code>set gtid_next='aaaaaaaa-cccc-dddd-eeee-ffffffffffff:10';
+                <pre><code class="language-sql">set gtid_next='aaaaaaaa-cccc-dddd-eeee-ffffffffffff:10';
 begin;
 commit;
 set gtid_next=automatic;
@@ -1601,7 +1606,7 @@ start slave;
                 <h1>基于GTID的主备切换</h1>
                 <p>现在，我们已经理解GTID的概念，再一起来看看基于GTID的主备复制的用法。</p>
                 <p>在GTID模式下，备库B要设置为新主库A’的从库的语法如下：</p>
-                <pre><code>CHANGE MASTER TO 
+                <pre><code class="language-sql">CHANGE MASTER TO 
 MASTER_HOST=$host_name 
 MASTER_PORT=$port 
 MASTER_USER=$user_name 
@@ -1682,7 +1687,7 @@ master_auto_position=1
                     <p>到实例X上执行以下语句序列：</p>
                   </li>
                 </ul>
-                <pre><code>set GTID_NEXT=&quot;server_uuid_of_Y:gno&quot;;
+                <pre><code class="language-sql">set GTID_NEXT=&quot;server_uuid_of_Y:gno&quot;;
 begin;
 commit;
 set gtid_next=automatic;

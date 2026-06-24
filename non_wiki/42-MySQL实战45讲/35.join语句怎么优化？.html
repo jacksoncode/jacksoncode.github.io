@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1354,7 +1359,7 @@
                 </p>
                 <p>当然了，这两个算法都还有继续优化的空间，我们今天就来聊聊这个话题。</p>
                 <p>为了便于分析，我还是创建两个表t1、t2来和你展开今天的问题。</p>
-                <pre><code>create table t1(id int primary key, a int, b int, index(a));
+                <pre><code class="language-sql">create table t1(id int primary key, a int, b int, index(a));
 create table t2 like t1;
 drop procedure idata;
 delimiter ;;
@@ -1392,7 +1397,7 @@ call idata();
                 <!-- [[[read_end]]] -->
                 <p>然后，有同学在留言区问到，回表过程是一行行地查数据，还是批量地查数据？</p>
                 <p>我们先来看看这个问题。假设，我执行这个语句：</p>
-                <pre><code>select * from t1 where a&gt;=1 and a&lt;=100;
+                <pre><code class="language-sql">select * from t1 where a&gt;=1 and a&lt;=100;
 </code></pre>
                 <p>
                   主键索引是一棵B+树，在这棵树上，每次只能根据一个主键id查到一行数据。因此，回表肯定是一行行搜索主键索引的，基本流程如图1所示。
@@ -1494,7 +1499,7 @@ call idata();
                 </p>
                 <p>那么，这个BKA算法到底要怎么启用呢？</p>
                 <p>如果要使用BKA优化算法的话，你需要在执行SQL语句之前，先设置</p>
-                <pre><code>set optimizer_switch='mrr=on,mrr_cost_based=off,batched_key_access=on';
+                <pre><code class="language-sql">set optimizer_switch='mrr=on,mrr_cost_based=off,batched_key_access=on';
 </code></pre>
                 <p>其中，前两个参数的作用是要启用MRR。这么做的原因是，BKA算法的优化要依赖于MRR。</p>
                 <h1>BNL算法的性能问题</h1>
@@ -1545,7 +1550,7 @@ call idata();
                 <h1>BNL转BKA</h1>
                 <p>一些情况下，我们可以直接在被驱动表上建索引，这时就可以直接转成BKA算法了。</p>
                 <p>但是，有时候你确实会碰到一些不适合在被驱动表上建索引的情况。比如下面这个语句：</p>
-                <pre><code>select * from t1 join t2 on (t1.b=t2.b) where t2.b&gt;=1 and t2.b&lt;=2000;
+                <pre><code class="language-sql">select * from t1 join t2 on (t1.b=t2.b) where t2.b&gt;=1 and t2.b&lt;=2000;
 </code></pre>
                 <p>
                   我们在文章开始的时候，在表t2中插入了100万行数据，但是经过where条件过滤后，需要参与join的只有2000行数据。如果这条语句同时是一个低频的SQL语句，那么再为这个语句在表t2的字段b上创建一个索引就很浪费了。
@@ -1602,7 +1607,7 @@ call idata();
                   </li>
                 </ol>
                 <p>此时，对应的SQL语句的写法如下：</p>
-                <pre><code>create temporary table temp_t(id int primary key, a int, b int, index(b))engine=innodb;
+                <pre><code class="language-sql">create temporary table temp_t(id int primary key, a int, b int, index(b))engine=innodb;
 insert into temp_t select * from t2 where b&gt;=1 and b&lt;=2000;
 select * from t1 join temp_t on (t1.b=temp_t.b);
 </code></pre>
@@ -1679,7 +1684,7 @@ select * from t1 join temp_t on (t1.b=temp_t.b);
                 <p>
                   我们在讲join语句的这两篇文章中，都只涉及到了两个表的join。那么，现在有一个三个表join的需求，假设这三个表的表结构如下：
                 </p>
-                <pre><code>CREATE TABLE `t1` (
+                <pre><code class="language-sql">CREATE TABLE `t1` (
  `id` int(11) NOT NULL,
  `a` int(11) DEFAULT NULL,
  `b` int(11) DEFAULT NULL,
@@ -1692,7 +1697,7 @@ create table t3 like t2;
 insert into ... //初始化三张表的数据
 </code></pre>
                 <p>语句的需求实现如下的join逻辑：</p>
-                <pre><code>select * from t1 join t2 on(t1.a=t2.a) join t3 on (t2.b=t3.b) where t1.c&gt;=X and t2.c&gt;=Y and t3.c&gt;=Z;
+                <pre><code class="language-sql">select * from t1 join t2 on(t1.a=t2.a) join t3 on (t2.b=t3.b) where t1.c&gt;=X and t2.c&gt;=Y and t3.c&gt;=Z;
 </code></pre>
                 <p>
                   现在为了得到最快的执行速度，如果让你来设计表t1、t2、t3上的索引，来支持这个join语句，你会加哪些索引呢？

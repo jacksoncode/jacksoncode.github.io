@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1351,7 +1356,7 @@
                 <p>
                   为了便于描述，我还是构造一个表，基于这个表来说明今天的问题。这个表有两个字段id和c，并且我在里面插入了10万行记录。
                 </p>
-                <pre><code>mysql&gt; CREATE TABLE `t` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `c` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1376,7 +1381,7 @@ call idata();
                 </p>
                 <h1>第一类：查询长时间不返回</h1>
                 <p>如图1所示，在表t执行下面的SQL语句：</p>
-                <pre><code>mysql&gt; select * from t where id=1;
+                <pre><code class="language-sql">mysql&gt; select * from t where id=1;
 </code></pre>
                 <p>查询结果长时间不返回。</p>
                 <p>
@@ -1443,7 +1448,7 @@ call idata();
                 <h2>等flush</h2>
                 <p>接下来，我给你举另外一种查询被堵住的情况。</p>
                 <p>我在表t上，执行下面的SQL语句：</p>
-                <pre><code>mysql&gt; select * from information_schema.processlist where id=1;
+                <pre><code class="language-sql">mysql&gt; select * from information_schema.processlist where id=1;
 </code></pre>
                 <p>这里，我先卖个关子。</p>
                 <p>
@@ -1457,7 +1462,7 @@ call idata();
                 <p>
                   这个状态表示的是，现在有一个线程正要对表t做flush操作。MySQL里面对表做flush操作的用法，一般有以下两个：
                 </p>
-                <pre><code>flush tables t with read lock;
+                <pre><code class="language-sql">flush tables t with read lock;
 
 flush tables with read lock;
 </code></pre>
@@ -1495,7 +1500,7 @@ flush tables with read lock;
                 <center><span class="reference">图 7 Waiting for table flush的show processlist 结果</span></center>
                 <h2>等行锁</h2>
                 <p>现在，经过了表级锁的考验，我们的select 语句终于来到引擎里了。</p>
-                <pre><code>mysql&gt; select * from t where id=1 lock in share mode; 
+                <pre><code class="language-sql">mysql&gt; select * from t where id=1 lock in share mode; 
 </code></pre>
                 <p>
                   上面这条语句的用法你也很熟悉了，我们在第8篇<a href="https://time.geekbang.org/column/article/70562"
@@ -1526,7 +1531,7 @@ flush tables with read lock;
                   5.7版本，可以通过sys.innodb_lock_waits 表查到。
                 </p>
                 <p>查询方法是：</p>
-                <pre><code>mysql&gt; select * from t sys.innodb_lock_waits where locked_table=`'test'.'t'`\G
+                <pre><code class="language-sql">mysql&gt; select * from t sys.innodb_lock_waits where locked_table=`'test'.'t'`\G
 </code></pre>
                 <p>
                   <img
@@ -1551,7 +1556,7 @@ flush tables with read lock;
                 <h1>第二类：查询慢</h1>
                 <p>经过了重重封“锁”，我们再来看看一些查询慢的例子。</p>
                 <p>先来看一条你一定知道原因的SQL语句：</p>
-                <pre><code>mysql&gt; select * from t where c=50000 limit 1;
+                <pre><code class="language-sql">mysql&gt; select * from t where c=50000 limit 1;
 </code></pre>
                 <p>由于字段c上没有索引，这个语句只能走id主键顺序扫描，因此需要扫描5万行。</p>
                 <p>
@@ -1571,7 +1576,7 @@ flush tables with read lock;
                 <p>扫描行数多，所以执行慢，这个很好理解。</p>
                 <p>但是接下来，我们再看一个只扫描一行，但是执行很慢的语句。</p>
                 <p>如图12所示，是这个例子的slow log。可以看到，执行的语句是</p>
-                <pre><code>mysql&gt; select * from t where id=1；
+                <pre><code class="language-sql">mysql&gt; select * from t where id=1；
 </code></pre>
                 <p>虽然扫描行数是1，但执行时间却长达800毫秒。</p>
                 <p>
@@ -1647,7 +1652,7 @@ flush tables with read lock;
                   mode。由于id上有索引，所以可以直接定位到id=1这一行，因此读锁也是只加在了这一行上。
                 </p>
                 <p>但如果是下面的SQL语句，</p>
-                <pre><code>begin;
+                <pre><code class="language-sql">begin;
 select * from t where c=5 for update;
 commit;
 </code></pre>
@@ -1658,7 +1663,7 @@ commit;
                 <h1>上期问题时间</h1>
                 <p>在上一篇文章最后，我留给你的问题是，希望你可以分享一下之前碰到过的、与文章中类似的场景。</p>
                 <p>@封建的风 提到一个有趣的场景，值得一说。我把他的问题重写一下，表结构如下：</p>
-                <pre><code>mysql&gt; CREATE TABLE `table_a` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `table_a` (
   `id` int(11) NOT NULL,
   `b` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1668,7 +1673,7 @@ commit;
                 <p>
                   假设现在表里面，有100万行数据，其中有10万行数据的b的值是’1234567890’， 假设现在执行语句是这么写的:
                 </p>
-                <pre><code>mysql&gt; select * from table_a where b='1234567890abcd';
+                <pre><code class="language-sql">mysql&gt; select * from table_a where b='1234567890abcd';
 </code></pre>
                 <p>这时候，MySQL会怎么执行呢？</p>
                 <p>最理想的情况是，MySQL看到字段b定义的是varchar(10)，那肯定返回空呀。可惜，MySQL并没有这么做。</p>

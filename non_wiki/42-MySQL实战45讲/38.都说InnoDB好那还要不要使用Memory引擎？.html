@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1352,7 +1357,7 @@
                   为了便于分析，我来把这个问题简化一下，假设有以下的两张表t1 和 t2，其中表t1使用Memory 引擎，
                   表t2使用InnoDB引擎。
                 </p>
-                <pre><code>create table t1(id int primary key, c int) engine=Memory;
+                <pre><code class="language-sql">create table t1(id int primary key, c int) engine=Memory;
 create table t2(id int primary key, c int) engine=innodb;
 insert into t1 values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(0,0);
 insert into t2 values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(0,0);
@@ -1436,13 +1441,13 @@ insert into t2 values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(0,0)
                 <p>
                   由于内存表的这些特性，每个数据行被删除以后，空出的这个位置都可以被接下来要插入的数据复用。比如，如果要在表t1中执行：
                 </p>
-                <pre><code>delete from t1 where id=5;
+                <pre><code class="language-sql">delete from t1 where id=5;
 insert into t1 values(10,10);
 select * from t1;
 </code></pre>
                 <p>就会看到返回结果里，id=10这一行出现在id=4之后，也就是原来id=5这行数据的位置。</p>
                 <p>需要指出的是，表t1的这个主键索引是哈希索引，因此如果执行范围查询，比如</p>
-                <pre><code>select * from t1 where id&lt;5;
+                <pre><code class="language-sql">select * from t1 where id&lt;5;
 </code></pre>
                 <p>
                   是用不上主键索引的，需要走全表扫描。你可以借此再回顾下<a
@@ -1452,7 +1457,7 @@ select * from t1;
                 </p>
                 <h1>hash索引和B-Tree索引</h1>
                 <p>实际上，内存表也是支B-Tree索引的。在id列上创建一个B-Tree索引，SQL语句可以这么写：</p>
-                <pre><code>alter table t1 add index a_btree_index using btree (id);
+                <pre><code class="language-sql">alter table t1 add index a_btree_index using btree (id);
 </code></pre>
                 <p>这时，表t1的数据组织形式就变成了这样：</p>
                 <p>
@@ -1594,7 +1599,7 @@ select * from t1;
                 <p>
                   现在，我们回过头再看一下第35篇join语句优化的例子，当时我建议的是创建一个InnoDB临时表，使用的语句序列是：
                 </p>
-                <pre><code>create temporary table temp_t(id int primary key, a int, b int, index(b))engine=innodb;
+                <pre><code class="language-sql">create temporary table temp_t(id int primary key, a int, b int, index(b))engine=innodb;
 insert into temp_t select * from t2 where b&gt;=1 and b&lt;=2000;
 select * from t1 join temp_t on (t1.b=temp_t.b);
 </code></pre>
@@ -1614,7 +1619,7 @@ select * from t1 join temp_t on (t1.b=temp_t.b);
                   因此，你可以对<a href="https://time.geekbang.org/column/article/80147">第35篇文章</a
                   >的语句序列做一个改写，将临时表t1改成内存临时表，并且在字段b上创建一个hash索引。
                 </p>
-                <pre><code>create temporary table temp_t(id int primary key, a int, b int, index (b))engine=memory;
+                <pre><code class="language-sql">create temporary table temp_t(id int primary key, a int, b int, index (b))engine=memory;
 insert into temp_t select * from t2 where b&gt;=1 and b&lt;=2000;
 select * from t1 join temp_t on (t1.b=temp_t.b);
 </code></pre>

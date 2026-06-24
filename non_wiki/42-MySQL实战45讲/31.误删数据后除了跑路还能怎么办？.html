@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1389,12 +1394,12 @@
                   </li>
                 </ol>
                 <p>如果误操作不是一个，而是多个，会怎么样呢？比如下面三个事务：</p>
-                <pre><code>(A)delete ...
+                <pre><code class="language-sql">(A)delete ...
 (B)insert ...
 (C)update ...
 </code></pre>
                 <p>现在要把数据库恢复回这三个事务操作之前的状态，用Flashback工具解析binlog后，写回主库的命令是：</p>
-                <pre><code>(reverse C)update ...
+                <pre><code class="language-sql">(reverse C)update ...
 (reverse B)delete ...
 (reverse A)insert ...
 </code></pre>
@@ -1641,7 +1646,7 @@
                 <h1>上期问题时间</h1>
                 <p>我在上一篇文章给你留的问题，是关于空表的间隙的定义。</p>
                 <p>一个空表就只有一个间隙。比如，在空表上执行：</p>
-                <pre><code>begin;
+                <pre><code class="language-sql">begin;
 select * from t where id&gt;1 for update;
 </code></pre>
                 <p>这个查询语句加锁的范围就是next-key lock (-∞, supremum]。</p>

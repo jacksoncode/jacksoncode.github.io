@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1365,7 +1370,7 @@
                   <li>一个bug：唯一索引上的范围查询会访问到不满足条件的第一个值为止。</li>
                 </ul>
                 <p>接下来，我们的讨论还是基于下面这个表t：</p>
-                <pre><code>CREATE TABLE `t` (
+                <pre><code class="language-sql">CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `c` int(11) DEFAULT NULL,
   `d` int(11) DEFAULT NULL,
@@ -1382,7 +1387,7 @@ insert into t values(0,0,0),(5,5,5),
                 </p>
                 <!-- [[[read_end]]] -->
                 <p>我们一起来看下这个例子，分析一下这条查询语句的加锁范围：</p>
-                <pre><code>begin;
+                <pre><code class="language-sql">begin;
 select * from t where id&gt;9 and id&lt;12 order by id desc for update;
 </code></pre>
                 <p>
@@ -1428,7 +1433,7 @@ select * from t where id&gt;9 and id&lt;12 order by id desc for update;
                 <p>也就是说，在执行过程中，通过树搜索的方式定位记录的时候，用的是“等值查询”的方法。</p>
                 <h1>等值查询的过程</h1>
                 <p>与上面这个例子对应的，是@发条橙子同学提出的问题：下面这个语句的加锁范围是什么？</p>
-                <pre><code>begin;
+                <pre><code class="language-sql">begin;
 select id from t where c in(5,20,10) lock in share mode;
 </code></pre>
                 <p>
@@ -1454,7 +1459,7 @@ select id from t where c in(5,20,10) lock in share mode;
                 <p>因为我要跟你强调这个过程：这些锁是“在执行过程中一个一个加的”，而不是一次性加上去的。</p>
                 <p>理解了这个加锁过程之后，我们就可以来分析下面例子中的死锁问题了。</p>
                 <p>如果同时有另外一个语句，是这么写的：</p>
-                <pre><code>select id from t where c in(5,20,10) order by c desc for update;
+                <pre><code class="language-sql">select id from t where c in(5,20,10) order by c desc for update;
 </code></pre>
                 <p>此时的加锁范围，又是什么呢？</p>
                 <p>我们现在都知道间隙锁是不互锁的，但是这两条语句都会在索引c上的c=5、10、20这三行记录上加记录锁。</p>

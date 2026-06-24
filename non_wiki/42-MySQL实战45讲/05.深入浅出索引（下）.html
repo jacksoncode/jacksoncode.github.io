@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1349,7 +1354,7 @@
                   5，需要执行几次树的搜索操作，会扫描多少行？
                 </p>
                 <p>下面是这个表的初始化语句。</p>
-                <pre><code>mysql&gt; create table T (
+                <pre><code class="language-sql">mysql&gt; create table T (
 ID int primary key,
 k int NOT NULL DEFAULT 0, 
 s varchar(16) NOT NULL DEFAULT '',
@@ -1414,7 +1419,7 @@ insert into T values(100,1, 'aa'),(200,2,'bb'),(300,3,'cc'),(500,5,'ee'),(600,6,
                   >
                 </p>
                 <p>假设这个市民表的定义是这样的：</p>
-                <pre><code>CREATE TABLE `tuser` (
+                <pre><code class="language-sql">CREATE TABLE `tuser` (
   `id` int(11) NOT NULL,
   `id_card` varchar(32) DEFAULT NULL,
   `name` varchar(32) DEFAULT NULL,
@@ -1485,7 +1490,7 @@ insert into T values(100,1, 'aa'),(200,2,'bb'),(300,3,'cc'),(500,5,'ee'),(600,6,
                   我们还是以市民表的联合索引（name,
                   age）为例。如果现在有一个需求：检索出表中“名字第一个字是张，而且年龄是10岁的所有男孩”。那么，SQL语句是这么写的：
                 </p>
-                <pre><code>mysql&gt; select * from tuser where name like '张%' and age=10 and ismale=1;
+                <pre><code class="language-sql">mysql&gt; select * from tuser where name like '张%' and age=10 and ismale=1;
 </code></pre>
                 <p>
                   你已经知道了前缀索引规则，所以这个语句在搜索索引树的时候，只能用
@@ -1529,7 +1534,7 @@ insert into T values(100,1, 'aa'),(200,2,'bb'),(300,3,'cc'),(500,5,'ee'),(600,6,
                 <p>
                   实际上主键索引也是可以使用多个字段的。DBA小吕在入职新公司的时候，就发现自己接手维护的库里面，有这么一个表，表结构定义类似这样的：
                 </p>
-                <pre><code>CREATE TABLE `geek` (
+                <pre><code class="language-sql">CREATE TABLE `geek` (
   `a` int(11) NOT NULL,
   `b` int(11) NOT NULL,
   `c` int(11) NOT NULL,
@@ -1545,7 +1550,7 @@ insert into T values(100,1, 'aa'),(200,2,'bb'),(300,3,'cc'),(500,5,'ee'),(600,6,
                   但是，学过本章内容的小吕又纳闷了，既然主键包含了a、b这两个字段，那意味着单独在字段c上创建一个索引，就已经包含了三个字段了呀，为什么要创建“ca”“cb”这两个索引？
                 </p>
                 <p>同事告诉他，是因为他们的业务里面有这样的两种语句：</p>
-                <pre><code>select * from geek where c=N order by a limit 1;
+                <pre><code class="language-sql">select * from geek where c=N order by a limit 1;
 select * from geek where c=N order by b limit 1;
 </code></pre>
                 <p>我给你的问题是，这位同事的解释对吗，为了这两个查询模式，这两个索引是否都是必须的？为什么呢？</p>

@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1349,7 +1354,7 @@
                   但是，我在上一篇文章中，和你分享行锁的时候又提到，一个事务要更新一行，如果刚好有另外一个事务拥有这一行的行锁，它又不能这么超然了，会被锁住，进入等待状态。问题是，既然进入了等待状态，那么等到这个事务自己获取到行锁要更新数据的时候，它读到的值又是什么呢？
                 </p>
                 <p>我给你举一个例子吧。下面是一个只有两行的表的初始化语句。</p>
-                <pre><code>mysql&gt; CREATE TABLE `t` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `k` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1591,7 +1596,7 @@ insert into t(id, k) values(1,1),(2,2);
                   所以，如果把事务A的查询语句select * from t where id=1修改一下，加上lock in share mode 或 for
                   update，也都可以读到版本号是101的数据，返回的k的值是3。下面这两个select语句，就是分别加了读锁（S锁，共享锁）和写锁（X锁，排他锁）。
                 </p>
-                <pre><code>mysql&gt; select k from t where id=1 lock in share mode;
+                <pre><code class="language-sql">mysql&gt; select k from t where id=1 lock in share mode;
 mysql&gt; select k from t where id=1 for update;
 </code></pre>
                 <p>再往前一步，假设事务C不是马上提交的，而是变成了下面的事务C’，会怎么样呢？</p>
@@ -1673,7 +1678,7 @@ mysql&gt; select k from t where id=1 for update;
                 <p>
                   又到思考题时间了。我用下面的表结构和初始化语句作为试验环境，事务隔离级别是可重复读。现在，我要把所有“字段c和id值相等的行”的c值清零，但是却发现了一个“诡异”的、改不掉的情况。请你构造出这种情况，并说明其原理。
                 </p>
-                <pre><code>mysql&gt; CREATE TABLE `t` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `c` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)

@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1353,7 +1358,7 @@
                   接下来，我就先和你介绍一下grant语句和flush privileges语句分别做了什么事情，然后再一起来分析这个问题。
                 </p>
                 <p>为了便于说明，我先创建一个用户：</p>
-                <pre><code>create user 'ua'@'%' identified by 'pa';
+                <pre><code class="language-sql">create user 'ua'@'%' identified by 'pa';
 </code></pre>
                 <p>
                   这条语句的逻辑是创建一个用户’ua’@’%’，密码是pa。注意，在MySQL里面，用户名(user)+地址(host)才表示一个用户，因此
@@ -1384,7 +1389,7 @@
                 <p>
                   全局权限，作用于整个MySQL实例，这些权限信息保存在mysql库的user表里。如果我要给用户ua赋一个最高权限的话，语句是这么写的：
                 </p>
-                <pre><code>grant all privileges on *.* to 'ua'@'%' with grant option;
+                <pre><code class="language-sql">grant all privileges on *.* to 'ua'@'%' with grant option;
 </code></pre>
                 <p>这个grant命令做了两个动作：</p>
                 <ol>
@@ -1414,7 +1419,7 @@
                   需要说明的是，<strong>一般在生产环境上要合理控制用户权限的范围</strong>。我们上面用到的这个grant语句就是一个典型的错误示范。如果一个用户有所有权限，一般就不应该设置为所有IP地址都可以访问。
                 </p>
                 <p>如果要回收上面的grant语句赋予的权限，你可以使用下面这条命令：</p>
-                <pre><code>revoke all privileges on *.* from 'ua'@'%';
+                <pre><code class="language-sql">revoke all privileges on *.* from 'ua'@'%';
 </code></pre>
                 <p>这条revoke命令的用法与grant类似，做了如下两个动作：</p>
                 <ol>
@@ -1429,7 +1434,7 @@
                 <p>
                   除了全局权限，MySQL也支持库级别的权限定义。如果要让用户ua拥有库db1的所有权限，可以执行下面这条命令：
                 </p>
-                <pre><code>grant all privileges on db1.* to 'ua'@'%' with grant option;
+                <pre><code class="language-sql">grant all privileges on db1.* to 'ua'@'%' with grant option;
 </code></pre>
                 <p>
                   基于库的权限记录保存在mysql.db表中，在内存里则保存在数组acl_dbs中。这条grant命令做了如下两个动作：
@@ -1487,7 +1492,7 @@
                   除了db级别的权限外，MySQL支持更细粒度的表权限和列权限。其中，表权限定义存放在表mysql.tables_priv中，列权限定义存放在表mysql.columns_priv中。这两类权限，组合起来存放在内存的hash结构column_priv_hash中。
                 </p>
                 <p>这两类权限的赋权命令如下：</p>
-                <pre><code>create table db1.t1(id int, a int);
+                <pre><code class="language-sql">create table db1.t1(id int, a int);
 
 grant all privileges on db1.t1 to 'ua'@'%' with grant option;
 GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO 'ua'@'%' with grant option;
@@ -1559,7 +1564,7 @@ GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO 'ua'@'%' with grant option;
                   privileges语句本身会用数据表的数据重建一份内存权限数据，所以在权限数据可能存在不一致的情况下再使用。而这种不一致往往是由于直接用DML语句操作系统权限表导致的，所以我们尽量不要使用这类语句。
                 </p>
                 <p>另外，在使用grant语句赋权时，你可能还会看到这样的写法：</p>
-                <pre><code>grant super on *.* to 'ua'@'%' identified by 'pa';
+                <pre><code class="language-sql">grant super on *.* to 'ua'@'%' identified by 'pa';
 </code></pre>
                 <p>这条命令加了identified by ‘密码’， 语句的逻辑里面除了赋权外，还包含了：</p>
                 <ol>
@@ -1595,7 +1600,7 @@ GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO 'ua'@'%' with grant option;
                 <p>
                   另一种应用场景是使用mysqlbinlog工具解析binlog文件，并应用到目标库的情况。你可以使用下面这条命令 ：
                 </p>
-                <pre><code>mysqlbinlog $binlog_file | mysql -h$host -P$port -u$user -p$pwd
+                <pre><code class="language-sql">mysqlbinlog $binlog_file | mysql -h$host -P$port -u$user -p$pwd
 </code></pre>
                 <p>把日志直接解析出来发给目标库执行。增加local，就能让这个方法支持非本地的$host。</p>
                 <p>评论区留言点赞板：</p>

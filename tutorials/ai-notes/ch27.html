@@ -82,6 +82,11 @@
                 </ul>
             </div>
 
+            <figure class="ai-figure">
+                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Multimodal%20AI%20architecture%2C%20text%20image%20audio%20video%20fusion%2C%20CLIP%20BLIP%20GPT-4V%20models%2C%20cross-modal%20attention%2C%20early%20late%20fusion%20strategies%2C%20clean%20educational%20infographic%20style%2C%20flat%20design%2C%20white%20background&image_size=landscape_4_3" alt="多模态AI架构与融合策略图" loading="lazy">
+                <figcaption><strong>图27-1</strong> 多模态AI架构：文本、图像、音频、视频模态的融合与对齐</figcaption>
+            </figure>
+
             <p style="font-size:1.05rem;color:#4a5568;margin:1.5rem 0;">
                 人类感知世界的方式从来不是单一的 —— 我们同时用眼睛看、耳朵听、大脑综合理解。当你看到一张朋友在海边微笑的照片时，你的大脑同时处理了视觉信息（面孔、表情、海浪）和语义信息（"这是我的朋友"、"开心"、"度假"）。多模态AI正是模仿这种能力，让机器能够同时处理和关联来自不同来源（文本、图像、音频、视频）的信息。本章将带你从概念到实践，系统认识这一前沿领域。
             </p>
@@ -321,34 +326,10 @@
                 </p>
 
                 <h3 class="ai-section-subtitle">架构图解</h3>
-                <div class="flow-diagram">
-                    <h4><i class="fas fa-diagram-project"></i> 多模态大模型典型架构</h4>
-                    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.5rem;">
-                        <div class="diagram-card" style="min-width:150px;">
-                            <i class="fas fa-image" style="color:#e53e3e;"></i>
-                            <p><strong>视觉编码器</strong><br>Vision Transformer / CNN</p>
-                            <p style="font-size:0.75rem;color:#a0aec0;">提取视觉特征</p>
-                        </div>
-                        <div class="diagram-card" style="min-width:80px;">
-                            <i class="fas fa-arrow-right" style="color:#a0aec0;"></i>
-                            <p>&nbsp;</p>
-                        </div>
-                        <div class="diagram-card" style="min-width:150px;">
-                            <i class="fas fa-exchange-alt" style="color:#805ad5;"></i>
-                            <p><strong>投影层</strong><br>MLP Adapter / Q-Former</p>
-                            <p style="font-size:0.75rem;color:#a0aec0;">对齐表示空间</p>
-                        </div>
-                        <div class="diagram-card" style="min-width:80px;">
-                            <i class="fas fa-arrow-right" style="color:#a0aec0;"></i>
-                            <p>&nbsp;</p>
-                        </div>
-                        <div class="diagram-card" style="min-width:150px;">
-                            <i class="fas fa-brain" style="color:#38a169;"></i>
-                            <p><strong>语言模型</strong><br>LLaMA / GPT / T5</p>
-                            <p style="font-size:0.75rem;color:#a0aec0;">生成文本输出</p>
-                        </div>
-                    </div>
-                </div>
+                <figure style="margin:2rem 0;">
+                    <iframe src="assets/images/multimodal-fusion-architecture.html" style="width:100%;height:380px;border:none;background:var(--bg-color,#f8f9fa);border-radius:8px;"></iframe>
+                    <figcaption style="text-align:center;font-size:0.9rem;color:#718096;margin-top:0.5rem;">多模态融合架构：视觉编码器与语言模型的融合策略</figcaption>
+                </figure>
 
                 <h3 class="ai-section-subtitle">视觉编码器选型</h3>
                 <p>
@@ -752,6 +733,10 @@ class CrossAttentionFusion(nn.Module):
                 </p>
 
                 <h3 class="ai-section-subtitle">CLIP的训练目标</h3>
+                <figure style="margin:2rem 0;">
+                    <iframe src="assets/images/clip-contrastive-learning.html" style="width:100%;height:340px;border:none;background:var(--bg-color,#f8f9fa);border-radius:8px;"></iframe>
+                    <figcaption style="text-align:center;font-size:0.9rem;color:#718096;margin-top:0.5rem;">CLIP对比学习原理：图像-文本对齐训练过程</figcaption>
+                </figure>
                 <p>
                     CLIP的训练非常直觉：在一个batch中，有N个图文对。模型需要学会让正确匹配的图文对相似度最高，同时让不匹配的对相似度最低。这本质上是一个N选1的分类问题。
                 </p>

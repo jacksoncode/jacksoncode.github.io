@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1359,7 +1364,7 @@
                 </p>
                 <p>表定义的自增值达到上限后的逻辑是：再申请下一个id时，得到的值保持不变。</p>
                 <p>我们可以通过下面这个语句序列验证一下：</p>
-                <pre><code>create table t(id int unsigned auto_increment primary key) auto_increment=4294967295;
+                <pre><code class="language-sql">create table t(id int unsigned auto_increment primary key) auto_increment=4294967295;
 insert into t values(null);
 //成功插入一行 4294967295
 show create table t;
@@ -1618,7 +1623,7 @@ insert into t values(null);
                   processlist里看到两个相同的thread_id。
                 </p>
                 <p>这，是因为MySQL设计了一个唯一数组的逻辑，给新线程分配thread_id的时候，逻辑代码是这样的：</p>
-                <pre><code>do {
+                <pre><code class="language-sql">do {
   new_id= thread_id_counter++;
 } while (!thread_ids.insert_unique(new_id).second);
 </code></pre>

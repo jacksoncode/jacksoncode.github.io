@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多模态融合架构图</title>
+  <style>
+    :root {
+      --purple-50: #EEEDFE; --purple-100: #CECBF6; --purple-200: #AFA9EC; --purple-400: #7F77DD; --purple-600: #534AB7; --purple-800: #3C3489; --purple-900: #26215C;
+      --teal-50: #E1F5EE; --teal-100: #9FE1CB; --teal-200: #5DCAA5; --teal-400: #1D9E75; --teal-600: #0F6E56; --teal-800: #085041; --teal-900: #04342C;
+      --coral-50: #FAECE7; --coral-100: #F5C4B3; --coral-200: #F0997B; --coral-400: #D85A30; --coral-600: #993C1D; --coral-800: #712B13; --coral-900: #4A1B0C;
+      --gray-50: #F1EFE8; --gray-100: #D3D1C7; --gray-200: #B4B2A9; --gray-400: #888780; --gray-600: #5F5E5A; --gray-800: #444441; --gray-900: #2C2C2A;
+      --blue-50: #E6F1FB; --blue-100: #B5D4F4; --blue-200: #85B7EB; --blue-400: #378ADD; --blue-600: #185FA5; --blue-800: #0C447C; --blue-900: #042C53;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --purple-50: #3C3489; --purple-100: #534AB7; --purple-200: #7F77DD; --purple-400: #AFA9EC; --purple-600: #CECBF6; --purple-800: #EEEDFE; --purple-900: #F8F7FE;
+        --teal-50: #085041; --teal-100: #0F6E56; --teal-200: #1D9E75; --teal-400: #5DCAA5; --teal-600: #9FE1CB; --teal-800: #E1F5EE; --teal-900: #F0FAF7;
+        --coral-50: #712B13; --coral-100: #993C1D; --coral-200: #D85A30; --coral-400: #F0997B; --coral-600: #F5C4B3; --coral-800: #FAECE7; --coral-900: #FDF6F3;
+        --gray-50: #444441; --gray-100: #5F5E5A; --gray-200: #888780; --gray-400: #B4B2A9; --gray-600: #D3D1C7; --gray-800: #F1EFE8; --gray-900: #F9F8F5;
+        --blue-50: #0C447C; --blue-100: #185FA5; --blue-200: #378ADD; --blue-400: #85B7EB; --blue-600: #B5D4F4; --blue-800: #E6F1FB; --blue-900: #F3F9FD;
+      }
+    }
+    body { margin: 0; padding: 20px; background: var(--gray-50); font-family: Inter, system-ui, sans-serif; }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 20px; font-weight: 600; color: var(--gray-800); margin: 0 0 8px 0; }
+    h2 { font-size: 14px; font-weight: 400; color: var(--gray-600); margin: 0 0 20px 0; }
+    svg { display: block; }
+    .th { font-size: 14px; font-weight: 500; fill: var(--gray-800); }
+    .ts { font-size: 12px; font-weight: 400; fill: var(--gray-600); }
+    .t { font-size: 14px; font-weight: 400; fill: var(--gray-800); }
+    .arr { stroke: var(--gray-600); stroke-width: 1.5; fill: none; }
+    .node-purple rect { fill: var(--purple-50); stroke: var(--purple-600); }
+    .node-purple text { fill: var(--purple-800); }
+    .node-teal rect { fill: var(--teal-50); stroke: var(--teal-600); }
+    .node-teal text { fill: var(--teal-800); }
+    .node-gray rect { fill: var(--gray-50); stroke: var(--gray-600); }
+    .node-gray text { fill: var(--gray-800); }
+    .node-coral rect { fill: var(--coral-50); stroke: var(--coral-600); }
+    .node-coral text { fill: var(--coral-800); }
+    .container-box rect { fill: transparent; stroke: var(--purple-200); stroke-width: 1; stroke-dasharray: 4 2; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>多模态融合架构</h1>
+    <h2>视觉编码器与语言模型的融合策略</h2>
+    <svg width="100%" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      
+      <!-- 输入层 -->
+      <g class="node-gray">
+        <rect x="80" y="40" width="160" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="160" y="62" text-anchor="middle" dominant-baseline="central">图像输入</text>
+      </g>
+      <g class="node-gray">
+        <rect x="440" y="40" width="160" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="520" y="62" text-anchor="middle" dominant-baseline="central">文本输入</text>
+      </g>
+      
+      <!-- 编码器层 -->
+      <g class="node-teal">
+        <rect x="80" y="110" width="160" height="56" rx="8" stroke-width="0.5"/>
+        <text class="th" x="160" y="130" text-anchor="middle" dominant-baseline="central">视觉编码器</text>
+        <text class="ts" x="160" y="148" text-anchor="middle" dominant-baseline="central">Vision Encoder</text>
+      </g>
+      <g class="node-teal">
+        <rect x="440" y="110" width="160" height="56" rx="8" stroke-width="0.5"/>
+        <text class="th" x="520" y="130" text-anchor="middle" dominant-baseline="central">文本编码器</text>
+        <text class="ts" x="520" y="148" text-anchor="middle" dominant-baseline="central">Text Encoder</text>
+      </g>
+      
+      <!-- 特征向量 -->
+      <g class="node-coral">
+        <rect x="80" y="180" width="160" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="160" y="202" text-anchor="middle" dominant-baseline="central">图像特征向量</text>
+      </g>
+      <g class="node-coral">
+        <rect x="440" y="180" width="160" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="520" y="202" text-anchor="middle" dominant-baseline="central">文本特征向量</text>
+      </g>
+      
+      <!-- 融合层容器 -->
+      <g class="container-box">
+        <rect x="200" y="240" width="280" height="60" rx="12"/>
+        <text class="ts" x="220" y="260">融合模块</text>
+      </g>
+      
+      <!-- 融合层核心 -->
+      <g class="node-purple">
+        <rect x="260" y="250" width="160" height="44" rx="8" stroke-width="0.5"/>
+        <text class="th" x="340" y="272" text-anchor="middle" dominant-baseline="central">共享语义空间</text>
+      </g>
+      
+      <!-- 连接线 -->
+      <line x1="160" y1="84" x2="160" y2="110" class="arr" marker-end="url(#arrow)"/>
+      <line x1="520" y1="84" x2="520" y2="110" class="arr" marker-end="url(#arrow)"/>
+      <line x1="160" y1="166" x2="160" y2="180" class="arr" marker-end="url(#arrow)"/>
+      <line x1="520" y1="166" x2="520" y2="180" class="arr" marker-end="url(#arrow)"/>
+      
+      <!-- 融合箭头 -->
+      <path d="M160 224 Q160 250 260 272" class="arr" marker-end="url(#arrow)" fill="none"/>
+      <path d="M520 224 Q520 250 420 272" class="arr" marker-end="url(#arrow)" fill="none"/>
+      
+      <!-- 融合说明 -->
+      <text class="ts" x="340" y="310" text-anchor="middle" dominant-baseline="central">多模态理解 / 生成输出</text>
+      
+      <!-- 标签 -->
+      <text class="ts" x="60" y="62" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">输入</text>
+      <text class="ts" x="60" y="138" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">编码</text>
+      <text class="ts" x="60" y="202" text-anchor="end" dominant-baseline="central" fill="var(--gray-600)">特征</text>
+    </svg>
+  </div>
+</body>
+</html>

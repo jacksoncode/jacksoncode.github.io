@@ -1324,6 +1324,11 @@
         font-size: 9px;
       }
     </style>
+    <!-- Prism.js 代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -1359,7 +1364,7 @@
                 <p>
                   实际上，select 1成功返回，只能说明这个库的进程还在，并不能说明主库没问题。现在，我们来看一下这个场景。
                 </p>
-                <pre><code>set global innodb_thread_concurrency=3;
+                <pre><code class="language-sql">set global innodb_thread_concurrency=3;
 
 CREATE TABLE `t` (
   `id` int(11) NOT NULL,
@@ -1457,7 +1462,7 @@ CREATE TABLE `t` (
                 <p>
                   为了能够检测InnoDB并发线程数过多导致的系统不可用情况，我们需要找一个访问InnoDB的场景。一般的做法是，在系统库（mysql库）里创建一个表，比如命名为health_check，里面只放一行数据，然后定期执行：
                 </p>
-                <pre><code>mysql&gt; select * from mysql.health_check; 
+                <pre><code class="language-sql">mysql&gt; select * from mysql.health_check; 
 </code></pre>
                 <p>使用这个方法，我们可以检测出由于并发线程过多导致的数据库不可用的情况。</p>
                 <p>但是，我们马上还会碰到下一个问题，即：空间满了以后，这种方法又会变得不好使。</p>
@@ -1469,7 +1474,7 @@ CREATE TABLE `t` (
                 <p>
                   既然要更新，就要放个有意义的字段，常见做法是放一个timestamp字段，用来表示最后一次执行检测的时间。这条更新语句类似于：
                 </p>
-                <pre><code>mysql&gt; update mysql.health_check set t_modified=now();
+                <pre><code class="language-sql">mysql&gt; update mysql.health_check set t_modified=now();
 </code></pre>
                 <p>节点可用性的检测都应该包含主库和备库。如果用更新来检测主库的话，那么备库也要进行更新检测。</p>
                 <p>
@@ -1482,7 +1487,7 @@ CREATE TABLE `t` (
                 <p>
                   为了让主备之间的更新不产生冲突，我们可以在mysql.health_check表上存入多行数据，并用A、B的server_id做主键。
                 </p>
-                <pre><code>mysql&gt; CREATE TABLE `health_check` (
+                <pre><code class="language-sql">mysql&gt; CREATE TABLE `health_check` (
   `id` int(11) NOT NULL,
   `t_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -1562,16 +1567,16 @@ insert into mysql.health_check(id, t_modified) values (@@server_id, now()) on du
                   我的测试结果是，如果打开所有的performance_schema项，性能大概会下降10%左右。所以，我建议你只打开自己需要的项进行统计。你可以通过下面的方法打开或者关闭某个具体项的统计。
                 </p>
                 <p>如果要打开redo log的时间监控，你可以执行这个语句：</p>
-                <pre><code>mysql&gt; update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/io/file/innodb/innodb_log_file%';
+                <pre><code class="language-sql">mysql&gt; update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/io/file/innodb/innodb_log_file%';
 </code></pre>
                 <p>假设，现在你已经开启了redo log和binlog这两个统计信息，那要怎么把这个信息用在实例状态诊断上呢？</p>
                 <p>
                   很简单，你可以通过MAX_TIMER的值来判断数据库是否出问题了。比如，你可以设定阈值，单次IO请求时间超过200毫秒属于异常，然后使用类似下面这条语句作为检测逻辑。
                 </p>
-                <pre><code>mysql&gt; select event_name,MAX_TIMER_WAIT  FROM performance_schema.file_summary_by_event_name where event_name in ('wait/io/file/innodb/innodb_log_file','wait/io/file/sql/binlog') and MAX_TIMER_WAIT&gt;200*1000000000;
+                <pre><code class="language-sql">mysql&gt; select event_name,MAX_TIMER_WAIT  FROM performance_schema.file_summary_by_event_name where event_name in ('wait/io/file/innodb/innodb_log_file','wait/io/file/sql/binlog') and MAX_TIMER_WAIT&gt;200*1000000000;
 </code></pre>
                 <p>发现异常后，取到你需要的信息，再通过下面这条语句：</p>
-                <pre><code>mysql&gt; truncate table performance_schema.file_summary_by_event_name;
+                <pre><code class="language-sql">mysql&gt; truncate table performance_schema.file_summary_by_event_name;
 </code></pre>
                 <p>把之前的统计信息清空。这样如果后面的监控中，再次出现这个异常，就可以加入监控累积值了。</p>
                 <h1>小结</h1>
